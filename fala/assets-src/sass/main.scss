@@ -1,0 +1,17 @@
+$images-dir: '/static/images/';
+
+@import 'govuk';
+
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+}
+
+.other-advise {
+  margin-top: 2em;
+}
