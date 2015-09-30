@@ -11,7 +11,8 @@ root = lambda *x: join(abspath(PROJECT_ROOT), *x)
 
 sys.path.insert(0, root('apps'))
 
-DEBUG = False
+DEBUG = os.environ.get('DEBUG', False)
+DEBUG = DEBUG == 'True' or DEBUG is True
 
 ADMINS = ()
 
