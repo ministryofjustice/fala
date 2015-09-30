@@ -1,0 +1,62 @@
+*.py[cod]
+
+# C extensions
+*.so
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.coverage
+.tox
+nosetests.xml
+nightwatch.xml
+
+*.log
+
+tests/reports/nightwatch/*
+
+# Translations
+*.mo
+
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
+*.ropeproject
+
+# Complexity
+output/*.html
+output/*/index.html
+
+# Sphinx
+docs/_build
+
+.webassets-cache
+
+# Virtualenvs
+env
+env*
+venv
+
+# intellij
+.idea/
+*.ipr
+*.iml
+*.iws
+
+.DS_Store
+
+# node
+node_modules/
+
+bower_components/
+
+.sass-cache/
+
+venv
+
+# Fala
+fala/settings/local.py
+fala/assets
+

@@ -1,0 +1,10 @@
+{% extends 'layouts/django/external.html' %}
+{% load staticfiles %}
+
+{% block include_js %}
+  <script src="{% static 'scripts/application.js' %}"></script>
+{% endblock %}
+
+{% block stylesheets %}
+  <link href="{% static 'css/main.css' %}" rel="stylesheet">
+{% endblock %}
