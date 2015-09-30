@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import sys
+import os
 from os.path import join, abspath, dirname
 
 import json
@@ -10,8 +11,7 @@ root = lambda *x: join(abspath(PROJECT_ROOT), *x)
 
 sys.path.insert(0, root('apps'))
 
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+DEBUG = False
 
 ADMINS = ()
 
@@ -21,7 +21,9 @@ DATABASES = {}
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '.dsd.io',
+]
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -72,9 +74,8 @@ bower_dir = json.load(open(join(project_root, '.bowerrc')))['directory']
 # Additional locations of static files
 STATICFILES_DIRS = (
     root('assets'),
-    abspath(root(project_root, bower_dir)),
     abspath(root(project_root, bower_dir, 'govuk-template', 'assets')),
-    abspath(root(project_root, bower_dir, 'mojular', 'assets')),
+    abspath(root(project_root, bower_dir, 'mojular', 'assets'))
 )
 
 # List of finder classes that know how to find static files in
@@ -85,13 +86,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'CHANGE THIS!!!'
-
-# List of callables that know how to import templates from various sources.
-# TEMPLATE_LOADERS = (
-#     'django_jinja.loaders.FileSystemLoader',
-#     'django_jinja.loaders.AppLoader',
-# )
+SECRET_KEY = os.environ.get('SECRET_KEY', None)
 
 TEMPLATES = [
     {
@@ -108,14 +103,10 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'debug': DEBUG,
         },
     },
 ]
-
-# TEMPLATE_DIRS = (
-#     root('templates'),
-#     abspath(root(project_root, bower_dir, 'mojular', 'templates')),
-# )
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -134,21 +125,17 @@ ROOT_URLCONF = 'fala.urls'
 WSGI_APPLICATION = 'fala.wsgi.application'
 
 INSTALLED_APPS = (
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.admin',
-    'django_jinja',
 
+    'raven.contrib.django.raven_compat',
     'requests',
-
-    'fala',
 )
 
-PROJECT_APPS = ()
+PROJECT_APPS = (
+    'adviser',
+)
 
 INSTALLED_APPS += PROJECT_APPS
 
@@ -181,11 +168,9 @@ LOGGING = {
     }
 }
 
-DEFAULT_JINJA2_TEMPLATE_EXTENSION = '.html'
-
-
-# EMAILS
-
+RAVEN_CONFIG = {
+    'dsn': os.environ.get('SENTRY_DSN'),
+}
 
 # .local.py overrides all the common settings.
 try:
