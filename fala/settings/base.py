@@ -106,12 +106,12 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'raven.contrib.django.raven_compat',
     'requests',
 )
 
 PROJECT_APPS = (
     'adviser',
+    'laalaa',
 )
 
 INSTALLED_APPS += PROJECT_APPS
@@ -152,9 +152,21 @@ LOGGING = {
     }
 }
 
-RAVEN_CONFIG = {
-    'dsn': os.environ.get('SENTRY_DSN'),
-}
+# RAVEN SENTRY CONFIG
+if 1 or 'SENTRY_DSN' in os.environ:
+    RAVEN_CONFIG = {
+        'dsn': os.environ.get('SENTRY_DSN')
+    }
+
+    INSTALLED_APPS += (
+        'raven.contrib.django.raven_compat',
+    )
+
+    MIDDLEWARE_CLASSES = (
+        'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware',
+    ) + MIDDLEWARE_CLASSES
+
+LAALAA_API_HOST = os.environ.get('LAALAA_API_HOST', 'http://0.0.0.0:8001')
 
 # .local.py overrides all the common settings.
 try:
