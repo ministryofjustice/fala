@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load adviser_extras %}
 
 {% block content %}
   <h1>Find a legal adviser or family mediator</h1>
@@ -7,25 +8,41 @@
       <legend>Search for a legal adviser or family mediator with a legal aid contract in England and Wales.</legend>
       <legend>Search by:</legend>
       <div class="form-group inline">
-        <label class="block-label" for="radio-inline-11"><input id="radio-inline-11" name="search_by" type="radio" value="Location" checked>Location</input></label><label class="block-label" for="radio-inline-12"><input id="radio-inline-12" name="search_by" type="radio" value="Organisation">Organisation</input></label>
+        {% for c in form.search_type %}
+          <label class="block-label" for="search_type_{{ forloop.counter0 }}"><input id="search_type_{{ forloop.counter0 }}" name="search_type" type="radio" value="{{ c.choice_value }}" {{ form.search_type|checked:forloop.counter0 }}>{{ c.choice_label }}</input></label>
+        {% endfor %}
       </div>
-      <div class="panel-indent" data-control-value="Location" data-controlled-by="search_by">
-        <label class="form-label" for="ni-number-2">Enter a postcode, town or city</label><input name="postcode" class="form-control" id="postcode" type="text" />
+      <div class="panel-indent" data-control-value="location" data-controlled-by="search_type">
+        <label class="form-label" for="postcode">Enter a postcode, town or city</label><input name="postcode" class="form-control" id="postcode" type="text" value="{{ form.postcode|val }}" />
       </div>
-      <div class="panel-indent" data-control-value="Organisation" data-controlled-by="search_by">
-        <label class="form-label" for="ni-number-2">Organisation name</label><input name="name" class="form-control" id="name" type="text" />
+      <div class="panel-indent" data-control-value="organisation" data-controlled-by="search_type">
+        <label class="form-label" for="organisation_name">Organisation name</label><input name="organisation_name" class="form-control" id="organisation_name" type="text" value="{{ form.organisation_name|val }}" />
       </div>
     </fieldset>
     <input class="button" type="submit" value="Search">
-    <div class="panel-indent" data-control-value="Location" data-controlled-by="search_by">
+    <div data-control-value="location" data-controlled-by="search_type">
       <fieldset>
         <legend class="form-label-bold">Filter by:</legend>
         <p>
           Select all that apply
         </p>
-        <label class="block-label" for="checkbox-1"><input id="checkbox-1" type="checkbox" value="charity">Charity or government-funded organisation</input></label>
-        <label class="block-label" for="checkbox-2"><input id="checkbox-2" type="checkbox" value="solicitor">Solicitor or private company</input></label>
-        <label class="block-label" for="checkbox-3"><input id="checkbox-3" type="checkbox" value="category">Categories of law</input></label>
+        {% for c in form.organisation_types %}
+          <label class="block-label" for="id_organisation_types_{{ forloop.counter0 }}"><input id="id_organisation_types_{{ forloop.counter0 }}" name="organisation_types" type="checkbox" value="{{ c.choice_value }}"{{ form.organisation_types|selected:forloop.counter0 }}>{{ c.choice_label }}</input></label>
+        {% endfor %}
+        <label class="block-label" for="category"><input id="category" name="category" type="checkbox" value="1"{% if form.category.value == '1' %} checked{% endif %}>Categories of law</input></label>
+        <div class="panel-indent" data-control-value="1" data-controlled-by="category" data-persist-values="true">
+          <div class="grid-row">
+            <div class="column-half">
+              {% for c in form.categories %}
+                <label class="block-label" for="id_categories_{{ forloop.counter0 }}"><input id="id_categories_{{ forloop.counter0 }}" name="categories" type="checkbox" value="{{ c.choice_value }}"{{ form.categories|selected:forloop.counter0 }}>{{ c.choice_label }}</input></label>
+                {% if forloop.counter|multiply:2 >= categories|length %}
+                  </div>
+                  <div class="column-half">
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
       </fieldset>
     </div>
   </form>
@@ -34,4 +51,8 @@
     <p id="advice">For advice on education or discrimination contact <a href="https://www.gov.uk/civil-legal-advice" rel="external" target="_blank">Civil Legal Advice.</a></p>
     <p>For welfare benefits, contact a <a href="https://www.justice.gov.uk/legal-aid/areas-of-work/civil/social-welfare-law" rel="external" target="_blank">local adviser</a>.</p>
   </div>
+
+  {% for result in  data.results %}
+    {{ result }}<br>
+  {% endfor %}
 {% endblock %}
