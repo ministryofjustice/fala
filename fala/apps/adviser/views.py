@@ -11,27 +11,31 @@ class IndexView(TemplateView):
     template_name = 'adviser/index.html'
 
     def get(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
         form = AdviserSearchForm(data=request.GET or None)
 
-        try:
-            data = laalaa.find(
-                postcode=request.GET.get('postcode'),
-                categories=request.GET.getlist('categories'),
-                page=request.GET.get('page'),
-                organisation_types=request.GET.getlist('organisation_types'),
-                organisation_name=request.GET.getlist('organisation_name'),
-            )
-            if 'error' in data:
-                raise Exception(data['error'])
-        except laalaa.LaaLaaError:
-            raise Exception(u"%s %s" % (
-                _('Error looking up legal advisers.'),
-                _('Please try again later.')
-            ))
+        if form.is_valid():
+            try:
+                data = laalaa.find(
+                    postcode=request.GET.get('postcode'),
+                    categories=request.GET.getlist('categories'),
+                    page=request.GET.get('page'),
+                    organisation_types=request.GET.getlist('organisation_types'),
+                    organisation_name=request.GET.getlist('organisation_name'),
+                )
+                if 'error' in data:
+                    form.add_error('postcode', (data['error']))
+            except laalaa.LaaLaaError:
+                form.add_error('postcode', u"%s %s" % (
+                    _('Error looking up legal advisers.'),
+                    _('Please try again later.')
+                ))
+            context.update({
+                'data': data,
+            })
 
-        context = self.get_context_data(**kwargs)
+
         context.update({
-            'data': data,
             'form': form,
             'categories': [{'id': c[0], 'name': c[1]} for c in laalaa.PROVIDER_CATEGORIES.items()],
         })
