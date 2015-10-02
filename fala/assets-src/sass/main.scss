@@ -2,6 +2,8 @@ $images-dir: '/static/images/';
 
 @import 'govuk';
 
+@import 'find-legal-adviser';
+
 body {
   margin: 0;
   padding: 0;
@@ -14,4 +16,8 @@ img {
 
 .other-advise {
   margin-top: 2em;
+}
+
+.find-legal-adviser {
+  margin-bottom: 2em;
 }

@@ -3,6 +3,7 @@
 
 {% block content %}
   <h1>Find a legal adviser or family mediator</h1>
+  {% include 'adviser/partials/_find-legal-adviser.html' with data=data %}
   <form action="" method="GET">
     <fieldset>
       <legend>Search for a legal adviser or family mediator with a legal aid contract in England and Wales.</legend>
@@ -22,7 +23,9 @@
         <label class="form-label" for="organisation_name">Organisation name</label><input name="organisation_name" class="form-control" id="organisation_name" type="text" value="{{ form.organisation_name|val }}" />
       </div>
     </fieldset>
+
     <input class="button" type="submit" value="Search">
+
     <div data-control-value="location" data-controlled-by="search_type">
       <fieldset>
         <legend class="form-label-bold">Filter by:</legend>
@@ -38,7 +41,7 @@
             <div class="column-half">
               {% for c in form.categories %}
                 <label class="block-label" for="id_categories_{{ forloop.counter0 }}"><input id="id_categories_{{ forloop.counter0 }}" name="categories" type="checkbox" value="{{ c.choice_value }}"{{ form.categories|selected:forloop.counter0 }}>{{ c.choice_label }}</input></label>
-                {% if forloop.counter|multiply:2 >= categories|length %}
+                {% if forloop.counter0|multiply:2 >= categories|length %}
                   </div>
                   <div class="column-half">
                 {% endif %}
@@ -55,7 +58,4 @@
     <p>For welfare benefits, contact a <a href="https://www.justice.gov.uk/legal-aid/areas-of-work/civil/social-welfare-law" rel="external" target="_blank">local adviser</a>.</p>
   </div>
 
-  {% for result in  data.results %}
-    {{ result }}<br>
-  {% endfor %}
 {% endblock %}

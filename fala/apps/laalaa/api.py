@@ -81,6 +81,6 @@ def find(postcode=None, categories=None, page=1, organisation_types=None, organi
         organisation_types=organisation_types,
         organisation_name=organisation_name)
 
-    data['results'] = map(decode_categories, data.get('results', []))
+    data['results'] = list(map(decode_categories, data.get('results', [])))
 
     return data
