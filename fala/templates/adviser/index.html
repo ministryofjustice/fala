@@ -59,3 +59,10 @@
   </div>
 
 {% endblock %}
+
+{% block include_js %}
+  {{ block.super }}
+  {% if data.results|length %}
+    <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?sensor=true"></script>
+  {% endif%}
+{% endblock %}
