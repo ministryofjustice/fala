@@ -22,19 +22,6 @@ ORGANISATION_TYPES_CHOICES = tuple(zip(ORGANISATION_TYPES,
 
 
 class AdviserSearchForm(forms.Form):
-    def clean(self):
-        cleaned_data = super(AdviserSearchForm, self).clean()
-        if cleaned_data.get('search_type') == 'location' and not \
-                cleaned_data.get('postcode'):
-            raise forms.ValidationError(
-                _('Please enter a postcode')
-            )
-        elif cleaned_data.get('search_type') == 'organisation' and not \
-                cleaned_data.get('organisation_name'):
-            raise forms.ValidationError(
-                _('Please enter an organisation')
-            )
-        return cleaned_data
 
     search_type = forms.ChoiceField(
         choices=SEARCH_TYPE_CHOICES,
@@ -62,6 +49,20 @@ class AdviserSearchForm(forms.Form):
         widget=forms.CheckboxSelectMultiple(),
         required=False)
 
+    def clean(self):
+        cleaned_data = super(AdviserSearchForm, self).clean()
+        if cleaned_data.get('search_type') == 'location' and not \
+                cleaned_data.get('postcode'):
+            raise forms.ValidationError(
+                _('Please enter a postcode')
+            )
+        elif cleaned_data.get('search_type') == 'organisation' and not \
+                cleaned_data.get('organisation_name'):
+            raise forms.ValidationError(
+                _('Please enter an organisation')
+            )
+        return cleaned_data
+
     def search(self):
         if self.is_valid():
             try:
@@ -75,6 +76,7 @@ class AdviserSearchForm(forms.Form):
                 if 'error' in data:
                     self.add_error('postcode', (data['error']))
                     return {}
+                print(data)
                 return data
             except laalaa.LaaLaaError:
                 self.add_error('postcode', u"%s %s" % (
