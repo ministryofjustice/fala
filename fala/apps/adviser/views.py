@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
+from django.conf import settings
 from django.views.generic import TemplateView
-from django.utils.translation import gettext as _
 
-from laalaa import api as laalaa
-
-from .forms import AdviserSearchForm, SEARCH_TYPE_CHOICES
+from .forms import AdviserSearchForm
 
 
 class IndexView(TemplateView):
@@ -14,30 +12,10 @@ class IndexView(TemplateView):
         context = self.get_context_data(**kwargs)
         form = AdviserSearchForm(data=request.GET or None)
 
-        if form.is_valid():
-            try:
-                data = laalaa.find(
-                    postcode=request.GET.get('postcode'),
-                    categories=request.GET.getlist('categories'),
-                    page=request.GET.get('page'),
-                    organisation_types=request.GET.getlist('organisation_types'),
-                    organisation_name=request.GET.getlist('organisation_name'),
-                )
-                if 'error' in data:
-                    form.add_error('postcode', (data['error']))
-            except laalaa.LaaLaaError:
-                form.add_error('postcode', u"%s %s" % (
-                    _('Error looking up legal advisers.'),
-                    _('Please try again later.')
-                ))
-            context.update({
-                'data': data,
-            })
-
-
         context.update({
             'form': form,
-            'categories': [{'id': c[0], 'name': c[1]} for c in laalaa.PROVIDER_CATEGORIES.items()],
+            'data': form.search(),
+            'LAALAA_API_HOST': settings.LAALAA_API_HOST,
         })
 
         return self.render_to_response(context)

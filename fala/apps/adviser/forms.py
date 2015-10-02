@@ -2,7 +2,7 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
-from laalaa.api import PROVIDER_CATEGORY_CHOICES
+import laalaa.api as laalaa
 
 
 SEARCH_TYPE_CHOICES = [
@@ -58,6 +58,29 @@ class AdviserSearchForm(forms.Form):
         widget=forms.CheckboxInput()
     )
     categories = forms.MultipleChoiceField(
-        choices=PROVIDER_CATEGORY_CHOICES,
+        choices=laalaa.PROVIDER_CATEGORY_CHOICES,
         widget=forms.CheckboxSelectMultiple(),
         required=False)
+
+    def search(self):
+        if self.is_valid():
+            try:
+                data = laalaa.find(
+                    postcode=self.cleaned_data.get('postcode'),
+                    categories=self.cleaned_data.get('categories'),
+                    page=self.cleaned_data.get('page'),
+                    organisation_types=self.cleaned_data.get('organisation_types'),
+                    organisation_name=self.cleaned_data.get('organisation_name'),
+                )
+                if 'error' in data:
+                    self.add_error('postcode', (data['error']))
+                    return {}
+                return data
+            except laalaa.LaaLaaError:
+                self.add_error('postcode', u"%s %s" % (
+                    _('Error looking up legal advisers.'),
+                    _('Please try again later.')
+                ))
+        return {}
+
+
