@@ -76,7 +76,6 @@ class AdviserSearchForm(forms.Form):
                 if 'error' in data:
                     self.add_error('postcode', (data['error']))
                     return {}
-                print(data)
                 return data
             except laalaa.LaaLaaError:
                 self.add_error('postcode', u"%s %s" % (
