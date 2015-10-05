@@ -153,7 +153,7 @@ LOGGING = {
 }
 
 # RAVEN SENTRY CONFIG
-if 1 or 'SENTRY_DSN' in os.environ:
+if 'SENTRY_DSN' in os.environ:
     RAVEN_CONFIG = {
         'dsn': os.environ.get('SENTRY_DSN')
     }
