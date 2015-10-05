@@ -163,7 +163,7 @@ $mobile: max-width 640px;
 .find-legal-adviser .map {
   display: none;
 
-  @include breakpoint($tablet) {
+  @include media('>phone') {
     height: 100%;
     width: 100% - $results-sidebar-width;
     float: left;
@@ -200,12 +200,12 @@ $mobile: max-width 640px;
     height: $map-height;
     margin-bottom: 1em;
 
-    @include breakpoint($mobile) {
+    @include media('<tablet') {
       height: $map-height - 100;
     }
   }
 
-  @include breakpoint($tablet) {
+  @include media('>phone') {
     $_pagination-height: 35px;
 
     .map {
@@ -291,7 +291,7 @@ $mobile: max-width 640px;
       height: $_pagination-height - 6 - 2;
       padding: 3px;
 
-      @include breakpoint($tablet) {
+      @include media('>phone') {
         background: $grey-4;
         margin: 0;
       }

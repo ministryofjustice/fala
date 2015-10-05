@@ -46,13 +46,9 @@ STATIC_URL = '/static/'
 
 project_root = abspath(root('..'))
 
-bower_dir = json.load(open(join(project_root, '.bowerrc')))['directory']
-
 # Additional locations of static files
 STATICFILES_DIRS = (
     root('assets'),
-    abspath(root(project_root, bower_dir, 'govuk-template', 'assets')),
-    abspath(root(project_root, bower_dir, 'mojular', 'assets'))
 )
 
 # List of finder classes that know how to find static files in
@@ -70,7 +66,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             root('templates'),
-            abspath(root(project_root, bower_dir, 'mojular', 'templates')),
+            abspath(root(project_root, 'node_modules', 'mojular-templates')),
         ],
         'APP_DIRS': True,
         'OPTIONS': {

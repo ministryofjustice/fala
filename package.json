@@ -16,12 +16,20 @@
     "url": "https://github.com/ministryofjustice/fala/issues"
   },
   "homepage": "https://github.com/ministryofjustice/fala",
+  "dependencies": {
+    "mojular": "mojular/mojular#webpack",
+    "mojular-govuk-elements": "mojular/govuk-elements#dev",
+    "mojular-templates": "mojular/templates#webpack"
+  },
   "devDependencies": {
+    "browser-sync": "^2.9.8",
     "gulp": "^3.8.11",
     "gulp-concat": "~2.6",
     "gulp-sass": "^2.0.4",
     "gulp-sourcemaps": "^1.5.2",
+    "gulp-util": "^3.0.6",
     "merge-stream": "^1.0.0",
-    "read-json-sync": "^1.1.0"
+    "read-json-sync": "^1.1.0",
+    "webpack": "^1.12.2"
   }
 }
