@@ -126,30 +126,64 @@ LOGGING = {
         'simple': {
             'format': '%(levelname)s %(message)s'
         },
+        'logstash': {
+            '()': 'logstash_formatter.LogstashFormatter'
+        }
+    },
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        },
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue'
+        }
     },
     'handlers': {
-        'console': {
-            'level': 'WARN',
-            'class': 'logging.StreamHandler',
-            'formatter': 'verbose'
-        },
         'mail_admins': {
             'level': 'ERROR',
+            'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
         }
     },
     'loggers': {
-        'django': {
-            'handlers': ['console'],
-            'propagate': True,
-            'level': 'WARN',
-        },
         'django.request': {
-            'handlers': ['console'],
+            'handlers': ['mail_admins'],
             'level': 'ERROR',
-            'propagate': False,
+            'propagate': True,
         }
     }
+}
+
+#APP LOGGING CONFIG
+LOGGING['handlers']['production_file'] = {
+    'level': 'INFO',
+    'class': 'logging.handlers.RotatingFileHandler',
+    'filename': 'app.log',
+    'maxBytes': 1024*1024*5, # 5 MB
+    'backupCount': 7,
+    'formatter': 'logstash',
+    'filters': ['require_debug_false'],
+}
+
+LOGGING['handlers']['debug_file'] = {
+    'level': 'DEBUG',
+    'class': 'logging.handlers.RotatingFileHandler',
+    'filename': 'debug.log',
+    'maxBytes': 1024*1024*5, # 5 MB
+    'backupCount': 7,
+    'formatter': 'logstash',
+    'filters': ['require_debug_true'],
+}
+
+LOGGING['handlers']['console'] = {
+    'level': 'DEBUG',
+    'class': 'logging.StreamHandler',
+    'stream': sys.stdout
+}
+
+LOGGING['loggers'][''] = {
+    'handlers': ['console'],
+    'level': "DEBUG",
 }
 
 # RAVEN SENTRY CONFIG
