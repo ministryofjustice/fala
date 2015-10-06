@@ -7,7 +7,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var webpack = require('webpack');
 var browserSync = require('browser-sync').create();
 
-var importPaths = require('mojular-govuk-elements').getPaths();
+var importPaths = require('mojular-govuk-elements').getPaths('sass').concat(require('mojular-moj-elements').getPaths('sass'));
 
 var paths = {
   src: 'fala/assets-src/',
@@ -20,8 +20,8 @@ var paths = {
 gulp.task('sass', function() {
   return gulp.src(paths.styles)
     .pipe(sourcemaps.init())
-    .pipe(sass({ includePaths: importPaths.sass }).on('error', sass.logError))
-    .pipe(sourcemaps.write('.'))
+    .pipe(sass({ includePaths: importPaths }).on('error', sass.logError))
+    .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.dest + 'css/'))
     .pipe(browserSync.stream({match: '**/*.css'}));
 });

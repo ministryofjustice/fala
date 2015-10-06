@@ -1,17 +1,25 @@
 $images-dir: '/static/images/';
 
-@import 'govuk';
+@import 'govuk/fonts';
+@import 'govuk/base';
+@import 'govuk/typography';
+@import 'govuk/layout';
+
+@import 'govuk/elements/global-header';
+@import 'govuk/elements/global-subheader';
+@import 'govuk/elements/global-footer';
+@import 'govuk/elements/phase-banner';
+@import 'govuk/elements/table';
+@import 'govuk/elements/data';
+@import 'govuk/elements/breadcrumbs';
+@import 'govuk/elements/panel-indent';
+@import 'govuk/elements/details';
+@import 'govuk/elements/buttons';
+
+@import 'govuk/utilities';
+
+@import 'cla/elements';
 @import 'find-legal-adviser';
-
-body {
-  margin: 0;
-  padding: 0;
-  -webkit-font-smoothing: antialiased;
-}
-
-img {
-  max-width: 100%;
-}
 
 .other-advise {
   margin-top: 2em;
@@ -19,4 +27,17 @@ img {
 
 .find-legal-adviser {
   margin-bottom: 2em;
+}
+
+.page-header {
+  margin: 1em 0;
+
+  h1 {
+    margin: 0 0 .5em;
+  }
+}
+
+.form-actions {
+  clear: both;
+  margin: 1.5em 0;
 }

@@ -1,55 +1,116 @@
 {% extends "base.html" %}
 {% load adviser_extras %}
 
+{% block global_subheader %}
+  <div class="global-subheader container">
+    <div class="subheader-item phase-banner">
+      <span class="phase-tag phase-tag-alpha">ALPHA</span>
+      <span class="phase-banner-message">
+        This is a new service – your <a href="/feedback">feedback</a> will help us to improve it.
+      </span>
+    </div>
+  </div>
+{% endblock %}
+
 {% block content %}
-  <h1>Find a legal adviser or family mediator</h1>
+  <header class="page-header">
+    <h1>
+      Find a legal adviser <span style="display:block;font-weight: 400;font-size:.9em;">or family mediator</span>
+    </h1>
+    <p class="lede">Search for a legal adviser or family mediator with a legal aid contract in England and Wales.</p>
+  </header>
+
   {% include 'adviser/partials/_find-legal-adviser.html' with data=data %}
+
   <form action="" method="GET">
-    <fieldset>
-      <legend>Search for a legal adviser or family mediator with a legal aid contract in England and Wales.</legend>
-      <legend>Search by:</legend>
-      <div class="form-group inline">
-        {{ form.errors }}
+    {% if form.errors %}
+      <div class="alert alert-error">
+        <div class="alert-message">
+          <h3 class="alert-header">This form has errors</h3>
+        </div>
+        <ul class="error-summary">
+          {% for k, v in form.errors.items %}
+            <dl class="error-summary-details">
+              <dt>
+                <a href="#">
+                  {{ v }}
+                </a>
+              </dt>
+            </dl>
+          {% endfor %}
+        </ul>
       </div>
-      <div class="form-group inline">
-        {% for c in form.search_type %}
-          <label class="block-label" for="search_type_{{ forloop.counter0 }}"><input id="search_type_{{ forloop.counter0 }}" name="search_type" type="radio" value="{{ c.choice_value }}" {{ form.search_type|checked:forloop.counter0 }}>{{ c.choice_label }}</input></label>
-        {% endfor %}
-      </div>
-      <div class="panel-indent" data-control-value="location" data-controlled-by="search_type">
-        <label class="form-label" for="postcode">Enter a postcode, town or city</label><input name="postcode" class="form-control" id="postcode" type="text" value="{{ form.postcode|val }}" />
-      </div>
-      <div class="panel-indent" data-control-value="organisation" data-controlled-by="search_type">
-        <label class="form-label" for="organisation_name">Organisation name</label><input name="organisation_name" class="form-control" id="organisation_name" type="text" value="{{ form.organisation_name|val }}" />
+    {% endif %}
+
+    <fieldset class="form-group fieldset-group">
+      <legend class="form-group-label"><span>Search by</span></legend>
+
+      <div class="form-row">
+        <div class="form-group-plain inline">
+          {% for c in form.search_type %}
+            <label class="radio-inline" for="search_type_{{ forloop.counter0 }}">
+            <input id="search_type_{{ forloop.counter0 }}" name="search_type" type="radio" value="{{ c.choice_value }}" {{ form.search_type|checked:forloop.counter0 }}>{{ c.choice_label }}</input></label>
+          {% endfor %}
+        </div>
+
+        <div class="form-group form-subfield" data-control-value="location" data-controlled-by="search_type">
+          <div class="form-group-label">
+            <label for="postcode">Enter a postcode</label>
+          </div>
+          <div class="form-row">
+            <input name="postcode" class="form-control" id="postcode" type="text" value="{{ form.postcode|val }}" />
+          </div>
+        </div>
+
+        <div class="form-group form-subfield" data-control-value="organisation" data-controlled-by="search_type">
+          <div class="form-group-label">
+            <label for="organisation_name">Organisation name</label>
+          </div>
+          <div class="form-row">
+            <input name="organisation_name" class="form-control" id="organisation_name" type="text" value="{{ form.organisation_name|val }}" />
+          </div>
+        </div>
       </div>
     </fieldset>
 
-    <input class="button" type="submit" value="Search">
+    <fieldset class="form-group fieldset-group" data-control-value="location" data-controlled-by="search_type">
+      <legend class="form-group-label"><span>Filter by</span></legend>
+      <p class="form-row field-help">
+        Select all that apply
+      </p>
 
-    <div data-control-value="location" data-controlled-by="search_type">
-      <fieldset>
-        <legend class="form-label-bold">Filter by:</legend>
-        <p>
-          Select all that apply
-        </p>
-        {% for c in form.organisation_types %}
-          <label class="block-label" for="id_organisation_types_{{ forloop.counter0 }}"><input id="id_organisation_types_{{ forloop.counter0 }}" name="organisation_types" type="checkbox" value="{{ c.choice_value }}"{{ form.organisation_types|selected:forloop.counter0 }}>{{ c.choice_label }}</input></label>
-        {% endfor %}
-        <label class="block-label" for="category"><input id="category" name="category" type="checkbox" value="1"{% if form.category.value == '1' %} checked{% endif %}>Categories of law</input></label>
-        <div class="panel-indent" data-control-value="1" data-controlled-by="category" data-persist-values="true">
-          <div class="grid-row">
-            <div class="column-half">
-              {% for c in form.categories %}
-                <label class="block-label" for="id_categories_{{ forloop.counter0 }}"><input id="id_categories_{{ forloop.counter0 }}" name="categories" type="checkbox" value="{{ c.choice_value }}"{{ form.categories|selected:forloop.counter0 }}>{{ c.choice_label }}</input></label>
-                {% if forloop.counter0|multiply:2 >= categories|length %}
-                  </div>
-                  <div class="column-half">
-                {% endif %}
-              {% endfor %}
-            </div>
+      {% for c in form.organisation_types %}
+        <label for="id_organisation_types_{{ forloop.counter0 }}">
+          <input id="id_organisation_types_{{ forloop.counter0 }}" name="organisation_types" type="checkbox" value="{{ c.choice_value }}"{{ form.organisation_types|selected:forloop.counter0 }}>
+          {{ c.choice_label }}
+        </label>
+      {% endfor %}
+
+      <label for="category">
+        <input id="category" name="category" type="checkbox" value="1"{% if form.category.value == '1' %} checked{% endif %}>
+        Categories of law
+      </label>
+
+      <div class="form-group form-subfield" data-control-value="1" data-controlled-by="category" data-persist-values="true">
+        <div class="grid-row">
+          <div class="column-half">
+            {% for c in form.categories %}
+              <label for="id_categories_{{ forloop.counter0 }}">
+                <input id="id_categories_{{ forloop.counter0 }}" name="categories" type="checkbox" value="{{ c.choice_value }}"{{ form.categories|selected:forloop.counter0 }}/>
+                {{ c.choice_label }}
+              </label>
+              {% if forloop.counter0|multiply:2 >= categories|length %}
+                </div>
+                <div class="column-half">
+              {% endif %}
+            {% endfor %}
           </div>
         </div>
-      </fieldset>
+      </div>
+    </fieldset>
+
+    <div class="form-actions">
+      <button type="submit" class="button">Search</button>
     </div>
   </form>
 
@@ -62,7 +123,5 @@
 
 {% block before_main_js %}
   {{ block.super }}
-  {% if data.results|length %}
-    <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?sensor=true"></script>
-  {% endif%}
+  <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?sensor=true"></script>
 {% endblock %}
