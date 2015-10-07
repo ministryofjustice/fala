@@ -43,7 +43,7 @@ $mobile: max-width 640px;
     }
   }
 
-  .search-results-list {
+    .search-results-list {
     .org-list {
       margin: 0;
       padding: 0;
@@ -105,7 +105,7 @@ $mobile: max-width 640px;
     }
   }
 
-  .search-results-pagination {
+    .search-results-pagination {
     overflow: hidden;
     border-top: 2px solid $grey-3;
     margin: 1em 0;
@@ -146,7 +146,7 @@ $mobile: max-width 640px;
   }
 }
 
-.find-legal-adviser .map {
+.legal-adviser-results .map {
   display: none;
 
   @include media('>phone') {
@@ -174,7 +174,7 @@ $mobile: max-width 640px;
 }
 
 
-.js-enabled .find-legal-adviser {
+.js-enabled .legal-adviser-results {
   .results-location {
     padding-left: 20px;
     background: url(../images/icons/icon-location.png) .17em .17em no-repeat;
@@ -286,7 +286,7 @@ $mobile: max-width 640px;
 }
 
 @media print {
-  .find-legal-adviser {
+  .legal-adviser-results {
     page-break-before: always;
 
     .map {

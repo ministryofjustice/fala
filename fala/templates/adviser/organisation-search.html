@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block search_form %}
+  <ul class="tabs" role="tablist">
+    <li class="tab"><a href="/location">Location</a></li>
+    <li class="tab active"><a href="/organisation">Organisation</a></li>
+  </ul>
+
+  <form action="" class="legal-adviser-search">
+    <div class="form-row">
+      <div class="form-group-plain">
+        <div class="form-group-label">
+          <label for="id_{{ form.organisation_name.name }}">{{ form.organisation_name.label }}</label>
+        </div>
+        <div class="form-row">
+          {{ form.organisation_name }}
+          <button type="submit" class="button">Search</button>
+        </div>
+      </div>
+    </div>
+  </form>
+{% endblock %}
+
+{% block search_results %}
+  {% if data.results %}
+    {% include 'adviser/_results.html' %}
+  {% endif %}
+{% endblock %}

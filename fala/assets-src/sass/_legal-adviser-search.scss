@@ -1,0 +1,16 @@
+.legal-adviser-search {
+  padding: 20px;
+  margin-bottom: 1em;
+  border: solid $grey-2;
+  border-width: 1px 0;
+
+  .tabs + & {
+    margin-top: -1px;
+  }
+
+  .form-control {
+    padding: em(10);
+    vertical-align: top;
+  }
+}
+

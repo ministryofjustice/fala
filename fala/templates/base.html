@@ -1,5 +1,16 @@
 {% extends 'layouts/jinja/external.html' %}
 
+{% block global_subheader %}
+  <div class="global-subheader container">
+    <div class="subheader-item phase-banner">
+      <span class="phase-tag phase-tag-alpha">ALPHA</span>
+      <span class="phase-banner-message">
+        This is a new service – your <a href="/feedback">feedback</a> will help us to improve it.
+      </span>
+    </div>
+  </div>
+{% endblock %}
+
 {% block head %}
   {{ super() }}
   <script>
@@ -12,4 +23,33 @@
 
 {% block stylesheets %}
   <link href="{{ static('css/main.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+  <header class="page-header">
+    <h1>
+      Find a legal adviser <span style="display:block;font-weight: 400;font-size:.8em;">or family mediator</span>
+    </h1>
+    <p class="lede">Search for a legal adviser or family mediator with a legal aid contract in England and Wales.</p>
+  </header>
+
+  <div class="find-legal-adviser">
+    {% block search_form %}{% endblock %}
+    {% block search_results %}{% endblock %}
+  </div>
+
+  <div class="other-advise">
+    <p id="advice">For advice on education or discrimination contact <a href="https://www.gov.uk/civil-legal-advice" rel="external" target="_blank">Civil Legal Advice.</a></p>
+    <p>For welfare benefits, contact a <a href="https://www.justice.gov.uk/legal-aid/areas-of-work/civil/social-welfare-law" rel="external" target="_blank">local adviser</a>.</p>
+  </div>
+{% endblock %}
+
+{% block before_main_js %}
+  {{ super() }}
+  <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?sensor=true"></script>
+  <script>
+    window.LABELS = {
+      loading: "{{ _('Loading…') }}"
+    };
+  </script>
 {% endblock %}

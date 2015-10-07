@@ -21,35 +21,15 @@ ORGANISATION_TYPES_CHOICES = tuple(zip(ORGANISATION_TYPES,
                                        ORGANISATION_TYPES))
 
 
-class AdviserSearchForm(forms.Form):
+class FalaTextInput(forms.TextInput):
+    def __init__(self, attrs={}):
+        class_attr = ' '.join([c for c in ['form-control', attrs.get('class')] if c])
+        attrs.update({'class': class_attr})
 
-    search_type = forms.ChoiceField(
-        choices=SEARCH_TYPE_CHOICES,
-        widget=forms.RadioSelect(),
-        initial=SEARCH_TYPE_CHOICES[0][0])
-    postcode = forms.CharField(
-        label=_('Enter postcode'),
-        max_length=10,
-        help_text=_('Enter a postcode, town or city'),
-        required=False,
-        widget=forms.TextInput(attrs={'class': 'form-control'}))
-    organisation_name = forms.CharField(
-        label=_('Organisation name'),
-        max_length=100,
-        required=False,
-        widget=forms.TextInput(attrs={'class': 'form-control'}))
-    organisation_types = forms.MultipleChoiceField(
-        choices=ORGANISATION_TYPES_CHOICES,
-        widget=forms.CheckboxSelectMultiple(),
-        required=False)
-    category = forms.NullBooleanField(
-        label=_('Categories of law'),
-        widget=forms.CheckboxInput()
-    )
-    categories = forms.MultipleChoiceField(
-        choices=laalaa.PROVIDER_CATEGORY_CHOICES,
-        widget=forms.CheckboxSelectMultiple(),
-        required=False)
+        super(FalaTextInput, self).__init__(attrs)
+
+
+class AdviserSearchForm(forms.Form):
 
     def clean(self):
         cleaned_data = super(AdviserSearchForm, self).clean()
@@ -87,3 +67,35 @@ class AdviserSearchForm(forms.Form):
         return {}
 
 
+class AdviserSearchByLocationForm(AdviserSearchForm):
+
+    postcode = forms.CharField(
+        label=_('Enter postcode'),
+        max_length=10,
+        help_text=_('Enter a postcode, town or city'),
+        required=False,
+        widget=FalaTextInput)
+
+    organisation_types = forms.MultipleChoiceField(
+        choices=ORGANISATION_TYPES_CHOICES,
+        widget=forms.CheckboxSelectMultiple(),
+        required=False)
+
+    category = forms.NullBooleanField(
+        label=_('Categories of law'),
+        widget=forms.CheckboxInput()
+    )
+
+    categories = forms.MultipleChoiceField(
+        choices=laalaa.PROVIDER_CATEGORY_CHOICES,
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'aa'}),
+        required=False)
+
+
+class AdviserSearchByOrganisationForm(AdviserSearchForm):
+
+    organisation_name = forms.CharField(
+        label=_('Organisation name'),
+        max_length=100,
+        required=False,
+        widget=FalaTextInput)

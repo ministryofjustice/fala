@@ -19,14 +19,12 @@ $images-dir: '/static/images/';
 @import 'govuk/utilities';
 
 @import 'cla/elements';
-@import 'find-legal-adviser';
+@import 'tabs';
+@import 'legal-adviser-search';
+@import 'legal-adviser-results';
 
 .other-advise {
   margin-top: 2em;
-}
-
-.find-legal-adviser {
-  margin-bottom: 2em;
 }
 
 .page-header {
@@ -35,9 +33,4 @@ $images-dir: '/static/images/';
   h1 {
     margin: 0 0 .5em;
   }
-}
-
-.form-actions {
-  clear: both;
-  margin: 1.5em 0;
 }

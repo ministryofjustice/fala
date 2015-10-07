@@ -1,0 +1,33 @@
+.tabs {
+  @include clearfix;
+  border-bottom: 1px solid $grey-2;
+  list-style: none;
+  padding: 0 10px;
+  margin: 0;
+
+  .tab {
+    float: left;
+    margin: 0 -2px -1px 0;
+    padding: 6px;
+    border: 1px solid transparent;
+    border-bottom: 0;
+  }
+
+  .tab.active {
+    position: relative;
+    border-color: $grey-2;
+    background: white;
+
+    a {
+      background: none;
+    }
+  }
+
+  .tab a {
+    text-decoration: none;
+    display: block;
+    color: $text-colour;
+    background: $grey-3;
+    padding: .4em .7em .3em;
+  }
+}

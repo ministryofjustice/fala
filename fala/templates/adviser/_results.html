@@ -1,7 +1,7 @@
-<section class="find-legal-adviser">
+<section class="legal-adviser-results">
   {% if data and data.count and data.count > 0 %}
     <p class="results-summary">
-{#      {% blocktrans with count=data.results|length %}Showing {{ count }} results around{% endblocktrans %}#}
+      {% trans count=data.results|length %}Showing {{ count }} results around{% endtrans %}
       <span class="results-location">{{ data.origin.postcode }}</span>
       {% if category_name %}
         {{ _('for') }}
@@ -27,10 +27,10 @@
         <div class="search-results-list">
           <ul class="org-list">
             {% for item in data.results %}
-              <li class="org-list-item vcard" data-lat="{{ item.location.point.coordinates.1 }}" data-lon="{{ item.location.point.coordinates.0 }}" data-id="{{ forloop.counter }}">
+              <li class="org-list-item vcard" data-lat="{{ item.location.point.coordinates.1 }}" data-lon="{{ item.location.point.coordinates.0 }}" data-id="{{ loop.index }}">
                 <header class="org-summary">
                   <h3 class="org-title">
-                    <span class="marker">{{ forloop.counter }}</span>
+                    <span class="marker">{{ loop.index}}</span>
                     <span class="fn org">{{ item.organisation.name }}</span>
                   </h3>
                   <div class="distance">
@@ -39,16 +39,16 @@
                   </div>
                 </header>
                 <div class="org-details">
-                  {% if item.categories|length %}
-                    <div class="org-categories" role="list">
-                      <div class="sr-only">{{ _('Categories of law') }}</div>
-                      {% for cat in item.categories %}
-                        {% if cat %}
-                          <span class="org-category" role="listitem">{{ cat }}</span>
-                        {% endif %}
-                      {% endfor %}
-                    </div>
-                  {% endif %}
+{#                  {% if item.categories|length %}#}
+{#                    <div class="org-categories" role="list">#}
+{#                      <div class="sr-only">{{ _('Categories of law') }}</div>#}
+{#                      {% for cat in item.categories %}#}
+{#                        {% if cat %}#}
+{#                          <span class="org-category" role="listitem">{{ cat }}</span>#}
+{#                        {% endif %}#}
+{#                      {% endfor %}#}
+{#                    </div>#}
+{#                  {% endif %}#}
                   <p>
                     <span class="sr-only">{{ _('Address') }}:</span>
                     <span class="adr">
@@ -104,9 +104,3 @@
     {{ _('No results') }}
   {% endif %}
 </section>
-
-<script>
-  window.LABELS = {
-    loading: "{{ _('Loading…') }}"
-  };
-</script>

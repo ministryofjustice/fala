@@ -2,15 +2,14 @@
 from django.conf import settings
 from django.views.generic import TemplateView
 
-from .forms import AdviserSearchForm
+from .forms import AdviserSearchForm, AdviserSearchByLocationForm, AdviserSearchByOrganisationForm
 
 
-class IndexView(TemplateView):
-    template_name = 'adviser/index.html'
+class AdviserView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
-        form = AdviserSearchForm(data=request.GET or None)
+        form = self.form_class(data=request.GET or None)
 
         context.update({
             'form': form,
@@ -21,3 +20,11 @@ class IndexView(TemplateView):
         return self.render_to_response(context)
 
 
+class LocationSearchView(AdviserView):
+    template_name = 'adviser/location-search.html'
+    form_class = AdviserSearchByLocationForm
+
+
+class OrganisationSearchView(AdviserView):
+    template_name = 'adviser/organisation-search.html'
+    form_class = AdviserSearchByOrganisationForm

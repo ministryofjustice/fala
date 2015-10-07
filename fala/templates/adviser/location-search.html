@@ -1,0 +1,63 @@
+{% if request.is_ajax() %}
+  {% extends 'ajax-base.html' %}
+{% else %}
+  {% extends 'base.html' %}
+{% endif %}
+
+{% block search_form %}
+  <ul class="tabs" role="tablist">
+    <li class="tab active"><a href="/location">Location</a></li>
+    <li class="tab"><a href="/organisation">Organisation</a></li>
+  </ul>
+
+  <form action="" class="legal-adviser-search">
+    <div class="form-row">
+      <div class="form-group-plain">
+        <div class="form-group-label">
+          <label for="id_{{ form.postcode.name }}">{{ form.postcode.label }}</label>
+        </div>
+        <div class="form-row">
+          {{ form.postcode }}
+          <button type="submit" class="button">Search</button>
+        </div>
+      </div>
+    </div>
+
+    <fieldset class="form-group fieldset-group">
+      <legend class="form-group-label"><span>Filter by</span></legend>
+      <div class="form-row">
+        {% for field in form.organisation_types %}
+          {{ field }}
+        {% endfor %}
+        <label for="category">
+          <input id="category" name="category" type="checkbox" value="1"
+                 {% if form.category.value == '1' %}checked{% endif %}>
+          {{ form.category.label }}
+        </label>
+      </div>
+
+      <div class="form-group form-subfield" data-control-value="1" data-controlled-by="category"
+           data-persist-values="true">
+        <div class="grid-row">
+          <ul class="column-half">
+            {% for category in form.categories %}
+              <li>
+                {{ category }}
+              </li>
+              {% if loop.index == (form.categories|length / 2)|round %}
+                </ul>
+                <ul class="column-half">
+              {% endif %}
+            {% endfor %}
+            </ul>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+{% endblock %}
+
+{% block search_results %}
+  {% if data.results %}
+    {% include 'adviser/_results.html' %}
+  {% endif %}
+{% endblock %}
