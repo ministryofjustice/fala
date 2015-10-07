@@ -1,0 +1,94 @@
+<form action="" method="GET">
+  {% if form.errors %}
+    <div class="alert alert-error">
+      <div class="alert-message">
+        <h3 class="alert-header">This form has errors</h3>
+      </div>
+      <ul class="error-summary">
+        {% for k, v in form.errors.items %}
+          <dl class="error-summary-details">
+            <dt>
+              <a href="#">
+                {{ v }}
+              </a>
+            </dt>
+          </dl>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+  <fieldset class="form-group fieldset-group">
+    <legend class="form-group-label"><span>Search by</span></legend>
+
+    <div class="form-row">
+      <div class="form-group-plain inline">
+        {% for c in form.search_type %}
+          <label class="radio-inline" for="search_type_{{ loop.index0 }}">
+            <input id="search_type_{{ loop.index0 }}" name="search_type" type="radio" value="{{ c.choice_value }}" />
+            {{ c.choice_label }}
+          </label>
+        {% endfor %}
+      </div>
+
+      <div class="form-group form-subfield" data-control-value="location" data-controlled-by="search_type">
+        <div class="form-group-label">
+          <label for="id_{{ form.postcode.name }}">{{ form.postcode.label }}</label>
+        </div>
+        <div class="form-row">
+          {{ form.postcode }}
+        </div>
+      </div>
+
+      <div class="form-group form-subfield" data-control-value="organisation" data-controlled-by="search_type">
+        <div class="form-group-label">
+          <label for="id_{{ form.organisation_name.name }}">{{ form.organisation_name.label }}</label>
+        </div>
+        <div class="form-row">
+          {{ form.organisation_name }}
+        </div>
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset class="form-group fieldset-group" data-control-value="location" data-controlled-by="search_type">
+    <legend class="form-group-label"><span>Filter by</span></legend>
+    <p class="form-row field-help">
+      Select all that apply
+    </p>
+    <div class="form-row">
+      {% for field in form.organisation_types %}
+        {{ field }}
+      {% endfor %}
+      <label for="category">
+        <input id="category" name="category" type="checkbox" value="1"{% if form.category.value == '1' %}
+             checked{% endif %}>
+        {{ form.category.label }}
+      </label>
+    </div>
+
+    <div class="form-group form-subfield" data-control-value="1" data-controlled-by="category"
+         data-persist-values="true">
+      <div class="grid-row">
+        <ul class="column-half">
+          {% for field in form.categories %}
+            <li>
+              <label for="id_categories_{{ loop.index0 }}">
+                {{ field }}
+                {{ field.choice_label }}
+              </label>
+            </li>
+            {% if loop.index == (form.categories|length / 2)|round %}
+              </ul>
+              <ul class="column-half">
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </fieldset>
+
+  <div class="form-actions">
+    <button type="submit" class="button">Search</button>
+  </div>
+</form>

@@ -1,10 +1,7 @@
-{% load i18n %}
-
 <section class="find-legal-adviser">
-
   {% if data and data.count and data.count > 0 %}
     <p class="results-summary">
-      {% blocktrans with count=data.results|length %}Showing {{ count }} results around{% endblocktrans %}
+{#      {% blocktrans with count=data.results|length %}Showing {{ count }} results around{% endblocktrans %}#}
       <span class="results-location">{{ data.origin.postcode }}</span>
       {% if category_name %}
         {{ _('for') }}
@@ -38,7 +35,7 @@
                   </h3>
                   <div class="distance">
                     <span class="sr-only">{{ _('Distance') }}</span>
-                    {% blocktrans with miles=item.distance|floatformat:2 %}{{ miles }} miles{% endblocktrans %}
+{#                    {% blocktrans with miles=item.distance|floatformat:2 %}{{ miles }} miles{% endblocktrans %}#}
                   </div>
                 </header>
                 <div class="org-details">
@@ -106,11 +103,10 @@
   {% elif 'count' in data and data.count == 0 %}
     {{ _('No results') }}
   {% endif %}
-
-  <script>
-    window.LABELS = {
-      loading: "{{ _('Loading…') }}"
-    };
-  </script>
-
 </section>
+
+<script>
+  window.LABELS = {
+    loading: "{{ _('Loading…') }}"
+  };
+</script>

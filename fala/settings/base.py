@@ -63,20 +63,20 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'SET_THIS_IN_ENV')
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'BACKEND': 'django_jinja.backend.Jinja2',
         'DIRS': [
             root('templates'),
             abspath(root(project_root, 'node_modules', 'mojular-templates')),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
+            'match_extension': '.html',
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
-            'debug': DEBUG,
         },
     },
 ]

@@ -28,20 +28,22 @@ class AdviserSearchForm(forms.Form):
         widget=forms.RadioSelect(),
         initial=SEARCH_TYPE_CHOICES[0][0])
     postcode = forms.CharField(
-        label=_('Postcode'),
+        label=_('Enter postcode'),
         max_length=10,
         help_text=_('Enter a postcode, town or city'),
-        required=False)
+        required=False,
+        widget=forms.TextInput(attrs={'class': 'form-control'}))
     organisation_name = forms.CharField(
-        label=_('Organisation'),
+        label=_('Organisation name'),
         max_length=100,
-        required=False)
+        required=False,
+        widget=forms.TextInput(attrs={'class': 'form-control'}))
     organisation_types = forms.MultipleChoiceField(
         choices=ORGANISATION_TYPES_CHOICES,
         widget=forms.CheckboxSelectMultiple(),
         required=False)
     category = forms.NullBooleanField(
-        label=_('Category'),
+        label=_('Categories of law'),
         widget=forms.CheckboxInput()
     )
     categories = forms.MultipleChoiceField(

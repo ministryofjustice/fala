@@ -1,5 +1,9 @@
 {% extends "base.html" %}
-{% load adviser_extras %}
+
+{% macro hello() %}
+  <h1>Hello</h1>
+{% endmacro %}
+
 
 {% block global_subheader %}
   <div class="global-subheader container">
@@ -20,99 +24,9 @@
     <p class="lede">Search for a legal adviser or family mediator with a legal aid contract in England and Wales.</p>
   </header>
 
-  {% include 'adviser/partials/_find-legal-adviser.html' with data=data %}
+  {% include 'adviser/_find-legal-adviser.html' %}
 
-  <form action="" method="GET">
-    {% if form.errors %}
-      <div class="alert alert-error">
-        <div class="alert-message">
-          <h3 class="alert-header">This form has errors</h3>
-        </div>
-        <ul class="error-summary">
-          {% for k, v in form.errors.items %}
-            <dl class="error-summary-details">
-              <dt>
-                <a href="#">
-                  {{ v }}
-                </a>
-              </dt>
-            </dl>
-          {% endfor %}
-        </ul>
-      </div>
-    {% endif %}
-
-    <fieldset class="form-group fieldset-group">
-      <legend class="form-group-label"><span>Search by</span></legend>
-
-      <div class="form-row">
-        <div class="form-group-plain inline">
-          {% for c in form.search_type %}
-            <label class="radio-inline" for="search_type_{{ forloop.counter0 }}">
-            <input id="search_type_{{ forloop.counter0 }}" name="search_type" type="radio" value="{{ c.choice_value }}" {{ form.search_type|checked:forloop.counter0 }}>{{ c.choice_label }}</input></label>
-          {% endfor %}
-        </div>
-
-        <div class="form-group form-subfield" data-control-value="location" data-controlled-by="search_type">
-          <div class="form-group-label">
-            <label for="postcode">Enter a postcode</label>
-          </div>
-          <div class="form-row">
-            <input name="postcode" class="form-control" id="postcode" type="text" value="{{ form.postcode|val }}" />
-          </div>
-        </div>
-
-        <div class="form-group form-subfield" data-control-value="organisation" data-controlled-by="search_type">
-          <div class="form-group-label">
-            <label for="organisation_name">Organisation name</label>
-          </div>
-          <div class="form-row">
-            <input name="organisation_name" class="form-control" id="organisation_name" type="text" value="{{ form.organisation_name|val }}" />
-          </div>
-        </div>
-      </div>
-    </fieldset>
-
-    <fieldset class="form-group fieldset-group" data-control-value="location" data-controlled-by="search_type">
-      <legend class="form-group-label"><span>Filter by</span></legend>
-      <p class="form-row field-help">
-        Select all that apply
-      </p>
-
-      {% for c in form.organisation_types %}
-        <label for="id_organisation_types_{{ forloop.counter0 }}">
-          <input id="id_organisation_types_{{ forloop.counter0 }}" name="organisation_types" type="checkbox" value="{{ c.choice_value }}"{{ form.organisation_types|selected:forloop.counter0 }}>
-          {{ c.choice_label }}
-        </label>
-      {% endfor %}
-
-      <label for="category">
-        <input id="category" name="category" type="checkbox" value="1"{% if form.category.value == '1' %} checked{% endif %}>
-        Categories of law
-      </label>
-
-      <div class="form-group form-subfield" data-control-value="1" data-controlled-by="category" data-persist-values="true">
-        <div class="grid-row">
-          <div class="column-half">
-            {% for c in form.categories %}
-              <label for="id_categories_{{ forloop.counter0 }}">
-                <input id="id_categories_{{ forloop.counter0 }}" name="categories" type="checkbox" value="{{ c.choice_value }}"{{ form.categories|selected:forloop.counter0 }}/>
-                {{ c.choice_label }}
-              </label>
-              {% if forloop.counter0|multiply:2 >= categories|length %}
-                </div>
-                <div class="column-half">
-              {% endif %}
-            {% endfor %}
-          </div>
-        </div>
-      </div>
-    </fieldset>
-
-    <div class="form-actions">
-      <button type="submit" class="button">Search</button>
-    </div>
-  </form>
+  {% include 'adviser/_search-form.html' %}
 
   <div class="other-advise">
     <p id="advice">For advice on education or discrimination contact <a href="https://www.gov.uk/civil-legal-advice" rel="external" target="_blank">Civil Legal Advice.</a></p>

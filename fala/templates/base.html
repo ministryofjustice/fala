@@ -1,8 +1,7 @@
-{% extends 'layouts/django/external.html' %}
-{% load staticfiles %}
+{% extends 'layouts/jinja/external.html' %}
 
 {% block head %}
-  {{ block.super }}
+  {{ super() }}
   <script>
     /* Modernizr 2.8.3 (Custom Build) | MIT & BSD
      * Build: http://modernizr.com/download/#-mq-teststyles
@@ -12,5 +11,5 @@
 {% endblock %}
 
 {% block stylesheets %}
-  <link href="{% static 'css/main.css' %}" rel="stylesheet">
+  <link href="{{ static('css/main.css') }}" rel="stylesheet">
 {% endblock %}
