@@ -1,0 +1,175 @@
+{#
+  Renders `form-group` wrapper for form fields
+
+  Params:
+    - field <object> (optional)
+        Form field
+    - class_ <string> (default: '')
+        Additional CSS class (all form group wrappers get 'form-group' CSS class)
+    - field_attrs <object> (default: {})
+        Custom HTML attributes for field
+    - controlled_by <string> (default: None)
+        name of the field that controls the visibility of this container
+    - control_value <string> (default: None)
+        value of the field that controls the visibility of this field
+    - row_class <string> (default: '')
+        Optional CSS class for `form-row` element
+#}
+{% macro group(field=None, class_='', field_attrs={}) %}
+  {% set controlled_by = kwargs.controlled_by %}
+  {% set control_value = kwargs.control_value if kwargs.control_value else '1' %}
+  {% set use_row = kwargs.use_row if kwargs.use_row is defined else True %}
+  {% set group_class = class_ if class_.startswith('form-group') else 'form-group %s' % class_ %}
+
+  <div class="
+      {{- group_class -}}
+      {%- if field and field.errors %} form-error{% endif -%}
+      {%- if controlled_by and control_value %} s-hidden{% endif -%}
+    "
+    {% if controlled_by %}data-controlled-by="{{ controlled_by.name }}" data-control-value="{{ control_value }}"{% endif %}
+    {% if field %}id="field-{{ field.html_name }}"{% endif %}
+  >
+
+    {{ render_field_label(field, kwargs.hide_label) }}
+
+    {% if field and (field.errors and controlled_by and not controlled_by.errors or field.errors and not controlled_by) %}
+      {{ render_field_errors(field) }}
+    {% endif %}
+
+    {{ render_field_description(field) }}
+
+    {% if use_row and (field or caller) %}
+      <div class="form-row {{ kwargs.row_class }}">
+        {% if field %}
+          {{ field }}
+        {% endif %}
+        {% if caller %}
+          {{ caller() }}
+        {% endif %}
+      </div>
+    {% elif caller %}
+      {{ caller() }}
+    {% elif field %}
+      {{ field }}
+    {% endif %}
+  </div>
+{% endmacro %}
+
+
+{#
+  Renders field label (if exists)
+
+  Params:
+    - field <object>
+        Form field
+    - hide_label <boolean> (default: False)
+        Whether to hide the label visually (still available for screen readers)
+#}
+{% macro render_field_label(field, hide_label=False) %}
+  {% if field %}
+    {% if field.field.required %}
+      {% set label_text = field.label %}
+    {% else %}
+      {% set label_text = field.label + ' <span class="form-optional">optional</span>' %}
+    {% endif %}
+
+    <div class="form-group-label{{ (' sr-only' if hide_label else '') }}">
+      <label for="{{ field.id_for_label }}">{{ label_text|safe }}</label>
+    </div>
+  {% endif %}
+{% endmacro %}
+
+
+{#
+  Renders field description (if exists)
+
+  Params:
+    - field <object>
+        Form field
+#}
+{% macro render_field_description(field) %}
+  {% if field and field.field.description %}
+    <div class="form-row field-help" id="field-description-{{ field.id }}">
+      <span class="field-description">
+        {{- field.field.description -}}
+      </span>
+    </div>
+  {%- endif -%}
+{% endmacro %}
+
+
+{#
+  Render field errors
+  (including mutli-fields)
+
+  Params:
+    - field <object> Form field
+#}
+{% macro render_field_errors(field) %}
+  {% if field and field.errors %}
+    {% set errors = field.errors.values() if field.errors is mapping else field.errors %}
+    <div class="form-row field-error">
+      {% for error in errors %}
+        {% if error is string or error == error|string %}
+          <p>{{error}}</p>
+        {% else %}
+          {% for line in error %}
+            <p>{{line}}</p>
+          {% endfor %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endmacro %}
+
+
+{#
+  Renders form fieldset. Used as container for form fields.
+  Fieldset have `legend` element with optional `label` for single input
+  elements (such as text input)
+
+  Params:
+    - field <object>
+        Form field (optional)
+    - class_ <string> (default: 'fieldset-group')
+        CSS class for fieldset element
+    - legend <string> (default: None)
+        Custom legend text (if field is not provided)
+    - attrs <object> (default: None)
+        Custom HTML attributes for fieldset element
+#}
+{% macro fieldset(field=None, class_='form-group fieldset-group', legend=None, field_attrs={}) %}
+  {% set legend_ = field.label.text if field else legend %}
+  {% set controlled_by = kwargs.controlled_by %}
+  {% set control_value = kwargs.control_value if kwargs.control_value else '1' %}
+
+  <fieldset class="
+      {{- class_ -}}
+      {%- if field and field.errors %} form-error{% endif -%}
+      {%- if controlled_by and control_value %} s-hidden{% endif -%}
+    "
+    {%- if kwargs.attrs %}{{ kwargs.attrs|xmlattr }}{% endif -%}
+    {% if controlled_by %}data-controlled-by="{{ controlled_by.name }}" data-control-value="{{ control_value }}"{% endif %}
+    {%- if field %}id="field-{{ field.id_for_label }}"{% endif -%}
+  >
+    {% if legend_ %}
+      <legend class="form-group-label" {% if field %} id="field-label-{{ field.id }}"{% endif %}>
+        <span>{{ legend_ }}</span>
+      </legend>
+    {% endif %}
+
+    {{ render_field_errors(field) }}
+    {{ render_field_description(field) }}
+
+    {% if field or caller %}
+      <div class="form-row {{ kwargs.row_class }}">
+        {% if field and not kwargs.field_as_label %}
+          {{ field }}
+        {% endif %}
+        {% if caller %}
+          {{ caller() }}
+        {% endif %}
+      </div>
+    {% endif %}
+  </fieldset>
+{% endmacro %}

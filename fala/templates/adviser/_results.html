@@ -1,28 +1,13 @@
-<section class="legal-adviser-results">
-  {% if data and data.count and data.count > 0 %}
+{% if data and data.count and data.count > 0 %}
+  <section class="legal-adviser-results">
     <p class="results-summary">
       {% trans count=data.results|length %}Showing {{ count }} results around{% endtrans %}
       <span class="results-location">{{ data.origin.postcode }}</span>
-      {% if category_name %}
-        {{ _('for') }}
-        <span class="results-filter org-category">
-          {{ category_name }}
-          <a
-            class="filter-remove"
-            href="{{ LAALAA_API_HOST }}"
-            title="Remove filter"
-          >
-            <i class="icon icon-remove"></i>
-            {{ _('Remove') }}
-          </a>
-        </span>
-      {% endif %}
     </p>
 
     <div class="search-results-container">
       <div id="resultsMap" class="map" data-lat="{{ data.origin.point.coordinates.1 }}" data-lon="{{ data.origin.point.coordinates.0 }}"></div>
       <div class="search-results">
-
 
         <div class="search-results-list">
           <ul class="org-list">
@@ -34,21 +19,21 @@
                     <span class="fn org">{{ item.organisation.name }}</span>
                   </h3>
                   <div class="distance">
-                    <span class="sr-only">{{ _('Distance') }}</span>
-{#                    {% blocktrans with miles=item.distance|floatformat:2 %}{{ miles }} miles{% endblocktrans %}#}
+                    <span class="u-vh">{{ _('Distance') }}</span>
+                    {% trans miles=item.distance|round(2) %}{{ miles }} miles{% endtrans %}
                   </div>
                 </header>
                 <div class="org-details">
-{#                  {% if item.categories|length %}#}
-{#                    <div class="org-categories" role="list">#}
-{#                      <div class="sr-only">{{ _('Categories of law') }}</div>#}
-{#                      {% for cat in item.categories %}#}
-{#                        {% if cat %}#}
-{#                          <span class="org-category" role="listitem">{{ cat }}</span>#}
-{#                        {% endif %}#}
-{#                      {% endfor %}#}
-{#                    </div>#}
-{#                  {% endif %}#}
+                  {% if item.categories|length %}
+                    <div class="org-categories" role="list">
+                      <div class="sr-only">{{ _('Categories of law') }}</div>
+                      {% for cat in item.categories %}
+                        {% if cat %}
+                          <span class="org-category" role="listitem">{{ cat }}</span>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+                  {% endif %}
                   <p>
                     <span class="sr-only">{{ _('Address') }}:</span>
                     <span class="adr">
@@ -64,7 +49,9 @@
                   {% if item.organisation.website %}
                     <p>
                       <span>{{ _('Website') }}:</span>
-                      <a class="url" href="item.organisation.website" target="_blank" rel="external">item.organisation.website</a>
+                      <a class="url" href="{{ item.organisation.website }}" target="_blank" rel="external">
+                        {{ item.organisation.website }}
+                      </a>
                     </p>
                   {% endif %}
                 </div>
@@ -77,20 +64,14 @@
           <ul>
             {% if data.previous %}
               <li class="results-nav results-nav-prev">
-                <a
-                  href="{{ LAALAA_API_HOST }}"
-                  data-page="1"
-                >
+                <a href="{{ LAALAA_API_HOST }}" data-page="1">
                   {{ _('Previous') }}
                 </a>
               </li>
             {% endif %}
             {% if data.next %}
               <li class="results-nav results-nav-next">
-                <a
-                  href="{{ LAALAA_API_HOST }}"
-                  data-page="2"
-                >
+                <a href="{{ LAALAA_API_HOST }}" data-page="2">
                   {{ _('Next') }}
                 </a>
               </li>
@@ -100,7 +81,10 @@
 
       </div>
     </div>
-  {% elif 'count' in data and data.count == 0 %}
-    {{ _('No results') }}
-  {% endif %}
 </section>
+{% elif 'count' in data and data.count == 0 %}
+  {% from "macros/element.html" import alert %}
+  {% call alert(title=_('No results')) %}
+    {{ _('There are no results matching your search criteria.') }}
+  {% endcall %}
+{% endif %}

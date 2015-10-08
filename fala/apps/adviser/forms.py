@@ -31,6 +31,10 @@ class FalaTextInput(forms.TextInput):
 
 class AdviserSearchForm(forms.Form):
 
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault('label_suffix', '')
+        super(AdviserSearchForm, self).__init__(*args, **kwargs)
+
     def clean(self):
         cleaned_data = super(AdviserSearchForm, self).clean()
         if cleaned_data.get('search_type') == 'location' and not \
@@ -73,22 +77,22 @@ class AdviserSearchByLocationForm(AdviserSearchForm):
         label=_('Enter postcode'),
         max_length=10,
         help_text=_('Enter a postcode, town or city'),
-        required=False,
-        widget=FalaTextInput)
+        required=True,
+        widget=FalaTextInput(attrs={
+            'placeholder': _('e.g. SW1H 9AJ'),
+            'autofocus': True
+        }))
 
     organisation_types = forms.MultipleChoiceField(
+        label=_('Organisation type'),
         choices=ORGANISATION_TYPES_CHOICES,
         widget=forms.CheckboxSelectMultiple(),
         required=False)
 
-    category = forms.NullBooleanField(
-        label=_('Categories of law'),
-        widget=forms.CheckboxInput()
-    )
-
     categories = forms.MultipleChoiceField(
+        label=_('Category'),
         choices=laalaa.PROVIDER_CATEGORY_CHOICES,
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'aa'}),
+        widget=forms.CheckboxSelectMultiple(),
         required=False)
 
 
@@ -97,5 +101,8 @@ class AdviserSearchByOrganisationForm(AdviserSearchForm):
     organisation_name = forms.CharField(
         label=_('Organisation name'),
         max_length=100,
-        required=False,
-        widget=FalaTextInput)
+        required=True,
+        widget=FalaTextInput(attrs={
+            'placeholder': _('e.g. Winthorpes'),
+            'autofocus': True
+        }))

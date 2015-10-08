@@ -1,15 +1,8 @@
 {% extends 'layouts/jinja/external.html' %}
 
-{% block global_subheader %}
-  <div class="global-subheader container">
-    <div class="subheader-item phase-banner">
-      <span class="phase-tag phase-tag-alpha">ALPHA</span>
-      <span class="phase-banner-message">
-        This is a new service – your <a href="/feedback">feedback</a> will help us to improve it.
-      </span>
-    </div>
-  </div>
-{% endblock %}
+{% import "macros/forms.html" as Form %}
+
+{% set title = _('Find a legal adviser or family mediator') %}
 
 {% block head %}
   {{ super() }}
@@ -25,6 +18,22 @@
   <link href="{{ static('css/main.css') }}" rel="stylesheet">
 {% endblock %}
 
+{% block page_title %}{{ title }}{% endblock %}
+{% block proposition %}
+  <span class="proposition-name">{{ title }}</span>
+{% endblock %}
+
+{% block global_subheader %}
+  <div class="global-subheader container">
+    <div class="subheader-item phase-banner">
+      <span class="phase-tag phase-tag-alpha">ALPHA</span>
+      <span class="phase-banner-message">
+        This is a new service – your <a href="/feedback">feedback</a> will help us to improve it.
+      </span>
+    </div>
+  </div>
+{% endblock %}
+
 {% block content %}
   <header class="page-header">
     <h1>
@@ -34,8 +43,10 @@
   </header>
 
   <div class="find-legal-adviser">
+    {% block search_results %}
+      {% include 'adviser/_results.html' %}
+    {% endblock %}
     {% block search_form %}{% endblock %}
-    {% block search_results %}{% endblock %}
   </div>
 
   <div class="other-advise">
@@ -46,7 +57,7 @@
 
 {% block before_main_js %}
   {{ super() }}
-  <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?sensor=true"></script>
+  <script src="//maps.googleapis.com/maps/api/js?sensor=true"></script>
   <script>
     window.LABELS = {
       loading: "{{ _('Loading…') }}"

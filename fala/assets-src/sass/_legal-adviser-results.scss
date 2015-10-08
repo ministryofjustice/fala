@@ -4,7 +4,7 @@ $map-height: 460px;
 $tablet: min-width 641px;
 $mobile: max-width 640px;
 
-.legal-adviser-results {
+.find-legal-adviser {
   .org-category {
     font-size: 11px;
     display: inline-block;
@@ -13,37 +13,7 @@ $mobile: max-width 640px;
     text-transform: uppercase;
   }
 
-  .results-filter {
-    cursor: default;
-    display: inline-block;
-    font-size: 13px;
-    padding: 3px 5px;
-
-    .filter-remove {
-      text-indent: -999em;
-      float: right;
-      width: 16px;
-      height: 16px;
-      padding: 3px;
-      margin: -3px -5px -3px 4px;
-      opacity: .6;
-      border-left: 1px solid white;
-
-      &:hover {
-        opacity: 1;
-      }
-
-      &:focus {
-        outline: none;
-      }
-
-      .icon {
-        float: left;
-      }
-    }
-  }
-
-    .search-results-list {
+  .search-results-list {
     .org-list {
       margin: 0;
       padding: 0;
@@ -60,7 +30,7 @@ $mobile: max-width 640px;
         border: 0;
       }
 
-      header {
+      .org-summary {
         @include clearfix;
         padding: 0 80px 0 25px;
         margin-bottom: 8px;
@@ -105,7 +75,7 @@ $mobile: max-width 640px;
     }
   }
 
-    .search-results-pagination {
+  .search-results-pagination {
     overflow: hidden;
     border-top: 2px solid $grey-3;
     margin: 1em 0;
@@ -146,10 +116,10 @@ $mobile: max-width 640px;
   }
 }
 
-.legal-adviser-results .map {
+.find-legal-adviser .map {
   display: none;
 
-  @include media('>phone') {
+  @include media('>tablet') {
     height: 100%;
     width: 100% - $results-sidebar-width;
     float: left;
@@ -174,7 +144,7 @@ $mobile: max-width 640px;
 }
 
 
-.js-enabled .legal-adviser-results {
+.js-enabled .find-legal-adviser {
   .results-location {
     padding-left: 20px;
     background: url(../images/icons/icon-location.png) .17em .17em no-repeat;
@@ -186,12 +156,12 @@ $mobile: max-width 640px;
     height: $map-height;
     margin-bottom: 1em;
 
-    @include media('<tablet') {
+    @include media('<phone') {
       height: $map-height - 100;
     }
   }
 
-  @include media('>phone') {
+  @include media('>tablet') {
     $_pagination-height: 35px;
 
     .map {
@@ -286,7 +256,7 @@ $mobile: max-width 640px;
 }
 
 @media print {
-  .legal-adviser-results {
+  .find-legal-adviser {
     page-break-before: always;
 
     .map {

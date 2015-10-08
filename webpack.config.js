@@ -1,5 +1,4 @@
 var webpack = require("webpack");
-var PROD = JSON.parse(process.env.PROD || '0');
 
 module.exports = {
   entry: {
@@ -15,12 +14,5 @@ module.exports = {
       'node_modules',
       'node_modules/mojular/node_modules'
     ]
-  },
-  plugins: PROD ? [
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        global_defs: { DEBUG: false }
-      }
-    })
-  ] : []
+  }
 };

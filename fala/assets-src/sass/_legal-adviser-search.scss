@@ -1,10 +1,13 @@
 .legal-adviser-search {
-  padding: 20px;
-  margin-bottom: 1em;
-  border: solid $grey-2;
-  border-width: 1px 0;
+  margin: 30px 0;
 
-  .tabs + & {
+  form {
+    padding: 20px;
+    border: 1px solid $grey-2;
+    background: $grey-4;
+  }
+
+  .tabs + form {
     margin-top: -1px;
   }
 
@@ -12,5 +15,27 @@
     padding: em(10);
     vertical-align: top;
   }
-}
 
+  .form-group {
+    margin-top: 20px;
+  }
+
+  .js-enabled & select {
+    display: none;
+  }
+
+  .filters {
+    fieldset {
+      margin: 0;
+
+      legend {
+        font-size: 1em;
+        color: $grey-1;
+      }
+    }
+  }
+
+  @media print {
+    display: none;
+  }
+}

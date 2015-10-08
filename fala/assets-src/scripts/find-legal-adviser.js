@@ -82,6 +82,13 @@ Mojular.Modules.FindLegalAdviser = {
     };
 
     this.eventsBound = true;
+
+    $('.legal-adviser-search [type="checkbox"], select').on('change', function() {
+      if (!self.$resultsMap.length) {
+        return;
+      }
+      self.$findLegalAdviserForm.trigger('submit');
+    })
   },
 
   _unbindEvents: function() {
@@ -288,7 +295,7 @@ Mojular.Modules.FindLegalAdviser = {
   cacheEls: function() {
     this.$resultsMap = $(this.el);
     this.$findLegalAdviserContainer = $('.find-legal-adviser');
-    this.$findLegalAdviserForm = $('.legal-adviser-search');
+    this.$findLegalAdviserForm = $('.legal-adviser-search form');
     this.$organisationListItems = $('.search-results-list .vcard');
     this.$resultsPagination = $('.search-results-pagination');
   }

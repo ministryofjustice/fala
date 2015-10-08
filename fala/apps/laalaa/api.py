@@ -66,9 +66,9 @@ def decode_category(category):
 
 
 def decode_categories(result):
-    result['categories'] = filter(None, map(
+    result['categories'] = list(filter(None, map(
         decode_category,
-        result.get('categories', [])))
+        result.get('categories', []))))
     return result
 
 
