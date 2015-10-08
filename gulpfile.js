@@ -5,7 +5,9 @@ var gutil = require("gulp-util");
 var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var webpack = require('webpack');
-var browserSync = require('browser-sync').create();
+try {
+  var browserSync = require('browser-sync').create();
+} catch(e) {}
 
 var importPaths = require('mojular-govuk-elements').getPaths('sass').concat(require('mojular-moj-elements').getPaths('sass'));
 
@@ -18,12 +20,16 @@ var paths = {
 };
 
 gulp.task('sass', function() {
-  return gulp.src(paths.styles)
+  var result = gulp.src(paths.styles)
     .pipe(sourcemaps.init())
     .pipe(sass({ includePaths: importPaths }).on('error', sass.logError))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.dest + 'css/'))
-    .pipe(browserSync.stream({match: '**/*.css'}));
+
+    try {
+      result.pipe(browserSync.stream({match: '**/*.css'}));
+    } catch(e) {}
+  return result;
 });
 
 gulp.task('scripts', function(callback) {

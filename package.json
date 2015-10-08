@@ -23,7 +23,6 @@
     "mojular-templates": "mojular/templates#webpack"
   },
   "devDependencies": {
-    "browser-sync": "^2.9.8",
     "gulp": "^3.8.11",
     "gulp-concat": "~2.6",
     "gulp-sass": "^2.0.4",
