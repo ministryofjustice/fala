@@ -39,9 +39,7 @@
                   {% if item.organisation.website %}
                     <p>
                       <span>{{ _('Website') }}:</span>
-                      <a class="url" href="{{ item.organisation.website }}" target="_blank" rel="external">
-                        {{ item.organisation.website }}
-                      </a>
+                      {{ item.organisation.website|urlize }}
                     </p>
                   {% endif %}
                   {% if item.categories|length %}
