@@ -79,8 +79,7 @@ class AdviserSearchByLocationForm(AdviserSearchForm):
         help_text=_('Enter a postcode, town or city'),
         required=True,
         widget=FalaTextInput(attrs={
-            'placeholder': _('e.g. SW1H 9AJ'),
-            'autofocus': True
+            'placeholder': _('e.g. SW1H 9AJ')
         }))
 
     organisation_types = forms.MultipleChoiceField(
@@ -103,6 +102,5 @@ class AdviserSearchByOrganisationForm(AdviserSearchForm):
         max_length=100,
         required=True,
         widget=FalaTextInput(attrs={
-            'placeholder': _('e.g. Winthorpes'),
-            'autofocus': True
+            'placeholder': _('e.g. Winthorpes')
         }))
