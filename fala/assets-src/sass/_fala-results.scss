@@ -11,12 +11,17 @@ $mobile: max-width 640px;
     border-top: 1px solid $grey-2;
   }
 
+  .org-categories {
+    line-height: 1.2;
+    font-size: .8em;
+    padding: 4px;
+    margin: 8px -5px -5px -5px;
+    background: $grey-4;
+    color: $grey-1;
+  }
+
   .org-category {
-    font-size: 11px;
     display: inline-block;
-    padding: 1px 5px;
-    background: $yellow-25;
-    text-transform: uppercase;
   }
 
   .search-results-list {
@@ -237,6 +242,11 @@ $mobile: max-width 640px;
         outline: 0;
         margin: -4px;
         padding: 8px 88px 8px 34px;
+      }
+
+      .org-categories {
+        padding-left: 27px;
+        margin-left: -27px;
       }
     }
 

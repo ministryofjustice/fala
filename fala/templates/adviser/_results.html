@@ -24,16 +24,6 @@
                   </div>
                 </header>
                 <div class="org-details">
-                  {% if item.categories|length %}
-                    <div class="org-categories" role="list">
-                      <div class="sr-only">{{ _('Categories of law') }}</div>
-                      {% for cat in item.categories %}
-                        {% if cat %}
-                          <span class="org-category" role="listitem">{{ cat }}</span>
-                        {% endif %}
-                      {% endfor %}
-                    </div>
-                  {% endif %}
                   <p>
                     <span class="sr-only">{{ _('Address') }}:</span>
                     <span class="adr">
@@ -53,6 +43,17 @@
                         {{ item.organisation.website }}
                       </a>
                     </p>
+                  {% endif %}
+                  {% if item.categories|length %}
+                    <div class="org-categories" role="list">
+                      <div class="sr-only">{{ _('Categories of law') }}</div>
+                      {% for cat in item.categories %}
+                        {% if cat %}
+                          <span class="org-category" role="listitem">{{ cat }}</span>
+                          {%- if not loop.last %},{% endif %}
+                        {% endif %}
+                      {% endfor %}
+                    </div>
                   {% endif %}
                 </div>
               </li>
