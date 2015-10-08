@@ -5,6 +5,12 @@ $tablet: min-width 641px;
 $mobile: max-width 640px;
 
 .find-legal-adviser {
+  .results-summary {
+    margin: 0;
+    padding: 20px 0;
+    border-top: 1px solid $grey-2;
+  }
+
   .org-category {
     font-size: 11px;
     display: inline-block;

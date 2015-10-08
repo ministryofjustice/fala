@@ -118,7 +118,7 @@ Mojular.Modules.FindLegalAdviser = {
 
         if(scrollToResults) {
           $('html, body').delay(300).animate({
-            'scrollTop': self.$findLegalAdviserContainer.offset().top - 10
+            'scrollTop': self.$findLegalAdviserContainer.offset().top + 1
           }, 160);
         }
 
@@ -191,7 +191,6 @@ Mojular.Modules.FindLegalAdviser = {
     var $container = $item.closest('.search-results-list');
 
     if($item.hasClass('s-highlighted')) {
-      this.$organisationListItems.removeClass('s-highlighted');
       this._fitAllMarkers();
       return;
     }
