@@ -5,7 +5,7 @@ from django.conf.urls import url
 from .views import LocationSearchView, OrganisationSearchView
 
 urlpatterns = [
-    url(r'^$', LocationSearchView.as_view()),
-    url(r'^location/$', LocationSearchView.as_view()),
-    url(r'^organisation/$', OrganisationSearchView.as_view()),
+    url(r'^$', LocationSearchView.as_view(), name='root'),
+    url(r'^location/$', LocationSearchView.as_view(), name='location'),
+    url(r'^organisation/$', OrganisationSearchView.as_view(), name='organisation'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
