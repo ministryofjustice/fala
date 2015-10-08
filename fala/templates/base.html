@@ -20,7 +20,7 @@
 
 {% block page_title %}{{ title }}{% endblock %}
 {% block proposition %}
-  <span class="proposition-name">{{ title }}</span>
+  <a href="{{ url('root') }}" class="proposition-name">{{ title }}</a>
 {% endblock %}
 
 {% block global_subheader %}
