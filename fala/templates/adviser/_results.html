@@ -1,10 +1,20 @@
 {% if data and data.count and data.count > 0 %}
   <section class="legal-adviser-results">
     <p class="results-summary">
-      {% trans page_count=data.results|length, result_count=data.count %}
-        {{ result_count }} results in total. Showing {{ page_count }} results around
-      {% endtrans %}
-      <span class="results-location">{{ data.origin.postcode }}</span>
+      {% if data.origin %}
+        {% trans page_count=data.results|length, result_count=data.count %}
+          Showing {{ page_count }} results around
+        {% pluralize %}
+          {{ result_count }} results in total. Showing {{ page_count }} results around
+        {% endtrans %}
+        <span class="results-location">{{ data.origin.postcode }}</span>
+      {% else %}
+        {% trans result_count=data.count, page_count=data.results|length, org_name=form.organisation_name.value() %}
+          Showing {{ page_count }} result for <strong>{{ org_name }}</strong>
+        {% pluralize %}
+          {{ result_count }} results in total. Showing {{ page_count }} results for <strong>{{ org_name }}</strong>
+        {% endtrans %}
+      {% endif %}
     </p>
 
     <div class="search-results-container">
