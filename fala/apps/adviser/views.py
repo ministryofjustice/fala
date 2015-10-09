@@ -11,10 +11,12 @@ class AdviserView(TemplateView):
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
         form = self.form_class(data=request.GET or None)
+        current_url = resolve(request.path_info).url_name
 
         context.update({
             'form': form,
             'data': form.search(),
+            'current_url': current_url,
             'LAALAA_API_HOST': settings.LAALAA_API_HOST,
         })
 

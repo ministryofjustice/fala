@@ -1,14 +1,18 @@
 {% if data and data.count and data.count > 0 %}
   <section class="legal-adviser-results">
     <p class="results-summary">
-      {% trans count=data.results|length %}Showing {{ count }} results around{% endtrans %}
+      {% trans page_count=data.results|length, result_count=data.count %}
+        {{ result_count }} results in total. Showing {{ page_count }} results around
+      {% endtrans %}
       <span class="results-location">{{ data.origin.postcode }}</span>
     </p>
 
+  <pre>{{ data.next|pprint }}</pre>
+
     <div class="search-results-container">
       <div id="resultsMap" class="map" data-lat="{{ data.origin.point.coordinates.1 }}" data-lon="{{ data.origin.point.coordinates.0 }}"></div>
-      <div class="search-results">
 
+      <div class="search-results">
         <div class="search-results-list">
           <ul class="org-list">
             {% for item in data.results %}
@@ -62,15 +66,19 @@
         <nav class="search-results-pagination">
           <ul>
             {% if data.previous %}
+              {% set prev_page = data.previous|query_to_dict('page') %}
               <li class="results-nav results-nav-prev">
-                <a href="{{ LAALAA_API_HOST }}" data-page="1">
-                  {{ _('Previous') }}
+                <a href="{{ request.path_info + '?' + request.META.QUERY_STRING }}&amp;page={{ prev_page }}"
+                   data-page="{{prev_page}}">
+                  {{ _('Next') }}
                 </a>
               </li>
             {% endif %}
             {% if data.next %}
+              {% set next_page = data.next|query_to_dict('page')|first %}
               <li class="results-nav results-nav-next">
-                <a href="{{ LAALAA_API_HOST }}" data-page="2">
+                <a href="{{ request.path_info + '?' + request.META.QUERY_STRING }}&amp;page={{ next_page }}"
+                   data-page="{{next_page}}">
                   {{ _('Next') }}
                 </a>
               </li>
