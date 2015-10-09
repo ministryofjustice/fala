@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
-from django.core.urlresolvers import resolve
+from django.core.urlresolvers import resolve, reverse
 from django.views.generic import TemplateView
 
 from .forms import AdviserSearchForm, AdviserSearchByLocationForm, AdviserSearchByOrganisationForm
@@ -11,7 +11,8 @@ class AdviserView(TemplateView):
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
         form = self.form_class(data=request.GET or None)
-        current_url = resolve(request.path_info).url_name
+        view_name = resolve(request.path_info).url_name
+        current_url = reverse(view_name)
 
         context.update({
             'form': form,

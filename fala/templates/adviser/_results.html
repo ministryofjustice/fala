@@ -7,8 +7,6 @@
       <span class="results-location">{{ data.origin.postcode }}</span>
     </p>
 
-  <pre>{{ data.next|pprint }}</pre>
-
     <div class="search-results-container">
       <div id="resultsMap" class="map" data-lat="{{ data.origin.point.coordinates.1 }}" data-lon="{{ data.origin.point.coordinates.0 }}"></div>
 
@@ -66,19 +64,19 @@
         <nav class="search-results-pagination">
           <ul>
             {% if data.previous %}
-              {% set prev_page = data.previous|query_to_dict('page') %}
+              {% set prev_page = data.previous|to_fala_page_url(current_url) %}
               <li class="results-nav results-nav-prev">
-                <a href="{{ request.path_info + '?' + request.META.QUERY_STRING }}&amp;page={{ prev_page }}"
-                   data-page="{{prev_page}}">
-                  {{ _('Next') }}
+                <a href="{{ prev_page }}"
+                   data-page="{{ prev_page|query_to_dict('page')|first }}">
+                  {{ _('Previous') }}
                 </a>
               </li>
             {% endif %}
             {% if data.next %}
-              {% set next_page = data.next|query_to_dict('page')|first %}
+              {% set next_page = data.next|to_fala_page_url(current_url) %}
               <li class="results-nav results-nav-next">
-                <a href="{{ request.path_info + '?' + request.META.QUERY_STRING }}&amp;page={{ next_page }}"
-                   data-page="{{next_page}}">
+                <a href="{{ next_page }}"
+                   data-page="{{ next_page|query_to_dict('page')|first }}">
                   {{ _('Next') }}
                 </a>
               </li>
@@ -88,7 +86,7 @@
 
       </div>
     </div>
-</section>
+  </section>
 {% elif 'count' in data and data.count == 0 %}
   {% from "macros/element.html" import alert %}
   {% call alert(title=_('No results')) %}

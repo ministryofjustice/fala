@@ -31,6 +31,11 @@ class FalaTextInput(forms.TextInput):
 
 class AdviserSearchForm(forms.Form):
 
+    page = forms.IntegerField(
+        required=False,
+        widget=forms.HiddenInput()
+    )
+
     def __init__(self, *args, **kwargs):
         kwargs.setdefault('label_suffix', '')
         super(AdviserSearchForm, self).__init__(*args, **kwargs)
@@ -55,7 +60,7 @@ class AdviserSearchForm(forms.Form):
                 data = laalaa.find(
                     postcode=self.cleaned_data.get('postcode'),
                     categories=self.cleaned_data.get('categories'),
-                    page=self.cleaned_data.get('page'),
+                    page=self.cleaned_data.get('page', 1),
                     organisation_types=self.cleaned_data.get('organisation_types'),
                     organisation_name=self.cleaned_data.get('organisation_name'),
                 )
