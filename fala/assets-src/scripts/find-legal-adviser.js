@@ -183,9 +183,15 @@ Mojular.Modules.FindLegalAdviser = {
 
     var pairBounds = new window.google.maps.LatLngBounds();
     pairBounds.extend(markerOnMap.position);
-    pairBounds.extend(this.searchLocationMarker.position);
+    if(this.searchLocationMarker) {
+      pairBounds.extend(this.searchLocationMarker.position);
+    }
 
     this.map.fitBounds(pairBounds);
+
+    if(!this.searchLocationMarker) {
+      this.map.setZoom(this.map.getZoom() - 3);
+    }
   },
 
   _handleItemHighlight: function(evt, $item) {
@@ -205,28 +211,30 @@ Mojular.Modules.FindLegalAdviser = {
     this._handleHighlightedItemScroll($item, $container);
   },
 
-  renderMap: function(lat, lon) {
+  renderMap: function(lat, lng) {
     var self = this;
 
     var searchLocation = {
-      lat: lat,
-      lng: lon
+      lat: lat || 51.5,
+      lng: lng || -0.2
     };
 
     var mapOptions = {
       center: searchLocation,
-      zoom: 15,
+      zoom: 12,
       scrollwheel: false,
       panControl: false,
       streetViewControl: false
     };
 
     this.map = new window.google.maps.Map(this.$resultsMap[0], mapOptions);
-    this.searchLocationMarker = this.addMarker(searchLocation, {
-      title: 'Search location',
-      icon: 'icon-location-2x'
-    });
 
+    if(lat && lng) {
+      this.searchLocationMarker = this.addMarker(searchLocation, {
+        title: 'Search location',
+        icon: 'icon-location-2x'
+      });
+    }
     window.google.maps.event.addListener(self.map, 'click', function() {
       self._closeOpenInfoWindow();
     });
