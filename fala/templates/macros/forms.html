@@ -39,7 +39,7 @@
     {{ render_field_description(field) }}
 
     {% if use_row and (field or caller) %}
-      <div class="form-row {{ kwargs.row_class }}">
+      <div class="form-row {{ kwargs.row_class or '' }}">
         {% if field %}
           {{ field }}
         {% endif %}
