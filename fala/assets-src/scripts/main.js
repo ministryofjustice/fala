@@ -5,3 +5,5 @@ require('mojular-moj-elements/assets/scripts/modules/devs');
 require('mojular-moj-elements/assets/scripts/modules/cookie-message');
 
 require('./find-legal-adviser');
+
+Mojular.init();
