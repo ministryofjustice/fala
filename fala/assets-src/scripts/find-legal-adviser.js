@@ -190,7 +190,7 @@ Mojular.Modules.FindLegalAdviser = {
     this.map.fitBounds(pairBounds);
 
     if(!this.searchLocationMarker) {
-      this.map.setZoom(this.map.getZoom() - 3);
+      this.map.setZoom(this.map.getZoom() - 4);
     }
   },
 
