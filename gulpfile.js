@@ -58,6 +58,10 @@ gulp.task('serve', ['build'], function() {
 
   gulp.watch(paths.images, ['images']);
   gulp.watch(paths.styles, ['sass']);
+  gulp.watch([
+    'node_modules/mojular-govuk-elements/**/*.scss',
+    'node_modules/mojular-moj-elements/**/*.scss'
+  ], ['sass']);
   gulp.watch(paths.scripts, ['scripts']).on('change', browserSync.reload);
 });
 
