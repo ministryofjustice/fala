@@ -1,7 +1,7 @@
 #
 # FALA Dockerfile all environments
 #
-FROM ubuntu:trusty
+FROM ubuntu:trusty-20150814
 
 MAINTAINER Josh Rowe <josh.rowe@digital.justice.gov.uk>
 
