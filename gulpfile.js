@@ -9,7 +9,9 @@ try {
   var browserSync = require('browser-sync').create();
 } catch(e) {}
 
-var importPaths = require('mojular-govuk-elements').getPaths('sass').concat(require('mojular-moj-elements').getPaths('sass'));
+var importPaths = [];
+importPaths.push(require('mojular-govuk-elements').getPaths('sass'));
+importPaths.push(require('mojular-moj-elements').getPaths('sass'));
 
 var paths = {
   src: 'fala/assets-src/',
@@ -22,9 +24,9 @@ var paths = {
 gulp.task('sass', function() {
   var result = gulp.src(paths.styles)
     .pipe(sourcemaps.init())
-    .pipe(sass({ includePaths: importPaths }).on('error', sass.logError))
+    .pipe(sass({ includePaths: [].concat.apply([], importPaths) }).on('error', sass.logError))
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest(paths.dest + 'css/'))
+    .pipe(gulp.dest(paths.dest + 'css/'));
 
     try {
       result.pipe(browserSync.stream({match: '**/*.css'}));
