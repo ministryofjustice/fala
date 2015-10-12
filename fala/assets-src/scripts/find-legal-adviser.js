@@ -1,6 +1,7 @@
 var $ = require('jquery');
 var debounce = require('lodash/function/debounce');
 var find = require('lodash/collection/find');
+var reduce = require('lodash/collection/reduce');
 
 Mojular.Modules.FindLegalAdviser = {
   el: '#resultsMap',
@@ -154,7 +155,7 @@ Mojular.Modules.FindLegalAdviser = {
   _fitAllMarkers: function() {
     var self = this;
 
-    this.map.fitBounds(this.markers.reduce(function(bounds, marker) {
+    this.map.fitBounds(reduce(this.markers, function(bounds, marker) {
       return bounds.extend(marker.getPosition());
     }, new window.google.maps.LatLngBounds()));
 
