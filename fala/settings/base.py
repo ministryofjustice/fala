@@ -177,6 +177,8 @@ if 'SENTRY_DSN' in os.environ:
 
 LAALAA_API_HOST = os.environ.get('LAALAA_API_HOST', 'http://0.0.0.0:8001')
 
+GA_ID = os.environ.get('GA_ID')
+
 # .local.py overrides all the common settings.
 try:
     from .local import *

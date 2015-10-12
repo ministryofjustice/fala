@@ -18,6 +18,7 @@ class AdviserView(TemplateView):
             'form': form,
             'data': form.search(),
             'current_url': current_url,
+            'GA_ID': settings.GA_ID,
             'LAALAA_API_HOST': settings.LAALAA_API_HOST,
         })
 
