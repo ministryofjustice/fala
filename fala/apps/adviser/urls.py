@@ -9,3 +9,9 @@ urlpatterns = [
     url(r'^location/$', LocationSearchView.as_view(), name='location'),
     url(r'^organisation/$', OrganisationSearchView.as_view(), name='organisation'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+
+if settings.DEBUG_STATIC:
+    urlpatterns += [
+        url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
+    ]
