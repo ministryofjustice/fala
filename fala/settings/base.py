@@ -35,7 +35,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-MEDIA_ROOT = root('static', 'uploads')
+MEDIA_ROOT = root('assets', 'uploads')
 
 MEDIA_URL = '/media/'
 
@@ -44,6 +44,11 @@ STATIC_ROOT = root('static')
 STATIC_URL = '/static/'
 
 project_root = abspath(root('..'))
+
+# Additional locations of static files
+STATICFILES_DIRS = (
+    root('assets'),
+)
 
 # List of finder classes that know how to find static files in
 # various locations.
