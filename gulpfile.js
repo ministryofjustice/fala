@@ -15,7 +15,7 @@ importPaths.push(require('mojular-moj-elements').getPaths('sass'));
 
 var paths = {
   src: 'fala/assets-src/',
-  dest: 'fala/assets/',
+  dest: 'fala/static/',
   styles: 'fala/assets-src/sass/**/*.scss',
   scripts: 'fala/assets-src/scripts/**/*.js',
   images: 'node_modules/mojular-govuk-elements/assets/images/*'

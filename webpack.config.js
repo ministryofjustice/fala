@@ -6,7 +6,7 @@ module.exports = {
     polyfills: ['JSON2', 'html5shiv']
   },
   output: {
-    path: 'fala/assets/scripts',
+    path: 'fala/static/scripts',
     filename: '[name].bundle.js'
   },
   module: {

@@ -58,5 +58,5 @@ venv
 
 # Fala
 fala/settings/local.py
-fala/assets
+fala/static/
 
