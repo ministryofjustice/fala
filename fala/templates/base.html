@@ -61,9 +61,14 @@
       {% include 'adviser/_results.html' %}
     {% endblock %}
     {% block search_form %}{% endblock %}
-  </div>
 
-  <p>For advice on education or discrimination contact <a href="https://www.gov.uk/civil-legal-advice" rel="external" target="_blank">Civil Legal Advice.</a></p>
+    {% if not data.count %}
+      <p>
+        For advice on education or discrimination contact
+        <a href="https://www.gov.uk/civil-legal-advice" rel="external" target="_blank">Civil Legal Advice.</a>
+      </p>
+    {% endif %}
+  </div>
 {% endblock %}
 
 {% block before_main_js %}
