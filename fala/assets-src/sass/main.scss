@@ -29,6 +29,12 @@ $images-dir: '/static/images/';
 
   h1 {
     margin: 0 0 .5em;
+
+    span {
+      display: block;
+      font-weight: 400;
+      font-size:.8em;
+    }
   }
 }
 
