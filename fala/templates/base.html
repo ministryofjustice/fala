@@ -6,11 +6,13 @@
 
 {% block head %}
   {{ super() }}
-  <style media="print">
-    a[href^="/"]:after {
-      content: ' ({{ request.META.HTTP_HOST }}' attr(href) ')';
-    }
-  </style>
+  {% if request %}
+    <style media="print">
+      a[href^="/"]:after {
+        content: ' ({{ request.META.HTTP_HOST }}' attr(href) ')';
+      }
+    </style>
+  {% endif %}
   <script>
     /* Modernizr 2.8.3 (Custom Build) | MIT & BSD
      * Build: http://modernizr.com/download/#-mq-teststyles

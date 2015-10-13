@@ -1,1 +1,20 @@
-{% extends 'layouts/jinja/external.html' %}
+{% extends 'base.html' %}
+
+{% block before_main_js %}{% endblock %}
+{% block main_js %}{% endblock %}
+
+{% block content %}
+  <header class="page-header">
+    <h1>This service is temporarily unavailable</h1>
+  </header>
+  <p>This service is not available right now, but we’re working hard to get things up and running again.</p>
+{% endblock %}
+
+{% block after_main_js %}
+  {% if GA_ID %}
+    <script>
+      ga('create', '{{ GA_ID }}', 'auto');
+      ga('send', 'pageview', '/404' + window.location.pathname + window.location.search);
+    </script>
+  {% endif %}
+{% endblock %}
