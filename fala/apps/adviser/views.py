@@ -3,7 +3,7 @@ from django.conf import settings
 from django.core.urlresolvers import resolve, reverse
 from django.views.generic import TemplateView
 
-from .forms import AdviserSearchForm, AdviserSearchByLocationForm, AdviserSearchByOrganisationForm
+from .forms import AdviserSearchByLocationForm, AdviserSearchByOrganisationForm
 
 
 class AdviserView(TemplateView):

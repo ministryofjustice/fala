@@ -24,8 +24,6 @@ ALLOWED_HOSTS = [
     '.dsd.io',
 ]
 
-TIME_ZONE = 'Europe/London'
-
 LANGUAGE_CODE = 'en-gb'
 
 TIME_ZONE = 'UTC'

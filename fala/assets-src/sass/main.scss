@@ -24,20 +24,12 @@ $images-dir: '/static/images/';
 @import 'fala-search';
 @import 'fala-results';
 
-.other-advise {
-  margin-top: 2em;
-}
-
 .page-header {
   margin: 1em 0;
 
   h1 {
     margin: 0 0 .5em;
   }
-}
-
-.form-option-list {
-  line-height: 1.1;
 }
 
 .main-content {
