@@ -180,8 +180,10 @@ LAALAA_API_HOST = os.environ.get('LAALAA_API_HOST', 'http://0.0.0.0:8001')
 # Zendesk settings for feedback
 ZENDESK_API_USERNAME = os.environ.get('ZENDESK_API_USERNAME')
 ZENDESK_API_TOKEN = os.environ.get('ZENDESK_API_TOKEN')
-ZENDESK_DEFAULT_GROUP_ID = os.environ.get('ZENDESK_DEFAULT_GROUP_ID')
-ZENDESK_DEFAULT_REQUESTER = 649762516  # anonymous feedback <noreply@ministryofjustice.zendesk.com>
+ZENDESK_GROUP_ID = os.environ.get('ZENDESK_GROUP_ID')
+ZENDESK_API_ENDPOINT = 'https://ministryofjustice.zendesk.com/api/v2/'
+ZENDESK_REQUESTER_ID = os.environ.get('ZENDESK_REQUESTER_ID', 649762516)
+# defaults to 'anonymous feedback <noreply@ministryofjustice.zendesk.com>'
 
 GA_ID = os.environ.get('GA_ID')
 

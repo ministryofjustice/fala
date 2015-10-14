@@ -14,5 +14,5 @@ class FeedbackForm(forms.Form):
         required=True,
         widget=forms.Textarea(attrs={
             'class': 'form-control m-full',
-            'rows': 12
+            'rows': 10
         }))
