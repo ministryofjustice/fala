@@ -55,7 +55,9 @@
                   {% if item.organisation.website %}
                     <p>
                       <span>{{ _('Website') }}:</span>
-                      {{ item.organisation.website|urlize }}
+                      <a href="{{ item.organisation.website|human_to_url }}" class="url">
+                        {{ item.organisation.website|url_to_human }}
+                      </a>
                     </p>
                   {% endif %}
                   {% if item.categories|length %}
