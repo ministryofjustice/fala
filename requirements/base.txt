@@ -1,6 +1,6 @@
 django==1.8.4
 raven==5.7.2
-git+git://github.com/unbit/uwsgi.git@b608eb1772641d525bfde268fe9d6d8d0d5efde7
+uwsgi==2.0.11.2
 requests==2.7.0
 django_jinja==1.4.1
 logstash-formatter==0.5.14
