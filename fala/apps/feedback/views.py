@@ -24,10 +24,13 @@ class FeedbackView(TemplateView):
                     'user_agent': request.META.get('HTTP_USER_AGENT')
                 })
 
-            if response.status_code < 300:
+            if response['status'] < 300:
                 return redirect('feedback_confirmation')
             else:
-                context.update({'error': 'Something went wrong. Please try again.'})
+                context.update({'error': {
+                    'message': 'Something went wrong. Please try again.',
+                    'json': response['json']
+                }})
 
         return self.render_to_response(context)
 

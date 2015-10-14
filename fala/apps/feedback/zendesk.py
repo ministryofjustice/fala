@@ -43,17 +43,30 @@ class ZendeskClient(object):
         return self.post('tickets', self.feedback_payload(feedback_data))
 
     def post(self, endpoint, data):
-        return requests.post(
-            '{base}{endpoint}.json'.format(
-                base=settings.ZENDESK_API_ENDPOINT, endpoint=endpoint),
-            data=json.dumps(data),
-            auth=(
-                '{username}/token'.format(
-                    username=settings.ZENDESK_API_USERNAME),
-                settings.ZENDESK_API_TOKEN,
-            ),
-            headers={'content-type': 'application/json'},
-            timeout=REQUEST_TIMEOUT,
-        )
+        try:
+            response = requests.post(
+                '{base}{endpoint}.json'.format(
+                    base=settings.ZENDESK_API_ENDPOINT, endpoint=endpoint),
+                data=json.dumps(data),
+                auth=(
+                    '{username}/token'.format(
+                        username=settings.ZENDESK_API_USERNAME),
+                    settings.ZENDESK_API_TOKEN,
+                ),
+                headers={'content-type': 'application/json'},
+                timeout=REQUEST_TIMEOUT,
+            )
+        except RequestException:
+            return {
+                'json': {
+                    "error": "Timeout",
+                    "message": "Feedback request timed out."
+                },
+                'status': 408
+            }
+        return {
+            'json': response.json(),
+            'status': response.status_code
+        }
 
 zendesk_client = ZendeskClient()
