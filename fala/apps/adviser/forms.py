@@ -10,15 +10,12 @@ SEARCH_TYPE_CHOICES = [
     ('organisation', _('Organisation')),
 ]
 
-ORGANISATION_TYPES = [
-    'Charity or Voluntary Org',
-    'Mediation Service',
-    'Private Company',
-    'Solicitor',
+ORGANISATION_TYPES_CHOICES = [
+    ('Charity or Voluntary Org', 'Charity or Voluntary Organisations'),
+    ('Mediation', 'Mediation Service'),
+    ('Private Company', 'Private Company'),
+    ('Solicitor', 'Solicitor'),
 ]
-
-ORGANISATION_TYPES_CHOICES = tuple(zip(ORGANISATION_TYPES,
-                                       ORGANISATION_TYPES))
 
 
 class FalaTextInput(forms.TextInput):
