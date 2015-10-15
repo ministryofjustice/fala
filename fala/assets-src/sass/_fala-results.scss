@@ -5,6 +5,10 @@ $tablet: min-width 641px;
 $mobile: max-width 640px;
 
 .find-legal-adviser {
+  .street-address {
+    white-space: pre;
+  }
+
   .results-summary {
     margin: 0;
     padding: 20px 0;
@@ -12,16 +16,8 @@ $mobile: max-width 640px;
   }
 
   .org-categories {
+    font-size: .85em;
     line-height: 1.2;
-    font-size: .8em;
-    padding: 4px;
-    margin: 8px -5px -5px -5px;
-    background: $grey-4;
-    color: $grey-1;
-  }
-
-  .org-category {
-    display: inline-block;
   }
 
   .search-results-list {
@@ -33,18 +29,19 @@ $mobile: max-width 640px;
 
     .org-list-item {
       border-top: 1px solid $grey-3;
-      padding: 10px;
+      padding: 10px 0;
       margin: 0;
       display: block;
 
-      &:first-child {
-        border: 0;
-      }
-
       .org-summary {
+        display: block;
         overflow: hidden;
         padding: 2px 80px 2px 27px;
         margin-bottom: 8px;
+      }
+
+      .org-details {
+        padding-left: 27px;
       }
 
       .marker {
@@ -60,10 +57,6 @@ $mobile: max-width 640px;
         float: left;
         margin: -1px 0 0 -26px;
         background: white;
-      }
-
-      .street-address {
-        white-space: pre;
       }
     }
 
@@ -82,15 +75,25 @@ $mobile: max-width 640px;
       margin-right: -80px;
     }
 
+    .org-categories {
+      background: $grey-4;
+      color: $grey-1;
+      margin: 8px 0 0 -27px;
+      padding: 5px 5px 5px 27px;
+    }
+
     p {
       margin: 5px 0 0;
     }
   }
 
+  .adr span {
+    display: block;
+  }
+
   .search-results-pagination {
     overflow: hidden;
-    border-top: 2px solid $grey-3;
-    margin: 1em 0;
+    border-top: 3px solid $grey-3;
     padding-top: 10px;
 
     ul {
@@ -105,7 +108,7 @@ $mobile: max-width 640px;
       a,
       span {
         font-size: .9em;
-        line-height: 27px;
+        line-height: 26px;
         display: block;
         padding: 0 8px;
         font-weight: bold;
@@ -149,14 +152,10 @@ $mobile: max-width 640px;
   .distance {
     display: none;
   }
-
-  .address {
-    white-space: pre;
-  }
 }
 
 
-.js-enabled .find-legal-adviser {
+.js-enabled .legal-adviser-results {
   .results-location {
     padding-left: 20px;
     background: url(../images/icons/icon-location.png) .17em .17em no-repeat;
@@ -228,6 +227,10 @@ $mobile: max-width 640px;
         &.s-highlighted {
           background: $yellow;
         }
+
+        &:first-child {
+          border: 0;
+        }
       }
 
       .url:after {
@@ -238,16 +241,13 @@ $mobile: max-width 640px;
       }
 
       .org-summary {
-        display: block;
-        overflow: hidden;
         outline: 0;
         margin: -4px;
         padding: 8px 88px 8px 34px;
       }
 
       .org-categories {
-        padding-left: 27px;
-        margin-left: -27px;
+        margin: 5px -7px -7px -29px;
       }
     }
 
@@ -261,7 +261,7 @@ $mobile: max-width 640px;
     }
 
     .search-results-pagination {
-      height: $_pagination-height - 6 - 2;
+      height: $_pagination-height - 6 - 3;
       padding: 3px;
 
       @include media('>phone') {
@@ -314,8 +314,8 @@ $mobile: max-width 640px;
 }
 
 .map .org-categories {
-  margin: 10px 0 0;
-  padding: 5px 0 0;
+  margin-top: 10px;
+  padding-top: 5px;
   border-top: 1px solid $grey-3;
   color: #444;
   background: none;
