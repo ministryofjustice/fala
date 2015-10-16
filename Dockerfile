@@ -23,7 +23,7 @@ RUN apt-get update && \
 
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 10
 
-RUN npm install -g bower gulp
+RUN npm install -g gulp
 
 # Add requirements to docker
 ADD ./requirements/base.txt /requirements.txt
@@ -34,7 +34,7 @@ ADD . /home/app
 RUN rm -rf /home/app/.git
 RUN  chown -R app: /home/app
 
-RUN cd /home/app && npm install --unsafe-perm && bower install --allow-root && gulp
+RUN cd /home/app && npm install --unsafe-perm && gulp --production
 
 RUN cd /home/app && ./manage.py collectstatic --noinput
 

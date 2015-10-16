@@ -1,0 +1,27 @@
+{#
+  Generic alert element
+
+  Params:
+    - type <string> (default: info)
+        Type of alert (sets CSS class `alert-{type}`)
+    - icon <string> (default: none)
+        Alert icon (sets CSS class `icon-{icon}`)
+    - title <string> (default: None)
+        Alert title
+#}
+{% macro alert(type='info', icon=None, title=None) %}
+  <div class="alert alert-{{type}}"
+    role="alert"
+    {% if title %}aria-labelledby="alert-heading-{{type}}"{% endif %}
+  >
+    {% if icon %}
+      <span class="icon icon-{{icon}}" aria-hidden="true"></span>
+    {% endif %}
+    <div class="alert-message">
+      {% if title %}
+        <h3 class="alert-header" id="alert-heading-{{type}}">{{ _(title) }}</h3>
+      {% endif %}
+      {{ caller() }}
+    </div>
+  </div>
+{% endmacro %}

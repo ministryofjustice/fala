@@ -1,55 +1,77 @@
 /* jshint node: true */
 
-'use strict';
-
+var argv = require('yargs').argv;
 var gulp = require('gulp');
+var gutil = require("gulp-util");
 var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
-var readJson = require('read-json-sync');
-var concat = require('gulp-concat');
-var util = require('util');
-var merge = require('merge-stream');
-
-var bowerDir = 'bower_components';
-
+var webpack = require('webpack');
 try {
-  bowerDir = readJson('.bowerrc').directory;
+  var browserSync = require('browser-sync').create();
 } catch(e) {}
 
+var importPaths = [];
+importPaths.push(require('mojular-govuk-elements').getPaths('sass'));
+importPaths.push(require('mojular-moj-elements').getPaths('sass'));
+
 var paths = {
-  src: __dirname + '/fala/assets-src/',
-  dest: __dirname + '/fala/assets/',
-  styles: __dirname + '/fala/assets-src/sass/**/*.scss',
-  js: __dirname + '/fala/assets-src/js/**/*.js',
-  mojular_js: [
-    util.format('%s/mojular/assets/scripts/moj.js', bowerDir),
-    util.format('%s/mojular/assets/scripts/modules/**/*.js', bowerDir),
-    util.format('%s/mojular/assets/scripts/moj-init.js', bowerDir)
-  ]
+  src: 'fala/assets-src/',
+  dest: 'fala/assets/',
+  styles: 'fala/assets-src/sass/**/*.scss',
+  scripts: 'fala/assets-src/scripts/**/*.js',
+  images: 'node_modules/mojular-govuk-elements/assets/images/*'
 };
 
 gulp.task('sass', function() {
-  var importPaths = [];
-
-  importPaths = importPaths.concat(readJson(util.format('%s/govuk-template/paths.json', bowerDir)).import_paths);
-  importPaths = importPaths.concat(readJson(util.format('%s/mojular/paths.json', bowerDir)).import_paths);
-
-  gulp.src(paths.styles)
+  var result = gulp.src(paths.styles)
     .pipe(sourcemaps.init())
     .pipe(sass({
-      includePaths: importPaths.map(function(path) {
-        return util.format('%s/%s', bowerDir, path);
-      })
+      includePaths: [].concat.apply([], importPaths),
+      outputStyle: argv.production ? 'compressed' : 'expanded'
     }).on('error', sass.logError))
-    .pipe(sourcemaps.write('.'))
+    .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.dest + 'css/'));
+
+    try {
+      result.pipe(browserSync.stream({ match: '**/*.css' }));
+    } catch(e) {}
+  return result;
 });
 
-gulp.task('js', function() {
-  var local_js = gulp.src(paths.mojular_js).pipe(concat('moj.js')).pipe(gulp.dest(paths.dest + 'scripts/'));
-  var mojular_js = gulp.src(paths.js).pipe(concat('application.js')).pipe(gulp.dest(paths.dest + 'scripts/'));
-
-  return merge(local_js, mojular_js);
+gulp.task('scripts', function(callback) {
+  var config = argv.production ? require('./webpack.config.prod.js') : require('./webpack.config.js');
+  webpack(config).run(function(err, stats) {
+    if(err) throw new gutil.PluginError("webpack", err);
+    gutil.log("[webpack]", stats.toString({
+      colors: true,
+      modules: false,
+      chunkModules: false
+    }));
+    callback();
+  });
 });
 
-gulp.task('default', ['js', 'sass']);
+gulp.task('images', function() {
+  return gulp.src(paths.images)
+    .pipe(gulp.dest(paths.dest + 'images/'));
+});
+
+gulp.task('serve', ['build'], function() {
+  browserSync.init({
+    proxy: 'localhost:8000',
+    open: false,
+    port: 3000
+  });
+
+  gulp.watch(paths.images, ['images']);
+  gulp.watch(paths.styles, ['sass']);
+  gulp.watch([
+    'node_modules/mojular-govuk-elements/**/*.scss',
+    'node_modules/mojular-moj-elements/**/*.scss'
+  ], ['sass']);
+  gulp.watch(paths.scripts, ['scripts']).on('change', browserSync.reload);
+});
+
+gulp.task('build', ['sass', 'images', 'scripts']);
+
+gulp.task('default', ['build']);

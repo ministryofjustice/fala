@@ -1,27 +1,31 @@
 # -*- coding: utf-8 -*-
-from django import template
 
-register = template.Library()
-
-
-def multiply(value, arg):
-    return value * arg
+import re
+from urllib.parse import urlparse, parse_qs, quote
+from django_jinja import library
+from jinja2 import contextfilter
 
 
-def val(field):
-    return field.value() if field.value() else ''
+@library.filter
+def url_to_human(value):
+    return re.sub(r'(^https?://)|(/$)', '', value)
 
 
-def checked(field, index):
-    return ' checked' if field.data == field[index].choice_value else ''
+@library.filter
+def human_to_url(value):
+    return re.sub(r'^((?!https?://).*)', r'http://\1', quote(value))
 
 
-def selected(field, index):
-    return ' checked' if field.data and field[index].choice_value in \
-                                        field.data else ''
+@library.filter
+@contextfilter
+def query_to_dict(context, value, prop=None):
+    result = parse_qs(urlparse(value).query)
+    if prop:
+        result = result[prop]
+    return result
 
 
-register.filter('multiply', multiply)
-register.filter('checked', checked)
-register.filter('selected', selected)
-register.filter('val', val)
+@library.filter
+@contextfilter
+def to_fala_page_url(context, value, url_path):
+    return '%s?%s' % (url_path, urlparse(value).query)

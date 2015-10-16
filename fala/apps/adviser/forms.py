@@ -10,44 +10,32 @@ SEARCH_TYPE_CHOICES = [
     ('organisation', _('Organisation')),
 ]
 
-ORGANISATION_TYPES = [
-    'Charity or Voluntary Org',
-    'Mediation Service',
-    'Private Company',
-    'Solicitor',
+ORGANISATION_TYPES_CHOICES = [
+    ('Charity or Voluntary Org', 'Charity or Voluntary Organisations'),
+    ('Mediation', 'Mediation Service'),
+    ('Private Company', 'Private Company'),
+    ('Solicitor', 'Solicitor'),
 ]
 
-ORGANISATION_TYPES_CHOICES = tuple(zip(ORGANISATION_TYPES,
-                                       ORGANISATION_TYPES))
+
+class FalaTextInput(forms.TextInput):
+    def __init__(self, attrs={}):
+        class_attr = ' '.join([c for c in ['form-control', attrs.get('class')] if c])
+        attrs.update({'class': class_attr})
+
+        super(FalaTextInput, self).__init__(attrs)
 
 
 class AdviserSearchForm(forms.Form):
 
-    search_type = forms.ChoiceField(
-        choices=SEARCH_TYPE_CHOICES,
-        widget=forms.RadioSelect(),
-        initial=SEARCH_TYPE_CHOICES[0][0])
-    postcode = forms.CharField(
-        label=_('Postcode'),
-        max_length=10,
-        help_text=_('Enter a postcode, town or city'),
-        required=False)
-    organisation_name = forms.CharField(
-        label=_('Organisation'),
-        max_length=100,
-        required=False)
-    organisation_types = forms.MultipleChoiceField(
-        choices=ORGANISATION_TYPES_CHOICES,
-        widget=forms.CheckboxSelectMultiple(),
-        required=False)
-    category = forms.NullBooleanField(
-        label=_('Category'),
-        widget=forms.CheckboxInput()
+    page = forms.IntegerField(
+        required=False,
+        widget=forms.HiddenInput()
     )
-    categories = forms.MultipleChoiceField(
-        choices=laalaa.PROVIDER_CATEGORY_CHOICES,
-        widget=forms.CheckboxSelectMultiple(),
-        required=False)
+
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault('label_suffix', '')
+        super(AdviserSearchForm, self).__init__(*args, **kwargs)
 
     def clean(self):
         cleaned_data = super(AdviserSearchForm, self).clean()
@@ -69,7 +57,7 @@ class AdviserSearchForm(forms.Form):
                 data = laalaa.find(
                     postcode=self.cleaned_data.get('postcode'),
                     categories=self.cleaned_data.get('categories'),
-                    page=self.cleaned_data.get('page'),
+                    page=self.cleaned_data.get('page', 1),
                     organisation_types=self.cleaned_data.get('organisation_types'),
                     organisation_name=self.cleaned_data.get('organisation_name'),
                 )
@@ -85,3 +73,36 @@ class AdviserSearchForm(forms.Form):
         return {}
 
 
+class AdviserSearchByLocationForm(AdviserSearchForm):
+
+    postcode = forms.CharField(
+        label=_('Enter postcode'),
+        max_length=10,
+        help_text=_('Enter a postcode, town or city'),
+        required=True,
+        widget=FalaTextInput(attrs={
+            'placeholder': _('e.g. SW1H 9AJ')
+        }))
+
+    organisation_types = forms.MultipleChoiceField(
+        label=_('Organisation type'),
+        choices=ORGANISATION_TYPES_CHOICES,
+        widget=forms.CheckboxSelectMultiple(),
+        required=False)
+
+    categories = forms.MultipleChoiceField(
+        label=_('Category'),
+        choices=laalaa.PROVIDER_CATEGORY_CHOICES,
+        widget=forms.CheckboxSelectMultiple(),
+        required=False)
+
+
+class AdviserSearchByOrganisationForm(AdviserSearchForm):
+
+    organisation_name = forms.CharField(
+        label=_('Organisation name'),
+        max_length=100,
+        required=True,
+        widget=FalaTextInput(attrs={
+            'placeholder': _('e.g. Winthorpes')
+        }))

@@ -1,0 +1,42 @@
+// Results print
+
+@media print {
+  .legal-adviser-results {
+    .map {
+      float: none;
+      width: auto;
+      margin-bottom: 5mm;
+
+      a:after {
+        content: none;
+      }
+    }
+
+    .search-results-container {
+      height: auto !important;
+    }
+
+    .search-results {
+      page-break-before: always;
+      float: none !important;
+      height: auto !important;
+      width: auto !important;
+      border: 0 !important;
+      margin: 1cm 0 1cm 5mm;
+    }
+
+    .search-results-list {
+      width: auto !important;
+      height: auto !important;
+      border: 0 !important;
+
+      .org-details {
+        display: block !important;
+      }
+    }
+
+    .search-results-pagination {
+      display: none;
+    }
+  }
+}
