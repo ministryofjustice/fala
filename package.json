@@ -18,9 +18,9 @@
   "homepage": "https://github.com/ministryofjustice/fala",
   "dependencies": {
     "mojular": "mojular/mojular",
-    "mojular-govuk-elements": "mojular/govuk-elements",
-    "mojular-moj-elements": "mojular/moj-elements",
-    "mojular-templates": "mojular/templates"
+    "mojular-govuk-elements": "mojular/govuk-elements#0.0.7",
+    "mojular-moj-elements": "mojular/moj-elements#0.0.3",
+    "mojular-templates": "mojular/templates#0.0.5"
   },
   "devDependencies": {
     "gulp": "^3.8.11",
