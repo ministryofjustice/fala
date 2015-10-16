@@ -75,25 +75,42 @@ $mobile: max-width 640px;
       margin-right: -80px;
     }
 
+    .org-address {
+      margin: 0 0 5px;
+      float: left;
+    }
+
+    .org-type {
+      font-size: .9em;
+      display: inline-block;
+      background: $pink;
+      padding: 2px 5px 0;
+      margin-left: 10px;
+      float: right;
+      color: white;
+    }
+
     .org-categories {
       background: $grey-4;
       color: $grey-1;
       margin: 8px 0 0 -27px;
-      padding: 5px 5px 5px 27px;
+      padding: 7px 5px 5px 27px;
     }
 
     p {
       margin: 5px 0 0;
+      clear: left;
     }
   }
 
+  .adr,
   .adr span {
     display: block;
   }
 
   .search-results-pagination {
     overflow: hidden;
-    border-top: 3px solid $grey-3;
+    border-top: 2px solid $grey-2;
     padding-top: 10px;
 
     ul {
@@ -107,11 +124,16 @@ $mobile: max-width 640px;
 
       a,
       span {
+        color: $link-colour;
         font-size: .9em;
-        line-height: 26px;
+        line-height: 27px;
         display: block;
         padding: 0 8px;
         font-weight: bold;
+      }
+
+      a:hover {
+        text-decoration: none;
       }
 
       span {
@@ -158,6 +180,7 @@ $mobile: max-width 640px;
 .js-enabled .legal-adviser-results {
   .results-location {
     padding-left: 20px;
+    margin-left: 5px;
     background: url(../images/icons/icon-location.png) .17em .17em no-repeat;
     background: url(../images/icons/icon-location-2x.png) .2em .2em / 16px no-repeat;
   }
@@ -261,7 +284,7 @@ $mobile: max-width 640px;
     }
 
     .search-results-pagination {
-      height: $_pagination-height - 6 - 3;
+      height: $_pagination-height - 6 - 2;
       padding: 3px;
 
       @include media('>phone') {

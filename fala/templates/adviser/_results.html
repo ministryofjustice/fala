@@ -40,7 +40,10 @@
                   {% endif %}
                 </header>
                 <div class="org-details">
-                  <p>
+                  {% if item.location.type != 'Office' %}
+                    <div class="org-type">{{ item.location.type|replace('Office', '') }}</div>
+                  {% endif %}
+                  <p class="org-address">
                     <span class="sr-only">{{ _('Address') }}:</span>
                     <span class="adr">
                       <span class="street-address">{{ item.location.address }}</span>
