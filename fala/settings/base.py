@@ -180,7 +180,7 @@ LAALAA_API_HOST = os.environ.get('LAALAA_API_HOST', 'http://0.0.0.0:8001')
 # Zendesk settings for feedback
 ZENDESK_API_USERNAME = os.environ.get('ZENDESK_API_USERNAME')
 ZENDESK_API_TOKEN = os.environ.get('ZENDESK_API_TOKEN')
-ZENDESK_GROUP_ID = os.environ.get('ZENDESK_GROUP_ID')
+ZENDESK_GROUP_ID = os.environ.get('ZENDESK_GROUP_ID', 26974037) # Find a Legal Adviser (FALA)
 ZENDESK_API_ENDPOINT = 'https://ministryofjustice.zendesk.com/api/v2/'
 ZENDESK_REQUESTER_ID = os.environ.get('ZENDESK_REQUESTER_ID', 649762516)
 # defaults to 'anonymous feedback <noreply@ministryofjustice.zendesk.com>'
