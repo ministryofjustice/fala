@@ -21,9 +21,12 @@ $images-dir: '/static/images/';
 @import 'govuk/utilities';
 
 @import 'cla/elements';
+
 @import 'tabs';
 @import 'fala-search';
 @import 'fala-results';
+@import 'fala-results-js';
+@import 'fala-results-print';
 
 .page-header {
   margin: 2em 0;

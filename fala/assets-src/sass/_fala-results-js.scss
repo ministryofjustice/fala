@@ -1,0 +1,157 @@
+// Results enhanced (JS enabled)
+
+$results-sidebar-width: 40%;
+$map-height: 460px;
+
+.js-enabled {
+  // Map
+  .map {
+    display: none;
+
+    @include media('>tablet') {
+      height: 100%;
+      width: 100% - $results-sidebar-width;
+      float: left;
+    }
+
+    h3 {
+      margin: 5px 0;
+    }
+
+    p {
+      margin: 5px 0 0;
+    }
+
+    .marker,
+    .distance {
+      display: none;
+    }
+
+    .org-categories {
+      margin-top: 10px;
+      padding-top: 5px;
+      border-top: 1px solid $grey-3;
+      color: #444;
+      background: none;
+    }
+  }
+
+  // Sidebar results
+  .legal-adviser-results {
+    .results-location {
+      padding-left: 20px;
+      margin-left: 5px;
+      background: url(../images/icons/icon-location.png) .17em .17em no-repeat;
+      background: url(../images/icons/icon-location-2x.png) .2em .2em / 16px no-repeat;
+    }
+
+    .map {
+      display: block;
+      height: $map-height;
+      margin-bottom: 1em;
+
+      @include media('<phone') {
+        height: $map-height - 100;
+      }
+    }
+
+    @include media('>tablet') {
+      $_pagination-height: 35px;
+
+      .map {
+        margin: 0;
+      }
+
+      .search-results-container {
+        height: $map-height;
+        margin: 0 -1px;
+        border: 1px solid $grey-2;
+      }
+
+      .search-results {
+        font-size: .9em;
+        background: white;
+        float: right;
+        position: relative;
+        width: $results-sidebar-width;
+        border-left: 1px solid $grey-2;
+        margin-left: -1px;
+
+        .fn {
+          color: $link-colour;
+        }
+
+        .org-details {
+          font-size: .9em;
+          display: none;
+          padding: 8px 8px 8px 30px;
+          background: white;
+          outline: 0;
+        }
+
+        .s-highlighted {
+          .fn {
+            color: $black;
+          }
+
+          .org-details {
+            display: block;
+            margin-top: 4px;
+          }
+        }
+
+        .org-list-item {
+          padding: 4px;
+
+          &:hover {
+            background: $grey-4;
+          }
+
+          &.s-highlighted {
+            background: $yellow;
+          }
+
+          &:first-child {
+            border: 0;
+          }
+        }
+
+        .url:after {
+          position: relative;
+          top: -.3em;
+          margin-left: .2em;
+          display: inline-block;
+        }
+
+        .org-summary {
+          outline: 0;
+          margin: -4px;
+          padding: 8px 88px 8px 34px;
+        }
+
+        .org-categories {
+          margin: 5px -7px -7px -29px;
+        }
+      }
+
+      .search-results-list {
+        overflow: auto;
+        height: $map-height - $_pagination-height;
+
+        &:focus {
+          outline: 2px solid $yellow;
+        }
+      }
+
+      .search-results-pagination {
+        height: $_pagination-height - 6 - 2;
+        padding: 3px;
+
+        @include media('>phone') {
+          background: $grey-4;
+          margin: 0;
+        }
+      }
+    }
+  }
+}
