@@ -34,7 +34,7 @@ ADD . /home/app
 RUN rm -rf /home/app/.git
 RUN  chown -R app: /home/app
 
-RUN cd /home/app && npm install --unsafe-perm && gulp
+RUN cd /home/app && npm install --unsafe-perm && gulp --production
 
 RUN cd /home/app && ./manage.py collectstatic --noinput
 

@@ -1,5 +1,6 @@
 /* jshint node: true */
 
+var argv = require('yargs').argv;
 var gulp = require('gulp');
 var gutil = require("gulp-util");
 var sass = require('gulp-sass');
@@ -24,18 +25,22 @@ var paths = {
 gulp.task('sass', function() {
   var result = gulp.src(paths.styles)
     .pipe(sourcemaps.init())
-    .pipe(sass({ includePaths: [].concat.apply([], importPaths) }).on('error', sass.logError))
+    .pipe(sass({
+      includePaths: [].concat.apply([], importPaths),
+      outputStyle: argv.production ? 'compressed' : 'expanded'
+    }).on('error', sass.logError))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.dest + 'css/'));
 
     try {
-      result.pipe(browserSync.stream({match: '**/*.css'}));
+      result.pipe(browserSync.stream({ match: '**/*.css' }));
     } catch(e) {}
   return result;
 });
 
 gulp.task('scripts', function(callback) {
-  webpack(require('./webpack.config.js')).run(function(err, stats) {
+  var config = argv.production ? require('./webpack.config.prod.js') : require('./webpack.config.js');
+  webpack(config).run(function(err, stats) {
     if(err) throw new gutil.PluginError("webpack", err);
     gutil.log("[webpack]", stats.toString({
       colors: true,

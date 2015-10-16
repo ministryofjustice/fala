@@ -1,4 +1,4 @@
-var webpack = require("webpack");
+var webpack = require('webpack');
 
 module.exports = {
   entry: {
@@ -22,9 +22,6 @@ module.exports = {
     extensions: ['', '.json', '.js']
   },
   plugins: [
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false }
-    })
+    new webpack.optimize.DedupePlugin()
   ]
 };
