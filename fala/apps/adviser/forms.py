@@ -33,6 +33,35 @@ class AdviserSearchForm(forms.Form):
         widget=forms.HiddenInput()
     )
 
+    postcode = forms.CharField(
+        label=_('Enter postcode'),
+        max_length=10,
+        help_text=_('Enter a postcode, town or city'),
+        required=False,
+        widget=FalaTextInput(attrs={
+            'placeholder': _('e.g. SW1H 9AJ')
+        }))
+
+    organisation_name = forms.CharField(
+        label=_('Organisation name'),
+        max_length=100,
+        required=False,
+        widget=FalaTextInput(attrs={
+            'placeholder': _('e.g. Winthorpes')
+        }))
+
+    organisation_types = forms.MultipleChoiceField(
+        label=_('Organisation type'),
+        choices=ORGANISATION_TYPES_CHOICES,
+        widget=forms.CheckboxSelectMultiple(),
+        required=False)
+
+    categories = forms.MultipleChoiceField(
+        label=_('Category'),
+        choices=laalaa.PROVIDER_CATEGORY_CHOICES,
+        widget=forms.CheckboxSelectMultiple(),
+        required=False)
+
     def __init__(self, *args, **kwargs):
         kwargs.setdefault('label_suffix', '')
         super(AdviserSearchForm, self).__init__(*args, **kwargs)
@@ -61,38 +90,3 @@ class AdviserSearchForm(forms.Form):
                     _('Please try again later.')
                 ))
         return {}
-
-
-class AdviserSearchByLocationForm(AdviserSearchForm):
-
-    postcode = forms.CharField(
-        label=_('Enter postcode'),
-        max_length=10,
-        help_text=_('Enter a postcode, town or city'),
-        required=True,
-        widget=FalaTextInput(attrs={
-            'placeholder': _('e.g. SW1H 9AJ')
-        }))
-
-    organisation_types = forms.MultipleChoiceField(
-        label=_('Organisation type'),
-        choices=ORGANISATION_TYPES_CHOICES,
-        widget=forms.CheckboxSelectMultiple(),
-        required=False)
-
-    categories = forms.MultipleChoiceField(
-        label=_('Category'),
-        choices=laalaa.PROVIDER_CATEGORY_CHOICES,
-        widget=forms.CheckboxSelectMultiple(),
-        required=False)
-
-
-class AdviserSearchByOrganisationForm(AdviserSearchForm):
-
-    organisation_name = forms.CharField(
-        label=_('Organisation name'),
-        max_length=100,
-        required=True,
-        widget=FalaTextInput(attrs={
-            'placeholder': _('e.g. Winthorpes')
-        }))
