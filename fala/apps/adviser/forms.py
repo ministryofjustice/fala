@@ -39,16 +39,6 @@ class AdviserSearchForm(forms.Form):
 
     def clean(self):
         cleaned_data = super(AdviserSearchForm, self).clean()
-        if cleaned_data.get('search_type') == 'location' and not \
-                cleaned_data.get('postcode'):
-            raise forms.ValidationError(
-                _('Please enter a postcode')
-            )
-        elif cleaned_data.get('search_type') == 'organisation' and not \
-                cleaned_data.get('organisation_name'):
-            raise forms.ValidationError(
-                _('Please enter an organisation')
-            )
         return cleaned_data
 
     def search(self):
