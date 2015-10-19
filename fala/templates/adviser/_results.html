@@ -9,7 +9,7 @@
         {% endtrans %}
         <span class="results-location">{{ data.origin.postcode }}</span>
       {% else %}
-        {% trans result_count=data.count, page_count=data.results|length, org_name=form.organisation_name.value() %}
+        {% trans result_count=data.count, page_count=data.results|length, org_name=form.name.value() %}
           Showing {{ page_count }} result for <strong>{{ org_name }}</strong>
         {% pluralize %}
           {{ result_count }} results in total. Showing {{ page_count }} results for <strong>{{ org_name }}</strong>
@@ -80,29 +80,28 @@
           </ul>
         </div>
 
-        <nav class="search-results-pagination">
-          <ul>
-            {% if data.previous %}
-              {% set prev_page = data.previous|to_fala_page_url(current_url) %}
-              <li class="results-nav results-nav-prev">
-                <a href="{{ prev_page }}"
-                   data-page="{{ prev_page|query_to_dict('page')|first }}">
-                  {{ _('Previous') }}
-                </a>
-              </li>
-            {% endif %}
-            {% if data.next %}
-              {% set next_page = data.next|to_fala_page_url(current_url) %}
-              <li class="results-nav results-nav-next">
-                <a href="{{ next_page }}"
-                   data-page="{{ next_page|query_to_dict('page')|first }}">
-                  {{ _('Next') }}
-                </a>
-              </li>
-            {% endif %}
-          </ul>
-        </nav>
-
+          <nav class="search-results-pagination">
+            <ul>
+              {% if data.previous %}
+                {% set prev_page = data.previous|to_fala_page_url(current_url) %}
+                <li class="results-nav results-nav-prev">
+                  <a href="{{ prev_page|replace('organisation_', '') }}"
+                     data-page="{{ prev_page|query_to_dict('page')|first }}">
+                    {{ _('Previous') }}
+                  </a>
+                </li>
+              {% endif %}
+              {% if data.next %}
+                {% set next_page = data.next|to_fala_page_url(current_url) %}
+                <li class="results-nav results-nav-next">
+                  <a href="{{ next_page|replace('organisation_', '') }}"
+                     data-page="{{ next_page|query_to_dict('page')|first }}">
+                    {{ _('Next') }}
+                  </a>
+                </li>
+              {% endif %}
+            </ul>
+          </nav>
       </div>
     </div>
   </section>

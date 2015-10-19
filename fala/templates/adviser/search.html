@@ -24,10 +24,10 @@
           <div class="column-half">
             <fieldset class="form-group fieldset-group">
               <legend class="form-group-label">
-                {{ form.organisation_types.label }}
+                {{ form.type.label }}
               </legend>
               <ul class="form-option-list">
-                {% for org in form.organisation_types %}
+                {% for org in form.type %}
                   <li>{{ org }}</li>
                 {% endfor %}
               </ul>

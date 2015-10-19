@@ -42,7 +42,7 @@ class AdviserSearchForm(forms.Form):
             'placeholder': _('e.g. SW1H 9AJ')
         }))
 
-    organisation_name = forms.CharField(
+    name = forms.CharField(
         label=_('Organisation name'),
         max_length=100,
         required=False,
@@ -50,7 +50,7 @@ class AdviserSearchForm(forms.Form):
             'placeholder': _('e.g. Winthorpes')
         }))
 
-    organisation_types = forms.MultipleChoiceField(
+    type = forms.MultipleChoiceField(
         label=_('Organisation type'),
         choices=ORGANISATION_TYPES_CHOICES,
         widget=forms.CheckboxSelectMultiple(),
@@ -77,8 +77,8 @@ class AdviserSearchForm(forms.Form):
                     postcode=self.cleaned_data.get('postcode'),
                     categories=self.cleaned_data.get('categories'),
                     page=self.cleaned_data.get('page', 1),
-                    organisation_types=self.cleaned_data.get('organisation_types'),
-                    organisation_name=self.cleaned_data.get('organisation_name'),
+                    organisation_types=self.cleaned_data.get('type'),
+                    organisation_name=self.cleaned_data.get('name'),
                 )
                 if 'error' in data:
                     self.add_error('postcode', (data['error']))
