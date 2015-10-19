@@ -16,7 +16,7 @@ Mojular.Modules.FindLegalAdviser = {
     this._handleMQTest();
 
     if(!this.$resultsMap.length) {
-      $('.legal-adviser-search input[type="text"]').focus();
+      $('#id_postcode').focus();
       return;
     }
 
