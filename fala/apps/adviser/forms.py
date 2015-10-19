@@ -67,8 +67,12 @@ class AdviserSearchForm(forms.Form):
         super(AdviserSearchForm, self).__init__(*args, **kwargs)
 
     def clean(self):
-        cleaned_data = super(AdviserSearchForm, self).clean()
-        return cleaned_data
+        data = self.cleaned_data
+        if(not data.get('postcode') and not data.get('name')):
+            raise forms.ValidationError(
+                _('Please enter postcode or organisation name')
+            )
+        return data
 
     def search(self):
         if self.is_valid():

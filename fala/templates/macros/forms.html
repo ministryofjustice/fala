@@ -30,7 +30,7 @@
     {% if field %}id="field-{{ field.html_name }}"{% endif %}
   >
 
-    {{ render_field_label(field, kwargs.hide_label) }}
+    {{ render_field_label(field, kwargs.hide_label, kwargs.hide_optional) }}
 
     {% if field and (field.errors and controlled_by and not controlled_by.errors or field.errors and not controlled_by) %}
       {{ render_field_errors(field) }}
@@ -65,9 +65,9 @@
     - hide_label <boolean> (default: False)
         Whether to hide the label visually (still available for screen readers)
 #}
-{% macro render_field_label(field, hide_label=False) %}
+{% macro render_field_label(field, hide_label=False, hide_optional=False) %}
   {% if field %}
-    {% if field.field.required %}
+    {% if field.field.required or hide_optional %}
       {% set label_text = field.label %}
     {% else %}
       {% set label_text = field.label + ' <span class="form-optional">optional</span>' %}

@@ -4,10 +4,20 @@
   {% extends 'base.html' %}
 {% endif %}
 
+{% import "macros/element.html" as Element %}
+{% import "macros/forms.html" as Form %}
+
 {% block search_form %}
+  {% if form.errors and form.errors['__all__'] %}
+    {% call Element.alert('error', title='Form errors') %}
+      {% for k, error in form.errors.items() %}
+        {{ error }}
+      {% endfor %}
+    {% endcall %}
+  {% endif %}
   <div class="legal-adviser-search">
     <form action="">
-      {% call Form.group(form.postcode, 'form-group-plain') %}
+      {% call Form.group(form.postcode, 'form-group-plain', hide_optional=True) %}
         <button type="submit" class="button" id="searchButton" name="search">Search</button>
       {% endcall %}
 
@@ -16,7 +26,7 @@
           <label>{{ _('Filter by') }}</label>
         </div>
         <div class="form-row">
-          {% call Form.group(form.organisation_name, 'form-group-plain') %}
+          {% call Form.group(form.name, 'form-group-plain', hide_optional=True) %}
             <button type="submit" class="button button-secondary" name="filter">Filter</button>
           {% endcall %}
         </div>
