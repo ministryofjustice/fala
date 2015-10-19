@@ -19,7 +19,10 @@ var paths = {
   dest: 'fala/assets/',
   styles: 'fala/assets-src/sass/**/*.scss',
   scripts: 'fala/assets-src/scripts/**/*.js',
-  images: 'node_modules/mojular-govuk-elements/assets/images/*'
+  images: [
+    'node_modules/mojular-govuk-elements/assets/images/*',
+    'fala/assets-src/images/**/*'
+  ]
 };
 
 gulp.task('sass', function() {
