@@ -2,6 +2,7 @@ var $ = require('jquery');
 var debounce = require('lodash/function/debounce');
 var find = require('lodash/collection/find');
 var reduce = require('lodash/collection/reduce');
+var reject = require('lodash/collection/reject');
 
 Mojular.Modules.FindLegalAdviser = {
   el: '#resultsMap',
@@ -71,7 +72,12 @@ Mojular.Modules.FindLegalAdviser = {
     this.$findLegalAdviserForm.submit(function(evt) {
       evt.preventDefault();
 
-      var url = document.location.pathname + '?' + $(this).serialize();
+      var formData = $(this).serializeArray();
+      if(!formData.length) {
+        return;
+      }
+      formData = reject(formData, 'value', '');
+      var url = document.location.pathname + '?' + $.param(formData);
       self._fetchPage(url, true);
 
       // Update browser history
