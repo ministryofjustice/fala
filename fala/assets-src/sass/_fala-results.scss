@@ -1,0 +1,150 @@
+// Common results
+
+.find-legal-adviser {
+  .street-address {
+    white-space: pre;
+  }
+
+  .results-summary {
+    margin: 0;
+    padding: 20px 0;
+    border-top: 1px solid $grey-2;
+  }
+
+  .org-categories {
+    font-size: .85em;
+    line-height: 1.2;
+  }
+
+  .search-results-list {
+    .org-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .org-list-item {
+      border-top: 1px solid $grey-3;
+      padding: 10px 0;
+      margin: 0;
+      display: block;
+
+      .org-summary {
+        display: block;
+        overflow: hidden;
+        padding: 2px 80px 2px 27px;
+        margin-bottom: 8px;
+      }
+
+      .org-details {
+        padding-left: 27px;
+      }
+
+      .marker {
+        width: 16px;
+        height: 16px;
+        text-align: center;
+        line-height: 18px;
+        font-size: 11px;
+        font-weight: bold;
+        color: #4a4a4a;
+        border-radius: 100%;
+        border: 2px solid #ae4f47;
+        float: left;
+        margin: -1px 0 0 -26px;
+        background: white;
+      }
+    }
+
+    .org-title {
+      margin: 0;
+      font-size: 1em;
+      line-height: 1.1;
+      float: left;
+    }
+
+    .distance {
+      color: $grey-1;
+      color: rgba($black, .6);
+      font-size: .8em;
+      float: right;
+      margin-right: -80px;
+    }
+
+    .org-address {
+      margin: 0 0 5px;
+      float: left;
+    }
+
+    .org-type {
+      font-size: .9em;
+      display: inline-block;
+      background: $pink;
+      padding: 2px 5px 0;
+      margin-left: 10px;
+      float: right;
+      color: white;
+    }
+
+    .org-categories {
+      background: $grey-4;
+      color: $grey-1;
+      margin: 8px 0 0 -27px;
+      padding: 7px 5px 5px 27px;
+    }
+
+    p {
+      margin: 5px 0 0;
+      clear: left;
+    }
+  }
+
+  .adr,
+  .adr span {
+    display: block;
+  }
+
+  .search-results-pagination {
+    overflow: hidden;
+    border-top: 2px solid $grey-2;
+    padding-top: 10px;
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .results-nav {
+      margin: 0;
+
+      a,
+      span {
+        color: $link-colour;
+        font-size: .9em;
+        line-height: 27px;
+        display: block;
+        padding: 0 8px;
+        font-weight: bold;
+      }
+
+      a:hover {
+        text-decoration: none;
+      }
+
+      span {
+        font-weight: normal;
+        color: $grey-1;
+        cursor: default;
+      }
+    }
+
+    .results-nav-prev {
+      float: left;
+    }
+
+    .results-nav-next {
+      float: right;
+    }
+  }
+}

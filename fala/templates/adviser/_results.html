@@ -1,0 +1,114 @@
+{% if data and data.count and data.count > 0 %}
+  <section class="legal-adviser-results">
+    <p class="results-summary">
+      {% if data.origin %}
+        {% trans page_count=data.results|length, result_count=data.count %}
+          Showing {{ page_count }} results around
+        {% pluralize %}
+          {{ result_count }} results in total. Showing {{ page_count }} results around
+        {% endtrans %}
+        <span class="results-location">{{ data.origin.postcode }}</span>
+      {% else %}
+        {% trans result_count=data.count, page_count=data.results|length, org_name=form.organisation_name.value() %}
+          Showing {{ page_count }} result for <strong>{{ org_name }}</strong>
+        {% pluralize %}
+          {{ result_count }} results in total. Showing {{ page_count }} results for <strong>{{ org_name }}</strong>
+        {% endtrans %}
+      {% endif %}
+    </p>
+
+    <div class="search-results-container">
+      <div id="resultsMap" class="map"
+       {% if data.origin %}data-lat="{{ data.origin.point.coordinates.1 }}" data-lon="{{ data.origin.point.coordinates.0 }}"{% endif %}
+      ></div>
+
+      <div class="search-results">
+        <div class="search-results-list">
+          <ul class="org-list">
+            {% for item in data.results %}
+              <li class="org-list-item vcard" data-lat="{{ item.location.point.coordinates.1 }}" data-lon="{{ item.location.point.coordinates.0 }}" data-id="{{ loop.index }}">
+                <header class="org-summary">
+                  <h3 class="org-title">
+                    <span class="marker">{{ loop.index}}</span>
+                    <span class="fn org">{{ item.organisation.name }}</span>
+                  </h3>
+                  {% if item.distance %}
+                    <div class="distance">
+                      <span class="u-vh">{{ _('Distance') }}</span>
+                      {% trans miles=item.distance|round(2) %}{{ miles }} miles{% endtrans %}
+                    </div>
+                  {% endif %}
+                </header>
+                <div class="org-details">
+                  {% if item.location.type != 'Office' %}
+                    <div class="org-type">{{ item.location.type|replace('Office', '') }}</div>
+                  {% endif %}
+                  <p class="org-address">
+                    <span class="sr-only">{{ _('Address') }}:</span>
+                    <span class="adr">
+                      <span class="street-address">{{ item.location.address }}</span>
+                      <span class="postal-code">{{ item.location.postcode }}</span>
+                      <span class="city">{{ item.location.city }}</span>
+                    </span>
+                  </p>
+                  <p>
+                    <span>{{ _('Helpline') }}:</span>
+                    <span class="tel">{{ item.telephone }}</span>
+                  </p>
+                  {% if item.organisation.website %}
+                    <p>
+                      <span>{{ _('Website') }}:</span>
+                      <a href="{{ item.organisation.website|human_to_url }}" class="url">
+                        {{ item.organisation.website|url_to_human }}
+                      </a>
+                    </p>
+                  {% endif %}
+                  {% if item.categories|length %}
+                    <div class="org-categories" role="list">
+                      <div class="sr-only">{{ _('Categories of law') }}</div>
+                      {% for cat in item.categories %}
+                        {% if cat %}
+                          <span class="org-category" role="listitem">{{ cat }}</span>
+                          {%- if not loop.last %},{% endif %}
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <nav class="search-results-pagination">
+          <ul>
+            {% if data.previous %}
+              {% set prev_page = data.previous|to_fala_page_url(current_url) %}
+              <li class="results-nav results-nav-prev">
+                <a href="{{ prev_page }}"
+                   data-page="{{ prev_page|query_to_dict('page')|first }}">
+                  {{ _('Previous') }}
+                </a>
+              </li>
+            {% endif %}
+            {% if data.next %}
+              {% set next_page = data.next|to_fala_page_url(current_url) %}
+              <li class="results-nav results-nav-next">
+                <a href="{{ next_page }}"
+                   data-page="{{ next_page|query_to_dict('page')|first }}">
+                  {{ _('Next') }}
+                </a>
+              </li>
+            {% endif %}
+          </ul>
+        </nav>
+
+      </div>
+    </div>
+  </section>
+{% elif 'count' in data and data.count == 0 %}
+  {% from "macros/element.html" import alert %}
+  {% call alert(title=_('No results')) %}
+    {{ _('There are no results matching your search criteria.') }}
+  {% endcall %}
+{% endif %}

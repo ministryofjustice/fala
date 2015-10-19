@@ -13,6 +13,7 @@ sys.path.insert(0, root('apps'))
 
 DEBUG = os.environ.get('DEBUG', False)
 DEBUG = DEBUG == 'True' or DEBUG is True
+DEBUG_STATIC = False
 
 ADMINS = ()
 
@@ -23,8 +24,6 @@ DATABASES = {}
 ALLOWED_HOSTS = [
     '.dsd.io',
 ]
-
-TIME_ZONE = 'Europe/London'
 
 LANGUAGE_CODE = 'en-gb'
 
@@ -46,13 +45,9 @@ STATIC_URL = '/static/'
 
 project_root = abspath(root('..'))
 
-bower_dir = json.load(open(join(project_root, '.bowerrc')))['directory']
-
 # Additional locations of static files
 STATICFILES_DIRS = (
     root('assets'),
-    abspath(root(project_root, bower_dir, 'govuk-template', 'assets')),
-    abspath(root(project_root, bower_dir, 'mojular', 'assets'))
 )
 
 # List of finder classes that know how to find static files in
@@ -67,20 +62,21 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'SET_THIS_IN_ENV')
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'BACKEND': 'django_jinja.backend.Jinja2',
         'DIRS': [
             root('templates'),
-            abspath(root(project_root, bower_dir, 'mojular', 'templates')),
+            abspath(root(project_root, 'node_modules', 'mojular-templates')),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
+            'match_extension': '.html',
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
+                # 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'adviser.context_processors.ga_id',
             ],
-            'debug': DEBUG,
         },
     },
 ]
@@ -89,8 +85,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    # 'django.contrib.auth.middleware.AuthenticationMiddleware',
+    # 'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -180,6 +176,16 @@ if 'SENTRY_DSN' in os.environ:
     ) + MIDDLEWARE_CLASSES
 
 LAALAA_API_HOST = os.environ.get('LAALAA_API_HOST', 'http://0.0.0.0:8001')
+
+# Zendesk settings for feedback
+ZENDESK_API_USERNAME = os.environ.get('ZENDESK_API_USERNAME')
+ZENDESK_API_TOKEN = os.environ.get('ZENDESK_API_TOKEN')
+ZENDESK_GROUP_ID = os.environ.get('ZENDESK_GROUP_ID', 26974037) # Find a Legal Adviser (FALA)
+ZENDESK_API_ENDPOINT = 'https://ministryofjustice.zendesk.com/api/v2/'
+ZENDESK_REQUESTER_ID = os.environ.get('ZENDESK_REQUESTER_ID', 649762516)
+# defaults to 'anonymous feedback <noreply@ministryofjustice.zendesk.com>'
+
+GA_ID = os.environ.get('GA_ID')
 
 # .local.py overrides all the common settings.
 try:

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block page_title %}Feedback - {{ title }}{% endblock %}
+
+{% block content %}
+  <header class="page-header">
+    <h1>Your feedback</h1>
+  </header>
+
+  {% if error %}
+    {% call Element.alert('error') %}
+      {{ error.message }}
+    {% endcall %}
+  {% endif %}
+
+  <form action="" method="POST">
+    {% csrf_token %}
+    {% if request.META.HTTP_REFERER %}
+      <input type="hidden" name="referrer" value="{{ request.META.HTTP_REFERER }}">
+    {% endif %}
+
+    {{ Form.group(form.feedback, 'form-group') }}
+
+    <p class="form-action">
+      <button type="submit" class="button">Submit</button>
+    </p>
+  </form>
+{% endblock %}
+
+{% block after_main_js %}
+  {{ super() }}
+  {% if GA_ID and error %}
+    <script>
+      ga('send', 'event', 'error', 'feedback-error');
+    </script>
+  {% endif %}
+{% endblock %}

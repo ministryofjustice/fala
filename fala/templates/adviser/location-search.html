@@ -1,0 +1,52 @@
+{% if request.is_ajax() %}
+  {% extends 'ajax-base.html' %}
+{% else %}
+  {% extends 'base.html' %}
+{% endif %}
+
+{% block search_form %}
+  <div class="legal-adviser-search">
+    <ul class="tabs" role="tablist">
+      <li class="tab active"><a href="{{ url('location') }}">Location</a></li>
+      <li class="tab"><a href="{{ url('organisation') }}">Organisation</a></li>
+    </ul>
+
+    <form action="">
+      {% call Form.group(form.postcode, 'form-group-plain') %}
+        <button type="submit" class="button">Search</button>
+      {% endcall %}
+
+      <div class="form-group filters">
+        <div class="form-group-label">
+          <label>{{ _('Filter by') }}</label>
+        </div>
+        <div class="grid-row">
+          <div class="column-half">
+            <fieldset class="form-group fieldset-group">
+              <legend class="form-group-label">
+                {{ form.organisation_types.label }}
+              </legend>
+              <ul class="form-option-list">
+                {% for org in form.organisation_types %}
+                  <li>{{ org }}</li>
+                {% endfor %}
+              </ul>
+            </fieldset>
+          </div>
+          <div class="column-half">
+            <fieldset class="form-group fieldset-group">
+              <legend class="form-group-label">
+                {{ form.categories.label }}
+              </legend>
+              <ul class="form-option-list">
+                {% for org in form.categories %}
+                  <li>{{ org }}</li>
+                {% endfor %}
+              </ul>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+{% endblock %}
