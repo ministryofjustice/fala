@@ -85,7 +85,7 @@ Mojular.Modules.FindLegalAdviser = {
         history.pushState(null, null, url);
       }
 
-      $(this).find('button[type="submit"]')
+      $(this).find('#searchButton')
         .text(window.LABELS.loading)
         .attr('disabled', true);
     });
