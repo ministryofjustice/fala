@@ -80,6 +80,7 @@
           </ul>
         </div>
 
+        {% if data.previous or data.next %}
           <nav class="search-results-pagination">
             <ul>
               {% if data.previous %}
@@ -102,6 +103,7 @@
               {% endif %}
             </ul>
           </nav>
+        {% endif %}
       </div>
     </div>
   </section>
