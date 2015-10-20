@@ -8,6 +8,9 @@
           {{ result_count }} results in total. Showing {{ page_count }} results around
         {% endtrans %}
         <span class="results-location">{{ data.origin.postcode }}</span>
+        {% if  form.name.value() %}
+          {{ _('matching') }} <strong>{{ form.name.value() }}</strong>
+        {% endif %}
       {% else %}
         {% trans result_count=data.count, page_count=data.results|length, org_name=form.name.value() %}
           Showing {{ page_count }} result for <strong>{{ org_name }}</strong>
