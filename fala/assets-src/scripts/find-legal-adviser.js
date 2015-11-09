@@ -3,7 +3,7 @@ var debounce = require('lodash/function/debounce');
 var find = require('lodash/collection/find');
 var reduce = require('lodash/collection/reduce');
 
-Mojular.Modules.FindLegalAdviser = {
+exports.FindLegalAdviser = {
   el: '#resultsMap',
   markers: [],
   searchLocationMarker: null,

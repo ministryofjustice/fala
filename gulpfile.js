@@ -10,9 +10,10 @@ try {
   var browserSync = require('browser-sync').create();
 } catch(e) {}
 
-var importPaths = [];
-importPaths.push(require('mojular-govuk-elements').getPaths('sass'));
-importPaths.push(require('mojular-moj-elements').getPaths('sass'));
+var loadPaths = require('mojular/sass-paths')([
+  require('mojular-govuk-elements/package.json'),
+  require('mojular-moj-elements/package.json')
+]);
 
 var paths = {
   src: 'fala/assets-src/',
@@ -20,7 +21,7 @@ var paths = {
   styles: 'fala/assets-src/sass/**/*.scss',
   scripts: 'fala/assets-src/scripts/**/*.js',
   images: [
-    'node_modules/mojular-govuk-elements/assets/images/*',
+    'node_modules/mojular-govuk-elements/images/*',
     'fala/assets-src/images/**/*'
   ]
 };
@@ -29,7 +30,7 @@ gulp.task('sass', function() {
   var result = gulp.src(paths.styles)
     .pipe(sourcemaps.init())
     .pipe(sass({
-      includePaths: [].concat.apply([], importPaths),
+      includePaths: loadPaths,
       outputStyle: argv.production ? 'compressed' : 'expanded'
     }).on('error', sass.logError))
     .pipe(sourcemaps.write('./'))
