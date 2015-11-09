@@ -23,6 +23,7 @@ RUN apt-get update && \
 
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 10
 
+RUN npm update -g
 RUN npm install -g gulp
 
 # Add requirements to docker
