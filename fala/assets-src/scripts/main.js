@@ -1,9 +1,9 @@
-require('mojular');
+var Mojular = require('mojular');
 
-require('mojular-moj-elements/assets/scripts/modules/skip-to-content');
-require('mojular-moj-elements/assets/scripts/modules/devs');
-require('mojular-moj-elements/assets/scripts/modules/cookie-message');
-
-require('./find-legal-adviser');
-
-Mojular.init();
+Mojular
+  .use([
+    require('mojular-govuk-elements'),
+    require('mojular-moj-elements/modules/devs'),
+    require('./find-legal-adviser')
+  ])
+  .init();
