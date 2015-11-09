@@ -12,9 +12,9 @@ RUN locale-gen "en_US.UTF-8"
 ENV LC_CTYPE=en_US.UTF-8
 
 RUN apt-get update && \
-    apt-get install -y software-properties-common python-software-properties
+    apt-get install -y software-properties-common python-software-properties curl
 
-RUN add-apt-repository -y ppa:chris-lea/node.js
+RUN curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash
 
 RUN apt-get update && \
     apt-get install -y \
