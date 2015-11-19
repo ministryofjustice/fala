@@ -34,7 +34,7 @@ class AdviserSearchForm(forms.Form):
     )
 
     postcode = forms.CharField(
-        label=_('Enter postcode'),
+        label=_('Enter postcode, town or city'),
         max_length=10,
         help_text=_('Enter a postcode, town or city'),
         required=False,
