@@ -12,9 +12,9 @@ RUN locale-gen "en_US.UTF-8"
 ENV LC_CTYPE=en_US.UTF-8
 
 RUN apt-get update && \
-    apt-get install -y software-properties-common python-software-properties
+    apt-get install -y software-properties-common python-software-properties curl
 
-RUN add-apt-repository -y ppa:chris-lea/node.js
+RUN curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash
 
 RUN apt-get update && \
     apt-get install -y \
@@ -23,6 +23,7 @@ RUN apt-get update && \
 
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 10
 
+RUN npm update -g
 RUN npm install -g gulp
 
 # Add requirements to docker

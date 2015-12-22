@@ -3,7 +3,7 @@ var debounce = require('lodash/function/debounce');
 var find = require('lodash/collection/find');
 var reduce = require('lodash/collection/reduce');
 
-Mojular.Modules.FindLegalAdviser = {
+exports.FindLegalAdviser = {
   el: '#resultsMap',
   markers: [],
   searchLocationMarker: null,
@@ -16,7 +16,7 @@ Mojular.Modules.FindLegalAdviser = {
     this._handleMQTest();
 
     if(!this.$resultsMap.length) {
-      $('.legal-adviser-search input[type="text"]').focus();
+      $('#id_postcode').focus();
       return;
     }
 
@@ -39,10 +39,12 @@ Mojular.Modules.FindLegalAdviser = {
 
   bindEvents: function() {
     var self = this;
+    // Replace result headings with hyperlinks for accessibility
     this.$organisationListItems.find('.org-summary').each(function() {
       $(this).replaceWith('<a class="' + this.className + '" aria-expanded="false" href="#">' + $(this).html() + '</a>');
     });
 
+    // Make result items expandable
     this.$organisationListItems.on('click', '.org-summary', function(evt) {
       evt.preventDefault();
       self.$organisationListItems.find('.org-summary').attr('aria-expanded', false);
@@ -50,6 +52,7 @@ Mojular.Modules.FindLegalAdviser = {
       self._handleItemHighlight(evt, $(this).closest('li'));
     });
 
+    // Handle pagination
     this.$resultsPagination.on('click', 'a', function(evt) {
       evt.preventDefault();
 
@@ -64,33 +67,37 @@ Mojular.Modules.FindLegalAdviser = {
       }
     });
 
+    // Handle form submission
     this.$findLegalAdviserForm.submit(function(evt) {
       evt.preventDefault();
 
       var url = document.location.pathname + '?' + $(this).serialize();
       self._fetchPage(url, true);
 
+      // Update browser history
       if(window.history && history.pushState) {
         history.pushState(null, null, url);
       }
 
-      $(this).find('button[type="submit"]')
+      $(this).find('#searchButton')
         .text(window.LABELS.loading)
         .attr('disabled', true);
     });
 
+    // Handle URLs
     window.onpopstate = function() {
       self._fetchPage(document.location.href);
     };
 
-    this.eventsBound = true;
-
+    // Trigger search when checkboxes are changed
     $('.legal-adviser-search [type="checkbox"], select').on('change', function() {
       if (!self.$resultsMap.length) {
         return;
       }
       self.$findLegalAdviserForm.trigger('submit');
-    })
+    });
+
+    this.eventsBound = true;
   },
 
   _unbindEvents: function() {

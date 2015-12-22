@@ -3,14 +3,15 @@ from django.conf import settings
 from django.core.urlresolvers import resolve, reverse
 from django.views.generic import TemplateView
 
-from .forms import AdviserSearchByLocationForm, AdviserSearchByOrganisationForm
+from .forms import AdviserSearchForm
 
 
 class AdviserView(TemplateView):
+    template_name = 'adviser/search.html'
 
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
-        form = self.form_class(data=request.GET or None)
+        form = AdviserSearchForm(data=request.GET or None)
         view_name = resolve(request.path_info).url_name
         current_url = reverse(view_name)
 
@@ -23,13 +24,3 @@ class AdviserView(TemplateView):
         })
 
         return self.render_to_response(context)
-
-
-class LocationSearchView(AdviserView):
-    template_name = 'adviser/location-search.html'
-    form_class = AdviserSearchByLocationForm
-
-
-class OrganisationSearchView(AdviserView):
-    template_name = 'adviser/organisation-search.html'
-    form_class = AdviserSearchByOrganisationForm

@@ -35,7 +35,7 @@
 {% block page_title %}{{ title }}{% endblock %}
 
 {% block proposition %}
-  <a href="{{ url('root') }}" class="proposition-name">{{ title }}</a>
+  <a href="{{ url('adviser') }}" class="proposition-name">{{ title }}</a>
 {% endblock %}
 
 {% block global_subheader %}
@@ -86,7 +86,7 @@
       ga('send', 'pageview');
     </script>
   {% endif %}
-  <script src="//maps.googleapis.com/maps/api/js?sensor=true"></script>
+  <script src="//maps.googleapis.com/maps/api/js"></script>
   <script>
     window.LABELS = {
       loading: "{{ _('Loading…') }}"
