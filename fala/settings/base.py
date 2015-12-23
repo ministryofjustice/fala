@@ -22,7 +22,8 @@ MANAGERS = ADMINS
 DATABASES = {}
 
 ALLOWED_HOSTS = [
-    '.dsd.io',
+    '.fala.dsd.io',
+    '.find-legal-advice.justice.gov.uk',
 ]
 
 LANGUAGE_CODE = 'en-gb'
