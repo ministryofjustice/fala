@@ -3,7 +3,7 @@
 {% import "macros/forms.html" as Form %}
 {% import "macros/element.html" as Element %}
 
-{% set title = _('Find a legal adviser or family mediator') %}
+{% set title = _('Find a legal aid adviser or family mediator') %}
 
 {% block head %}
   {{ super() }}
@@ -52,7 +52,7 @@
 {% block content %}
   <header class="page-header">
     <h1>
-      Find a legal adviser <span>or family mediator</span>
+      Find a legal aid adviser <span>or family mediator</span>
     </h1>
     <p class="lede">Search for a legal adviser or family mediator with a legal aid contract in England and Wales.</p>
   </header>
@@ -69,6 +69,7 @@
         <a href="https://www.gov.uk/civil-legal-advice" rel="external" target="_blank">Civil Legal Advice.</a>
       </p>
     {% endif %}
+    <p>If you are a provider and your details are incorrect, please contact your contract manager.</p>
   </div>
 {% endblock %}
 

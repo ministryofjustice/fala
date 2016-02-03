@@ -22,7 +22,7 @@ class ZendeskClient(object):
         custom_fields.append({'id': ZENDESK_CUSTOM_FIELD_USERAGENT, 'value': feedback_data['user_agent']})
         custom_fields.append({'id': ZENDESK_CUSTOM_FIELD_REFERRER, 'value': feedback_data['referrer']})
 
-        subject = 'Find a Legal Adviser Feedback (FALA)'
+        subject = 'Find a Legal aid Adviser Feedback (FALA)'
         if settings.DEBUG:
             subject = '[TEST] - ' + subject
 
