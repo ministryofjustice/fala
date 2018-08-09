@@ -24,13 +24,23 @@ Install Python depencenies:
 pip install -r requirements/base.txt
 ```
 
+Create `fala/settings/local.py`:
+```
+cp fala/settings/local.example.py fala/settings/local.py
+```
+
 Run Django server:
 
 ```
 python3 ./manage.py runserver
 ```
 
-Run Gulp tasks (default task is `build`):
+Build assets:
+```
+gulp build
+```
+
+Or run Gulp tasks (default task is `build`):
 
 ```
 gulp serve
