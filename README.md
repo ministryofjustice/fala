@@ -8,8 +8,9 @@ virtualenv -p python3 venv
 source venv/bin/activate
 ```
 
-
 ## Development
+
+:memo: The application assumes Node.js 8 to be installed.
 
 Install NPM dependencies (Gulp, Mojular etc.):
 
@@ -26,7 +27,7 @@ pip install -r requirements/base.txt
 Run Django server:
 
 ```
-./manage.py runserver
+python3 ./manage.py runserver
 ```
 
 Run Gulp tasks (default task is `build`):
