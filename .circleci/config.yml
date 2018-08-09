@@ -1,0 +1,72 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: docker:17.03-git
+    environment:
+      DOCKER_REGISTRY: "registry.service.dsd.io"
+      DOCKER_IMAGE: "fala"
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 17.03.0-ce
+          docker_layer_caching: true
+      - run:
+          name: Login to container registry
+          command: |
+            docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD --email "${DOCKER_USERNAME}@digital.justice.gov.uk" $DOCKER_REGISTRY
+      - run:
+          name: Build Docker image
+          command: |
+            docker build --tag $DOCKER_REGISTRY/$DOCKER_IMAGE:$CIRCLE_SHA1 .
+            docker tag $DOCKER_REGISTRY/$DOCKER_IMAGE:$CIRCLE_SHA1 $DOCKER_REGISTRY/$DOCKER_IMAGE:$CIRCLE_BRANCH.$(git rev-parse --short=7 $CIRCLE_SHA1)
+            docker tag $DOCKER_REGISTRY/$DOCKER_IMAGE:$CIRCLE_SHA1 $DOCKER_REGISTRY/$DOCKER_IMAGE:$CIRCLE_BRANCH.latest
+      - run:
+          name: Validate Python version
+          command: |
+            docker run --rm --tty --interactive $DOCKER_REGISTRY/$DOCKER_IMAGE:$CIRCLE_SHA1 python --version | grep "3.4"
+      - run:
+          name: Push Docker image
+          command: |
+            docker push $DOCKER_REGISTRY/$DOCKER_IMAGE:$CIRCLE_SHA1
+            docker push $DOCKER_REGISTRY/$DOCKER_IMAGE:$CIRCLE_BRANCH.$(git rev-parse --short=7 $CIRCLE_SHA1)
+            docker push $DOCKER_REGISTRY/$DOCKER_IMAGE:$CIRCLE_BRANCH.latest
+
+  test:
+    docker:
+      - image: circleci/python:3.4
+    steps:
+      - checkout
+      - run:
+          name: Setup Python environment
+          command: |
+            pip install virtualenv
+            virtualenv env
+
+      - restore_cache:
+          keys:
+            - pip-v1-{{ checksum "requirements/base.txt" }}
+      - run:
+          name: Install dependencies
+          command: |
+            source env/bin/activate
+            pip install --requirement requirements/base.txt
+      - save_cache:
+          key: pip-v1-{{ checksum "requirements/base.txt" }}
+          paths:
+            - "~/.cache/pip"
+
+      - run:
+          name: Run unit tests
+          command: |
+            source env/bin/activate
+            python manage.py test
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - test
+      - build:
+          requires:
+            - test
