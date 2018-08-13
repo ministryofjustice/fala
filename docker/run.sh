@@ -2,4 +2,4 @@
 set -e
 
 # Run server
-/usr/local/bin/uwsgi --ini /home/app/conf/uwsgi.ini
+$HOME/.local/bin/uwsgi --ini $APP_HOME/conf/uwsgi.ini

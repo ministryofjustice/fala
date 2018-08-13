@@ -18,11 +18,12 @@ def human_to_url(value):
 
 @library.filter
 @contextfilter
-def query_to_dict(context, value, prop=None):
+def query_to_dict(_context, value, prop=None):
     result = parse_qs(urlparse(value).query)
-    if prop:
-        result = result[prop]
-    return result
+    if not prop:
+        return result
+
+    return result.get(prop, [])
 
 
 @library.filter

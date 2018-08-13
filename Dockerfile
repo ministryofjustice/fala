@@ -1,48 +1,52 @@
-#
-# FALA Dockerfile all environments
-#
-FROM ubuntu:trusty-20150814
+FROM ubuntu:trusty-20180712
 
-MAINTAINER Josh Rowe <josh.rowe@digital.justice.gov.uk>
-
-# Runtime User
-RUN useradd -m -d /home/app app
+LABEL summary="Find A Legal Adviser" \
+      name="fala" \
+      version="1.0" \
+      maintainer="Legal Aid Agency, Get Access <laa-get-access@digital.justice.gov.uk>"
 
 RUN locale-gen "en_US.UTF-8"
 ENV LC_CTYPE=en_US.UTF-8
 
-RUN apt-get update && \
-    apt-get install -y software-properties-common python-software-properties curl
-
-RUN curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash
-
+# Install Node.js, npm, gulp
 RUN apt-get update && \
     apt-get install -y \
-        build-essential git python3-all python3-all-dev python3-setuptools \
-        curl libpq-dev ntp ruby ruby-dev nodejs python3-pip python-pip
+      build-essential \
+      curl \
+      git \
+      python-minimal && \
+    curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash && \
+    apt-get install -y nodejs && \
+    apt-get clean && \
+    npm install --global npm@5.6.0 && \
+    npm install --global gulp
 
-RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 10
+# Install Python3
+RUN apt-get update && \
+    apt-get install -y \
+      libpcre3 libpcre3-dev \
+      python3-all python3-all-dev \
+      python3-pip \
+      && \
+    apt-get clean && \
+    update-alternatives --install /usr/bin/python python /usr/bin/python3 10
 
-RUN npm update -g
-RUN npm install -g gulp
-
-# Add requirements to docker
-ADD ./requirements/base.txt /requirements.txt
-RUN pip3 install -r /requirements.txt
-
-# Add project directory to docker
-ADD . /home/app
-RUN rm -rf /home/app/.git
-RUN  chown -R app: /home/app
-
-RUN cd /home/app && npm install --unsafe-perm && gulp --production
-
-RUN cd /home/app && ./manage.py collectstatic --noinput
-
-# Set correct environment variables.
 ENV HOME /home/app
-WORKDIR /home/app
 ENV APP_HOME /home/app
-USER app
+WORKDIR /home/app
+
+# Install Python dependencies
+COPY ./requirements/base.txt ./requirements.txt
+RUN pip3 install --user --requirement ./requirements.txt
+
+# Install npm dependencies
+COPY package.json package-lock.json ./
+RUN npm install
+
+COPY . .
+
+RUN gulp --production && \
+    ./manage.py collectstatic --noinput
+
 EXPOSE 8000
-ENTRYPOINT ["/home/app/docker/run.sh"]
+CMD ["/home/app/docker/run.sh"]
