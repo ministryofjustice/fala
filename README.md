@@ -8,8 +8,9 @@ virtualenv -p python3 venv
 source venv/bin/activate
 ```
 
-
 ## Development
+
+:memo: The application assumes Node.js 8 to be installed.
 
 Install NPM dependencies (Gulp, Mojular etc.):
 
@@ -23,13 +24,23 @@ Install Python depencenies:
 pip install -r requirements/base.txt
 ```
 
+Create `fala/settings/local.py`:
+```
+cp fala/settings/local.example.py fala/settings/local.py
+```
+
 Run Django server:
 
 ```
-./manage.py runserver
+python3 ./manage.py runserver
 ```
 
-Run Gulp tasks (default task is `build`):
+Build assets:
+```
+gulp build
+```
+
+Or run Gulp tasks (default task is `build`):
 
 ```
 gulp serve
