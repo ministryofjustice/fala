@@ -22,8 +22,9 @@ MANAGERS = ADMINS
 DATABASES = {}
 
 ALLOWED_HOSTS = [
+    '.laa-fala-staging.apps.cloud-platform-live-0.k8s.integration.dsd.io',
     '.fala.dsd.io',
-    '.find-legal-advice.justice.gov.uk',
+    '.find-legal-advice.justice.gov.uk'
 ]
 
 LANGUAGE_CODE = 'en-gb'
