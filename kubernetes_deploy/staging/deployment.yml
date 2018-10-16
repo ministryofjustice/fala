@@ -21,3 +21,5 @@ spec:
         env:
         - name: LAALAA_API_HOST
           value: https://staging.laalaa.dsd.io
+        - name: DEBUG_STATIC
+          value: "True"

@@ -13,7 +13,7 @@ sys.path.insert(0, root('apps'))
 
 DEBUG = os.environ.get('DEBUG', False)
 DEBUG = DEBUG == 'True' or DEBUG is True
-DEBUG_STATIC = False
+DEBUG_STATIC = os.environ.get('DEBUG_STATIC', False)
 
 ADMINS = ()
 
