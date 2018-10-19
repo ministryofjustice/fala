@@ -9,18 +9,17 @@ RUN locale-gen "en_US.UTF-8"
 ENV LC_CTYPE=en_US.UTF-8
 
 # Install python and build dependencies
-RUN apt-get update && \
-    apt-get -y --force-yes install \
-        build-essential \
-        curl \
-        git \
-        libpcre3 \
-        libpcre3-dev \
-        python-minimal \
-        python3-all \
-        python3-all-dev \
-        python3-pip && \
-        update-alternatives --install /usr/bin/python python /usr/bin/python3 10
+RUN apt-get update && apt-get -y --force-yes install \
+      build-essential \
+      curl \
+      git \
+      libpcre3 \
+      libpcre3-dev \
+      python-minimal \
+      python3-all \
+      python3-all-dev \
+      python3-pip && \
+      update-alternatives --install /usr/bin/python python /usr/bin/python3 10
 
 # Install NodeJS
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \

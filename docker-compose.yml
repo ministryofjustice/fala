@@ -1,0 +1,22 @@
+version: "3.7"
+services:
+
+  nginx:
+    build:
+      context: ./
+      dockerfile: Dockerfile.nginx
+    depends_on:
+      - falaapp
+    ports:
+      - "8002:80"
+
+  falaapp:
+    container_name: fala
+    build: .
+    environment:
+      - LAALAA_API_HOST=https://staging.laalaa.dsd.io
+    ports:
+      - target: 8000
+        published: 8000
+        protocol: tcp
+        mode: host
