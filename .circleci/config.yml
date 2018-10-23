@@ -11,14 +11,13 @@ references:
           APPLICATION_DEPLOY_NAME: laa-fala
 
 jobs:
-  build:
+  build_web:
     docker:
       - image: docker:17.03-git
     environment:
       DSD_DOCKER_REGISTRY: "registry.service.dsd.io"
       DSD_DOCKER_IMAGE: "fala"
-      ECR_DOCKER_REGISTRY: "926803513772.dkr.ecr.eu-west-1.amazonaws.com"
-      ECR_DOCKER_IMAGE: "laa-get-access/laa-fala-webapp"
+      ECR_DOCKER_REPO: "926803513772.dkr.ecr.eu-west-1.amazonaws.com/laa-get-access/laa-fala-webapp"
     steps:
       - checkout
       - setup_remote_docker:
@@ -50,13 +49,10 @@ jobs:
           name: Tag and push Docker images
           command: |
             .circleci/tag_and_push_docker_image application:$CIRCLE_SHA1 $DSD_DOCKER_REGISTRY/$DSD_DOCKER_IMAGE
-            .circleci/tag_and_push_docker_image application:$CIRCLE_SHA1 $ECR_DOCKER_REGISTRY/$ECR_DOCKER_IMAGE
+            .circleci/tag_and_push_docker_image application:$CIRCLE_SHA1 $ECR_DOCKER_REPO
   build_nginx:
     docker:
       - image: docker:18.05.0-git
-    environment:
-      ECR_DOCKER_REGISTRY: "926803513772.dkr.ecr.eu-west-1.amazonaws.com"
-      ECR_DOCKER_IMAGE: "laa-get-access/laa-fala-nginx"
     steps:
       - checkout
       - setup_remote_docker:
@@ -79,9 +75,11 @@ jobs:
               .
       - run:
           name: Tag and push Docker images
-          command: .circleci/tag_and_push_docker_image nginx:$CIRCLE_SHA1 $ECR_DOCKER_REGISTRY/$ECR_DOCKER_IMAGE
+          command: .circleci/tag_and_push_docker_image \
+              nginx:$CIRCLE_SHA1 \
+              926803513772.dkr.ecr.eu-west-1.amazonaws.com/laa-get-access/laa-fala-nginx
 
-  test:
+  test-web:
     docker:
       - image: circleci/python:3.4
     steps:
@@ -123,8 +121,7 @@ jobs:
       - deploy:
           name: Deploy fala to staging
           command: |
-            .circleci/deploy_to_kubernetes staging $ECR_DOCKER_REGISTRY/$ECR_DOCKER_IMAGE-nginx nginx
-            .circleci/deploy_to_kubernetes staging $ECR_DOCKER_REGISTRY/$ECR_DOCKER_IMAGE-webapp webapp
+            .circleci/deploy_to_kubernetes staging
       - deploy:
           name: Notify Slack channel
           command: .circleci/notify_slack_channel staging
@@ -133,15 +130,17 @@ workflows:
   version: 2
   build_test_and_deploy:
     jobs:
-      - build_nginx
-      - test
-      - build:
+      - test-web
+      - build_web:
           requires:
-            - test
+            - test-web
+      - build_nginx:
+          requires:
+            - test-web
       - staging_deploy_approval:
           type: approval
           requires:
-            - build
+            - build_web
             - build_nginx
       - staging_deploy:
           requires:
