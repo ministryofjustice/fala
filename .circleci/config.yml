@@ -51,6 +51,35 @@ jobs:
           command: |
             .circleci/tag_and_push_docker_image application:$CIRCLE_SHA1 $DSD_DOCKER_REGISTRY/$DSD_DOCKER_IMAGE
             .circleci/tag_and_push_docker_image application:$CIRCLE_SHA1 $ECR_DOCKER_REGISTRY/$ECR_DOCKER_IMAGE
+  build_nginx:
+    docker:
+      - image: docker:18.05.0-git
+    environment:
+      ECR_DOCKER_REGISTRY: "926803513772.dkr.ecr.eu-west-1.amazonaws.com"
+      ECR_DOCKER_IMAGE: "laa-get-access/laa-fala-nginx"
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 18.05.0-ce
+          docker_layer_caching: true
+      - run:
+          name: Login to the ECR Docker registry
+          command: |
+            apk add --no-cache --no-progress py2-pip
+            pip install awscli
+            ecr_login="$(AWS_ACCESS_KEY_ID=$NGINX_AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$NGINX_AWS_SECRET_ACCESS_KEY aws ecr get-login --region eu-west-1 --no-include-email)"
+            ${ecr_login}
+      - run:
+          name: Build Docker image
+          command: |
+            docker build --file Dockerfile.nginx --tag nginx:$CIRCLE_SHA1 \
+              --label build.git.sha=$CIRCLE_SHA1 \
+              --label build.git.branch=$CIRCLE_BRANCH \
+              --label build.url=$CIRCLE_BUILD_URL \
+              .
+      - run:
+          name: Tag and push Docker images
+          command: .circleci/tag_and_push_docker_image nginx:$CIRCLE_SHA1 $ECR_DOCKER_REGISTRY/$ECR_DOCKER_IMAGE
 
   test:
     docker:
@@ -104,6 +133,7 @@ workflows:
   version: 2
   build_test_and_deploy:
     jobs:
+      - build_nginx
       - test
       - build:
           requires:
@@ -112,6 +142,7 @@ workflows:
           type: approval
           requires:
             - build
+            - build_nginx
       - staging_deploy:
           requires:
             - staging_deploy_approval
