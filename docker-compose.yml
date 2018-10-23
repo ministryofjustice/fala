@@ -6,11 +6,11 @@ services:
       context: ./
       dockerfile: Dockerfile.nginx
     depends_on:
-      - falaapp
+      - webapp
     ports:
       - "8002:80"
 
-  falaapp:
+  webapp:
     container_name: fala
     build: .
     environment:

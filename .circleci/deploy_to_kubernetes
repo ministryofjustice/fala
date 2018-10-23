@@ -3,6 +3,8 @@
 ROOT=$(dirname "$0")
 NAMESPACE="$1"
 NAMESPACE_DIR="$ROOT/../kubernetes_deploy/$NAMESPACE"
+WEBAPP_REPO="$2"
+NGINX_REPO="$3"
 
 if ! [ $NAMESPACE ] ; then
 
@@ -17,11 +19,14 @@ if ! [ -d $NAMESPACE_DIR ] ; then
 fi
 
 source "$ROOT/define_build_environment_variables"
+ECR_WEBAPP_DEPLOY_IMAGE="$WEBAPP_REPO:$safe_git_branch.$short_sha"
+ECR_NGINX_DEPLOY_IMAGE="$NGINX_REPO:$safe_git_branch.$short_sha"
 
-echo "Deploying $ECR_DEPLOY_IMAGE to $NAMESPACE..."
+echo "Deploying $ECR_WEBAPP_DEPLOY_IMAGE to $NAMESPACE..."
+echo "Deploying $ECR_NGINX_DEPLOY_IMAGE to $NAMESPACE..."
 
 kubectl set image --filename="$NAMESPACE_DIR/deployment.yml" --local --output=yaml \
-  app="$ECR_DEPLOY_IMAGE" | \
+  webapp="$ECR_WEBAPP_DEPLOY_IMAGE" nginx="$ECR_NGINX_DEPLOY_IMAGE" | \
   kubectl apply \
     --filename=/dev/stdin \
     --filename="$NAMESPACE_DIR/service.yml" \

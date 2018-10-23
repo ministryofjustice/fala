@@ -6,7 +6,7 @@ references:
       - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
         environment:
           GITHUB_TEAM_NAME_SLUG: laa-get-access
-          APPLICATION_DEPLOY_NAME: laa-fala
+          APPLICATION_DEPLOY_NAME: laa-fala-webapp
 
 jobs:
   build_web:
@@ -118,7 +118,7 @@ jobs:
       - deploy:
           name: Deploy fala to staging
           command: |
-            .circleci/deploy_to_kubernetes staging
+            .circleci/deploy_to_kubernetes staging ${ECR_DOCKER_REPO_BASE}-webapp ${ECR_DOCKER_REPO_BASE}-nginx 
       - deploy:
           name: Notify Slack channel
           command: .circleci/notify_slack_channel staging
