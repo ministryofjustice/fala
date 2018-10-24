@@ -35,12 +35,9 @@ RUN pip3 install --user --requirement ./requirements.txt
 
 # Install npm dependencies
 COPY package.json package-lock.json ./
-RUN npm install
+RUN npm install --production
 
 COPY . .
-
-RUN ./node_modules/.bin/gulp build --production && \
-    ./manage.py collectstatic --noinput
 
 EXPOSE 8000
 CMD ["/home/app/docker/run.sh"]
