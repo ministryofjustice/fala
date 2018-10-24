@@ -15,8 +15,6 @@ services:
     build: .
     environment:
       - LAALAA_API_HOST=https://staging.laalaa.dsd.io
+      - DJANGO_SETTINGS_MODULE=fala.settings.local
     ports:
-      - target: 8000
-        published: 8000
-        protocol: tcp
-        mode: host
+      - "8000:8000"
