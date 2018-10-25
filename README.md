@@ -50,6 +50,31 @@ Serve task will create a proxy server on port 3000 that goes via Django’s serv
 additional features provided by [Browsersync](http://www.browsersync.io/), such as CSS/JS reload, interaction
 synchronisation and much more.
 
+### Running Nginx and Django locally
+You must refer to the name of the `webapp` container in `nginx.conf.
+
+Update `nginx.conf`:
+
+```
+upstream webapp {
+    server localhost:8000;
+}
+```
+to:
+```
+upstream webapp {
+    server webapp:8000;
+}
+```
+
+Then run:
+
+```
+docker-compose up
+```
+
+and visit http://localhost:8002
+
 ## Releasing
 
 ### Releasing to non-production
