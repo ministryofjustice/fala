@@ -37,14 +37,14 @@ spec:
         name: nginx
         readinessProbe:
           httpGet:
-            path: /ping.json
+            path: /static/ping.json
             port: 80
           initialDelaySeconds: 5
           timeoutSeconds: 1
           periodSeconds: 10
         livenessProbe:
           httpGet:
-            path: /ping.json
+            path: /static/ping.json
             port: 80
           initialDelaySeconds: 5
           timeoutSeconds: 1
