@@ -35,6 +35,20 @@ spec:
           value: https://staging.laalaa.dsd.io
       - image: 926803513772.dkr.ecr.eu-west-1.amazonaws.com/laa-get-access/laa-fala-nginx:master
         name: nginx
+        readinessProbe:
+          httpGet:
+            path: /static/ping.json
+            port: 80
+          initialDelaySeconds: 5
+          timeoutSeconds: 1
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /static/ping.json
+            port: 80
+          initialDelaySeconds: 5
+          timeoutSeconds: 1
+          periodSeconds: 10
         ports:
         - containerPort: 80
           name: http
