@@ -155,7 +155,8 @@ LOGGING = {
 LOGGING['handlers']['console'] = {
     'level': 'DEBUG',
     'class': 'logging.StreamHandler',
-    'stream': sys.stdout
+    'stream': sys.stdout,
+    'formatter': 'logstash'
 }
 
 LOGGING['loggers'][''] = {
