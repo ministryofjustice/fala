@@ -157,6 +157,10 @@ workflows:
           type: approval
           requires:
             - staging_deploy
+          filters:
+            branches:
+              only:
+                - master
       - production_deploy:
           requires:
             - production_deploy_approval
