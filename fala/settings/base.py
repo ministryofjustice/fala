@@ -22,6 +22,7 @@ MANAGERS = ADMINS
 DATABASES = {}
 
 ALLOWED_HOSTS = [
+    '.laa-fala-production.apps.cloud-platform-live-0.k8s.integration.dsd.io',
     '.laa-fala-staging.apps.cloud-platform-live-0.k8s.integration.dsd.io',
     '.fala.dsd.io',
     '.find-legal-advice.justice.gov.uk'
