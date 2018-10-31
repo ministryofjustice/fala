@@ -128,40 +128,20 @@ LOGGING = {
             '()': 'logstash_formatter.LogstashFormatter'
         }
     },
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse'
-        },
-        'require_debug_true': {
-            '()': 'django.utils.log.RequireDebugTrue'
-        }
-    },
     'handlers': {
-        'mail_admins': {
-            'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler'
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'stream': sys.stdout,
+            'formatter': 'logstash'
         }
     },
     'loggers': {
-        'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
-            'propagate': True,
+        'root': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
         }
     }
-}
-
-LOGGING['handlers']['console'] = {
-    'level': 'DEBUG',
-    'class': 'logging.StreamHandler',
-    'stream': sys.stdout,
-    'formatter': 'logstash'
-}
-
-LOGGING['loggers'][''] = {
-    'handlers': ['console'],
-    'level': "DEBUG",
 }
 
 # RAVEN SENTRY CONFIG
