@@ -31,6 +31,8 @@ spec:
         - containerPort: 8000
           name: http
         env:
+        - name: ALLOWED_HOSTS
+          value: .laa-fala-staging.apps.cloud-platform-live-0.k8s.integration.dsd.io
         - name: LAALAA_API_HOST
           value: https://staging.laalaa.dsd.io
         - name: SENTRY_DSN
