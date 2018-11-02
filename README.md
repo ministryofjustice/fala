@@ -14,4 +14,5 @@ The REST API is https://prod.laalaa.dsd.io/.
 
 * [Installation](docs/installation.md)
 * [Development](docs/development.md)
+* [Using Kubernetes](docs/kubernetes.md)
 * [Releasing](docs/releasing.md)
