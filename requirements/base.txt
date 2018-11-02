@@ -1,5 +1,5 @@
 django==1.8.4
-raven==5.7.2
+raven==6.9.0
 uwsgi==2.0.17
 requests==2.7.0
 django_jinja==1.4.1
