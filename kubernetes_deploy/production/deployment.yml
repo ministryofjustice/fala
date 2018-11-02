@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: laa-fala
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: laa-fala-app
@@ -32,9 +32,9 @@ spec:
           name: http
         env:
         - name: ALLOWED_HOSTS
-          value: .laa-fala-staging.apps.cloud-platform-live-0.k8s.integration.dsd.io
+          value: ".laa-fala-production.apps.cloud-platform-live-0.k8s.integration.dsd.io .find-legal-advice.justice.gov.uk"
         - name: LAALAA_API_HOST
-          value: https://staging.laalaa.dsd.io
+          value: https://prod.laalaa.dsd.io
         - name: SENTRY_DSN
           valueFrom:
             secretKeyRef:

@@ -1,13 +1,5 @@
 version: 2
 
-references:
-  container_config: &container_config
-    docker:
-      - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
-        environment:
-          GITHUB_TEAM_NAME_SLUG: laa-get-access
-          APPLICATION_DEPLOY_NAME: laa-fala-webapp
-
 jobs:
   build_web:
     docker:
@@ -107,7 +99,8 @@ jobs:
             python manage.py test
 
   staging_deploy:
-    <<: *container_config
+    docker:
+      - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
     steps:
       - checkout
       - run:
@@ -122,6 +115,24 @@ jobs:
       - deploy:
           name: Notify Slack channel
           command: .circleci/notify_slack_channel staging
+
+  production_deploy:
+    docker:
+      - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
+    steps:
+      - checkout
+      - run:
+          name: Initialise Kubernetes production context
+          command: |
+            setup-kube-auth
+            kubectl config use-context production
+      - deploy:
+          name: Deploy fala to production
+          command: |
+            .circleci/deploy_to_kubernetes production ${ECR_DOCKER_REPO_BASE}-webapp ${ECR_DOCKER_REPO_BASE}-nginx 
+      - deploy:
+          name: Notify Slack channel
+          command: .circleci/notify_slack_channel production
 
 workflows:
   version: 2
@@ -142,3 +153,14 @@ workflows:
       - staging_deploy:
           requires:
             - staging_deploy_approval
+      - production_deploy_approval:
+          type: approval
+          requires:
+            - staging_deploy
+          filters:
+            branches:
+              only:
+                - master
+      - production_deploy:
+          requires:
+            - production_deploy_approval

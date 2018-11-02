@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: laa-fala
+  namespace: laa-fala-production
+spec:
+  rules:
+  - host: laa-fala-production.apps.cloud-platform-live-0.k8s.integration.dsd.io
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: laa-fala
+          servicePort: 80

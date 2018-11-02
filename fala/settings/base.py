@@ -21,11 +21,8 @@ MANAGERS = ADMINS
 
 DATABASES = {}
 
-ALLOWED_HOSTS = [
-    '.laa-fala-staging.apps.cloud-platform-live-0.k8s.integration.dsd.io',
-    '.fala.dsd.io',
-    '.find-legal-advice.justice.gov.uk'
-]
+DEFAULT_ALLOWED_HOSTS = '.fala.dsd.io .find-legal-advice.justice.gov.uk'
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', DEFAULT_ALLOWED_HOSTS).split(' ')
 
 LANGUAGE_CODE = 'en-gb'
 
