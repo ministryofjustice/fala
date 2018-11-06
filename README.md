@@ -37,13 +37,13 @@ python3 ./manage.py runserver
 
 Build assets:
 ```
-gulp build
+npm run build
 ```
 
 Or run Gulp tasks (default task is `build`):
 
 ```
-gulp serve
+npm run serve
 ```
 
 Serve task will create a proxy server on port 3000 that goes via Django’s server on port 8000 enhancing it with
