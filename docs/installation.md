@@ -17,7 +17,7 @@ Next, create the environment and start it up:
 
 ```
 cd fala
-virtualenv -p python3 venv
+virtualenv -p python3 env
 source env/bin/activate
 
 pip install -r requirements/base.txt
@@ -28,7 +28,7 @@ npm run build
 Create a ``local.py`` settings file from the example file:
 
 ```
-fala/settings/local.example.py fala/settings/local.py
+cp fala/settings/local.example.py fala/settings/local.py
 ```
 
 Next, run the Django server with:
