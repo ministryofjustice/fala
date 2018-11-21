@@ -2,7 +2,7 @@
 
 Assets reside in `fala/assets-src` directory and compiled in `fala/assets` directory upon running build tasks.
 
-FALA is using [Gulp](http://gulpjs.com/) for build tasks. The following Gulp tasks are used in development:
+FALA uses [Gulp](http://gulpjs.com/) for build tasks. The following Gulp tasks are used in development:
 
 - `build` builds and minifies all assets and does all of the following
 - `sass` builds the SCSS and generates source maps
@@ -10,7 +10,7 @@ FALA is using [Gulp](http://gulpjs.com/) for build tasks. The following Gulp tas
 
 :memo: It is also possible to use `npm run build` and `npm run serve` instead of gulp directly.
 
-The `serve` task will create a proxy server on port 3000 that goes via Django’s server on port 8000 enhancing it with
+The `serve` task starts a server on port 3000 proxying Django’s server on port 8000 enhancing it with
 additional features provided by [Browsersync](http://www.browsersync.io/), such as CSS/JS reload, interaction
 synchronisation and much more.
 
