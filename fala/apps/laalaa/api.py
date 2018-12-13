@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
 import urllib
+# coding=utf-8
 from urllib.parse import urlencode
 from collections import OrderedDict
 import requests
