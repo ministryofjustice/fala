@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# coding=utf-8
 
 import re
 from urllib.parse import urlparse, parse_qs, quote
