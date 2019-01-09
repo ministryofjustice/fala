@@ -70,7 +70,7 @@ jobs:
 
   test-web:
     docker:
-      - image: circleci/python:3.4
+      - image: circleci/python:3.6
     steps:
       - checkout
       - run:
