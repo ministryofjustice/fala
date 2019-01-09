@@ -91,10 +91,15 @@ jobs:
           paths:
             - "~/.cache/pip"
       - run:
-          name: Lint code
+          name: Lint with flake8
           command: |
             source env/bin/activate
             flake8 fala
+      - run:
+          name: Check formatting with Black
+          command: |
+            source env/bin/activate
+            black --check fala
       - run:
           name: Run unit tests
           command: |
