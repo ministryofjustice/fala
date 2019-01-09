@@ -5,92 +5,83 @@ from django.utils.translation import gettext_lazy as _
 import laalaa.api as laalaa
 
 
-SEARCH_TYPE_CHOICES = [
-    ('location', _('Location')),
-    ('organisation', _('Organisation')),
-]
+SEARCH_TYPE_CHOICES = [("location", _("Location")), ("organisation", _("Organisation"))]
 
 ORGANISATION_TYPES_CHOICES = [
-    ('Charity or Voluntary Org', 'Charity or Voluntary Organisations'),
-    ('Mediation', 'Mediation Service'),
-    ('Private Company', 'Private Company'),
-    ('Solicitor', 'Solicitor'),
+    ("Charity or Voluntary Org", "Charity or Voluntary Organisations"),
+    ("Mediation", "Mediation Service"),
+    ("Private Company", "Private Company"),
+    ("Solicitor", "Solicitor"),
 ]
 
 
 class FalaTextInput(forms.TextInput):
     def __init__(self, attrs={}):
-        class_attr = ' '.join([c for c in ['form-control', attrs.get('class')] if c])
-        attrs.update({'class': class_attr})
+        class_attr = " ".join([c for c in ["form-control", attrs.get("class")] if c])
+        attrs.update({"class": class_attr})
 
         super(FalaTextInput, self).__init__(attrs)
 
 
 class AdviserSearchForm(forms.Form):
 
-    page = forms.IntegerField(
-        required=False,
-        widget=forms.HiddenInput()
-    )
+    page = forms.IntegerField(required=False, widget=forms.HiddenInput())
 
     postcode = forms.CharField(
-        label=_('Enter postcode, town or city'),
+        label=_("Enter postcode, town or city"),
         max_length=10,
-        help_text=_('Enter a postcode, town or city'),
+        help_text=_("Enter a postcode, town or city"),
         required=False,
-        widget=FalaTextInput(attrs={
-            'placeholder': _('e.g. SW1H 9AJ')
-        }))
+        widget=FalaTextInput(attrs={"placeholder": _("e.g. SW1H 9AJ")}),
+    )
 
     name = forms.CharField(
-        label=_('Organisation name'),
+        label=_("Organisation name"),
         max_length=100,
         required=False,
-        widget=FalaTextInput(attrs={
-            'placeholder': _('e.g. Winthorpes')
-        }))
+        widget=FalaTextInput(attrs={"placeholder": _("e.g. Winthorpes")}),
+    )
 
     type = forms.MultipleChoiceField(
-        label=_('Organisation type'),
+        label=_("Organisation type"),
         choices=ORGANISATION_TYPES_CHOICES,
         widget=forms.CheckboxSelectMultiple(),
-        required=False)
+        required=False,
+    )
 
     categories = forms.MultipleChoiceField(
-        label=_('Category'),
+        label=_("Category"),
         choices=laalaa.PROVIDER_CATEGORY_CHOICES,
         widget=forms.CheckboxSelectMultiple(),
-        required=False)
+        required=False,
+    )
 
     def __init__(self, *args, **kwargs):
-        kwargs.setdefault('label_suffix', '')
+        kwargs.setdefault("label_suffix", "")
         super(AdviserSearchForm, self).__init__(*args, **kwargs)
 
     def clean(self):
         data = self.cleaned_data
-        if(not data.get('postcode') and not data.get('name')):
-            raise forms.ValidationError(
-                _('Please enter postcode or organisation name')
-            )
+        if not data.get("postcode") and not data.get("name"):
+            raise forms.ValidationError(_("Please enter postcode or organisation name"))
         return data
 
     def search(self):
         if self.is_valid():
             try:
                 data = laalaa.find(
-                    postcode=self.cleaned_data.get('postcode'),
-                    categories=self.cleaned_data.get('categories'),
-                    page=self.cleaned_data.get('page', 1),
-                    organisation_types=self.cleaned_data.get('type'),
-                    organisation_name=self.cleaned_data.get('name'),
+                    postcode=self.cleaned_data.get("postcode"),
+                    categories=self.cleaned_data.get("categories"),
+                    page=self.cleaned_data.get("page", 1),
+                    organisation_types=self.cleaned_data.get("type"),
+                    organisation_name=self.cleaned_data.get("name"),
                 )
-                if 'error' in data:
-                    self.add_error('postcode', (data['error']))
+                if "error" in data:
+                    self.add_error("postcode", (data["error"]))
                     return {}
                 return data
             except laalaa.LaaLaaError:
-                self.add_error('postcode', u"%s %s" % (
-                    _('Error looking up legal advisers.'),
-                    _('Please try again later.')
-                ))
+                self.add_error(
+                    "postcode", u"%s %s" % (_("Error looking up legal advisers."), _("Please try again later."))
+                )
         return {}
