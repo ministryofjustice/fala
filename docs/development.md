@@ -14,6 +14,20 @@ The `serve` task starts a server on port 3000 proxying Django’s server on port
 additional features provided by [Browsersync](http://www.browsersync.io/), such as CSS/JS reload, interaction
 synchronisation and much more.
 
+## Lint and pre-commit hooks
+
+To lint with Black and flake8, install pre-commit hooks:
+```
+. env/bin/activate
+pip install -r requirements/dev.txt
+pre-commit install
+```
+
+To run them manually:
+```
+pre-commit run --all-files
+```
+
 ## Running Nginx and Django locally
 
 You must refer to the name of the `webapp` container in `nginx.conf`.
