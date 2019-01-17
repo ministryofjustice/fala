@@ -3,9 +3,17 @@ import sys
 import os
 from os.path import join, abspath, dirname
 
-here = lambda *x: join(abspath(dirname(__file__)), *x)  # noqa: E731
+
+def here(*x):
+    return join(abspath(dirname(__file__)), *x)
+
+
 PROJECT_ROOT = here("..")
-root = lambda *x: join(abspath(PROJECT_ROOT), *x)  # noqa: E731
+
+
+def root(*x):
+    return join(abspath(PROJECT_ROOT), *x)
+
 
 sys.path.insert(0, root("apps"))
 
