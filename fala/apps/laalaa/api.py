@@ -20,7 +20,7 @@ except NameError:
     basestring = str
 
 PROVIDER_CATEGORY_CHOICES = (
-    ("aap", _("Actions against the police")),
+    ("aap", _("Claims Against Public Authorities")),
     ("med", _("Clinical negligence")),
     ("com", _("Community care")),
     ("crm", _("Crime")),
