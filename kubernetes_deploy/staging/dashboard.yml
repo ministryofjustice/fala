@@ -4,7 +4,7 @@ metadata:
   name: laa-fala-staging-dashboard
   namespace: laa-fala-staging
   labels:
-    cloud-platform.justice.gov.uk/grafana-dashboard: ""
+    grafana-dashboard: ""
 data:
   laa-fala-staging-dashboard.json: |
     {
