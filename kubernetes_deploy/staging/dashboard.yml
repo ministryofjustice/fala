@@ -4,7 +4,7 @@ metadata:
   name: laa-fala-staging-dashboard
   namespace: laa-fala-staging
   labels:
-    grafana-dashboard: ""
+    grafana_dashboard: ""
 data:
   laa-fala-staging-dashboard.json: |
     {
