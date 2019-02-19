@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: laa-fala-staging-dashboard
+  name: laa-fala-test-dashboard
   namespace: laa-fala-staging
   labels:
     grafana_dashboard: ""
