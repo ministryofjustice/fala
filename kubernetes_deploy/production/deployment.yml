@@ -40,6 +40,26 @@ spec:
             secretKeyRef:
               name: sentry
               key: dsn
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: secret-key
+              key: SECRET_KEY
+        - name: ZENDESK_API_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: zendesk-api
+              key: ZENDESK_API_TOKEN
+        - name: ZENDESK_API_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: zendesk-api
+              key: ZENDESK_API_USERNAME
+        - name: GA_ID
+          valueFrom:
+            secretKeyRef:
+              name: ga-id
+              key: GA_ID
       - image: 926803513772.dkr.ecr.eu-west-1.amazonaws.com/laa-get-access/laa-fala-nginx:master
         name: nginx
         readinessProbe:
