@@ -82,7 +82,7 @@ data:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 8,
@@ -188,7 +188,7 @@ data:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "Prometheus",
           "decimals": null,
           "fill": 1,
           "gridPos": {
@@ -294,7 +294,7 @@ data:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "Prometheus",
           "decimals": null,
           "fill": 1,
           "gridPos": {
@@ -395,7 +395,7 @@ data:
           {
             "allValue": null,
             "current": {},
-            "datasource": "${DS_PROMETHEUS}",
+            "datasource": "Prometheus",
             "definition": "label_values(kube_deployment_metadata_generation, namespace)",
             "hide": 0,
             "includeAll": false,
@@ -446,7 +446,7 @@ data:
         ]
       },
       "timezone": "browser",
-      "title": "LAA CLA / FALA - test",
-      "uid": "54de8aa09ac1531a5ffbac20dde2e95ce9b0adba",
+      "title": "LAA CLA / FALA - test dashboard",
+      "uid": "87a9fc9281061289879d05928d54a80c6b57818a",
       "version": 1
     }
