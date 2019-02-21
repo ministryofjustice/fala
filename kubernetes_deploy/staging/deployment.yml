@@ -13,7 +13,7 @@ spec:
         app: laa-fala-app
     spec:
       containers:
-      - image: 926803513772.dkr.ecr.eu-west-1.amazonaws.com/laa-get-access/laa-fala-webapp:master01
+      - image: 926803513772.dkr.ecr.eu-west-1.amazonaws.com/laa-get-access/laa-fala-webapp:master
         name: webapp
         readinessProbe:
           tcpSocket:
@@ -44,7 +44,7 @@ spec:
         name: nginx
         readinessProbe:
           httpGet:
-            path: /static/ping.json
+            path: /static/ping.fail
             port: 80
           initialDelaySeconds: 5
           timeoutSeconds: 1
