@@ -45,7 +45,7 @@ spec:
         readinessProbe:
           httpGet:
             path: /static/ping.fail
-            port: 80
+            port: 801
           initialDelaySeconds: 5
           timeoutSeconds: 1
           periodSeconds: 10
