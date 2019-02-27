@@ -17,7 +17,7 @@ spec:
         name: webapp
         readinessProbe:
           tcpSocket:
-            port: 8000
+            port: 8001
           initialDelaySeconds: 5
           timeoutSeconds: 1
           periodSeconds: 10
@@ -44,8 +44,8 @@ spec:
         name: nginx
         readinessProbe:
           httpGet:
-            path: /static/ping.fail
-            port: 801
+            path: /static/ping.json
+            port: 80
           initialDelaySeconds: 5
           timeoutSeconds: 1
           periodSeconds: 10
