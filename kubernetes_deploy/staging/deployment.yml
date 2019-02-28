@@ -17,7 +17,7 @@ spec:
         name: webapp
         readinessProbe:
           tcpSocket:
-            port: 8002
+            port: 8000
           initialDelaySeconds: 5
           timeoutSeconds: 1
           periodSeconds: 10
