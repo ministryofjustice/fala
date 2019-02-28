@@ -35,6 +35,8 @@ spec:
           value: .laa-fala-staging.apps.cloud-platform-live-0.k8s.integration.dsd.io
         - name: LAALAA_API_HOST
           value: https://staging.laalaa.dsd.io
+        - name: DJANGO_SETTINGS_MODULE
+          value: "fala.settings.production"
         - name: SENTRY_DSN
           valueFrom:
             secretKeyRef:
