@@ -17,7 +17,7 @@ class AdviserView(TemplateView):
 
         context.update(
             {
-                "form": form,
+                "form": form.get,
                 "data": form.search(),
                 "current_url": current_url,
                 "GA_ID": settings.GA_ID,
