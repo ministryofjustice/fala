@@ -4,8 +4,21 @@ metadata:
   name: laa-fala
   namespace: laa-fala-production
 spec:
+  tls:
+  - hosts:
+    - laa-fala-production.apps.cloud-platform-live-0.k8s.integration.dsd.io
+  - hosts:
+    - find-legal-advice.justice.gov.uk
+    secretName: fala-tls-certificate
   rules:
   - host: laa-fala-production.apps.cloud-platform-live-0.k8s.integration.dsd.io
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: laa-fala
+          servicePort: 80
+  - host: find-legal-advice.justice.gov.uk
     http:
       paths:
       - path: /
