@@ -11,7 +11,7 @@ spec:
   - name: node.rules
     rules:
     - alert: Replicas shortage
-      expr: "avg (avg_over_time(kube_pod_container_status_ready{namespace="laa-fala-staging", container="webapp"}[6m]))"
+      expr: 'avg (avg_over_time(kube_pod_container_status_ready{namespace="laa-fala-staging", container="webapp"}[6m]))'
       for: 5m
       labels:
         severity: laa-cla-fala
