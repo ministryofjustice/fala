@@ -1,0 +1,20 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  creationTimestamp: null
+  namespace: laa-fala-staging
+  labels:
+    role: alert-rules
+  name: prometheus-custom-rules-laa-fala-staging
+spec:
+  groups:
+  - name: node.rules
+    rules:
+    - alert: Replicas shortage
+      expr: "avg (avg_over_time(kube_pod_container_status_ready{namespace="laa-fala-staging", container="webapp"}[6m]))"
+      for: 5m
+      labels:
+        severity: laa-cla-fala
+      annotations:
+        message: Replicas count is less than or equal to 0.5.
+        runbook_url: https://github.com/kubernetes-monitoring/kubernetes-mixin/tree/master/runbook.md#alert-name-kubequotaexceeded

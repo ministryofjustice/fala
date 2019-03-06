@@ -32,5 +32,6 @@ kubectl set image --filename="$NAMESPACE_DIR/deployment.yml" --local --output=ya
     --filename="$NAMESPACE_DIR/service.yml" \
     --filename="$NAMESPACE_DIR/ingress.yml" \
     --filename="$NAMESPACE_DIR/dashboard.yml" \
-    --filename="$NAMESPACE_DIR/certificate.yml"
+    --filename="$NAMESPACE_DIR/certificate.yml" \
+    --filename="$NAMESPACE_DIR/prometheus-custom-rules.yml"
 
