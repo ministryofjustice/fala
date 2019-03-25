@@ -139,6 +139,8 @@ ZENDESK_REQUESTER_ID = os.environ.get("ZENDESK_REQUESTER_ID", 649762516)
 
 GA_ID = os.environ.get("GA_ID")
 
+GOOGLE_MAPS_API_KEY = os.environ.get("GOOGLE_MAPS_API_KEY", "")
+
 # .local.py overrides all the common settings.
 try:
     from .local import *  # noqa: F401,F403

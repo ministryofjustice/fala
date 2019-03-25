@@ -33,6 +33,11 @@ spec:
         env:
         - name: ALLOWED_HOSTS
           value: .laa-fala-staging.apps.cloud-platform-live-0.k8s.integration.dsd.io
+        - name: GOOGLE_MAPS_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: google-maps
+              key: GOOGLE_MAPS_API_KEY
         - name: LAALAA_API_HOST
           value: https://staging.laalaa.dsd.io
         - name: SENTRY_DSN

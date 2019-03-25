@@ -39,6 +39,11 @@ spec:
           value: "UA-37377084-6"
         - name: DJANGO_SETTINGS_MODULE
           value: "fala.settings.production"
+        - name: GOOGLE_MAPS_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: google-maps
+              key: GOOGLE_MAPS_API_KEY
         - name: SENTRY_DSN
           valueFrom:
             secretKeyRef:
