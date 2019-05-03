@@ -4,7 +4,7 @@ metadata:
   name: laa-fala-dashboard
   namespace: laa-fala-production
   labels:
-    cloud-platform.justice.gov.uk/grafana-dashboard: ""
+    grafana_dashboard: ""
 data:
   laa-fala-production-dashboard.json: |
     {
@@ -447,6 +447,6 @@ data:
       },
       "timezone": "browser",
       "title": "LAA CLA / FALA",
-      "uid": "87a9fc9281061289879d05928d54a80c6b57818a",
+      "uid": "Zr8wbp3iz",
       "version": 1
     }
