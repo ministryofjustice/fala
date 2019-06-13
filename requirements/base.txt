@@ -1,6 +1,6 @@
 django==1.8.4
 raven==6.9.0
 uwsgi==2.0.17
-requests==2.7.0
+requests==2.22.0
 django_jinja==1.4.1
 logstash-formatter==0.5.14
