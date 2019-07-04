@@ -21,6 +21,7 @@ class AdviserView(TemplateView):
                 "data": form.search(),
                 "current_url": current_url,
                 "GA_ID": settings.GA_ID,
+                "GOOGLE_MAPS_API_KEY": settings.GOOGLE_MAPS_API_KEY,
                 "LAALAA_API_HOST": settings.LAALAA_API_HOST,
             }
         )

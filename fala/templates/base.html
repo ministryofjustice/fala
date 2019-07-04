@@ -89,7 +89,7 @@
       ga('send', 'pageview');
     </script>
   {% endif %}
-  <script src="//maps.googleapis.com/maps/api/js"></script>
+  <script src="//maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}"></script>
   <script>
     window.LABELS = {
       loading: "{{ _('Loading…') }}"
