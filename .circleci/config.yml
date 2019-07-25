@@ -126,7 +126,7 @@ jobs:
           name: Run unit tests
           command: |
             source env/bin/activate
-            python manage.py test
+            python -Wa manage.py test
 
   staging_deploy:
     docker:
