@@ -33,6 +33,8 @@ PROVIDER_CATEGORY_CHOICES = (
     ("pl", _("Prison law")),
     ("pub", _("Public law")),
     ("wb", _("Welfare benefits")),
+    ("disc", _("Discrimination")),
+    ("edu", _("Education")),
 )
 
 PROVIDER_CATEGORIES = OrderedDict(PROVIDER_CATEGORY_CHOICES)
