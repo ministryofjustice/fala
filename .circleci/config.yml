@@ -1,7 +1,14 @@
 version: 2
 
 jobs:
-  build_web:
+  build:
+    parameters:
+      aws_access_key:
+        type: env_var_name
+        default: AWS_ACCESS_KEY_ID
+      aws_secret_key:
+        type: env_var_name
+        default: AWS_SECRET_ACCESS_KEY
     docker:
       - image: docker:17.03-git
     environment:
@@ -21,7 +28,7 @@ jobs:
           command: |
             apk add --no-cache --no-progress py2-pip
             pip install awscli
-            ecr_login="$(AWS_ACCESS_KEY_ID=$WEBAPP_AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$WEBAPP_AWS_SECRET_ACCESS_KEY aws ecr get-login --region eu-west-1 --no-include-email)"
+            ecr_login="$(AWS_ACCESS_KEY_ID=${<< parameters.aws_access_key >>} AWS_SECRET_ACCESS_KEY=${<< parameters.aws_secret_key >>} aws ecr get-login --region eu-west-1 --no-include-email)"
             ${ecr_login}
       - run:
           name: Build Docker image
@@ -39,35 +46,7 @@ jobs:
           command: |
             .circleci/tag_and_push_docker_image application:$CIRCLE_SHA1 $DSD_DOCKER_REGISTRY/$DSD_DOCKER_IMAGE
             .circleci/tag_and_push_docker_image application:$CIRCLE_SHA1 ${ECR_DOCKER_REPO_BASE}-webapp
-  build_nginx:
-    docker:
-      - image: docker:18.05.0-git
-    steps:
-      - checkout
-      - setup_remote_docker:
-          version: 18.05.0-ce
-          docker_layer_caching: true
-      - run:
-          name: Login to the ECR Docker registry
-          command: |
-            apk add --no-cache --no-progress py2-pip
-            pip install awscli
-            ecr_login="$(AWS_ACCESS_KEY_ID=$NGINX_AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$NGINX_AWS_SECRET_ACCESS_KEY aws ecr get-login --region eu-west-1 --no-include-email)"
-            ${ecr_login}
-      - run:
-          name: Build Docker image
-          command: |
-            docker build --file Dockerfile.nginx --tag nginx:$CIRCLE_SHA1 \
-              --label build.git.sha=$CIRCLE_SHA1 \
-              --label build.git.branch=$CIRCLE_BRANCH \
-              --label build.url=$CIRCLE_BUILD_URL \
-              .
-      - run:
-          name: Tag and push Docker images
-          command: .circleci/tag_and_push_docker_image \
-              nginx:$CIRCLE_SHA1 \
-              ${ECR_DOCKER_REPO_BASE}-nginx
-  lint-web:
+  lint:
     docker:
       - image: circleci/python:3.7
     steps:
@@ -99,7 +78,7 @@ jobs:
           command: |
             source lint-env/bin/activate
             black --check fala
-  test-web:
+  test:
     docker:
       - image: circleci/python:3.4
     steps:
@@ -168,31 +147,69 @@ workflows:
   version: 2
   build_test_and_deploy:
     jobs:
-      - lint-web
-      - test-web
-      - build_web:
+      - lint
+      - test
+      - build:
+          name: live-0-build
+          cluster: live-0
           requires:
-            - test-web
-            - lint-web
-      - build_nginx:
-          requires:
-            - test-web
+            - test
+            - lint
       - staging_deploy_approval:
+          name: live-0-staging-deploy-approval
+          cluster: live-0
           type: approval
           requires:
-            - build_web
-            - build_nginx
+            - live-0-build
       - staging_deploy:
+          name: live-0-staging-deploy
+          cluster: live-0
           requires:
-            - staging_deploy_approval
+            - live-0-staging-deploy-approval
       - production_deploy_approval:
+          name: live-0-production-deploy-approval
+          cluster: live-0
           type: approval
           requires:
-            - staging_deploy
+            - live-0-staging-deploy
           filters:
             branches:
               only:
                 - master
       - production_deploy:
+          name: live-0-production-deploy
+          cluster: live-0
           requires:
-            - production_deploy_approval
+            - live-0-production-deploy-approval
+      - build:
+          name: live-1-build
+          cluster: live-1
+          requires:
+            - test
+            - lint
+      - staging_deploy_approval:
+          name: live-1-staging-deploy-approval
+          cluster: live-1
+          type: approval
+          requires:
+            - live-1-build
+      - staging_deploy:
+          name: live-1-staging-deploy
+          cluster: live-1
+          requires:
+            - live-1-staging-deploy-approval
+      - production_deploy_approval:
+          name: live-1-production-deploy-approval
+          cluster: live-1
+          type: approval
+          requires:
+            - live-1-staging-deploy
+          filters:
+            branches:
+              only:
+                - master
+      - production_deploy:
+          name: live-1-production-deploy
+          cluster: live-1
+          requires:
+            - live-1-production-deploy-approval
