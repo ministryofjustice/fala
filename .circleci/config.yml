@@ -1,51 +1,6 @@
 version: 2
 
 jobs:
-  build:
-    parameters:
-      aws_access_key:
-        type: env_var_name
-        default: AWS_ACCESS_KEY_ID
-      aws_secret_key:
-        type: env_var_name
-        default: AWS_SECRET_ACCESS_KEY
-    docker:
-      - image: docker:17.03-git
-    environment:
-      DSD_DOCKER_REGISTRY: "registry.service.dsd.io"
-      DSD_DOCKER_IMAGE: "fala"
-    steps:
-      - checkout
-      - setup_remote_docker:
-          version: 17.03.0-ce
-          docker_layer_caching: true
-      - run:
-          name: Login to the DSD Docker registry
-          command: |
-            docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD --email "${DOCKER_USERNAME}@digital.justice.gov.uk" $DSD_DOCKER_REGISTRY
-      - run:
-          name: Login to the ECR Docker registry
-          command: |
-            apk add --no-cache --no-progress py2-pip
-            pip install awscli
-            ecr_login="$(AWS_ACCESS_KEY_ID=${<< parameters.aws_access_key >>} AWS_SECRET_ACCESS_KEY=${<< parameters.aws_secret_key >>} aws ecr get-login --region eu-west-1 --no-include-email)"
-            ${ecr_login}
-      - run:
-          name: Build Docker image
-          command: |
-            docker build --tag application:$CIRCLE_SHA1 \
-              --label build.git.sha=$CIRCLE_SHA1 \
-              --label build.git.branch=$CIRCLE_BRANCH \
-              --label build.url=$CIRCLE_BUILD_URL \
-              .
-      - run:
-          name: Validate Python version
-          command: docker run --rm --tty --interactive application:$CIRCLE_SHA1 python --version | grep "3.4"
-      - run:
-          name: Tag and push Docker images
-          command: |
-            .circleci/tag_and_push_docker_image application:$CIRCLE_SHA1 $DSD_DOCKER_REGISTRY/$DSD_DOCKER_IMAGE
-            .circleci/tag_and_push_docker_image application:$CIRCLE_SHA1 ${ECR_DOCKER_REPO_BASE}-webapp
   lint:
     docker:
       - image: circleci/python:3.7
@@ -78,6 +33,7 @@ jobs:
           command: |
             source lint-env/bin/activate
             black --check fala
+
   test:
     docker:
       - image: circleci/python:3.4
@@ -107,7 +63,75 @@ jobs:
             source env/bin/activate
             python manage.py test
 
-  staging_deploy:
+  build_web_for_live_0:
+    docker:
+      - image: docker:17.03-git
+    environment:
+      DSD_DOCKER_REGISTRY: "registry.service.dsd.io"
+      DSD_DOCKER_IMAGE: "fala"
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 17.03.0-ce
+          docker_layer_caching: true
+      - run:
+          name: Login to the DSD Docker registry
+          command: |
+            docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD --email "${DOCKER_USERNAME}@digital.justice.gov.uk" $DSD_DOCKER_REGISTRY
+      - run:
+          name: Login to the ECR Docker registry
+          command: |
+            apk add --no-cache --no-progress py2-pip
+            pip install awscli
+            ecr_login="$(AWS_ACCESS_KEY_ID=$WEBAPP_AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$WEBAPP_AWS_SECRET_ACCESS_KEY aws ecr get-login --region eu-west-1 --no-include-email)"
+            ${ecr_login}
+      - run:
+          name: Build Docker image
+          command: |
+            docker build --tag application:$CIRCLE_SHA1 \
+              --label build.git.sha=$CIRCLE_SHA1 \
+              --label build.git.branch=$CIRCLE_BRANCH \
+              --label build.url=$CIRCLE_BUILD_URL \
+              .
+      - run:
+          name: Validate Python version
+          command: docker run --rm --tty --interactive application:$CIRCLE_SHA1 python --version | grep "3.4"
+      - run:
+          name: Tag and push Docker images
+          command: |
+            .circleci/tag_and_push_docker_image application:$CIRCLE_SHA1 $DSD_DOCKER_REGISTRY/$DSD_DOCKER_IMAGE
+            .circleci/tag_and_push_docker_image application:$CIRCLE_SHA1 ${ECR_DOCKER_REPO_BASE}-webapp
+
+  build_nginx_for_live_0:
+    docker:
+      - image: docker:18.05.0-git
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 18.05.0-ce
+          docker_layer_caching: true
+      - run:
+          name: Login to the ECR Docker registry
+          command: |
+            apk add --no-cache --no-progress py2-pip
+            pip install awscli
+            ecr_login="$(AWS_ACCESS_KEY_ID=$NGINX_AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$NGINX_AWS_SECRET_ACCESS_KEY aws ecr get-login --region eu-west-1 --no-include-email)"
+            ${ecr_login}
+      - run:
+          name: Build Docker image
+          command: |
+            docker build --file Dockerfile.nginx --tag nginx:$CIRCLE_SHA1 \
+              --label build.git.sha=$CIRCLE_SHA1 \
+              --label build.git.branch=$CIRCLE_BRANCH \
+              --label build.url=$CIRCLE_BUILD_URL \
+              .
+      - run:
+          name: Tag and push Docker images
+          command: .circleci/tag_and_push_docker_image \
+              nginx:$CIRCLE_SHA1 \
+              ${ECR_DOCKER_REPO_BASE}-nginx
+
+  staging_deploy_to_live_0:
     docker:
       - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
     steps:
@@ -125,7 +149,82 @@ jobs:
           name: Notify Slack channel
           command: .circleci/notify_slack_channel staging
 
-  production_deploy:
+  production_deploy_to_live_0:
+    docker:
+      - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
+    steps:
+      - checkout
+      - run:
+          name: Initialise Kubernetes production context
+          command: |
+            setup-kube-auth
+            kubectl config use-context production
+      - deploy:
+          name: Deploy fala to production
+          command: |
+            .circleci/deploy_to_kubernetes production ${ECR_DOCKER_REPO_BASE}-webapp ${ECR_DOCKER_REPO_BASE}-nginx 
+      - deploy:
+          name: Notify Slack channel
+          command: .circleci/notify_slack_channel production
+
+  build_for_live_1:
+    docker:
+      - image: docker:17.03-git
+    environment:
+      DSD_DOCKER_REGISTRY: "registry.service.dsd.io"
+      DSD_DOCKER_IMAGE: "fala"
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 17.03.0-ce
+          docker_layer_caching: true
+      - run:
+          name: Login to the DSD Docker registry
+          command: |
+            docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD --email "${DOCKER_USERNAME}@digital.justice.gov.uk" $DSD_DOCKER_REGISTRY
+      - run:
+          name: Login to the ECR Docker registry
+          command: |
+            apk add --no-cache --no-progress py2-pip
+            pip install awscli
+            ecr_login="$(AWS_ACCESS_KEY_ID=$WEBAPP_AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$WEBAPP_AWS_SECRET_ACCESS_KEY aws ecr get-login --region eu-west-1 --no-include-email)"
+            ${ecr_login}
+      - run:
+          name: Build Docker image
+          command: |
+            docker build --tag application:$CIRCLE_SHA1 \
+              --label build.git.sha=$CIRCLE_SHA1 \
+              --label build.git.branch=$CIRCLE_BRANCH \
+              --label build.url=$CIRCLE_BUILD_URL \
+              .
+      - run:
+          name: Validate Python version
+          command: docker run --rm --tty --interactive application:$CIRCLE_SHA1 python --version | grep "3.4"
+      - run:
+          name: Tag and push Docker images
+          command: |
+            .circleci/tag_and_push_docker_image application:$CIRCLE_SHA1 $DSD_DOCKER_REGISTRY/$DSD_DOCKER_IMAGE
+            .circleci/tag_and_push_docker_image application:$CIRCLE_SHA1 ${ECR_DOCKER_REPO_BASE}-webapp
+
+  staging_deploy_to_live_1:
+    docker:
+      - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
+    steps:
+      - checkout
+      - run:
+          name: Initialise Kubernetes staging context
+          command: |
+            setup-kube-auth
+            kubectl config use-context staging
+      - deploy:
+          name: Deploy fala to staging
+          command: |
+            .circleci/deploy_to_kubernetes staging ${ECR_DOCKER_REPO_BASE}-webapp ${ECR_DOCKER_REPO_BASE}-nginx 
+      - deploy:
+          name: Notify Slack channel
+          command: .circleci/notify_slack_channel staging
+
+  production_deploy_to_live_1:
     docker:
       - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
     steps:
@@ -149,67 +248,52 @@ workflows:
     jobs:
       - lint
       - test
-      - build:
-          name: live-0-build
-          cluster: live-0
+      - build_web_for_live_0:
           requires:
-            - test
             - lint
-      - staging_deploy_approval:
-          name: live-0-staging-deploy-approval
-          cluster: live-0
+            - test
+      - build_nginx_for_live_0:
+          requires:
+            - lint
+            - test
+      - staging_deploy_approval_for_live_0:
           type: approval
           requires:
-            - live-0-build
-      - staging_deploy:
-          name: live-0-staging-deploy
-          cluster: live-0
+            - build_web_for_live_0
+            - build_nginx_for_live_0
+      - staging_deploy_to_live_0:
           requires:
-            - live-0-staging-deploy-approval
-      - production_deploy_approval:
-          name: live-0-production-deploy-approval
-          cluster: live-0
+            - staging_deploy_approval_for_live_0
+      - production_deploy_approval_for_live_0:
           type: approval
           requires:
-            - live-0-staging-deploy
+            - staging_deploy_to_live_0
           filters:
             branches:
               only:
                 - master
-      - production_deploy:
-          name: live-0-production-deploy
-          cluster: live-0
+      - production_deploy_to_live_0:
           requires:
-            - live-0-production-deploy-approval
-      - build:
-          name: live-1-build
-          cluster: live-1
+            - production_deploy_approval_for_live_0
+      - build_for_live_1:
           requires:
-            - test
             - lint
-      - staging_deploy_approval:
-          name: live-1-staging-deploy-approval
-          cluster: live-1
+            - test
+      - staging_deploy_approval_for_live_1:
           type: approval
           requires:
-            - live-1-build
-      - staging_deploy:
-          name: live-1-staging-deploy
-          cluster: live-1
+            - build_for_live_1
+      - staging_deploy_to_live_1:
           requires:
-            - live-1-staging-deploy-approval
-      - production_deploy_approval:
-          name: live-1-production-deploy-approval
-          cluster: live-1
+            - staging_deploy_approval_for_live_1
+      - production_deploy_approval_for_live_1:
           type: approval
           requires:
-            - live-1-staging-deploy
+            - staging_deploy_to_live_1
           filters:
             branches:
               only:
                 - master
-      - production_deploy:
-          name: live-1-production-deploy
-          cluster: live-1
+      - production_deploy_to_live_1:
           requires:
-            - live-1-production-deploy-approval
+            - production_deploy_approval_for_live_1
