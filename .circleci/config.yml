@@ -279,21 +279,21 @@ workflows:
           requires:
             - lint
             - test
-      - staging_deploy_approval_for_live_1:
-          type: approval
-          requires:
-            - build_for_live_1
-      - staging_deploy_to_live_1:
-          requires:
-            - staging_deploy_approval_for_live_1
-      - production_deploy_approval_for_live_1:
-          type: approval
-          requires:
-            - staging_deploy_to_live_1
-          filters:
-            branches:
-              only:
-                - master
-      - production_deploy_to_live_1:
-          requires:
-            - production_deploy_approval_for_live_1
+      # - staging_deploy_approval_for_live_1:
+          # type: approval
+          # requires:
+            # - build_for_live_1
+      # - staging_deploy_to_live_1:
+          # requires:
+            # - staging_deploy_approval_for_live_1
+      # - production_deploy_approval_for_live_1:
+          # type: approval
+          # requires:
+            # - staging_deploy_to_live_1
+          # filters:
+            # branches:
+              # only:
+                # - master
+      # - production_deploy_to_live_1:
+          # requires:
+            # - production_deploy_approval_for_live_1
