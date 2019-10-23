@@ -6,9 +6,9 @@ metadata:
 spec:
   tls:
   - hosts:
-    - laa-fala-staging.apps.cloud-platform-live-0.k8s.integration.dsd.io
+    - laa-fala-staging.apps.live-1.cloud-platform.service.justice.gov.uk
   rules:
-  - host: laa-fala-staging.apps.cloud-platform-live-0.k8s.integration.dsd.io
+  - host: laa-fala-staging.apps.live-1.cloud-platform.service.justice.gov.uk
     http:
       paths:
       - path: /
