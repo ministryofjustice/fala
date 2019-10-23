@@ -187,7 +187,7 @@ jobs:
           command: |
             apk add --no-cache --no-progress py2-pip
             pip install awscli
-            ecr_login="$(AWS_ACCESS_KEY_ID=$WEBAPP_AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$WEBAPP_AWS_SECRET_ACCESS_KEY aws ecr get-login --region eu-west-1 --no-include-email)"
+            ecr_login="$(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)"
             ${ecr_login}
       - run:
           name: Build Docker image
@@ -204,7 +204,7 @@ jobs:
           name: Tag and push Docker images
           command: |
             .circleci/tag_and_push_docker_image application:$CIRCLE_SHA1 $DSD_DOCKER_REGISTRY/$DSD_DOCKER_IMAGE
-            .circleci/tag_and_push_docker_image application:$CIRCLE_SHA1 ${ECR_DOCKER_REPO_BASE}-webapp
+            .circleci/tag_and_push_docker_image application:$CIRCLE_SHA1 ${ECR_DOCKER_REPO_BASE}
 
   staging_deploy_to_live_1:
     docker:
@@ -219,10 +219,10 @@ jobs:
       - deploy:
           name: Deploy fala to staging
           command: |
-            .circleci/deploy_to_kubernetes staging ${ECR_DOCKER_REPO_BASE}-webapp ${ECR_DOCKER_REPO_BASE}-nginx 
+            .circleci/deploy_to_kubernetes staging ${ECR_DOCKER_REPO_BASE}
       - deploy:
           name: Notify Slack channel
-          command: .circleci/notify_slack_channel staging
+          command: .circleci/notify_slack_channel staging-live-1
 
   production_deploy_to_live_1:
     docker:
@@ -237,10 +237,10 @@ jobs:
       - deploy:
           name: Deploy fala to production
           command: |
-            .circleci/deploy_to_kubernetes production ${ECR_DOCKER_REPO_BASE}-webapp ${ECR_DOCKER_REPO_BASE}-nginx 
+            .circleci/deploy_to_kubernetes production ${ECR_DOCKER_REPO_BASE}
       - deploy:
           name: Notify Slack channel
-          command: .circleci/notify_slack_channel production
+          command: .circleci/notify_slack_channel production-live-1
 
 workflows:
   version: 2
@@ -279,6 +279,7 @@ workflows:
           requires:
             - lint
             - test
+          context: laa-fala-live-1
       # - staging_deploy_approval_for_live_1:
           # type: approval
           # requires:
@@ -286,6 +287,7 @@ workflows:
       # - staging_deploy_to_live_1:
           # requires:
             # - staging_deploy_approval_for_live_1
+          # context: laa-fala-live-1
       # - production_deploy_approval_for_live_1:
           # type: approval
           # requires:
@@ -297,3 +299,4 @@ workflows:
       # - production_deploy_to_live_1:
           # requires:
             # - production_deploy_approval_for_live_1
+          # context: laa-fala-live-1
