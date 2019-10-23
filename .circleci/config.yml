@@ -144,10 +144,10 @@ jobs:
       - deploy:
           name: Deploy fala to staging
           command: |
-            .circleci/deploy_to_kubernetes staging ${ECR_DOCKER_REPO_BASE}-webapp ${ECR_DOCKER_REPO_BASE}-nginx 
+            .circleci/deploy_to_kubernetes_live_0 staging_live_0 ${ECR_DOCKER_REPO_BASE}-webapp ${ECR_DOCKER_REPO_BASE}-nginx
       - deploy:
           name: Notify Slack channel
-          command: .circleci/notify_slack_channel staging
+          command: .circleci/notify_slack_channel staging-live-0
 
   production_deploy_to_live_0:
     docker:
@@ -165,7 +165,7 @@ jobs:
             .circleci/deploy_to_kubernetes production ${ECR_DOCKER_REPO_BASE}-webapp ${ECR_DOCKER_REPO_BASE}-nginx 
       - deploy:
           name: Notify Slack channel
-          command: .circleci/notify_slack_channel production
+          command: .circleci/notify_slack_channel production-live-0
 
   build_for_live_1:
     docker:
@@ -280,14 +280,14 @@ workflows:
             - lint
             - test
           context: laa-fala-live-1
-      # - staging_deploy_approval_for_live_1:
-          # type: approval
-          # requires:
-            # - build_for_live_1
-      # - staging_deploy_to_live_1:
-          # requires:
-            # - staging_deploy_approval_for_live_1
-          # context: laa-fala-live-1
+      - staging_deploy_approval_for_live_1:
+          type: approval
+          requires:
+            - build_for_live_1
+      - staging_deploy_to_live_1:
+          requires:
+            - staging_deploy_approval_for_live_1
+          context: laa-fala-live-1
       # - production_deploy_approval_for_live_1:
           # type: approval
           # requires:
