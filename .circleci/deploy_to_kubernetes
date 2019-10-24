@@ -3,7 +3,6 @@
 ROOT=$(dirname "$0")
 NAMESPACE="$1"
 NAMESPACE_DIR="$ROOT/../kubernetes_deploy/$NAMESPACE"
-REPO="$2"
 
 if ! [ $NAMESPACE ] ; then
 
@@ -17,8 +16,9 @@ if ! [ -d $NAMESPACE_DIR ] ; then
   exit 1;
 fi
 
-source "$ROOT/define_build_environment_variables"
-ECR_DEPLOY_IMAGE="$REPO:$safe_git_branch.$short_sha"
+if [ -z "$ECR_DEPLOY_IMAGE" ] ; then
+  source "$ROOT/define_build_environment_variables"
+fi
 
 echo "Deploying $ECR_DEPLOY_IMAGE to $NAMESPACE..."
 

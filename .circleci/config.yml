@@ -219,7 +219,7 @@ jobs:
       - deploy:
           name: Deploy fala to staging
           command: |
-            .circleci/deploy_to_kubernetes staging ${ECR_DOCKER_REPO_BASE}
+            .circleci/deploy_to_kubernetes staging
       - deploy:
           name: Notify Slack channel
           command: .circleci/notify_slack_channel staging-live-1
