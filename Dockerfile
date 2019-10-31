@@ -8,6 +8,9 @@ LABEL summary="Find A Legal Adviser" \
 RUN locale-gen "en_US.UTF-8"
 ENV LC_CTYPE=en_US.UTF-8
 
+# Runtime User
+RUN useradd --uid 1000 --user-group -m -d /home/app app
+
 # Install python and build dependencies
 RUN apt-get update && apt-get -y --force-yes install \
       build-essential \
@@ -42,5 +45,9 @@ COPY . .
 RUN ./node_modules/.bin/gulp build --production && \
     ./manage.py collectstatic --noinput
 
+# Project permissions
+RUN  chown -R app: /home/app
+
+USER 1000
 EXPOSE 8000
 CMD ["/home/app/docker/run.sh"]
