@@ -3,45 +3,24 @@ from urllib.parse import urlencode
 from collections import OrderedDict
 import requests
 
-try:
-    from django.conf import settings
-    from django.utils.translation import gettext_lazy as _
+from django.conf import settings
+from django.utils.translation import gettext_lazy as _
 
-    LAALAA_API_HOST = settings.LAALAA_API_HOST
-except ImportError:
-    from flask import current_app
-    from flask.ext.babel import lazy_gettext as _
-
-    LAALAA_API_HOST = current_app.config["LAALAA_API_HOST"]
+from cla_common.laalaa import LaalaaProviderCategoriesApiClient, LaaLaaError
 
 try:
     basestring
 except NameError:
     basestring = str
 
-PROVIDER_CATEGORY_CHOICES = (
-    ("aap", _("Claims Against Public Authorities")),
-    ("med", _("Clinical negligence")),
-    ("com", _("Community care")),
-    ("crm", _("Crime")),
-    ("deb", _("Debt")),
-    ("disc", _("Discrimination")),
-    ("edu", _("Education")),
-    ("mat", _("Family")),
-    ("fmed", _("Family mediation")),
-    ("hou", _("Housing")),
-    ("immas", _("Immigration or asylum")),
-    ("mhe", _("Mental health")),
-    ("pl", _("Prison law")),
-    ("pub", _("Public law")),
-    ("wb", _("Welfare benefits")),
-)
 
+def get_categories():
+    categories = LaalaaProviderCategoriesApiClient.singleton(settings.LAALAA_API_HOST, _).get_categories()
+    return [item for item in sorted(categories.items())]
+
+
+PROVIDER_CATEGORY_CHOICES = get_categories()
 PROVIDER_CATEGORIES = OrderedDict(PROVIDER_CATEGORY_CHOICES)
-
-
-class LaaLaaError(Exception):
-    pass
 
 
 def kwargs_to_urlparams(**kwargs):
@@ -50,7 +29,9 @@ def kwargs_to_urlparams(**kwargs):
 
 
 def laalaa_url(**kwargs):
-    return "{host}/legal-advisers/?{params}".format(host=LAALAA_API_HOST, params=kwargs_to_urlparams(**kwargs))
+    return "{host}/legal-advisers/?{params}".format(
+        host=settings.LAALAA_API_HOST, params=kwargs_to_urlparams(**kwargs)
+    )
 
 
 def laalaa_search(**kwargs):
