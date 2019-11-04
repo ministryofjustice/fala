@@ -1,4 +1,6 @@
+boto3==1.10.8
 django==1.8.4
+django-storages==1.6.5
 raven==6.9.0
 uwsgi==2.0.17
 requests==2.7.0
