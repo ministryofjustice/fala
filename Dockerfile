@@ -43,7 +43,6 @@ RUN npm install
 COPY . .
 
 RUN ./node_modules/.bin/gulp build --production && \
-    ./manage.py rewrite_paths_in_css && \
     ./manage.py collectstatic --noinput
 
 # Project permissions

@@ -18,7 +18,7 @@ spec:
       containers:
       - name: app
         image: "<to be set by deploy_to_kubernetes>"
-        command: ["python", "manage.py", "collectstatic", "--noinput"]
+        command: ["collect_static.sh"]
         env:
         - name: SECRET_KEY
           valueFrom:
