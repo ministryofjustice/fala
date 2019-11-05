@@ -109,7 +109,7 @@ WSGI_APPLICATION = "fala.wsgi.application"
 
 INSTALLED_APPS = ("django.contrib.sessions", "django.contrib.messages", "django.contrib.staticfiles", "requests")
 
-PROJECT_APPS = ("adviser", "laalaa")
+PROJECT_APPS = ("adviser", "fala", "laalaa")
 
 INSTALLED_APPS += PROJECT_APPS
 
