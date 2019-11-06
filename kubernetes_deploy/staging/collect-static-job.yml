@@ -18,7 +18,7 @@ spec:
       containers:
       - name: app
         image: "<to be set by deploy_to_kubernetes>"
-        command: ["collect_static.sh"]
+        command: ["/home/app/docker/collect_static.sh"]
         env:
         - name: SECRET_KEY
           valueFrom:
