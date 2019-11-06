@@ -17,16 +17,12 @@ class Command(BaseCommand):
             self.stdout.write("Rewriting paths in {file_path}".format(file_path=file_path))
             with open(file_path, "r") as css_file:
                 contents = css_file.read()
-                pattern = r"url\(\"{static_url}(.*?)\"\)".format(static_url=settings.STATIC_URL)
-                paths = re.findall(pattern, contents)
-                for path in paths:
-                    new_path = static(path)
-                    self.stdout.write(
-                        "  Rewriting {old_path} to {new_path}".format(
-                            old_path=settings.STATIC_URL + path, new_path=new_path
-                        )
-                    )
-                    contents = contents.replace(settings.STATIC_URL + path, new_path)
+                pattern = r"url\((\"?(?:{static_url}|\.\./)(.*?)\"?)\)".format(static_url=settings.STATIC_URL)
+                matches = re.findall(pattern, contents)
+                for url, path in matches:
+                    new_url = static(path)
+                    self.stdout.write("  Rewriting {old_url} to {new_url}".format(old_url=url, new_url=new_url))
+                    contents = contents.replace(url, new_url)
             with open(file_path, "w") as css_file:
                 css_file.write(contents)
                 self.stdout.write("  Done")
