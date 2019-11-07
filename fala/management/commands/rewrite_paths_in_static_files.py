@@ -15,7 +15,7 @@ class Command(BaseCommand):
 
     regex_patterns = {
         "css": r"url\((?P<url>\"?(?:{static_url}|\.\.)(?P<path>.*?)\"?)\)",
-        "js": r"""url\: ?['"](?P<url>(?:{static_url})(?P<path>.*?))\['"]""",
+        "js": r"""url\: ?['"](?P<url>(?:{static_url})(?P<path>.*?))['"]""",
     }
 
     def handle(self, *args, **kwargs):
