@@ -253,9 +253,9 @@ exports.FindLegalAdviser = {
     var image;
     options = options || {};
 
-    if(options.icon) {
+    if(options.icon && options.icon==='icon-location-2x') {
       image = {
-        url: '/static/images/icons/' + options.icon + '.png',
+        url: '/static/images/icons/icon-location-2x.png',
         scaledSize: new window.google.maps.Size(16, 16),
         anchor: new window.google.maps.Point(8, 8)
       };
