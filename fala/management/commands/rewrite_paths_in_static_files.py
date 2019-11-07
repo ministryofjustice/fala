@@ -33,8 +33,8 @@ class Command(BaseCommand):
                     )
                     for url, path in matches:
                         try:
-                            # Set expiry to 10 years
-                            new_url = staticfiles_storage.url(path, expire=315360000)
+                            # Set expiry to one week
+                            new_url = staticfiles_storage.url(path, expire=604800)
                         except TypeError:
                             # Backend doesn't take an expire argument, so don't pass it
                             new_url = staticfiles_storage.url(path)
