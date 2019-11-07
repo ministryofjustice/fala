@@ -2,7 +2,7 @@ import glob
 import re
 
 from django.conf import settings
-from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.contrib.staticfiles.storage import staticfiles_storage
 from django.core.management.base import BaseCommand
 
 from fala.settings.base import root
@@ -32,7 +32,12 @@ class Command(BaseCommand):
                         self.regex_patterns[file_type].format(static_url=settings.STATIC_URL), contents
                     )
                     for url, path in matches:
-                        new_url = static(path)
+                        try:
+                            # Set expiry to 10 years
+                            new_url = staticfiles_storage.url(path, expire=315360000)
+                        except TypeError:
+                            # Backend doesn't take an expire argument, so don't pass it
+                            new_url = staticfiles_storage.url(path)
                         self.stdout.write("  Rewriting {old_url} to {new_url}".format(old_url=url, new_url=new_url))
                         contents = contents.replace(url, new_url)
                 with open(file_path, "w") as static_file:
