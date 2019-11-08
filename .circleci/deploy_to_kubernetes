@@ -53,6 +53,9 @@ kubectl set image --filename="$NAMESPACE_DIR/deployment.yml" --local --output=ya
   kubectl apply \
     --filename=/dev/stdin \
     --filename="$NAMESPACE_DIR/service.yml" \
-    --filename="$NAMESPACE_DIR/ingress.yml" \
-    --filename="$NAMESPACE_DIR/collect-static-cronjob.yml"
+    --filename="$NAMESPACE_DIR/ingress.yml"
+  cat $NAMESPACE_DIR/collect-static-cronjob.yml | \
+    kubectl set image app="$ECR_DEPLOY_IMAGE" --filename=/dev/stdin --local --output=yaml | \
+    kubectl annotate kubernetes.io/change-cause="$CIRCLE_BUILD_URL" --filename=/dev/stdin --local --output=yaml | \
+    kubectl apply --record=false --filename=/dev/stdin
 
