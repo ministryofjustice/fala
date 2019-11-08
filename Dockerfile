@@ -34,6 +34,7 @@ WORKDIR /home/app
 
 # Install Python dependencies
 COPY ./requirements/base.txt ./requirements.txt
+RUN pip3 install -U setuptools pip==18.1 wheel
 RUN pip3 install --user --requirement ./requirements.txt
 
 # Install npm dependencies
