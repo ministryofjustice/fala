@@ -166,7 +166,7 @@ jobs:
       - deploy:
           name: Deploy fala to production
           command: |
-            .circleci/deploy_to_kubernetes production ${ECR_DOCKER_REPO_BASE}-webapp ${ECR_DOCKER_REPO_BASE}-nginx 
+            .circleci/deploy_to_kubernetes_live_0 production ${ECR_DOCKER_REPO_BASE}-webapp ${ECR_DOCKER_REPO_BASE}-nginx 
       - deploy:
           name: Notify Slack channel
           command: .circleci/notify_slack_channel production-live-0
