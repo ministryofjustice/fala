@@ -292,15 +292,15 @@ workflows:
           requires:
             - live-1_staging_deploy_approval
           context: laa-fala-live-1
-      # - live-1_production_deploy_approval:
-          # type: approval
-          # requires:
-            # - live-1_staging_deploy
-          # filters:
-            # branches:
-              # only:
-                # - master
-      # - live-1_production_deploy:
-          # requires:
-            # - live-1_production_deploy_approval
-          # context: laa-fala-live-1
+      - live-1_production_deploy_approval:
+          type: approval
+          requires:
+            - live-1_staging_deploy
+          filters:
+            branches:
+              only:
+                - master
+      - live-1_production_deploy:
+          requires:
+            - live-1_production_deploy_approval
+          context: laa-fala-live-1
