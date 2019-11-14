@@ -46,6 +46,9 @@ COPY . .
 RUN ./node_modules/.bin/gulp build --production && \
     ./manage.py collectstatic --noinput
 
+# Project permissions
+RUN  chown -R app: /home/app
+
 USER 1000
 EXPOSE 8000
 CMD ["/home/app/docker/run.sh"]
