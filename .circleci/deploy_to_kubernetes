@@ -1,10 +1,9 @@
-#!/bin/sh -eu
+#!/bin/bash -e
+set -o pipefail
 
 ROOT=$(dirname "$0")
 NAMESPACE="$1"
 NAMESPACE_DIR="$ROOT/../kubernetes_deploy/$NAMESPACE"
-WEBAPP_REPO="$2"
-NGINX_REPO="$3"
 
 if ! [ $NAMESPACE ] ; then
 
@@ -18,19 +17,45 @@ if ! [ -d $NAMESPACE_DIR ] ; then
   exit 1;
 fi
 
-source "$ROOT/define_build_environment_variables"
-ECR_WEBAPP_DEPLOY_IMAGE="$WEBAPP_REPO:$safe_git_branch.$short_sha"
-ECR_NGINX_DEPLOY_IMAGE="$NGINX_REPO:$safe_git_branch.$short_sha"
+if [ -z "$ECR_DEPLOY_IMAGE" ] ; then
+  source "$ROOT"/define_build_environment_variables
+fi
 
-echo "Deploying $ECR_WEBAPP_DEPLOY_IMAGE to $NAMESPACE..."
-echo "Deploying $ECR_NGINX_DEPLOY_IMAGE to $NAMESPACE..."
+echo "Deploying $ECR_DEPLOY_IMAGE to $NAMESPACE..."
 
+echo "Running jobs"
+COLLECT_STATIC=$NAMESPACE_DIR/collect-static-job.yml
+
+for JOB in $COLLECT_STATIC
+do
+  echo "Running $JOB"
+  kubectl delete -f $JOB --ignore-not-found
+  cat $JOB| \
+    kubectl set image app="$ECR_DEPLOY_IMAGE" --filename=/dev/stdin --local --output=yaml | \
+    kubectl annotate kubernetes.io/change-cause="$CIRCLE_BUILD_URL" --filename=/dev/stdin --local --output=yaml | \
+    kubectl apply --record=false --filename=/dev/stdin
+done
+
+echo "Waiting for jobs"
+if ! kubectl wait --for=condition=complete -f $COLLECT_STATIC --timeout=180s ; then
+  echo "Failed pods:"
+  kubectl get pods --field-selector=status.phase=Failed
+  FIRST_POD=$(kubectl get pods --field-selector=status.phase=Failed -o=name | head -n 1)
+  echo "
+Logs for failed pod $FIRST_POD:"
+    kubectl logs $FIRST_POD
+  exit 1
+fi
+
+echo "Deploying app"
 kubectl set image --filename="$NAMESPACE_DIR/deployment.yml" --local --output=yaml \
-  webapp="$ECR_WEBAPP_DEPLOY_IMAGE" nginx="$ECR_NGINX_DEPLOY_IMAGE" | \
+  app="$ECR_DEPLOY_IMAGE" | \
   kubectl apply \
     --filename=/dev/stdin \
     --filename="$NAMESPACE_DIR/service.yml" \
-    --filename="$NAMESPACE_DIR/ingress.yml" \
-    --filename="$NAMESPACE_DIR/dashboard.yml" \
-    --filename="$NAMESPACE_DIR/certificate.yml"
+    --filename="$NAMESPACE_DIR/ingress.yml"
+  cat $NAMESPACE_DIR/collect-static-cronjob.yml | \
+    kubectl set image app="$ECR_DEPLOY_IMAGE" --filename=/dev/stdin --local --output=yaml | \
+    kubectl annotate kubernetes.io/change-cause="$CIRCLE_BUILD_URL" --filename=/dev/stdin --local --output=yaml | \
+    kubectl apply --record=false --filename=/dev/stdin
 

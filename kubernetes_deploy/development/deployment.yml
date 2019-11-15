@@ -1,0 +1,40 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: laa-fala
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: laa-fala-app
+  template:
+    metadata:
+      labels:
+        app: laa-fala-app
+    spec:
+      containers:
+      - image: "<to be set by deploy_to_kubernetes>"
+        imagePullPolicy: Never
+        name: app
+        readinessProbe:
+          tcpSocket:
+            port: 8000
+          initialDelaySeconds: 5
+          timeoutSeconds: 1
+          periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: 8000
+          initialDelaySeconds: 5
+          timeoutSeconds: 1
+          periodSeconds: 10
+        ports:
+        - containerPort: 8000
+          name: http
+        env:
+        - name: ALLOWED_HOSTS
+          value: localhost
+        - name: GOOGLE_MAPS_API_KEY
+          value: AIzaSyDdz1B1M2-2r0CQKJPscvmNEyxGwSZkXJk
+        - name: LAALAA_API_HOST
+          value: https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk

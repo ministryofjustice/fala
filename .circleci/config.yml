@@ -1,7 +1,73 @@
 version: 2
 
 jobs:
-  build_web:
+  lint:
+    docker:
+      - image: circleci/python:3.7
+    steps:
+      - checkout
+      - run:
+          name: Setup Python environment
+          command: |
+            pip install virtualenv
+            virtualenv lint-env
+            source lint-env/bin/activate
+            pip install pip==18.1
+      - restore_cache:
+          keys:
+            - pip-v1-{{ checksum "requirements/lint.txt" }}
+      - run:
+          name: Install dependencies
+          command: |
+            source lint-env/bin/activate
+            pip install --requirement requirements/lint.txt
+      - save_cache:
+          key: pip-v1-{{ checksum "requirements/lint.txt" }}
+          paths:
+            - "~/.cache/pip"
+      - run:
+          name: Lint with flake8
+          command: |
+            source lint-env/bin/activate
+            flake8 fala
+      - run:
+          name: Check formatting with Black
+          command: |
+            source lint-env/bin/activate
+            black --check fala
+
+  test:
+    docker:
+      - image: circleci/python:3.4
+    steps:
+      - checkout
+      - run:
+          name: Setup Python environment
+          command: |
+            pip install virtualenv
+            virtualenv env
+            source env/bin/activate
+            pip install pip==18.1
+      - restore_cache:
+          keys:
+            - pip-v1-{{ checksum "requirements/base.txt" }}
+      - run:
+          name: Install dependencies
+          command: |
+            source env/bin/activate
+            pip install --requirement requirements/base.txt
+            pip check
+      - save_cache:
+          key: pip-v1-{{ checksum "requirements/base.txt" }}
+          paths:
+            - "~/.cache/pip"
+      - run:
+          name: Run unit tests
+          command: |
+            source env/bin/activate
+            python manage.py test
+
+  live-0_build_web:
     docker:
       - image: docker:17.03-git
     environment:
@@ -39,7 +105,8 @@ jobs:
           command: |
             .circleci/tag_and_push_docker_image application:$CIRCLE_SHA1 $DSD_DOCKER_REGISTRY/$DSD_DOCKER_IMAGE
             .circleci/tag_and_push_docker_image application:$CIRCLE_SHA1 ${ECR_DOCKER_REPO_BASE}-webapp
-  build_nginx:
+
+  live-0_build_nginx:
     docker:
       - image: docker:18.05.0-git
     steps:
@@ -67,72 +134,8 @@ jobs:
           command: .circleci/tag_and_push_docker_image \
               nginx:$CIRCLE_SHA1 \
               ${ECR_DOCKER_REPO_BASE}-nginx
-  lint-web:
-    docker:
-      - image: circleci/python:3.7
-    steps:
-      - checkout
-      - run:
-          name: Setup Python environment
-          command: |
-            pip install virtualenv
-            virtualenv lint-env
-            source lint-env/bin/activate
-            pip install pip==18.1
-      - restore_cache:
-          keys:
-            - pip-v1-{{ checksum "requirements/lint.txt" }}
-      - run:
-          name: Install dependencies
-          command: |
-            source lint-env/bin/activate
-            pip install --requirement requirements/lint.txt
-      - save_cache:
-          key: pip-v1-{{ checksum "requirements/lint.txt" }}
-          paths:
-            - "~/.cache/pip"
-      - run:
-          name: Lint with flake8
-          command: |
-            source lint-env/bin/activate
-            flake8 fala
-      - run:
-          name: Check formatting with Black
-          command: |
-            source lint-env/bin/activate
-            black --check fala
-  test-web:
-    docker:
-      - image: circleci/python:3.4
-    steps:
-      - checkout
-      - run:
-          name: Setup Python environment
-          command: |
-            pip install virtualenv
-            virtualenv env
-            source env/bin/activate
-            pip install pip==18.1
-      - restore_cache:
-          keys:
-            - pip-v1-{{ checksum "requirements/base.txt" }}
-      - run:
-          name: Install dependencies
-          command: |
-            source env/bin/activate
-            pip install --requirement requirements/base.txt
-            pip check
-      - save_cache:
-          key: pip-v1-{{ checksum "requirements/base.txt" }}
-          paths:
-            - "~/.cache/pip"
-      - run:
-          name: Run unit tests
-          command: |
-            source env/bin/activate
-            python manage.py test
 
-  staging_deploy:
+  live-0_staging_deploy:
     docker:
       - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
     steps:
@@ -145,12 +148,12 @@ jobs:
       - deploy:
           name: Deploy fala to staging
           command: |
-            .circleci/deploy_to_kubernetes staging ${ECR_DOCKER_REPO_BASE}-webapp ${ECR_DOCKER_REPO_BASE}-nginx
+            .circleci/deploy_to_kubernetes_live_0 staging_live_0 ${ECR_DOCKER_REPO_BASE}-webapp ${ECR_DOCKER_REPO_BASE}-nginx
       - deploy:
           name: Notify Slack channel
-          command: .circleci/notify_slack_channel staging
+          command: .circleci/notify_slack_channel staging-live-0
 
-  production_deploy:
+  live-0_production_deploy:
     docker:
       - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
     steps:
@@ -163,40 +166,141 @@ jobs:
       - deploy:
           name: Deploy fala to production
           command: |
-            .circleci/deploy_to_kubernetes production ${ECR_DOCKER_REPO_BASE}-webapp ${ECR_DOCKER_REPO_BASE}-nginx
+            .circleci/deploy_to_kubernetes_live_0 production ${ECR_DOCKER_REPO_BASE}-webapp ${ECR_DOCKER_REPO_BASE}-nginx 
       - deploy:
           name: Notify Slack channel
-          command: .circleci/notify_slack_channel production
+          command: .circleci/notify_slack_channel production-live-0
+
+  live-1_build:
+    docker:
+      - image: docker:17.03-git
+    environment:
+      DSD_DOCKER_REGISTRY: "registry.service.dsd.io"
+      DSD_DOCKER_IMAGE: "fala"
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 17.03.0-ce
+          docker_layer_caching: true
+      - run:
+          name: Login to the DSD Docker registry
+          command: |
+            docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD --email "${DOCKER_USERNAME}@digital.justice.gov.uk" $DSD_DOCKER_REGISTRY
+      - run:
+          name: Login to the ECR Docker registry
+          command: |
+            apk add --no-cache --no-progress py2-pip
+            pip install awscli
+            ecr_login="$(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)"
+            ${ecr_login}
+      - run:
+          name: Build Docker image
+          command: |
+            docker build --tag application:$CIRCLE_SHA1 \
+              --label build.git.sha=$CIRCLE_SHA1 \
+              --label build.git.branch=$CIRCLE_BRANCH \
+              --label build.url=$CIRCLE_BUILD_URL \
+              .
+      - run:
+          name: Validate Python version
+          command: docker run --rm --tty --interactive application:$CIRCLE_SHA1 python --version | grep "3.4"
+      - run:
+          name: Tag and push Docker images
+          command: |
+            .circleci/tag_and_push_docker_image application:$CIRCLE_SHA1 $DSD_DOCKER_REGISTRY/$DSD_DOCKER_IMAGE
+            .circleci/tag_and_push_docker_image application:$CIRCLE_SHA1 ${ECR_DOCKER_REPO_BASE}
+
+  live-1_staging_deploy:
+    docker:
+      - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
+    steps:
+      - checkout
+      - run:
+          name: Initialise Kubernetes staging context
+          command: |
+            setup-kube-auth
+            kubectl config use-context staging
+      - deploy:
+          name: Deploy fala to staging
+          command: |
+            .circleci/deploy_to_kubernetes staging
+      - deploy:
+          name: Notify Slack channel
+          command: .circleci/notify_slack_channel staging-live-1
+
+  live-1_production_deploy:
+    docker:
+      - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
+    steps:
+      - checkout
+      - run:
+          name: Initialise Kubernetes production context
+          command: |
+            setup-kube-auth
+            kubectl config use-context production
+      - deploy:
+          name: Deploy fala to production
+          command: |
+            .circleci/deploy_to_kubernetes production ${ECR_DOCKER_REPO_BASE}
+      - deploy:
+          name: Notify Slack channel
+          command: .circleci/notify_slack_channel production-live-1
 
 workflows:
   version: 2
   build_test_and_deploy:
     jobs:
-      - lint-web
-      - test-web
-      - build_web:
+      - lint
+      - test
+      - live-0_build_web:
           requires:
-            - test-web
-            - lint-web
-      - build_nginx:
+            - lint
+            - test
+      - live-0_build_nginx:
           requires:
-            - test-web
-      - staging_deploy_approval:
+            - lint
+            - test
+      - live-0_staging_deploy_approval:
           type: approval
           requires:
-            - build_web
-            - build_nginx
-      - staging_deploy:
+            - live-0_build_web
+            - live-0_build_nginx
+      - live-0_staging_deploy:
           requires:
-            - staging_deploy_approval
-      - production_deploy_approval:
+            - live-0_staging_deploy_approval
+      - live-0_production_deploy_approval:
           type: approval
           requires:
-            - staging_deploy
+            - live-0_staging_deploy
           filters:
             branches:
               only:
                 - master
-      - production_deploy:
+      - live-0_production_deploy:
           requires:
-            - production_deploy_approval
+            - live-0_production_deploy_approval
+      - live-1_build:
+          requires:
+            - lint
+            - test
+          context: laa-fala-live-1
+      - live-1_staging_deploy_approval:
+          type: approval
+          requires:
+            - live-1_build
+      - live-1_staging_deploy:
+          requires:
+            - live-1_staging_deploy_approval
+          context: laa-fala-live-1
+      # - live-1_production_deploy_approval:
+          # type: approval
+          # requires:
+            # - live-1_staging_deploy
+          # filters:
+            # branches:
+              # only:
+                # - master
+      # - live-1_production_deploy:
+          # requires:
+            # - live-1_production_deploy_approval
+          # context: laa-fala-live-1

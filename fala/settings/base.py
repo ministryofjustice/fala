@@ -44,9 +44,19 @@ MEDIA_ROOT = root("assets", "uploads")
 
 MEDIA_URL = "/media/"
 
-STATIC_ROOT = root("static")
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.8/howto/static-files/
+if os.environ.get("STATIC_FILES_BACKEND") == "s3":
+    STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+
+AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME")
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
+AWS_S3_REGION_NAME = os.environ.get("AWS_S3_REGION_NAME")
+AWS_DEFAULT_ACL = None
 
 STATIC_URL = "/static/"
+STATIC_ROOT = root("static")
 
 project_root = abspath(root(".."))
 
@@ -99,7 +109,7 @@ WSGI_APPLICATION = "fala.wsgi.application"
 
 INSTALLED_APPS = ("django.contrib.sessions", "django.contrib.messages", "django.contrib.staticfiles", "requests")
 
-PROJECT_APPS = ("adviser", "laalaa")
+PROJECT_APPS = ("adviser", "fala", "laalaa")
 
 INSTALLED_APPS += PROJECT_APPS
 
