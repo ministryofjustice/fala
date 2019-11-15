@@ -218,10 +218,6 @@ jobs:
       - run:
           name: Initialise Kubernetes staging context
           command: |
-            unset KUBE_ENV_PRODUCTION_CACERT
-            unset KUBE_ENV_PRODUCTION_NAME
-            unset KUBE_ENV_PRODUCTION_NAMESPACE
-            unset KUBE_ENV_PRODUCTION_TOKEN
             setup-kube-auth
             kubectl config use-context staging
       - deploy:
