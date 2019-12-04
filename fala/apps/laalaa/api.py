@@ -15,8 +15,11 @@ except NameError:
 
 
 def get_categories():
-    categories = LaalaaProviderCategoriesApiClient.singleton(settings.LAALAA_API_HOST, _).get_categories()
-    return [item for item in sorted(categories.items())]
+    if settings.LAALAA_API_HOST:
+        categories = LaalaaProviderCategoriesApiClient.singleton(settings.LAALAA_API_HOST, _).get_categories()
+        return [item for item in sorted(categories.items())]
+
+    return []
 
 
 PROVIDER_CATEGORY_CHOICES = get_categories()
