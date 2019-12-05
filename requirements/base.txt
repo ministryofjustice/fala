@@ -1,10 +1,10 @@
 boto3==1.10.8
-django==1.8.4
+django==1.11.20
 django-storages==1.6.5
 raven==6.9.0
 uwsgi==2.0.17
 requests==2.20.0
-django_jinja==1.4.1
+django_jinja==2.4.1
 logstash-formatter==0.5.14
 git+git://github.com/ministryofjustice/cla_common.git@0.3.3#egg=cla_common==0.3.3
 botocore==1.13.8
