@@ -137,7 +137,7 @@ if "SENTRY_DSN" in os.environ:
         "raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware",
     ) + MIDDLEWARE_CLASSES
 
-LAALAA_API_HOST = os.environ.get("LAALAA_API_HOST", "http://0.0.0.0:8001")
+LAALAA_API_HOST = os.environ.get("LAALAA_API_HOST", None)
 
 # Zendesk settings for feedback
 ZENDESK_API_USERNAME = os.environ.get("ZENDESK_API_USERNAME")
