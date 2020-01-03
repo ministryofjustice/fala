@@ -1,6 +1,6 @@
 FROM python:3.4
 
-ENV LC_CTYPE=en_US.UTF-8
+ENV LC_CTYPE=C.UTF-8
 
 # Runtime User
 RUN useradd --uid 1000 --user-group -m -d /home/app app
