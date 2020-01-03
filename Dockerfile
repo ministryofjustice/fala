@@ -31,11 +31,11 @@ COPY ./requirements/base.txt ./requirements.txt
 RUN pip3 install -U setuptools pip==19.1 wheel
 RUN pip3 install --user --requirement ./requirements.txt
 
-USER 1000
-
 # Install npm dependencies
 COPY package.json package-lock.json ./
+USER 1000
 RUN npm install
+USER root
 
 COPY . .
 
@@ -45,5 +45,6 @@ RUN ./node_modules/.bin/gulp build --production && \
 # Project permissions
 RUN  chown -R app: /home/app
 
+USER 1000
 EXPOSE 8000
 CMD ["/home/app/docker/run.sh"]
