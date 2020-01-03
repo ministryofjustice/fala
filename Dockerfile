@@ -1,11 +1,5 @@
-FROM ubuntu:trusty-20180712
+FROM python:3.4
 
-LABEL summary="Find A Legal Adviser" \
-      name="fala" \
-      version="1.0" \
-      maintainer="Legal Aid Agency, Get Access <laa-get-access@digital.justice.gov.uk>"
-
-RUN locale-gen "en_US.UTF-8"
 ENV LC_CTYPE=en_US.UTF-8
 
 # Runtime User
@@ -34,8 +28,10 @@ WORKDIR /home/app
 
 # Install Python dependencies
 COPY ./requirements/base.txt ./requirements.txt
-RUN pip3 install -U setuptools pip==18.1 wheel
+RUN pip3 install -U setuptools pip==19.1 wheel
 RUN pip3 install --user --requirement ./requirements.txt
+
+USER 1000
 
 # Install npm dependencies
 COPY package.json package-lock.json ./
@@ -49,6 +45,5 @@ RUN ./node_modules/.bin/gulp build --production && \
 # Project permissions
 RUN  chown -R app: /home/app
 
-USER 1000
 EXPOSE 8000
 CMD ["/home/app/docker/run.sh"]
