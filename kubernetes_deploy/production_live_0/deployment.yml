@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: laa-fala
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: laa-fala-app
@@ -13,8 +13,8 @@ spec:
         app: laa-fala-app
     spec:
       containers:
-      - image: 754256621582.dkr.ecr.eu-west-2.amazonaws.com/laa-get-access/fala:master
-        name: app
+      - image: 926803513772.dkr.ecr.eu-west-1.amazonaws.com/laa-get-access/laa-fala-webapp:master
+        name: webapp
         readinessProbe:
           tcpSocket:
             port: 8000
@@ -32,11 +32,15 @@ spec:
           name: http
         env:
         - name: ALLOWED_HOSTS
-          value: ".laa-fala-staging.apps.live-1.cloud-platform.service.justice.gov.uk .staging.find-legal-advice.justice.gov.uk"
-        - name: GOOGLE_MAPS_API_KEY
-          value: AIzaSyDdz1B1M2-2r0CQKJPscvmNEyxGwSZkXJk
+          value: ".laa-fala-production.apps.cloud-platform-live-0.k8s.integration.dsd.io .find-legal-advice.justice.gov.uk"
         - name: LAALAA_API_HOST
-          value: https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk
+          value: https://laa-legal-adviser-api-production.cloud-platform.service.justice.gov.uk
+        - name: GA_ID
+          value: "UA-37377084-6"
+        - name: DJANGO_SETTINGS_MODULE
+          value: "fala.settings.production"
+        - name: GOOGLE_MAPS_API_KEY
+          value: AIzaSyC3yE4iqalLcys8ZbjdZAPjDpcYuwd2GME
         - name: SENTRY_DSN
           valueFrom:
             secretKeyRef:
@@ -57,25 +61,22 @@ spec:
             secretKeyRef:
               name: zendesk-api
               key: ZENDESK_API_USERNAME
-        - name: STATIC_FILES_BACKEND
-          value: s3
-        - name: AWS_STORAGE_BUCKET_NAME
-          valueFrom:
-            secretKeyRef:
-              name: s3
-              key: bucket_name
-        - name: AWS_ACCESS_KEY_ID
-          valueFrom:
-            secretKeyRef:
-              name: s3
-              key: access_key_id
-        - name: AWS_SECRET_ACCESS_KEY
-          valueFrom:
-            secretKeyRef:
-              name: s3
-              key: secret_access_key
-        - name: AWS_S3_REGION_NAME
-          valueFrom:
-            secretKeyRef:
-              name: s3
-              key: region
+      - image: 926803513772.dkr.ecr.eu-west-1.amazonaws.com/laa-get-access/laa-fala-nginx:master
+        name: nginx
+        readinessProbe:
+          httpGet:
+            path: /static/ping.json
+            port: 80
+          initialDelaySeconds: 5
+          timeoutSeconds: 1
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /static/ping.json
+            port: 80
+          initialDelaySeconds: 5
+          timeoutSeconds: 1
+          periodSeconds: 10
+        ports:
+        - containerPort: 80
+          name: http

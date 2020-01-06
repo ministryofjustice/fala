@@ -1,12 +1,6 @@
-FROM ubuntu:trusty-20180712
+FROM python:3.4
 
-LABEL summary="Find A Legal Adviser" \
-      name="fala" \
-      version="1.0" \
-      maintainer="Legal Aid Agency, Get Access <laa-get-access@digital.justice.gov.uk>"
-
-RUN locale-gen "en_US.UTF-8"
-ENV LC_CTYPE=en_US.UTF-8
+ENV LC_CTYPE=C.UTF-8
 
 # Runtime User
 RUN useradd --uid 1000 --user-group -m -d /home/app app
@@ -34,12 +28,14 @@ WORKDIR /home/app
 
 # Install Python dependencies
 COPY ./requirements/base.txt ./requirements.txt
-RUN pip3 install -U setuptools pip==18.1 wheel
+RUN pip3 install -U setuptools pip==19.1 wheel
 RUN pip3 install --user --requirement ./requirements.txt
 
 # Install npm dependencies
 COPY package.json package-lock.json ./
+USER 1000
 RUN npm install
+USER root
 
 COPY . .
 
