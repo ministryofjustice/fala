@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: laa-fala-test-dashboard
-  namespace: laa-fala-staging
+  name: laa-fala-dashboard
+  namespace: laa-fala-production
   labels:
     grafana_dashboard: ""
 data:
-  laa-fala-staging-dashboard.json: |
+  laa-fala-production-dashboard.json: |
     {
       "__inputs": [
         {
@@ -446,7 +446,7 @@ data:
         ]
       },
       "timezone": "browser",
-      "title": "LAA CLA / FALA - test dashboard",
-      "uid": "87a9fc9281061289879d05928d54a80c6b57818a",
+      "title": "LAA CLA / FALA",
+      "uid": "Zr8wbp3iz",
       "version": 1
     }
