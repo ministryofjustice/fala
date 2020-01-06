@@ -300,7 +300,6 @@ workflows:
             branches:
               only:
                 - master
-                - feature/LGA-700-live-1-prod
       - live-1_production_deploy:
           requires:
             - live-1_production_deploy_approval
