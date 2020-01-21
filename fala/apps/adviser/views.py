@@ -1,6 +1,6 @@
 # coding=utf-8
 from django.conf import settings
-from django.core.urlresolvers import resolve, reverse
+from django.urls import resolve, reverse
 from django.views.generic import TemplateView
 
 from .forms import AdviserSearchForm
