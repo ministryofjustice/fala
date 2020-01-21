@@ -1,4 +1,4 @@
-FROM python:3.4
+FROM python:3.7
 
 ENV LC_CTYPE=C.UTF-8
 
@@ -20,7 +20,7 @@ RUN apt-get update && apt-get -y --force-yes install \
 
 # Install NodeJS
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
-    apt-get -y --force-yes install nodejs
+    apt-get -y --force-yes install nodejs npm
 
 ENV HOME /home/app
 ENV APP_HOME /home/app
