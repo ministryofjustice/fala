@@ -1,5 +1,5 @@
 boto3==1.10.8
-django~=2.2
+django==2.2.10
 django-storages==1.6.5
 raven==6.9.0
 uwsgi==2.0.17
