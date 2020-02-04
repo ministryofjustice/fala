@@ -32,6 +32,7 @@
     "gulp-sourcemaps": "^1.5.2",
     "gulp-util": "^3.0.6",
     "merge-stream": "^1.0.0",
+    "natives": "^1.1.6",
     "read-json-sync": "^1.1.0",
     "webpack": "^1.12.2",
     "yargs": "^3.27.0"
