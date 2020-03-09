@@ -1,11 +1,9 @@
 {% extends 'feedback/index.html' %}
 
 {% block content %}
-  <header class="page-header">
-    <h1>Thanks for your feedback</h1>
-    <p>We use the feedback to improve the service.</p>
-  </header>
-  <p class="form-action">
-    <a href="{{ url('adviser') }}" class="button">Back to home page</a>
+  <h1 class="govuk-heading-xl">Thanks for your feedback</h1>
+  <p class="govuk-body">We use the feedback to improve the service.</p>
+  <p class="govuk-body form-action">
+    <a href="{{ url('adviser') }}" class="govuk-button">Back to home page</a>
   </p>
 {% endblock %}
