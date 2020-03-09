@@ -4,7 +4,7 @@
 
 {% block content %}
   <header class="page-header">
-    <h1>Your feedback</h1>
+    <h1 class="govuk-heading-xl">Your feedback</h1>
   </header>
 
   {% if error %}
@@ -22,7 +22,7 @@
     {{ Form.group(form.feedback, 'form-group') }}
 
     <p class="form-action">
-      <button type="submit" class="button">Submit</button>
+      <button type="submit" class="govuk-button">Submit</button>
     </p>
   </form>
 {% endblock %}

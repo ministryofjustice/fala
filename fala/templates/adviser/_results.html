@@ -1,21 +1,21 @@
 {% if data and data.count and data.count > 0 %}
   <section class="legal-adviser-results">
-    <p class="results-summary">
+    <p class="govuk-body">
       {% if data.origin %}
         {% trans page_count=data.results|length, result_count=data.count %}
           Showing {{ page_count }} results around
         {% pluralize %}
           {{ result_count }} results in total. Showing {{ page_count }} results around
         {% endtrans %}
-        <span class="results-location">{{ data.origin.postcode }}</span>
+        <strong>{{ data.origin.postcode }}</strong>
         {% if  form.name.value() %}
-          {{ _('matching') }} <strong>{{ form.name.value() }}</strong>
+          {{ _('matching') }} <strong>{{ form.name.value() }}</strong>.
         {% endif %}
       {% else %}
         {% trans result_count=data.count, page_count=data.results|length, org_name=form.name.value() %}
           Showing {{ page_count }} result for <strong>{{ org_name }}</strong>
         {% pluralize %}
-          {{ result_count }} results in total. Showing {{ page_count }} results for <strong>{{ org_name }}</strong>
+          {{ result_count }} results in total. Showing {{ page_count }} results for <strong>{{ org_name }}</strong>.
         {% endtrans %}
       {% endif %}
     </p>
@@ -46,7 +46,7 @@
                   {% if item.location.type != 'Office' %}
                     <div class="org-type">{{ item.location.type|replace('Office', '') }}</div>
                   {% endif %}
-                  <p class="org-address">
+                  <p class="govuk-body-s org-address">
                     <span class="sr-only">{{ _('Address') }}:</span>
                     <span class="adr">
                       <span class="street-address">{{ item.location.address }}</span>
@@ -54,14 +54,14 @@
                       <span class="postal-code">{{ item.location.postcode }}</span>
                     </span>
                   </p>
-                  <p>
+                  <p class="govuk-body-s">
                     <span>{{ _('Helpline') }}:</span>
                     <span class="tel">{{ item.telephone }}</span>
                   </p>
                   {% if item.organisation.website %}
-                    <p>
+                    <p class="govuk-body-s">
                       <span>{{ _('Website') }}:</span>
-                      <a href="{{ item.organisation.website|human_to_url }}" class="url">
+                      <a class="govuk-link" href="{{ item.organisation.website|human_to_url }}" class="url">
                         {{ item.organisation.website|url_to_human }}
                       </a>
                     </p>
@@ -89,7 +89,7 @@
               {% if data.previous %}
                 {% set prev_page = data.previous|to_fala_page_url(current_url) %}
                 <li class="results-nav results-nav-prev">
-                  <a href="{{ prev_page|replace('organisation_', '') }}"
+                  <a class="govuk-link" href="{{ prev_page|replace('organisation_', '') }}"
                      data-page="{{ prev_page|query_to_dict('page')|first }}">
                     {{ _('Previous') }}
                   </a>
@@ -98,7 +98,7 @@
               {% if data.next %}
                 {% set next_page = data.next|to_fala_page_url(current_url) %}
                 <li class="results-nav results-nav-next">
-                  <a href="{{ next_page|replace('organisation_', '') }}"
+                  <a class="govuk-link" href="{{ next_page|replace('organisation_', '') }}"
                      data-page="{{ next_page|query_to_dict('page')|first }}">
                     {{ _('Next') }}
                   </a>
