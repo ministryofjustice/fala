@@ -1,0 +1,29 @@
+{% extends 'generic-py-base.html' %}
+
+{% block head %}
+  {{ super() }}
+  <!--[if lt IE 9]>
+    <script src="{{ static('scripts/polyfills.bundle.js') }}" type="text/javascript"></script>
+  <![endif]-->
+{% endblock %}
+
+{% block global_subheader_container %}
+  {% if self.global_subheader() %}
+    {{ super() }}
+  {% endif %}
+{% endblock %}
+
+{% block main_js %}
+  <script src="{{ static('scripts/app.bundle.js') }}"></script>
+{% endblock %}
+
+{% block template_type %}external{% endblock %}
+
+{% block govuk_logo %}
+  <div class="header-branding">
+    <a href="https://www.gov.uk" title="Go to the GOV.UK homepage" class="header-logo">
+      <img src="{{ static('images/crown-logo-black-2x.png') }}" width="35" alt="">
+      <span>HMG.UK</span>
+    </a>
+  </div>
+{% endblock %}
