@@ -17,7 +17,7 @@
   {% endif %}
   <div class="legal-adviser-search">
     <form action="">
-      {% call Form.group(form.postcode, 'form-group-plain', field_attrs={'class': 'govuk-input'}) %}
+      {% call Form.group(form.postcode, 'form-group-plain', hide_optional=True) %}
         <button type="submit" class="govuk-button" id="searchButton" name="search">Search</button>
       {% endcall %}
 
@@ -26,7 +26,7 @@
           <label class="govuk-label">{{ _('Filter by') }}</label>
         </div>
         <div class="form-row">
-          {% call Form.group(form.name, 'form-group-plain', field_attrs={'class': 'govuk-input'}) %}
+          {% call Form.group(form.name, 'form-group-plain', hide_optional=True) %}
             <button type="submit" class="govuk-button govuk-button--secondary" name="filter">Filter</button>
           {% endcall %}
         </div>
