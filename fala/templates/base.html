@@ -35,27 +35,34 @@
 {% block page_title %}{{ title }}{% endblock %}
 
 {% block proposition %}
-  <a href="{{ url('adviser') }}" class="proposition-name">{{ title }}</a>
+  <a href="{{ url('adviser') }}" class="govuk-header__link govuk-header__link--service-name">{{ title }}</a>
 {% endblock %}
 
 {% block global_subheader %}
-  <div class="global-subheader container">
-    <div class="subheader-item phase-banner">
-      <span class="phase-tag phase-tag-alpha">ALPHA</span>
-    </div>
+  <div class="govuk-phase-banner">
+    <p class="govuk-phase-banner__content">
+      <strong class="govuk-tag govuk-phase-banner__content__tag">
+        alpha
+      </strong>
+      <span class="govuk-phase-banner__text">
+        This is a new service – your <a class="govuk-link" href="https://forms.gle/Lvr3pU9BSju2LnDz8">feedback</a> will help us to improve it.
+      </span>
+    </p>
   </div>
+
 {% endblock %}
 
 {% block content %}
   <div id="google_translate_element"></div>
   <header class="page-header">
-    <h1>
-      Find a legal aid adviser <span>or family mediator</span>
+    <h1 class="govuk-heading-xl">
+      Find a legal aid adviser <br />
+      <span class="govuk-!-font-weight-regular govuk-!-font-size-36">or family mediator</span>
     </h1>
-    <p class="lede">Search for a legal adviser or family mediator with a legal aid contract in England and Wales.</p>
+    <p class="govuk-body-l">Search for a legal adviser or family mediator with a legal aid contract in England and Wales.</p>
 
-    <p>
-      <a href="https://forms.gle/Lvr3pU9BSju2LnDz8">What did you think of this service?</a> (takes 30 seconds)
+    <p class="govuk-body">
+      <a class="govuk-link" href="https://forms.gle/Lvr3pU9BSju2LnDz8">What did you think of this service?</a> (takes 30 seconds)
     </p>
   </header>
 
@@ -64,13 +71,13 @@
       {% include 'adviser/_results.html' %}
     {% endblock %}
     {% block search_form %}{% endblock %}
-    <p>If you are a provider and your details are incorrect, please contact your contract manager.</p>
+    <p class="govuk-body">If you are a provider and your details are incorrect, please contact your contract manager.</p>
   </div>
 {% endblock %}
 
 {% block support_links_items %}
-  <li><a href="https://www.gov.uk/help/cookies">Cookies</a></li>
-  <li><a href="https://www.gov.uk/government/organisations/legal-aid-agency">Legal Aid Agency</a></li>
+  <li><a class="govuk-footer__link" href="https://www.gov.uk/help/cookies">Cookies</a></li>
+  <li><a class="govuk-footer__link"  href="https://www.gov.uk/government/organisations/legal-aid-agency">Legal Aid Agency</a></li>
 {% endblock %}
 
 {% block before_main_js %}
