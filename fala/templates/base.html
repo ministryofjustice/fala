@@ -53,23 +53,27 @@
 {% endblock %}
 
 {% block content %}
-  <div id="google_translate_element"></div>
-  <h1 class="govuk-heading-xl govuk-!-margin-top-7">
-    Find a legal aid adviser <br />
-    <span class="govuk-!-font-weight-regular govuk-!-font-size-36">or family mediator</span>
-  </h1>
-  <p class="govuk-body-l">Search for a legal adviser or family mediator with a legal aid contract in England and Wales.</p>
-
-  <p class="govuk-body">
-    <a class="govuk-link" href="https://forms.gle/Lvr3pU9BSju2LnDz8">What did you think of this service?</a> (takes 30 seconds)
-  </p>
+  <div class="govuk-grid-column-full">
+    <div id="google_translate_element"></div>
+    <h1 class="govuk-heading-xl govuk-!-margin-top-7">
+      Find a legal aid adviser <br />
+      <span class="govuk-!-font-weight-regular govuk-!-font-size-36">or family mediator</span>
+    </h1>
+  </div>
+  <div class="govuk-grid-column-two-thirds">
+    <p class="govuk-body-l">Search for a legal adviser or family mediator with a legal aid contract in England and Wales.</p>
+  </div>
 
   <div class="find-legal-adviser">
-    {% block search_results %}
-      {% include 'adviser/_results.html' %}
-    {% endblock %}
-    {% block search_form %}{% endblock %}
-    <p class="govuk-body">If you are a provider and your details are incorrect, please contact your contract manager.</p>
+    <div class="govuk-grid-column-full">
+      {% block search_results %}
+        {% include 'adviser/_results.html' %}
+      {% endblock %}
+      {% block search_form %}{% endblock %}
+    </div>
+    <div class="govuk-grid-column-two-thirds">
+      <p class="govuk-body">If you are a provider and your details are incorrect, please contact your contract manager.</p>
+    </div>
   </div>
 {% endblock %}
 

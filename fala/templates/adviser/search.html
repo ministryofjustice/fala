@@ -15,34 +15,45 @@
       {% endfor %}
     {% endcall %}
   {% endif %}
-  <form action="" style="margin-bottom:1em">
-    {% call Form.group(form.postcode, 'form-group-plain', hide_optional=True) %}
-      <button type="submit" class="govuk-button" id="searchButton" name="search">Search</button>
-    {% endcall %}
+  <form action="" style="margin-top:1em" novalidate>
+    <div class="govuk-form-group">
+      {% call Form.group(form.postcode, 'form-group-plain', hide_optional=True) %}
+      {% endcall %}
+      {% call Form.group(form.name, 'form-group-plain', hide_optional=True) %}
+      {% endcall %}
+    </div>
+    <button type="submit" class="govuk-button" id="searchButton" name="search">Search</button>
 
     <div class="form-group filters">
-      <div class="form-group-label">
-        <label class="govuk-label">{{ _('Filter by') }}</label>
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+            <h2 class="govuk-fieldset__heading">
+              Filter by category
+            </h2>
+          </legend>
+          <div class="govuk-checkboxes govuk-checkboxes--small fala-tickbox-columns">
+            {% for value, label_text in form.categories.field.choices %}
+              <div class="govuk-checkboxes__item">
+                <input
+                  class="govuk-checkboxes__input"
+                  id="id_categories_{{ loop.index0 }}"
+                  name="categories"
+                  type="checkbox"
+                  value="{{ value }}"
+                  {% if value in request.GET.getlist('categories','') %}
+                    checked
+                  {% endif %}
+                >
+                <label class="govuk-label govuk-checkboxes__label" for="id_categories_{{ loop.index0 }}">
+                  {{ label_text }}
+                </label>
+              </div>
+            {% endfor %}
+          </div>
+        </fieldset>
       </div>
-      <div class="form-row">
-        {% call Form.group(form.name, 'form-group-plain', hide_optional=True) %}
-          <button type="submit" class="govuk-button govuk-button--secondary" name="filter">Filter</button>
-        {% endcall %}
-      </div>
-      <div class="grid-row">
-        <div class="column-half">
-          <fieldset class="form-group fieldset-group" style="margin-left:0">
-            <legend class="form-group-label">
-              {{ form.categories.label }}
-            </legend>
-            <ul class="form-option-list">
-              {% for org in form.categories %}
-                <li>{{ org }}</li>
-              {% endfor %}
-            </ul>
-          </fieldset>
-        </div>
-      </div>
+      <button type="submit" class="govuk-button govuk-button--secondary" name="filter">Apply filter</button>
     </div>
   </form>
 {% endblock %}
