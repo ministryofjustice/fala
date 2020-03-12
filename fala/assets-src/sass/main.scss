@@ -38,22 +38,25 @@ $govuk-typography-use-rem: false;
 
 .page-header {
   margin: 2em 0;
-
-  h1 {
-    margin: 0 0 .5em;
-
-    span {
-      display: block;
-      font-weight: 400;
-      font-size:.8em;
-    }
-  }
-}
-
-.main-content {
-  outline: 0;
 }
 
 .form-action {
   margin-top: 1em;
+}
+
+body.govuk-template__body {
+  height: auto;
+  height: initial;
+  display: block;
+  font-family: GDS Transport, Arial, sans-serif; /*temp - remove when all classes updated*/
+}
+
+.govuk-footer__copyright-logo, 
+.govuk-footer__copyright-logo:focus {
+  background: img-url('govuk-crest-2x.png') no-repeat 50% 0;
+  background-size: contain;
+}
+  
+.govuk-footer__copyright-logo:focus {
+  background-color: $govuk-focus-colour;
 }

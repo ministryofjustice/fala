@@ -1,4 +1,4 @@
-{% extends 'layouts/jinja/external.html' %}
+{% extends 'external.html' %}
 
 {% import "macros/forms.html" as Form %}
 {% import "macros/element.html" as Element %}
@@ -54,17 +54,15 @@
 
 {% block content %}
   <div id="google_translate_element"></div>
-  <header class="page-header">
-    <h1 class="govuk-heading-xl">
-      Find a legal aid adviser <br />
-      <span class="govuk-!-font-weight-regular govuk-!-font-size-36">or family mediator</span>
-    </h1>
-    <p class="govuk-body-l">Search for a legal adviser or family mediator with a legal aid contract in England and Wales.</p>
+  <h1 class="govuk-heading-xl govuk-!-margin-top-7">
+    Find a legal aid adviser <br />
+    <span class="govuk-!-font-weight-regular govuk-!-font-size-36">or family mediator</span>
+  </h1>
+  <p class="govuk-body-l">Search for a legal adviser or family mediator with a legal aid contract in England and Wales.</p>
 
-    <p class="govuk-body">
-      <a class="govuk-link" href="https://forms.gle/Lvr3pU9BSju2LnDz8">What did you think of this service?</a> (takes 30 seconds)
-    </p>
-  </header>
+  <p class="govuk-body">
+    <a class="govuk-link" href="https://forms.gle/Lvr3pU9BSju2LnDz8">What did you think of this service?</a> (takes 30 seconds)
+  </p>
 
   <div class="find-legal-adviser">
     {% block search_results %}
@@ -76,8 +74,22 @@
 {% endblock %}
 
 {% block support_links_items %}
-  <li><a class="govuk-footer__link" href="https://www.gov.uk/help/cookies">Cookies</a></li>
-  <li><a class="govuk-footer__link"  href="https://www.gov.uk/government/organisations/legal-aid-agency">Legal Aid Agency</a></li>
+  <li class="govuk-footer__inline-list-item">
+    <a class="govuk-footer__link" href="https://www.gov.uk/help/cookies">
+      Cookies
+    </a>
+  </li>
+  <li class="govuk-footer__inline-list-item">
+    <a class="govuk-footer__link"  href="https://www.gov.uk/government/organisations/legal-aid-agency">
+      Legal Aid Agency
+    </a>
+  </li>
+  <li class="govuk-footer__inline-list-item">
+    Built by
+    <a class="govuk-footer__link" href="https://mojdigital.blog.gov.uk/">
+      <abbr title="Ministry of Justice">MoJ</abbr> Digital Services
+    </a>
+  </li>
 {% endblock %}
 
 {% block before_main_js %}
