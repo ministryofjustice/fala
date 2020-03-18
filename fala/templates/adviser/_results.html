@@ -8,8 +8,10 @@
           {{ result_count }} results in total. Showing {{ page_count }} results around
         {% endtrans %}
         <strong>{{ data.origin.postcode }}</strong>
-        {% if form.name.value() %}
+        {%- if form.name.value() -%}
           {{ _('matching') }} <strong>{{ form.name.value() }}</strong>.
+        {%- else -%}
+          .
         {% endif %}
       {% elif request.GET.get('postcode','') %}
         {% set city_list = [] %}
@@ -52,18 +54,25 @@
         {% endfor %}
         {% set city_list = city_list|join('; ') %}
 
-        {% trans result_count=data.count, page_count=data.results|length, city_name=city_list %}
-          Showing {{ page_count }} result for <strong>{{ city_name }}</strong>.
-        {% pluralize %}
-          {{ result_count }} results in total. Showing {{ page_count }} results for <strong>{{ city_name }}</strong>.
-        {% endtrans %}
-      {% elif form.name.value() %}
+        {% if form.name.value() %}
+          {% trans result_count=data.count, page_count=data.results|length, org_name=form.name.value(), city_name=city_list %}
+            Showing {{ page_count }} result matching <strong>{{ org_name }}</strong> for <strong>{{ city_name }}</strong>.
+          {% pluralize %}
+            {{ result_count }} results in total. Showing {{ page_count }} results marching <strong>{{ org_name }}</strong> for <strong>{{ city_name }}</strong>.
+          {% endtrans %}
+        {% else %}
+          {% trans result_count=data.count, page_count=data.results|length, city_name=city_list %}
+            Showing {{ page_count }} result for <strong>{{ city_name }}</strong>.
+          {% pluralize %}
+            {{ result_count }} results in total. Showing {{ page_count }} results for <strong>{{ city_name }}</strong>.
+          {% endtrans %}
+        {% endif %}
+      {% else %}
         {% trans result_count=data.count, page_count=data.results|length, org_name=form.name.value() %}
           Showing {{ page_count }} result for <strong>{{ org_name }}</strong>.
         {% pluralize %}
           {{ result_count }} results in total. Showing {{ page_count }} results for <strong>{{ org_name }}</strong>.
         {% endtrans %}
-      {% else %}
       {% endif %}
     </p>
 
