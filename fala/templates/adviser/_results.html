@@ -8,14 +8,42 @@
           {{ result_count }} results in total. Showing {{ page_count }} results around
         {% endtrans %}
         <strong>{{ data.origin.postcode }}</strong>
-        {% if  form.name.value() %}
+        {% if form.name.value() %}
           {{ _('matching') }} <strong>{{ form.name.value() }}</strong>.
         {% endif %}
-      {% else %}
+      {% elif form.name.value() %}
         {% trans result_count=data.count, page_count=data.results|length, org_name=form.name.value() %}
-          Showing {{ page_count }} result for <strong>{{ org_name }}</strong>
+          Showing {{ page_count }} result for <strong>{{ org_name }}</strong>.
         {% pluralize %}
           {{ result_count }} results in total. Showing {{ page_count }} results for <strong>{{ org_name }}</strong>.
+        {% endtrans %}
+      {% else %}
+        {% set city_list = [] %}
+        {% for item in data.results %}
+          {% set location = item.location.city
+            |replace("-"," ")
+            |replace(" In "," in ")
+            |replace(" On "," on ")
+            |replace(" Cum "," cum ")
+            |replace(" Upon "," upon ")
+            |replace(" Under "," under ")
+            |replace(" Super "," super ")
+            |replace(" in ","-in-")
+            |replace(" on ","-on-")
+            |replace(" cum ","-cum-")
+            |replace(" upon ","-upon-")
+            |replace(" under ","-under-")
+            |replace(" super ","-super-") %}
+          {% if location not in city_list %}
+            {% do city_list.append( location ) %}
+          {% endif %}
+        {% endfor %}
+        {% set city_list = city_list|join('; ') %}
+
+        {% trans result_count=data.count, page_count=data.results|length, city_name=city_list %}
+          Showing {{ page_count }} result for <strong>{{ city_name }}</strong>.
+        {% pluralize %}
+          {{ result_count }} results in total. Showing {{ page_count }} results for <strong>{{ city_name }}</strong>.
         {% endtrans %}
       {% endif %}
     </p>
