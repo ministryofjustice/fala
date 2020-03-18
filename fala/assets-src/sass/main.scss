@@ -60,3 +60,39 @@ body.govuk-template__body {
 .govuk-footer__copyright-logo:focus {
   background-color: $govuk-focus-colour;
 }
+
+.laa-postcode {
+  text-transform: uppercase;
+}
+
+.fala-tickbox-columns .govuk-checkboxes__item {
+  clear:none;
+  min-width:44.63%;
+}
+
+@media only screen and (max-width: 640px) {
+  .fala-tickbox-columns .govuk-checkboxes__item {
+    min-width:42%;
+  }
+}
+
+@media only screen and (max-width: 620px) {
+  .fala-tickbox-columns .govuk-checkboxes__item:first-child {
+    /*first option is longer than others*/
+    min-width:60%;
+  }
+}
+
+.fala-tickbox-columns .govuk-checkboxes__item label.govuk-checkboxes__label {
+  min-width:100%;
+}
+
+/*below override for archaic class*/
+p.govuk-body:last-child,
+p.govuk-body-m:last-child {
+  margin-bottom:20px;
+}
+
+p.govuk-body-l:last-child {
+  margin-bottom:30px;
+}

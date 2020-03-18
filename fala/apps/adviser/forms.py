@@ -29,17 +29,17 @@ class AdviserSearchForm(forms.Form):
 
     postcode = forms.CharField(
         label=_("Enter postcode, town or city"),
-        max_length=10,
-        help_text=_("Enter a postcode, town or city"),
+        max_length=30,
+        help_text=_("For example, SW1H 9AJ"),
         required=False,
-        widget=FalaTextInput(attrs={"placeholder": _("e.g. SW1H 9AJ")}),
+        widget=FalaTextInput(attrs={"class": "govuk-input govuk-!-width-one-third laa-postcode"}),
     )
 
     name = forms.CharField(
         label=_("Organisation name"),
         max_length=100,
         required=False,
-        widget=FalaTextInput(attrs={"placeholder": _("e.g. Winthorpes")}),
+        widget=FalaTextInput(attrs={"class": "govuk-input govuk-!-width-one-third"}),
     )
 
     type = forms.MultipleChoiceField(

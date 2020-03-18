@@ -88,12 +88,10 @@
         Form field
 #}
 {% macro render_field_description(field) %}
-  {% if field and field.field.description %}
-    <div class="form-row field-help" id="field-description-{{ field.id }}">
-      <span class="field-description">
-        {{- field.field.description -}}
-      </span>
-    </div>
+  {% if field and field.help_text %}
+    <span class="govuk-hint" id="field-description-{{ field.id }}">
+      {{- field.help_text -}}
+    </span>
   {%- endif -%}
 {% endmacro %}
 
