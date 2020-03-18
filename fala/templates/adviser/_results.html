@@ -11,29 +11,41 @@
         {% if form.name.value() %}
           {{ _('matching') }} <strong>{{ form.name.value() }}</strong>.
         {% endif %}
-      {% elif form.name.value() %}
-        {% trans result_count=data.count, page_count=data.results|length, org_name=form.name.value() %}
-          Showing {{ page_count }} result for <strong>{{ org_name }}</strong>.
-        {% pluralize %}
-          {{ result_count }} results in total. Showing {{ page_count }} results for <strong>{{ org_name }}</strong>.
-        {% endtrans %}
-      {% else %}
+      {% elif request.GET.get('postcode','') %}
         {% set city_list = [] %}
         {% for item in data.results %}
+          {#
+            To prevent the same place appearing twice in the list, we harmonise the ones with commin misspellings.
+            All ones with a common middle element (e.g. by the) are hyphenated and lower cased (remove hyphens, change case, replace hyphens).
+            Thornton-Cleveleys is always hyphenated.
+            Hull is always Kingston upon Hull (not hyphenated).
+          #}
           {% set location = item.location.city
             |replace("-"," ")
+            |replace(" By The "," by the ")
+            |replace(" In The "," in the ")
+            |replace(" On The "," on the ")
+            |replace(" By "," by ")
             |replace(" In "," in ")
             |replace(" On "," on ")
             |replace(" Cum "," cum ")
             |replace(" Upon "," upon ")
             |replace(" Under "," under ")
             |replace(" Super "," super ")
+            |replace(" by the ","-by-the-")
+            |replace(" in the ","-in-the-")
+            |replace(" on the ","-on-the-")
+            |replace(" by ","-by-")
             |replace(" in ","-in-")
             |replace(" on ","-on-")
             |replace(" cum ","-cum-")
             |replace(" upon ","-upon-")
             |replace(" under ","-under-")
-            |replace(" super ","-super-") %}
+            |replace(" super ","-super-")
+            |replace("Thornton Cleveleys","Thornton-Cleveleys")
+            |replace("Hull","Kingston upon Hull")
+            |replace("Kingston-upon-Kingston upon Hull","Kingston upon Hull")
+          %}
           {% if location not in city_list %}
             {% do city_list.append( location ) %}
           {% endif %}
@@ -45,6 +57,13 @@
         {% pluralize %}
           {{ result_count }} results in total. Showing {{ page_count }} results for <strong>{{ city_name }}</strong>.
         {% endtrans %}
+      {% elif form.name.value() %}
+        {% trans result_count=data.count, page_count=data.results|length, org_name=form.name.value() %}
+          Showing {{ page_count }} result for <strong>{{ org_name }}</strong>.
+        {% pluralize %}
+          {{ result_count }} results in total. Showing {{ page_count }} results for <strong>{{ org_name }}</strong>.
+        {% endtrans %}
+      {% else %}
       {% endif %}
     </p>
 
