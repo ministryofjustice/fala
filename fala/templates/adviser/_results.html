@@ -8,7 +8,7 @@
           {{ result_count }} results in total. Showing {{ page_count }} results around
         {% endtrans %}
         <strong>{{ data.origin.postcode }}</strong>
-        {%- if form.name.value() -%}
+        {%- if form.name.value() %}
           {{ _('matching') }} <strong>{{ form.name.value() }}</strong>.
         {%- else -%}
           .
@@ -52,19 +52,19 @@
             {% do city_list.append( location ) %}
           {% endif %}
         {% endfor %}
-        {% set city_list = city_list|join('; ') %}
+        {% set city_list = "<strong>" ~ city_list|join('</strong>; <strong>') ~ "</strong>" %}
 
         {% if form.name.value() %}
-          {% trans result_count=data.count, page_count=data.results|length, org_name=form.name.value(), city_name=city_list %}
-            Showing {{ page_count }} result matching <strong>{{ org_name }}</strong> for <strong>{{ city_name }}</strong>.
+          {% trans result_count=data.count, page_count=data.results|length, org_name=form.name.value(), city_name=city_list|safe %}
+            Showing {{ page_count }} result matching <strong>{{ org_name }}</strong> for {{ city_name }}.
           {% pluralize %}
-            {{ result_count }} results in total. Showing {{ page_count }} results marching <strong>{{ org_name }}</strong> for <strong>{{ city_name }}</strong>.
+            {{ result_count }} results in total. Showing {{ page_count }} results marching <strong>{{ org_name }}</strong> for {{ city_name }}.
           {% endtrans %}
         {% else %}
-          {% trans result_count=data.count, page_count=data.results|length, city_name=city_list %}
-            Showing {{ page_count }} result for <strong>{{ city_name }}</strong>.
+          {% trans result_count=data.count, page_count=data.results|length, city_name=city_list|safe %}
+            Showing {{ page_count }} result for {{ city_name }}.
           {% pluralize %}
-            {{ result_count }} results in total. Showing {{ page_count }} results for <strong>{{ city_name }}</strong>.
+            {{ result_count }} results in total. Showing {{ page_count }} results for {{ city_name }}.
           {% endtrans %}
         {% endif %}
       {% else %}
