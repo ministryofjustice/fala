@@ -1,6 +1,8 @@
 <div class="find-legal-adviser">
-  {% block search_results %}
-    {% include 'adviser/_results.html' %}
-  {% endblock %}
-  {% block search_form %}{% endblock %}
+  <div class="govuk-grid-column-full">
+    {% block search_results %}
+      {% include 'adviser/_results.html' %}
+    {% endblock %}
+    {% block search_form %}{% endblock %}
+  </div>
 </div>
