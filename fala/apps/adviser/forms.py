@@ -32,7 +32,7 @@ class AdviserSearchForm(forms.Form):
         max_length=30,
         help_text=_("For example, SW1H 9AJ"),
         required=False,
-        widget=FalaTextInput(attrs={"class": "govuk-input govuk-!-width-one-third laa-postcode"}),
+        widget=FalaTextInput(attrs={"class": "govuk-input govuk-!-width-one-third"}),
     )
 
     name = forms.CharField(
