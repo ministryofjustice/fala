@@ -1,4 +1,34 @@
-// use govuk element style
-.goog-te-combo {
-  @extend .form-control
+select.goog-te-combo {
+  font-size: 16px;
+  font-family: "GDS Transport",Arial,sans-serif;
+  height: 2.5rem;
+  padding: 5px;
+  border: 2px solid $govuk-text-colour;
+
+  &:focus {
+    outline: 3px solid $govuk-focus-colour;
+    outline-offset: 0;
+    -webkit-box-shadow: inset 0 0 0 2px;
+    box-shadow: inset 0 0 0 2px;
+  }
+}
+
+select.goog-te-combo option {
+  display:none;
+  &[value=""],
+  &[value|=en],
+  &[value|=cy],
+  &[value|=gd],
+  &[value|=ga] {
+    display:block;
+  }
+}
+
+a.goog-logo-link:focus {
+  outline: 3px solid transparent;
+  color: $govuk-text-colour;
+  background-color: $govuk-focus-colour;
+  -webkit-box-shadow: 0 -2px $govuk-focus-colour, 0 4px $govuk-text-colour;
+  box-shadow: 0 -2px $govuk-focus-colour, 0 4px $govuk-text-colour;
+  text-decoration: none;
 }
