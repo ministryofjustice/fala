@@ -1,3 +1,4 @@
+{% set error = "500" %}
 {% extends 'base.html' %}
 
 {% block before_main_js %}{% endblock %}
@@ -6,20 +7,14 @@
 {% block page_title %}{{ _('Sorry, there is a problem with the service - Check if you can get legal aid - GOV.UK') }} - {{ super() }}{% endblock %}
 
 {% block content %}
-<div class="govuk-width-container">
-  <main class="govuk-main-wrapper govuk-main-wrapper--l" id="main-content" role="main">
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds">
-        <header class="page-header">
-          <h1 class="govuk-heading-xl">Sorry, there is a problem with the service</h1>
-        </header>
-        <p class="govuk-body">Try again later.</p>
-        <p class="govuk-body">You can also <a class="govuk-link" href="http://solicitors.lawsociety.org.uk/">find a solicitor</a> on the Law Society website.</p>
-        <p class="govuk-body">Search using your location, then select 'Accepts legal aid' to show legal aid solicitors near you.</p>
-      </div>
-    </div>
-  </main>
-</div>
+  <div class="govuk-grid-column-two-thirds">
+    <header class="page-header">
+      <h1 class="govuk-heading-xl">Sorry, there is a problem with the service</h1>
+    </header>
+    <p class="govuk-body">Try again later.</p>
+    <p class="govuk-body">You can also <a class="govuk-link" href="http://solicitors.lawsociety.org.uk/">find a solicitor</a> on the Law Society website.</p>
+    <p class="govuk-body">Search using your location, then select ‘Accepts legal aid’ to show legal aid solicitors near you.</p>
+  </div>
 {% endblock %}
 
 {% block after_main_js %}
