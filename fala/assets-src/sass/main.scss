@@ -96,3 +96,7 @@ p.govuk-body-m:last-child {
 p.govuk-body-l:last-child {
   margin-bottom:30px;
 }
+
+.gds-header__error {
+  border-bottom: 10px solid $govuk-error-colour;
+}
