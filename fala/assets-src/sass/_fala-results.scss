@@ -15,6 +15,10 @@
 
 // Common results
 
+a.org-summary:focus {
+  background:$govuk-focus-colour;
+}
+
 .find-legal-adviser {
   .street-address {
     white-space: pre;
