@@ -198,9 +198,9 @@
             <ul class="moj-pagination__list">
               {% if data.previous %}
                 {% set prev_page = data.previous|to_fala_page_url(current_url) %}
-                <li class="moj-pagination__item  moj-pagination__item--prev">
+                <li class="moj-pagination__item  moj-pagination__item--prev" style="float:left;">
                   <a class="govuk-link moj-pagination__link govuk-!-font-size-16"
-                    style="float:left;padding-bottom:2px;padding-top:2px;"
+                    style="padding-bottom:2px;"
                     href="{{ prev_page|replace('organisation_', '') }}"
                     data-page="{{ prev_page|query_to_dict('page')|first }}"
                   >
@@ -210,9 +210,9 @@
               {% endif %}
               {% if data.next %}
                 {% set next_page = data.next|to_fala_page_url(current_url) %}
-                <li class="moj-pagination__item  moj-pagination__item--next">
+                <li class="moj-pagination__item  moj-pagination__item--next" style="float:right;">
                   <a class="govuk-link moj-pagination__link govuk-!-font-size-16"
-                    style="float:right;padding-bottom:2px;padding-top:2px;"
+                    style="padding-bottom:2px;"
                     href="{{ next_page|replace('organisation_', '') }}"
                     data-page="{{ next_page|query_to_dict('page')|first }}"
                   >
