@@ -1,3 +1,18 @@
+// Map styling
+.gm-style {
+  a:focus {
+    outline: solid 2px $govuk-focus-colour;
+    background-color: $govuk-focus-colour;
+  }
+  button:focus,
+  div[role=button]:focus {
+    background-color:$govuk-focus-colour ! important;
+    outline:$govuk-focus-colour 2px solid;
+  }
+}
+
+
+
 // Common results
 
 .find-legal-adviser {
@@ -79,7 +94,8 @@
     .org-type {
       font-size: .9em;
       display: inline-block;
-      background: $pink;
+      background: $govuk-brand-colour;
+      font-weight: 700;
       padding: 2px 5px 0;
       margin-left: 10px;
       float: right;

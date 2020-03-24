@@ -108,7 +108,7 @@ $map-height: 500px;
           }
 
           &.s-highlighted {
-            background: $yellow;
+            background: $govuk-focus-colour;
           }
 
           &:first-child {
@@ -139,7 +139,7 @@ $map-height: 500px;
         height: $map-height - $_pagination-height;
 
         &:focus {
-          outline: 2px solid $yellow;
+          outline: 2px solid $govuk-focus-colour;
         }
       }
 
