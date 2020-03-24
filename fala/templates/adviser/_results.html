@@ -156,7 +156,7 @@
                   {% if item.location.type != 'Office' %}
                     <div class="org-type">{{ item.location.type|replace('Office', '') }}</div>
                   {% endif %}
-                  <p class="govuk-body-s org-address">
+                  <p class="govuk-body-s govuk-!-margin-top-0" style="padding-right:88px;">
                     <span class="govuk-visually-hidden">{{ _('Address') }}:</span>
                     <span class="adr">
                       <span class="street-address">{{ item.location.address }}</span>
@@ -177,12 +177,11 @@
                     </p>
                   {% endif %}
                   {% if item.categories|length %}
-                    <h4 class="govuk-heading-s govuk-!-font-size-16 govuk-!-margin-bottom-2">{{ _('Categories of law') }}</h4>
+                    <h4 class="govuk-heading-s govuk-!-font-size-16 govuk-!-margin-bottom-2">{{ _('Categories of law covered') }}</h4>
                     <ul class="govuk-list govuk-list--bullet govuk-!-font-size-14" role="list">
                       {% for cat in item.categories %}
                         {% if cat %}
                           <li class="govuk-!-margin-0" role="listitem">{{ cat }}</li>
-                          {%- if not loop.last %},{% endif %}
                         {% endif %}
                       {% endfor %}
                     </ul>
