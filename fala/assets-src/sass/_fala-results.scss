@@ -137,7 +137,7 @@ a.org-summary:focus {
 
       a,
       span {
-        color: $link-colour;
+        color: $govuk-link-colour;
         font-size: .9em;
         line-height: 27px;
         display: block;
@@ -262,11 +262,11 @@ a.org-summary:focus {
 
   &:link,
   &:visited {
-    color: govuk-colour("blue");
+    color: $govuk-link-colour;
   }
 
   &:hover {
-    color: govuk-colour("light-blue");
+    color: $govuk-link-hover-colour;
    }
 
   &:focus {
