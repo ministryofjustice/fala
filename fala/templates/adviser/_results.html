@@ -195,7 +195,7 @@
         {% if data.previous or data.next %}
           <nav class="search-results-pagination">
             <p class="govuk-visually-hidden" aria-labelledby="pagination-label">{{ _('Results navigation') }}</p>
-            <ul class="moj-pagination__list">
+            <ul class="moj-pagination__list" style="width:100%;">
               {% if data.previous %}
                 {% set prev_page = data.previous|to_fala_page_url(current_url) %}
                 <li class="moj-pagination__item  moj-pagination__item--prev" style="float:left;">
