@@ -100,3 +100,15 @@ p.govuk-body-l:last-child {
 .gds-header__error {
   border-bottom: 10px solid $govuk-error-colour;
 }
+
+.gm-style {
+  a:focus {
+    outline: solid 2px $govuk-focus-colour;
+    background-color: $govuk-focus-colour;
+  }
+  button:focus,
+  div[role=button]:focus {
+    background-color:$govuk-focus-colour ! important;
+    outline:$govuk-focus-colour 2px solid;
+  }
+}
