@@ -137,10 +137,6 @@ $map-height: 500px;
       .search-results-list {
         overflow: auto;
         height: $map-height - $_pagination-height;
-
-        &:focus {
-          outline: 2px solid $govuk-focus-colour;
-        }
       }
 
       .search-results-pagination {

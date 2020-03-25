@@ -39,8 +39,12 @@ a.org-summary:focus {
       list-style: none;
     }
 
+    .org-list-item:last-child {
+      border-bottom: 1px solid $govuk-border-colour;
+    }
+
     .org-list-item {
-      border-top: 1px solid $grey-3;
+      border-top: 1px solid $govuk-border-colour;
       padding: 10px 0;
       margin: 0;
       display: block;
@@ -65,7 +69,7 @@ a.org-summary:focus {
         font-weight: bold;
         color: #4a4a4a;
         border-radius: 100%;
-        border: 2px solid #ae4f47;
+        border: 2px solid #d34f45;
         float: left;
         margin: -1px 0 0 -26px;
         background: white;
@@ -80,8 +84,7 @@ a.org-summary:focus {
     }
 
     .distance {
-      color: $grey-1;
-      color: rgba($black, .6);
+      color: $govuk-text-colour;
       font-size: .8em;
       float: right;
       margin-right: -80px;

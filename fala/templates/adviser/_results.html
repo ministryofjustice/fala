@@ -146,8 +146,8 @@
                     <span class="fn org">{{ item.organisation.name }}</span>
                   </h3>
                   {% if item.distance %}
-                    <div class="distance">
-                      <span class="u-vh">{{ _('Distance') }}</span>
+                    <div class="govuk-body-s distance">
+                      <span class="govuk-visually-hidden">{{ _('Distance') }}</span>
                       {% trans miles=item.distance|round(2) %}{{ miles }} miles{% endtrans %}
                     </div>
                   {% endif %}
