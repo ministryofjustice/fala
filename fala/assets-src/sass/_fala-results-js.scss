@@ -30,7 +30,7 @@ $map-height: 500px;
     .org-categories {
       margin-top: 10px;
       padding-top: 5px;
-      border-top: 1px solid $grey-3;
+      border-top: 1px solid $govuk-border-colour;
       color: #444;
       background: none;
     }
@@ -65,7 +65,7 @@ $map-height: 500px;
       .search-results-container {
         height: $map-height;
         margin: 0 -1px;
-        border: 1px solid $grey-2;
+        border: 1px solid $govuk-border-colour;
       }
 
       .search-results {
@@ -74,7 +74,7 @@ $map-height: 500px;
         float: right;
         position: relative;
         width: $results-sidebar-width;
-        border-left: 1px solid $grey-2;
+        border-left: 1px solid $govuk-border-colour;
         margin-left: -1px;
 
         .fn {
@@ -104,7 +104,7 @@ $map-height: 500px;
           padding: 4px;
 
           &:hover {
-            background: $grey-4;
+            background: govuk-colour("light-grey");
           }
 
           &.s-highlighted {
