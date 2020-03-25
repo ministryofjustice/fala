@@ -1,30 +1,38 @@
+// Map styling
+.gm-style {
+  a:focus {
+    outline: solid 2px $govuk-focus-colour;
+    background-color: $govuk-focus-colour;
+  }
+  button:focus,
+  div[role=button]:focus {
+    background-color:$govuk-focus-colour ! important;
+    outline:$govuk-focus-colour 2px solid;
+  }
+}
+
+
+
 // Common results
 
+a.org-summary:focus {
+  background:$govuk-focus-colour;
+}
+
 .find-legal-adviser {
-  .street-address {
-    white-space: pre;
-  }
-
-  .results-summary {
-    margin: 0;
-    padding: 20px 0;
-    border-top: 1px solid $grey-2;
-  }
-
-  .org-categories {
-    font-size: .85em;
-    line-height: 1.2;
-  }
 
   .search-results-list {
     .org-list {
       margin: 0;
       padding: 0;
-      list-style: none;
+    }
+
+    .org-list-item:last-child {
+      border-bottom: 1px solid $govuk-border-colour;
     }
 
     .org-list-item {
-      border-top: 1px solid $grey-3;
+      border-top: 1px solid $govuk-border-colour;
       padding: 10px 0;
       margin: 0;
       display: block;
@@ -49,7 +57,7 @@
         font-weight: bold;
         color: #4a4a4a;
         border-radius: 100%;
-        border: 2px solid #ae4f47;
+        border: 2px solid #d34f45;
         float: left;
         margin: -1px 0 0 -26px;
         background: white;
@@ -64,33 +72,21 @@
     }
 
     .distance {
-      color: $grey-1;
-      color: rgba($black, .6);
+      color: $govuk-text-colour;
       font-size: .8em;
       float: right;
       margin-right: -80px;
     }
 
-    .org-address {
-      margin: 0 0 5px;
-      float: left;
-    }
-
     .org-type {
       font-size: .9em;
       display: inline-block;
-      background: $pink;
+      background: $govuk-brand-colour;
+      font-weight: 700;
       padding: 2px 5px 0;
       margin-left: 10px;
       float: right;
       color: white;
-    }
-
-    .org-categories {
-      background: $grey-4;
-      color: $grey-1;
-      margin: 8px 0 0 -27px;
-      padding: 7px 5px 5px 27px;
     }
 
     p {
@@ -108,43 +104,118 @@
     overflow: hidden;
     border-top: 2px solid $grey-2;
     padding-top: 10px;
+  }
+}
 
-    ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
+// Pagination
 
-    .results-nav {
-      margin: 0;
+.moj-pagination {
+  // text-align: center;
 
-      a,
-      span {
-        color: $link-colour;
-        font-size: .9em;
-        line-height: 27px;
-        display: block;
-        padding: 0 8px;
-        font-weight: bold;
-      }
+  @include govuk-media-query($from: desktop) {
 
-      a:hover {
-        text-decoration: none;
-      }
+    // Alignment adjustments
+    margin-left: - govuk-spacing(1);
+    margin-right: - govuk-spacing(1);
 
-      span {
-        font-weight: normal;
-        color: $grey-1;
-        cursor: default;
-      }
-    }
+    // Hide whitespace between elements
+    font-size: 0;
 
-    .results-nav-prev {
-      float: left;
-    }
+    // Trick to remove the need for floats
+    text-align: justify;
 
-    .results-nav-next {
-      float: right;
+    &:after {
+      content: '';
+      display: inline-block;
+      width: 100%;
     }
   }
+
+}
+
+.moj-pagination__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  @include govuk-media-query($from: desktop) {
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: middle;
+  }
+}
+
+.moj-pagination__results {
+  @include govuk-media-query($from: desktop) {
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: middle;
+  }
+}
+
+.moj-pagination__item {
+  @include govuk-font(19);
+  display: inline-block;
+}
+
+.moj-pagination__item--active,
+.moj-pagination__item--dots {
+  font-weight: bold;
+  height: 25px;
+  padding: govuk-spacing(1) govuk-spacing(2);
+  text-align: center;
+}
+
+.moj-pagination__item--dots {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.moj-pagination__item--prev .moj-pagination__link:before,
+.moj-pagination__item--next .moj-pagination__link:after {
+    display: inline-block;
+    height: 10px;
+    width: 10px;
+    border-style: solid;
+    color: govuk-colour("black");
+    background: transparent;
+    -webkit-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    content: "";
+}
+
+.moj-pagination__item--prev .moj-pagination__link:before {
+    border-width: 3px 0 0 3px;
+    margin-right: govuk-spacing(1);
+}
+
+.moj-pagination__item--next .moj-pagination__link:after {
+    border-width: 0 3px 3px 0;
+    margin-left: govuk-spacing(1);
+}
+
+.moj-pagination__link {
+  display: block;
+  padding: govuk-spacing(1);
+  text-align: center;
+  text-decoration: none;
+  min-width: 25px;
+
+  &:link,
+  &:visited {
+    color: $govuk-link-colour;
+  }
+
+  &:hover {
+    color: $govuk-link-hover-colour;
+   }
+
+  &:focus {
+    color: govuk-colour("black");
+  }
+
+}
+
+.moj-pagination__results {
+  padding: govuk-spacing(1);
 }

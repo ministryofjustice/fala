@@ -53,6 +53,7 @@
     {% endif %}
   {% endif %}
   <section class="legal-adviser-results">
+    <h2 class="govuk-visually-hidden">_('Results')</h2><!--for screen readers only-->
     <p class="govuk-body">
       {% if data.origin %}
         {% trans page_count=data.results|length, result_count=data.count %}
@@ -146,7 +147,7 @@
                   </h3>
                   {% if item.distance %}
                     <div class="distance">
-                      <span class="u-vh">{{ _('Distance') }}</span>
+                      <span class="govuk-visually-hidden">{{ _('Distance') }}</span>
                       {% trans miles=item.distance|round(2) %}{{ miles }} miles{% endtrans %}
                     </div>
                   {% endif %}
@@ -155,8 +156,8 @@
                   {% if item.location.type != 'Office' %}
                     <div class="org-type">{{ item.location.type|replace('Office', '') }}</div>
                   {% endif %}
-                  <p class="govuk-body-s org-address">
-                    <span class="sr-only">{{ _('Address') }}:</span>
+                  <p class="govuk-body-s govuk-!-margin-top-0" style="padding-right:88px;">
+                    <span class="govuk-visually-hidden">{{ _('Address') }}:</span>
                     <span class="adr">
                       <span class="street-address">{{ item.location.address }}</span>
                       <span class="city">{{ item.location.city }}</span>
@@ -176,15 +177,14 @@
                     </p>
                   {% endif %}
                   {% if item.categories|length %}
-                    <div class="org-categories" role="list">
-                      <div class="sr-only">{{ _('Categories of law') }}</div>
+                    <h4 class="govuk-heading-s govuk-!-font-size-16 govuk-!-margin-bottom-2">{{ _('Categories of law covered') }}</h4>
+                    <ul class="govuk-list govuk-list--bullet govuk-!-font-size-14" role="list">
                       {% for cat in item.categories %}
                         {% if cat %}
-                          <span class="org-category" role="listitem">{{ cat }}</span>
-                          {%- if not loop.last %},{% endif %}
+                          <li class="govuk-!-margin-0" role="listitem">{{ cat }}</li>
                         {% endif %}
                       {% endfor %}
-                    </div>
+                    </ul>
                   {% endif %}
                 </div>
               </li>
@@ -194,22 +194,29 @@
 
         {% if data.previous or data.next %}
           <nav class="search-results-pagination">
-            <ul>
+            <p class="govuk-visually-hidden" aria-labelledby="pagination-label">{{ _('Results navigation') }}</p>
+            <ul class="moj-pagination__list" style="width:100%;">
               {% if data.previous %}
                 {% set prev_page = data.previous|to_fala_page_url(current_url) %}
-                <li class="results-nav results-nav-prev">
-                  <a class="govuk-link" href="{{ prev_page|replace('organisation_', '') }}"
-                     data-page="{{ prev_page|query_to_dict('page')|first }}">
-                    {{ _('Previous') }}
+                <li class="moj-pagination__item  moj-pagination__item--prev" style="float:left;">
+                  <a class="govuk-link moj-pagination__link govuk-!-font-size-16"
+                    style="padding-bottom:2px;"
+                    href="{{ prev_page|replace('organisation_', '') }}"
+                    data-page="{{ prev_page|query_to_dict('page')|first }}"
+                  >
+                    {{ _('Previous') }}<span class="govuk-visually-hidden"> {{ _('set of pages') }}</span>
                   </a>
                 </li>
               {% endif %}
               {% if data.next %}
                 {% set next_page = data.next|to_fala_page_url(current_url) %}
-                <li class="results-nav results-nav-next">
-                  <a class="govuk-link" href="{{ next_page|replace('organisation_', '') }}"
-                     data-page="{{ next_page|query_to_dict('page')|first }}">
-                    {{ _('Next') }}
+                <li class="moj-pagination__item  moj-pagination__item--next" style="float:right;">
+                  <a class="govuk-link moj-pagination__link govuk-!-font-size-16"
+                    style="padding-bottom:2px;"
+                    href="{{ next_page|replace('organisation_', '') }}"
+                    data-page="{{ next_page|query_to_dict('page')|first }}"
+                  >
+                    {{ _('Next') }}<span class="govuk-visually-hidden"> {{ _('set of pages') }}</span>
                   </a>
                 </li>
               {% endif %}
