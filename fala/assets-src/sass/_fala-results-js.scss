@@ -137,6 +137,10 @@ $map-height: 500px;
       .search-results-list {
         overflow: auto;
         height: $map-height - $_pagination-height;
+
+        &:focus {
+          outline: none; //overrides browser default
+        }
       }
 
       .search-results-pagination {
@@ -144,7 +148,6 @@ $map-height: 500px;
         padding: 3px;
 
         @include media('>phone') {
-          background: $grey-4;
           margin: 0;
         }
       }
