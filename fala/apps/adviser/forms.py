@@ -30,7 +30,7 @@ class AdviserSearchForm(forms.Form):
     postcode = forms.CharField(
         label=_("Enter postcode, town or city"),
         max_length=30,
-        help_text=_("For example, SW1H 9AJ"),
+        help_text=_("For example, <span class='notranslate'>SW1H 9AJ</span>"),
         required=False,
         widget=FalaTextInput(attrs={"class": "govuk-input govuk-!-width-one-third"}),
     )
@@ -63,7 +63,7 @@ class AdviserSearchForm(forms.Form):
     def clean(self):
         data = self.cleaned_data
         if not data.get("postcode") and not data.get("name"):
-            raise forms.ValidationError(_("Please enter postcode or organisation name"))
+            raise forms.ValidationError(_("Enter a postcode or an organisation name"))
         return data
 
     def search(self):

@@ -25,3 +25,16 @@
     </div>
   </div>
 {% endmacro %}
+
+{% macro error(type='error', icon=None, title=None) %}
+  <div class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary">
+    {% if title %}
+      <h2 class="govuk-error-summary__title" id="error-summary-title">
+        {{ _(title) }}
+      </h2>
+    {% endif %}
+    <div class="govuk-error-summary__body">
+      {{ caller() }}
+    </div>
+  </div>
+{% endmacro %}
