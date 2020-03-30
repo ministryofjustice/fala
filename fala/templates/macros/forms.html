@@ -89,7 +89,7 @@
 #}
 {% macro render_field_description(field) %}
   {% if field and field.help_text %}
-    <span class="govuk-hint" id="field-description-{{ field.id }}">
+    <span class="govuk-hint" id="field-description-{{ field.name }}">
       {{- field.help_text | safe -}}
     </span>
   {%- endif -%}
