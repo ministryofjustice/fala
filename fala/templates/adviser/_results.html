@@ -1,5 +1,8 @@
 {% if data and data.count and data.count > 0 %}
   {% if data.origin.postcode %}
+    {#
+      These are repeated below
+    #}
     {% if data.origin.postcode.startswith("IM") %}
       <div class="govuk-warning-text">
         <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
@@ -264,6 +267,26 @@
           Legal Aid is different in Guernsey. Visit
           <a class="govuk-link" href="https://www.gov.gg/legalaid">gov.gg</a>
           for information about the process in Guernsey.
+      </strong>
+    </div>
+  {% elif searched_postcode.startswith("BT") %}
+    <div class="govuk-warning-text">
+      <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+      <strong class="govuk-warning-text__text">
+        <span class="govuk-warning-text__assistive">Warning </span>
+          Legal Aid is different in Northern Ireland. Visit
+          <a class="govuk-link" href="https://www.nidirect.gov.uk/articles/legal-aid-schemes">nidirect.gov.uk</a>
+          for more information.
+      </strong>
+    </div>
+  {% elif searched_postcode[:2] in ("AB","DD","DG","EH","FK","G1","G2","G3","G4","G5","G6","G7","G8","G9","G0","HS","IV","KA","KW","KY","ML","PA","PH","TD","ZE",) %}
+    <div class="govuk-warning-text">
+      <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+      <strong class="govuk-warning-text__text">
+        <span class="govuk-warning-text__assistive">Warning </span>
+          Legal Aid is different in Scotland. Visit
+          <a class="govuk-link" href="https://www.mygov.scot/legal-aid/">mygov.scot</a>
+          for more information.
       </strong>
     </div>
   {% endif %}
