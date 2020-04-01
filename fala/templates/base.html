@@ -54,7 +54,30 @@
 
 {% block content %}
   <div class="govuk-grid-column-full">
-    <div id="google_translate_element"></div>
+    <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
+
+    {% if form.errors and form.errors['__all__'] %}
+      {% call Element.error('error', title='There is a problem') %}
+        {% for k, error in form.errors.items() %}
+          {{ error | 
+          replace("errorlist nonfield","govuk-list govuk-error-summary__list") | 
+          replace("Enter a postcode or an organisation name",'<a href="#id_postcode" onclick="errorScroll(&quot;fala_questions&quot;,&quot;id_postcode&quot;);return false;" >Enter a postcode or an organisation name</a>') | 
+          safe }}
+        {% endfor %}
+      {% endcall %}
+    {% elif (form.postcode and form.postcode.errors) or (form.name and form.name.errors) %}
+      <div class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary">
+        <h2 class="govuk-error-summary__title" id="error-summary-title">
+          There is a problem
+        </h2>
+        <div class="govuk-error-summary__body">
+          <ul class="govuk-list govuk-error-summary__list">
+            {{ Form.render_field_errors_for_summary(form.postcode) }}
+            {{ Form.render_field_errors_for_summary(form.name) }}
+          </ul>
+        </div>
+      </div>
+    {% endif %}
     <h1 class="govuk-heading-xl govuk-!-margin-top-7">
       Find a legal aid adviser <br />
       <span class="govuk-!-font-weight-regular govuk-!-font-size-36">or family mediator</span>
@@ -131,4 +154,10 @@
     }
   </script>
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script>
+    function errorScroll(s,f) {
+      document.getElementById(s).scrollIntoView();
+      document.getElementById(f).focus();
+    }
+  </script>
 {% endblock %}
