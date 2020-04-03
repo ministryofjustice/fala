@@ -68,17 +68,17 @@ class AdviserSearchForm(forms.Form):
             msg1 = "This service does not cover "
             msg2 = "Try a postcode, town or city in England or Wales."
             x = "England or Wales. "
-            if re.search("^[Bb][Tt][0-9]", data.get("postcode")):
+            if re.search("^\s*[Bb]\s*[Tt]\s*[0-9]", data.get("postcode")):
                 x = "Northern Ireland. "
-            elif re.search("[Ii][Mm][0-9]", data.get("postcode")):
+            elif re.search("^\s*[Ii]\s*[Mm]\s*[0-9]", data.get("postcode")):
                 x = "the Isle of Man. "
-            elif re.search("[Jj][Ee][0-9]", data.get("postcode")):
+            elif re.search("^\s*[Jj]\s*[Ee]\s*[0-9]", data.get("postcode")):
                 x = "Jersey. "
-            elif re.search("[Gg][Yy][1][0]", data.get("postcode")):
+            elif re.search("^\s*[Gg]\s*[Yy]\s*[1]\s*[0]", data.get("postcode")):
                 x = "Sark or Guernsey. "
-            elif re.search("[Gg][Yy][9]", data.get("postcode")):
+            elif re.search("^\s*[Gg]\s*[Yy]\s*[9]", data.get("postcode")):
                 x = "Alderney or Guernsey. "
-            elif re.search("[Gg][Yy][0-8]", data.get("postcode")):
+            elif re.search("^\s*[Gg]\s*[Yy]\s*[0-8]", data.get("postcode")):
                 x = "Guernsey. "
             if x != "England or Wales. ":
                 self.add_error("postcode", u"%s %s" % (_(" ".join((msg1,x))), _(msg2)))
