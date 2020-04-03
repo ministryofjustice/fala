@@ -65,16 +65,23 @@ class AdviserSearchForm(forms.Form):
         if not data.get("postcode") and not data.get("name"):
             raise forms.ValidationError(_("Enter a postcode or an organisation name"))
         else:
-            x = "England or Wales"
-            if re.search("[bB][tT][0-9]", data.get("postcode")):
-                x = "Northern Ireland"
-            if (x!="England or Wales"):
-              self.add_error(
-                  "postcode", u"%s %s" % (
-                      _("This service does not cover Northern Ireland."),
-                      _("Try a postcode, town or city in England or Wales.")
-                  )
-              )
+            msg1 = "This service does not cover "
+            msg2 = "Try a postcode, town or city in England or Wales."
+            x = "England or Wales. "
+            if re.search("[Bb][Tt][0-9]", data.get("postcode")):
+                x = "Northern Ireland. "
+            elif re.search("[Ii][Mm][0-9]", data.get("postcode")):
+                x = "the Isle of Man. "
+            elif re.search("[Jj][Ee][0-9]", data.get("postcode")):
+                x = "Jersey. "
+            elif re.search("[Gg][Yy][1][0]", data.get("postcode")):
+                x = "Sark or Guernsey. "
+            elif re.search("[Gg][Yy][9]", data.get("postcode")):
+                x = "Alderney or Guernsey. "
+            elif re.search("[Gg][Yy][0-8]", data.get("postcode")):
+                x = "Guernsey. "
+            if x != "England or Wales. ":
+                self.add_error("postcode", u"%s %s %s" % (_(msg1), _(x), _(msg2)))
         return data
 
     def search(self):
