@@ -3,7 +3,7 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 
 import laalaa.api as laalaa
-
+import re
 
 SEARCH_TYPE_CHOICES = [("location", _("Location")), ("organisation", _("Organisation"))]
 
@@ -64,48 +64,17 @@ class AdviserSearchForm(forms.Form):
         data = self.cleaned_data
         if not data.get("postcode") and not data.get("name"):
             raise forms.ValidationError(_("Enter a postcode or an organisation name"))
-        elif data.get("postcode").startswith("BT"):
-            self.add_error(
-                "postcode", u"%s %s" % (
-                    _("This service does not cover Northern Ireland."),
-                    _("Try a postcode or town name in England or Wales.")
-                )
-            )
-        elif data.get("postcode").startswith("IM"):
-            self.add_error(
-                "postcode", u"%s %s" % (
-                    _("This service does not cover the Isle of Man."),
-                    _("Try a postcode or town name in England or Wales.")
-                )
-            )
-        elif data.get("postcode").startswith("JE"):
-            self.add_error(
-                "postcode", u"%s %s" % (
-                    _("This service does not cover Jersey."),
-                    _("Try a postcode or town name in England or Wales.")
-                )
-            )
-        elif data.get("postcode").startswith("GY10"):
-            self.add_error(
-                "postcode", u"%s %s" % (
-                    _("This service does not cover Sark or Guernsey."),
-                    _("Try a postcode or town name in England or Wales.")
-                )
-            )
-        elif data.get("postcode").startswith("GY9"):
-            self.add_error(
-                "postcode", u"%s %s" % (
-                    _("This service does not cover Alderney or Guernsey."),
-                    _("Try a postcode or town name in England or Wales.")
-                )
-            )
-        elif data.get("postcode").startswith("GY"):
-            self.add_error(
-                "postcode", u"%s %s" % (
-                    _("This service does not cover Guernsey."),
-                    _("Try a postcode or town name in England or Wales.")
-                )
-            )
+        else:
+            x = "England or Wales"
+            if re.search("[bB][tT][0-9]", data.get("postcode")):
+                x = "Northern Ireland"
+            if (x!="England or Wales"):
+              self.add_error(
+                  "postcode", u"%s %s" % (
+                      _("This service does not cover Northern Ireland."),
+                      _("Try a postcode, town or city in England or Wales.")
+                  )
+              )
         return data
 
     def search(self):
