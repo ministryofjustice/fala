@@ -65,23 +65,24 @@ class AdviserSearchForm(forms.Form):
         if not data.get("postcode") and not data.get("name"):
             raise forms.ValidationError(_("Enter a postcode or an organisation name"))
         else:
+            postcodeNoSpace = data.get("postcode").replace(" ", "")
             msg1 = "This service does not cover "
             msg2 = "Try a postcode, town or city in England or Wales."
-            x = "England or Wales. "
-            if re.search(r"^\s*[Bb]\s*[Tt]\s*[0-9]", data.get("postcode")):
-                x = "Northern Ireland. "
-            elif re.search(r"^\s*[Ii]\s*[Mm]\s*[0-9]", data.get("postcode")):
-                x = "the Isle of Man. "
-            elif re.search(r"^\s*[Jj]\s*[Ee]\s*[0-9]", data.get("postcode")):
-                x = "Jersey. "
-            elif re.search(r"^\s*[Gg]\s*[Yy]\s*[1]\s*[0]", data.get("postcode")):
-                x = "Sark or Guernsey. "
-            elif re.search(r"^\s*[Gg]\s*[Yy]\s*[9]", data.get("postcode")):
-                x = "Alderney or Guernsey. "
-            elif re.search(r"^\s*[Gg]\s*[Yy]\s*[0-8]", data.get("postcode")):
-                x = "Guernsey. "
-            if x != "England or Wales. ":
-                self.add_error("postcode", u"%s %s" % (_(" ".join((msg1, x))), _(msg2)))
+            region = "England or Wales. "
+            if re.search(r"^BT[0-9]", postcodeNoSpace, flags=re.IGNORECASE):
+                region = "Northern Ireland. "
+            elif re.search(r"^IM[0-9]", postcodeNoSpace, flags=re.IGNORECASE):
+                region = "the Isle of Man. "
+            elif re.search(r"^JE[0-9]", postcodeNoSpace, flags=re.IGNORECASE):
+                region = "Jersey. "
+            elif re.search(r"^GY[1][0]", postcodeNoSpace, flags=re.IGNORECASE):
+                region = "Sark or Guernsey. "
+            elif re.search(r"^GY[9]", postcodeNoSpace, flags=re.IGNORECASE):
+                region = "Alderney or Guernsey. "
+            elif re.search(r"^GY[0-8]", postcodeNoSpace, flags=re.IGNORECASE):
+                region = "Guernsey. "
+            if region != "England or Wales. ":
+                self.add_error("postcode", u"%s %s" % (_(" ".join((msg1, region))), _(msg2)))
         return data
 
     def search(self):
