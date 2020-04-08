@@ -61,7 +61,8 @@
         {% for k, error in form.errors.items() %}
           {{ error | 
           replace("errorlist nonfield","govuk-list govuk-error-summary__list") | 
-          replace("Enter a postcode or an organisation name",'<a href="#id_postcode" onclick="errorScroll(&quot;fala_questions&quot;,&quot;id_postcode&quot;);return false;" >Enter a postcode or an organisation name</a>') | 
+          replace("<li>",'<a href="#id_postcode" onclick="errorScroll(&quot;fala_questions&quot;,&quot;id_postcode&quot;);return false;" >') | 
+          replace("</li>",'</a>') | 
           safe }}
         {% endfor %}
       {% endcall %}

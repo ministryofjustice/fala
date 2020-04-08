@@ -3,7 +3,7 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 
 import laalaa.api as laalaa
-
+import re
 
 SEARCH_TYPE_CHOICES = [("location", _("Location")), ("organisation", _("Organisation"))]
 
@@ -64,6 +64,25 @@ class AdviserSearchForm(forms.Form):
         data = self.cleaned_data
         if not data.get("postcode") and not data.get("name"):
             raise forms.ValidationError(_("Enter a postcode or an organisation name"))
+        else:
+            postcodeNoSpace = data.get("postcode").replace(" ", "")
+            msg1 = "This service does not cover "
+            msg2 = "Try a postcode, town or city in England or Wales."
+            region = "England or Wales. "
+            if re.search(r"^BT[0-9]", postcodeNoSpace, flags=re.IGNORECASE):
+                region = "Northern Ireland. "
+            elif re.search(r"^IM[0-9]", postcodeNoSpace, flags=re.IGNORECASE):
+                region = "the Isle of Man. "
+            elif re.search(r"^JE[0-9]", postcodeNoSpace, flags=re.IGNORECASE):
+                region = "Jersey. "
+            elif re.search(r"^GY[1][0]", postcodeNoSpace, flags=re.IGNORECASE):
+                region = "Sark or Guernsey. "
+            elif re.search(r"^GY[9]", postcodeNoSpace, flags=re.IGNORECASE):
+                region = "Alderney or Guernsey. "
+            elif re.search(r"^GY[0-8]", postcodeNoSpace, flags=re.IGNORECASE):
+                region = "Guernsey. "
+            if region != "England or Wales. ":
+                self.add_error("postcode", u"%s %s" % (_(" ".join((msg1, region))), _(msg2)))
         return data
 
     def search(self):
