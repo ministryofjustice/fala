@@ -125,8 +125,11 @@
   {% if GA_ID %}
     <script>
       ga('create', '{{ GA_ID }}', 'auto');
+      console.log("cookie code: ga('create', '{{ GA_ID }}', 'auto');")
       ga('set', 'location', window.location.href.replace(/postcode=[^&]+/gi, 'postcode=redacted'));
+      console.log("cookie code: ga('set', 'location', window.location.href.replace(/postcode=[^&]+/gi, 'postcode=redacted'));")
       ga('send', 'pageview');
+      console.log("cookie code: ga('send', 'pageview');")
     </script>
   {% endif %}
   <script src="//maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}"></script>
@@ -141,7 +144,9 @@
   {% if GA_ID %}
     <script>
       ga('create', '{{ GA_ID }}', 'auto');
+      console.log("cookie code: ga('create', '{{ GA_ID }}', 'auto');")
       ga('send', 'pageview');
+      console.log("cookie code: ga('send', 'pageview');")
     </script>
   {% endif %}
   <script>
