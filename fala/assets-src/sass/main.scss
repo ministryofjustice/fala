@@ -105,14 +105,15 @@ p.govuk-body-l:last-child {
   background: govuk-colour("white");
   display: none;
 
+}
+
+.js-enabled .laa-cookie-banner {
+  display:block;
+
   &.laa-cookies-accepted {
     display:none;
   }
   &.laa-cookies-rejected {
     display:none;
   }
-}
-
-.js-enabled .laa-cookie-banner {
-  display:block;
 }

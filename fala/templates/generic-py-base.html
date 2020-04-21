@@ -11,7 +11,7 @@
   <body class="govuk-template__body ">
     <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
     <header class="govuk-header " role="banner" data-module="govuk-header">
-      <div id="cookie-message" class="laa-cookie-banner" data-module="cookie-banner" role="region" aria-label="cookie banner" style="display: block;">
+      <div id="cookie-message" class="laa-cookie-banner" data-module="cookie-banner" role="region" aria-label="cookie banner">
         <div class="govuk-width-container govuk-!-padding-top-3">
           <div class="govuk-grid-row">
             <div class=" govuk-grid-column-three-quarters">
@@ -19,7 +19,7 @@
                 <span class="govuk-heading-m">{% trans %}Cookies on Check if you can get Legal Aid{% endtrans %}</span>
                 <p class="govuk-body">
                   {% set cookie_info_url = '/cookies' %}
-                  {% trans %}We use <a class="govuk-link" href="{{ cookie_info_url }}">cookies to collect information</a> about how you use GOV.UK.{% endtrans %}
+                  {% trans %}We use cookies to collect information about how you use GOV.UK.{% endtrans %}
                   {% trans %}We use this information to make the website work as well as possible and improve government services.{% endtrans %}
                 </p>
               </div>
@@ -100,7 +100,7 @@
         $("#cookieAccept").click(function() {
           $(".laa-cookie-banner").addClass("laa-cookies-accepted");
         });
-        $("#cookieAReject").click(function() {
+        $("#cookieReject").click(function() {
           $(".laa-cookie-banner").addClass("laa-cookies-rejected");
         });
       });
