@@ -124,12 +124,16 @@
   {{ super() }}
   <script>
     function performGoogleAnalyticalTasks() {
-      ga('create', '{{ GA_ID }}', 'auto');
-      ga('set', 'location', window.location.href.replace(/postcode=[^&]+/gi, 'postcode=redacted'));
-      ga('send', 'pageview');
+      {% if GA_ID %}
+        ga('create', '{{ GA_ID }}', 'auto');
+        ga('set', 'location', window.location.href.replace(/postcode=[^&]+/gi, 'postcode=redacted'));
+        ga('send', 'pageview');
+      {% else %}
+        console.log("Analyzed - no GA ID");
+      {% endif %}
     }
   </script>
-  {% if GA_ID and request.COOKIES.get('cookiePermission') == 'Allowed' %}
+  {% if request.COOKIES.get('cookiePermission') == 'Allowed' %}
     <script>
       performGoogleAnalyticalTasks()
     </script>
