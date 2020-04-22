@@ -122,20 +122,18 @@
 
 {% block before_main_js %}
   {{ super() }}
-  {% if GA_ID %}
+  {% if GA_ID and request.COOKIES.get('cookiePermission') == 'Allowed' %}
     <script>
       ga('create', '{{ GA_ID }}', 'auto');
-      console.log("cookie code: ga('create', '{{ GA_ID }}', 'auto');")
       ga('set', 'location', window.location.href.replace(/postcode=[^&]+/gi, 'postcode=redacted'));
-      console.log("cookie code: ga('set', 'location', window.location.href.replace(/postcode=[^&]+/gi, 'postcode=redacted'));")
       ga('send', 'pageview');
-      console.log("cookie code: ga('send', 'pageview');")
     </script>
-  {% else %}
+  {% endif %}
+  {% if request.COOKIES.get('cookiePermission') == 'Allowed' %}
     <script>
-      console.log("cookie code: ga('create', '{{ GA_ID }}', 'auto');")
-      console.log("cookie code: ga('set', 'location', window.location.href.replace(/postcode=[^&]+/gi, 'postcode=redacted'));")
-      console.log("cookie code: ga('send', 'pageview');")
+      console.log("cookie code: ga('create', '{{ GA_ID }}', 'auto');");
+      console.log("cookie code: ga('set', 'location', " + window.location.href.replace(/postcode=[^&]+/gi, 'postcode=redacted') + ");");
+      console.log("cookie code: ga('send', 'pageview');");
     </script>
   {% endif %}
   <script src="//maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}"></script>
@@ -147,17 +145,16 @@
 {% endblock %}
 
 {% block after_main_js %}
-  {% if GA_ID %}
+  {% if GA_ID and request.COOKIES.get('cookiePermission') == 'Allowed' %}
     <script>
       ga('create', '{{ GA_ID }}', 'auto');
-      console.log("cookie code: ga('create', '{{ GA_ID }}', 'auto');")
       ga('send', 'pageview');
-      console.log("cookie code: ga('send', 'pageview');")
     </script>
-  {% else %}
+  {% endif %}
+  {% if request.COOKIES.get('cookiePermission') == 'Allowed' %}
     <script>
-      console.log("cookie code: ga('create', '{{ GA_ID }}', 'auto');")
-      console.log("cookie code: ga('send', 'pageview');")
+      console.log("cookie code: ga('create', '{{ GA_ID }}', 'auto');");
+      console.log("cookie code: ga('send', 'pageview');");
     </script>
   {% endif %}
   <script>
