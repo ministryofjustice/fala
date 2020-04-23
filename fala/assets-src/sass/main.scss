@@ -116,3 +116,11 @@ p.govuk-body-l:last-child {
     display:none;
   }
 }
+
+.laa-hide-if-no-js {
+  display:none;
+}
+
+.js-enabled .laa-hide-if-no-js {
+  display:initial;
+}

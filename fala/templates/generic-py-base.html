@@ -127,6 +127,18 @@
           eraseCookie("cookiePermission");
           $(".laa-cookie-banner").addClass("laa-cookies-rejected");
         });
+        $("#cookieReview").click(function() {
+          $(".laa-cookie-banner").removeClass("laa-cookies-accepted").removeClass("laa-cookies-rejected");
+          $("html, body").animate(
+            { scrollTop: 0 }, 
+            "slow", 
+            "swing", 
+            function(){
+              $("#cookieAccept").focus();
+            }
+          );
+          return false;
+        });
       });
     </script>
   </body>
