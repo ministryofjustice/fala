@@ -11,12 +11,34 @@
   <body class="govuk-template__body ">
     <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
     <header class="govuk-header " role="banner" data-module="govuk-header">
-      <div id="global-cookie-message">
-        <div class="container">
-          <p class="govuk-body-s">GOV.UK uses cookies to make the site simpler. <a class="govuk-link" href="https://www.gov.uk/help/cookies">Find out more about
-            cookies.</a></p>
+      <div id="cookie-message" class="
+        laa-cookie-banner
+        {% if request.COOKIES.get('cookiePermission') == 'Allowed' %}
+          laa-cookies-accepted
+        {% endif %}
+        " data-module="cookie-banner" role="region" aria-label="cookie banner">
+        <div class="govuk-width-container govuk-!-padding-top-3">
+          <div class="govuk-grid-row">
+            <div class=" govuk-grid-column-three-quarters">
+              <div>
+                <span class="govuk-heading-m">{% trans %}Cookies on Check if you can get Legal Aid{% endtrans %}</span>
+                <p class="govuk-body">
+                  {% set cookie_info_url = '/cookies' %}
+                  {% trans %}We use cookies to collect information about how you use GOV.UK.{% endtrans %}
+                  {% trans %}We use this information to make the website work as well as possible and improve government services.{% endtrans %}
+                </p>
+              </div>
+              <button id="cookieAccept" class="no-js-hide-inline-block govuk-button govuk-!-margin-bottom-4 govuk-!-margin-right-7" type="submit" data-module="track-click" data-accept-cookies="true" data-track-category="cookieBanner" data-track-action="Cookie banner accepted">
+                {% trans %}Accept cookies{% endtrans %}
+              </button>
+              <button id="cookieReject" class="govuk-button govuk-button--secondary" role="button" data-module="track-click" data-track-category="cookieBanner" data-track-action="Cookie banner settings clicked" href="/cookie-settings">
+                {% trans %}Reject cookies{% endtrans %}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
+
       <div class="govuk-header__container govuk-width-container {% if error is defined %}gds-header__error{% endif %}">
         <div class="govuk-header__logo">
           <a href="#" class="govuk-header__link govuk-header__link--homepage">
@@ -77,5 +99,47 @@
     {% block before_main_js %}{% endblock %}
     {% block main_js %}{% endblock %}
     {% block after_main_js %}{% endblock %}
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js" type="text/javascript"></script>
+    <script>
+      function setCookie(key, value, expiry) {
+        var expires = new Date();
+        expires.setTime(expires.getTime() + (expiry * 24 * 60 * 60 * 1000));
+        document.cookie = key + '=' + value + ';expires=' + expires.toUTCString();
+      }
+
+      function getCookie(key) {
+        var keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
+        return keyValue ? keyValue[2] : null;
+      }
+
+      function eraseCookie(key) {
+        var keyValue = getCookie(key);
+        setCookie(key, keyValue, '-1');
+      }
+
+      $(function() {
+        $("#cookieAccept").click(function() {
+          setCookie("cookiePermission", "Allowed", 30);
+          $(".laa-cookie-banner").addClass("laa-cookies-accepted");
+          performGoogleAnalyticalTasks();
+        });
+        $("#cookieReject").click(function() {
+          eraseCookie("cookiePermission");
+          $(".laa-cookie-banner").addClass("laa-cookies-rejected");
+        });
+        $("#cookieReview").click(function() {
+          $(".laa-cookie-banner").removeClass("laa-cookies-accepted").removeClass("laa-cookies-rejected");
+          $("html, body").animate(
+            { scrollTop: 0 }, 
+            "slow", 
+            "swing", 
+            function(){
+              $("#cookieAccept").focus();
+            }
+          );
+          return false;
+        });
+      });
+    </script>
   </body>
 </html>

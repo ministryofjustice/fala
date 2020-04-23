@@ -100,3 +100,27 @@ p.govuk-body-l:last-child {
 .gds-header__error {
   border-bottom: 10px solid $govuk-error-colour;
 }
+
+.laa-cookie-banner {
+  background: govuk-colour("white");
+  display: none;
+}
+
+.js-enabled .laa-cookie-banner {
+  display:block;
+
+  &.laa-cookies-accepted {
+    display:none;
+  }
+  &.laa-cookies-rejected {
+    display:none;
+  }
+}
+
+.laa-hide-if-no-js {
+  display:none;
+}
+
+.js-enabled .laa-hide-if-no-js {
+  display:initial;
+}
