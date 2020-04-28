@@ -15,7 +15,7 @@ exports.FindLegalAdviser = {
 
     this._handleMQTest();
 
-    if(!this.$resultsMap.length) {
+    if($('.alert').length) {
       $('#id_postcode').focus();
       return;
     }
