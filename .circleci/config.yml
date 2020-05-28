@@ -155,10 +155,9 @@ workflows:
           context: laa-fala-live-1
       - staging_deploy_approval:
           type: approval
-          requires:
-            - build
       - staging_deploy:
           requires:
+            - build
             - staging_deploy_approval
           context: laa-fala-live-1
       - production_deploy_approval:

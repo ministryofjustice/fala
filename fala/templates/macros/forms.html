@@ -15,7 +15,7 @@
     - row_class <string> (default: '')
         Optional CSS class for `form-row` element
 #}
-{% macro group(field=None, class_='', field_attrs={}) %}
+{% macro group(field=None, class_='', field_attrs={'class':'govuk-input govuk-!-width-one-third govuk-input--error'}) %}
   {% set controlled_by = kwargs.controlled_by %}
   {% set control_value = kwargs.control_value if kwargs.control_value else '1' %}
   {% set use_row = kwargs.use_row if kwargs.use_row is defined else True %}
@@ -41,7 +41,11 @@
     {% if use_row and (field or caller) %}
       <div class="form-row {{ kwargs.row_class or '' }}">
         {% if field %}
-          {{ field }}
+          {% if (field.errors and controlled_by and not controlled_by.errors or field.errors and not controlled_by) %}
+            <input type="text" name="{{ field.name }}" value="{{ field.data }}" class="govuk-input govuk-input--error govuk-!-width-one-third" maxlength="30" id="id_{{ field.name }}">
+          {% else %}
+            <input type="text" name="{{ field.name }}" value="{{ field.data }}" class="govuk-input govuk-!-width-one-third" maxlength="30" id="id_{{ field.name }}">
+          {% endif %}
         {% endif %}
         {% if caller %}
           {{ caller() }}

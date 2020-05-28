@@ -11,7 +11,7 @@
   <form action="" style="margin-top:1em" novalidate>
     <div 
       class="govuk-form-group
-        {% if (form.postcode and form.postcode.errors) or (form.name and form.name.errors) %}
+        {% if (form.postcode and form.postcode.errors) or (form.name and form.name.errors) or (form.errors and form.errors['__all__']) %}
           govuk-form-group--error
         {% endif %}
         "
