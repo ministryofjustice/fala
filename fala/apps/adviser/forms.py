@@ -25,8 +25,6 @@ class FalaTextInput(forms.TextInput):
 
 class AdviserSearchForm(forms.Form):
 
-    error_css_class = "govuk-input--error"
-
     page = forms.IntegerField(required=False, widget=forms.HiddenInput())
 
     postcode = forms.CharField(

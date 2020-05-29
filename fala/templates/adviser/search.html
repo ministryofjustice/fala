@@ -16,10 +16,28 @@
         {% endif %}
         "
       id="fala_questions">
-      {% call Form.group(form.postcode, 'form-group-plain', hide_optional=True) %}
-      {% endcall %}
-      {% call Form.group(form.name, 'form-group-plain', hide_optional=True) %}
-      {% endcall %}
+
+      {% set errorMessage = {'err': ""} %}
+
+      {% if form.errors and form.errors['__all__'] %}
+        {% call Element.errorText() %}
+          {% for k, error in form.errors.items() %}
+            {% if errorMessage.update({'err': error | striptags}) %}{% endif %}
+          {% endfor %}
+        {% endcall %}
+      {% endif %}
+
+      {% if (form.errors and form.errors['__all__']) %}
+        {% call Form.group(form.postcode, 'form-group-plain', {'class':'govuk-input--error'}, hide_optional=True, global_error=errorMessage.err) %}
+        {% endcall %}
+        {% call Form.group(form.name, 'form-group-plain', {'class':'govuk-input--error'}, hide_optional=True, max_length='100', global_error_hidden=errorMessage.err) %}
+        {% endcall %}
+      {% else %}
+        {% call Form.group(form.postcode, 'form-group-plain', hide_optional=True) %}
+        {% endcall %}
+        {% call Form.group(form.name, 'form-group-plain', hide_optional=True, max_length='100') %}
+        {% endcall %}
+      {% endif %}
     </div>
     <button type="submit" class="govuk-button" id="searchButton" name="search">Search</button>
 
