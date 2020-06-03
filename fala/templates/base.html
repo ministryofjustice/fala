@@ -62,9 +62,8 @@
           {% for k, error in form.errors.items() %}
             {% if "Enter a postcode or an organisation name" == error | striptags %}
               <a href="#id_postcode" onclick="errorScroll(&quot;fala_questions&quot;,&quot;id_postcode&quot;);return false;" >
-                Enter a postcode
-              </a>
-              or
+                Enter a postcode</a>
+              <b>or</b>
               <a href="#id_name" onclick="errorScroll(&quot;fala_questions&quot;,&quot;id_name&quot;);return false;" >
                 an organisation name
               </a>
