@@ -50,9 +50,9 @@
       <div class="form-row {{ kwargs.row_class or '' }}">
         {% if field %}
           {% if field.errors and controlled_by and not controlled_by.errors or field.errors and not controlled_by %}
-            <input type="text" name="{{ field.name }}" value="{{ field.data }}" class="govuk-input govuk-input--error govuk-!-width-one-third {{ field_attrs.class or '' }}" maxlength="{{ kwargs.max_length or '30' }}" id="id_{{ field.name }}">
+            <input type="text" name="{{ field.name }}" value="{{ field.data or '' }}" class="govuk-input govuk-input--error govuk-!-width-one-third {{ field_attrs.class or '' }}" maxlength="{{ kwargs.max_length or '30' }}" id="id_{{ field.name }}">
           {% else %}
-            <input type="text" name="{{ field.name }}" value="{{ field.data }}" class="govuk-input govuk-!-width-one-third {{ field_attrs.class or '' }}" maxlength="{{ kwargs.max_length or '30' }}" id="id_{{ field.name }}">
+            <input type="text" name="{{ field.name }}" value="{{ field.data or '' }}" class="govuk-input govuk-!-width-one-third {{ field_attrs.class or '' }}" maxlength="{{ kwargs.max_length or '30' }}" id="id_{{ field.name }}">
           {% endif %}
         {% endif %}
         {% if caller %}
