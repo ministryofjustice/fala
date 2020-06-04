@@ -5,7 +5,7 @@
     - field <object> (optional)
         Form field
     - class_ <string> (default: '')
-        Additional CSS class (all form group wrappers get 'form-group' CSS class)
+        Additional CSS class (all form group wrappers get 'govuk-form-group' CSS class)
     - field_attrs <object> (default: {})
         Custom HTML attributes for field
     - controlled_by <string> (default: None)
@@ -19,7 +19,7 @@
   {% set controlled_by = kwargs.controlled_by %}
   {% set control_value = kwargs.control_value if kwargs.control_value else '1' %}
   {% set use_row = kwargs.use_row if kwargs.use_row is defined else True %}
-  {% set group_class = class_ if class_.startswith('form-group') else 'form-group %s' % class_ %}
+  {% set group_class = class_ if class_.startswith('govuk-form-group ') else 'govuk-form-group %s' % class_ %}
 
   <div class="
       {{- group_class -}}
