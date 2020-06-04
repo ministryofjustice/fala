@@ -11,7 +11,7 @@
   <form action="" style="margin-top:1em" novalidate>
     <div 
       class="govuk-form-group
-        {% if (form.postcode and form.postcode.errors) or (form.name and form.name.errors) or (form.errors and form.errors['__all__']) %}
+        {% if (form.errors and form.errors['__all__']) %}
           govuk-form-group--error
         {% endif %}
         "
@@ -28,14 +28,14 @@
       {% endif %}
 
       {% if (form.errors and form.errors['__all__']) %}
-        {% call Form.group(form.postcode, 'form-group-plain', {'class':'govuk-input--error'}, hide_optional=True, global_error=errorMessage.err) %}
+        {% call Form.group(form.postcode, 'govuk-form-group', {'class':'govuk-input--error'}, hide_optional=True, global_error=errorMessage.err) %}
         {% endcall %}
-        {% call Form.group(form.name, 'form-group-plain', {'class':'govuk-input--error'}, hide_optional=True, max_length='100', global_error_hidden=errorMessage.err) %}
+        {% call Form.group(form.name, 'govuk-form-group', {'class':'govuk-input--error'}, hide_optional=True, max_length='100', global_error_hidden=errorMessage.err) %}
         {% endcall %}
       {% else %}
-        {% call Form.group(form.postcode, 'form-group-plain', hide_optional=True) %}
+        {% call Form.group(form.postcode, 'govuk-form-group', hide_optional=True) %}
         {% endcall %}
-        {% call Form.group(form.name, 'form-group-plain', hide_optional=True, max_length='100') %}
+        {% call Form.group(form.name, 'govuk-form-group', hide_optional=True, max_length='100') %}
         {% endcall %}
       {% endif %}
     </div>

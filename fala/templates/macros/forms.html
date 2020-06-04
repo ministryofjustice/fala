@@ -23,7 +23,7 @@
 
   <div class="
       {{- group_class -}}
-      {%- if field and field.errors %} form-error{% endif -%}
+      {%- if field and field.errors %} govuk-form-group--error{% endif -%}
       {%- if controlled_by and control_value %} s-hidden{% endif -%}
     "
     {% if controlled_by %}data-controlled-by="{{ controlled_by.name }}" data-control-value="{{ control_value }}"{% endif %}
