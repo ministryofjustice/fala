@@ -30,6 +30,12 @@
     {% if field %}id="field-{{ field.html_name }}"{% endif %}
   >
 
+    {% if kwargs.global_error %}
+      <div aria-hidden="true" class="form-row govuk-error-message">
+        {{ kwargs.global_error }}
+      </div>
+    {% endif %}
+
     {{ render_field_label(field, kwargs.hide_label, kwargs.hide_optional) }}
 
     {{ render_field_description(field) }}
@@ -39,13 +45,11 @@
     {% endif %}
 
     {% if kwargs.global_error %}
-      <div class="form-row govuk-error-message">
-        <span class="govuk-visually-hidden">Error:</span> {{ kwargs.global_error }}
-      </div>
+      <span class="govuk-visually-hidden">Error: {{ kwargs.global_error }}</span>
     {% elif kwargs.global_error_hidden %}
       <span class="govuk-visually-hidden">Error: {{ kwargs.global_error_hidden }}</span>
     {% endif %}
-    
+
     {% if use_row and (field or caller) %}
       <div class="form-row {{ kwargs.row_class or '' }}">
         {% if field %}
@@ -85,7 +89,7 @@
       {% set label_text = field.label + ' <span class="form-optional">optional</span>' %}
     {% endif %}
 
-    <div class="form-group-label{{ (' sr-only' if hide_label else '') }}">
+    <div class="form-group-label{{ (' govuk-visually-hidden' if hide_label else '') }}">
       <label class="govuk-label" for="{{ field.id_for_label }}">{{ label_text|safe }}</label>
     </div>
   {% endif %}
