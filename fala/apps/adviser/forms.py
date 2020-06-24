@@ -17,7 +17,7 @@ ORGANISATION_TYPES_CHOICES = [
 
 class FalaTextInput(forms.TextInput):
     def __init__(self, attrs={}):
-        class_attr = " ".join([c for c in ["form-control", attrs.get("class")] if c])
+        class_attr = " ".join([c for c in ["govuk-input govuk-!-width-one-third", attrs.get("class")] if c])
         attrs.update({"class": class_attr})
 
         super(FalaTextInput, self).__init__(attrs)
@@ -32,15 +32,10 @@ class AdviserSearchForm(forms.Form):
         max_length=30,
         help_text=_("For example, <span class='notranslate'>SW1H 9AJ</span>"),
         required=False,
-        widget=FalaTextInput(attrs={"class": "govuk-input govuk-!-width-one-third"}),
+        widget=FalaTextInput(),
     )
 
-    name = forms.CharField(
-        label=_("Organisation name"),
-        max_length=100,
-        required=False,
-        widget=FalaTextInput(attrs={"class": "govuk-input govuk-!-width-one-third"}),
-    )
+    name = forms.CharField(label=_("Organisation name"), max_length=100, required=False, widget=FalaTextInput(),)
 
     type = forms.MultipleChoiceField(
         label=_("Organisation type"),

@@ -38,3 +38,7 @@
     </div>
   </div>
 {% endmacro %}
+
+{% macro errorText() %}
+  {{ caller() }}
+{% endmacro %}
