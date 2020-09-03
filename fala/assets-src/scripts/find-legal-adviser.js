@@ -17,9 +17,6 @@ function setMapHeight(setHeight) {
 $("document").ready(function(){
   var originalHeight = $(".search-results-list").height();
   setMapHeight(originalHeight);
-  $(".search-results-container").click(function(){
-    setMapHeight(originalHeight);
-  });
 });
 
 
@@ -70,6 +67,9 @@ exports.FindLegalAdviser = {
       self.$organisationListItems.find('.org-summary').attr('aria-expanded', false);
       $(this).attr('aria-expanded', true);
       self._handleItemHighlight(evt, $(this).closest('li'));
+      console.log("clicked");
+      console.log(originalHeight);
+      setMapHeight(originalHeight);
     });
 
     // Handle pagination
