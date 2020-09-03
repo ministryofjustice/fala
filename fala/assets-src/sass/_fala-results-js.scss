@@ -47,7 +47,7 @@ $map-height: 500px;
 
     .map {
       display: block;
-      height: $map-height;
+      min-height: $map-height;
       margin-bottom: 1em;
 
       @include media('<phone') {

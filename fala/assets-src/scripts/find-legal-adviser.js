@@ -2,6 +2,24 @@ var $ = require('jquery');
 var debounce = require('lodash/function/debounce');
 var find = require('lodash/collection/find');
 var reduce = require('lodash/collection/reduce');
+var wideScreen = 641;
+
+function setMapHeight(setHeight) {
+  if ($(window).width() >= wideScreen) {
+    var listHeight = $("ul.org-list").height() + $("nav.search-results-pagination").height() ;
+    if (listHeight > setHeight) setHeight = listHeight;
+    $(".search-results-container, .search-results-list").height(setHeight);
+  }
+}
+
+$("document").ready(function(){
+  var originalHeight = $("#resultsMap").height();
+  setMapHeight(originalHeight);
+  $(".search-results-container").click(function(){
+    setMapHeight(originalHeight);
+  });
+});
+
 
 exports.FindLegalAdviser = {
   el: '#resultsMap',

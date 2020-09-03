@@ -2,6 +2,7 @@
 .gm-style {
   a:focus {
     outline: solid 2px $govuk-focus-colour;
+    outline-offset: 0;
     background-color: $govuk-focus-colour;
   }
   button:focus,
