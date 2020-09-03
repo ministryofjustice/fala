@@ -2,13 +2,13 @@ var $ = require('jquery');
 var debounce = require('lodash/function/debounce');
 var find = require('lodash/collection/find');
 var reduce = require('lodash/collection/reduce');
-var wideScreen = 641;
-var originalHeight = 465;
+const wideScreen = 641;
+const originalHeight = 465;
 
 function setMapHeight(setHeight) {
   if ($(window).width() >= wideScreen) {
-    var listHeight = $("ul.org-list").height();
-    var paginationHeight = $("nav.search-results-pagination").height() + 6 + 2; /*mimicking the CSS*/
+    let listHeight = $("ul.org-list").height();
+    let paginationHeight = $("nav.search-results-pagination").height() + 6 + 2; /*mimicking the CSS*/
     if (listHeight > setHeight + paginationHeight) setHeight = listHeight;
     $(".search-results-list").height(setHeight);
     $(".search-results-container").height(setHeight + paginationHeight);
