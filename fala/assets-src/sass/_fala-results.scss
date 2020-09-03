@@ -16,8 +16,13 @@
 
 // Common results
 
-a.org-summary:focus {
-  background:$govuk-focus-colour;
+a.org-summary {
+  color:$govuk-link-colour;
+
+  &:focus {
+    background:$govuk-focus-colour;
+    color:$govuk-text-colour;
+  }
 }
 
 .find-legal-adviser {
