@@ -3,9 +3,10 @@ var debounce = require('lodash/function/debounce');
 var find = require('lodash/collection/find');
 var reduce = require('lodash/collection/reduce');
 var wideScreen = 641;
+var originalHeight = 465;
 
 function setMapHeight(setHeight) {
-  if ($(window).width() >= 641) {
+  if ($(window).width() >= wideScreen) {
     var listHeight = $("ul.org-list").height();
     var paginationHeight = $("nav.search-results-pagination").height() + 6 + 2; /*mimicking the CSS*/
     if (listHeight > setHeight + paginationHeight) setHeight = listHeight;
@@ -15,7 +16,6 @@ function setMapHeight(setHeight) {
 }
 
 $("document").ready(function(){
-  var originalHeight = $(".search-results-list").height();
   setMapHeight(originalHeight);
 });
 
@@ -67,8 +67,6 @@ exports.FindLegalAdviser = {
       self.$organisationListItems.find('.org-summary').attr('aria-expanded', false);
       $(this).attr('aria-expanded', true);
       self._handleItemHighlight(evt, $(this).closest('li'));
-      console.log("clicked");
-      console.log(originalHeight);
       setMapHeight(originalHeight);
     });
 
