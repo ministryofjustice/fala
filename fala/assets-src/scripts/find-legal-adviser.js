@@ -64,10 +64,12 @@ exports.FindLegalAdviser = {
     // Make result items expandable
     this.$organisationListItems.on('click', '.org-summary', function(evt) {
       evt.preventDefault();
+      var currentPosition = $(document).scrollTop();
       self.$organisationListItems.find('.org-summary').attr('aria-expanded', false);
       $(this).attr('aria-expanded', true);
       self._handleItemHighlight(evt, $(this).closest('li'));
       setMapHeight(originalHeight);
+      $(document).scrollTop(currentPosition);
     });
 
     // Handle pagination
