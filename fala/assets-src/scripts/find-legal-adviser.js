@@ -5,15 +5,17 @@ var reduce = require('lodash/collection/reduce');
 var wideScreen = 641;
 
 function setMapHeight(setHeight) {
-  if ($(window).width() >= wideScreen) {
-    var listHeight = $("ul.org-list").height() + $("nav.search-results-pagination").height() ;
-    if (listHeight > setHeight) setHeight = listHeight;
-    $(".search-results-container, .search-results-list").height(setHeight);
+  if ($(window).width() >= 641) {
+    var listHeight = $("ul.org-list").height();
+    var paginationHeight = $("nav.search-results-pagination").height() + 6 + 2; /*mimicking the CSS*/
+    if (listHeight > setHeight + paginationHeight) setHeight = listHeight;
+    $(".search-results-list").height(setHeight);
+    $(".search-results-container").height(setHeight + paginationHeight);
   }
 }
 
 $("document").ready(function(){
-  var originalHeight = $("#resultsMap").height();
+  var originalHeight = $(".search-results-list").height();
   setMapHeight(originalHeight);
   $(".search-results-container").click(function(){
     setMapHeight(originalHeight);
