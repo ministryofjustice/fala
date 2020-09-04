@@ -6,7 +6,10 @@ const wideScreen = 641;
 const originalHeight = 465;
 
 function setMapHeight(setHeight) {
-  if ($(window).width() >= wideScreen) {
+  $('body, html').css('overflow', 'hidden'); //remove scroll bar
+  let screenWidth = $(window).width();  //get width as per CSS
+  $('body, html').css('overflow', 'visible'); //restore scroll bar
+  if (screenWidth >= wideScreen) {
     let listHeight = $("ul.org-list").height();
     let paginationHeight = $("nav.search-results-pagination").height() + 6 + 2; /*mimicking the CSS*/
     if (listHeight > setHeight + paginationHeight) setHeight = listHeight;
