@@ -47,6 +47,7 @@ exports.FindLegalAdviser = {
 
   // Handle events which rely on media queries
   _handleMQTest: function() {
+    setMapHeight(originalHeight);
     if(window.Modernizr.mq('(min-width: 641px)')) {
       if(!this.eventsBound) {
         this.bindEvents();
