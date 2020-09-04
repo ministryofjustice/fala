@@ -47,6 +47,8 @@ $map-height: 500px;
 
     .org-details {
       outline: 0;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
     }
 
     @include media('<=tablet') {
