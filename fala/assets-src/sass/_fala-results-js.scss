@@ -45,6 +45,13 @@ $map-height: 500px;
       background: url(../images/icons/icon-location-2x.png) 0 .2em / 16px no-repeat;
     }
 
+    @include media('<=tablet') {
+      .search-results-container,
+      .search-results-list {
+        height: auto!important;
+      }
+    }
+
     .map {
       display: block;
       min-height: $map-height;
@@ -83,6 +90,10 @@ $map-height: 500px;
           padding: 8px 8px 8px 30px;
           background: white;
           outline: 0;
+
+          &:focus {
+            outline:none;
+          }
         }
 
         .s-highlighted {
