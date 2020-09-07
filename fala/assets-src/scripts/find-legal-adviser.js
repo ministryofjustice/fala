@@ -15,8 +15,6 @@ function setMapHeight(setHeight) {
     if (listHeight > setHeight + paginationHeight) setHeight = listHeight;
     $(".search-results-list").height(setHeight);
     $(".search-results-container").height(setHeight + paginationHeight);
-  } else {
-    $(".search-results-list, .search-results-container").height("");
   }
 }
 
