@@ -2,6 +2,7 @@
 .gm-style {
   a:focus {
     outline: solid 2px $govuk-focus-colour;
+    outline-offset: 0;
     background-color: $govuk-focus-colour;
   }
   button:focus,
@@ -15,8 +16,13 @@
 
 // Common results
 
-a.org-summary:focus {
-  background:$govuk-focus-colour;
+a.org-summary {
+  color:$govuk-link-colour;
+
+  &:focus {
+    background:$govuk-focus-colour;
+    color:$govuk-text-colour;
+  }
 }
 
 .find-legal-adviser {
@@ -102,8 +108,7 @@ a.org-summary:focus {
 
   .search-results-pagination {
     overflow: hidden;
-    border-top: 2px solid $grey-2;
-    padding-top: 10px;
+    border-top: 2px solid #fff;
   }
 }
 

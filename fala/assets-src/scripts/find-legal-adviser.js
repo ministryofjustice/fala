@@ -2,6 +2,26 @@ var $ = require('jquery');
 var debounce = require('lodash/function/debounce');
 var find = require('lodash/collection/find');
 var reduce = require('lodash/collection/reduce');
+const wideScreen = 641;
+const originalHeight = 465;
+
+function setMapHeight(setHeight) {
+  $('body, html').css('overflow', 'hidden'); //remove scroll bar
+  let screenWidth = $(window).width();  //get width as per CSS
+  $('body, html').css('overflow', 'visible'); //restore scroll bar
+  if (screenWidth >= wideScreen) {
+    let listHeight = $("ul.org-list").height();
+    let paginationHeight = $("nav.search-results-pagination").height() + 6 + 2; /*mimicking the CSS*/
+    if (listHeight > setHeight + paginationHeight) setHeight = listHeight;
+    $(".search-results-list").height(setHeight);
+    $(".search-results-container").height(setHeight + paginationHeight);
+  }
+}
+
+$("document").ready(function(){
+  setMapHeight(originalHeight);
+});
+
 
 exports.FindLegalAdviser = {
   el: '#resultsMap',
@@ -28,6 +48,7 @@ exports.FindLegalAdviser = {
 
   // Handle events which rely on media queries
   _handleMQTest: function() {
+    setMapHeight(originalHeight);
     if(window.Modernizr.mq('(min-width: 641px)')) {
       if(!this.eventsBound) {
         this.bindEvents();
@@ -47,9 +68,12 @@ exports.FindLegalAdviser = {
     // Make result items expandable
     this.$organisationListItems.on('click', '.org-summary', function(evt) {
       evt.preventDefault();
+      var currentPosition = $(document).scrollTop();
       self.$organisationListItems.find('.org-summary').attr('aria-expanded', false);
       $(this).attr('aria-expanded', true);
       self._handleItemHighlight(evt, $(this).closest('li'));
+      setMapHeight(originalHeight);
+      $(document).scrollTop(currentPosition);
     });
 
     // Handle pagination
