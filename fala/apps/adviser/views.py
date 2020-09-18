@@ -15,6 +15,9 @@ class AdviserView(TemplateView):
         view_name = resolve(request.path_info).url_name
         current_url = reverse(view_name)
 
+        if "error" in request.GET.keys():
+            raise Exception
+
         context.update(
             {
                 "form": form,

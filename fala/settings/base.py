@@ -3,6 +3,9 @@ import sys
 import os
 from os.path import join, abspath, dirname
 
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
 
 def here(*x):
     return join(abspath(dirname(__file__)), *x)
@@ -128,15 +131,14 @@ LOGGING = {
     "loggers": {"root": {"level": "DEBUG", "handlers": ["console"]}},
 }
 
-# RAVEN SENTRY CONFIG
+# SENTRY CONFIG
 if "SENTRY_DSN" in os.environ:
-    RAVEN_CONFIG = {"dsn": os.environ.get("SENTRY_DSN")}
-
-    INSTALLED_APPS += ("raven.contrib.django.raven_compat",)
-
-    MIDDLEWARE_CLASSES = (
-        "raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware",
-    ) + MIDDLEWARE_CLASSES
+    sentry_sdk.init(
+        dsn=os.environ.get("SENTRY_DSN"),
+        integrations=[DjangoIntegration()],
+        traces_sample_rate=1.0,
+        environment=os.environ.get("ENVIRONMENT", "unknown"),
+    )
 
 LAALAA_API_HOST = os.environ.get("LAALAA_API_HOST", None)
 
