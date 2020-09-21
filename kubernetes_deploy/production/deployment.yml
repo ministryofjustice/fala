@@ -46,7 +46,7 @@ spec:
         - name: SENTRY_DSN
           valueFrom:
             secretKeyRef:
-              name: new-sentry
+              name: sentry
               key: dsn
         - name: SECRET_KEY
           valueFrom:
