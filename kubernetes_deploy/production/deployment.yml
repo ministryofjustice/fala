@@ -37,6 +37,8 @@ spec:
           value: AIzaSyC3yE4iqalLcys8ZbjdZAPjDpcYuwd2GME
         - name: LAALAA_API_HOST
           value: https://laa-legal-adviser-api-production.cloud-platform.service.justice.gov.uk
+        - name: ENVIRONMENT
+          value: staging
         - name: GA_ID
           value: "UA-37377084-6"
         - name: DJANGO_SETTINGS_MODULE
