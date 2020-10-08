@@ -42,7 +42,13 @@
   <div class="govuk-phase-banner">
     <p class="govuk-phase-banner__content">
       <strong class="govuk-tag govuk-phase-banner__content__tag">
-        alpha
+        {% if CLA_ENV == "dev" %}
+          Development
+        {% elif CLA_ENV == "staging" %}
+          Staging
+        {% elif CLA_ENV == "production" %}
+          Beta
+        {% endif %}
       </strong>
       <span class="govuk-phase-banner__text">
         This is a new service – your <a class="govuk-link" href="https://forms.gle/Lvr3pU9BSju2LnDz8">feedback</a> will help us to improve it.
