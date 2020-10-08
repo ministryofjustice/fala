@@ -48,6 +48,8 @@
           Staging
         {% elif ENVIRONMENT == "production" %}
           Beta
+        {% else %}
+          {{ ENVIRONMENT.title() }}
         {% endif %}
       </strong>
       <span class="govuk-phase-banner__text">
