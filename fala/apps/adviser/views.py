@@ -23,7 +23,7 @@ class AdviserView(TemplateView):
                 "GA_ID": settings.GA_ID,
                 "GOOGLE_MAPS_API_KEY": settings.GOOGLE_MAPS_API_KEY,
                 "LAALAA_API_HOST": settings.LAALAA_API_HOST,
-                "ENVIRONMENT": settings.ENVIRONMENT
+                "ENVIRONMENT": settings.ENVIRONMENT,
             }
         )
 
