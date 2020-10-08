@@ -129,7 +129,7 @@ p.govuk-body-l:last-child {
   display:initial;
 }
 
-body:not(.cla-production) {
+body:not(.fala-production) {
   .govuk-header__container {
     border-bottom-color:$laa-unknown-colour;
   }
@@ -138,7 +138,7 @@ body:not(.cla-production) {
   }
 }
 
-body.cla-staging {
+body.fala-staging {
   .govuk-header__container {
     border-bottom-color:$laa-staging-colour;
   }
@@ -147,7 +147,7 @@ body.cla-staging {
   }
 }
 
-body.cla-dev {
+body.fala-dev {
   .govuk-header__container {
     border-bottom-color:$laa-dev-colour;
   }
