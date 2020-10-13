@@ -12,6 +12,7 @@ spec:
       labels:
         app: laa-fala-app
     spec:
+      terminationGracePeriodSeconds: 30
       containers:
       - image: 754256621582.dkr.ecr.eu-west-2.amazonaws.com/laa-get-access/fala:master
         name: app
@@ -27,6 +28,10 @@ spec:
           initialDelaySeconds: 5
           timeoutSeconds: 1
           periodSeconds: 10
+        lifecycle:
+          preStop:
+            exec:
+              command: ["/bin/sleep","10"]
         ports:
         - containerPort: 8000
           name: http
