@@ -5,3 +5,4 @@ DEBUG = True
 ALLOWED_HOSTS = ["localhost"]
 DEBUG_STATIC = True
 LAALAA_API_HOST = os.environ.get("LAALAA_API_HOST", "http://0.0.0.0:8001")
+ENVIRONMENT = "dev"

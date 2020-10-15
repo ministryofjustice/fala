@@ -29,6 +29,10 @@ $govuk-typography-use-rem: false;
 
 @import 'cla/elements';
 
+$laa-unknown-colour: govuk-colour("orange");
+$laa-staging-colour: govuk-colour("turquoise");
+$laa-dev-colour: govuk-colour("pink");
+
 @import 'tabs';
 @import 'fala-search';
 @import 'fala-results';
@@ -123,4 +127,31 @@ p.govuk-body-l:last-child {
 
 .js-enabled .laa-hide-if-no-js {
   display:initial;
+}
+
+body:not(.fala-production) {
+  .govuk-header__container {
+    border-bottom-color:$laa-unknown-colour;
+  }
+  .govuk-phase-banner__content__tag {
+    background-color:$laa-unknown-colour
+  }
+}
+
+body.fala-staging {
+  .govuk-header__container {
+    border-bottom-color:$laa-staging-colour;
+  }
+  .govuk-phase-banner__content__tag {
+    background-color:$laa-staging-colour;
+  }
+}
+
+body.fala-dev {
+  .govuk-header__container {
+    border-bottom-color:$laa-dev-colour;
+  }
+  .govuk-phase-banner__content__tag {
+    background-color:$laa-dev-colour;
+  }
 }
