@@ -142,7 +142,7 @@ if "SENTRY_DSN" in os.environ:
 
 LAALAA_API_HOST = os.environ.get("LAALAA_API_HOST", None)
 
-ENVIRONMENT = os.environ.get("ENVIRONMENT", "dev")
+ENVIRONMENT = os.environ.get("ENVIRONMENT", "unknown")
 
 # Zendesk settings for feedback
 ZENDESK_API_USERNAME = os.environ.get("ZENDESK_API_USERNAME")
