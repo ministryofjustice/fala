@@ -90,6 +90,7 @@ TEMPLATES = [
                 # 'django.contrib.auth.context_processors.auth',
                 "django.contrib.messages.context_processors.messages",
                 "adviser.context_processors.ga_id",
+                "adviser.context_processors.current_environment",
             ],
         },
     }
