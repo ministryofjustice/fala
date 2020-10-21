@@ -30,7 +30,7 @@ class AdviserSearchForm(forms.Form):
     postcode = forms.CharField(
         label=_("Enter postcode, town or city"),
         max_length=30,
-        help_text=_("For example, <span class='notranslate'>SW1H 9AJ</span>"),
+        help_text=_("For example, <span class='notranslate' translate='no'>SW1H 9AJ</span>"),
         required=False,
         widget=FalaTextInput(),
     )

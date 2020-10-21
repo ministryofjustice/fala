@@ -64,7 +64,7 @@
         {% pluralize %}
           {{ result_count }} results in total. Showing {{ page_count }} results around
         {% endtrans %}
-        <strong>{{ data.origin.postcode }}</strong>
+        <strong class="notranslate" translate="no">{{ data.origin.postcode }}</strong>
         {%- if form.name.value() %}
           {{ _('matching') }} <strong>{{ form.name.value() }}</strong>.
         {%- else -%}
@@ -162,9 +162,9 @@
                   <p class="govuk-body-s govuk-!-margin-top-0" style="padding-right:88px;">
                     <span class="govuk-visually-hidden">{{ _('Address') }}:</span>
                     <span class="adr">
-                      <span class="street-address">{{ item.location.address }}</span>
+                      <span class="street-address notranslate" translate="no">{{ item.location.address }}</span>
                       <span class="city">{{ item.location.city }}</span>
-                      <span class="postal-code">{{ item.location.postcode }}</span>
+                      <span class="postal-code notranslate" translate="no">{{ item.location.postcode }}</span>
                     </span>
                   </p>
                   <p class="govuk-body-s">

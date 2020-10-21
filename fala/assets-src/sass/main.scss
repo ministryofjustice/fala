@@ -155,3 +155,28 @@ body.fala-dev {
     background-color:$laa-dev-colour;
   }
 }
+
+.fala-header__logotype-crest {
+  position: relative;
+  top: -7px;
+  margin-right: 5px;
+  vertical-align: top;
+}
+
+.govuk-header__logo,
+.govuk-header__content {
+  display:inline-block;
+  float:none;
+  padding-left:0;
+  width:unset;
+}
+
+.govuk-header__logo {
+  white-space: nowrap;
+  min-width: 33.33%;
+  margin-bottom: 0;
+}
+
+.govuk-footer__copyright-logo {
+  max-width: 140px;
+}
