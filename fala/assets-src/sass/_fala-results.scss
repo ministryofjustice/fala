@@ -13,13 +13,15 @@
     outline-offset: 0;
     background-color: $govuk-focus-colour;
   }
+  button:focus img {
+    filter: contrast(10);
+  }
   button:focus,
   div[role=button]:focus {
     border-radius:0!important;
-    background-color:$govuk-focus-colour ! important;
+    background-color:$govuk-focus-colour!important;
     outline:none;
-    box-shadow: 0px 3px 0px 0px $govuk-text-colour !important;
-
+    box-shadow: 0px 3px 0px 0px $govuk-text-colour!important;
     + div {
       background-color:unset!important;
     }
