@@ -1,14 +1,13 @@
 // Map styling
-iframe ~ div div:focus-within {
-    background-color:$govuk-focus-colour;
-    box-shadow:0 -2px 0 0 $govuk-text-colour inset;
-}
-iframe ~ div div a:focus {
-    outline:none!important;
-    background-color:transparent!important;
-}
-
 .gm-style {
+  iframe ~ div div:focus-within {
+      background-color:$govuk-focus-colour;
+      box-shadow:0 -2px 0 0 $govuk-text-colour inset;
+  }
+  iframe ~ div div a:focus {
+      outline:none!important;
+      background-color:transparent!important;
+  }
   a:focus {
     outline: solid 2px $govuk-focus-colour;
     outline-offset: 0;
@@ -26,8 +25,6 @@ iframe ~ div div a:focus {
     }
   }
 }
-
-
 
 // Common results
 
