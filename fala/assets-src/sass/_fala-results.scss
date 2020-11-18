@@ -18,7 +18,7 @@
   }
   button:focus,
   div[role=button]:focus {
-    color:$govuk-text-colour!important
+    color:$govuk-text-colour!important;
     border-radius:0!important;
     background-color:$govuk-focus-colour!important;
     outline:none;
