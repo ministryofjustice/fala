@@ -1,18 +1,33 @@
 // Map styling
 .gm-style {
+  iframe ~ div div:focus-within {
+      background-color:$govuk-focus-colour;
+      box-shadow:0 -2px 0 0 $govuk-text-colour inset;
+  }
+  iframe ~ div div a:focus {
+      outline:none!important;
+      background-color:transparent!important;
+  }
   a:focus {
     outline: solid 2px $govuk-focus-colour;
     outline-offset: 0;
     background-color: $govuk-focus-colour;
   }
+  button:focus img {
+    filter: contrast(10);
+  }
   button:focus,
   div[role=button]:focus {
-    background-color:$govuk-focus-colour ! important;
-    outline:$govuk-focus-colour 2px solid;
+    color:$govuk-text-colour!important;
+    border-radius:0!important;
+    background-color:$govuk-focus-colour!important;
+    outline:none;
+    box-shadow: 0px 3px 0px 0px $govuk-text-colour!important;
+    + div {
+      background-color:unset!important;
+    }
   }
 }
-
-
 
 // Common results
 
@@ -22,6 +37,7 @@ a.org-summary {
   &:focus {
     background:$govuk-focus-colour;
     color:$govuk-text-colour;
+    box-shadow: 0 -3px 0 0 $govuk-text-colour inset;
   }
 }
 
