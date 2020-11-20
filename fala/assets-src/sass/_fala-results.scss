@@ -8,6 +8,14 @@
       outline:none!important;
       background-color:transparent!important;
   }
+  [tabindex="0"]:focus {
+    > .gm-style-pbc + div {
+      box-shadow:0 0 0 2px govuk-colour("black") inset, 0 0 0 11px $govuk-focus-colour inset;
+    }
+    ~ div .gm-style-cc * {
+      background-color:transparent!important;
+    }
+  }
   a:focus {
     outline: solid 2px $govuk-focus-colour;
     outline-offset: 0;
