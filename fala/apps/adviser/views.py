@@ -27,3 +27,7 @@ class AdviserView(TemplateView):
         )
 
         return self.render_to_response(context)
+
+
+class InformationView(TemplateView):
+    template_name = "adviser/information.html"
