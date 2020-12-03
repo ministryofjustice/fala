@@ -6,7 +6,7 @@ from adviser.views import AdviserView, AccessibilityView
 from django.views.static import serve
 
 urlpatterns = [
-    url(r"^information$", AccessibilityView.as_view(), name="information"),
+    url(r"^accessibility-statement$", AccessibilityView.as_view(), name="accessibility-statement"),
     url(r"^$", AdviserView.as_view(), name="adviser"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
