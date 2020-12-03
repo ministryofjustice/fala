@@ -1,0 +1,7 @@
+{% if request.is_ajax() %}
+  {% extends 'ajax-base.html' %}
+{% else %}
+  {% extends 'base.html' %}
+{% endif %}
+
+<h1 class="govuk-heading-xl">Accessibility statement</h1>
