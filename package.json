@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/ministryofjustice/fala",
   "dependencies": {
-    "govuk-frontend": "^3.9.1",
+    "govuk-frontend": "^3.10.2",
     "mojular": "mojular/mojular#0.2.0",
     "mojular-govuk-elements": "mojular/govuk-elements#0.2.0",
     "mojular-moj-elements": "mojular/moj-elements#0.2.0",
