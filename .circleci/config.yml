@@ -70,18 +70,11 @@ jobs:
   build:
     docker:
       - image: docker:17.03-git
-    environment:
-      DSD_DOCKER_REGISTRY: "registry.service.dsd.io"
-      DSD_DOCKER_IMAGE: "fala"
     steps:
       - checkout
       - setup_remote_docker:
           version: 17.03.0-ce
           docker_layer_caching: true
-      - run:
-          name: Login to the DSD Docker registry
-          command: |
-            docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD --email "${DOCKER_USERNAME}@digital.justice.gov.uk" $DSD_DOCKER_REGISTRY
       - run:
           name: Login to the ECR Docker registry
           command: |
@@ -103,7 +96,6 @@ jobs:
       - run:
           name: Tag and push Docker images
           command: |
-            .circleci/tag_and_push_docker_image application:$CIRCLE_SHA1 $DSD_DOCKER_REGISTRY/$DSD_DOCKER_IMAGE
             .circleci/tag_and_push_docker_image application:$CIRCLE_SHA1 ${ECR_DOCKER_REPO_BASE}
 
   staging_deploy:
