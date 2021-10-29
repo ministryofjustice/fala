@@ -1,4 +1,4 @@
-FROM python:3.7
+FROM python:3.7-buster
 
 ENV LC_CTYPE=C.UTF-8
 
