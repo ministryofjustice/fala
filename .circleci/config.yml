@@ -99,7 +99,7 @@ jobs:
           command: |
             .circleci/tag_and_push_docker_image application:$CIRCLE_SHA1 ${ECR_DOCKER_REPO_BASE}
 
-  staging_deploy:
+  deploy:
     parameters:
       namespace:
         type: string
@@ -122,24 +122,6 @@ jobs:
             .circleci/deploy_to_kubernetes << parameters.namespace >>
       - slack/status
 
-  production_deploy:
-    docker:
-      - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
-    steps:
-      - checkout
-      - run:
-          name: Initialise Kubernetes production context
-          command: |
-            setup-kube-auth
-            kubectl config use-context production
-      - deploy:
-          name: Deploy fala to production
-          command: |
-            .circleci/deploy_to_kubernetes production ${ECR_DOCKER_REPO_BASE}
-      - deploy:
-          name: Notify Slack channel
-          command: .circleci/notify_slack_channel production-live-1
-
 workflows:
   version: 2
   build_test_and_deploy:
@@ -155,7 +137,8 @@ workflows:
           type: approval
           requires:
             - build
-      - staging_deploy:
+      - deploy:
+          name: staging_deploy
           namespace: staging
           requires:
             - staging_deploy_approval
@@ -171,7 +154,11 @@ workflows:
             branches:
               only:
                 - master
-      - production_deploy:
+      - deploy:
+          name: production_deploy
+          namespace: staging
           requires:
             - production_deploy_approval
-          context: laa-fala-live-1
+          context:
+            - laa-fala-live-1
+            - laa-fala-live1-production
