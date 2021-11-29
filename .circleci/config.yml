@@ -156,6 +156,7 @@ workflows:
           requires:
             - build
       - staging_deploy:
+          namespace: staging
           requires:
             - staging_deploy_approval
           context:
