@@ -4,8 +4,8 @@ metadata:
   name: laa-fala
   namespace: laa-fala-staging
   annotations:
-    external-dns.alpha.kubernetes.io/set-identifier: laa-fala-laa-fala-staging-green
-    external-dns.alpha.kubernetes.io/aws-weight: "100"
+    external-dns.alpha.kubernetes.io/set-identifier: laa-fala-laa-fala-staging-blue
+    external-dns.alpha.kubernetes.io/aws-weight: "0"
 spec:
   tls:
   - hosts:

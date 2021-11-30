@@ -137,9 +137,10 @@ workflows:
           type: approval
           requires:
             - build
+
       - deploy:
-          name: staging_deploy
-          namespace: staging
+          name: staging_deploy_live1
+          namespace: staging-live1
           requires:
             - staging_deploy_approval
           context:
@@ -149,7 +150,7 @@ workflows:
       - production_deploy_approval:
           type: approval
           requires:
-            - staging_deploy
+            - staging_deploy_live1
           filters:
             branches:
               only:
