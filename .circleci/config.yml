@@ -1,5 +1,6 @@
-version: 2
-
+version: 2.1
+orbs:
+  slack: circleci/slack@2.5.0
 jobs:
   lint:
     docker:
@@ -98,41 +99,28 @@ jobs:
           command: |
             .circleci/tag_and_push_docker_image application:$CIRCLE_SHA1 ${ECR_DOCKER_REPO_BASE}
 
-  staging_deploy:
+  deploy:
+    parameters:
+      namespace:
+        type: string
     docker:
-      - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
+      - image: ministryofjustice/cloud-platform-tools
     steps:
       - checkout
       - run:
-          name: Initialise Kubernetes staging context
+          name: Authenticate with cluster
           command: |
-            setup-kube-auth
-            kubectl config use-context staging
+            echo -n ${K8S_CLUSTER_CERT} | base64 -d > ./ca.crt
+            kubectl config set-cluster ${K8S_CLUSTER_NAME} --certificate-authority=./ca.crt --server=${K8S_SERVER_ADDRESS}
+            kubectl config set-credentials circleci --token=${K8S_TOKEN}
+            kubectl config set-context ${K8S_CLUSTER_NAME} --cluster=${K8S_CLUSTER_NAME} --user=circleci --namespace=${K8S_NAMESPACE}
+            kubectl config use-context ${K8S_CLUSTER_NAME}
+            kubectl --namespace=${K8S_NAMESPACE} get pods
       - deploy:
-          name: Deploy fala to staging
+          name: Deploy to << parameters.namespace >>
           command: |
-            .circleci/deploy_to_kubernetes staging
-      - deploy:
-          name: Notify Slack channel
-          command: .circleci/notify_slack_channel staging-live-1
-
-  production_deploy:
-    docker:
-      - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
-    steps:
-      - checkout
-      - run:
-          name: Initialise Kubernetes production context
-          command: |
-            setup-kube-auth
-            kubectl config use-context production
-      - deploy:
-          name: Deploy fala to production
-          command: |
-            .circleci/deploy_to_kubernetes production ${ECR_DOCKER_REPO_BASE}
-      - deploy:
-          name: Notify Slack channel
-          command: .circleci/notify_slack_channel production-live-1
+            .circleci/deploy_to_kubernetes << parameters.namespace >>
+      - slack/status
 
 workflows:
   version: 2
@@ -149,10 +137,15 @@ workflows:
           type: approval
           requires:
             - build
-      - staging_deploy:
+      - deploy:
+          name: staging_deploy
+          namespace: staging
           requires:
             - staging_deploy_approval
-          context: laa-fala-live-1
+          context:
+            - laa-fala-live-1
+            - laa-fala-live1-staging
+
       - production_deploy_approval:
           type: approval
           requires:
@@ -161,7 +154,11 @@ workflows:
             branches:
               only:
                 - master
-      - production_deploy:
+      - deploy:
+          name: production_deploy
+          namespace: production
           requires:
             - production_deploy_approval
-          context: laa-fala-live-1
+          context:
+            - laa-fala-live-1
+            - laa-fala-live1-production
