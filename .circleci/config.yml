@@ -147,6 +147,15 @@ workflows:
             - laa-fala-live-1
             - laa-fala-live1-staging
 
+      - deploy:
+          name: staging_deploy_live
+          namespace: staging
+          requires:
+            - staging_deploy_approval
+          context:
+            - laa-fala-live-1
+            - laa-fala-live-staging
+
       - production_deploy_approval:
           type: approval
           requires:
