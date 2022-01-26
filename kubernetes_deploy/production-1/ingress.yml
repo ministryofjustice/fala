@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: laa-fala
+  namespace: laa-fala-production
+  annotations:
+    external-dns.alpha.kubernetes.io/set-identifier: laa-fala-laa-fala-production-blue
+    external-dns.alpha.kubernetes.io/aws-weight: "100"
+spec:
+  tls:
+  - hosts:
+    - laa-fala-production.apps.live-1.cloud-platform.service.justice.gov.uk
+  - hosts:
+    - find-legal-advice.justice.gov.uk
+    secretName: fala-tls-certificate
+  rules:
+  - host: laa-fala-production.apps.live-1.cloud-platform.service.justice.gov.uk
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: laa-fala
+          servicePort: 80
+  - host: find-legal-advice.justice.gov.uk
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: laa-fala
+          servicePort: 80
