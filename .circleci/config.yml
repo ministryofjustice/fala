@@ -165,10 +165,19 @@ workflows:
               only:
                 - master
       - deploy:
+          name: production_deploy_live1
+          environment: production-live1
+          requires:
+            - production_deploy_approval
+          context:
+            - laa-fala-live-1
+            - laa-fala-live1-production
+
+      - deploy:
           name: production_deploy
           environment: production
           requires:
             - production_deploy_approval
           context:
             - laa-fala-live-1
-            - laa-fala-live1-production
+            - laa-fala-live-production
