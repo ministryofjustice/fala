@@ -132,20 +132,11 @@ workflows:
           requires:
             - lint
             - test
-          context: laa-fala-live-1
+          context: laa-fala
       - staging_deploy_approval:
           type: approval
           requires:
             - build
-
-      - deploy:
-          name: staging_deploy_live1
-          environment: staging-live1
-          requires:
-            - staging_deploy_approval
-          context:
-            - laa-fala-live-1
-            - laa-fala-live1-staging
 
       - deploy:
           name: staging_deploy_live
@@ -153,13 +144,13 @@ workflows:
           requires:
             - staging_deploy_approval
           context:
-            - laa-fala-live-1
+            - laa-fala
             - laa-fala-live-staging
 
       - production_deploy_approval:
           type: approval
           requires:
-            - staging_deploy_live1
+            - staging_deploy_live
           filters:
             branches:
               only:
@@ -179,5 +170,5 @@ workflows:
           requires:
             - production_deploy_approval
           context:
-            - laa-fala-live-1
+            - laa-fala
             - laa-fala-live-production
