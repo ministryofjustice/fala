@@ -37,7 +37,7 @@ spec:
           name: http
         env:
         - name: ALLOWED_HOSTS
-          value: ".laa-fala-production.apps.live-1.cloud-platform.service.justice.gov.uk .find-legal-advice.justice.gov.uk"
+          value: ".laa-fala-production.apps.live.cloud-platform.service.justice.gov.uk .find-legal-advice.justice.gov.uk"
         - name: GOOGLE_MAPS_API_KEY
           value: AIzaSyC3yE4iqalLcys8ZbjdZAPjDpcYuwd2GME
         - name: LAALAA_API_HOST
