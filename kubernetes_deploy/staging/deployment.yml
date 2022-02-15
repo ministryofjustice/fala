@@ -32,11 +32,11 @@ spec:
           name: http
         env:
         - name: ALLOWED_HOSTS
-          value: ".laa-fala-staging.apps.live.cloud-platform.service.justice.gov.uk .staging.find-legal-advice.justice.gov.uk"
+          value: ".laa-fala-staging.apps.live-1.cloud-platform.service.justice.gov.uk .staging.find-legal-advice.justice.gov.uk"
         - name: GOOGLE_MAPS_API_KEY
           value: AIzaSyDdz1B1M2-2r0CQKJPscvmNEyxGwSZkXJk
         - name: LAALAA_API_HOST
-          value: https://laa-legal-adviser-api-staging.apps.live.cloud-platform.service.justice.gov.uk
+          value: https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk
         - name: ENVIRONMENT
           value: staging
         - name: SENTRY_DSN

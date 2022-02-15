@@ -9,12 +9,12 @@ metadata:
 spec:
   tls:
   - hosts:
-    - laa-fala-staging.apps.live.cloud-platform.service.justice.gov.uk
+    - laa-fala-staging.apps.live-1.cloud-platform.service.justice.gov.uk
   - hosts:
     - staging.find-legal-advice.justice.gov.uk
     secretName: fala-tls-certificate
   rules:
-  - host: laa-fala-staging.apps.live.cloud-platform.service.justice.gov.uk
+  - host: laa-fala-staging.apps.live-1.cloud-platform.service.justice.gov.uk
     http:
       paths:
       - path: /
