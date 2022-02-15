@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion:  networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: laa-fala
@@ -18,13 +18,19 @@ spec:
     http:
       paths:
       - path: /
+        pathType: ImplementationSpecific   
         backend:
-          serviceName: laa-fala
-          servicePort: 80
+          service:
+            name: laa-fala
+            port:
+              number: 80
   - host: staging.find-legal-advice.justice.gov.uk
     http:
       paths:
       - path: /
+        pathType: ImplementationSpecific
         backend:
-          serviceName: laa-fala
-          servicePort: 80
+          service:
+            name: laa-fala
+            port:
+              number: 80
