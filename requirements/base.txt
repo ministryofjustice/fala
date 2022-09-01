@@ -5,6 +5,6 @@ uwsgi==2.0.17
 requests==2.20.0
 django_jinja==2.4.1
 logstash-formatter==0.5.14
-git+git://github.com/ministryofjustice/cla_common.git@0.3.3#egg=cla_common==0.3.3
+git+https://github.com/ministryofjustice/cla_common.git@0.3.3#egg=cla_common==0.3.3
 botocore==1.13.8
 sentry-sdk==0.17.6
