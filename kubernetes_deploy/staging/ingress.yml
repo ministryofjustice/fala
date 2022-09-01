@@ -1,11 +1,12 @@
 apiVersion:  networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: laa-fala
+  name: laa-fala-v122
   namespace: laa-fala-staging
   annotations:
-    external-dns.alpha.kubernetes.io/set-identifier: laa-fala-laa-fala-staging-green
+    external-dns.alpha.kubernetes.io/set-identifier: laa-fala-v122-laa-fala-staging-green
     external-dns.alpha.kubernetes.io/aws-weight: "100"
+    nginx.ingress.kubernetes.io/enable-modsecurity: "true"
 spec:
   tls:
   - hosts:
@@ -18,7 +19,7 @@ spec:
     http:
       paths:
       - path: /
-        pathType: ImplementationSpecific   
+        pathType: ImplementationSpecific
         backend:
           service:
             name: laa-fala
