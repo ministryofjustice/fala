@@ -33,8 +33,9 @@ RUN pip3 install --user --requirement ./requirements.txt
 
 # Install npm dependencies
 COPY package.json package-lock.json ./
+COPY npm_install_wrapper.sh npm_install_wrapper.sh ./
 USER 1000
-RUN npm install
+RUN ./npm_install_wrapper.sh
 USER root
 
 COPY . .
