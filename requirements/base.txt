@@ -1,6 +1,6 @@
 boto3==1.10.8
 django==3.2.15
-django-storages==1.6.5
+django-storages==1.7
 uwsgi==2.0.17
 requests==2.20.0
 django_jinja==2.4.1
