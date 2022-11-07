@@ -1,5 +1,5 @@
 boto3==1.10.8
-django==2.2.10
+django==3.2.15
 django-storages==1.6.5
 uwsgi==2.0.17
 requests==2.20.0
@@ -11,3 +11,4 @@ logstash-formatter==0.5.14
 git+https://github.com/ministryofjustice/cla_common.git@0.3.3#egg=cla_common==0.3.3
 botocore==1.13.8
 sentry-sdk==0.17.6
+urllib3>=1.26.5 # not directly required, pinned by Snyk to avoid a vulnerability
