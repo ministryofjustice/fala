@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "gulp build",
-    "serve": "gulp serve"
+    "serve": "gulp serve",
+    "prepare": "npm run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -24,7 +26,8 @@
     "mojular-govuk-elements": "mojular/govuk-elements#0.2.0",
     "mojular-moj-elements": "mojular/moj-elements#0.2.0",
     "mojular-templates": "mojular/templates#0.0.6",
-    "nunjucks": "^3.2.0"
+    "nunjucks": "^3.2.0",
+    "@snyk/protect": "latest"
   },
   "devDependencies": {
     "browser-sync": "^2.27.10",
@@ -38,5 +41,6 @@
     "read-json-sync": "^1.1.0",
     "webpack": "^1.12.2",
     "yargs": "^3.27.0"
-  }
+  },
+  "snyk": true
 }
