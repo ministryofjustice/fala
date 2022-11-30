@@ -1,7 +1,7 @@
 FROM node:12 as node_build
 
 COPY package.json package-lock.json ./
-COPY npm_install_wrapper.sh npm_innpmstall_wrapper.sh ./
+COPY npm_install_wrapper.sh npm_install_wrapper.sh ./
 USER 1000
 RUN ./npm_install_wrapper.sh
 
