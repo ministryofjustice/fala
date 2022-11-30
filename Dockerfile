@@ -12,14 +12,13 @@ RUN apt-get update && apt-get -y --force-yes install \
       git \
       libpcre3 \
       libpcre3-dev \
-      python-minimal \
       python3-all \
       python3-all-dev \
       python3-pip && \
       update-alternatives --install /usr/bin/python python /usr/bin/python3 10
 
 # Install NodeJS
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
     apt-get -y --force-yes install nodejs npm
 
 ENV HOME /home/app
@@ -28,7 +27,7 @@ WORKDIR /home/app
 
 # Install Python dependencies
 COPY ./requirements/base.txt ./requirements.txt
-RUN pip3 install -U setuptools pip==19.1 wheel
+RUN pip3 install -U setuptools pip wheel
 RUN pip3 install --user --requirement ./requirements.txt
 
 # Install npm dependencies
