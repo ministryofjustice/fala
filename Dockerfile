@@ -1,4 +1,17 @@
+FROM node:12 as node_build
+
+COPY package.json package-lock.json ./
+COPY npm_install_wrapper.sh npm_innpmstall_wrapper.sh ./
+USER 1000
+RUN ./npm_install_wrapper.sh
+
+COPY . .
+
+RUN ./node_modules/.bin/gulp build --production
+
 FROM python:3.7-bullseye
+
+COPY --from=node_build ./fala/assets /home/app/fala/assets
 
 ENV LC_CTYPE=C.UTF-8
 
@@ -11,15 +24,7 @@ RUN apt-get update && apt-get -y --force-yes install \
       curl \
       git \
       libpcre3 \
-      libpcre3-dev \
-      python3-all \
-      python3-all-dev \
-      python3-pip && \
-      update-alternatives --install /usr/bin/python python /usr/bin/python3 10
-
-# Install NodeJS
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
-    apt-get -y --force-yes install nodejs npm
+      libpcre3-dev
 
 ENV HOME /home/app
 ENV APP_HOME /home/app
@@ -30,17 +35,9 @@ COPY ./requirements/base.txt ./requirements.txt
 RUN pip3 install -U setuptools pip wheel
 RUN pip3 install --user --requirement ./requirements.txt
 
-# Install npm dependencies
-COPY package.json package-lock.json ./
-COPY npm_install_wrapper.sh npm_install_wrapper.sh ./
-USER 1000
-RUN ./npm_install_wrapper.sh
-USER root
-
 COPY . .
 
-RUN ./node_modules/.bin/gulp build --production && \
-    ./manage.py collectstatic --noinput
+RUN ./manage.py collectstatic --noinput
 
 # Project permissions
 RUN  chown -R app: /home/app
