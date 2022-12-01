@@ -70,7 +70,7 @@ jobs:
 
   build:
     docker:
-      - image: docker:17.03-git
+      - image: docker:18.09-git
     steps:
       - checkout
       - setup_remote_docker:
