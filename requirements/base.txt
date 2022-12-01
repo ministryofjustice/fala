@@ -1,7 +1,7 @@
 boto3==1.10.8
 django==2.2.10
 django-storages==1.6.5
-uwsgi==2.0.17
+uwsgi==2.0.21
 requests==2.20.0
 django_jinja==2.4.1
 # django_jinja requires jinja2 >=2.5 but 3.1 of jinja2 breaks backward compatibility
