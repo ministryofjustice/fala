@@ -1,12 +1,14 @@
 apiVersion:  networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: laa-fala
+  name: laa-fala-v122
   namespace: laa-fala-production
   annotations:
-    external-dns.alpha.kubernetes.io/set-identifier: laa-fala-laa-fala-production-green
+    external-dns.alpha.kubernetes.io/set-identifier: laa-fala-v122-laa-fala-production-green
     external-dns.alpha.kubernetes.io/aws-weight: "100"
+    nginx.ingress.kubernetes.io/enable-modsecurity: "true"
 spec:
+  ingressClassName: "modsec"
   tls:
   - hosts:
     - laa-fala-production.apps.live-1.cloud-platform.service.justice.gov.uk
