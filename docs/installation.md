@@ -20,7 +20,7 @@ cd fala
 virtualenv -p python3 env
 source env/bin/activate
 
-pip install -r requirements/base.txt
+pip install -r requirements/generated/requirements-base.txt
 # We cannot directly call npm install because some packages have not update how they bring in their dependencies as the 
 # unauthenticated git:// no longer works see https://github.blog/2021-09-01-improving-git-protocol-security-github/#no-more-unauthenticated-git for more details
 ./npm_install_wrapper.sh

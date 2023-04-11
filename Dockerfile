@@ -27,7 +27,7 @@ ENV APP_HOME /home/app
 WORKDIR /home/app
 
 # Install Python dependencies
-COPY ./requirements/base.txt ./requirements.txt
+COPY ./requirements/generated/requirements-base.txt ./requirements.txt
 RUN pip3 install -U setuptools pip==19.1 wheel
 RUN pip3 install --user --requirement ./requirements.txt
 

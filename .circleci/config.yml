@@ -16,14 +16,14 @@ jobs:
             pip install pip==18.1
       - restore_cache:
           keys:
-            - pip-v1-{{ checksum "requirements/lint.txt" }}
+            - pip-v1-{{ checksum "requirements/generated/requirements-lint.txt" }}
       - run:
           name: Install dependencies
           command: |
             source lint-env/bin/activate
-            pip install --requirement requirements/lint.txt
+            pip install --requirement requirements/generated/requirements-lint.txt
       - save_cache:
-          key: pip-v1-{{ checksum "requirements/lint.txt" }}
+          key: pip-v1-{{ checksum "requirements/generated/requirements-lint.txt" }}
           paths:
             - "~/.cache/pip"
       - run:
@@ -51,15 +51,15 @@ jobs:
             pip install setuptools pip==19.1 wheel
       - restore_cache:
           keys:
-            - pip-v1-{{ checksum "requirements/base.txt" }}
+            - pip-v1-{{ checksum "requirements/generated/requirements-base.txt" }}
       - run:
           name: Install dependencies
           command: |
             source env/bin/activate
-            pip install --requirement requirements/base.txt
+            pip install --requirement requirements/generated/requirements-base.txt
             pip check
       - save_cache:
-          key: pip-v1-{{ checksum "requirements/base.txt" }}
+          key: pip-v1-{{ checksum "requirements/generated/requirements-base.txt" }}
           paths:
             - "~/.cache/pip"
       - run:
