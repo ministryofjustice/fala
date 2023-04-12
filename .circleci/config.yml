@@ -69,11 +69,10 @@ jobs:
 
   build:
     docker:
-      - image: docker:20.10-git
+       - image: ministryofjustice/cloud-platform-tools
     steps:
       - checkout
       - setup_remote_docker:
-          version: "20.10.7"
           docker_layer_caching: true
       - run:
           name: Login to the ECR Docker registry
