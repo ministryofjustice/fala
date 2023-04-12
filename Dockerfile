@@ -23,13 +23,7 @@ RUN apt-get update && apt-get -y --force-yes install \
       curl \
       git \
       libpcre3 \
-      libpcre3-dev \
-      python-minimal \
-      python3-all \
-      python3-all-dev \
-      python3-pip && \
-      update-alternatives --install /usr/bin/python python /usr/bin/python3 10
-
+      libpcre3-dev
 
 ENV HOME /home/app
 ENV APP_HOME /home/app
