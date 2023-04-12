@@ -1,0 +1,13 @@
+boto3==1.10.8
+django==2.2.10
+django-storages==1.6.5
+uwsgi==2.0.17
+requests==2.20.0
+django_jinja==2.4.1
+# django_jinja requires jinja2 >=2.5 but 3.1 of jinja2 breaks backward compatibility
+# So pinning jinja2 to 3.0.3
+jinja2==3.0.3
+logstash-formatter==0.5.14
+git+https://github.com/ministryofjustice/cla_common.git@0.3.3#egg=cla_common==0.3.3
+botocore==1.13.8
+sentry-sdk==0.17.6
