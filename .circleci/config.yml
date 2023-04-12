@@ -70,11 +70,10 @@ jobs:
 
   build:
     docker:
-      - image: docker:17.03-git
+      - image: docker:20.10-git
     steps:
       - checkout
       - setup_remote_docker:
-          version: 17.03.0-ce
           docker_layer_caching: true
       - run:
           name: Login to the ECR Docker registry
