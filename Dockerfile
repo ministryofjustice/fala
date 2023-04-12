@@ -8,7 +8,9 @@ COPY . .
 
 RUN ./node_modules/.bin/gulp build --production
 
-FROM python:3.7-buster
+FROM python:3.10-bullseye
+
+COPY --from=node_build ./fala/assets /home/app/fala/assets
 
 ENV LC_CTYPE=C.UTF-8
 

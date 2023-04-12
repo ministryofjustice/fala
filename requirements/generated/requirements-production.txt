@@ -4,9 +4,9 @@
 #
 #    pip-compile --output-file=requirements/generated/requirements-production.txt requirements/source/requirements-production.in
 #
-boto3==1.10.8
+boto3==1.23.10
     # via -r requirements/source/requirements-base.in
-botocore==1.13.8
+botocore==1.26.10
     # via
     #   -r requirements/source/requirements-base.in
     #   boto3
@@ -15,7 +15,7 @@ certifi==2022.12.7
     # via
     #   requests
     #   sentry-sdk
-chardet==3.0.4
+charset-normalizer==2.1.1
     # via requests
 cla_common @ git+https://github.com/ministryofjustice/cla_common.git@0.3.3
     # via -r requirements/source/requirements-base.in
@@ -29,8 +29,6 @@ django-jinja==2.4.1
     # via -r requirements/source/requirements-base.in
 django-storages==1.6.5
     # via -r requirements/source/requirements-base.in
-docutils==0.15.2
-    # via botocore
 idna==2.7
     # via requests
 jinja2==3.0.3
@@ -51,11 +49,11 @@ python-dateutil==2.8.2
     #   cla-common
 pytz==2023.3
     # via django
-requests==2.20.0
+requests==2.28.1
     # via
     #   -r requirements/source/requirements-base.in
     #   cla-common
-s3transfer==0.2.1
+s3transfer==0.5.2
     # via boto3
 sentry-sdk==0.17.6
     # via -r requirements/source/requirements-base.in
@@ -63,10 +61,10 @@ six==1.16.0
     # via python-dateutil
 sqlparse==0.4.3
     # via django
-urllib3==1.24.3
+urllib3==1.26.15
     # via
     #   botocore
     #   requests
     #   sentry-sdk
-uwsgi==2.0.17
+uwsgi==2.0.21
     # via -r requirements/source/requirements-base.in
