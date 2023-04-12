@@ -78,7 +78,7 @@ jobs:
       - run:
           name: Login to the ECR Docker registry
           command: |
-            apk add --no-cache --no-progress py2-pip
+            apk add --no-cache --no-progress py3-pip
             pip install awscli
             ecr_login="$(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)"
             ${ecr_login}
