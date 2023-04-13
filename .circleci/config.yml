@@ -77,9 +77,9 @@ jobs:
       - run:
           name: Login to the ECR Docker registry
           command: |
-            apk add --no-cache --no-progress py3-pip
-            ecr_login="$(AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION} AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} aws ecr get-login --no-include-email)"
-            ${ecr_login}
+            aws ecr get-login-password --region $AWS_DEFAULT_REGION \
+            | docker login --username AWS --password-stdin \
+            $ECR_ENDPOINT
       - run:
           name: Build Docker image
           command: |
