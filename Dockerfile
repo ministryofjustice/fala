@@ -34,8 +34,6 @@ COPY ./requirements/generated/requirements-production.txt ./requirements.txt
 RUN pip3 install -U setuptools wheel
 RUN pip3 install --user --requirement ./requirements.txt
 
-USER root
-
 COPY . .
 
 RUN ./manage.py collectstatic --noinput
