@@ -4,7 +4,7 @@ orbs:
 jobs:
   lint:
     docker:
-      - image: circleci/python:3.10
+      - image: cimg/python:3.10
     steps:
       - checkout
       - run:
@@ -38,7 +38,7 @@ jobs:
 
   test:
     docker:
-      - image: cimg/python:3.7
+      - image: cimg/python:3.10
     steps:
       - checkout
       - run:
@@ -47,7 +47,7 @@ jobs:
             pip install virtualenv
             virtualenv env
             source env/bin/activate
-            pip install setuptools pip==19.1 wheel
+            pip install setuptools wheel
       - restore_cache:
           keys:
             - pip-v1-{{ checksum "requirements/generated/requirements-production.txt" }}
