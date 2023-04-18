@@ -18,7 +18,7 @@ ENV LC_CTYPE=C.UTF-8
 RUN useradd --uid 1000 --user-group -m -d /home/app app
 
 # Install python and build dependencies
-RUN apt-get update && apt-get -y --force-yes install \
+RUN apt-get update && apt-get -y --no-install-recommends install \
       build-essential \
       curl \
       git \
