@@ -13,16 +13,23 @@ Clone the repository:
 ```
 git clone git@github.com:ministryofjustice/fala.git
 ```
-Next, create the environment and start it up:
+Next, create the environment and start it up. Ensure you are in the top level folder:
 
 ```
-cd fala
 virtualenv -p python3 env
 source env/bin/activate
+```
+Install the requirements for this project
 
+```
 pip install -r requirements/generated/requirements-production.txt
+```
+
 # We cannot directly call npm install because some packages have not update how they bring in their dependencies as the 
 # unauthenticated git:// no longer works see https://github.blog/2021-09-01-improving-git-protocol-security-github/#no-more-unauthenticated-git for more details
+Before running this command, make sure you are using the correct version of node.
+This can be changed using nvm
+```
 ./npm_install_wrapper.sh
 npm run build
 ```
