@@ -1,1 +1,3 @@
+-r requirements-production.in
 pre-commit==1.14.2
+pip-tools==6.13.0
