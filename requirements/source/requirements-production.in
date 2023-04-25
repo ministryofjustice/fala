@@ -8,7 +8,7 @@ django_jinja==2.4.1
 # So pinning jinja2 to 3.0.3
 jinja2==3.0.3
 logstash-formatter==0.5.14
-git+https://github.com/ministryofjustice/cla_common.git@0.3.3#egg=cla_common==0.3.3
+https://github.com/ministryofjustice/cla_common/archive/refs/tags/0.3.3.tar.gz
 botocore==1.26.10
 sentry-sdk==0.17.6
 
