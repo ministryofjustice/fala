@@ -4,7 +4,7 @@ orbs:
 jobs:
   lint:
     docker:
-      - image: circleci/python:3.7
+      - image: cimg/python:3.10
     steps:
       - checkout
       - run:
@@ -13,17 +13,16 @@ jobs:
             pip install virtualenv
             virtualenv lint-env
             source lint-env/bin/activate
-            pip install pip==18.1
       - restore_cache:
           keys:
-            - pip-v1-{{ checksum "requirements/lint.txt" }}
+            - pip-v1-{{ checksum "requirements/generated/requirements-lint.txt" }}
       - run:
           name: Install dependencies
           command: |
             source lint-env/bin/activate
-            pip install --requirement requirements/lint.txt
+            pip install --requirement requirements/generated/requirements-lint.txt
       - save_cache:
-          key: pip-v1-{{ checksum "requirements/lint.txt" }}
+          key: pip-v1-{{ checksum "requirements/generated/requirements-lint.txt" }}
           paths:
             - "~/.cache/pip"
       - run:
@@ -39,7 +38,7 @@ jobs:
 
   test:
     docker:
-      - image: cimg/python:3.7
+      - image: cimg/python:3.10
     steps:
       - checkout
       - run:
@@ -48,18 +47,18 @@ jobs:
             pip install virtualenv
             virtualenv env
             source env/bin/activate
-            pip install setuptools pip==19.1 wheel
+            pip install setuptools wheel
       - restore_cache:
           keys:
-            - pip-v1-{{ checksum "requirements/base.txt" }}
+            - pip-v1-{{ checksum "requirements/generated/requirements-production.txt" }}
       - run:
           name: Install dependencies
           command: |
             source env/bin/activate
-            pip install --requirement requirements/base.txt
+            pip install --requirement requirements/generated/requirements-production.txt
             pip check
       - save_cache:
-          key: pip-v1-{{ checksum "requirements/base.txt" }}
+          key: pip-v1-{{ checksum "requirements/generated/requirements-production.txt" }}
           paths:
             - "~/.cache/pip"
       - run:
@@ -70,19 +69,17 @@ jobs:
 
   build:
     docker:
-      - image: docker:17.03-git
+       - image: ministryofjustice/cloud-platform-tools
     steps:
       - checkout
       - setup_remote_docker:
-          version: 17.03.0-ce
           docker_layer_caching: true
       - run:
           name: Login to the ECR Docker registry
           command: |
-            apk add --no-cache --no-progress py2-pip
-            pip install awscli
-            ecr_login="$(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)"
-            ${ecr_login}
+            aws ecr get-login-password --region $AWS_DEFAULT_REGION \
+            | docker login --username AWS --password-stdin \
+            $ECR_ENDPOINT
       - run:
           name: Build Docker image
           command: |
@@ -93,7 +90,7 @@ jobs:
               .
       - run:
           name: Validate Python version
-          command: docker run --rm --tty --interactive application:$CIRCLE_SHA1 python --version | grep "3.7"
+          command: docker run --rm --tty --interactive application:$CIRCLE_SHA1 python --version | grep "3.10"
       - run:
           name: Tag and push Docker images
           command: |

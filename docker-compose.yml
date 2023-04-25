@@ -14,7 +14,7 @@ services:
     container_name: fala
     build: .
     environment:
-      - LAALAA_API_HOST=https://staging.laalaa.dsd.io
+      - https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk
       - DJANGO_SETTINGS_MODULE=fala.settings.local
     ports:
       - "8000:8000"

@@ -19,7 +19,7 @@ synchronisation and much more.
 To lint with Black and flake8, install pre-commit hooks:
 ```
 . env/bin/activate
-pip install -r requirements/dev.txt
+pip install -r requirements/generated/requirements-dev.txt
 pre-commit install
 ```
 
