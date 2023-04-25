@@ -59,7 +59,7 @@ sentry-sdk==0.17.6
     # via -r requirements/source/requirements-production.in
 six==1.16.0
     # via python-dateutil
-sqlparse==0.4.3
+sqlparse==0.4.4
     # via django
 urllib3==1.26.15
     # via
