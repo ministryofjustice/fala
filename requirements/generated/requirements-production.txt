@@ -55,7 +55,7 @@ requests==2.28.1
     #   cla-common
 s3transfer==0.5.2
     # via boto3
-sentry-sdk==0.17.6
+sentry-sdk==1.14.0
     # via -r requirements/source/requirements-production.in
 six==1.16.0
     # via python-dateutil
