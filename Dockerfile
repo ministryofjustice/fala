@@ -31,7 +31,6 @@ WORKDIR /home/app
 
 # Install Python dependencies
 COPY ./requirements/generated/requirements-production.txt ./requirements.txt
-RUN pip3 install -U setuptools pip wheel
 RUN pip3 install --user --requirement ./requirements.txt
 
 COPY . .
