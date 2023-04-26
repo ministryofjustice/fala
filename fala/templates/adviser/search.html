@@ -1,4 +1,4 @@
-{% if request.is_ajax() %}
+{% if request.accepts('text/html') %}
   {% extends 'ajax-base.html' %}
 {% else %}
   {% extends 'base.html' %}
@@ -9,7 +9,7 @@
 
 {% block search_form %}
   <form action="" class="laa-fala__search" novalidate>
-    <div 
+    <div
       class="govuk-form-group
         {% if (form.errors and form.errors['__all__']) %}
           govuk-form-group--error
