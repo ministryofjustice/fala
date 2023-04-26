@@ -1,4 +1,4 @@
-{% if request.accepts('text/html') %}
+{% if request.headers.get('x-requested-with') == 'XMLHttpRequest' %}
   {% extends 'ajax-base.html' %}
 {% else %}
   {% extends 'base.html' %}
