@@ -1,8 +1,4 @@
-{% if request.headers.get('x-requested-with') == 'XMLHttpRequest' %}
-  {% extends 'ajax-base.html' %}
-{% else %}
-  {% extends 'base.html' %}
-{% endif %}
+{% extends 'base.html' %}
 
 {% block content %}
   <div class="govuk-grid-column-two-thirds">
