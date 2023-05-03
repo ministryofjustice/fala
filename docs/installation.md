@@ -22,16 +22,32 @@ source env/bin/activate
 Install the requirements for this project
 
 ```
-pip install -r requirements/generated/requirements-production.txt
+pip install -r requirements/generated/requirements-dev.txt
 ```
+# Node
 
-# We cannot directly call npm install because some packages have not update how they bring in their dependencies as the 
-# unauthenticated git:// no longer works see https://github.blog/2021-09-01-improving-git-protocol-security-github/#no-more-unauthenticated-git for more details
-Before running this command, make sure you are using the correct version of node.
+Assets reside in `fala/assets-src` directory and compiled in `fala/assets` directory upon running build tasks.
+
+FALA uses [Gulp](http://gulpjs.com/) for build tasks. The following Gulp tasks are used in development:
+
+- `build` builds and minifies all assets and does all of the following
+- `sass` builds the SCSS and generates source maps
+- `serve` watches the files for changes and reloads the browser using [BrowserSync](http://www.browsersync.io/)
+
+:memo: It is also possible to use `npm run build` and `npm run serve` instead of gulp directly.
+
+**We cannot directly call npm install because some packages have not update how they bring in their dependencies as the 
+unauthenticated git:// no longer works see https://github.blog/2021-09-01-improving-git-protocol-security-github/#no-more-unauthenticated-git 
+for more details**
+
+Before running this command, make sure you are using the correct version of node. 
 This can be changed using nvm
+
+The following commands will import the assets including CSS into your local environment:
 ```
 ./npm_install_wrapper.sh
 npm run build
+./manage.py collectstatic --noinput      
 ```
 
 Create a ``local.py`` settings file from the example file:
@@ -44,4 +60,18 @@ Next, run the Django server with:
 
 ```
 python3 ./manage.py runserver
+```
+
+## Lint and pre-commit hooks
+
+To lint with Black and flake8, install pre-commit hooks:
+```
+. env/bin/activate
+pip install -r requirements/generated/requirements-dev.txt
+pre-commit install
+```
+
+To run them manually:
+```
+pre-commit run --all-files
 ```

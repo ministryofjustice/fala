@@ -1,15 +1,11 @@
-{% if request.is_ajax() %}
-  {% extends 'ajax-base.html' %}
-{% else %}
-  {% extends 'base.html' %}
-{% endif %}
+{% extends 'base.html' %}
 
 {% import "macros/element.html" as Element %}
 {% import "macros/forms.html" as Form %}
 
 {% block search_form %}
   <form action="" class="laa-fala__search" novalidate>
-    <div 
+    <div
       class="govuk-form-group
         {% if (form.errors and form.errors['__all__']) %}
           govuk-form-group--error
