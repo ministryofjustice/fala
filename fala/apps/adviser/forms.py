@@ -28,7 +28,7 @@ class AdviserSearchForm(forms.Form):
     page = forms.IntegerField(required=False, widget=forms.HiddenInput())
 
     postcode = forms.CharField(
-        label=_("Enter postcode, town or city"),
+        label=_("Enter postcode"),
         max_length=30,
         help_text=_("For example, <span class='notranslate' translate='no'>SW1H 9AJ</span>"),
         required=False,
