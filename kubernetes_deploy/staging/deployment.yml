@@ -12,6 +12,7 @@ spec:
       labels:
         app: laa-fala-app
     spec:
+      serviceAccountName: laa-fala-staging-irsa-sevice-account
       containers:
       - image: 754256621582.dkr.ecr.eu-west-2.amazonaws.com/laa-get-access/fala:master
         name: app
@@ -66,18 +67,3 @@ spec:
             secretKeyRef:
               name: s3
               key: bucket_name
-        - name: AWS_ACCESS_KEY_ID
-          valueFrom:
-            secretKeyRef:
-              name: s3
-              key: access_key_id
-        - name: AWS_SECRET_ACCESS_KEY
-          valueFrom:
-            secretKeyRef:
-              name: s3
-              key: secret_access_key
-        - name: AWS_S3_REGION_NAME
-          valueFrom:
-            secretKeyRef:
-              name: s3
-              key: region
