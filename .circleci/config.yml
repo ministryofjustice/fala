@@ -156,7 +156,11 @@ workflows:
             - lint
             - test
           context: laa-fala
-      - behave
+      - behave:
+          requires:
+            - build
+          context: laa-fala
+
       - staging_deploy_approval:
           type: approval
           requires:
