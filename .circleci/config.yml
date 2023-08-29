@@ -142,7 +142,6 @@ jobs:
           echo "export FALA_IMAGE=$ECR_DEPLOY_IMAGE" >> $BASH_ENV
           echo "export A11Y_ENABLED=true" >> $BASH_ENV
           echo "Setting FALA image $ECR_DEPLOY_IMAGE"
-          echo "E2E_BRANCH=feature/LGA-2642-irsa-circleci" >> $BASH_ENV
       - cla-end-to-end-tests/behave
 
 workflows:
