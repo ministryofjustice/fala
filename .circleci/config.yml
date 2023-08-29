@@ -131,6 +131,19 @@ jobs:
             .circleci/deploy_to_kubernetes << parameters.environment >>
       - slack/status
 
+  behave:
+    executor: aws-ecr/default
+    steps:
+      - checkout:
+          path: fala
+      - run: |
+          cd fala
+          source .circleci/define_build_environment_variables
+          echo "export FALA_IMAGE=$ECR_DEPLOY_IMAGE" >> $BASH_ENV
+          echo "export A11Y_ENABLED=true" >> $BASH_ENV
+          echo "Setting FALA image $ECR_DEPLOY_IMAGE"
+      - cla-end-to-end-tests/behave
+
 workflows:
   version: 2
   build_test_and_deploy:
@@ -142,20 +155,11 @@ workflows:
             - lint
             - test
           context: laa-fala
-      - cla-end-to-end-tests/behave:
+      - behave:
           requires:
             - build
           context: laa-fala
-          pre-steps:
-            - checkout:
-                path: fala
-            - run:
-                command: |
-                  cd fala
-                  source .circleci/define_build_environment_variables
-                  echo "export FALA_IMAGE=$ECR_DEPLOY_IMAGE" >> $BASH_ENV
-                  echo "export A11Y_ENABLED=true" >> $BASH_ENV
-                  echo "Setting FALA image $ECR_DEPLOY_IMAGE"
+
       - staging_deploy_approval:
           type: approval
           requires:
