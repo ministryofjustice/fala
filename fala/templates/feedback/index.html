@@ -1,5 +1,20 @@
 {% extends 'base.html' %}
 
+{% block before_main_js %}{% endblock %}
+  <script>
+  function tagMan() {  // Activate Google Tag Manager
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WDJLHSKL');
+  }
+  </script>
+  {% if (request.COOKIES.get('cookiePermission') == 'Allowed') %}
+  <script>tagMan();</script>
+  {% endif %}
+{% block main_js %}{% endblock %}
+
 {% block page_title %}Feedback - {{ title }}{% endblock %}
 
 {% block content %}
@@ -27,11 +42,3 @@
   </form>
 {% endblock %}
 
-{% block after_main_js %}
-  {{ super() }}
-  {% if GA_ID and error %}
-    <script>
-      ga('send', 'event', 'error', 'feedback-error');
-    </script>
-  {% endif %}
-{% endblock %}

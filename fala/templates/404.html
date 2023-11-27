@@ -2,6 +2,18 @@
 {% extends 'base.html' %}
 
 {% block before_main_js %}{% endblock %}
+  <script>
+  function tagMan() {  // Activate Google Tag Manager
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WDJLHSKL');
+  }
+  </script>
+  {% if (request.COOKIES.get('cookiePermission') == 'Allowed') %}
+  <script>tagMan();</script>
+  {% endif %}
 {% block main_js %}{% endblock %}
 
 {% block page_title %}Page not found - 404 - {{ title }}{% endblock %}
@@ -13,13 +25,4 @@
     <p class="govuk-body">If you entered a web address please check it was correct.</p>
     <p class="govuk-body">Alternatively return to <a class="govuk-link" href="{{ url('adviser') }}">{{ title }} homepage</a> and try again.</p>
   </div>
-{% endblock %}
-
-{% block after_main_js %}
-  {% if GA_ID %}
-    <script>
-      ga('create', '{{ GA_ID }}', 'auto');
-      ga('send', 'pageview', '/404' + window.location.pathname + window.location.search);
-    </script>
-  {% endif %}
 {% endblock %}
