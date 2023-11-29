@@ -45,8 +45,6 @@ spec:
           value: https://laa-legal-adviser-api-production.cloud-platform.service.justice.gov.uk
         - name: ENVIRONMENT
           value: production
-        - name: GA_ID
-          value: "UA-37377084-6"
         - name: DJANGO_SETTINGS_MODULE
           value: "fala.settings.production"
         - name: SENTRY_DSN

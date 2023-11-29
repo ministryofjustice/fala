@@ -14,12 +14,3 @@
     <p class="govuk-body">Alternatively return to <a class="govuk-link" href="{{ url('adviser') }}">{{ title }} homepage</a> and try again.</p>
   </div>
 {% endblock %}
-
-{% block after_main_js %}
-  {% if GA_ID %}
-    <script>
-      ga('create', '{{ GA_ID }}', 'auto');
-      ga('send', 'pageview', '/404' + window.location.pathname + window.location.search);
-    </script>
-  {% endif %}
-{% endblock %}

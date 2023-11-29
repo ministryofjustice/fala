@@ -86,7 +86,6 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 # 'django.contrib.auth.context_processors.auth',
                 "django.contrib.messages.context_processors.messages",
-                "adviser.context_processors.ga_id",
                 "adviser.context_processors.current_environment",
             ],
         },
@@ -149,8 +148,6 @@ ZENDESK_GROUP_ID = os.environ.get("ZENDESK_GROUP_ID", 26974037)  # Find a Legal 
 ZENDESK_API_ENDPOINT = "https://ministryofjustice.zendesk.com/api/v2/"
 ZENDESK_REQUESTER_ID = os.environ.get("ZENDESK_REQUESTER_ID", 649762516)
 # defaults to 'anonymous feedback <noreply@ministryofjustice.zendesk.com>'
-
-GA_ID = os.environ.get("GA_ID")
 
 GOOGLE_MAPS_API_KEY = os.environ.get("GOOGLE_MAPS_API_KEY", "")
 

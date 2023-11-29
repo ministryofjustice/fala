@@ -122,7 +122,7 @@
         $("#cookieAccept").click(function() {
           setCookie("cookiePermission", "Allowed", 30);
           $(".laa-cookie-banner").addClass("laa-cookies-accepted");
-          performGoogleAnalyticalTasks();
+          tagMan();
         });
         $("#cookieReject").click(function() {
           eraseCookie("cookiePermission");
