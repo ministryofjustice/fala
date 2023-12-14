@@ -120,6 +120,10 @@ CSP_DEFAULT_SRC = [
 if "localhost" in ALLOWED_HOSTS:
     CSP_DEFAULT_SRC += "localhost:*"
 
+CSP_FONT_SRC = ["'self'", "data:"]
+
+CSP_STYLE_SRC = ["'self'", "'unsafe-inline'"]
+
 ROOT_URLCONF = "fala.urls"
 
 # Python dotted path to the WSGI application used by Django's runserver.
