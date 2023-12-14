@@ -108,7 +108,17 @@ MIDDLEWARE = (
 )
 
 X_FRAME_OPTIONS = "SAMEORIGIN"
-CSP_DEFAULT_SRC = "'self'"
+CSP_DEFAULT_SRC = [
+    "'self'",
+    "www.googletagmanager.com",
+    "www.google.co.uk",
+    "*.analytics.google.com",
+    "ws:",
+    "wss:",
+    "stats.g.doubleclick.net",
+]
+if "localhost" in ALLOWED_HOSTS:
+    CSP_DEFAULT_SRC += "localhost:*"
 
 ROOT_URLCONF = "fala.urls"
 
