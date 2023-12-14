@@ -99,12 +99,16 @@ MIDDLEWARE_CLASSES = (
     # 'django.contrib.auth.middleware.AuthenticationMiddleware',
     # 'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     "django.contrib.messages.middleware.MessageMiddleware",
+    "csp.middleware.CSPMiddleware",
 )
 
 MIDDLEWARE = (
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
+    "csp.middleware.CSPMiddleware",
 )
+
+X_FRAME_OPTIONS = "SAMEORIGIN"
 
 ROOT_URLCONF = "fala.urls"
 
