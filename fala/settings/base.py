@@ -104,6 +104,7 @@ MIDDLEWARE_CLASSES = (
 MIDDLEWARE = (
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
+    "csp.middleware.CSPMiddleware",
 )
 
 ROOT_URLCONF = "fala.urls"

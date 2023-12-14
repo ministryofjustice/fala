@@ -3,6 +3,7 @@ botocore==1.29.119
 django==4.2
 django-jinja==2.10.2
 django-storages==1.13.2
+django-csp==3.7
 jinja2==3.1.2
 logstash-formatter==0.5.17
 https://github.com/ministryofjustice/cla_common/archive/refs/tags/0.3.3.tar.gz
