@@ -119,6 +119,10 @@ CSP_SCRIPT_SRC = [
     "blob:",
     "ajax.aspnetcdn.com",
     "cloud-platform-3b0904ebacb2f3618f1979bba0bd0ce5.s3.amazonaws.com",
+    "*.googletagmanager.com",
+    "*.analytics.google.com",
+    "*.g.doubleclick.net",
+    "*.google.co.uk",
 ]
 CSP_IMG_SRC = [
     "'self'",
@@ -129,9 +133,25 @@ CSP_IMG_SRC = [
     "data:",
     "cloud-platform-3b0904ebacb2f3618f1979bba0bd0ce5.s3.amazonaws.com",
     "*.googletagmanager.com",
+    "*.analytics.google.com",
+    "*.google.co.uk",
+    "*.g.doubleclick.net",
+    "*.google-analytics.com",
 ]
 CSP_FRAME_SRC = ["*.google.com"]
-CSP_CONNECT_SRC = ["'self'", "*.googleapis.com", "*.google.com", "*.gstatic.com", "data:", "blob:"]
+CSP_CONNECT_SRC = [
+    "'self'",
+    "*.googleapis.com",
+    "*.google.com",
+    "*.gstatic.com",
+    "data:",
+    "blob:",
+    "*.google-analytics.com",
+    "*.analytics.google.com",
+    "*.googletagmanager.com",
+    "*.g.doubleclick.net",
+    "*.google.co.uk",
+]
 CSP_FONT_SRC = [
     "'self'",
     "data:",
