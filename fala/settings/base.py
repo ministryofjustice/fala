@@ -126,7 +126,12 @@ if "localhost" in ALLOWED_HOSTS:
 
 CSP_FONT_SRC = ["'self'", "data:"]
 
-CSP_STYLE_SRC = ["'self'", "'unsafe-inline'", "*.gstatic.com"]
+CSP_STYLE_SRC = [
+    "'self'",
+    "'unsafe-inline'",
+    "*.gstatic.com",
+    "cloud-platform-3b0904ebacb2f3618f1979bba0bd0ce5.s3.amazonaws.com",
+]
 
 ROOT_URLCONF = "fala.urls"
 
