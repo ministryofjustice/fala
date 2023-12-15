@@ -119,6 +119,7 @@ CSP_DEFAULT_SRC = [
     "*.googleapis.com",
     "translate.google.com",
     "ajax.aspnetcdn.com",
+    "cloud-platform-3b0904ebacb2f3618f1979bba0bd0ce5.s3.amazonaws.com",
 ]
 if "localhost" in ALLOWED_HOSTS:
     CSP_DEFAULT_SRC += "localhost:*"
