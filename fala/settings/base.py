@@ -124,7 +124,7 @@ CSP_DEFAULT_SRC = [
 if "localhost" in ALLOWED_HOSTS:
     CSP_DEFAULT_SRC += "localhost:*"
 
-CSP_FONT_SRC = ["'self'", "data:"]
+CSP_FONT_SRC = ["'self'", "data:", "cloud-platform-3b0904ebacb2f3618f1979bba0bd0ce5.s3.amazonaws.com"]
 
 CSP_STYLE_SRC = [
     "'self'",
