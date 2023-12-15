@@ -106,57 +106,25 @@ MIDDLEWARE = (
     "django.middleware.security.SecurityMiddleware",
     "csp.middleware.CSPMiddleware",
 )
-
-X_FRAME_OPTIONS = "SAMEORIGIN"
-CSP_DEFAULT_SRC = [
+CSP_DEFAULT_SRC = ["'self'"]
+CSP_SCRIPT_SRC = [
     "'self'",
-    "www.googletagmanager.com",
-    "www.google.co.uk",
-    "*.analytics.google.com",
-    "ws:",
-    "wss:",
-    "stats.g.doubleclick.net",
-    "*.googleapis.com",
-    "translate.google.com",
-    "ajax.aspnetcdn.com",
-    "cloud-platform-3b0904ebacb2f3618f1979bba0bd0ce5.s3.amazonaws.com",
-    "*.gstatic.com",
-]
-if "localhost" in ALLOWED_HOSTS:
-    CSP_DEFAULT_SRC += "localhost:*"
-
-CSP_SCRIPT_SRC = ["'strict-dynamic'", "https:", "'unsafe-eval'", "blob:"]
-
-CSP_IMG_SRC = ["'self'", "*.googleapis.com", "*.gstatic.com", "*.google.com", "*.googleusercontent.com", "'data'"]
-
-CSP_CONNECT_SRC = ["'self'", "*.googleapis.com", "*.google.com", "*.gstatic.com", "data:", "blob:"]
-
-CSP_FRAME_SRC = [
-    "'self",
-    "*.googleapis.com",
-    "*.gstatic.com",
-    "cloud-platform-3300ca90491f7aed3b76d454a2e495a5.s3.amazonaws.com",
-    "*.google.com",
-]
-
-CSP_WORKER_SRC = ["blob:"]
-
-CSP_FONT_SRC = [
-    "'self'",
-    "data:",
-    "fonts.gstatic.com",
-    "cloud-platform-3b0904ebacb2f3618f1979bba0bd0ce5.s3.amazonaws.com",
-    "cloud-platform-3b0904ebacb2f3618f1979bba0bd0ce5.s3.amazonaws.com/images/fonts",
-]
-
-CSP_STYLE_SRC = [
-    "'self'",
-    "*.googleapis.com",
     "'unsafe-inline'",
+    "'unsafe-eval'",
+    "*.googleapis.com",
     "*.gstatic.com",
-    "cloud-platform-3b0904ebacb2f3618f1979bba0bd0ce5.s3.amazonaws.com",
-    "fonts.googleapis.com",
+    "*.google.com",
+    "*.ggpht.com",
+    "*.googleusercontent.com",
+    "blob:",
+    "ajax.aspnetcdn.com",
 ]
+CSP_IMG_SRC = ["'self'", "*.googleapis.com", "*.gstatic.com", "*.google.com", "*.googleusercontent.com", "data:"]
+CSP_FRAME_SRC = ["*.google.com"]
+CSP_CONNECT_SRC = ["'self'", "*.googleapis.com", "*.google.com", "*.gstatic.com", "data:", "blob:"]
+CSP_FONT_SRC = ["'self'", "data:", "fonts.gstatic.com"]
+CSP_STYLE_SRC = ["'self'", "'unsafe-inline'", "fonts.googleapis.com", "*.gstatic.com"]
+CSP_WORKER_SRC = ["blob:"]
 
 ROOT_URLCONF = "fala.urls"
 
