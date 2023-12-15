@@ -106,7 +106,7 @@ MIDDLEWARE = (
     "django.middleware.security.SecurityMiddleware",
     "csp.middleware.CSPMiddleware",
 )
-CSP_DEFAULT_SRC = ["'self'"]
+CSP_DEFAULT_SRC = ["'self'", "*.googletagmanager.com"]
 CSP_SCRIPT_SRC = [
     "'self'",
     "'unsafe-inline'",
@@ -128,6 +128,7 @@ CSP_IMG_SRC = [
     "*.googleusercontent.com",
     "data:",
     "cloud-platform-3b0904ebacb2f3618f1979bba0bd0ce5.s3.amazonaws.com",
+    "*.googletagmanager.com",
 ]
 CSP_FRAME_SRC = ["*.google.com"]
 CSP_CONNECT_SRC = ["'self'", "*.googleapis.com", "*.google.com", "*.gstatic.com", "data:", "blob:"]
@@ -145,6 +146,10 @@ CSP_STYLE_SRC = [
     "cloud-platform-3b0904ebacb2f3618f1979bba0bd0ce5.s3.amazonaws.com",
 ]
 CSP_WORKER_SRC = ["blob:"]
+
+CSP_FORM_ACTION = ["'self'"]
+
+CSP_FRAME_ANCESTORS = ["'self'"]
 
 ROOT_URLCONF = "fala.urls"
 
