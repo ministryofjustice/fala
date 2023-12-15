@@ -118,12 +118,32 @@ CSP_SCRIPT_SRC = [
     "*.googleusercontent.com",
     "blob:",
     "ajax.aspnetcdn.com",
+    "cloud-platform-3b0904ebacb2f3618f1979bba0bd0ce5.s3.amazonaws.com",
 ]
-CSP_IMG_SRC = ["'self'", "*.googleapis.com", "*.gstatic.com", "*.google.com", "*.googleusercontent.com", "data:"]
+CSP_IMG_SRC = [
+    "'self'",
+    "*.googleapis.com",
+    "*.gstatic.com",
+    "*.google.com",
+    "*.googleusercontent.com",
+    "data:",
+    "cloud-platform-3b0904ebacb2f3618f1979bba0bd0ce5.s3.amazonaws.com",
+]
 CSP_FRAME_SRC = ["*.google.com"]
 CSP_CONNECT_SRC = ["'self'", "*.googleapis.com", "*.google.com", "*.gstatic.com", "data:", "blob:"]
-CSP_FONT_SRC = ["'self'", "data:", "fonts.gstatic.com"]
-CSP_STYLE_SRC = ["'self'", "'unsafe-inline'", "fonts.googleapis.com", "*.gstatic.com"]
+CSP_FONT_SRC = [
+    "'self'",
+    "data:",
+    "fonts.gstatic.com",
+    "cloud-platform-3b0904ebacb2f3618f1979bba0bd0ce5.s3.amazonaws.com",
+]
+CSP_STYLE_SRC = [
+    "'self'",
+    "'unsafe-inline'",
+    "fonts.googleapis.com",
+    "*.gstatic.com",
+    "cloud-platform-3b0904ebacb2f3618f1979bba0bd0ce5.s3.amazonaws.com",
+]
 CSP_WORKER_SRC = ["blob:"]
 
 ROOT_URLCONF = "fala.urls"
