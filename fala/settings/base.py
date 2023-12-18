@@ -109,8 +109,8 @@ MIDDLEWARE = (
 CSP_DEFAULT_SRC = ["'self'", "*.googletagmanager.com"]
 CSP_SCRIPT_SRC = [
     "'self'",
-    "'unsafe-inline'",
-    "'unsafe-eval'",
+    "'nonce-gmaps'",
+    "'nonce-govdefault'",
     "*.googleapis.com",
     "*.gstatic.com",
     "*.google.com",
