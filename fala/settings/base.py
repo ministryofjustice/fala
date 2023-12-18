@@ -107,10 +107,9 @@ MIDDLEWARE = (
     "csp.middleware.CSPMiddleware",
 )
 CSP_DEFAULT_SRC = ["'self'", "*.googletagmanager.com"]
+CSP_INCLUDE_NONCE_IN = ["script-src"]
 CSP_SCRIPT_SRC = [
     "'self'",
-    "'nonce-gmaps'",
-    "'nonce-govdefault'",
     "*.googleapis.com",
     "*.gstatic.com",
     "*.google.com",
@@ -161,6 +160,9 @@ CSP_FONT_SRC = [
 CSP_STYLE_SRC = [
     "'self'",
     "'unsafe-inline'",
+    "*.googleapis.com",
+    "*.google.com",
+    "*.google.co.uk",
     "fonts.googleapis.com",
     "*.gstatic.com",
     "cloud-platform-3b0904ebacb2f3618f1979bba0bd0ce5.s3.amazonaws.com",
