@@ -118,6 +118,7 @@ CSP_SCRIPT_SRC = [
     "blob:",
     "ajax.aspnetcdn.com",
     "cloud-platform-3b0904ebacb2f3618f1979bba0bd0ce5.s3.amazonaws.com",
+    "cloud-platform-3300ca90491f7aed3b76d454a2e495a5.s3.amazonaws.com",
     "*.googletagmanager.com",
     "*.analytics.google.com",
     "*.g.doubleclick.net",
@@ -131,6 +132,7 @@ CSP_IMG_SRC = [
     "*.googleusercontent.com",
     "data:",
     "cloud-platform-3b0904ebacb2f3618f1979bba0bd0ce5.s3.amazonaws.com",
+    "cloud-platform-3300ca90491f7aed3b76d454a2e495a5.s3.amazonaws.com",
     "*.googletagmanager.com",
     "*.analytics.google.com",
     "*.google.co.uk",
@@ -156,6 +158,7 @@ CSP_FONT_SRC = [
     "data:",
     "fonts.gstatic.com",
     "cloud-platform-3b0904ebacb2f3618f1979bba0bd0ce5.s3.amazonaws.com",
+    "cloud-platform-3300ca90491f7aed3b76d454a2e495a5.s3.amazonaws.com",
 ]
 CSP_STYLE_SRC = [
     "'self'",
@@ -166,6 +169,7 @@ CSP_STYLE_SRC = [
     "fonts.googleapis.com",
     "*.gstatic.com",
     "cloud-platform-3b0904ebacb2f3618f1979bba0bd0ce5.s3.amazonaws.com",
+    "cloud-platform-3300ca90491f7aed3b76d454a2e495a5.s3.amazonaws.com",
 ]
 CSP_WORKER_SRC = ["blob:"]
 
