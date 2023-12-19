@@ -99,9 +99,83 @@ MIDDLEWARE_CLASSES = (
     # 'django.contrib.auth.middleware.AuthenticationMiddleware',
     # 'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     "django.contrib.messages.middleware.MessageMiddleware",
+)
+
+MIDDLEWARE = (
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
+    "csp.middleware.CSPMiddleware",
 )
+CSP_DEFAULT_SRC = ["'self'", "*.googletagmanager.com"]
+CSP_INCLUDE_NONCE_IN = ["script-src"]
+CSP_SCRIPT_SRC = [
+    "'self'",
+    "*.googleapis.com",
+    "*.gstatic.com",
+    "*.google.com",
+    "*.ggpht.com",
+    "*.googleusercontent.com",
+    "blob:",
+    "ajax.aspnetcdn.com",
+    "cloud-platform-3b0904ebacb2f3618f1979bba0bd0ce5.s3.amazonaws.com",
+    "cloud-platform-3300ca90491f7aed3b76d454a2e495a5.s3.amazonaws.com",
+    "*.googletagmanager.com",
+    "*.analytics.google.com",
+    "*.g.doubleclick.net",
+    "*.google.co.uk",
+]
+CSP_IMG_SRC = [
+    "'self'",
+    "*.googleapis.com",
+    "*.gstatic.com",
+    "*.google.com",
+    "*.googleusercontent.com",
+    "data:",
+    "cloud-platform-3b0904ebacb2f3618f1979bba0bd0ce5.s3.amazonaws.com",
+    "cloud-platform-3300ca90491f7aed3b76d454a2e495a5.s3.amazonaws.com",
+    "*.googletagmanager.com",
+    "*.analytics.google.com",
+    "*.google.co.uk",
+    "*.g.doubleclick.net",
+    "*.google-analytics.com",
+]
+CSP_FRAME_SRC = ["*.google.com"]
+CSP_CONNECT_SRC = [
+    "'self'",
+    "*.googleapis.com",
+    "*.google.com",
+    "*.gstatic.com",
+    "data:",
+    "blob:",
+    "*.google-analytics.com",
+    "*.analytics.google.com",
+    "*.googletagmanager.com",
+    "*.g.doubleclick.net",
+    "*.google.co.uk",
+]
+CSP_FONT_SRC = [
+    "'self'",
+    "data:",
+    "fonts.gstatic.com",
+    "cloud-platform-3b0904ebacb2f3618f1979bba0bd0ce5.s3.amazonaws.com",
+    "cloud-platform-3300ca90491f7aed3b76d454a2e495a5.s3.amazonaws.com",
+]
+CSP_STYLE_SRC = [
+    "'self'",
+    "'unsafe-inline'",
+    "*.googleapis.com",
+    "*.google.com",
+    "*.google.co.uk",
+    "fonts.googleapis.com",
+    "*.gstatic.com",
+    "cloud-platform-3b0904ebacb2f3618f1979bba0bd0ce5.s3.amazonaws.com",
+    "cloud-platform-3300ca90491f7aed3b76d454a2e495a5.s3.amazonaws.com",
+]
+CSP_WORKER_SRC = ["blob:"]
+
+CSP_FORM_ACTION = ["'self'"]
+
+CSP_FRAME_ANCESTORS = ["'self'"]
 
 ROOT_URLCONF = "fala.urls"
 

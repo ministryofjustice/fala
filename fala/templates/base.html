@@ -14,7 +14,7 @@
       }
     </style>
   {% endif %}
-  <script>
+  <script nonce="{{request.csp_nonce}}">
   function tagMan() {  // Activate Google Tag Manager
     (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -25,9 +25,9 @@
   </script>
   
   {% if (request.COOKIES.get('cookiePermission') == 'Allowed') %}
-  <script>tagMan();</script>
+  <script nonce="{{request.csp_nonce}}">tagMan();</script>
   {% endif %}
-  <script>
+  <script nonce="{{request.csp_nonce}}">
     /* Modernizr 2.8.3 (Custom Build) | MIT & BSD
      * Build: http://modernizr.com/download/#-mq-teststyles
      */
@@ -161,7 +161,7 @@
 {% block before_main_js %}
   {{ super() }}
   <script src="//maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}"></script>
-  <script>
+  <script nonce="{{request.csp_nonce}}">
     window.LABELS = {
       loading: "{{ _('Loading…') }}"
     };
@@ -169,7 +169,7 @@
 {% endblock %}
 
 {% block after_main_js %}
-  <script>
+  <script  nonce="{{request.csp_nonce}}">
     function googleTranslateElementInit() {
       new google.translate.TranslateElement(
         {
@@ -180,7 +180,7 @@
     }
   </script>
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-  <script>
+  <script  nonce="{{request.csp_nonce}}">
     function errorScroll(s,f) {
       document.getElementById(s).scrollIntoView();
       document.getElementById(f).focus();
