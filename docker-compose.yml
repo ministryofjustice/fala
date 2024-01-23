@@ -1,20 +1,18 @@
 version: "3.7"
 services:
-
-  nginx:
-    build:
-      context: ./
-      dockerfile: Dockerfile.nginx
-    depends_on:
-      - webapp
-    ports:
-      - "8002:80"
-
   webapp:
     container_name: fala
     build: .
+    volumes:
+      - ./fala:/home/app/fala
+    command:
+      - python3
+      - manage.py
+      - runserver
+      - "0.0.0.0:8000"
+
     environment:
-      - LAALAA_API_HOST=https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk
-      - DJANGO_SETTINGS_MODULE=fala.settings.local
+      LAALAA_API_HOST: "https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk"
+      DJANGO_SETTINGS_MODULE: "fala.settings.local"
     ports:
-      - "8000:8000"
+      - "8013:8000"
