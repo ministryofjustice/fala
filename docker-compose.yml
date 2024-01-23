@@ -5,6 +5,7 @@ services:
     build: .
     volumes:
       - ./fala:/home/app/fala
+      - /home/app/fala/assets
     command:
       - python3
       - manage.py

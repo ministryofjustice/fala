@@ -32,3 +32,4 @@ pip-log.txt
 tests/reports/nightwatch/*
 venv
 docker-compose.yml
+run_local.sh
