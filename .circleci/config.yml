@@ -46,7 +46,25 @@ jobs:
           command: |
             source lint-env/bin/activate
             black --check fala
-
+  pip-compile:
+    docker:
+      - image: cimg/python:3.10
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - pip-v1-{{ checksum "requirements/generated/requirements-pre-commit.txt" }}
+      - run:
+          name: Install dependencies
+          command: |
+            pip install -r requirements/generated/requirements-pre-commit.txt
+      - save_cache:
+          key: pip-v1-{{ checksum "requirements/generated/requirements-pre-commit.txt" }}
+          paths:
+            - "~/.cache/pip"
+      - run:
+          name: Check for changes with pip-compile
+          command: ls requirements/source/* | xargs pre-commit run pip-compile --files
   test:
     docker:
       - image: cimg/python:3.10
@@ -149,10 +167,13 @@ workflows:
   build_test_and_deploy:
     jobs:
       - lint
-      - test
-      - build:
+      - pip-compile
+      - test:
           requires:
             - lint
+            - pip-compile
+      - build:
+          requires:
             - test
           context: laa-fala
       - behave:
