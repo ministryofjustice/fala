@@ -11,8 +11,8 @@ The website uses the LAA Legal Adviser API. The code is hosted at https://github
 The REST API is https://prod.laalaa.dsd.io/.
 
 ## Documentation
-
-* [Installation](docs/installation.md)
+* [Installation via docker](docs/docker.md)
+* [Installation via virtualenv](docs/virtual-env.md)
 * [Using Kubernetes](docs/kubernetes.md)
 * [Releasing](https://github.com/ministryofjustice/laa-civil-legal-aid-documentation/blob/master/releasing/kubernetes.md)
 (opens in https://github.com/ministryofjustice/laa-civil-legal-aid-documentation)
