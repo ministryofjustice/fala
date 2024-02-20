@@ -24,7 +24,7 @@
     "mojular-govuk-elements": "mojular/govuk-elements#0.2.0",
     "mojular-moj-elements": "mojular/moj-elements#0.2.0",
     "mojular-templates": "mojular/templates#0.0.6",
-    "nunjucks": "^3.2.0"
+    "nunjucks": "^3.2.1"
   },
   "devDependencies": {
     "browser-sync": "^2.27.10",
