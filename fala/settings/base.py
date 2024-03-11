@@ -53,7 +53,8 @@ if os.environ.get("STATIC_FILES_BACKEND") == "s3":
     STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
 AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME")
-AWS_DEFAULT_ACL = None
+AWS_DEFAULT_ACL = "public-read"
+AWS_QUERYSTRING_AUTH = False
 AWS_QUERYSTRING_EXPIRE = 60 * 60 * 24 * 7
 
 STATIC_URL = "/static/"
