@@ -47,7 +47,6 @@ MEDIA_ROOT = root("assets", "uploads")
 
 MEDIA_URL = "/media/"
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 if os.environ.get("STATIC_FILES_BACKEND") == "s3":
