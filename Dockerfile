@@ -8,7 +8,7 @@ COPY . .
 
 RUN ./node_modules/.bin/gulp build --production
 
-FROM python:3.12-bookworm
+FROM python:3.12-bullseye
 
 COPY --from=node_build ./fala/assets /home/app/fala/assets
 
