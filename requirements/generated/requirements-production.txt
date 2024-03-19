@@ -70,5 +70,5 @@ urllib3==1.26.15
     #   botocore
     #   requests
     #   sentry-sdk
-uwsgi==2.0.21
+uwsgi==2.0.24
     # via -r requirements/source/requirements-base.in
