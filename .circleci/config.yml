@@ -15,7 +15,7 @@ orbs:
 jobs:
   lint:
     docker:
-      - image: cimg/python:3.10
+      - image: cimg/python:3.12
     steps:
       - checkout
       - run:
@@ -48,7 +48,7 @@ jobs:
             black --check fala
   pip-compile:
     docker:
-      - image: cimg/python:3.10
+      - image: cimg/python:3.12
     steps:
       - checkout
       - restore_cache:
@@ -67,7 +67,7 @@ jobs:
           command: ls requirements/source/* | xargs pre-commit run pip-compile --files
   test:
     docker:
-      - image: cimg/python:3.10
+      - image: cimg/python:3.12
     steps:
       - checkout
       - run:
