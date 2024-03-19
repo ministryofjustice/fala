@@ -16,8 +16,8 @@ git clone git@github.com:ministryofjustice/fala.git
 Next, create the environment and start it up. Ensure you are in the top level folder:
 
 ```
-virtualenv -p python3 env
-source env/bin/activate
+python3 -m venv venv
+source venv/bin/activate
 ```
 Install the requirements for this project
 
@@ -56,17 +56,24 @@ Create a ``local.py`` settings file from the example file:
 cp fala/settings/local.example.py fala/settings/local.py
 ```
 
+LAALAA_API_HOST has to be set to a valid host running laa-laa-api, otherwise the Django server doesn't start
+
 Next, run the Django server with:
 
 ```
 python3 ./manage.py runserver
 ```
 
+## Running tests
+```
+python3 ./manage.py tests 
+```
+
 ## Lint and pre-commit hooks
 
 To lint with Black and flake8, install pre-commit hooks:
 ```
-. env/bin/activate
+. venv/bin/activate
 pip install -r requirements/generated/requirements-dev.txt
 pre-commit install
 ```
