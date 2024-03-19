@@ -1,4 +1,4 @@
-FROM node:8 as node_build
+FROM node:10 as node_build
 
 COPY package.json package-lock.json ./
 COPY npm_install_wrapper.sh  ./

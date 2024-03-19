@@ -4,7 +4,7 @@
 
 - [Virtualenv](http://www.virtualenv.org/en/latest/)
 - [Python 3](http://www.python.org/) (Can be installed using `brew install python3`)
-- [nodejs.org](http://nodejs.org/) (v8.12 - can be installed using [nvm](https://github.com/creationix/nvm))
+- [nodejs.org](http://nodejs.org/) (v10.24 - can be installed using [nvm](https://github.com/creationix/nvm))
 - [docker](https://www.docker.com/) - Only required for running application from Docker
 
 ## Manual Installation
