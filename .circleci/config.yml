@@ -21,8 +21,7 @@ jobs:
       - run:
           name: Setup Python environment
           command: |
-            pip install virtualenv
-            virtualenv lint-env
+            python -m venv lint-env
             source lint-env/bin/activate
       - restore_cache:
           keys:
@@ -73,8 +72,7 @@ jobs:
       - run:
           name: Setup Python environment
           command: |
-            pip install virtualenv
-            virtualenv env
+            python -m venv env
             source env/bin/activate
       - restore_cache:
           keys:
@@ -120,11 +118,11 @@ jobs:
           tag: $BUILD_TAGS
           region: $ECR_REGION # this will use the env var
           repo: $ECR_REPOSITORY # this will use the env var
-      # Validate the python version as 3.10
+      # Validate the python version as 3.12
       - run:
           name: Validate Python version
           command: |
-            docker run --rm --tty --interactive ${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG python --version | grep "3.10"
+            docker run --rm --tty --interactive ${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG python --version | grep "3.12"
 
   deploy:
     parameters:
