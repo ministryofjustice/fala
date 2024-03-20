@@ -2,7 +2,6 @@
 
 ## Dependencies
 
-- [Virtualenv](http://www.virtualenv.org/en/latest/)
 - [Python 3](http://www.python.org/) (Can be installed using `brew install python3`)
 - [nodejs.org](http://nodejs.org/) (v10.24 - can be installed using [nvm](https://github.com/creationix/nvm))
 - [docker](https://www.docker.com/) - Only required for running application from Docker
@@ -36,16 +35,12 @@ FALA uses [Gulp](http://gulpjs.com/) for build tasks. The following Gulp tasks a
 
 :memo: It is also possible to use `npm run build` and `npm run serve` instead of gulp directly.
 
-**We cannot directly call npm install because some packages have not update how they bring in their dependencies as the 
-unauthenticated git:// no longer works see https://github.blog/2021-09-01-improving-git-protocol-security-github/#no-more-unauthenticated-git 
-for more details**
-
 Before running this command, make sure you are using the correct version of node. 
 This can be changed using nvm
 
 The following commands will import the assets including CSS into your local environment:
 ```
-./npm_install_wrapper.sh
+npm install
 npm run build
 ./manage.py collectstatic --noinput      
 ```
