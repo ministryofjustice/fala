@@ -56,7 +56,6 @@ def decode_categories(result):
 
 
 def find(postcode=None, categories=None, page=1, organisation_types=None, organisation_name=None):
-
     data = laalaa_search(
         postcode=postcode,
         categories=categories,

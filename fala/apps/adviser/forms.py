@@ -24,7 +24,6 @@ class FalaTextInput(forms.TextInput):
 
 
 class AdviserSearchForm(forms.Form):
-
     page = forms.IntegerField(required=False, widget=forms.HiddenInput())
 
     postcode = forms.CharField(
@@ -35,7 +34,7 @@ class AdviserSearchForm(forms.Form):
         widget=FalaTextInput(),
     )
 
-    name = forms.CharField(label=_("Organisation name"), max_length=100, required=False, widget=FalaTextInput(),)
+    name = forms.CharField(label=_("Organisation name"), max_length=100, required=False, widget=FalaTextInput())
 
     type = forms.MultipleChoiceField(
         label=_("Organisation type"),
@@ -77,7 +76,7 @@ class AdviserSearchForm(forms.Form):
             elif re.search(r"^GY[0-8]", postcodeNoSpace, flags=re.IGNORECASE):
                 region = "Guernsey. "
             if region != "England or Wales. ":
-                self.add_error("postcode", u"%s %s" % (_(" ".join((msg1, region))), _(msg2)))
+                self.add_error("postcode", "%s %s" % (_(" ".join((msg1, region))), _(msg2)))
         return data
 
     def search(self):
@@ -96,6 +95,6 @@ class AdviserSearchForm(forms.Form):
                 return data
             except laalaa.LaaLaaError:
                 self.add_error(
-                    "postcode", u"%s %s" % (_("Error looking up legal advisers."), _("Please try again later."))
+                    "postcode", "%s %s" % (_("Error looking up legal advisers."), _("Please try again later."))
                 )
         return {}
