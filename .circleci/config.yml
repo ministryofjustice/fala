@@ -21,8 +21,7 @@ jobs:
       - run:
           name: Setup Python environment
           command: |
-            pip install virtualenv
-            virtualenv lint-env
+            python -m venv lint-env
             source lint-env/bin/activate
       - restore_cache:
           keys:
@@ -73,8 +72,7 @@ jobs:
       - run:
           name: Setup Python environment
           command: |
-            pip install virtualenv
-            virtualenv env
+            python -m venv env
             source env/bin/activate
       - restore_cache:
           keys:
