@@ -16,3 +16,4 @@ The REST API is https://prod.laalaa.dsd.io/.
 * [Using Kubernetes](docs/kubernetes.md)
 * [Releasing](https://github.com/ministryofjustice/laa-civil-legal-aid-documentation/blob/master/releasing/kubernetes.md)
 (opens in https://github.com/ministryofjustice/laa-civil-legal-aid-documentation)
+* [Requirements files](docs/requirements.md)
