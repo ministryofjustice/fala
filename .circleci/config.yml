@@ -15,7 +15,7 @@ orbs:
 jobs:
   lint:
     docker:
-      - image: cimg/python:3.10
+      - image: cimg/python:3.12
     steps:
       - checkout
       - run:
@@ -47,7 +47,7 @@ jobs:
             black --check fala
   pip-compile:
     docker:
-      - image: cimg/python:3.10
+      - image: cimg/python:3.12
     steps:
       - checkout
       - restore_cache:
@@ -66,7 +66,7 @@ jobs:
           command: ls requirements/source/* | xargs pre-commit run pip-compile --files
   test:
     docker:
-      - image: cimg/python:3.10
+      - image: cimg/python:3.12
     steps:
       - checkout
       - run:
@@ -118,11 +118,11 @@ jobs:
           tag: $BUILD_TAGS
           region: $ECR_REGION # this will use the env var
           repo: $ECR_REPOSITORY # this will use the env var
-      # Validate the python version as 3.10
+      # Validate the python version as 3.12
       - run:
           name: Validate Python version
           command: |
-            docker run --rm --tty --interactive ${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG python --version | grep "3.10"
+            docker run --rm --tty --interactive ${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG python --version | grep "3.12"
 
   deploy:
     parameters:
