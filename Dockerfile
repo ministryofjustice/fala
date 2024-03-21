@@ -1,4 +1,4 @@
-FROM node:12 as node_build
+FROM node:10 as node_build
 
 COPY package.json package-lock.json ./
 # On the Git protocol side, unencrypted git:// offers no integrity or authentication, making it subject to tampering.
@@ -6,7 +6,7 @@ COPY package.json package-lock.json ./
 # We’ll be disabling support for this protocol.
 # https://github.blog/2021-09-01-improving-git-protocol-security-github/#no-more-unauthenticated-git
 #RUN git config --global url."https://".insteadOf git://
-RUN npm install -g npm@8
+#RUN npm install -g npm@8
 RUN npm install
 
 COPY . .
