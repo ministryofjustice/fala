@@ -1,7 +1,7 @@
 FROM node:10 as node_build
 
 COPY package.json package-lock.json ./
-RUN npm install
+RUN npm install --verbose
 
 COPY . .
 
