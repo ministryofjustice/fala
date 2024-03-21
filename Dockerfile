@@ -6,7 +6,7 @@ COPY package.json package-lock.json ./
 # We’ll be disabling support for this protocol.
 # https://github.blog/2021-09-01-improving-git-protocol-security-github/#no-more-unauthenticated-git
 RUN git config --global url."https://".insteadOf git://
-RUN npm install --ignore-scripts
+RUN npm install
 
 COPY . .
 
