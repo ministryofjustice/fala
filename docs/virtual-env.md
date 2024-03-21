@@ -4,7 +4,6 @@
 
 - [Python 3](http://www.python.org/) (Can be installed using `brew install python3`)
 - [nodejs.org](http://nodejs.org/) (v10.24 - can be installed using [nvm](https://github.com/creationix/nvm))
-- [docker](https://www.docker.com/) - Only required for running application from Docker
 
 ## Manual Installation
 
@@ -23,7 +22,19 @@ Install the requirements for this project
 ```
 pip install -r requirements/generated/requirements-dev.txt
 ```
-# Node
+### NodeJS v10.x
+
+It's suggested to use 'nvm' to install this old version of Node.
+
+1. Install NVM: https://github.com/nvm-sh/nvm#install--update-script
+
+2. Install the NodeJS version:
+
+   nvm install 10.24
+
+You can check your NodeJS version:
+
+node --version
 
 Assets reside in `fala/assets-src` directory and compiled in `fala/assets` directory upon running build tasks.
 
