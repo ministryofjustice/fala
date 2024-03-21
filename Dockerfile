@@ -5,7 +5,8 @@ COPY package.json package-lock.json ./
 # We expect very few people are still using this protocol, especially given that you can’t push (it’s read-only on GitHub).
 # We’ll be disabling support for this protocol.
 # https://github.blog/2021-09-01-improving-git-protocol-security-github/#no-more-unauthenticated-git
-RUN git config --global url."https://".insteadOf git://
+#RUN git config --global url."https://".insteadOf git://
+#RUN npm install npm@8
 RUN npm install
 
 COPY . .
