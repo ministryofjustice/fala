@@ -3,7 +3,7 @@ orbs:
   slack: circleci/slack@2.5.0
   cla-end-to-end-tests: ministryofjustice/cla-end-to-end-tests@volatile
   aws-cli: circleci/aws-cli@4.0.0 # use v4 of this orb
-  aws-ecr: circleci/aws-ecr@8.2.1 # this orb doesn't support OIDC v2, so we use aws-cli to authenticate
+  aws-ecr: circleci/aws-ecr@9 # this orb doesn't support OIDC v2, so we use aws-cli to authenticate
 
 
 # ------------------
@@ -15,14 +15,13 @@ orbs:
 jobs:
   lint:
     docker:
-      - image: cimg/python:3.10
+      - image: cimg/python:3.12
     steps:
       - checkout
       - run:
           name: Setup Python environment
           command: |
-            pip install virtualenv
-            virtualenv lint-env
+            python -m venv lint-env
             source lint-env/bin/activate
       - restore_cache:
           keys:
@@ -48,7 +47,7 @@ jobs:
             black --check fala
   pip-compile:
     docker:
-      - image: cimg/python:3.10
+      - image: cimg/python:3.12
     steps:
       - checkout
       - restore_cache:
@@ -67,14 +66,13 @@ jobs:
           command: ls requirements/source/* | xargs pre-commit run pip-compile --files
   test:
     docker:
-      - image: cimg/python:3.10
+      - image: cimg/python:3.12
     steps:
       - checkout
       - run:
           name: Setup Python environment
           command: |
-            pip install virtualenv
-            virtualenv env
+            python -m venv env
             source env/bin/activate
       - restore_cache:
           keys:
@@ -114,17 +112,19 @@ jobs:
       # Authenticate to the ECR repository using the standard command
       - run: |
           aws ecr get-login-password --region $ECR_REGION | docker login --username AWS --password-stdin ${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com
-      # Build and push your Docker image
-      - aws-ecr/build-image:
-          push-image: true
+      # Update timeout needed as run on circle often exceeds 10 minute deadline
+      - aws-ecr/build_image:
+          no_output_timeout: 15m
+          push_image: true
+          account_id: $AWS_ECR_REGISTRY_ID
           tag: $BUILD_TAGS
           region: $ECR_REGION # this will use the env var
           repo: $ECR_REPOSITORY # this will use the env var
-      # Validate the python version as 3.10
+      # Validate the python version as 3.12
       - run:
           name: Validate Python version
           command: |
-            docker run --rm --tty --interactive ${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG python --version | grep "3.10"
+            docker run --rm --tty --interactive ${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG python --version | grep "3.12"
 
   deploy:
     parameters:
