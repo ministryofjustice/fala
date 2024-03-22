@@ -1,3 +1,3 @@
 -r requirements-base.in
 -r requirements-pre-commit.in
-pip-tools==6.13.0
+pip-tools==7.4.1
