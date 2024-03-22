@@ -29,7 +29,7 @@ click==8.1.7
     # via pip-tools
 distlib==0.3.8
     # via virtualenv
-django==4.2
+django==4.2.11
     # via
     #   -r requirements/source/requirements-base.in
     #   django-csp
