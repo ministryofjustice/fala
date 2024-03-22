@@ -65,16 +65,14 @@ nodeenv==1.8.0
     # via pre-commit
 packaging==24.0
     # via build
-pip-tools==7.4.1
+pip-tools==6.13.0
     # via -r requirements/source/requirements-dev.in
 platformdirs==4.2.0
     # via virtualenv
 pre-commit==3.6.2
     # via -r requirements/source/requirements-pre-commit.in
 pyproject-hooks==1.0.0
-    # via
-    #   build
-    #   pip-tools
+    # via build
 python-dateutil==2.9.0.post0
     # via
     #   botocore
