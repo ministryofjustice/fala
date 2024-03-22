@@ -28,7 +28,7 @@ We want the dependencies to be up-to-date as we can, for security and maintainab
 
 These automated tools generally increment the Generated files to the latest. The PRs they create should be tested, and if they work they can be merged.
 
-Note: These automated tools don't look at the .in source files, so the constraints we put in them aren't taken account of. So test well! If the tests fail, then the human can look in the source file's constraint to see if that already records a reason for not being able to upgrade.
+Note: These automated tools don't look at the .in source files, so the constraints we put in them aren't taken account of. When this happens, it will be picked up with a CircleCI failure in the `pip-compile` step.
 
 ### Manual updates
 
@@ -40,7 +40,5 @@ pip-compile --upgrade --output-file=requirements/generated/requirements-lint.txt
 pip-compile --upgrade --output-file=requirements/generated/requirements-pre-commit.txt requirements/source/requirements-pre-commit.in
 pip-compile --upgrade --output-file=requirements/generated/requirements-production.txt requirements/source/requirements-production.in
 ```
-
-Note: Check in case something has been **downgraded**. This is possible because Dependabot/Snyk don't take account of the constraints in the source file. If this happens, then it suggests the constraint should be loosened to include the later version. Test to see what versions are ok.
 
 This method is superior than the Dependabot/Snyk automation, because it does take account of the constraints contained in the source files. So it avoids major breaking changes and known incompatibilities. And it's good for updates across all the dependencies at once. And during testing you find out if new versions are problematic, which require constraints adding to the source files.
