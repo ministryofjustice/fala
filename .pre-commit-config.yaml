@@ -22,6 +22,7 @@ repos:
         files: requirements-pre-commit.in
         args: [ requirements/source/requirements-pre-commit.in, "--output-file", requirements/generated/requirements-pre-commit.txt ]
       - id: pip-compile
+        language_version: python3.12
         name: pip-compile requirements-lint.in
         files: requirements-lint.in
         args: [ requirements/source/requirements-lint.in, "--output-file", requirements/generated/requirements-lint.txt ]

@@ -91,10 +91,6 @@ six==1.16.0
     # via python-dateutil
 sqlparse==0.4.4
     # via django
-tomli==2.0.1
-    # via build
-typing-extensions==4.10.0
-    # via asgiref
 urllib3==2.2.1
     # via
     #   botocore
