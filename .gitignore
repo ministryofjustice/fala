@@ -60,3 +60,6 @@ venv
 fala/settings/local.py
 fala/assets
 fala/static
+
+# Python version on local machine
+.python-version
