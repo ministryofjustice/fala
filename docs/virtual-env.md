@@ -4,9 +4,9 @@ This describes installing fala locally for development purposes.
 
 ## Dependencies
 
-### Pyenv, python3
+### Python & pyenv
 
-"pyenv" is used to provide python3. (Other CLA repos need different versions, so good to be able to .)
+"pyenv" is the tool we use to install and use the correct version of Python. (Other CLA repos need different python versions, and we've settled on pyenv as the best way to easily switch versions, depending on the repo you're in.)
 
 1. Install pyenv with brew:
 
@@ -24,7 +24,25 @@ This describes installing fala locally for development purposes.
 
         pyenv install 3.12 --skip-existing
 
-### NodeJS v10.x
+When you're in this repo's directory, pyenv will automatically use the version defined in `.python-version`:
+```
+$ cd fala
+$ python --version
+3.12
+```
+
+If you have a virtual environment with the wrong python version, then it's easiest to delete it and re-create it with the right python version:
+```
+rm -rf venv
+pyenv use
+python --version  # check the version is now correct
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements/generated/requirements-dev.txt
+# etc
+```
+
+### NodeJS
 
 It's suggested to use 'nvm' to install this old version of Node.
 
