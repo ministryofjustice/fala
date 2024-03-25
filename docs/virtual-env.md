@@ -1,4 +1,6 @@
-# Installation
+# Virtual-env install
+
+This describes installing fala locally for development purposes.
 
 ## Dependencies
 
@@ -36,23 +38,43 @@ You can check your NodeJS version:
 
 node --version
 
-## Manual Installation
+## Installation
 
-Clone the repository:
-```
-git clone git@github.com:ministryofjustice/fala.git
-```
-Next, create the environment and start it up. Ensure you are in the top level folder:
+1. Clone the repository:
 
-```
-python3 -m venv venv
-source venv/bin/activate
-```
-Install the requirements for this project
+      git clone git@github.com:ministryofjustice/fala.git
 
+2. Check your Python version:
+
+      $ cd fala
+      $ python --version
+      3.12
+
+3. Create the python environment, activate it and install the requirements:
+
+      python3 -m venv venv
+      source venv/bin/activate
+      pip install -r requirements/generated/requirements-dev.txt
+
+4. Build the assets:
+
+      nvm use
+      npm install
+      npm run build
+      ./manage.py collectstatic --noinput
+
+5. Create a ``local.py`` settings file from the example file:
+
+      cp fala/settings/local.example.py fala/settings/local.py
+
+## Running
+
+Run the Django server with:
 ```
-pip install -r requirements/generated/requirements-dev.txt
+./manage.py runserver
 ```
+
+## Assets
 
 Assets reside in `fala/assets-src` directory and compiled in `fala/assets` directory upon running build tasks.
 
@@ -74,20 +96,6 @@ npm run build
 ./manage.py collectstatic --noinput      
 ```
 
-Create a ``local.py`` settings file from the example file:
-
-```
-cp fala/settings/local.example.py fala/settings/local.py
-```
-
-LAALAA_API_HOST has to be set to a valid host running laa-laa-api, otherwise the Django server doesn't start
-
-Next, run the Django server with:
-
-```
-python3 ./manage.py runserver
-```
-
 ## Running tests
 ```
 python3 ./manage.py tests 
@@ -97,7 +105,7 @@ python3 ./manage.py tests
 
 To lint with Black and flake8, install pre-commit hooks:
 ```
-. venv/bin/activate
+source venv/bin/activate
 pip install -r requirements/generated/requirements-dev.txt
 pre-commit install
 ```
