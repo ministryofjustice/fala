@@ -60,30 +60,30 @@ node --version
 
 1. Clone the repository:
 
-      git clone git@github.com:ministryofjustice/fala.git
+        git clone git@github.com:ministryofjustice/fala.git
 
 2. Check your Python version:
 
-      $ cd fala
-      $ python --version
-      3.12
+        $ cd fala
+        $ python --version
+        3.12
 
 3. Create the python environment, activate it and install the requirements:
 
-      python3 -m venv venv
-      source venv/bin/activate
-      pip install -r requirements/generated/requirements-dev.txt
+        python3 -m venv venv
+        source venv/bin/activate
+        pip install -r requirements/generated/requirements-dev.txt
 
 4. Build the assets:
 
-      nvm use
-      npm install
-      npm run build
-      ./manage.py collectstatic --noinput
+        nvm use
+        npm install
+        npm run build
+        ./manage.py collectstatic --noinput
 
 5. Create a ``local.py`` settings file from the example file:
 
-      cp fala/settings/local.example.py fala/settings/local.py
+        cp fala/settings/local.example.py fala/settings/local.py
 
 ## Running
 
