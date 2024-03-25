@@ -10,19 +10,19 @@ This describes installing fala locally for development purposes.
 
 1. Install pyenv with brew:
 
-        brew install pyenv
+       brew install pyenv
 
 2. Set up your shell for pyenv. Make the changes to `~/.zshrc` described here: [Set up your shell for pyenv](https://github.com/pyenv/pyenv#set-up-your-shell-environment-for-pyenv) (This is so that pyenv's python binary can be found in your path)
 
 3. To make the shell changes take effect:
 
-        exec "$SHELL"
+       exec "$SHELL"
 
     (or alternatively, restart your shell)
 
 4. Install into pyenv the python version this repo uses (which is defined in `.python-version`):
 
-        pyenv install 3.12 --skip-existing
+       pyenv install 3.12 --skip-existing
 
 When you're in this repo's directory, pyenv will automatically use the version defined in `.python-version`:
 ```
