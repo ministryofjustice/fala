@@ -6,9 +6,9 @@
 #
 asgiref==3.8.1
     # via django
-boto3==1.34.68
+boto3==1.34.69
     # via -r requirements/source/requirements-base.in
-botocore==1.34.68
+botocore==1.34.69
     # via
     #   -r requirements/source/requirements-base.in
     #   boto3
@@ -29,7 +29,7 @@ click==8.1.7
     # via pip-tools
 distlib==0.3.8
     # via virtualenv
-django==4.2.11
+django==5.0
     # via
     #   -r requirements/source/requirements-base.in
     #   django-csp
@@ -69,7 +69,7 @@ pip-tools==6.13.0
     # via -r requirements/source/requirements-dev.in
 platformdirs==4.2.0
     # via virtualenv
-pre-commit==3.6.2
+pre-commit==3.7.0
     # via -r requirements/source/requirements-pre-commit.in
 pyproject-hooks==1.0.0
     # via build

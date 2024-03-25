@@ -1,6 +1,6 @@
 boto3<2
 botocore<2
-django==4.2.11
+django==5.0
 django-jinja==2.10.2
 django-storages==1.13.2
 django-csp==3.7
