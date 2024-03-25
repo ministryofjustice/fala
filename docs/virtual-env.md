@@ -31,7 +31,7 @@ $ python --version
 3.12
 ```
 
-If you have a virtual environment with the wrong python version, then it's easiest to delete it and re-create it with the right python version:
+If you have the wrong python version in your virtual environment, then it's easiest to delete it and re-create it with the right python version:
 ```
 rm -rf venv
 pyenv use
