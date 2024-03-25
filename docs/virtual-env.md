@@ -44,17 +44,20 @@ pip install -r requirements/generated/requirements-dev.txt
 
 ### NodeJS
 
-It's suggested to use 'nvm' to install this old version of Node.
+It's suggested to use 'nvm' to install the required old version of Node.
 
 1. Install NVM: https://github.com/nvm-sh/nvm#install--update-script
 
-2. Install the NodeJS version:
+2. Install the NodeJS version (specified in `.nvmrc`):
 
-   nvm install 10.24
+        nvm install
+
+Now when you run `nvm use` it'll modify your PATH to point to the NodeJS version specified in `.nvmrc`. So if you're swapping between repos with different Node versions, you'll need to rerun `nvm use` each time, or you can [automate it](https://github.com/nvm-sh/nvm?tab=readme-ov-file#deeper-shell-integration).
 
 You can check your NodeJS version:
-
+```
 node --version
+```
 
 ## Installation
 
@@ -94,25 +97,28 @@ Run the Django server with:
 
 ## Assets
 
-Assets reside in `fala/assets-src` directory and compiled in `fala/assets` directory upon running build tasks.
+Frontend assets have their source in `fala/assets-src/` and the build outputs to: `fala/assets/`.
 
-FALA uses [Gulp](http://gulpjs.com/) for build tasks. The following Gulp tasks are used in development:
+FALA uses [Gulp](http://gulpjs.com/) for this build. The following Gulp tasks are used in development:
 
 - `build` builds and minifies all assets and does all of the following
 - `sass` builds the SCSS and generates source maps
 - `serve` watches the files for changes and reloads the browser using [BrowserSync](http://www.browsersync.io/)
 
-:memo: It is also possible to use `npm run build` and `npm run serve` instead of gulp directly.
+Usage during frontend development:
 
-Before running this command, make sure you are using the correct version of node. 
-This can be changed using nvm
+1. Ensure you have the correct NodeJS version - see [NodeJS install](docs/virtual-env.md#nodejs)
 
-The following commands will import the assets including CSS into your local environment:
-```
-npm install
-npm run build
-./manage.py collectstatic --noinput      
-```
+2. Run the build:
+
+       nvm use
+       npm install
+       npm run build
+       ./manage.py collectstatic --noinput
+
+3. Serve assets:
+
+       npm run serve
 
 ## Running tests
 ```
