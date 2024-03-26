@@ -56,7 +56,7 @@ You can insert a breakpoint with the `breakpoint()` function at any position in 
 If you're using a docker contain to run your project locally, you can run `docker attach fala` to view the output in 
 your chosen terminal.
 
-When pdb.set_trace() is reached, you will be able to debug from the command line.
+When breakpoint() is reached, you will be able to debug from the command line.
 
 https://docs.python.org/3/library/pdb.html
 
