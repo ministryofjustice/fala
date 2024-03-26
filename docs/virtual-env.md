@@ -1,28 +1,48 @@
-# Installation
+# Virtual-env install
+
+This describes installing fala locally for development purposes.
 
 ## Dependencies
 
-- [Python 3](http://www.python.org/) (Can be installed using `brew install python3`)
-- [nodejs.org](http://nodejs.org/) (v10.24 - can be installed using [nvm](https://github.com/creationix/nvm))
+### Python & pyenv
 
-## Manual Installation
+"pyenv" is the tool we use to install and use the correct version of Python. (Other CLA repos need different python versions, and we've settled on pyenv as the best way to easily switch versions, depending on the repo you're in.)
 
-Clone the repository:
-```
-git clone git@github.com:ministryofjustice/fala.git
-```
-Next, create the environment and start it up. Ensure you are in the top level folder:
+1. Install pyenv with brew:
 
+       brew install pyenv
+
+2. Set up your shell for pyenv. Make the changes to `~/.zshrc` described here: [Set up your shell for pyenv](https://github.com/pyenv/pyenv#set-up-your-shell-environment-for-pyenv) (This is so that pyenv's python binary can be found in your path)
+
+3. To make the shell changes take effect:
+
+       exec "$SHELL"
+
+    (or alternatively, restart your shell)
+
+4. Install into pyenv the python version this repo uses (which is defined in `.python-version`):
+
+       pyenv install 3.12 --skip-existing
+
+When you're in this repo's directory, pyenv will automatically use the version defined in `.python-version`:
 ```
+$ cd fala
+$ python --version
+3.12
+```
+
+If you have the wrong python version in your virtual environment, then it's easiest to delete it and re-create it with the right python version:
+```
+rm -rf venv
+pyenv use
+python --version  # check the version is now correct
 python3 -m venv venv
 source venv/bin/activate
-```
-Install the requirements for this project
-
-```
 pip install -r requirements/generated/requirements-dev.txt
+# etc
 ```
-### NodeJS v10.x
+
+### NodeJS
 
 It's suggested to use 'nvm' to install this old version of Node.
 
@@ -35,6 +55,44 @@ It's suggested to use 'nvm' to install this old version of Node.
 You can check your NodeJS version:
 
 node --version
+
+## Installation
+
+1. Clone the repository:
+
+       git clone git@github.com:ministryofjustice/fala.git
+
+2. Check your Python version:
+
+       $ cd fala
+       $ python --version
+       3.12
+
+3. Create the python environment, activate it and install the requirements:
+
+       python3 -m venv venv
+       source venv/bin/activate
+       pip install -r requirements/generated/requirements-dev.txt
+
+4. Build the assets:
+
+       nvm use
+       npm install
+       npm run build
+       ./manage.py collectstatic --noinput
+
+5. Create a ``local.py`` settings file from the example file:
+
+       cp fala/settings/local.example.py fala/settings/local.py
+
+## Running
+
+Run the Django server with:
+```
+./manage.py runserver
+```
+
+## Assets
 
 Assets reside in `fala/assets-src` directory and compiled in `fala/assets` directory upon running build tasks.
 
@@ -56,20 +114,6 @@ npm run build
 ./manage.py collectstatic --noinput      
 ```
 
-Create a ``local.py`` settings file from the example file:
-
-```
-cp fala/settings/local.example.py fala/settings/local.py
-```
-
-LAALAA_API_HOST has to be set to a valid host running laa-laa-api, otherwise the Django server doesn't start
-
-Next, run the Django server with:
-
-```
-python3 ./manage.py runserver
-```
-
 ## Running tests
 ```
 python3 ./manage.py tests 
@@ -79,7 +123,7 @@ python3 ./manage.py tests
 
 To lint with Black and flake8, install pre-commit hooks:
 ```
-. venv/bin/activate
+source venv/bin/activate
 pip install -r requirements/generated/requirements-dev.txt
 pre-commit install
 ```
