@@ -23,7 +23,7 @@
     })(window,document,'script','dataLayer','GTM-WDJLHSKL');
   }
   </script>
-  
+
   {% if (request.COOKIES.get('cookiePermission') == 'Allowed') %}
   <script nonce="{{request.csp_nonce}}">tagMan();</script>
   {% endif %}
@@ -46,6 +46,9 @@
 {% endblock %}
 
 {% block global_subheader %}
+  {% if FALA_NO_MAP %}
+    Hello
+  {% endif %}
   <div class="govuk-phase-banner">
     <p class="govuk-phase-banner__content">
       <strong class="govuk-tag govuk-phase-banner__content__tag">

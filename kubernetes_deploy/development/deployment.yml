@@ -39,4 +39,4 @@ spec:
         - name: LAALAA_API_HOST
           value: https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk
         - name: FALA_NO_MAP
-          value: "false"
+          value: "true"
