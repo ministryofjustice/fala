@@ -214,6 +214,8 @@ if "SENTRY_DSN" in os.environ:
 
 LAALAA_API_HOST = os.environ.get("LAALAA_API_HOST", None)
 
+FALA_NO_MAP = os.environ.get("FALA_N0_MAP")
+
 ENVIRONMENT = os.environ.get("ENVIRONMENT", "unknown")
 
 # Zendesk settings for feedback
