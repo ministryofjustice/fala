@@ -1,0 +1,4 @@
+-r requirements-base.in
+-r requirements-pre-commit.in
+# pip-tools is pinned because it's important to be in step with .pre-commit-config.yaml
+pip-tools==6.13.0

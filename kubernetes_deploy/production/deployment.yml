@@ -13,6 +13,7 @@ spec:
         app: laa-fala-app
     spec:
       terminationGracePeriodSeconds: 30
+      serviceAccountName: laa-fala-production-irsa-sevice-account
       containers:
       - image: 754256621582.dkr.ecr.eu-west-2.amazonaws.com/laa-get-access/fala:master
         name: app
@@ -44,8 +45,6 @@ spec:
           value: https://laa-legal-adviser-api-production.cloud-platform.service.justice.gov.uk
         - name: ENVIRONMENT
           value: production
-        - name: GA_ID
-          value: "UA-37377084-6"
         - name: DJANGO_SETTINGS_MODULE
           value: "fala.settings.production"
         - name: SENTRY_DSN
@@ -75,18 +74,3 @@ spec:
             secretKeyRef:
               name: s3
               key: bucket_name
-        - name: AWS_ACCESS_KEY_ID
-          valueFrom:
-            secretKeyRef:
-              name: s3
-              key: access_key_id
-        - name: AWS_SECRET_ACCESS_KEY
-          valueFrom:
-            secretKeyRef:
-              name: s3
-              key: secret_access_key
-        - name: AWS_S3_REGION_NAME
-          valueFrom:
-            secretKeyRef:
-              name: s3
-              key: region

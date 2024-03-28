@@ -22,7 +22,6 @@ docs/_build
 env
 env*
 fala/assets/
-fala/settings/local.py
 fala/static/
 nightwatch.xml
 node_modules/
@@ -32,3 +31,5 @@ output/*/index.html
 pip-log.txt
 tests/reports/nightwatch/*
 venv
+docker-compose.yml
+run_local.sh

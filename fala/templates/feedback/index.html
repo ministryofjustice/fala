@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 
+{% block before_main_js %}{% endblock %}
+{% block main_js %}{% endblock %}
+
 {% block page_title %}Feedback - {{ title }}{% endblock %}
 
 {% block content %}
@@ -27,11 +30,3 @@
   </form>
 {% endblock %}
 
-{% block after_main_js %}
-  {{ super() }}
-  {% if GA_ID and error %}
-    <script>
-      ga('send', 'event', 'error', 'feedback-error');
-    </script>
-  {% endif %}
-{% endblock %}

@@ -53,10 +53,8 @@ if os.environ.get("STATIC_FILES_BACKEND") == "s3":
     STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
 AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME")
-AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
-AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
-AWS_S3_REGION_NAME = os.environ.get("AWS_S3_REGION_NAME")
-AWS_DEFAULT_ACL = None
+AWS_DEFAULT_ACL = "public-read"
+AWS_QUERYSTRING_AUTH = False
 AWS_QUERYSTRING_EXPIRE = 60 * 60 * 24 * 7
 
 STATIC_URL = "/static/"
@@ -89,7 +87,6 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 # 'django.contrib.auth.context_processors.auth',
                 "django.contrib.messages.context_processors.messages",
-                "adviser.context_processors.ga_id",
                 "adviser.context_processors.current_environment",
             ],
         },
@@ -103,9 +100,83 @@ MIDDLEWARE_CLASSES = (
     # 'django.contrib.auth.middleware.AuthenticationMiddleware',
     # 'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     "django.contrib.messages.middleware.MessageMiddleware",
+)
+
+MIDDLEWARE = (
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
+    "csp.middleware.CSPMiddleware",
 )
+CSP_DEFAULT_SRC = ["'self'", "*.googletagmanager.com"]
+CSP_INCLUDE_NONCE_IN = ["script-src"]
+CSP_SCRIPT_SRC = [
+    "'self'",
+    "*.googleapis.com",
+    "*.gstatic.com",
+    "*.google.com",
+    "*.ggpht.com",
+    "*.googleusercontent.com",
+    "blob:",
+    "ajax.aspnetcdn.com",
+    "cloud-platform-3b0904ebacb2f3618f1979bba0bd0ce5.s3.amazonaws.com",
+    "cloud-platform-3300ca90491f7aed3b76d454a2e495a5.s3.amazonaws.com",
+    "*.googletagmanager.com",
+    "*.analytics.google.com",
+    "*.g.doubleclick.net",
+    "*.google.co.uk",
+]
+CSP_IMG_SRC = [
+    "'self'",
+    "*.googleapis.com",
+    "*.gstatic.com",
+    "*.google.com",
+    "*.googleusercontent.com",
+    "data:",
+    "cloud-platform-3b0904ebacb2f3618f1979bba0bd0ce5.s3.amazonaws.com",
+    "cloud-platform-3300ca90491f7aed3b76d454a2e495a5.s3.amazonaws.com",
+    "*.googletagmanager.com",
+    "*.analytics.google.com",
+    "*.google.co.uk",
+    "*.g.doubleclick.net",
+    "*.google-analytics.com",
+]
+CSP_FRAME_SRC = ["*.google.com"]
+CSP_CONNECT_SRC = [
+    "'self'",
+    "*.googleapis.com",
+    "*.google.com",
+    "*.gstatic.com",
+    "data:",
+    "blob:",
+    "*.google-analytics.com",
+    "*.analytics.google.com",
+    "*.googletagmanager.com",
+    "*.g.doubleclick.net",
+    "*.google.co.uk",
+]
+CSP_FONT_SRC = [
+    "'self'",
+    "data:",
+    "fonts.gstatic.com",
+    "cloud-platform-3b0904ebacb2f3618f1979bba0bd0ce5.s3.amazonaws.com",
+    "cloud-platform-3300ca90491f7aed3b76d454a2e495a5.s3.amazonaws.com",
+]
+CSP_STYLE_SRC = [
+    "'self'",
+    "'unsafe-inline'",
+    "*.googleapis.com",
+    "*.google.com",
+    "*.google.co.uk",
+    "fonts.googleapis.com",
+    "*.gstatic.com",
+    "cloud-platform-3b0904ebacb2f3618f1979bba0bd0ce5.s3.amazonaws.com",
+    "cloud-platform-3300ca90491f7aed3b76d454a2e495a5.s3.amazonaws.com",
+]
+CSP_WORKER_SRC = ["blob:"]
+
+CSP_FORM_ACTION = ["'self'"]
+
+CSP_FRAME_ANCESTORS = ["'self'"]
 
 ROOT_URLCONF = "fala.urls"
 
@@ -152,8 +223,6 @@ ZENDESK_GROUP_ID = os.environ.get("ZENDESK_GROUP_ID", 26974037)  # Find a Legal 
 ZENDESK_API_ENDPOINT = "https://ministryofjustice.zendesk.com/api/v2/"
 ZENDESK_REQUESTER_ID = os.environ.get("ZENDESK_REQUESTER_ID", 649762516)
 # defaults to 'anonymous feedback <noreply@ministryofjustice.zendesk.com>'
-
-GA_ID = os.environ.get("GA_ID")
 
 GOOGLE_MAPS_API_KEY = os.environ.get("GOOGLE_MAPS_API_KEY", "")
 

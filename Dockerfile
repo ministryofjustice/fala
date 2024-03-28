@@ -1,4 +1,15 @@
-FROM python:3.7-buster
+FROM node:10 as node_build
+
+COPY package.json package-lock.json ./
+RUN npm install
+
+COPY . .
+
+RUN ./node_modules/.bin/gulp build --production
+
+FROM python:3.12-bullseye
+
+COPY --from=node_build ./fala/assets /home/app/fala/assets
 
 ENV LC_CTYPE=C.UTF-8
 
@@ -6,42 +17,24 @@ ENV LC_CTYPE=C.UTF-8
 RUN useradd --uid 1000 --user-group -m -d /home/app app
 
 # Install python and build dependencies
-RUN apt-get update && apt-get -y --force-yes install \
+RUN apt-get update && apt-get install -y --no-install-recommends \
       build-essential \
       curl \
       git \
       libpcre3 \
-      libpcre3-dev \
-      python-minimal \
-      python3-all \
-      python3-all-dev \
-      python3-pip && \
-      update-alternatives --install /usr/bin/python python /usr/bin/python3 10
-
-# Install NodeJS
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
-    apt-get -y --force-yes install nodejs npm
+      libpcre3-dev
 
 ENV HOME /home/app
 ENV APP_HOME /home/app
 WORKDIR /home/app
 
 # Install Python dependencies
-COPY ./requirements/base.txt ./requirements.txt
-RUN pip3 install -U setuptools pip==19.1 wheel
+COPY ./requirements/generated/requirements-production.txt ./requirements.txt
 RUN pip3 install --user --requirement ./requirements.txt
-
-# Install npm dependencies
-COPY package.json package-lock.json ./
-COPY npm_install_wrapper.sh npm_install_wrapper.sh ./
-USER 1000
-RUN ./npm_install_wrapper.sh
-USER root
 
 COPY . .
 
-RUN ./node_modules/.bin/gulp build --production && \
-    ./manage.py collectstatic --noinput
+RUN ./manage.py collectstatic --noinput
 
 # Project permissions
 RUN  chown -R app: /home/app

@@ -1,29 +1,38 @@
 version: 2.1
 orbs:
   slack: circleci/slack@2.5.0
+  cla-end-to-end-tests: ministryofjustice/cla-end-to-end-tests@volatile
+  aws-cli: circleci/aws-cli@4.1 # use v4 of this orb
+  aws-ecr: circleci/aws-ecr@9 # this orb doesn't support OIDC v2, so we use aws-cli to authenticate
+
+
+# ------------------
+#
+# JOBS
+#
+# ------------------
+
 jobs:
   lint:
     docker:
-      - image: circleci/python:3.7
+      - image: cimg/python:3.12
     steps:
       - checkout
       - run:
           name: Setup Python environment
           command: |
-            pip install virtualenv
-            virtualenv lint-env
+            python -m venv lint-env
             source lint-env/bin/activate
-            pip install pip==18.1
       - restore_cache:
           keys:
-            - pip-v1-{{ checksum "requirements/lint.txt" }}
+            - pip-v1-{{ checksum "requirements/generated/requirements-lint.txt" }}
       - run:
           name: Install dependencies
           command: |
             source lint-env/bin/activate
-            pip install --requirement requirements/lint.txt
+            pip install --requirement requirements/generated/requirements-lint.txt
       - save_cache:
-          key: pip-v1-{{ checksum "requirements/lint.txt" }}
+          key: pip-v1-{{ checksum "requirements/generated/requirements-lint.txt" }}
           paths:
             - "~/.cache/pip"
       - run:
@@ -36,30 +45,46 @@ jobs:
           command: |
             source lint-env/bin/activate
             black --check fala
-
+  pip-compile:
+    docker:
+      - image: cimg/python:3.12
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - pip-v1-{{ checksum "requirements/generated/requirements-pre-commit.txt" }}
+      - run:
+          name: Install dependencies
+          command: |
+            pip install -r requirements/generated/requirements-pre-commit.txt
+      - save_cache:
+          key: pip-v1-{{ checksum "requirements/generated/requirements-pre-commit.txt" }}
+          paths:
+            - "~/.cache/pip"
+      - run:
+          name: Check for changes with pip-compile
+          command: ls requirements/source/* | xargs pre-commit run pip-compile --show-diff-on-failure --files
   test:
     docker:
-      - image: cimg/python:3.7
+      - image: cimg/python:3.12
     steps:
       - checkout
       - run:
           name: Setup Python environment
           command: |
-            pip install virtualenv
-            virtualenv env
+            python -m venv env
             source env/bin/activate
-            pip install setuptools pip==19.1 wheel
       - restore_cache:
           keys:
-            - pip-v1-{{ checksum "requirements/base.txt" }}
+            - pip-v1-{{ checksum "requirements/generated/requirements-production.txt" }}
       - run:
           name: Install dependencies
           command: |
             source env/bin/activate
-            pip install --requirement requirements/base.txt
+            pip install --requirement requirements/generated/requirements-production.txt
             pip check
       - save_cache:
-          key: pip-v1-{{ checksum "requirements/base.txt" }}
+          key: pip-v1-{{ checksum "requirements/generated/requirements-production.txt" }}
           paths:
             - "~/.cache/pip"
       - run:
@@ -69,35 +94,38 @@ jobs:
             python manage.py test
 
   build:
-    docker:
-      - image: docker:17.03-git
+    executor: aws-ecr/default # use the aws-ecr/default executor to start the docker daemon
     steps:
+      # Checkout your repository
       - checkout
-      - setup_remote_docker:
-          version: 17.03.0-ce
-          docker_layer_caching: true
+      # Authenticate to AWS using OIDC v2 with the AWS CLI
+      - aws-cli/setup:
+          role_arn: $ECR_ROLE_TO_ASSUME # this will use the env var
+          region: $ECR_REGION # this will use the env var
       - run:
-          name: Login to the ECR Docker registry
+          name: Create target tags
           command: |
-            apk add --no-cache --no-progress py2-pip
-            pip install awscli
-            ecr_login="$(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)"
-            ${ecr_login}
-      - run:
-          name: Build Docker image
-          command: |
-            docker build --tag application:$CIRCLE_SHA1 \
-              --label build.git.sha=$CIRCLE_SHA1 \
-              --label build.git.branch=$CIRCLE_BRANCH \
-              --label build.url=$CIRCLE_BUILD_URL \
-              .
+            source .circleci/define_build_environment_variables
+            echo "Created tags $TARGET_TAGS"
+            echo "export BUILD_TAGS=$TARGET_TAGS" >> $BASH_ENV
+            echo "export IMAGE_TAG=$IMAGE_TAG" >> $BASH_ENV
+      # Authenticate to the ECR repository using the standard command
+      - run: |
+          aws ecr get-login-password --region $ECR_REGION | docker login --username AWS --password-stdin ${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com
+      # Build and push your Docker image
+      - aws-ecr/build_image:
+          # Timeout extended, as it often exceeds 10 minute deadline
+          no_output_timeout: 15m
+          push_image: true
+          account_id: $AWS_ECR_REGISTRY_ID
+          tag: $BUILD_TAGS
+          region: $ECR_REGION # this will use the env var
+          repo: $ECR_REPOSITORY # this will use the env var
+      # Validate the python version as 3.12
       - run:
           name: Validate Python version
-          command: docker run --rm --tty --interactive application:$CIRCLE_SHA1 python --version | grep "3.7"
-      - run:
-          name: Tag and push Docker images
           command: |
-            .circleci/tag_and_push_docker_image application:$CIRCLE_SHA1 ${ECR_DOCKER_REPO_BASE}
+            docker run --rm --tty --interactive ${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG python --version | grep "3.12"
 
   deploy:
     parameters:
@@ -122,17 +150,38 @@ jobs:
             .circleci/deploy_to_kubernetes << parameters.environment >>
       - slack/status
 
+  behave:
+    executor: aws-ecr/default
+    steps:
+      - checkout:
+          path: fala
+      - run: |
+          cd fala
+          source .circleci/define_build_environment_variables
+          echo "export FALA_IMAGE=$ECR_DEPLOY_IMAGE" >> $BASH_ENV
+          echo "export A11Y_ENABLED=true" >> $BASH_ENV
+          echo "Setting FALA image $ECR_DEPLOY_IMAGE"
+      - cla-end-to-end-tests/behave
+
 workflows:
   version: 2
   build_test_and_deploy:
     jobs:
       - lint
-      - test
-      - build:
+      - pip-compile
+      - test:
           requires:
             - lint
+            - pip-compile
+      - build:
+          requires:
             - test
           context: laa-fala
+      - behave:
+          requires:
+            - build
+          context: laa-fala
+
       - staging_deploy_approval:
           type: approval
           requires:

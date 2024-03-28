@@ -1,11 +1,11 @@
-apiVersion: batch/v1beta1
+apiVersion: batch/v1
 kind: CronJob
 metadata:
   annotations:
     kubernetes.io/change-cause: "<to be filled in deploy_to_kubernetes script>"
   name: laa-fala-collect-static-cronjob
 spec:
-  schedule: "0 0 * * *"
+  schedule: "0 */4 * * *"
   jobTemplate:
     spec:
       template:
