@@ -67,5 +67,5 @@ spec:
             secretKeyRef:
               name: s3
               key: bucket_name
-        - name: FALA_NO_MAP
-          value: "true"
+        - name: FALA_NO_MAP_ENABLED
+          value: ""
