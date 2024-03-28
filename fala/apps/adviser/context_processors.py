@@ -6,4 +6,4 @@ def current_environment(request):
 
 
 def feature_flag(request):
-    return {"FALA_NO_MAP": settings.FALA_NO_MAP_ENABLED}
+    return {"FALA_NO_MAP": settings.FALA_NO_MAP}
