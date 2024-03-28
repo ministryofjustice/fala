@@ -15,20 +15,20 @@ repos:
         language_version: python3.12
         name: pip-compile requirements-dev.in
         files: requirements-(base|dev|pre-commit).in
-        args: [ requirements/source/requirements-dev.in, "--output-file", requirements/generated/requirements-dev.txt ]
+        args: [ requirements/source/requirements-dev.in, "--output-file", requirements/generated/requirements-dev.txt, "-q" ]
       - id: pip-compile
         language_version: python3.12
         name: pip-compile requirements-pre-commit.in
         files: requirements-pre-commit.in
-        args: [ requirements/source/requirements-pre-commit.in, "--output-file", requirements/generated/requirements-pre-commit.txt ]
+        args: [ requirements/source/requirements-pre-commit.in, "--output-file", requirements/generated/requirements-pre-commit.txt, "-q" ]
       - id: pip-compile
         language_version: python3.12
         name: pip-compile requirements-lint.in
         files: requirements-lint.in
-        args: [ requirements/source/requirements-lint.in, "--output-file", requirements/generated/requirements-lint.txt ]
+        args: [ requirements/source/requirements-lint.in, "--output-file", requirements/generated/requirements-lint.txt, "-q" ]
       - id: pip-compile
         language_version: python3.12
         name: pip-compile requirements-production.in
         files: requirements-(base|production).in
-        args: [requirements/source/requirements-production.in, "--output-file", requirements/generated/requirements-production.txt]
+        args: [requirements/source/requirements-production.in, "--output-file", requirements/generated/requirements-production.txt, "-q"]
 
