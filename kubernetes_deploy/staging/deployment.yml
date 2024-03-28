@@ -68,4 +68,4 @@ spec:
               name: s3
               key: bucket_name
         - name: FEATURE_FLAG_NO_MAP
-          value: ""
+          value: "true"
