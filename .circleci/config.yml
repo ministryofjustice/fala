@@ -63,7 +63,7 @@ jobs:
             - "~/.cache/pip"
       - run:
           name: Check for changes with pip-compile
-          command: ls requirements/source/* | xargs pre-commit run pip-compile --files
+          command: ls requirements/source/* | xargs pre-commit run pip-compile --show-diff-on-failure --files
   test:
     docker:
       - image: cimg/python:3.12
