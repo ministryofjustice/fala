@@ -17,3 +17,4 @@ services:
       DJANGO_SETTINGS_MODULE: "fala.settings.local"
     ports:
       - "8013:8000"
+    stdin_open: true
