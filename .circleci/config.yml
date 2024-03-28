@@ -2,7 +2,7 @@ version: 2.1
 orbs:
   slack: circleci/slack@2.5.0
   cla-end-to-end-tests: ministryofjustice/cla-end-to-end-tests@volatile
-  aws-cli: circleci/aws-cli@4.0.0 # use v4 of this orb
+  aws-cli: circleci/aws-cli@4.1 # use v4 of this orb
   aws-ecr: circleci/aws-ecr@9 # this orb doesn't support OIDC v2, so we use aws-cli to authenticate
 
 
@@ -112,8 +112,9 @@ jobs:
       # Authenticate to the ECR repository using the standard command
       - run: |
           aws ecr get-login-password --region $ECR_REGION | docker login --username AWS --password-stdin ${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com
-      # Update timeout needed as run on circle often exceeds 10 minute deadline
+      # Build and push your Docker image
       - aws-ecr/build_image:
+          # Timeout extended, as it often exceeds 10 minute deadline
           no_output_timeout: 15m
           push_image: true
           account_id: $AWS_ECR_REGISTRY_ID
