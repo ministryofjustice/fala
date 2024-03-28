@@ -8,4 +8,3 @@ LAALAA_API_HOST = os.environ.get(
     "LAALAA_API_HOST", "https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk"
 )
 ENVIRONMENT = "dev"
-FALA_NO_MAP = ""

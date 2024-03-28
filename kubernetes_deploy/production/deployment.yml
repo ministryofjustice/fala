@@ -75,4 +75,4 @@ spec:
               name: s3
               key: bucket_name
         - name: FALA_NO_MAP
-          value: "false"
+          value: ""
