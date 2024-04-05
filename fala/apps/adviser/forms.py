@@ -91,6 +91,10 @@ class AdviserSearchForm(forms.Form):
                 self.add_error("postcode", "%s %s" % (_(" ".join((msg1, region))), _(msg2)))
         return data
 
+    @property
+    def current_page(self):
+        return self.cleaned_data.get("page", 1)
+
     def search(self):
         if self.is_valid():
             try:

@@ -76,15 +76,15 @@ jobs:
             source env/bin/activate
       - restore_cache:
           keys:
-            - pip-v1-{{ checksum "requirements/generated/requirements-production.txt" }}
+            - pip-v1-{{ checksum "requirements/generated/requirements-dev.txt" }}
       - run:
           name: Install dependencies
           command: |
             source env/bin/activate
-            pip install --requirement requirements/generated/requirements-production.txt
+            pip install --requirement requirements/generated/requirements-dev.txt
             pip check
       - save_cache:
-          key: pip-v1-{{ checksum "requirements/generated/requirements-production.txt" }}
+          key: pip-v1-{{ checksum "requirements/generated/requirements-dev.txt" }}
           paths:
             - "~/.cache/pip"
       - run:

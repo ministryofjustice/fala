@@ -23,7 +23,7 @@
     })(window,document,'script','dataLayer','GTM-WDJLHSKL');
   }
   </script>
-  
+
   {% if (request.COOKIES.get('cookiePermission') == 'Allowed') %}
   <script nonce="{{request.csp_nonce}}">tagMan();</script>
   {% endif %}
