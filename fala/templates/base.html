@@ -105,10 +105,16 @@
         </div>
       </div>
     {% endif %}
-    <h1 class="govuk-heading-xl govuk-!-margin-top-7">
-      Find a legal aid adviser <br />
-      <span class="govuk-!-font-weight-regular govuk-!-font-size-36">or family mediator</span>
-    </h1>
+    {% if FEATURE_FLAG_NO_MAP %}
+      <h1 class="govuk-heading-xl govuk-!-margin-top-7">
+        Find a legal aid adviser or family mediator
+      </h1>
+    {% else %}
+      <h1 class="govuk-heading-xl govuk-!-margin-top-7">
+        Find a legal aid adviser <br />
+        <span class="govuk-!-font-weight-regular govuk-!-font-size-36">or family mediator</span>
+      </h1>
+    {% endif %}
   </div>
   <div class="govuk-grid-column-two-thirds">
     <p class="govuk-body-l">Search for a legal adviser or family mediator with a legal aid contract in England and Wales.</p>

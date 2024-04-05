@@ -22,6 +22,7 @@ class AdviserView(TemplateView):
                 "current_url": current_url,
                 "GOOGLE_MAPS_API_KEY": settings.GOOGLE_MAPS_API_KEY,
                 "LAALAA_API_HOST": settings.LAALAA_API_HOST,
+                "FEATURE_FLAG_NO_MAP": settings.FEATURE_FLAG_NO_MAP,
             }
         )
 
