@@ -11,7 +11,7 @@ class SearchViewFunctionTest(SimpleTestCase):
 
     def test_invalid_postcode_generates_error(self):
         response = self.client.get(self.url, {"postcode": "ZZZ"})
-        self.assertEqual({"postcode": ["Postcode not found"]}, response.context_data["form"].errors)
+        self.assertEqual({"postcode": ["Enter a valid postcode"]}, response.context_data["form"].errors)
 
 
 @override_settings(FEATURE_FLAG_NO_MAP=True)
