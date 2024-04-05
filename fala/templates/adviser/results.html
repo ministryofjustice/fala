@@ -45,7 +45,7 @@
                       <span class="street-address notranslate" translate="no">{{ item.location.address }}</span>
                       <span class="city">{{ item.location.city }}</span>
                       <span class="postal-code notranslate" translate="no">{{ item.location.postcode }}</span>
-              </span>
+                    </span>
             </div>
             {% if item.organisation.website %}
               <div class="website">
@@ -57,14 +57,17 @@
             {% endif %}
             {% if item.categories|length %}
             <div class="categories">
-              <h3 class="govuk-heading-s govuk-!-margin-bottom-2">{{ _('Categories') }}</h3>
+              <h3 class="govuk-heading-s govuk-!-margin-bottom-2">{{ _('Categories ') }}</h3>
               <ul class="govuk-list govuk-list--bullet">
                 {% for cat in item.categories %}
-                  <li>{{ cat }}</li>
+                  <li >{{ cat }}</li>
                 {% endfor %}
               </ul>
             </div>
             {% endif %}
+            <a class="govuk-link" class="url" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?{{ item.location|google_map_params|urlencode }}">
+              View on map (Opens in new tab)
+            </a>
           </li>
         {% endfor %}
       </ul>

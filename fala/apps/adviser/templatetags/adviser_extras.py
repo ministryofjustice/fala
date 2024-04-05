@@ -30,3 +30,8 @@ def query_to_dict(_context, value, prop=None):
 @pass_context
 def to_fala_page_url(context, value, url_path):
     return "%s?%s" % (url_path, urlparse(value).query)
+
+
+@library.filter
+def google_map_params(location):
+    return {"api": 1, "query": location["address"] + " " + location["postcode"]}
