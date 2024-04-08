@@ -64,6 +64,67 @@
       </span>
     </p>
   </div>
+
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-column-full">
+    <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
+
+    {% if form.errors and form.errors['__all__'] %}
+      {% call Element.error('error', title='There is a problem') %}
+        <ul class="govuk-list govuk-error-summary__list">
+          {% for k, error in form.errors.items() %}
+            <li>
+              {% if "Enter a postcode or an organisation name" == error | striptags %}
+                <a href="#id_postcode" onclick="errorScroll(&quot;fala_questions&quot;,&quot;id_postcode&quot;);return false;" >
+                  Enter a postcode</a>
+                <b>or</b>
+                <a href="#id_name" onclick="errorScroll(&quot;fala_questions&quot;,&quot;id_name&quot;);return false;" >
+                  an organisation name
+                </a>
+              {% else %}
+                <a href="#id_postcode" onclick="errorScroll(&quot;fala_questions&quot;,&quot;id_postcode&quot;);return false;" >
+                  {{ error | striptags }}
+                </a>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      {% endcall %}
+    {% elif (form.postcode and form.postcode.errors) or (form.name and form.name.errors) %}
+      <div class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary">
+        <h2 class="govuk-error-summary__title" id="error-summary-title">
+          There is a problem
+        </h2>
+        <div class="govuk-error-summary__body">
+          <ul class="govuk-list govuk-error-summary__list">
+            {{ Form.render_field_errors_for_summary(form.postcode_old) }}
+            {{ Form.render_field_errors_for_summary(form.name) }}
+          </ul>
+        </div>
+      </div>
+    {% endif %}
+    <h1 class="govuk-heading-xl govuk-!-margin-top-7">
+      Find a legal aid adviser <br />
+      <span class="govuk-!-font-weight-regular govuk-!-font-size-36">or family mediator</span>
+    </h1>
+  </div>
+  <div class="govuk-grid-column-two-thirds">
+    <p class="govuk-body-l">Search for a legal adviser or family mediator with a legal aid contract in England and Wales.</p>
+  </div>
+
+  <div class="find-legal-adviser">
+    <div class="govuk-grid-column-full">
+      {% block search_results %}
+        {% include 'adviser/_results.html' %}
+      {% endblock %}
+      {% block search_form %}{% endblock %}
+    </div>
+    <div class="govuk-grid-column-two-thirds">
+      <p class="govuk-body">If you are a provider and your details are incorrect, please contact your contract manager.</p>
+    </div>
+  </div>
 {% endblock %}
 
 {% block support_links_items %}
@@ -95,6 +156,16 @@
       <abbr title="Ministry of Justice">MoJ</abbr> Digital Services
     </a>
   </li>
+{% endblock %}
+
+{% block before_main_js %}
+  {{ super() }}
+  <script src="//maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}"></script>
+  <script nonce="{{request.csp_nonce}}">
+    window.LABELS = {
+      loading: "{{ _('Loading…') }}"
+    };
+  </script>
 {% endblock %}
 
 {% block after_main_js %}

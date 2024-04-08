@@ -3,11 +3,18 @@ from django.conf import settings
 from django.urls import resolve, reverse
 from django.views.generic import TemplateView
 
-from .forms import AdviserSearchForm
+if settings.FEATURE_FLAG_NO_MAP:
+    from .forms import AdviserSearchForm
+else:
+    from .forms_old import AdviserSearchForm
 
 
 class AdviserView(TemplateView):
-    template_name = "adviser/search.html"
+    # https://docs.djangoproject.com/en/5.0/topics/class-based-views/#usage-in-your-urlconf - this is how `template_name`
+    if settings.FEATURE_FLAG_NO_MAP:
+        template_name = "adviser/search.html"
+    else:
+        template_name = "adviser/search-old.html"
 
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)

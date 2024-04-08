@@ -1,19 +1,11 @@
 {% if request.headers.get('x-requested-with') == 'XMLHttpRequest' %}
   {% extends 'ajax-base.html' %}
 {% else %}
-  {% extends 'base.html' %}
+  {% extends 'base_old.html' %}
 {% endif %}
 
 {% import "macros/element.html" as Element %}
 {% import "macros/forms.html" as Form %}
-
-{% block content %}
-  <div class="govuk-grid-column-two-thirds">
-    <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
-    <h1 class="govuk-heading-xl"> Find a legal aid adviser or family mediator </h1>
-    <p class="govuk-body">You need to provide information about your finances to find out if you qualify for legal aid.</p>
-    <p class="govuk-body"><a class="govuk-link" href="https://www.gov.uk/check-legal-aid" target="_blank">Check if you qualify for legal aid (opens in a new tab)</a></p>
-  </div>
 
 {% block search_form %}
   <form action="" class="laa-fala__search" novalidate>
@@ -47,14 +39,15 @@
         {% endcall %}
       {% endif %}
     </div>
+    <button type="submit" class="govuk-button" id="searchButton" name="search">Search</button>
 
     <div class="form-group filters">
       <div class="govuk-form-group">
         <fieldset class="govuk-fieldset">
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-            <label class="govuk-label govuk-label--s">
-              Catgories of law (optional)
-            </label>
+            <h2 class="govuk-fieldset__heading">
+              Filter by category
+            </h2>
           </legend>
           <div class="govuk-checkboxes govuk-checkboxes--small fala-tickbox-columns">
             {% for value, label_text in form.categories.field.choices %}
@@ -77,12 +70,7 @@
           </div>
         </fieldset>
       </div>
-      <button type="submit" class="govuk-button" id="searchButton" name="search">Search</button>
+      <button type="submit" class="govuk-button govuk-button--secondary" name="filter">Apply filter</button>
     </div>
   </form>
 {% endblock %}
-
-
-{% endblock %}
-
-
