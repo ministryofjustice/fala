@@ -9,3 +9,5 @@ if [ "$CIRCLE_BRANCH" == "master" ]; then
 else
   export TARGET_TAGS="$safe_git_branch.$short_sha,$safe_git_branch"
 fi
+
+export FALA_TESTS_ONLY=true
