@@ -27,14 +27,19 @@ class AdviserSearchForm(forms.Form):
     page = forms.IntegerField(required=False, widget=forms.HiddenInput())
 
     postcode = forms.CharField(
-        label=_("Postcode"),
+        label=_("<label class='govuk-label govuk-label--s'>Postcode</label>"),
         max_length=30,
         help_text=_("For example, <span class='notranslate' translate='no'>SW1H</span>"),
         required=False,
         widget=FalaTextInput(),
     )
 
-    name = forms.CharField(label=_("Organisation name"), max_length=100, required=False, widget=FalaTextInput())
+    name = forms.CharField(
+        label=_("<label class='govuk-label govuk-label--s'>Organisation name</label>"),
+        max_length=100,
+        required=False,
+        widget=FalaTextInput(),
+    )
 
     type = forms.MultipleChoiceField(
         label=_("Organisation type"),
