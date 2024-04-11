@@ -2,12 +2,13 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import re_path
-from adviser.views import AdviserView, AccessibilityView
+from fala.apps.adviser.views import AccessibilityView, AdviserView, fala_search
 from django.views.static import serve
 
 urlpatterns = [
     re_path(r"^accessibility-statement$", AccessibilityView.as_view(), name="accessibility_statement"),
     re_path(r"^$", AdviserView.as_view(), name="adviser"),
+    re_path(r"^search$", fala_search, name="search")
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG_STATIC:

@@ -8,7 +8,7 @@
 {% import "macros/forms.html" as Form %}
 
 {% block search_form %}
-  <form action="" class="laa-fala__search" novalidate>
+  <form action="/search" class="laa-fala__search" novalidate>
     <div
       class="govuk-form-group
         {% if (form.errors and form.errors['__all__']) %}
