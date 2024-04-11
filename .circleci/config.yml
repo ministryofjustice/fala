@@ -152,8 +152,6 @@ jobs:
 
   behave:
     executor: aws-ecr/default
-    requires:
-      - build
     steps:
       - checkout:
           path: fala
