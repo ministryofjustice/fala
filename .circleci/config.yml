@@ -19,7 +19,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Setup Python environment
+          name: Setup Python environment for tests
           command: |
             python -m venv lint-env
             source lint-env/bin/activate
