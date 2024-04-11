@@ -90,6 +90,8 @@ body.govuk-template__body {
 
 .fala-tickbox-columns .govuk-checkboxes__item label.govuk-checkboxes__label {
   min-width:100%;
+  inline-size: 150px;
+  overflow-wrap: break-word;
 }
 
 .govuk-checkboxes__label {
