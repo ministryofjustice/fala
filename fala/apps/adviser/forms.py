@@ -2,6 +2,7 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
 from django.utils.safestring import mark_safe
+from django.conf import settings
 
 import laalaa.api as laalaa
 import re
@@ -27,13 +28,22 @@ class FalaTextInput(forms.TextInput):
 class AdviserSearchForm(forms.Form):
     page = forms.IntegerField(required=False, widget=forms.HiddenInput())
 
-    postcode = forms.CharField(
-        label=_("Postcode"),
-        max_length=30,
-        help_text=_(mark_safe("For example, <span class='notranslate' translate='no'>SW1H</span>")),
-        required=False,
-        widget=FalaTextInput(),
-    )
+    if settings.FEATURE_FLAG_NO_MAP:
+        postcode = forms.CharField(
+            label=_("Postcode"),
+            max_length=30,
+            help_text=_(mark_safe("For example, <span class='notranslate' translate='no'>SW1H</span>")),
+            required=False,
+            widget=FalaTextInput(),
+        )
+    else:
+        postcode = forms.CharField(
+            label=_("Enter postcode"),
+            max_length=30,
+            help_text=_("For example, <span class='notranslate' translate='no'>SW1H 9AJ</span>"),
+            required=False,
+            widget=FalaTextInput(),
+        )
 
     name = forms.CharField(
         label=_("Organisation name"),

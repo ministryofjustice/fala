@@ -3,10 +3,7 @@ from django.conf import settings
 from django.urls import resolve, reverse
 from django.views.generic import TemplateView
 
-if settings.FEATURE_FLAG_NO_MAP:
-    from .forms import AdviserSearchForm
-else:
-    from .forms_old import AdviserSearchForm
+from .forms import AdviserSearchForm
 
 
 class AdviserView(TemplateView):
