@@ -5,7 +5,12 @@
 {% endif %}
 
 {% import "macros/element.html" as Element %}
-{% import "macros/forms.html" as Form %}
+
+{% if FEATURE_FLAG_NO_MAP %}
+  {% import "macros/forms.html" as Form %}
+{% else %}
+  {% import "macros/forms_old.html" as Form %}
+{% endif %}
 
 {% block content %}
   <div class="govuk-grid-column-two-thirds">

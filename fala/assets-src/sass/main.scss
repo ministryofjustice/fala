@@ -92,6 +92,12 @@ body.govuk-template__body {
   min-width:100%;
 }
 
+.govuk-checkboxes__label {
+  &::before {
+    background-color: govuk-colour("white");
+  }
+}
+
 /*below override for archaic class*/
 p.govuk-body:last-child,
 p.govuk-body-m:last-child {
@@ -189,9 +195,9 @@ body.fala-dev {
   }
 
   &__grey-box {
-    background-color: #f3f2f1; 
+    background-color: govuk-colour("light-grey"); 
     padding: 1em; 
     margin: 0.5em; 
   }
-  
+
 }
