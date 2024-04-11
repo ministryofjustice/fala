@@ -52,7 +52,7 @@
         {% if item.organisation.website %}
           <p class="govuk-body">
             <span>{{ _('Website') }}:</span>
-            <a class="govuk-link" href="{{ item.organisation.website|human_to_url }}" class="url" target="_blank">
+            <a class="govuk-link" href="{{ item.organisation.website|human_to_url }}" class="url" target="_blank" rel="noopener">
               {{ item.organisation.website|url_to_human + " (Opens in new tab)" }}
             </a>
           </p>
