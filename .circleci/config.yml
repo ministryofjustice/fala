@@ -152,6 +152,8 @@ jobs:
 
   behave:
     executor: aws-ecr/default
+    requires:
+      - build
     steps:
       - checkout:
           path: fala
@@ -185,7 +187,7 @@ workflows:
       - staging_deploy_approval:
           type: approval
           requires:
-            - build
+            - behave
 
       - deploy:
           name: staging_deploy_live
