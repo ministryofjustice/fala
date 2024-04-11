@@ -7,7 +7,7 @@ class LaalaaPaginator(object):
             self._current_page = 1
         else:
             self._current_page = current_page
-        self._very_last_page = self._data['count'] // self._page_size
+        self._very_last_page = self._data["count"] // self._page_size
 
     @property
     def page_range(self):
@@ -32,12 +32,16 @@ class LaalaaPaginator(object):
                 else:
                     self._page_num = page_num
                 self._last_page = last_page
+
             def has_previous(self):
                 return self._page_num > 1
+
             def has_next(self):
                 return self._page_num < self._last_page
+
             def previous_page_number(self):
                 return self._page_num - 1
+
             def next_page_number(self):
                 return self._page_num + 1
 
