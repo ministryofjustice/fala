@@ -14,7 +14,7 @@ class AdviserView(TemplateView):
     if settings.FEATURE_FLAG_NO_MAP:
         template_name = "adviser/search.html"
     else:
-        template_name = "adviser/search-old.html"
+        template_name = "adviser/search_old.html"
 
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)

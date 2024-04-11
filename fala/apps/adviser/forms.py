@@ -1,6 +1,7 @@
 # coding=utf-8
 from django import forms
 from django.utils.translation import gettext_lazy as _
+from django.utils.safestring import mark_safe
 
 import laalaa.api as laalaa
 import re
@@ -27,15 +28,15 @@ class AdviserSearchForm(forms.Form):
     page = forms.IntegerField(required=False, widget=forms.HiddenInput())
 
     postcode = forms.CharField(
-        label=_("<label class='govuk-label govuk-label--s'>Postcode</label>"),
+        label=_(mark_safe("<label class='govuk-label govuk-label--s'>Postcode</label>")),
         max_length=30,
-        help_text=_("For example, <span class='notranslate' translate='no'>SW1H</span>"),
+        help_text=_(mark_safe("For example, <span class='notranslate' translate='no'>SW1H</span>")),
         required=False,
         widget=FalaTextInput(),
     )
 
     name = forms.CharField(
-        label=_("<label class='govuk-label govuk-label--s'>Organisation name</label>"),
+        label=_(mark_safe("<label class='govuk-label govuk-label--s'>Organisation name</label>")),
         max_length=100,
         required=False,
         widget=FalaTextInput(),
