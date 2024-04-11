@@ -90,7 +90,7 @@
     {% endif %}
 
     <div class="form-group-label{{ (' govuk-visually-hidden' if hide_label else '') }}">
-      <label class="govuk-label govuk-label--s" for="{{ field.id_for_label }}">{{ label_text|safe }}</label>
+      <label class="govuk-label" for="{{ field.id_for_label }}">{{ label_text|safe }}</label>
     </div>
   {% endif %}
 {% endmacro %}

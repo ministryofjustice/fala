@@ -28,7 +28,7 @@ class AdviserSearchForm(forms.Form):
     page = forms.IntegerField(required=False, widget=forms.HiddenInput())
 
     postcode = forms.CharField(
-        label=_(mark_safe("<label class='govuk-label govuk-label--s'>Postcode</label>")),
+        label=_("Postcode"),
         max_length=30,
         help_text=_(mark_safe("For example, <span class='notranslate' translate='no'>SW1H</span>")),
         required=False,
@@ -36,7 +36,7 @@ class AdviserSearchForm(forms.Form):
     )
 
     name = forms.CharField(
-        label=_(mark_safe("<label class='govuk-label govuk-label--s'>Organisation name</label>")),
+        label=_("Organisation name"),
         max_length=100,
         required=False,
         widget=FalaTextInput(),

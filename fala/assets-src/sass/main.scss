@@ -182,7 +182,16 @@ body.fala-dev {
   max-width: 140px;
 }
 
-.laa-fala__search {
+.laa-fala {
+  &__search {
   margin-top:1em;
   clear:both;
+  }
+
+  &__grey-box {
+    background-color: #f3f2f1; 
+    padding: 1em; 
+    margin: 0.5em; 
+  }
+  
 }
