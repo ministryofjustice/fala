@@ -6,7 +6,7 @@ from django.urls import resolve, reverse
 from django.views.generic import TemplateView
 
 from .forms import AdviserSearchForm
-from .laa_laa_paginator import LaalaaPaginator
+from .laa_laa_paginator import LaaLaaPaginator
 
 
 # This is only used for the root(/) url - form now points to /search
@@ -42,7 +42,7 @@ def fala_search(request):
     data = form.search()
     if settings.FEATURE_FLAG_NO_MAP:
         template = loader.get_template("adviser/results.html")
-        pages = LaalaaPaginator(data, 10, 3, form.current_page)
+        pages = LaaLaaPaginator(data["count"], 10, 3, form.current_page)
         context = {"form": form, "data": data, "pages": pages}
         return HttpResponse(template.render(context, request))
     else:

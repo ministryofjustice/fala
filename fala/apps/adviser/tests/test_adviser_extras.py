@@ -1,6 +1,6 @@
 import unittest
 
-from adviser.templatetags import adviser_extras
+from fala.apps.adviser.templatetags import adviser_extras
 
 
 class QueryToDictTest(unittest.TestCase):

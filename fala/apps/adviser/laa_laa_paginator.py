@@ -1,22 +1,21 @@
-class LaalaaPaginator(object):
-    def __init__(self, data, page_size, window_size, current_page):
-        self._data = data
-        self._page_size = page_size
+class LaaLaaPaginator(object):
+    def __init__(self, count, page_size, window_size, current_page):
         self._window_size = window_size
         if current_page is None:
             self._current_page = 1
         else:
             self._current_page = current_page
-        self._very_last_page = self._data["count"] // self._page_size
+        self._very_last_page = count // page_size + 1
 
     @property
     def page_range(self):
-        if self._current_page - self._window_size > 0:
-            first_page = self._current_page - self._window_size
-        else:
-            first_page = 1
+        return range(self._first_page_num(), self._last_page_num() + 1)
 
-        return range(first_page, self._last_page_num())
+    def _first_page_num(self):
+        if self._current_page > self._window_size:
+            return self._current_page - self._window_size
+        else:
+            return 1
 
     def _last_page_num(self):
         if self._current_page + self._window_size < self._very_last_page:
@@ -24,7 +23,7 @@ class LaalaaPaginator(object):
         else:
             return self._very_last_page
 
-    def page(self, page_number):
+    def current_page(self):
         class LaaLaaPage(object):
             def __init__(self, page_num, last_page):
                 if page_num is None:
@@ -45,4 +44,4 @@ class LaalaaPaginator(object):
             def next_page_number(self):
                 return self._page_num + 1
 
-        return LaaLaaPage(page_number, self._last_page_num())
+        return LaaLaaPage(self._current_page, self._last_page_num())
