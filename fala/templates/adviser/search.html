@@ -16,78 +16,80 @@
   </div>
 
   {% block search_form %}
-      <div class="govuk-grid-column-full laa-fala__grey-box">
-        <form action="" novalidate>
-          <div
-            class="govuk-form-group
-              {% if (form.errors and form.errors['__all__']) %}
-                govuk-form-group--error
-              {% endif %}
-              "
-            id="fala_questions">
+      <div class="govuk-grid-column-full">
+        <div class="laa-fala__grey-box">
+          <form action="" novalidate>
+            <div
+              class="govuk-form-group
+                {% if (form.errors and form.errors['__all__']) %}
+                  govuk-form-group--error
+                {% endif %}
+                "
+              id="fala_questions">
 
-            {% set errorMessage = {'err': ""} %}
+              {% set errorMessage = {'err': ""} %}
 
-            {% if form.errors and form.errors['__all__'] %}
-              {% call Element.errorText() %}
-                {% for k, error in form.errors.items() %}
-                  {% if errorMessage.update({'err': error | striptags}) %}{% endif %}
-                {% endfor %}
-              {% endcall %}
-            {% endif %}
-
-            {% if (form.errors and form.errors['__all__']) %}
-              {% call Form.group(form.postcode, 'govuk-form-group', {'class':'govuk-input--error'}, hide_optional=True, global_error=errorMessage.err) %}
-              {% endcall %}
-              <p class="govuk-body">Or</p>
-              {% call Form.group(form.name, 'govuk-form-group', {'class':'govuk-input--error'}, hide_optional=True, max_length='100', global_error_hidden=errorMessage.err) %}
-              {% endcall %}
-            {% else %}
-              {% call Form.group(form.postcode, 'govuk-form-group', hide_optional=True) %}
-              {% endcall %}
-              <p class="govuk-body">Or</p>
-              {% call Form.group(form.name, 'govuk-form-group', hide_optional=True, max_length='100') %}
-              {% endcall %}
-            {% endif %}
-          </div>
-          
-          <div class="form-group filters">
-            <div class="govuk-form-group">
-              <fieldset class="govuk-fieldset">
-                <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-                  <label class="govuk-label govuk-label--s">
-                    Catgories of law (optional)
-                  </label>
-                </legend>
-                <div class="govuk-checkboxes govuk-checkboxes--small fala-tickbox-columns">
-                  {% for value, label_text in form.categories.field.choices %}
-                    <div class="govuk-checkboxes__item">
-                      <input
-                        class="govuk-checkboxes__input"
-                        id="id_categories_{{ loop.index0 }}"
-                        name="categories"
-                        type="checkbox"
-                        value="{{ value }}"
-                        {% if value in request.GET.getlist('categories','') %}
-                          checked
-                        {% endif %}
-                      >
-                      <label class="govuk-label govuk-checkboxes__label" for="id_categories_{{ loop.index0 }}">
-                        {{ label_text }}
-                      </label>
-                    </div>
+              {% if form.errors and form.errors['__all__'] %}
+                {% call Element.errorText() %}
+                  {% for k, error in form.errors.items() %}
+                    {% if errorMessage.update({'err': error | striptags}) %}{% endif %}
                   {% endfor %}
-                </div>
-              </fieldset>
+                {% endcall %}
+              {% endif %}
+
+              {% if (form.errors and form.errors['__all__']) %}
+                {% call Form.group(form.postcode, 'govuk-form-group', {'class':'govuk-input--error'}, hide_optional=True, global_error=errorMessage.err) %}
+                {% endcall %}
+                <p class="govuk-body">Or</p>
+                {% call Form.group(form.name, 'govuk-form-group', {'class':'govuk-input--error'}, hide_optional=True, max_length='100', global_error_hidden=errorMessage.err) %}
+                {% endcall %}
+              {% else %}
+                {% call Form.group(form.postcode, 'govuk-form-group', hide_optional=True) %}
+                {% endcall %}
+                <p class="govuk-body">Or</p>
+                {% call Form.group(form.name, 'govuk-form-group', hide_optional=True, max_length='100') %}
+                {% endcall %}
+              {% endif %}
             </div>
-            <button type="submit" class="govuk-button govuk-!-margin-bottom-2" id="searchButton" name="search">Search</button>
-          </div>
-        </form>
+            
+            <div class="form-group filters">
+              <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset">
+                  <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                    <label class="govuk-label govuk-label--s">
+                      Catgories of law (optional)
+                    </label>
+                  </legend>
+                  <div class="govuk-checkboxes govuk-checkboxes--small fala-tickbox-columns">
+                    {% for value, label_text in form.categories.field.choices %}
+                      <div class="govuk-checkboxes__item">
+                        <input
+                          class="govuk-checkboxes__input"
+                          id="id_categories_{{ loop.index0 }}"
+                          name="categories"
+                          type="checkbox"
+                          value="{{ value }}"
+                          {% if value in request.GET.getlist('categories','') %}
+                            checked
+                          {% endif %}
+                        >
+                        <label class="govuk-label govuk-checkboxes__label" for="id_categories_{{ loop.index0 }}">
+                          {{ label_text }}
+                        </label>
+                      </div>
+                    {% endfor %}
+                  </div>
+                </fieldset>
+              </div>
+              <button type="submit" class="govuk-button govuk-!-margin-bottom-2" id="searchButton" name="search">Search</button>
+            </div>
+          </form>
+        </div>
       </div>
   {% endblock %}
 
     <div class="govuk-grid-column-full">
-      <p class="govuk-body">If you are a provider and your details are incorrect, please contact your contract manager.</p>
+      <p class="govuk-body govuk-!-margin-top-5">If you are a provider and your details are incorrect, please contact your contract manager.</p>
     </div>
 {% endblock %}
 
