@@ -27,3 +27,7 @@ class SearchViewFunctionTest(SimpleTestCase):
     def test_postcode_name_category_search_heading_matching(self):
         response = self.client.get(self.url, {"postcode": "PE30", "name": "bu", "categories": "deb"})
         self.assertContains(response, "matching")
+
+    def test_no_results(self):
+        response = self.client.get(self.url, {"name": "yyyy"})
+        self.assertContains(response, "No results")

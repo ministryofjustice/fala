@@ -5,7 +5,7 @@ from django.template import loader
 from django.urls import resolve, reverse
 from django.views.generic import TemplateView
 
-from .forms import AdviserSearchForm
+from .forms import AdviserSearchForm, RegionNotFoundException, Region
 from .laa_laa_paginator import LaaLaaPaginator
 
 
@@ -36,28 +36,62 @@ class AdviserView(TemplateView):
 class AccessibilityView(TemplateView):
     template_name = "adviser/accessibility-statement.html"
 
+REGION_TO_LINK = {
+    Region.NI: {
+        "link": "https://www.nidirect.gov.uk/articles/legal-aid-schemes",
+        "region": "Northern Ireland",
+    },
+    Region.IOM:  {
+        "link": "https://www.gov.im/categories/benefits-and-financial-support/legal-aid/",
+        "region": "Isle of Man",
+    },
+    Region.JERSEY: {
+        "link": "https://www.legalaid.je/",
+        "region": "Jersey",
+    },
+    Region.GUERNSEY: {
+        "link": "https://www.gov.gg/legalaid",
+        "region": "Guernsey",
+    },
+    Region.SCOTLAND: {
+        "link": "https://www.mygov.scot/legal-aid/",
+        "region": "Scotland",
+    },
+}
 
 def fala_search(request):
     form = AdviserSearchForm(data=request.GET or None)
-    data = form.search()
+
     if settings.FEATURE_FLAG_NO_MAP:
-        if data:
-            template = loader.get_template("adviser/results.html")
-            pages = LaaLaaPaginator(data["count"], 10, 3, form.current_page)
-            params = {
+        try:
+            data = form.search()
+            if data:
+                pages = LaaLaaPaginator(data["count"], 10, 3, form.current_page)
+                params = {
                 "postcode": form.cleaned_data["postcode"],
                 "name": form.cleaned_data["name"],
             }
             categories = list(map(lambda c: "categories=" + c, form.cleaned_data["categories"]))
             context = {"form": form, "data": data, "pages": pages, "params": params, "categories": categories}
-        else:
-            template = loader.get_template("adviser/search.html")
+                template = loader.get_template("adviser/results.html")
+            else:
+                template = loader.get_template("adviser/search.html")
+                context = {
+                    "form": form
+                }
+            return HttpResponse(template.render(context, request))
+
+        except RegionNotFoundException as cde:
+            data = REGION_TO_LINK[cde.region]
             context = {
-                "form": form,
-                "data": data,
+                "postcode": form.cleaned_data["postcode"],
+                "link": data["link"],
+                "region": data["region"]
             }
-        return HttpResponse(template.render(context, request))
+            template = loader.get_template("adviser/other_region.html")
+            return HttpResponse(template.render(context, request))
     else:
+        data = form.search()
         template = loader.get_template("adviser/search.html")
         view_name = resolve(request.path_info).url_name
         current_url = reverse(view_name)
