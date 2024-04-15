@@ -3,6 +3,7 @@
 {% block content %}
   <div class="govuk-grid-column-full">
   <h1>Search Results</h1>
+  <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
   {% if data.origin %}
     {% trans page_count=data.results|length, result_count=data.count %}
       Showing {{ page_count }} results around
