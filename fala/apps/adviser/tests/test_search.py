@@ -24,6 +24,9 @@ class SearchTestWithClient(SimpleTestCase):
         response = self.client.get(self.url, { 'postcode': 'w1a 1aa' })
         # self.assertEqual(response.context.form.errors, ['postcode'])  # I don't know why the context isn't available on the response
 
+        # https://docs.djangoproject.com/en/5.0/intro/tutorial05/#the-django-test-client
+        # maybe we need setup_test_client()
+
 
 class SearchTestOfView(SimpleTestCase):
 
