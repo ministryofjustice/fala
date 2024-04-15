@@ -1,8 +1,10 @@
 import unittest
 
+from django.test import SimpleTestCase
+
 from fala.apps.adviser.laa_laa_paginator import LaaLaaPaginator
 
-class LaaLaaPaginatorTest(unittest.TestCase):
+class LaaLaaPaginatorTest(SimpleTestCase):
     def test_short_data_has_one_page(self):
         pag = LaaLaaPaginator(count=5, page_size=10, window_size=3, current_page=1)
         self.assertEqual(1,len(pag.page_range))
