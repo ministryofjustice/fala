@@ -2,122 +2,129 @@
 
 {% block content %}
   <div class="govuk-grid-column-full">
-  <h1>Search Results</h1>
-  <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
-  {% if data.origin %}
-    {% trans page_count=data.results|length, result_count=data.count %}
-      Showing {{ page_count }} results around
-      {% pluralize %}
-      {{ result_count }} results in total. Showing {{ page_count }} results in order of closeness to
-    {% endtrans %}
-    <strong class="notranslate" translate="no">{{ data.origin.postcode }}</strong>
-    {%- if form.name.value() %}
-      {{ _('matching') }} <strong>{{ form.name.value() }}</strong>.
-    {%- else -%}
-      .
-    {% endif %}
-  {% else %}
-    {% trans result_count=data.count, page_count=data.results|length, org_name=form.name.value() %}
-      Showing {{ page_count }} result for <strong>{{ org_name }}</strong>.
-      {% pluralize %}
-      {{ result_count }} results in total. Showing {{ page_count }} results for <strong>{{ org_name }}</strong>.
-    {% endtrans %}
-  {% endif %}
-  <hr/>
-  <div class="org-list">
-  {% for item in data.results %}
-    <div class="org-list-item results-list-item" data-lat="{{ item.location.point.coordinates.1 }}" data-lon="{{ item.location.point.coordinates.0 }}" data-id="{{ loop.index }}">
-      <div class="org-details">
-        {% if item.distance %}
-          <p class="miles-away govuk-body">
-            <span class="govuk-visually-hidden">{{ _('Distance') }}</span>
-            {% trans miles=item.distance|round(2) %}{{ miles }} miles away{% endtrans %}
-          </p>
+    <h1>Search Results</h1>
+    <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
+    {% if data and data.count and data.count > 0 %}
+      {% if data.origin %}
+        {% trans page_count=data.results|length, result_count=data.count %}
+          Showing {{ page_count }} results around
+          {% pluralize %}
+          {{ result_count }} results in total. Showing {{ page_count }} results in order of closeness to
+        {% endtrans %}
+        <strong class="notranslate" translate="no">{{ data.origin.postcode }}</strong>
+        {%- if form.name.value() %}
+          {{ _('matching') }} <strong>{{ form.name.value() }}</strong>.
+        {%- else -%}
+          .
         {% endif %}
-        <span class="fn org govuk-body-l govuk-!-font-weight-bold">{{ item.organisation.name }}</span>
-        {% if item.location.type != 'Office' %}
-          <div class="org-type">{{ item.location.type|replace('Office', '') }}</div>
-        {% endif %}
-        <p class="govuk-body">
-          <span>{{ _('Telephone') }}:</span>
-          <span class="tel">{{ item.telephone }}</span>
-        </p>
-        <p class="govuk-body govuk-!-margin-top-0">
-          <span>{{ _('Address') }}:</span>
-          <span class="govuk-visually-hidden">{{ _('Address') }}:</span>
-          <span class="adr">
-                      <span class="street-address notranslate" translate="no">{{ item.location.address }}</span>
-                      <span class="city">{{ item.location.city }}</span>
-                      <span class="postal-code notranslate" translate="no">{{ item.location.postcode }}</span>
-                    </span>
-        </p>
-        {% if item.organisation.website %}
-          <p class="govuk-body">
-            <span>{{ _('Website') }}:</span>
-            <a class="govuk-link" href="{{ item.organisation.website|human_to_url }}" class="url" target="_blank" rel="noopener">
-              {{ item.organisation.website|url_to_human + " (Opens in new tab)" }}
-            </a>
-          </p>
-        {% endif %}
-        {% if item.categories|length %}
-          <h4 class="govuk-heading-s govuk-!-margin-bottom-2">{{ _('Categories of law') }}</h4>
-          <ul class="govuk-list govuk-list--bullet" role="list">
-            {% for cat in item.categories %}
-              {% if cat %}
-                <li class="govuk-!-margin-0" role="listitem">{{ cat }}</li>
+      {% else %}
+        {% trans result_count=data.count, page_count=data.results|length, org_name=form.name.value() %}
+          Showing {{ page_count }} result for <strong>{{ org_name }}</strong>.
+          {% pluralize %}
+          {{ result_count }} results in total. Showing {{ page_count }} results for <strong>{{ org_name }}</strong>.
+        {% endtrans %}
+      {% endif %}
+      <hr/>
+      <div class="org-list">
+        {% for item in data.results %}
+          <div class="org-list-item results-list-item" data-lat="{{ item.location.point.coordinates.1 }}" data-lon="{{ item.location.point.coordinates.0 }}" data-id="{{ loop.index }}">
+            <div class="org-details">
+              {% if item.distance %}
+                <p class="miles-away govuk-body">
+                  <span class="govuk-visually-hidden">{{ _('Distance') }}</span>
+                  {% trans miles=item.distance|round(2) %}{{ miles }} miles away{% endtrans %}
+                </p>
               {% endif %}
-            {% endfor %}
-          </ul>
-        {% endif %}
+              <span class="fn org govuk-body-l govuk-!-font-weight-bold">{{ item.organisation.name }}</span>
+              {% if item.location.type != 'Office' %}
+                <div class="org-type">{{ item.location.type|replace('Office', '') }}</div>
+              {% endif %}
+              <p class="govuk-body">
+                <span>{{ _('Telephone') }}:</span>
+                <span class="tel">{{ item.telephone }}</span>
+              </p>
+              <p class="govuk-body govuk-!-margin-top-0">
+                <span>{{ _('Address') }}:</span>
+                <span class="govuk-visually-hidden">{{ _('Address') }}:</span>
+                <span class="adr">
+                        <span class="street-address notranslate" translate="no">{{ item.location.address }}</span>
+                        <span class="city">{{ item.location.city }}</span>
+                        <span class="postal-code notranslate" translate="no">{{ item.location.postcode }}</span>
+                      </span>
+              </p>
+              {% if item.organisation.website %}
+                <p class="govuk-body">
+                  <span>{{ _('Website') }}:</span>
+                  <a class="govuk-link" href="{{ item.organisation.website|human_to_url }}" class="url" target="_blank" rel="noopener">
+                    {{ item.organisation.website|url_to_human + " (Opens in new tab)" }}
+                  </a>
+                </p>
+              {% endif %}
+              {% if item.categories|length %}
+                <h4 class="govuk-heading-s govuk-!-margin-bottom-2">{{ _('Categories of law') }}</h4>
+                <ul class="govuk-list govuk-list--bullet" role="list">
+                  {% for cat in item.categories %}
+                    {% if cat %}
+                      <li class="govuk-!-margin-0" role="listitem">{{ cat }}</li>
+                    {% endif %}
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </div>
+          </div>
+          <hr/>
+        {% endfor %}
       </div>
-    </div>
-    <hr/>
-  {% endfor %}
-  </div>
 
-  <nav class="govuk-pagination" aria-label="Pagination">
-    {% set current_page = pages.current_page() %}
-    {% if current_page.has_previous() %}
-    <div class="govuk-pagination__prev">
-      <a class="govuk-link govuk-pagination__link" href="/search?postcode={{ form.postcode.value() }}&name={{ form.name.value() }}&page={{ current_page.previous_page_number() }}" rel="prev">
-        <svg class="govuk-pagination__icon govuk-pagination__icon--prev" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
-          <path d="m6.5938-0.0078125-6.7266 6.7266 6.7441 6.4062 1.377-1.449-4.1856-3.9768h12.896v-2h-12.984l4.2931-4.293-1.414-1.414z"></path>
-        </svg>
-        <span class="govuk-pagination__link-title">
-        Previous<span class="govuk-visually-hidden"> page</span>
-      </span>
-      </a>
-    </div>
-    {% endif %}
-    <ul class="govuk-pagination__list">
-      {% for page_num in pages.page_range %}
-        {% if form.current_page == page_num %}
-          <li class="govuk-pagination__item govuk-pagination__item--current">
-            <a class="govuk-link govuk-pagination__link" href="/search?postcode={{ form.postcode.value() }}&name={{ form.name.value() }}&page={{ page_num }}" aria-label="Page {{ page_num }}" aria-current="page">
-              {{ page_num }}
+      <nav class="govuk-pagination" aria-label="Pagination">
+        {% set current_page = pages.current_page() %}
+        {% if current_page.has_previous() %}
+          <div class="govuk-pagination__prev">
+            <a class="govuk-link govuk-pagination__link" href="/search?postcode={{ form.postcode.value() }}&name={{ form.name.value() }}&page={{ current_page.previous_page_number() }}" rel="prev">
+              <svg class="govuk-pagination__icon govuk-pagination__icon--prev" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
+                <path d="m6.5938-0.0078125-6.7266 6.7266 6.7441 6.4062 1.377-1.449-4.1856-3.9768h12.896v-2h-12.984l4.2931-4.293-1.414-1.414z"></path>
+              </svg>
+              <span class="govuk-pagination__link-title">
+          Previous<span class="govuk-visually-hidden"> page</span>
+        </span>
             </a>
-          </li>
-        {% else %}
-          <li class="govuk-pagination__item">
-            <a class="govuk-link govuk-pagination__link" href="/search?postcode={{ form.postcode.value() }}&name={{ form.name.value() }}&page={{ page_num }}" aria-label="Page {{ page_num }}">
-              {{ page_num }}
-            </a>
-          </li>
+          </div>
         {% endif %}
-      {% endfor %}
-    </ul>
-    {% if current_page.has_next() %}
-    <div class="govuk-pagination__next">
-      <a class="govuk-link govuk-pagination__link" href="/search?postcode={{ form.postcode.value() }}&name={{ form.name.value() }}&page={{ current_page.next_page_number() }}" rel="next">
-      <span class="govuk-pagination__link-title">
-        Next<span class="govuk-visually-hidden"> page</span>
-      </span>
-        <svg class="govuk-pagination__icon govuk-pagination__icon--next" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
-          <path d="m8.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z"></path>
-        </svg>
-      </a>
-    </div>
+        <ul class="govuk-pagination__list">
+          {% for page_num in pages.page_range %}
+            {% if form.current_page == page_num %}
+              <li class="govuk-pagination__item govuk-pagination__item--current">
+                <a class="govuk-link govuk-pagination__link" href="/search?postcode={{ form.postcode.value() }}&name={{ form.name.value() }}&page={{ page_num }}" aria-label="Page {{ page_num }}" aria-current="page">
+                  {{ page_num }}
+                </a>
+              </li>
+            {% else %}
+              <li class="govuk-pagination__item">
+                <a class="govuk-link govuk-pagination__link" href="/search?postcode={{ form.postcode.value() }}&name={{ form.name.value() }}&page={{ page_num }}" aria-label="Page {{ page_num }}">
+                  {{ page_num }}
+                </a>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+        {% if current_page.has_next() %}
+          <div class="govuk-pagination__next">
+            <a class="govuk-link govuk-pagination__link" href="/search?postcode={{ form.postcode.value() }}&name={{ form.name.value() }}&page={{ current_page.next_page_number() }}" rel="next">
+        <span class="govuk-pagination__link-title">
+          Next<span class="govuk-visually-hidden"> page</span>
+        </span>
+              <svg class="govuk-pagination__icon govuk-pagination__icon--next" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
+                <path d="m8.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z"></path>
+              </svg>
+            </a>
+          </div>
+        {% endif %}
+      </nav>
+    {% else %}
+      {% from "macros/element.html" import alert %}
+      {% call alert(title=_('No results')) %}
+        {{ _('There are no results matching your search criteria.') }}
+      {% endcall %}
     {% endif %}
-  </nav>
   </div>
 {% endblock %}
