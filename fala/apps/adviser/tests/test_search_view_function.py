@@ -9,8 +9,8 @@ class SearchViewFunctionTest(SimpleTestCase):
 
     def test_postcode_search(self):
         response = self.client.get(self.url, {"postcode": "PE31"})
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(200, response.status_code)
 
-    def test_postcode_search_zero_results(self):
+    def test_invalid_postcode_generates_error(self):
         response = self.client.get(self.url, {"postcode": "ZZZ"})
-        self.assertContains(response, "There are no results matching your search criteria")
+        self.assertEqual({"postcode": ["Postcode not found"]}, response.context_data["form"].errors)

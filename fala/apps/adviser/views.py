@@ -41,9 +41,16 @@ def fala_search(request):
     form = AdviserSearchForm(data=request.GET or None)
     data = form.search()
     if settings.FEATURE_FLAG_NO_MAP:
-        template = loader.get_template("adviser/results.html")
-        pages = LaaLaaPaginator(data["count"], 10, 3, form.current_page)
-        context = {"form": form, "data": data, "pages": pages}
+        if data:
+            template = loader.get_template("adviser/results.html")
+            pages = LaaLaaPaginator(data["count"], 10, 3, form.current_page)
+            context = {"form": form, "data": data, "pages": pages}
+        else:
+            template = loader.get_template("adviser/search.html")
+            context = {
+                "form": form,
+                "data": data,
+            }
         return HttpResponse(template.render(context, request))
     else:
         template = loader.get_template("adviser/search.html")
