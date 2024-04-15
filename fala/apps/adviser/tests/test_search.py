@@ -6,6 +6,10 @@ from ..views import AdviserView
 # https://docs.djangoproject.com/en/5.0/topics/testing/tools/
 
 class SearchTestWithClient(SimpleTestCase):
+    '''
+    Use test client to interact with views via making local web requests
+    '''
+
     client = Client()
 
     # avoid hardcoding the url unless it makes sense
@@ -21,22 +25,26 @@ class SearchTestWithClient(SimpleTestCase):
         self.assertEqual(response.status_code, 405)  # method not allowed
 
     def test_searching_for_a_postcode(self):
-        response = self.client.get(self.url, { 'postcode': 'w1a 1aa' })
-        # self.assertEqual(response.context.form.errors, ['postcode'])  # I don't know why the context isn't available on the response
-
-        # https://docs.djangoproject.com/en/5.0/intro/tutorial05/#the-django-test-client
-        # maybe we need setup_test_client()
+        '''
+        Bad test but just a demo of accessing context_data on the response
+        '''
+        response = self.client.get(self.url, { 'postcode': 'bt1 1bt' })
+        form_errors = response.context_data['form'].errors  # docs mostly talk about `context` but we are `context_data`. I think cos we use jinja
+        expected_message = 'This service does not cover  Northern Ireland.  Try a postcode, town or city in England or Wales.'
+        self.assertEqual(form_errors, {'postcode': [expected_message]})
 
 
 class SearchTestOfView(SimpleTestCase):
+    '''
+    Use instantiated View objects to unit test them
+    '''
 
     def setUp(self):
         # Every test needs access to the request factory.
         self.factory = RequestFactory()
 
-    def test_searching_for_a_postcode(self):
-        request = self.factory.get('/?postcode=wuuhei&name=&search=')
+    def test_method_directly(self):
+        view = AdviserView()
+        context = view.get_context_data()
 
-        response = AdviserView.as_view()(request)
-        self.assertEqual(response.status_code, 200)
-        print(response.content)
+        self.assertEqual(context['view'].__class__, AdviserView)  # awful, atrocious test, utterly pointless and actively bad, but demonstrates calling a method
