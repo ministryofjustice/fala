@@ -38,8 +38,33 @@ REGION_ERRORS = {
 }
 
 SCOTTISH_PREFIXES = [
-    "AB","DD","DG","EH","FK","G1","G2","G3","G4","G5","G6","G7","G8","G9","G0","HS","IV","KA","KW","KY","ML","PA","PH","TD","ZE"
+    "AB",
+    "DD",
+    "DG",
+    "EH",
+    "FK",
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "G7",
+    "G8",
+    "G9",
+    "G0",
+    "HS",
+    "IV",
+    "KA",
+    "KW",
+    "KY",
+    "ML",
+    "PA",
+    "PH",
+    "TD",
+    "ZE",
 ]
+
 
 class FalaTextInput(forms.TextInput):
     def __init__(self, attrs={}):
@@ -48,10 +73,12 @@ class FalaTextInput(forms.TextInput):
 
         super(FalaTextInput, self).__init__(attrs)
 
+
 class RegionNotFoundException(Exception):
     def __init__(self, region):
         self.region = region
         super(RegionNotFoundException, self).__init__()
+
 
 class AdviserSearchForm(forms.Form):
     page = forms.IntegerField(required=False, widget=forms.HiddenInput())

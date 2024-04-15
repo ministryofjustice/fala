@@ -36,12 +36,13 @@ class AdviserView(TemplateView):
 class AccessibilityView(TemplateView):
     template_name = "adviser/accessibility-statement.html"
 
+
 REGION_TO_LINK = {
     Region.NI: {
         "link": "https://www.nidirect.gov.uk/articles/legal-aid-schemes",
         "region": "Northern Ireland",
     },
-    Region.IOM:  {
+    Region.IOM: {
         "link": "https://www.gov.im/categories/benefits-and-financial-support/legal-aid/",
         "region": "Isle of Man",
     },
@@ -58,6 +59,7 @@ REGION_TO_LINK = {
         "region": "Scotland",
     },
 }
+
 
 def fala_search(request):
     form = AdviserSearchForm(data=request.GET or None)
@@ -76,18 +78,12 @@ def fala_search(request):
                 template = loader.get_template("adviser/results.html")
             else:
                 template = loader.get_template("adviser/search.html")
-                context = {
-                    "form": form
-                }
+                context = {"form": form}
             return HttpResponse(template.render(context, request))
 
         except RegionNotFoundException as cde:
             data = REGION_TO_LINK[cde.region]
-            context = {
-                "postcode": form.cleaned_data["postcode"],
-                "link": data["link"],
-                "region": data["region"]
-            }
+            context = {"postcode": form.cleaned_data["postcode"], "link": data["link"], "region": data["region"]}
             template = loader.get_template("adviser/other_region.html")
             return HttpResponse(template.render(context, request))
     else:
