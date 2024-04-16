@@ -29,6 +29,7 @@ class NewSearchViewTemplate(SimpleTestCase):
         self.assertContains(
             response,
             '<a class="govuk-link" href="https://www.gov.uk/check-legal-aid" target="_blank" rel="noopener">Check if you qualify for legal aid (opens in a new tab)</a>',
+            html=True,
         )
 
         # Ensure CSS class is visible in DOM
