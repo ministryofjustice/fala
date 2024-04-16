@@ -15,16 +15,6 @@
       <p class="govuk-body"><a class="govuk-link" href="{{ CHECK_LEGAL_AID_URL }}" target="_blank" rel="noopener">Check if you qualify for legal aid (opens in a new tab)</a></p>
   </div>
 
-  <!-- Take below out when merging with EL-1434 -->
-  <div class="find-legal-adviser">
-    <div class="govuk-grid-column-full">
-      {% block search_results %}
-        {% include 'adviser/_results.html' %}
-      {% endblock %}
-    </div>
-  </div>
-  <!-- Take above out when merging with EL-1434 -->
-
   {% block search_form %}
       <div class="govuk-grid-column-full">
         <div class="laa-fala__grey-box">
