@@ -78,7 +78,7 @@
         {% if current_page.has_previous() %}
           <div class="govuk-pagination__prev">
             {% if categories|length %}
-              <a class="govuk-link govuk-pagination__link" href="{{ url('search') }}?page={{ current_page.previous_page_number() }}&{{ params|urlencode }}&{{ categories }}" rel="prev">
+              <a class="govuk-link govuk-pagination__link" href="{{ url('search') }}?page={{ current_page.previous_page_number() }}&{{ params|urlencode }}&{{ categories|join("&") }}" rel="prev">
             {% else %}
               <a class="govuk-link govuk-pagination__link" href="{{ url('search') }}?page={{ current_page.previous_page_number() }}&{{ params|urlencode }}" rel="prev">
             {% endif %}
@@ -99,7 +99,7 @@
               <li class="govuk-pagination__item">
             {% endif %}
                 {% if categories|length %}
-                  <a class="govuk-link govuk-pagination__link" href="{{ url('search') }}?page={{ page_num }}&{{ params|urlencode }}&{{ categories }}" aria-label="Page {{ page_num }}" aria-current="page">
+                  <a class="govuk-link govuk-pagination__link" href="{{ url('search') }}?page={{ page_num }}&{{ params|urlencode }}&{{ categories|join("&") }}" aria-label="Page {{ page_num }}" aria-current="page">
                 {% else %}
                   <a class="govuk-link govuk-pagination__link" href="{{ url('search') }}?page={{ page_num }}&{{ params|urlencode }}" aria-label="Page {{ page_num }}" aria-current="page">
                 {% endif %}
@@ -111,7 +111,7 @@
         {% if current_page.has_next() %}
           <div class="govuk-pagination__next">
              {% if categories|length %}
-              <a class="govuk-link govuk-pagination__link" href="{{ url('search') }}?page={{ current_page.next_page_number() }}&{{ params|urlencode }}&{{ categories }}" rel="next">
+              <a class="govuk-link govuk-pagination__link" href="{{ url('search') }}?page={{ current_page.next_page_number() }}&{{ params|urlencode }}&{{ categories|join("&") }}" rel="next">
              {% else %}
               <a class="govuk-link govuk-pagination__link" href="{{ url('search') }}?page={{ current_page.next_page_number() }}&{{ params|urlencode }}" rel="next">
              {% endif %}

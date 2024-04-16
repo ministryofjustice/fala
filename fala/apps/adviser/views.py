@@ -48,7 +48,7 @@ def fala_search(request):
                 "postcode": form.cleaned_data["postcode"],
                 "name": form.cleaned_data["name"],
             }
-            categories = "&".join(map(lambda c: "categories=" + c, form.cleaned_data["categories"]))
+            categories = list(map(lambda c: "categories=" + c, form.cleaned_data["categories"]))
             context = {"form": form, "data": data, "pages": pages, "params": params, "categories": categories}
         else:
             template = loader.get_template("adviser/search.html")
