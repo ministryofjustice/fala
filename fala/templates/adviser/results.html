@@ -36,9 +36,6 @@
                 </p>
               {% endif %}
               <span class="fn org govuk-body-l govuk-!-font-weight-bold">{{ item.organisation.name }}</span>
-              {% if item.location.type != 'Office' %}
-                <div class="org-type">{{ item.location.type|replace('Office', '') }}</div>
-              {% endif %}
               <p class="govuk-body">
                 <span>{{ _('Telephone') }}:</span>
                 <span class="tel">{{ item.telephone }}</span>
