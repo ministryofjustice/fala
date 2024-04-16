@@ -44,7 +44,12 @@ def fala_search(request):
         if data:
             template = loader.get_template("adviser/results.html")
             pages = LaaLaaPaginator(data["count"], 10, 3, form.current_page)
-            context = {"form": form, "data": data, "pages": pages}
+            params = {
+                "postcode": form.cleaned_data["postcode"],
+                "name": form.cleaned_data["name"],
+            }
+            categories = "&".join(map(lambda c: "categories=" + c, form.cleaned_data['categories']))
+            context = {"form": form, "data": data, "pages": pages, "params": params, "categories": categories }
         else:
             template = loader.get_template("adviser/search.html")
             context = {

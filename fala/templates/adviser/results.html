@@ -80,7 +80,11 @@
         {% set current_page = pages.current_page() %}
         {% if current_page.has_previous() %}
           <div class="govuk-pagination__prev">
-            <a class="govuk-link govuk-pagination__link" href="/search?postcode={{ form.postcode.value() }}&name={{ form.name.value() }}&page={{ current_page.previous_page_number() }}" rel="prev">
+            {% if categories|length %}
+              <a class="govuk-link govuk-pagination__link" href="{{ url('search') }}?page={{ current_page.previous_page_number() }}&{{ params|urlencode }}&{{ categories }}" rel="prev">
+            {% else %}
+              <a class="govuk-link govuk-pagination__link" href="{{ url('search') }}?page={{ current_page.previous_page_number() }}&{{ params|urlencode }}" rel="prev">
+            {% endif %}
               <svg class="govuk-pagination__icon govuk-pagination__icon--prev" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
                 <path d="m6.5938-0.0078125-6.7266 6.7266 6.7441 6.4062 1.377-1.449-4.1856-3.9768h12.896v-2h-12.984l4.2931-4.293-1.414-1.414z"></path>
               </svg>
@@ -94,22 +98,26 @@
           {% for page_num in pages.page_range %}
             {% if form.current_page == page_num %}
               <li class="govuk-pagination__item govuk-pagination__item--current">
-                <a class="govuk-link govuk-pagination__link" href="/search?postcode={{ form.postcode.value() }}&name={{ form.name.value() }}&page={{ page_num }}" aria-label="Page {{ page_num }}" aria-current="page">
-                  {{ page_num }}
-                </a>
-              </li>
             {% else %}
               <li class="govuk-pagination__item">
-                <a class="govuk-link govuk-pagination__link" href="/search?postcode={{ form.postcode.value() }}&name={{ form.name.value() }}&page={{ page_num }}" aria-label="Page {{ page_num }}">
-                  {{ page_num }}
-                </a>
-              </li>
             {% endif %}
+                {% if categories|length %}
+                  <a class="govuk-link govuk-pagination__link" href="{{ url('search') }}?page={{ page_num }}&{{ params|urlencode }}&{{ categories }}" aria-label="Page {{ page_num }}" aria-current="page">
+                {% else %}
+                  <a class="govuk-link govuk-pagination__link" href="{{ url('search') }}?page={{ page_num }}&{{ params|urlencode }}" aria-label="Page {{ page_num }}" aria-current="page">
+                {% endif %}
+                    {{ page_num }}
+                  </a>
+              </li>
           {% endfor %}
         </ul>
         {% if current_page.has_next() %}
           <div class="govuk-pagination__next">
-            <a class="govuk-link govuk-pagination__link" href="/search?postcode={{ form.postcode.value() }}&name={{ form.name.value() }}&page={{ current_page.next_page_number() }}" rel="next">
+             {% if categories|length %}
+              <a class="govuk-link govuk-pagination__link" href="{{ url('search') }}?page={{ current_page.next_page_number() }}&{{ params|urlencode }}&{{ categories }}" rel="next">
+             {% else %}
+              <a class="govuk-link govuk-pagination__link" href="{{ url('search') }}?page={{ current_page.next_page_number() }}&{{ params|urlencode }}" rel="next">
+             {% endif %}
         <span class="govuk-pagination__link-title">
           Next<span class="govuk-visually-hidden"> page</span>
         </span>
