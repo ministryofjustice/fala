@@ -21,7 +21,7 @@ class SearchViewFunctionTest(SimpleTestCase):
 class NewSearchViewTemplate(SimpleTestCase):
     client = Client()
 
-    def test_tempalte_link_and_css(self):
+    def test_template_link_and_css(self):
         response = self.client.get(reverse("adviser"))
 
         self.assertEqual(response.status_code, 200)
