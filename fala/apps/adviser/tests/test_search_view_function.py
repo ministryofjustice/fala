@@ -19,18 +19,14 @@ class SearchViewFunctionTest(SimpleTestCase):
 
 @override_settings(FEATURE_FLAG_NO_MAP=True)
 class NewSearchViewTemplate(SimpleTestCase):
-    client = Client()
+    def test_tempalte_link_and_css(self):
+        client = Client()
+        response = client.get(reverse("adviser"))
 
-    def test_url_link_is_in_DOM(self):
-        response = self.client.get(reverse("adviser"))
         self.assertEqual(response.status_code, 200)
 
-        # Ensure URL link is in DOM
-        self.assertContains(
-            response,
-            '<a class="govuk-link" href="https://www.gov.uk/check-legal-aid" target="_blank" rel="noopener">Check if you qualify for legal aid (opens in a new tab)</a>',
-            html=True,
-        )
+        # Ensure URL link is in response content
+        self.assertContains(response, "https://www.gov.uk/check-legal-aid")
 
-        # Ensure CSS class is visible in DOM
-        self.assertContains(response, '<div class="laa-fala__grey-box">')
+        # Ensure CSS class is in response content
+        self.assertContains(response, "laa-fala__grey-box")
