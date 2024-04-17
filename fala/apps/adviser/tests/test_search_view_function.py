@@ -19,9 +19,10 @@ class SearchViewFunctionTest(SimpleTestCase):
 
 @override_settings(FEATURE_FLAG_NO_MAP=True)
 class NewSearchViewTemplate(SimpleTestCase):
+    client = Client()
+
     def test_tempalte_link_and_css(self):
-        client = Client()
-        response = client.get(reverse("adviser"))
+        response = self.client.get(reverse("adviser"))
 
         self.assertEqual(response.status_code, 200)
 
