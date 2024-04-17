@@ -1,4 +1,4 @@
-from django.test import SimpleTestCase, Client, override_settings
+from django.test import SimpleTestCase, Client, LiveServerTestCase, override_settings
 from django.urls import reverse
 
 
@@ -18,7 +18,7 @@ class SearchViewFunctionTest(SimpleTestCase):
 
 
 @override_settings(FEATURE_FLAG_NO_MAP=True)
-class NewSearchViewTemplate(SimpleTestCase):
+class NewSearchViewTemplate(LiveServerTestCase):
     client = Client()
 
     def test_template_link_and_css(self):
