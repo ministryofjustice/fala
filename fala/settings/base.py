@@ -230,9 +230,6 @@ GOOGLE_MAPS_API_KEY = os.environ.get("GOOGLE_MAPS_API_KEY", "")
 
 CHECK_LEGAL_AID_URL = "https://www.gov.uk/check-legal-aid"
 
-# We need a default database in order to run a LiveServerTestCase test.
-DATABASES = {"default": {"ENGINE": "django.db.backends.sqlite3"}}
-
 # .local.py overrides all the common settings.
 try:
     from .local import *  # noqa: F401,F403
