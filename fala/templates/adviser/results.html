@@ -58,7 +58,7 @@
                 </p>
               {% endif %}
               {% if item.categories|length %}
-                <h4 class="govuk-heading-s govuk-!-margin-bottom-2">{{ _('Categories of law') }}</h4>
+                <span class="govuk-heading-s govuk-!-margin-bottom-2">{{ _('Categories of law') }}</span>
                 <ul class="govuk-list govuk-list--bullet" role="list">
                   {% for cat in item.categories %}
                     {% if cat %}
