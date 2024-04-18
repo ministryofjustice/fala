@@ -29,9 +29,9 @@ class AdviserSearchForm(forms.Form):
     page = forms.IntegerField(required=False, widget=forms.HiddenInput())
 
     postcode = forms.CharField(
-        label=_("Enter postcode"),
+        label=_("Postcode"),
         max_length=30,
-        help_text=_("For example, <span class='notranslate' translate='no'>SW1H 9AJ</span>"),
+        help_text=_(mark_safe("For example, <span class='notranslate' translate='no'>SW1H</span>")),
         required=False,
         widget=FalaTextInput(),
     )
@@ -60,10 +60,10 @@ class AdviserSearchForm(forms.Form):
     def __init__(self, *args, **kwargs):
         kwargs.setdefault("label_suffix", "")
         super(AdviserSearchForm, self).__init__(*args, **kwargs)
-        if settings.FEATURE_FLAG_NO_MAP:
-            self.fields["postcode"].label = _("Postcode")
+        if not settings.FEATURE_FLAG_NO_MAP:
+            self.fields["postcode"].label = _("Enter postcode")
             self.fields["postcode"].help_text = _(
-                mark_safe("For example, <span class='notranslate' translate='no'>SW1H</span>")
+                "For example, <span class='notranslate' translate='no'>SW1H 9AJ</span>"
             )
 
     def clean(self):
