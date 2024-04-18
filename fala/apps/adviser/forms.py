@@ -28,22 +28,13 @@ class FalaTextInput(forms.TextInput):
 class AdviserSearchForm(forms.Form):
     page = forms.IntegerField(required=False, widget=forms.HiddenInput())
 
-    if settings.FEATURE_FLAG_NO_MAP:
-        postcode = forms.CharField(
-            label=_("Postcode"),
-            max_length=30,
-            help_text=_(mark_safe("For example, <span class='notranslate' translate='no'>SW1H</span>")),
-            required=False,
-            widget=FalaTextInput(),
-        )
-    else:
-        postcode = forms.CharField(
-            label=_("Enter postcode"),
-            max_length=30,
-            help_text=_("For example, <span class='notranslate' translate='no'>SW1H 9AJ</span>"),
-            required=False,
-            widget=FalaTextInput(),
-        )
+    postcode = forms.CharField(
+        label=_("Enter postcode"),
+        max_length=30,
+        help_text=_("For example, <span class='notranslate' translate='no'>SW1H 9AJ</span>"),
+        required=False,
+        widget=FalaTextInput(),
+    )
 
     name = forms.CharField(
         label=_("Organisation name"),
@@ -69,6 +60,11 @@ class AdviserSearchForm(forms.Form):
     def __init__(self, *args, **kwargs):
         kwargs.setdefault("label_suffix", "")
         super(AdviserSearchForm, self).__init__(*args, **kwargs)
+        if settings.FEATURE_FLAG_NO_MAP:
+            self.fields["postcode"].label = _("Postcode")
+            self.fields["postcode"].help_text = _(
+                mark_safe("For example, <span class='notranslate' translate='no'>SW1H</span>")
+            )
 
     def clean(self):
         data = self.cleaned_data
