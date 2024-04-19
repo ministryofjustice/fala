@@ -1,6 +1,8 @@
 # coding=utf-8
 from django import forms
 from django.utils.translation import gettext_lazy as _
+from django.utils.safestring import mark_safe
+from django.conf import settings
 
 import laalaa.api as laalaa
 import re
@@ -27,14 +29,19 @@ class AdviserSearchForm(forms.Form):
     page = forms.IntegerField(required=False, widget=forms.HiddenInput())
 
     postcode = forms.CharField(
-        label=_("Enter postcode"),
+        label=_("Postcode"),
         max_length=30,
-        help_text=_("For example, <span class='notranslate' translate='no'>SW1H 9AJ</span>"),
+        help_text=_(mark_safe("For example, <span class='notranslate' translate='no'>SW1H</span>")),
         required=False,
         widget=FalaTextInput(),
     )
 
-    name = forms.CharField(label=_("Organisation name"), max_length=100, required=False, widget=FalaTextInput())
+    name = forms.CharField(
+        label=_("Organisation name"),
+        max_length=100,
+        required=False,
+        widget=FalaTextInput(),
+    )
 
     type = forms.MultipleChoiceField(
         label=_("Organisation type"),
@@ -53,6 +60,11 @@ class AdviserSearchForm(forms.Form):
     def __init__(self, *args, **kwargs):
         kwargs.setdefault("label_suffix", "")
         super(AdviserSearchForm, self).__init__(*args, **kwargs)
+        if not settings.FEATURE_FLAG_NO_MAP:
+            self.fields["postcode"].label = _("Enter postcode")
+            self.fields["postcode"].help_text = _(
+                "For example, <span class='notranslate' translate='no'>SW1H 9AJ</span>"
+            )
 
     def clean(self):
         data = self.cleaned_data

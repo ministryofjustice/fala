@@ -92,6 +92,8 @@ jobs:
           command: |
             source env/bin/activate
             python manage.py test
+          environment:
+            LAALAA_API_HOST: "https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk"
 
   build:
     executor: aws-ecr/default # use the aws-ecr/default executor to start the docker daemon
