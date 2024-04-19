@@ -19,7 +19,7 @@ certifi==2024.2.2
     #   sentry-sdk
 charset-normalizer==3.3.2
     # via requests
-cla_common @ https://github.com/ministryofjustice/cla_common/archive/refs/tags/0.3.3.tar.gz
+cla-common @ https://github.com/ministryofjustice/cla_common/archive/refs/tags/0.3.3.tar.gz
     # via -r requirements/source/requirements-base.in
 django==5.0.3
     # via
@@ -63,7 +63,7 @@ sentry-sdk==1.43.0
     # via -r requirements/source/requirements-base.in
 six==1.16.0
     # via python-dateutil
-sqlparse==0.4.4
+sqlparse==0.5.0
     # via django
 urllib3==2.2.1
     # via

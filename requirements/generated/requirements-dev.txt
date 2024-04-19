@@ -23,7 +23,7 @@ cfgv==3.4.0
     # via pre-commit
 charset-normalizer==3.3.2
     # via requests
-cla_common @ https://github.com/ministryofjustice/cla_common/archive/refs/tags/0.3.3.tar.gz
+cla-common @ https://github.com/ministryofjustice/cla_common/archive/refs/tags/0.3.3.tar.gz
     # via -r requirements/source/requirements-base.in
 click==8.1.7
     # via pip-tools
@@ -65,14 +65,16 @@ nodeenv==1.8.0
     # via pre-commit
 packaging==24.0
     # via build
-pip-tools==6.13.0
+pip-tools==7.4.1
     # via -r requirements/source/requirements-dev.in
 platformdirs==4.2.0
     # via virtualenv
 pre-commit==3.7.0
     # via -r requirements/source/requirements-pre-commit.in
 pyproject-hooks==1.0.0
-    # via build
+    # via
+    #   build
+    #   pip-tools
 python-dateutil==2.9.0.post0
     # via
     #   botocore
@@ -89,7 +91,7 @@ sentry-sdk==1.43.0
     # via -r requirements/source/requirements-base.in
 six==1.16.0
     # via python-dateutil
-sqlparse==0.4.4
+sqlparse==0.5.0
     # via django
 urllib3==2.2.1
     # via
