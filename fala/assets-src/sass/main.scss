@@ -70,6 +70,18 @@ body.govuk-template__body {
   text-transform: uppercase;
 }
 
+.fala-tickbox-columns_new .govuk-checkboxes__item {
+  clear:none;
+  min-width:44.63%;
+}
+
+.fala-tickbox-columns_new .govuk-checkboxes__item label.govuk-checkboxes__label {
+  min-width:100%;
+  inline-size: 150px;
+  overflow-wrap: break-word;
+}
+
+// Remove below CSS once `FEATURE_FLAG_NO_MAP` is removed
 .fala-tickbox-columns .govuk-checkboxes__item {
   clear:none;
   min-width:44.63%;
@@ -90,9 +102,8 @@ body.govuk-template__body {
 
 .fala-tickbox-columns .govuk-checkboxes__item label.govuk-checkboxes__label {
   min-width:100%;
-  inline-size: 150px;
-  overflow-wrap: break-word;
 }
+// Remove above CSS once `FEATURE_FLAG_NO_MAP` is removed
 
 .govuk-checkboxes__label {
   &::before {
