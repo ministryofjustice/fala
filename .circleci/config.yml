@@ -160,6 +160,7 @@ jobs:
           source .circleci/define_build_environment_variables
           echo "export FALA_IMAGE=$ECR_DEPLOY_IMAGE" >> $BASH_ENV
           echo "export A11Y_ENABLED=true" >> $BASH_ENV
+          echo "export FALA_TESTS_ONLY=true" >> $BASH_ENV
           echo "Setting FALA image $ECR_DEPLOY_IMAGE"
       - cla-end-to-end-tests/behave
 
