@@ -2,3 +2,4 @@
 -r requirements-pre-commit.in
 # pip-tools is pinned because it's important to be in step with .pre-commit-config.yaml
 pip-tools==7.4.1
+beautifulsoup4<5

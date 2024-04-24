@@ -215,7 +215,29 @@ body.fala-dev {
   }
 
   &__grey-box {
-    background-color: govuk-colour("light-grey"); 
+    background-color: govuk-colour("light-grey");
     padding: 1em;
   }
 }
+
+.miles-away {
+  color: $govuk-secondary-text-colour;
+}
+
+.results-list-item {
+  margin-top: govuk-spacing(4);
+  border-top: 1px solid govuk-colour("mid-grey");
+
+  .address {
+    margin-top: govuk-spacing(2);
+  }
+
+  .website {
+    margin-top: govuk-spacing(2);
+  }
+
+  .categories {
+    margin-top: govuk-spacing(2);
+  }
+}
+
