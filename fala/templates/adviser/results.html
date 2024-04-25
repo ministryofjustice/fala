@@ -30,7 +30,7 @@
             {% if item.distance %}
               <p class="miles-away govuk-body">
                 <span class="govuk-visually-hidden">{{ _('Distance') }}</span>
-                {% trans miles=item.distance|round(2) %}{{ miles }} miles away{% endtrans %}
+                {% trans miles=item.distance|round(1) %}{{ miles }} miles away{% endtrans %}
               </p>
             {% endif %}
             <h2 class="govuk-body-l govuk-!-font-weight-bold">{{ item.organisation.name }}</h2>
@@ -45,7 +45,7 @@
                       <span class="street-address notranslate" translate="no">{{ item.location.address }}</span>
                       <span class="city">{{ item.location.city }}</span>
                       <span class="postal-code notranslate" translate="no">{{ item.location.postcode }}</span>
-                    </span>
+              </span>
             </div>
             {% if item.organisation.website %}
               <div class="website">
@@ -57,7 +57,7 @@
             {% endif %}
             {% if item.categories|length %}
             <div class="categories">
-              <h3 class="govuk-heading-s govuk-!-margin-bottom-2">{{ _('Categories of law covered') }}</h3>
+              <h3 class="govuk-heading-s govuk-!-margin-bottom-2">{{ _('Categories') }}</h3>
               <ul class="govuk-list govuk-list--bullet">
                 {% for cat in item.categories %}
                   <li class="govuk-!-margin-2">{{ cat }}</li>
