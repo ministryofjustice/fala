@@ -37,8 +37,8 @@ class PostcodeValidationTest(SimpleTestCase):
         data = {"postcode": "AB11 5BN"}
         response = self.client.get(self.url, data)
         soup = bs4.BeautifulSoup(response.content, "html.parser")
-        form = soup.find('form', {'action': '/', 'method': 'get'})
-        button = soup.find('button', {'type': 'submit', 'text': 'Change search'})
+        form = soup.find("form", {"action": "/", "method": "get"})
+        button = soup.find("button", {"type": "submit", "text": "Change search"})
         self.assertIsNotNone(form)
         self.assertIsNotNone(button)
 
