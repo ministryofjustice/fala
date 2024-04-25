@@ -11,7 +11,7 @@
           {% pluralize %}
           <span class="govuk-!-font-weight-bold">{{ result_count }} results</span> in order of closeness to
         {% endtrans %}
-        <strong class="notranslate" translate="no">{{ form.postcode.value() }}</strong>
+        <strong class="notranslate" translate="no">{{ form.postcode.value()|upper }}</strong>
         {%- if form.name.value() %}
           {{ _('matching') }} <strong>{{ form.name.value() }}</strong>.
         {%- else -%}
