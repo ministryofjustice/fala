@@ -38,9 +38,10 @@ class PostcodeValidationTest(SimpleTestCase):
         response = self.client.get(self.url, data)
         soup = bs4.BeautifulSoup(response.content, "html.parser")
         form = soup.find("form", {"action": "/", "method": "get"})
-        button = soup.find("button", {"type": "submit", "text": "Change search"})
+        button = soup.find("button", {"type": "submit", "data-module": "govuk-button"})
         self.assertIsNotNone(form)
         self.assertIsNotNone(button)
+        self.assertEqual(button.text.strip(), "Change search")
 
 
 @override_settings(FEATURE_FLAG_NO_MAP=True)
