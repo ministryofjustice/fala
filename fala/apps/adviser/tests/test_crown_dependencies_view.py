@@ -1,5 +1,6 @@
 from django.test import SimpleTestCase, Client, override_settings
 from django.urls import reverse
+import bs4
 
 
 @override_settings(FEATURE_FLAG_NO_MAP=True)
@@ -31,6 +32,15 @@ class PostcodeValidationTest(SimpleTestCase):
         data = {"postcode": "M2 3WQ"}
         response = self.client.get(self.url, data)
         self.assertContains(response, "in order of closeness to")
+
+    def test_change_search_button_and_form_is_visible(self):
+        data = {"postcode": "AB11 5BN"}
+        response = self.client.get(self.url, data)
+        soup = bs4.BeautifulSoup(response.content, "html.parser")
+        form = soup.find('form', {'action': '/', 'method': 'get'})
+        button = soup.find('button', {'type': 'submit', 'text': 'Change search'})
+        self.assertIsNotNone(form)
+        self.assertIsNotNone(button)
 
 
 @override_settings(FEATURE_FLAG_NO_MAP=True)
