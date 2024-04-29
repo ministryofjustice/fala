@@ -28,7 +28,7 @@ class ResultsPageWithBothOrgAndPostcodeTest(SimpleTestCase):
     def test_category_search_heading_closeness_and_matching(self):
         response = self.client.get(self.url, self.data)
         expected = (
-            '<span class="results-header"> <span class="govuk-!-font-weight-bold">22 results</span> in order of closeness to'
+            '<span class="results-header"> <span class="govuk-!-font-weight-bold">21 results</span> in order of closeness to'
             + '<strong class="notranslate" translate="no">pe30</strong>'
             + "matching <strong>bu</strong>."
             + "</span>"
@@ -65,7 +65,7 @@ class ResultsPageWithJustPostcodeTest(SimpleTestCase):
         response = self.client.get(self.url, self.data)
         self.assertContains(
             response,
-            '<span class="results-header"><span class="govuk-!-font-weight-bold">350 results</span> in order of closeness to'
+            '<span class="results-header"><span class="govuk-!-font-weight-bold">358 results</span> in order of closeness to'
             + '<strong class="notranslate" translate="no">PE30</strong> . </span>',
             html=True,
         )
