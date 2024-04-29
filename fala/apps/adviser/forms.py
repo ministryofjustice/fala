@@ -80,10 +80,9 @@ class AdviserSearchForm(forms.Form):
 
     def clean(self):
         data = self.cleaned_data
-        cleaned_data = super().clean()
-        postcode = cleaned_data.get("postcode")
+        postcode = data.get("postcode")
         if postcode:
-            cleaned_data["postcode"] = postcode.upper()
+            postcode = postcode.upper()
         if not postcode and not data.get("name"):
             raise forms.ValidationError(_("Enter a postcode or an organisation name"))
         else:

@@ -43,11 +43,11 @@ class PostcodeValidationTest(SimpleTestCase):
         self.assertIsNotNone(button)
         self.assertEqual(button.text.strip(), "Change search")
 
-    def test_lowercase_postcode_pass(self):
+    def test_lowercase_postcode_fails(self):
         # Lower case postcode string
-        data = {"postcode": "gy1"}
+        data = {"postcode": "ab"}
         response = self.client.get(self.url, data)
-        self.assertNotContains(response, "The postcode GY1 is in Guernsey")
+        self.assertNotContains(response, "The postcode AB is in Scotland")
 
 
 @override_settings(FEATURE_FLAG_NO_MAP=True)

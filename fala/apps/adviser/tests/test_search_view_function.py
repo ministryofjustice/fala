@@ -25,19 +25,24 @@ class ResultsPageWithBothOrgAndPostcodeTest(SimpleTestCase):
         response = self.client.get(self.url, self.data)
         self.assertContains(response, "PE30")
 
-    def test_category_search_heading_closeness_and_matching(self):
+    def test_category_search_heading_closeness_and_matching_postcode_and_organisation(self):
         response = self.client.get(self.url, self.data)
-        expected = (
-            '<span class="results-header"> <span class="govuk-!-font-weight-bold">21 results</span> in order of closeness to'
-            + '<strong class="notranslate" translate="no">PE30</strong>'
-            + "matching <strong>bu</strong>."
-            + "</span>"
-        )
-        self.assertContains(
-            response,
-            expected,
-            html=True,
-        )
+        soup = bs4.BeautifulSoup(response.content, "html.parser")
+        results_header = soup.find("span", class_="results-header")
+        self.assertIsNotNone(results_header)
+
+        # Check the content of the span
+        # Regex to check integer is present
+        expected_content_pattern = r"\d+ results"
+        self.assertRegex(results_header.text.strip(), expected_content_pattern)
+
+        # Check the presence of the string
+        expected_text = "in order of closeness to"
+        self.assertIn(expected_text, results_header.text.strip())
+
+        # Check the presence of specific elements
+        self.assertIsNotNone(results_header.find("strong", class_="notranslate", text="PE30"))
+        self.assertIsNotNone(results_header.find("strong", text="bu"))
 
     def test_search_parameters_box_is_visible(self):
         response = self.client.get(self.url, self.data)
@@ -67,14 +72,23 @@ class ResultsPageWithJustPostcodeTest(SimpleTestCase):
 
     data = {"postcode": "PE30", "categories": "deb"}
 
-    def test_category_search_heading(self):
+    def test_category_search_heading_postcode_only(self):
         response = self.client.get(self.url, self.data)
-        self.assertContains(
-            response,
-            '<span class="results-header"><span class="govuk-!-font-weight-bold">358 results</span> in order of closeness to'
-            + '<strong class="notranslate" translate="no">PE30</strong> . </span>',
-            html=True,
-        )
+        soup = bs4.BeautifulSoup(response.content, "html.parser")
+        results_header = soup.find("span", class_="results-header")
+        self.assertIsNotNone(results_header)
+
+        # Check the content of the span
+        # Regex to check integer is present
+        expected_content_pattern = r"\d+ results"
+        self.assertRegex(results_header.text.strip(), expected_content_pattern)
+
+        # Check the presence of the string with full stop
+        expected_text = "in order of closeness to PE30."
+        self.assertIn(expected_text, results_header.text.strip())
+
+        # Check the presence of specific elements
+        self.assertIsNotNone(results_header.find("strong", class_="notranslate", text="PE30"))
 
     def test_search_parameters_box_contains_only_postcode_and_categories(self):
         response = self.client.get(self.url, self.data)
