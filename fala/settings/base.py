@@ -94,21 +94,22 @@ TEMPLATES = [
 ]
 
 MIDDLEWARE_CLASSES = (
-    "django_prometheus.middleware.PrometheusBeforeMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     # 'django.contrib.auth.middleware.AuthenticationMiddleware',
     # 'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     "django.contrib.messages.middleware.MessageMiddleware",
-    "django_prometheus.middleware.PrometheusAfterMiddleware",
 )
 
 MIDDLEWARE = (
+    "django_prometheus.middleware.PrometheusBeforeMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "csp.middleware.CSPMiddleware",
+    "django_prometheus.middleware.PrometheusAfterMiddleware",
 )
+
 CSP_DEFAULT_SRC = ["'self'", "*.googletagmanager.com"]
 CSP_INCLUDE_NONCE_IN = ["script-src"]
 CSP_SCRIPT_SRC = [
