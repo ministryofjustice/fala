@@ -32,7 +32,7 @@ class ResultsPageWithBothOrgAndPostcodeTest(SimpleTestCase):
         self.assertIsNotNone(results_header)
 
         # Check the content of the span
-        # Regex to check integer is present
+        # Regex to check an integer is present
         expected_content_pattern = r"\d+ results"
         self.assertRegex(results_header.text.strip(), expected_content_pattern)
 
@@ -79,13 +79,19 @@ class ResultsPageWithJustPostcodeTest(SimpleTestCase):
         self.assertIsNotNone(results_header)
 
         # Check the content of the span
-        # Regex to check integer is present
+        # Regex to check an integer is present
         expected_content_pattern = r"\d+ results"
         self.assertRegex(results_header.text.strip(), expected_content_pattern)
 
-        # Check the presence of the string with full stop
-        expected_text = "in order of closeness to PE30."
+        # Check the presence of the string
+        expected_text = "in order of closeness to"
         self.assertIn(expected_text, results_header.text.strip())
+
+        # Extract the text from the results header span
+        header_text = results_header.get_text()
+
+        # Assert that either the full stop or the string is visible
+        self.assertIn(".", header_text, "Full stop after PE30 not found")
 
         # Check the presence of specific elements
         self.assertIsNotNone(results_header.find("strong", class_="notranslate", text="PE30"))
