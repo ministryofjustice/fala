@@ -28,6 +28,14 @@ class FalaTextInput(forms.TextInput):
         super(FalaTextInput, self).__init__(attrs)
 
 
+class CapitalisedPostcodeField(forms.CharField):
+    # converting String representation into a Python object
+    def to_python(self, value):
+        # Capitalise the input value
+        capitalised_value = value.upper() if value else value
+        return super().to_python(capitalised_value)
+
+
 class AdviserSearchForm(forms.Form):
     # Only used with FEATURE_FLAG_NO_MAP False
     REGION_NAMES = {
@@ -40,7 +48,7 @@ class AdviserSearchForm(forms.Form):
 
     page = forms.IntegerField(required=False, widget=forms.HiddenInput())
 
-    postcode = forms.CharField(
+    postcode = CapitalisedPostcodeField(
         label=_("Postcode"),
         max_length=30,
         help_text=_(mark_safe("For example, <span class='notranslate' translate='no'>SW1H</span>")),
@@ -81,8 +89,6 @@ class AdviserSearchForm(forms.Form):
     def clean(self):
         data = self.cleaned_data
         postcode = data.get("postcode")
-        if postcode:
-            postcode = postcode.upper()
         if not postcode and not data.get("name"):
             raise forms.ValidationError(_("Enter a postcode or an organisation name"))
         else:
@@ -100,20 +106,20 @@ class AdviserSearchForm(forms.Form):
 
     @property
     def region(self):
-        postcodeNoSpace = self.cleaned_data.get("postcode").replace(" ", "")
-        if re.search(r"^BT[0-9]", postcodeNoSpace, flags=re.IGNORECASE):
+        postcode_no_space = self.cleaned_data.get("postcode").replace(" ", "")
+        if re.search(r"^BT[0-9]", postcode_no_space, flags=re.IGNORECASE):
             return Region.NI
-        elif re.search(r"^IM[0-9]", postcodeNoSpace, flags=re.IGNORECASE):
+        elif re.search(r"^IM[0-9]", postcode_no_space, flags=re.IGNORECASE):
             return Region.IOM
-        elif re.search(r"^JE[0-9]", postcodeNoSpace, flags=re.IGNORECASE):
+        elif re.search(r"^JE[0-9]", postcode_no_space, flags=re.IGNORECASE):
             return Region.JERSEY
-        elif re.search(r"^GY[1][0]", postcodeNoSpace, flags=re.IGNORECASE):
+        elif re.search(r"^GY[1][0]", postcode_no_space, flags=re.IGNORECASE):
             return Region.GUERNSEY
-        elif re.search(r"^GY[9]", postcodeNoSpace, flags=re.IGNORECASE):
+        elif re.search(r"^GY[9]", postcode_no_space, flags=re.IGNORECASE):
             return Region.GUERNSEY
-        elif re.search(r"^GY[0-8]", postcodeNoSpace, flags=re.IGNORECASE):
+        elif re.search(r"^GY[0-8]", postcode_no_space, flags=re.IGNORECASE):
             return Region.GUERNSEY
-        elif postcodeNoSpace[:2] in SCOTTISH_PREFIXES:
+        elif postcode_no_space[:2] in SCOTTISH_PREFIXES:
             return Region.SCOTLAND
         else:
             return Region.ENGLAND_OR_WALES
