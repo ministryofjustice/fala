@@ -94,12 +94,14 @@ TEMPLATES = [
 ]
 
 MIDDLEWARE_CLASSES = (
+    "django_prometheus.middleware.PrometheusBeforeMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     # 'django.contrib.auth.middleware.AuthenticationMiddleware',
     # 'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     "django.contrib.messages.middleware.MessageMiddleware",
+    "django_prometheus.middleware.PrometheusAfterMiddleware",
 )
 
 MIDDLEWARE = (
@@ -185,7 +187,7 @@ WSGI_APPLICATION = "fala.wsgi.application"
 
 INSTALLED_APPS = ("django.contrib.sessions", "django.contrib.messages", "django.contrib.staticfiles", "requests")
 
-PROJECT_APPS = ("adviser", "fala", "laalaa")
+PROJECT_APPS = ("adviser", "fala", "laalaa", "django_prometheus")
 
 INSTALLED_APPS += PROJECT_APPS
 
