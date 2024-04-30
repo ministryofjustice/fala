@@ -57,7 +57,7 @@ bower_components/
 venv
 
 # Fala
-fala/settings/.env
+.env
 fala/assets
 fala/static
 
