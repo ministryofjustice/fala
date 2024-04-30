@@ -57,7 +57,7 @@ bower_components/
 venv
 
 # Fala
-fala/settings/local.py
+fala/settings/.env
 fala/assets
 fala/static
 
