@@ -1,6 +1,6 @@
 #!/bin/bash
-if [ ! -f fala/settings/local.py ]; then
-  cp fala/settings/local.example.py fala/settings/local.py
+if [ ! -f fala/settings/.env ]; then
+  cp fala/settings/.env.example fala/settings/.env
 fi
 
 docker-compose up -d --build

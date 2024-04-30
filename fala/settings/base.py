@@ -6,6 +6,11 @@ from os.path import join, abspath, dirname
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
+# Load environment variables from .env file
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 def here(*x):
     return join(abspath(dirname(__file__)), *x)

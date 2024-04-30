@@ -14,7 +14,7 @@ services:
 
     environment:
       LAALAA_API_HOST: "https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk"
-      DJANGO_SETTINGS_MODULE: "fala.settings.local"
+      DJANGO_SETTINGS_MODULE: "fala.settings"
     ports:
       - "8013:8000"
     stdin_open: true
