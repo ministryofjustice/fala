@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: laa-fala-test-dashboard
+  name: pods-dashboard
   namespace: laa-fala-staging
   labels:
     grafana_dashboard: ""
 data:
-  laa-fala-staging-dashboard.json: |
+  laa-fala-pods-dashboard.json: |
     {
       "__inputs": [
         {
@@ -57,7 +57,7 @@ data:
       "gnetId": null,
       "graphTooltip": 1,
       "id": null,
-      "iteration": 1550242953627,
+      "iteration": 1548242989805,
       "links": [],
       "panels": [
         {
@@ -90,7 +90,7 @@ data:
             "x": 0,
             "y": 1
           },
-          "id": 2,
+          "id": 11,
           "legend": {
             "alignAsTable": true,
             "avg": true,
@@ -117,21 +117,21 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by(pod_name)(container_memory_usage_bytes{namespace='$namespace'})",
+              "expr": "container_memory_usage_bytes{namespace='$namespace',container='app'}",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "POD: {{ pod_name}}",
+              "legendFormat": "{{pod}}",
               "refId": "A"
             },
             {
-              "expr": "avg(kube_pod_container_resource_requests_memory_bytes{namespace='$namespace'})",
+              "expr": "avg(kube_pod_container_resource_requests{namespace='$namespace', unit='byte'})",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Requested (soft limit)",
               "refId": "C"
             },
             {
-              "expr": "avg(kube_pod_container_resource_limits_memory_bytes{namespace='$namespace'})",
+              "expr": "avg(kube_pod_container_resource_limits{namespace='$namespace', unit='byte'})",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Limit (hard limit)",
@@ -224,21 +224,21 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (pod_name)(rate(container_cpu_usage_seconds_total{namespace='$namespace'}[5m]))",
+              "expr": "increase(container_cpu_usage_seconds_total{namespace='$namespace',container='app'}[1m])/2",
               "format": "time_series",
               "intervalFactor": 2,
-              "legendFormat": "POD: {{ pod_name}}",
+              "legendFormat": "{{pod}}",
               "refId": "A"
             },
             {
-              "expr": "avg(kube_pod_container_resource_requests_cpu_cores{namespace='$namespace'})",
+              "expr": "avg(kube_pod_container_resource_requests{namespace='$namespace', unit='core'})",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Requested (soft limit)",
               "refId": "B"
             },
             {
-              "expr": "avg(kube_pod_container_resource_limits_cpu_cores{namespace='$namespace'})",
+              "expr": "avg(kube_pod_container_resource_limits{namespace='$namespace',unit='core'})",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Limit (hard limit)",
@@ -330,17 +330,17 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sort_desc(avg(sum by (pod_name) (rate(container_network_receive_bytes_total{namespace='$namespace'}[5m]))))",
+              "expr": "avg by(pod_name) (increase(container_network_receive_bytes_total{namespace='$namespace'}[1m]))/2",
               "format": "time_series",
               "intervalFactor": 2,
-              "legendFormat": "Recv",
+              "legendFormat": "Avg Bytes Recv/sec",
               "refId": "A"
             },
             {
-              "expr": "sort_desc(avg(sum by (pod_name) (rate(container_network_transmit_bytes_total{namespace='$namespace'}[5m]))))",
+              "expr": "avg by(pod_name) (increase(container_network_transmit_bytes_total{namespace='$namespace'}[1m]))/2",
               "format": "time_series",
               "intervalFactor": 2,
-              "legendFormat": "Sent",
+              "legendFormat": "Avg Bytes Sent/sec",
               "refId": "B"
             }
           ],
@@ -394,7 +394,11 @@ data:
         "list": [
           {
             "allValue": null,
-            "current": {},
+            "current": {
+              "selected": false,
+              "text": "laa-fala-staging",
+              "value": "laa-fala-staging"
+            },
             "datasource": "Prometheus",
             "definition": "label_values(kube_deployment_metadata_generation, namespace)",
             "hide": 0,
@@ -405,9 +409,9 @@ data:
             "options": [],
             "query": "label_values(kube_deployment_metadata_generation, namespace)",
             "refresh": 1,
-            "regex": "/^laa-cla|laa-fala|laa-laa/",
+            "regex": "/^laa-fala/",
             "skipUrlSync": false,
-            "sort": 0,
+            "sort": 1,
             "tagValuesQuery": "",
             "tags": [],
             "tagsQuery": "",
@@ -446,7 +450,7 @@ data:
         ]
       },
       "timezone": "browser",
-      "title": "LAA CLA / FALA - test dashboard",
-      "uid": "87a9fc9281061289879d05928d54a80c6b57818a",
+      "title": "LAA CLA / FALA - PODS dashboard",
+      "uid": "49d028d84782bcd0af078e1318f11cbbdfe778c6",
       "version": 1
     }
