@@ -9,7 +9,8 @@ from sentry_sdk.integrations.django import DjangoIntegration
 # Load environment variables from .env file
 from dotenv import load_dotenv
 
-load_dotenv()
+# With override set to True the value of the variable in `.env` is loaded first https://pypi.org/project/python-dotenv/#variable-expansion
+load_dotenv(override=True)
 
 
 def here(*x):
