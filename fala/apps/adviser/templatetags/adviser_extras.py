@@ -34,4 +34,9 @@ def to_fala_page_url(context, value, url_path):
 
 @library.filter
 def google_map_params(location):
-    return {"api": 1, "query": location["address"] + " " + location["postcode"]}
+    if "postcode" in location and "address" in location:
+        return {"api": 1, "query": f"{location['address']} {location['postcode']}"}
+    elif "address" in location:
+        return {"api": 1, "query": location["address"]}
+    else:
+        return {"api": 1, "query": location["postcode"]}
