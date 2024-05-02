@@ -28,12 +28,12 @@
         {% for item in data.results %}
           <li class="results-list-item">
             {% if item.distance %}
-              <p class="miles-away govuk-body">
+              <p class="miles-away govuk-body govuk-!-margin-bottom-2">
                 <span class="govuk-visually-hidden">{{ _('Distance') }}</span>
                 {% trans miles=item.distance|round(1) %}{{ miles }} miles away{% endtrans %}
               </p>
             {% endif %}
-            <h2 class="govuk-body-l govuk-!-font-weight-bold">{{ item.organisation.name }}</h2>
+            <h2 class="govuk-body-l govuk-!-font-weight-bold govuk-!-margin-bottom-2">{{ item.organisation.name }}</h2>
             <div>
               <span>{{ _('Telephone') }}:</span>
               <span class="tel">{{ item.telephone }}</span>
