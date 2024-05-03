@@ -3,7 +3,7 @@
 {% block content %}
   <div class="govuk-grid-column-full">
     <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
-    <h1>Search Results</h1>
+    <h1>Search results</h1>
     <span class="results-header">
     {% if data.count > 0 %}
       {% if data.origin %}
@@ -11,7 +11,7 @@
           {% pluralize %}
           <span class="govuk-!-font-weight-bold">{{ result_count }} results</span> in order of closeness to
         {% endtrans %}
-        <strong class="notranslate" translate="no">{{ form.postcode.value() }}</strong>
+        <strong class="notranslate" translate="no">{{ form.postcode.value()|upper }}</strong>
         {%- if form.name.value() %}
           {{ _('matching') }} <strong>{{ form.name.value() }}</strong>.
         {%- else -%}
@@ -28,12 +28,12 @@
         {% for item in data.results %}
           <li class="results-list-item">
             {% if item.distance %}
-              <p class="miles-away govuk-body">
+              <p class="miles-away govuk-body govuk-!-margin-bottom-2">
                 <span class="govuk-visually-hidden">{{ _('Distance') }}</span>
-                {% trans miles=item.distance|round(2) %}{{ miles }} miles away{% endtrans %}
+                {% trans miles=item.distance|round(1) %}{{ miles }} miles away{% endtrans %}
               </p>
             {% endif %}
-            <h2 class="govuk-body-l govuk-!-font-weight-bold">{{ item.organisation.name }}</h2>
+            <h2 class="govuk-body-l govuk-!-font-weight-bold govuk-!-margin-bottom-2">{{ item.organisation.name }}</h2>
             <div>
               <span>{{ _('Telephone') }}:</span>
               <span class="tel">{{ item.telephone }}</span>
@@ -45,7 +45,7 @@
                       <span class="street-address notranslate" translate="no">{{ item.location.address }}</span>
                       <span class="city">{{ item.location.city }}</span>
                       <span class="postal-code notranslate" translate="no">{{ item.location.postcode }}</span>
-                    </span>
+              </span>
             </div>
             {% if item.organisation.website %}
               <div class="website">
@@ -57,10 +57,10 @@
             {% endif %}
             {% if item.categories|length %}
             <div class="categories">
-              <h3 class="govuk-heading-s govuk-!-margin-bottom-2">{{ _('Categories of law covered') }}</h3>
+              <h3 class="govuk-heading-s govuk-!-margin-bottom-2">{{ _('Categories') }}</h3>
               <ul class="govuk-list govuk-list--bullet">
                 {% for cat in item.categories %}
-                  <li class="govuk-!-margin-2">{{ cat }}</li>
+                  <li>{{ cat }}</li>
                 {% endfor %}
               </ul>
             </div>
