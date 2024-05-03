@@ -241,7 +241,11 @@ body.fala-dev {
 
   .categories {
     margin-top: govuk-spacing(2);
-    margin-bottom: govuk-spacing(1);
+    margin-bottom: 0;
+
+    .govuk-list {
+      margin-bottom: 0;
+    }
   }
 }
 
