@@ -23,13 +23,13 @@ class ResultsPageWithBothOrgAndPostcodeTest(SimpleTestCase):
 
     def test_category_search_has_just_user_input(self):
         response = self.client.get(self.url, self.data)
-        self.assertContains(response, "pe30")
+        self.assertContains(response, "PE30")
 
     def test_category_search_heading_closeness_and_matching(self):
         response = self.client.get(self.url, self.data)
         expected = (
             '<span class="results-header"> <span class="govuk-!-font-weight-bold">21 results</span> in order of closeness to'
-            + '<strong class="notranslate" translate="no">pe30</strong>'
+            + '<strong class="notranslate" translate="no">PE30</strong>'
             + "matching <strong>bu</strong>."
             + "</span>"
         )
@@ -41,7 +41,7 @@ class ResultsPageWithBothOrgAndPostcodeTest(SimpleTestCase):
 
     def test_search_returns_results_list(self):
         response = self.client.get(self.url, self.data)
-        soup = bs4.BeautifulSoup(response.content)
+        soup = bs4.BeautifulSoup(response.content, "html.parser")
         results = soup.find_all("li", class_="results-list-item")
         self.assertEqual(10, len(results))
 
