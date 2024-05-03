@@ -39,6 +39,12 @@ class ResultsPageWithBothOrgAndPostcodeTest(SimpleTestCase):
             html=True,
         )
 
+    def test_search_parameters_box_is_visible(self):
+        response = self.client.get(self.url, self.data)
+        soup = bs4.BeautifulSoup(response.content)
+        search_params_box = soup.find("div", class_="laa-fala__grey-box")
+        self.assertIsNotNone(search_params_box)
+
     def test_search_returns_results_list(self):
         response = self.client.get(self.url, self.data)
         soup = bs4.BeautifulSoup(response.content, "html.parser")
@@ -69,6 +75,30 @@ class ResultsPageWithJustPostcodeTest(SimpleTestCase):
             + '<strong class="notranslate" translate="no">PE30</strong> . </span>',
             html=True,
         )
+
+    def test_search_parameters_box_contains_only_postcode_and_categories(self):
+        response = self.client.get(self.url, self.data)
+        soup = bs4.BeautifulSoup(response.content)
+        search_params_box = soup.find("div", class_="laa-fala__grey-box")
+        # replace the spaces in the HTML for ease of comparison
+        content = search_params_box.text.replace("\n", "")
+        self.assertEqual(content, "Postcode: PE30Categories: Debt Change search")
+
+
+@override_settings(FEATURE_FLAG_NO_MAP=True)
+class ResultsPageWithJustOrgTest(SimpleTestCase):
+    client = Client()
+    url = reverse("search")
+
+    data = {"name": "foo", "categories": ["deb", "edu"]}
+
+    def test_search_parameters_box_contains_only_organisation_and_categories(self):
+        response = self.client.get(self.url, self.data)
+        soup = bs4.BeautifulSoup(response.content)
+        search_params_box = soup.find("div", class_="laa-fala__grey-box")
+        # replace the spaces in the HTML for ease of comparison
+        content = search_params_box.text.replace("\n", "")
+        self.assertEqual(content, "Organisation: fooCategories: Debt, Education Change search")
 
 
 @override_settings(FEATURE_FLAG_NO_MAP=True)

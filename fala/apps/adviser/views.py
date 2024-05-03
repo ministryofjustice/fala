@@ -5,6 +5,7 @@ from django.views.generic import TemplateView, ListView
 
 from .forms import AdviserSearchForm
 from .laa_laa_paginator import LaaLaaPaginator
+from laalaa.api import PROVIDER_CATEGORIES
 
 
 # https://docs.djangoproject.com/en/5.0/topics/class-based-views - documentation on Class-based views
@@ -59,7 +60,7 @@ class SearchView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context.update({"form": self._form, "data": self._data})
+        context.update({"form": self._form, "data": self._data, "category_selection": self.display_category()})
         # Only paginate on success. _data is already paginated, so we need our own paginator
         # that can answer questions about next and previous buttons etc.
         if self._data:
@@ -73,3 +74,11 @@ class SearchView(ListView):
 
             context.update({"pages": pages, "params": params, "categories": categories})
         return context
+
+    def display_category(self):
+        if "categories" in self._form.cleaned_data:
+            categories = [PROVIDER_CATEGORIES[cat] for cat in self._form.cleaned_data["categories"]]
+            formatted_categories = ", ".join(map(str, categories))
+
+            return formatted_categories
+        return []
