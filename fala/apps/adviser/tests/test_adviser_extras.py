@@ -15,3 +15,18 @@ class QueryToDictTest(unittest.TestCase):
     def test_returns_an_empty_list_when_a_prop_is_given_but_does_not_exist(self):
         result = adviser_extras.query_to_dict("irrelevant", "http://localhost:8000/?postcode=SW1A&page=3", "potato")
         self.assertEqual([], result)
+
+    def test_google_map_params(self):
+        location = {"address": "The Core, County Way Barnsley", "postcode": "S70 2JW"}
+        result = adviser_extras.google_map_params(location)
+        self.assertEqual(result, {"api": 1, "query": "The Core, County Way Barnsley S70 2JW"})
+
+    def test_map_params_without_postcode(self):
+        location = {"address": "The Core, County Way Barnsley"}
+        result = adviser_extras.google_map_params(location)
+        self.assertEqual(result, {"api": 1, "query": "The Core, County Way Barnsley"})
+
+    def test_map_params_without_address(self):
+        location = {"postcode": "S70 2JW"}
+        result = adviser_extras.google_map_params(location)
+        self.assertEqual(result, {"api": 1, "query": "S70 2JW"})

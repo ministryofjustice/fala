@@ -6,6 +6,12 @@ from os.path import join, abspath, dirname
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
+# Load environment variables from .env file
+from dotenv import load_dotenv
+
+# With override set to True the value of the variable in `.env` is loaded first https://pypi.org/project/python-dotenv/#variable-expansion
+load_dotenv(override=True)
+
 
 def here(*x):
     return join(abspath(dirname(__file__)), *x)
@@ -214,6 +220,8 @@ if "SENTRY_DSN" in os.environ:
 
 LAALAA_API_HOST = os.environ.get("LAALAA_API_HOST", None)
 
+FEATURE_FLAG_NO_MAP = os.environ.get("FEATURE_FLAG_NO_MAP", "").lower() == "true"
+
 ENVIRONMENT = os.environ.get("ENVIRONMENT", "unknown")
 
 # Zendesk settings for feedback
@@ -226,8 +234,4 @@ ZENDESK_REQUESTER_ID = os.environ.get("ZENDESK_REQUESTER_ID", 649762516)
 
 GOOGLE_MAPS_API_KEY = os.environ.get("GOOGLE_MAPS_API_KEY", "")
 
-# .local.py overrides all the common settings.
-try:
-    from .local import *  # noqa: F401,F403
-except ImportError:
-    pass
+CHECK_LEGAL_AID_URL = "https://www.gov.uk/check-legal-aid"
