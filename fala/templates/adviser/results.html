@@ -45,13 +45,13 @@
                       <span class="street-address notranslate" translate="no">{{ item.location.address }}</span>
                       <span class="city">{{ item.location.city }}</span>
                       <span class="postal-code notranslate" translate="no">{{ item.location.postcode }}</span>
-              </span>
+                    </span>
             </div>
             {% if item.organisation.website %}
               <div class="website">
                 <span>{{ _('Website') }}:</span>
                 <a class="govuk-link" href="{{ item.organisation.website|human_to_url }}" class="url" target="_blank" rel="noopener">
-                  {{ item.organisation.website|url_to_human + " (Opens in new tab)" }}
+                  {{ item.organisation.website|url_to_human + " (opens in new tab)" }}
                 </a>
               </div>
             {% endif %}
@@ -65,6 +65,9 @@
               </ul>
             </div>
             {% endif %}
+            <a class="govuk-link" class="url" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?{{ item.location|google_map_params|urlencode }}">
+              View on map (opens in new tab)
+            </a>
           </li>
         {% endfor %}
       </ul>
