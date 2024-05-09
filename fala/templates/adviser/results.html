@@ -3,7 +3,32 @@
 {% block content %}
   <div class="govuk-grid-column-full">
     <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
-    <h1>Search results</h1>
+    <h1 class="govuk-heading-xl">Search results</h1>
+    <div class="laa-fala__grey-box govuk-!-margin-bottom-6">
+      <ul class="govuk-list" role="list">
+        {% if form.postcode.value() %}
+          <li class="govuk-body notranslate" role="listitem" translate="no">Postcode: {{ form.postcode.value() }}</li>
+        {% endif %}
+        {% if form.name.value() %}
+          <li class="govuk-body notranslate" role="listitem" translate="no">Organisation: {{ form.name.value() }}</li>
+        {% endif %}
+        {% if category_selection %}
+          <li class="govuk-body notranslate" role="listitem" translate="no">Categories: {{ category_selection }} </li>
+        {% endif %}
+      </ul>
+
+      <form action="/" method="GET" novalidate>
+        <input type="hidden" name="postcode" value="{{ form.postcode.value() }}">
+        <input type="hidden" name="name" value="{{ form.name.value() }}">
+        {% for value, label_text in form.categories.field.choices %}
+          {% if label_text in category_selection.split(", ") %}
+            <input type="hidden" name="categories" value="{{ value }}">
+          {% endif %}
+        {% endfor %}
+        <button type="submit" class="govuk-button govuk-!-margin-bottom-2" id="changeSearchButton" name="search">Change search</button>
+      </form>
+    </div>
+
     <span class="results-header">
     {% if data.count > 0 %}
       {% if data.origin %}
