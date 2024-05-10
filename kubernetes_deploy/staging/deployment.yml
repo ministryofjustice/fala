@@ -14,7 +14,7 @@ spec:
     spec:
       serviceAccountName: laa-fala-staging-irsa-sevice-account
       containers:
-      - image: 754256621582.dkr.ecr.eu-west-2.amazonaws.com/laa-get-access/fala:master
+      - image: 754256621582.dkr.ecr.eu-west-2.amazonaws.com/laa-get-access/fala:main
         name: app
         readinessProbe:
           tcpSocket:

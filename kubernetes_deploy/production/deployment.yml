@@ -15,7 +15,7 @@ spec:
       terminationGracePeriodSeconds: 30
       serviceAccountName: laa-fala-production-irsa-sevice-account
       containers:
-      - image: 754256621582.dkr.ecr.eu-west-2.amazonaws.com/laa-get-access/fala:master
+      - image: 754256621582.dkr.ecr.eu-west-2.amazonaws.com/laa-get-access/fala:main
         name: app
         readinessProbe:
           tcpSocket:
