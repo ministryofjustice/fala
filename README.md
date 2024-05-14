@@ -23,6 +23,24 @@ You can use this command in your terminal or manually create a `.env` file:
 
 `cp .env.example .env` 
 
+### PlayWright Testing
+
+PlayWright is used for browser based testing. Once you have performed * [Installation via virtualenv,](docs/virtual-env.md) or you've
+got a Docker container up and running. Please perform the following below.
+
+Copy and paste into an active terminal:
+
+`playwright install`
+
+This will install all required browsers support for playwright to work on. You will only need to do this once.
+
+To execute playwright tests:
+
+`pytest playwright`
+
+pytest on its own will execute all pytest's in the repo, which will also execute other tests that are note playwright.
+the appended `playwright` is directory where to look for playwright related tests.
+
 ### Docker
 
 Please ensure your internet network such as your VPN does not interfere with your build.

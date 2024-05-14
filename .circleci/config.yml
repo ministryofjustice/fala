@@ -190,6 +190,20 @@ jobs:
           echo "Setting FALA image $ECR_DEPLOY_IMAGE"
       - cla-end-to-end-tests/behave
 
+  playwright:
+    steps:
+      - checkout
+      - run:
+          name: Run Playwright tests
+          command: |
+            docker-compose run --rm playwright_container bash -c "
+              cd /home/pwuser/project;
+              pip install playwright pytest pytest-playwright;
+              pytest playwright;
+            "
+    docker:
+      - image: mcr.microsoft.com/playwright/python:v1.43.0-jammy
+
 workflows:
   version: 2
   build_test_and_deploy:
@@ -204,9 +218,13 @@ workflows:
           requires:
             - test
           context: laa-fala
+      - playwright:
+         requires:
+           - build
+         context: laa-fala
       - behave:
           requires:
-            - build
+            - playwright
           context: laa-fala
 
       - staging_deploy_approval:
