@@ -82,7 +82,16 @@ class SearchView(ListView):
                 "pages": pages,
                 "params": params,
                 "categories": categories,
+                "category_selection": self._display_category(),
             }
+
+        def _display_category(self):
+            if "categories" in self._form.cleaned_data:
+                categories = [PROVIDER_CATEGORIES[cat] for cat in self._form.cleaned_data["categories"]]
+                formatted_categories = ", ".join(map(str, categories))
+
+                return formatted_categories
+            return []
 
     class OtherJurisdictionState(object):
         REGION_TO_LINK = {
@@ -150,11 +159,3 @@ class SearchView(ListView):
 
         context.update(self.state.get_context_data())
         return context
-
-    def display_category(self):
-        if "categories" in self._form.cleaned_data:
-            categories = [PROVIDER_CATEGORIES[cat] for cat in self._form.cleaned_data["categories"]]
-            formatted_categories = ", ".join(map(str, categories))
-
-            return formatted_categories
-        return []

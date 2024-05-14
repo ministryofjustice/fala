@@ -98,7 +98,7 @@ class ResultsPageWithJustPostcodeTest(SimpleTestCase):
 
     def test_search_parameters_box_contains_only_postcode_and_categories(self):
         response = self.client.get(self.url, self.data)
-        soup = bs4.BeautifulSoup(response.content)
+        soup = bs4.BeautifulSoup(response.content, "html.parser")
         search_params_box = soup.find("div", class_="laa-fala__grey-box")
         # replace the spaces in the HTML for ease of comparison
         content = search_params_box.text.replace("\n", "")
