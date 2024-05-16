@@ -5,6 +5,12 @@ orbs:
   aws-cli: circleci/aws-cli@4.1 # use v4 of this orb
   aws-ecr: circleci/aws-ecr@9 # this orb doesn't support OIDC v2, so we use aws-cli to authenticate
 
+references:
+  setup_database: &setup_database
+    run:
+      name: Database Setup
+      command: |
+        python manage.py migrate
 
 # ------------------
 #
@@ -64,34 +70,14 @@ jobs:
       - run:
           name: Check for changes with pip-compile
           command: ls requirements/source/* | xargs pre-commit run pip-compile --show-diff-on-failure --files
-  database:
-    # Primary container image where all commands run
+  test:
     docker:
       - image: cimg/python:3.12
-        environment:
-          TEST_DATABASE_URL: postgresql://postgres@localhost/fala_db
-    # Service container image
       - image: postgres:14.7
         environment:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: fala_db
-    steps:
-      - checkout
-      - run: sudo apt-get update
-      - run: sudo apt-get install postgresql-client
-      - run: whoami
-      - run: |
-          psql \
-          -d $TEST_DATABASE_URL \
-          -c "CREATE TABLE test (name char(25));"
-      - run: |
-          psql \
-          -d $TEST_DATABASE_URL \
-          -c "INSERT INTO test VALUES ('Masum'), ('Hettie'), ('Patrick');"
-  test:
-    docker:
-      - image: cimg/python:3.12
     steps:
       - checkout
       - run:
@@ -119,6 +105,28 @@ jobs:
             python manage.py test
           environment:
             LAALAA_API_HOST: "https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk"
+      - *setup_database
+      - run: 
+          name: Update
+          command: |
+            sudo apt-get update
+      - run: 
+          name: Install
+          command: |
+            sudo apt-get install postgresql-client
+      - run: whoami
+      - run: 
+          name: Create table
+          command: |
+            psql \
+            -d $TEST_DATABASE_URL \
+            -c "CREATE TABLE test (name char(25));"
+      - run: 
+          name: Insert into table
+          command: |
+            psql \
+            -d $TEST_DATABASE_URL \
+            -c "INSERT INTO test VALUES ('Masum'), ('Hettie'), ('Patrick');"
 
   build:
     executor: aws-ecr/default # use the aws-ecr/default executor to start the docker daemon
@@ -216,12 +224,10 @@ workflows:
     jobs:
       - lint
       - pip-compile
-      - database
       - test:
           requires:
             - lint
             - pip-compile
-            - database
       - build:
           requires:
             - test
