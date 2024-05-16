@@ -48,11 +48,6 @@ jobs:
   pip-compile:
     docker:
       - image: cimg/python:3.12
-      - image: postgres:16.3
-        environment:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: fala_db
     steps:
       - checkout
       - restore_cache:
@@ -72,6 +67,11 @@ jobs:
   test:
     docker:
       - image: cimg/python:3.12
+      - image: postgres:16.3
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: fala_db
     steps:
       - checkout
       - run:
