@@ -53,13 +53,13 @@
         {% for item in data.results %}
           <li class="results-list-item">
             {% if item.distance %}
-              <p class="miles-away govuk-body govuk-!-margin-bottom-2">
+              <p class="miles-away govuk-body govuk-!-margin-top-2">
                 <span class="govuk-visually-hidden">{{ _('Distance') }}</span>
                 {% trans miles=item.distance|round(1) %}{{ miles }} miles away{% endtrans %}
               </p>
             {% endif %}
-            <h2 class="govuk-body-l govuk-!-font-weight-bold govuk-!-margin-bottom-2">{{ item.organisation.name }}</h2>
-            <div>
+            <h2 class="govuk-body-l govuk-!-font-weight-bold govuk-!-margin-bottom-2 govuk-!-margin-top-2">{{ item.organisation.name }}</h2>
+            <div class="telephone">
               <span>{{ _('Telephone') }}:</span>
               <span class="tel">{{ item.telephone }}</span>
             </div>
@@ -82,7 +82,7 @@
             {% endif %}
             {% if item.categories|length %}
             <div class="categories">
-              <h3 class="govuk-heading-s govuk-!-margin-bottom-2">{{ _('Categories') }}</h3>
+              <h3 class="govuk-heading-s govuk-!-margin-top-2">{{ _('Categories') }}</h3>
               <ul class="govuk-list govuk-list--bullet">
                 {% for cat in item.categories %}
                   <li>{{ cat }}</li>
