@@ -46,7 +46,7 @@ class ResultsPageWithBothOrgAndPostcodeTest(SimpleTestCase):
 
     def test_search_parameters_box_is_visible(self):
         response = self.client.get(self.url, self.data)
-        soup = bs4.BeautifulSoup(response.content)
+        soup = bs4.BeautifulSoup(response.content, features="html.parser")
         search_params_box = soup.find("div", class_="laa-fala__grey-box")
         self.assertIsNotNone(search_params_box)
 
@@ -98,11 +98,30 @@ class ResultsPageWithJustPostcodeTest(SimpleTestCase):
 
     def test_search_parameters_box_contains_only_postcode_and_categories(self):
         response = self.client.get(self.url, self.data)
-        soup = bs4.BeautifulSoup(response.content, "html.parser")
+        soup = bs4.BeautifulSoup(response.content, features="html.parser")
         search_params_box = soup.find("div", class_="laa-fala__grey-box")
         # replace the spaces in the HTML for ease of comparison
         content = search_params_box.text.replace("\n", "")
         self.assertEqual(content, "Postcode: PE30Categories: Debt Change search")
+
+
+class ResearchBannerTest(SimpleTestCase):
+    client = Client()
+    url = reverse("search")
+
+    data = {"name": "foo", "categories": ["deb", "edu"]}
+
+    research_message = "Help improve this legal adviser search"
+
+    @override_settings(FEATURE_FLAG_SURVEY_MONKEY=True)
+    def test_research_banner_present_when_flag_set(self):
+        response = self.client.get(self.url, self.data)
+        self.assertContains(response, self.research_message)
+
+    @override_settings(FEATURE_FLAG_SURVEY_MONKEY=False)
+    def test_research_banner_absent_when_flag_unset(self):
+        response = self.client.get(self.url, self.data)
+        self.assertNotContains(response, self.research_message)
 
 
 @override_settings(FEATURE_FLAG_NO_MAP=True)
@@ -114,7 +133,7 @@ class ResultsPageWithJustOrgTest(SimpleTestCase):
 
     def test_search_parameters_box_contains_only_organisation_and_categories(self):
         response = self.client.get(self.url, self.data)
-        soup = bs4.BeautifulSoup(response.content)
+        soup = bs4.BeautifulSoup(response.content, features="html.parser")
         search_params_box = soup.find("div", class_="laa-fala__grey-box")
         # replace the spaces in the HTML for ease of comparison
         content = search_params_box.text.replace("\n", "")
