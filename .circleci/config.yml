@@ -106,8 +106,8 @@ jobs:
             python manage.py test
           environment:
             LAALAA_API_HOST: "https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk"
-      - *setup_database
       - checkout
+      - *setup_database
       - run: 
           name: Update
           command: |
