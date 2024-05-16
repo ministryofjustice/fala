@@ -17,16 +17,24 @@ class QueryToDictTest(unittest.TestCase):
         self.assertEqual([], result)
 
     def test_google_map_params(self):
-        location = {"address": "The Core, County Way Barnsley", "postcode": "S70 2JW"}
-        result = adviser_extras.google_map_params(location)
-        self.assertEqual(result, {"api": 1, "query": "The Core, County Way Barnsley S70 2JW"})
+        item = {
+            "organisation": {"name": "The Law Org"},
+            "location": {"address": "The Core, County Way Barnsley", "postcode": "S70 2JW"},
+        }
+        result = adviser_extras.google_map_params(item)
+        self.assertEqual(result, {"api": 1, "query": "The Law Org The Core, County Way Barnsley S70 2JW"})
 
     def test_map_params_without_postcode(self):
-        location = {"address": "The Core, County Way Barnsley"}
-        result = adviser_extras.google_map_params(location)
-        self.assertEqual(result, {"api": 1, "query": "The Core, County Way Barnsley"})
+        item = {"organisation": {"name": "The Law Org"}, "location": {"address": "The Core, County Way Barnsley"}}
+        result = adviser_extras.google_map_params(item)
+        self.assertEqual(result, {"api": 1, "query": "The Law Org The Core, County Way Barnsley"})
 
     def test_map_params_without_address(self):
-        location = {"postcode": "S70 2JW"}
-        result = adviser_extras.google_map_params(location)
+        item = {"organisation": {"name": "The Law Org"}, "location": {"postcode": "S70 2JW"}}
+        result = adviser_extras.google_map_params(item)
+        self.assertEqual(result, {"api": 1, "query": "The Law Org S70 2JW"})
+
+    def test_map_params_without_name(self):
+        item = {"location": {"postcode": "S70 2JW"}}
+        result = adviser_extras.google_map_params(item)
         self.assertEqual(result, {"api": 1, "query": "S70 2JW"})
