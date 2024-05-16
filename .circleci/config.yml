@@ -5,13 +5,6 @@ orbs:
   aws-cli: circleci/aws-cli@4.1 # use v4 of this orb
   aws-ecr: circleci/aws-ecr@9 # this orb doesn't support OIDC v2, so we use aws-cli to authenticate
 
-references:
-  setup_database: &setup_database
-    run:
-      name: Database Setup
-      command: |
-        python manage.py makemigrations
-        python manage.py migrate
 
 # ------------------
 #
@@ -74,11 +67,6 @@ jobs:
   test:
     docker:
       - image: cimg/python:3.12
-      - image: postgres:14.7
-        environment:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: fala_db
     steps:
       - checkout
       - run:
@@ -106,29 +94,6 @@ jobs:
             python manage.py test
           environment:
             LAALAA_API_HOST: "https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk"
-      - checkout
-      - *setup_database
-      - run: 
-          name: Update
-          command: |
-            sudo apt-get update
-      - run: 
-          name: Install
-          command: |
-            sudo apt-get install postgresql-client
-      - run: whoami
-      - run: 
-          name: Create table
-          command: |
-            psql \
-            -d $TEST_DATABASE_URL \
-            -c "CREATE TABLE test (name char(25));"
-      - run: 
-          name: Insert into table
-          command: |
-            psql \
-            -d $TEST_DATABASE_URL \
-            -c "INSERT INTO test VALUES ('Masum'), ('Hettie'), ('Patrick');"
 
   build:
     executor: aws-ecr/default # use the aws-ecr/default executor to start the docker daemon
