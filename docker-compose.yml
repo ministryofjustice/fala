@@ -20,7 +20,7 @@ services:
     stdin_open: true
 
   db:
-    image: postgres:14-alpine
+    image: postgres:16.3
     ports:
       - 5432:5432
     security_opt:
@@ -32,4 +32,4 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: fala_backend
+      POSTGRES_DB: fala_db
