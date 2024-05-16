@@ -64,6 +64,31 @@ jobs:
       - run:
           name: Check for changes with pip-compile
           command: ls requirements/source/* | xargs pre-commit run pip-compile --show-diff-on-failure --files
+  database:
+    # Primary container image where all commands run
+    docker:
+      - image: cimg/python:3.12
+        environment:
+          TEST_DATABASE_URL: postgresql://postgres@localhost/circle_test
+    # Service container image
+      - image: postgres:14.7
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: fala_db
+    steps:
+      - checkout
+      - run: sudo apt-get update
+      - run: sudo apt-get install postgresql-client
+      - run: whoami
+      - run: |
+          psql \
+          -d $TEST_DATABASE_URL \
+          -c "CREATE TABLE test (name char(25));"
+      - run: |
+          psql \
+          -d $TEST_DATABASE_URL \
+          -c "INSERT INTO test VALUES ('Masum'), ('Hettie'), ('Patrick');"
   test:
     docker:
       - image: cimg/python:3.12
@@ -191,10 +216,12 @@ workflows:
     jobs:
       - lint
       - pip-compile
+      - database
       - test:
           requires:
             - lint
             - pip-compile
+            - database
       - build:
           requires:
             - test
