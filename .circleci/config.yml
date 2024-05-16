@@ -69,7 +69,7 @@ jobs:
     docker:
       - image: cimg/python:3.12
         environment:
-          TEST_DATABASE_URL: postgresql://postgres@localhost/circle_test
+          TEST_DATABASE_URL: postgresql://postgres@localhost/fala_db
     # Service container image
       - image: postgres:14.7
         environment:
