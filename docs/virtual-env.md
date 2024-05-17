@@ -88,30 +88,20 @@ node --version
 
        `cp .env.example .env` 
 
-6. Create the database inside postgres. Make sure the postgres service is started. 
-     
-- Type `psql -d template1` to enter postgres, then enter:
+6. Use your local database credentials in your `.env` file, when you already have a postgres installed locally on your machine. (use HomeBrew and/or follow [official documentation](https://www.postgresql.org/download/macosx/) if not installed already)
 
-       `CREATE DATABASE fala_db WITH ENCODING 'UTF-8';`
-       `\c fala_db`
-       `create extension pgcrypto;`
+- You can use `psql -l` to list available databases, then exit. This will show the credentials to use for `DB_USER` in the 'Owner' column. Update you `.env` file with the following:
 
-- You should see a message saying `CREATE EXTENSION`. 
-       - (If you get an error instead, if means that you don't have the related lib installed. This is a rare case as `postgresql-contrib` gets installed automatically by homebrew and postgresapp. In linux, you can install it using `sudo apt-get install postgresql-contrib`)
+       DB_HOST = "127.0.0.1"
+       DB_USER = "[Owner name found in avalable datbases]"
+       DB_PASSWORD = ""
 
-- Now make postgres create the extension automatically when new databases are created, this is useful otherwise the test command will error.
-
-- Open a terminal and type:
-
-       `psql -d template1 -c 'create extension pgcrypto;'`
-
-- Sync and migrate the database (n.b. see [Troubleshooting](#troubleshooting) if the `postgres` role is missing):
+- Run the first database migration 
 
        `python manage.py migrate`
 
-- Create an admin user by running the following command and specifying username == password == 'admin' (email choice not relevant):
-
-       `python manage.py createsuperuser`
+- Use below command if you need exit postgres in terminal
+       `control + D`
 
 ## Running
 
