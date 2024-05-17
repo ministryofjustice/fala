@@ -93,7 +93,7 @@ node --version
 - You can use `psql -l` to list available databases, then exit. This will show the credentials to use for `DB_USER` in the 'Owner' column. Update you `.env` file with the following:
 
        DB_HOST = "127.0.0.1"
-       DB_USER = "[Owner name found in avalable datbases]"
+       DB_USER = "[Owner name found in available databases]"
        DB_PASSWORD = ""
 
 - Run the first database migration 
