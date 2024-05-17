@@ -84,9 +84,34 @@ node --version
        npm run build
        ./manage.py collectstatic --noinput
 
-5. Create a ``local.py`` settings file from the example file:
+5. Create a ``.env`` file from the example file:
 
-       cp fala/settings/local.example.py fala/settings/local.py
+       `cp .env.example .env` 
+
+6. Create the database inside postgres. Make sure the postgres service is started. 
+     
+- Type `psql -d template1` to enter postgres, then enter:
+
+       `CREATE DATABASE fala_db WITH ENCODING 'UTF-8';`
+       `\c fala_db`
+       `create extension pgcrypto;`
+
+- You should see a message saying `CREATE EXTENSION`. 
+       - (If you get an error instead, if means that you don't have the related lib installed. This is a rare case as `postgresql-contrib` gets installed automatically by homebrew and postgresapp. In linux, you can install it using `sudo apt-get install postgresql-contrib`)
+
+- Now make postgres create the extension automatically when new databases are created, this is useful otherwise the test command will error.
+
+- Open a terminal and type:
+
+       `psql -d template1 -c 'create extension pgcrypto;'`
+
+- Sync and migrate the database (n.b. see [Troubleshooting](#troubleshooting) if the `postgres` role is missing):
+
+       `python manage.py migrate`
+
+- Create an admin user by running the following command and specifying username == password == 'admin' (email choice not relevant):
+
+       `python manage.py createsuperuser`
 
 ## Running
 
