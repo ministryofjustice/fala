@@ -20,7 +20,7 @@ services:
     stdin_open: true
 
   db:
-    image: postgres:16.3
+    image: postgres:16.3-apline
     ports:
       - 5432:5432
     security_opt:
