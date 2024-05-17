@@ -10,6 +10,19 @@
 {% block content %}
   <div class="govuk-grid-column-two-thirds">
       <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
+      {% if (form.postcode and form.postcode.errors) or (form.name and form.name.errors) %}
+        <div class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary">
+          <h2 class="govuk-error-summary__title" id="error-summary-title">
+            There is a problem
+          </h2>
+          <div class="govuk-error-summary__body">
+            <ul class="govuk-list govuk-error-summary__list">
+              {{ Form.render_field_errors_for_summary(form.postcode) }}
+              {{ Form.render_field_errors_for_summary(form.name) }}
+            </ul>
+          </div>
+        </div>
+      {% endif %}
       <h1 class="govuk-heading-xl"> Find a legal aid adviser or family mediator </h1>
       <p class="govuk-body">You need to provide information about your finances to find out if you qualify for legal aid.</p>
       <p class="govuk-body"><a class="govuk-link" href="{{ CHECK_LEGAL_AID_URL }}" target="_blank" rel="noopener">Check if you qualify for legal aid (opens in a new tab)</a></p>
@@ -18,6 +31,7 @@
   {% block search_form %}
       <div class="govuk-grid-column-full">
         <div class="laa-fala__grey-box">
+
           <form action="search" novalidate>
             <div
               class="govuk-form-group
