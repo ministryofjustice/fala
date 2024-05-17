@@ -67,7 +67,7 @@ jobs:
   test:
     docker:
       - image: cimg/python:3.12
-      - image: postgres:16.3-alpine
+      - image: postgres:16.3
         environment:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres

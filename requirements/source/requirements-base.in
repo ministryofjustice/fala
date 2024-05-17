@@ -11,4 +11,4 @@ requests<3
 sentry-sdk<2
 uwsgi<3
 python-dotenv<1.5
-   
+psycopg==3.1.19
