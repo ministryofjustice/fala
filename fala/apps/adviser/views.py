@@ -101,7 +101,7 @@ class SearchView(ListView):
             },
             Region.IOM: {
                 "link": "https://www.gov.im/categories/benefits-and-financial-support/legal-aid/",
-                "region": "Isle of Man",
+                "region": "the Isle of Man",
             },
             Region.JERSEY: {
                 "link": "https://www.legalaid.je/",
