@@ -6,11 +6,6 @@ services:
     volumes:
       - ./fala:/home/app/fala
       - /home/app/fala/assets
-    command:
-      - python3
-      - manage.py
-      - runserver
-      - "0.0.0.0:8000"
 
     environment:
       LAALAA_API_HOST: "https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk"
@@ -18,6 +13,8 @@ services:
     ports:
       - "8013:8000"
     stdin_open: true
+    depends_on:
+      - db
 
   db:
     image: postgres:16.3
