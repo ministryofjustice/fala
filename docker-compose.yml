@@ -21,10 +21,9 @@ services:
 
   db:
     image: postgres:16.3-apline
+    restart: always
     ports:
       - 5432:5432
-    security_opt:
-      - no-new-privileges:true
     container_name:
       fala_backend_db
     volumes:
