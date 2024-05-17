@@ -1,4 +1,5 @@
 # coding=utf-8
+
 from django import forms
 from django.utils.translation import gettext_lazy as _
 from django.utils.safestring import mark_safe
@@ -6,6 +7,8 @@ from django.conf import settings
 
 import laalaa.api as laalaa
 import re
+
+from .regions import Region, SCOTTISH_PREFIXES
 
 SEARCH_TYPE_CHOICES = [("location", _("Location")), ("organisation", _("Organisation"))]
 
@@ -25,10 +28,27 @@ class FalaTextInput(forms.TextInput):
         super(FalaTextInput, self).__init__(attrs)
 
 
+class CapitalisedPostcodeField(forms.CharField):
+    # converting String representation into a Python object
+    def to_python(self, value):
+        # Capitalise the input value
+        capitalised_value = value.upper() if value else value
+        return super().to_python(capitalised_value)
+
+
 class AdviserSearchForm(forms.Form):
+    # Only used with FEATURE_FLAG_NO_MAP False
+    REGION_NAMES = {
+        Region.NI: "Northern Ireland. ",
+        Region.IOM: "the Isle of Man. ",
+        Region.JERSEY: "Jersey. ",
+        Region.GUERNSEY: "Guernsey. ",
+        Region.SCOTLAND: "Scotland. ",
+    }
+
     page = forms.IntegerField(required=False, widget=forms.HiddenInput())
 
-    postcode = forms.CharField(
+    postcode = CapitalisedPostcodeField(
         label=_("Postcode"),
         max_length=30,
         help_text=_(mark_safe("For example, <span class='notranslate' translate='no'>SW1H</span>")),
@@ -68,32 +88,56 @@ class AdviserSearchForm(forms.Form):
 
     def clean(self):
         data = self.cleaned_data
-        if not data.get("postcode") and not data.get("name"):
+        postcode = data.get("postcode")
+        if not postcode and not data.get("name"):
             raise forms.ValidationError(_("Enter a postcode or an organisation name"))
         else:
-            postcodeNoSpace = data.get("postcode").replace(" ", "")
-            msg1 = "This service does not cover "
-            msg2 = "Try a postcode, town or city in England or Wales."
-            region = "England or Wales. "
-            if re.search(r"^BT[0-9]", postcodeNoSpace, flags=re.IGNORECASE):
-                region = "Northern Ireland. "
-            elif re.search(r"^IM[0-9]", postcodeNoSpace, flags=re.IGNORECASE):
-                region = "the Isle of Man. "
-            elif re.search(r"^JE[0-9]", postcodeNoSpace, flags=re.IGNORECASE):
-                region = "Jersey. "
-            elif re.search(r"^GY[1][0]", postcodeNoSpace, flags=re.IGNORECASE):
-                region = "Sark or Guernsey. "
-            elif re.search(r"^GY[9]", postcodeNoSpace, flags=re.IGNORECASE):
-                region = "Alderney or Guernsey. "
-            elif re.search(r"^GY[0-8]", postcodeNoSpace, flags=re.IGNORECASE):
-                region = "Guernsey. "
-            if region != "England or Wales. ":
-                self.add_error("postcode", "%s %s" % (_(" ".join((msg1, region))), _(msg2)))
+            if settings.FEATURE_FLAG_NO_MAP:
+                if postcode and self.region == Region.ENGLAND_OR_WALES and not self._valid_postcode(postcode):
+                    self.add_error("postcode", (_("Enter a valid postcode")))
+            else:
+                region = self.region
+                if region != Region.ENGLAND_OR_WALES:
+                    region_error = self.REGION_NAMES[region]
+                    msg1 = "This service does not cover "
+                    msg2 = "Try a postcode, town or city in England or Wales."
+                    self.add_error("postcode", "%s %s" % (_(" ".join((msg1, region_error))), _(msg2)))
         return data
+
+    @property
+    def region(self):
+        postcode_no_space = self.cleaned_data.get("postcode").replace(" ", "")
+        if re.search(r"^BT[0-9]", postcode_no_space, flags=re.IGNORECASE):
+            return Region.NI
+        elif re.search(r"^IM[0-9]", postcode_no_space, flags=re.IGNORECASE):
+            return Region.IOM
+        elif re.search(r"^JE[0-9]", postcode_no_space, flags=re.IGNORECASE):
+            return Region.JERSEY
+        elif re.search(r"^GY[1][0]", postcode_no_space, flags=re.IGNORECASE):
+            return Region.GUERNSEY
+        elif re.search(r"^GY[9]", postcode_no_space, flags=re.IGNORECASE):
+            return Region.GUERNSEY
+        elif re.search(r"^GY[0-8]", postcode_no_space, flags=re.IGNORECASE):
+            return Region.GUERNSEY
+        elif postcode_no_space[:2] in SCOTTISH_PREFIXES:
+            return Region.SCOTLAND
+        else:
+            return Region.ENGLAND_OR_WALES
 
     @property
     def current_page(self):
         return self.cleaned_data.get("page", 1)
+
+    def _valid_postcode(self, postcode):
+        try:
+            data = laalaa.find(
+                postcode=postcode,
+                page=1,
+            )
+            return "error" not in data
+
+        except laalaa.LaaLaaError:
+            return False
 
     def search(self):
         if self.is_valid():
@@ -113,4 +157,6 @@ class AdviserSearchForm(forms.Form):
                 self.add_error(
                     "postcode", "%s %s" % (_("Error looking up legal advisers."), _("Please try again later."))
                 )
-        return {}
+                return {}
+        else:
+            return {}

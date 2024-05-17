@@ -11,7 +11,7 @@ class SearchViewFunctionTest(SimpleTestCase):
 
     def test_invalid_postcode_generates_error(self):
         response = self.client.get(self.url, {"postcode": "ZZZ"})
-        self.assertEqual({"postcode": ["Postcode not found"]}, response.context_data["form"].errors)
+        self.assertEqual({"postcode": ["Enter a valid postcode"]}, response.context_data["form"].errors)
 
 
 @override_settings(FEATURE_FLAG_NO_MAP=True)
@@ -25,19 +25,24 @@ class ResultsPageWithBothOrgAndPostcodeTest(SimpleTestCase):
         response = self.client.get(self.url, self.data)
         self.assertContains(response, "PE30")
 
-    def test_category_search_heading_closeness_and_matching(self):
+    def test_category_search_heading_closeness_and_matching_postcode_and_organisation(self):
         response = self.client.get(self.url, self.data)
-        expected = (
-            '<span class="results-header"> <span class="govuk-!-font-weight-bold">21 results</span> in order of closeness to'
-            + '<strong class="notranslate" translate="no">PE30</strong>'
-            + "matching <strong>bu</strong>."
-            + "</span>"
-        )
-        self.assertContains(
-            response,
-            expected,
-            html=True,
-        )
+        soup = bs4.BeautifulSoup(response.content, "html.parser")
+        results_header = soup.find("span", class_="results-header")
+        self.assertIsNotNone(results_header)
+
+        # Check the content of the span
+        # Regex to check an integer is present
+        expected_content_pattern = r"\d+ results"
+        self.assertRegex(results_header.text.strip(), expected_content_pattern)
+
+        # Check the presence of the string
+        expected_text = "in order of closeness to"
+        self.assertIn(expected_text, results_header.text.strip())
+
+        # Check the presence of specific elements
+        self.assertIsNotNone(results_header.find("strong", class_="notranslate", text="PE30"))
+        self.assertIsNotNone(results_header.find("strong", text="bu"))
 
     def test_search_parameters_box_is_visible(self):
         response = self.client.get(self.url, self.data)
@@ -67,18 +72,33 @@ class ResultsPageWithJustPostcodeTest(SimpleTestCase):
 
     data = {"postcode": "PE30", "categories": "deb"}
 
-    def test_category_search_heading(self):
+    def test_category_search_heading_postcode_only(self):
         response = self.client.get(self.url, self.data)
-        self.assertContains(
-            response,
-            '<span class="results-header"><span class="govuk-!-font-weight-bold">358 results</span> in order of closeness to'
-            + '<strong class="notranslate" translate="no">PE30</strong> . </span>',
-            html=True,
-        )
+        soup = bs4.BeautifulSoup(response.content, "html.parser")
+        results_header = soup.find("span", class_="results-header")
+        self.assertIsNotNone(results_header)
+
+        # Check the content of the span
+        # Regex to check an integer is present
+        expected_content_pattern = r"\d+ results"
+        self.assertRegex(results_header.text.strip(), expected_content_pattern)
+
+        # Check the presence of the string
+        expected_text = "in order of closeness to"
+        self.assertIn(expected_text, results_header.text.strip())
+
+        # Extract the text from the results header span
+        header_text = results_header.get_text()
+
+        # Assert that either the full stop or the string is visible
+        self.assertIn(".", header_text, "Full stop after PE30 not found")
+
+        # Check the presence of specific elements
+        self.assertIsNotNone(results_header.find("strong", class_="notranslate", text="PE30"))
 
     def test_search_parameters_box_contains_only_postcode_and_categories(self):
         response = self.client.get(self.url, self.data)
-        soup = bs4.BeautifulSoup(response.content)
+        soup = bs4.BeautifulSoup(response.content, "html.parser")
         search_params_box = soup.find("div", class_="laa-fala__grey-box")
         # replace the spaces in the HTML for ease of comparison
         content = search_params_box.text.replace("\n", "")

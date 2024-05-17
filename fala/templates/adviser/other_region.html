@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="govuk-grid-column-full">
+    <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
+    <h1 class="govuk-heading-xl">The postcode {{ postcode }} is in {{ region }}</h1>
+    <p class="govuk-body">This search only covers England and Wales.</p>
+    <p class="govuk-body">
+      Find out about <a class="govuk-link" href="{{ link }}">Legal Aid in {{ region }}</a>
+      or try a different search.
+    </p>
+
+    <form action="/" method="get" novalidate>
+      <button type="submit" class="govuk-button govuk-!-margin-top-2" data-module="govuk-button">
+        Change search
+      </button>
+    </form>
+
+  </div>
+{% endblock %}

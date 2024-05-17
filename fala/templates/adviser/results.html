@@ -28,7 +28,6 @@
         <button type="submit" class="govuk-button govuk-!-margin-bottom-2" id="changeSearchButton" name="search">Change search</button>
       </form>
     </div>
-
     <span class="results-header">
     {% if data.count > 0 %}
       {% if data.origin %}
@@ -70,7 +69,7 @@
                       <span class="street-address notranslate" translate="no">{{ item.location.address }}</span>
                       <span class="city">{{ item.location.city }}</span>
                       <span class="postal-code notranslate" translate="no">{{ item.location.postcode }}</span>
-                    </span>
+              </span>
             </div>
             {% if item.organisation.website %}
               <div class="website">
