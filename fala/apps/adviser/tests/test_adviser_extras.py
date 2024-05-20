@@ -17,7 +17,7 @@ class QueryToDictTest(unittest.TestCase):
         self.assertEqual([], result)
 
 
-class GoogleMapParamsTestNonOutreachOrg(unittest.TestCase):
+class GoogleMapParamsNonOutreachOrgTest(unittest.TestCase):
     def setUp(self):
         self.postcode = "S70 2JW"
         self.address = "The Core, County Way Barnsley"
@@ -60,7 +60,7 @@ class GoogleMapParamsTestNonOutreachOrg(unittest.TestCase):
         self.assertEqual(result, {"api": 1, "query": "S70 2JW"})
 
 
-class GoogleMapParamsTestOutreachOrg(unittest.TestCase):
+class GoogleMapParamsOutreachOrgTest(unittest.TestCase):
     def setUp(self):
         self.postcode = "S70 2JW"
         self.address = "The Core, County Way Barnsley"
