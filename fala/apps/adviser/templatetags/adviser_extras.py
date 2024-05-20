@@ -34,17 +34,22 @@ def to_fala_page_url(context, value, url_path):
 
 @library.filter
 def google_map_params(item):
+    organisation_type = item.get("type", "")
     organisation_name = item.get("organisation", {}).get("name", "")
     location = item.get("location", {})
     address = location.get("address", "")
     postcode = location.get("postcode", "")
 
-    if organisation_name:
+    if "outreach" not in organisation_type.lower() and organisation_name:
         if postcode and address:
             return {"api": 1, "query": f"{organisation_name} {address} {postcode}"}
         elif address:
             return {"api": 1, "query": f"{organisation_name} {address}"}
         else:
             return {"api": 1, "query": f"{organisation_name} {postcode}"}
+    elif postcode and address:
+        return {"api": 1, "query": f"{address} {postcode}"}
+    elif address:
+        return {"api": 1, "query": address}
     else:
         return {"api": 1, "query": postcode}
