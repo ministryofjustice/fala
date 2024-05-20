@@ -188,7 +188,7 @@ jobs:
           echo "export A11Y_ENABLED=true" >> $BASH_ENV
           echo "export FALA_TESTS_ONLY=true" >> $BASH_ENV
           echo "Setting FALA image $ECR_DEPLOY_IMAGE"
-          echo "export E2E_BRANCH= >> $BASH_ENV
+          echo "export E2E_BRANCH=EL-1502-fala-postgres-db">> $BASH_ENV
       - cla-end-to-end-tests/behave
 
 workflows:
