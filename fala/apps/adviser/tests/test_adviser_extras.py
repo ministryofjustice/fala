@@ -22,13 +22,12 @@ class GoogleMapParamsNonOutreachOrgTest(unittest.TestCase):
         self.postcode = "S70 2JW"
         self.address = "The Core, County Way Barnsley"
         self.name = "The Law Org"
-        self.type = ""
+        self.type = "Office"
 
     def test_google_map_params(self):
         item = {
             "organisation": {"name": self.name},
-            "location": {"address": self.address, "postcode": self.postcode},
-            "type": self.type,
+            "location": {"address": self.address, "postcode": self.postcode, "type": self.type},
         }
         result = adviser_extras.google_map_params(item)
         self.assertEqual(result, {"api": 1, "query": "The Law Org The Core, County Way Barnsley S70 2JW"})
@@ -36,8 +35,7 @@ class GoogleMapParamsNonOutreachOrgTest(unittest.TestCase):
     def test_map_params_without_postcode(self):
         item = {
             "organisation": {"name": self.name},
-            "location": {"address": self.address},
-            "type": self.type,
+            "location": {"address": self.address, "type": self.type},
         }
         result = adviser_extras.google_map_params(item)
         self.assertEqual(result, {"api": 1, "query": "The Law Org The Core, County Way Barnsley"})
@@ -45,16 +43,14 @@ class GoogleMapParamsNonOutreachOrgTest(unittest.TestCase):
     def test_map_params_without_address(self):
         item = {
             "organisation": {"name": self.name},
-            "location": {"postcode": self.postcode},
-            "type": self.type,
+            "location": {"postcode": self.postcode, "type": self.type},
         }
         result = adviser_extras.google_map_params(item)
         self.assertEqual(result, {"api": 1, "query": "The Law Org S70 2JW"})
 
     def test_map_params_without_name(self):
         item = {
-            "location": {"postcode": self.postcode},
-            "type": self.type,
+            "location": {"postcode": self.postcode, "type": self.type},
         }
         result = adviser_extras.google_map_params(item)
         self.assertEqual(result, {"api": 1, "query": "S70 2JW"})
@@ -70,8 +66,7 @@ class GoogleMapParamsOutreachOrgTest(unittest.TestCase):
     def test_google_map_params(self):
         item = {
             "organisation": {"name": self.name},
-            "location": {"address": self.address, "postcode": self.postcode},
-            "type": self.type,
+            "location": {"address": self.address, "postcode": self.postcode, "type": self.type},
         }
         result = adviser_extras.google_map_params(item)
         self.assertEqual(result, {"api": 1, "query": "The Core, County Way Barnsley S70 2JW"})
@@ -79,8 +74,7 @@ class GoogleMapParamsOutreachOrgTest(unittest.TestCase):
     def test_map_params_without_postcode(self):
         item = {
             "organisation": {"name": self.name},
-            "location": {"address": self.address},
-            "type": self.type,
+            "location": {"address": self.address, "type": self.type},
         }
         result = adviser_extras.google_map_params(item)
         self.assertEqual(result, {"api": 1, "query": "The Core, County Way Barnsley"})
@@ -88,8 +82,7 @@ class GoogleMapParamsOutreachOrgTest(unittest.TestCase):
     def test_map_params_without_address(self):
         item = {
             "organisation": {"name": self.name},
-            "location": {"postcode": self.postcode},
-            "type": self.type,
+            "location": {"postcode": self.postcode, "type": self.type},
         }
         result = adviser_extras.google_map_params(item)
         self.assertEqual(result, {"api": 1, "query": "S70 2JW"})
