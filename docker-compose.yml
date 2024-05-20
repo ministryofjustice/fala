@@ -19,16 +19,16 @@ services:
       - "8013:8000"
     stdin_open: true
 
-  db:
-    image: postgres:16.3
-    restart: always
-    ports:
-      - 5440:5432
-    container_name:
-      fala_backend_db
-    volumes:
-      - ~/apps/postgres:/var/lib/postgresql/data
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: fala_db
+  # db:
+  #   image: postgres:16.3
+  #   restart: always
+  #   ports:
+  #     - 5440:5432
+  #   container_name:
+  #     fala_backend_db
+  #   volumes:
+  #     - ~/apps/postgres:/var/lib/postgresql/data
+  #   environment:
+  #     POSTGRES_USER: postgres
+  #     POSTGRES_PASSWORD: postgres
+  #     POSTGRES_DB: fala_db
