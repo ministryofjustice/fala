@@ -85,7 +85,7 @@ python-dotenv==1.0.1
     # via -r requirements/source/requirements-base.in
 pyyaml==6.0.1
     # via pre-commit
-requests==2.31.0
+requests==2.32.0
     # via
     #   -r requirements/source/requirements-base.in
     #   cla-common
