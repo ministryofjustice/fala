@@ -26,11 +26,29 @@ services:
     restart: always
     ports:
       - "5440:5432"
-    container_name:
-      fala_backend_db
+    container_name: fala_backend_db
     volumes:
       - ~/apps/postgres:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: fala_db
+
+  playwright:
+    build:
+      context: .
+      dockerfile: Dockerfile-playwright
+    volumes:
+      - .:/fala_local
+    container_name: fala-playwright
+    network_mode: "host"
+    profiles:
+      - playwright
+
+  aws_fala_image:
+    image: ${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG
+    container_name: fala_container
+    ports:
+      - "8013:8000"
+    profiles:
+      - aws

@@ -1,19 +1,34 @@
-import re
-from playwright.sync_api import Page, expect
+import pytest
+import os
+from playwright.sync_api import Page, expect, sync_playwright
+
+# This is not best practice, reconfigure when writing new playwright tests.
+FALA_URL = os.environ.get("FALA_URL", "http://localhost:8013/")
 
 
-def test_has_title(page: Page):
-    page.goto("https://playwright.dev/")
+# This document is a simple playwright test file and should not be treated as a standard.
+# Future FALA tickets to create correct playwright tests will come later.
+@pytest.fixture(scope="session")
+def browser():
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        yield browser
+        browser.close()
 
-    # Expect a title "to contain" a substring.
-    expect(page).to_have_title(re.compile("Playwright"))
+
+@pytest.fixture(scope="function")
+def page(browser):
+    context = browser.new_context()
+    page = context.new_page()
+    yield page
+    context.close()
 
 
-def test_get_started_link(page: Page):
-    page.goto("https://playwright.dev/")
+def test_check_landing_page(page: Page):
+    page.goto(f"{FALA_URL}")
 
-    # Click the get started link.
-    page.get_by_role("link", name="Get started").click()
+    # Page title
+    expect(page).to_have_title("Find a legal aid adviser or family mediator")
 
-    # Expects page to have a heading with the name of Installation.
-    expect(page.get_by_role("heading", name="Installation")).to_be_visible()
+    # Page header
+    expect(page.locator("h1")).to_have_text("Find a legal aid adviser or family mediator")
