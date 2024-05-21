@@ -231,6 +231,10 @@ body.fala-dev {
   margin-top: govuk-spacing(4);
   border-top: 1px solid govuk-colour("mid-grey");
 
+  .telephone {
+    margin-top: govuk-spacing(2);
+  }
+
   .address {
     margin-top: govuk-spacing(2);
   }
