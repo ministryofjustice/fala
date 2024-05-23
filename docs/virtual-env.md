@@ -84,9 +84,24 @@ node --version
        npm run build
        ./manage.py collectstatic --noinput
 
-5. Create a ``local.py`` settings file from the example file:
+5. Create a ``.env`` file from the example file:
 
-       cp fala/settings/local.example.py fala/settings/local.py
+       `cp .env.example .env` 
+
+6. Use your local database credentials in your `.env` file, when you already have a postgres installed locally on your machine. (use HomeBrew and/or follow [official documentation](https://www.postgresql.org/download/macosx/) if not installed already)
+
+- You can use `psql -l` to list available databases, then exit. This will show the credentials to use for `DB_USER` in the 'Owner' column. Update you `.env` file with the following:
+
+       DB_HOST = "127.0.0.1"
+       DB_USER = "[Owner name found in available databases]"
+       DB_PASSWORD = ""
+
+- Run the first database migration 
+
+       `python manage.py migrate`
+
+- Use below command if you need exit postgres in terminal
+       `control + D`
 
 ## Running
 

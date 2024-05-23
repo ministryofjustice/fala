@@ -34,7 +34,16 @@ ADMINS = ()
 
 MANAGERS = ADMINS
 
-DATABASES = {}
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.environ.get("DB_NAME", "fala_db"),
+        "USER": os.environ.get("DB_USER", ""),
+        "PASSWORD": os.environ.get("DB_PASSWORD", "postgres"),
+        "PORT": os.environ.get("DB_PORT", "5432"),
+        "HOST": os.environ.get("DB_HOST", ""),
+    }
+}
 
 DEFAULT_ALLOWED_HOSTS = ".fala.dsd.io .find-legal-advice.justice.gov.uk"
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", DEFAULT_ALLOWED_HOSTS).split(" ")

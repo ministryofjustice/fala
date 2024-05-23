@@ -6,9 +6,9 @@
 #
 asgiref==3.8.1
     # via django
-boto3==1.34.94
+boto3==1.34.107
     # via -r requirements/source/requirements-base.in
-botocore==1.34.94
+botocore==1.34.107
     # via
     #   -r requirements/source/requirements-base.in
     #   boto3
@@ -21,7 +21,7 @@ charset-normalizer==3.3.2
     # via requests
 cla-common @ https://github.com/ministryofjustice/cla_common/archive/refs/tags/0.3.3.tar.gz
     # via -r requirements/source/requirements-base.in
-django==5.0.4
+django==5.0.6
     # via
     #   -r requirements/source/requirements-base.in
     #   django-csp
@@ -49,6 +49,8 @@ logstash-formatter==0.5.17
     # via -r requirements/source/requirements-base.in
 markupsafe==2.1.5
     # via jinja2
+psycopg==3.1.19
+    # via -r requirements/source/requirements-base.in
 python-dateutil==2.9.0.post0
     # via
     #   botocore
@@ -67,6 +69,8 @@ six==1.16.0
     # via python-dateutil
 sqlparse==0.5.0
     # via django
+typing-extensions==4.11.0
+    # via psycopg
 urllib3==2.2.1
     # via
     #   botocore

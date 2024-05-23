@@ -1,4 +1,4 @@
-version: "3.7"
+version: "3.9"
 services:
   webapp:
     container_name: fala
@@ -18,3 +18,19 @@ services:
     ports:
       - "8013:8000"
     stdin_open: true
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16.3
+    restart: always
+    ports:
+      - "5440:5432"
+    container_name:
+      fala_backend_db
+    volumes:
+      - ~/apps/postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: fala_db
