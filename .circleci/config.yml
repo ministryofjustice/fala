@@ -1,7 +1,7 @@
 version: 2.1
 orbs:
   slack: circleci/slack@2.5.0
-  cla-end-to-end-tests: ministryofjustice/cla-end-to-end-tests@dev:alpha
+  cla-end-to-end-tests: ministryofjustice/cla-end-to-end-tests@volatile
   aws-cli: circleci/aws-cli@4.1 # use v4 of this orb
   aws-ecr: circleci/aws-ecr@9 # this orb doesn't support OIDC v2, so we use aws-cli to authenticate
 
@@ -187,7 +187,6 @@ jobs:
           echo "export FALA_IMAGE=$ECR_DEPLOY_IMAGE" >> $BASH_ENV
           echo "export A11Y_ENABLED=true" >> $BASH_ENV
           echo "export FALA_TESTS_ONLY=true" >> $BASH_ENV
-          echo "export E2E_BRANCH=EL-1502-fala-postgres-db" >> $BASH_ENV
           echo "Setting FALA image $ECR_DEPLOY_IMAGE"
       - cla-end-to-end-tests/behave
 
