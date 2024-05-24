@@ -79,7 +79,7 @@
                       <div class="govuk-checkboxes__item">
                         <input
                           class="govuk-checkboxes__input"
-                          id="id_categories_{{ loop.index0 }}"
+                          id="id_categories_{{ loop.index0 }}_{{ label_text }}"
                           name="categories"
                           type="checkbox"
                           value="{{ value }}"
@@ -87,7 +87,7 @@
                             checked
                           {% endif %}
                         >
-                        <label class="govuk-label govuk-checkboxes__label" for="id_categories_{{ loop.index0 }}">
+                        <label class="govuk-label govuk-checkboxes__label" for="id_categories_{{ loop.index0 }}_{{ label_text }}">
                           {{ label_text }}
                         </label>
                       </div>
