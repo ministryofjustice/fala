@@ -81,6 +81,7 @@ class SearchView(ListView):
                 "data": self._data,
                 "pages": pages,
                 "params": params,
+                "FEATURE_FLAG_SURVEY_MONKEY": settings.FEATURE_FLAG_SURVEY_MONKEY,
                 "categories": categories,
                 "category_selection": self._display_category(),
             }

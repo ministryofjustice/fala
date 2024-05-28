@@ -244,3 +244,5 @@ ZENDESK_REQUESTER_ID = os.environ.get("ZENDESK_REQUESTER_ID", 649762516)
 GOOGLE_MAPS_API_KEY = os.environ.get("GOOGLE_MAPS_API_KEY", "")
 
 CHECK_LEGAL_AID_URL = "https://www.gov.uk/check-legal-aid"
+
+FEATURE_FLAG_SURVEY_MONKEY = os.environ.get("FEATURE_FLAG_SURVEY_MONKEY", "").lower() == "true"
