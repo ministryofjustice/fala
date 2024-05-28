@@ -3,10 +3,14 @@
 {% block content %}
   <div class="govuk-grid-column-full">
     <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
-    {% if FEATURE_FLAG_SURVEY_MONKEY %}
-      {% include 'research_banner.html' %}
-    {% endif %}
+  </div>
+  {% if FEATURE_FLAG_SURVEY_MONKEY %}
+    {% include 'research_banner.html' %}
+  {% endif %}
+  <div class="govuk-grid-column-full">
     <h1 class="govuk-heading-xl">Search results</h1>
+  </div>
+  <div class="govuk-grid-column-two-thirds">
     <div class="laa-fala__grey-box govuk-!-margin-bottom-6">
       <ul class="govuk-list" role="list">
         {% if form.postcode.value() %}
