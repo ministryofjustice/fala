@@ -15,30 +15,8 @@
     </style>
   {% endif %}
   <script nonce="{{request.csp_nonce}}">
-    const fala_form = document.querySelector('#fala_questions');
-    if (fala_form) {
-      fala_form.addEventListener('submit', function(e){
-    
-      // variables for postcode and organisation name
-      const postcode = document.querySelector("#id_postcode").value;
-      const organisation = document.querySelector("#id_name").value;
-      
-      // variables for checkbox
-      const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-      const selected = Array.from(checkboxes).map(x => x.value);
-  
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        'event': "formSubmission",
-        'postcode': postcode,
-        'organisation': organisation,
-        'checkbox': selected,
-      });
-    });
-  };
-  </script>
-  <script nonce="{{request.csp_nonce}}">
   function tagMan() {  // Activate Google Tag Manager
+    window.dataLayer = window.dataLayer || [];
     (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -208,5 +186,27 @@
       document.getElementById(s).scrollIntoView();
       document.getElementById(f).focus();
     }
+  </script>
+  <script nonce="{{request.csp_nonce}}">
+    const fala_form = document.querySelector('#fala_questions');
+    if (fala_form) {
+      fala_form.addEventListener('submit', function(e){
+    
+      // variables for postcode and organisation name
+      const postcode = document.querySelector("#id_postcode").value;
+      const organisation = document.querySelector("#id_name").value;
+      
+      // variables for checkbox
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+      const selected = Array.from(checkboxes).map(x => x.value);
+
+      window.dataLayer.push({
+        'event': "formSubmission",
+        'postcode': postcode,
+        'organisation': organisation,
+        'checkbox': selected,
+      });
+    });
+  };
   </script>
 {% endblock %}
