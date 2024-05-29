@@ -15,7 +15,9 @@
     </style>
   {% endif %}
   <script nonce="{{request.csp_nonce}}">
-    document.querySelector('#fala_questions').addEventListener('submit', function(e){
+    const fala_form = document.querySelector('#fala_questions');
+    if (fala_form) {
+      fala_form.addEventListener('submit', function(e){
     
       // variables for postcode and organisation name
       const postcode = document.querySelector("#id_postcode").value;
@@ -33,6 +35,7 @@
         'checkbox': selected,
       });
     });
+  };
   </script>
   <script nonce="{{request.csp_nonce}}">
   function tagMan() {  // Activate Google Tag Manager

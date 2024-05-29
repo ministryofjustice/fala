@@ -32,14 +32,14 @@
       <div class="govuk-grid-column-full">
         <div class="laa-fala__grey-box">
 
-          <form action="search" novalidate>
+          <form action="search" id="fala_questions" novalidate>
             <div
               class="govuk-form-group
                 {% if (form.errors and form.errors['__all__']) %}
                   govuk-form-group--error
                 {% endif %}
                 "
-              id="fala_questions">
+              >
 
               {% set errorMessage = {'err': ""} %}
 
