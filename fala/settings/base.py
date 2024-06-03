@@ -64,13 +64,6 @@ MEDIA_URL = "/media/"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
-if os.environ.get("STATIC_FILES_BACKEND") == "s3":
-    STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
-
-AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME")
-AWS_DEFAULT_ACL = "public-read"
-AWS_QUERYSTRING_AUTH = False
-AWS_QUERYSTRING_EXPIRE = 60 * 60 * 24 * 7
 
 STATIC_URL = "/static/"
 STATIC_ROOT = root("static")
@@ -133,8 +126,6 @@ CSP_SCRIPT_SRC = [
     "*.googleusercontent.com",
     "blob:",
     "ajax.aspnetcdn.com",
-    "cloud-platform-3b0904ebacb2f3618f1979bba0bd0ce5.s3.amazonaws.com",
-    "cloud-platform-3300ca90491f7aed3b76d454a2e495a5.s3.amazonaws.com",
     "*.googletagmanager.com",
     "*.analytics.google.com",
     "*.g.doubleclick.net",
@@ -147,8 +138,6 @@ CSP_IMG_SRC = [
     "*.google.com",
     "*.googleusercontent.com",
     "data:",
-    "cloud-platform-3b0904ebacb2f3618f1979bba0bd0ce5.s3.amazonaws.com",
-    "cloud-platform-3300ca90491f7aed3b76d454a2e495a5.s3.amazonaws.com",
     "*.googletagmanager.com",
     "*.analytics.google.com",
     "*.google.co.uk",
@@ -173,8 +162,6 @@ CSP_FONT_SRC = [
     "'self'",
     "data:",
     "fonts.gstatic.com",
-    "cloud-platform-3b0904ebacb2f3618f1979bba0bd0ce5.s3.amazonaws.com",
-    "cloud-platform-3300ca90491f7aed3b76d454a2e495a5.s3.amazonaws.com",
 ]
 CSP_STYLE_SRC = [
     "'self'",
@@ -184,8 +171,6 @@ CSP_STYLE_SRC = [
     "*.google.co.uk",
     "fonts.googleapis.com",
     "*.gstatic.com",
-    "cloud-platform-3b0904ebacb2f3618f1979bba0bd0ce5.s3.amazonaws.com",
-    "cloud-platform-3300ca90491f7aed3b76d454a2e495a5.s3.amazonaws.com",
 ]
 CSP_WORKER_SRC = ["blob:"]
 

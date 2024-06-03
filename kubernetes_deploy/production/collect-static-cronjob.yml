@@ -34,10 +34,3 @@ spec:
                 secretKeyRef:
                   name: sentry
                   key: dsn
-            - name: STATIC_FILES_BACKEND
-              value: s3
-            - name: AWS_STORAGE_BUCKET_NAME
-              valueFrom:
-                secretKeyRef:
-                  name: s3
-                  key: bucket_name
