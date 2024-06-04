@@ -38,6 +38,8 @@ spec:
           value: AIzaSyDdz1B1M2-2r0CQKJPscvmNEyxGwSZkXJk
         - name: LAALAA_API_HOST
           value: https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk
+        - name: DEBUG_STATIC
+          value: "true"
         - name: FEATURE_FLAG_NO_MAP
           value: "false"
         - name: FEATURE_FLAG_SURVEY_MONKEY

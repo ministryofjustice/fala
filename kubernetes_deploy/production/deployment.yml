@@ -69,5 +69,7 @@ spec:
               key: ZENDESK_API_USERNAME
         - name: FEATURE_FLAG_NO_MAP
           value: "false"
+        - name: DEBUG_STATIC
+          value: "true"
         - name: FEATURE_FLAG_SURVEY_MONKEY
           value: "false"
