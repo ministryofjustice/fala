@@ -7,7 +7,7 @@ orbs:
 
 
 commands:
-  aws-cli-setup-and-tagging:
+  aws-login-to-ecr-and-tagging:
     description: "Set up aws cli setup, creating target tagging and login into aws ecr"
     steps:
       - aws-cli/setup:
@@ -123,7 +123,7 @@ jobs:
     steps:
       # Checkout your repository
       - checkout
-      - aws-cli-setup-and-tagging
+      - aws-login-to-ecr-and-tagging
       # Build and push your Docker image
       - aws-ecr/build_image:
           # Timeout extended, as it often exceeds 10 minute deadline
@@ -201,12 +201,12 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - aws-cli-setup-and-tagging
+      - aws-login-to-ecr-and-tagging
 
       - run:
           name: Build AWS FALA Docker Image and run Playwright container tests
           command: |
-            # Up AWS FALA image so playwright can test against it.
+            # Run the AWS FALA image so playwright can test against it.
             docker-compose up --build -d aws_fala_image
 
             # Wait a few seconds to ensure services are up and running
