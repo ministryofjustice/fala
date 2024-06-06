@@ -68,6 +68,6 @@ spec:
               name: s3
               key: bucket_name
         - name: FEATURE_FLAG_NO_MAP
-          value: "true"
+          value: "false"
         - name: FEATURE_FLAG_SURVEY_MONKEY
           value: "true"
