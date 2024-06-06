@@ -6,7 +6,10 @@ import bs4
 @override_settings(FEATURE_FLAG_NO_MAP=True)
 class PostcodeValidationTest(SimpleTestCase):
     client = Client()
-    url = reverse("search")
+
+    @property
+    def url(self):
+        return reverse("search")
 
     def test_guernsey_postcode(self):
         data = {"postcode": "GY1"}
@@ -53,8 +56,11 @@ class PostcodeValidationTest(SimpleTestCase):
 @override_settings(FEATURE_FLAG_NO_MAP=True)
 class InvalidEnglishPostcodeTest(SimpleTestCase):
     client = Client()
-    url = reverse("search")
     data = {"postcode": "ZZ1 1QQ"}
+
+    @property
+    def url(self):
+        return reverse("search")
 
     def test_there_is_a_problem(self):
         response = self.client.get(self.url, self.data)
