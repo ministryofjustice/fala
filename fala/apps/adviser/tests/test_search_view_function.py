@@ -105,6 +105,7 @@ class ResultsPageWithJustPostcodeTest(SimpleTestCase):
         self.assertEqual(content, "Postcode: PE30Categories: Debt Change search")
 
 
+@override_settings(FEATURE_FLAG_NO_MAP=True)
 class ResearchBannerTest(SimpleTestCase):
     client = Client()
     url = reverse("search")

@@ -94,6 +94,28 @@ class SearchView(ListView):
                 return formatted_categories
             return []
 
+    class OldMapState(object):
+        def __init__(self, form, current_url):
+            self.current_url = current_url
+            self.form = form
+
+        def get_queryset(self):
+            return []
+
+        @property
+        def template_name(self):
+            return "search_old.html"
+
+        def get_context_data(self):
+            return {
+                "form": self.form,
+                "data": self.form.search(),
+                "current_url": self.current_url,
+                "GOOGLE_MAPS_API_KEY": settings.GOOGLE_MAPS_API_KEY,
+                "FEATURE_FLAG_NO_MAP": settings.FEATURE_FLAG_NO_MAP,
+                "CHECK_LEGAL_AID_URL": settings.CHECK_LEGAL_AID_URL,
+            }
+
     class OtherJurisdictionState(object):
         REGION_TO_LINK = {
             Region.NI: {
@@ -139,14 +161,19 @@ class SearchView(ListView):
 
     def get(self, request, *args, **kwargs):
         form = AdviserSearchForm(data=request.GET or None)
-        if form.is_valid():
-            region = form.region
-            if region == Region.ENGLAND_OR_WALES:
-                self.state = self.EnglandOrWalesState(form)
+        if settings.FEATURE_FLAG_NO_MAP:
+            if form.is_valid():
+                region = form.region
+                if region == Region.ENGLAND_OR_WALES:
+                    self.state = self.EnglandOrWalesState(form)
+                else:
+                    self.state = self.OtherJurisdictionState(region, form.cleaned_data["postcode"])
             else:
-                self.state = self.OtherJurisdictionState(region, form.cleaned_data["postcode"])
+                self.state = self.ErrorState(form)
         else:
-            self.state = self.ErrorState(form)
+            view_name = resolve(request.path_info).url_name
+            current_url = reverse(view_name)
+            self.state = self.OldMapState(form, current_url)
         return super().get(self, request, *args, **kwargs)
 
     def get_template_names(self):
