@@ -36,6 +36,13 @@ spec:
         ports:
         - containerPort: 8000
           name: http
+        resources:
+          limits:
+            cpu: 400m
+            memory: 500Mi
+          requests:
+            cpu: 200m
+            memory: 250Mi
         env:
         - name: ALLOWED_HOSTS
           value: ".laa-fala-production.apps.live-1.cloud-platform.service.justice.gov.uk .find-legal-advice.justice.gov.uk"
