@@ -15,6 +15,8 @@ services:
     environment:
       LAALAA_API_HOST: "https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk"
       DJANGO_SETTINGS_MODULE: "fala.settings"
+      DB_USER: ${DB_USER:-postgres}
+      DB_HOST: ${FALA_URL:-db}
     ports:
       - "8013:8000"
     stdin_open: true
@@ -26,11 +28,31 @@ services:
     restart: always
     ports:
       - "5440:5432"
-    container_name:
-      fala_backend_db
+    container_name: fala_backend_db
     volumes:
       - ~/apps/postgres:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: fala_db
+
+  playwright:
+    build:
+      context: .
+      dockerfile: Dockerfile-playwright
+    volumes:
+      - .:/fala_local
+    container_name: fala-playwright
+    network_mode: "host"
+    profiles:
+      - playwright
+    environment:
+      FALA_URL: "http://localhost:8013/"
+
+  aws_fala_image:
+    image: ${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG
+    container_name: fala_container
+    ports:
+      - "8013:8000"
+    profiles:
+      - aws

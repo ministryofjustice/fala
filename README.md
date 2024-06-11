@@ -13,6 +13,9 @@ The REST API is https://prod.laalaa.dsd.io/.
 ## Dependencies
 - [docker](https://www.docker.com/)
 
+## Prerequisites
+- [Playwright](https://playwright.dev/python/) 
+
 ## Installation for development
 
 ### .env
@@ -22,6 +25,34 @@ We need to do this for our developer settings, so please copy this file over if 
 You can use this command in your terminal or manually create a `.env` file: 
 
 `cp .env.example .env` 
+
+### Playwright
+
+Playwright is a tool for automating web browsers. It allows developers to write scripts to control web browsers and 
+interact with web pages programmatically.It's often used for automated testing, web scraping, and 
+browser automation tasks.
+
+Playwright will not work if FALA is not up and running as it interacts with its URL endpoints.
+
+### PlayWright Testing Locally
+
+PlayWright is used for browser based testing. Once you have performed * [Installation via virtualenv,](docs/virtual-env.md) Please perform the following below.
+
+You'll likely have a terminal which is being used to run FALA, you'll need to open another terminal
+and `source venv/bin/activate` within the new shell and copy and paste to install playwright browser plugins:
+
+`playwright install`
+
+This will install all required browsers support for playwright to work on. You will only need to do this once.
+
+Using the same terminal from above, execute playwright tests:
+
+`pytest playwright`
+
+Note: The appended `playwright` is directory where to look for playwright related tests.
+
+Note: Running pytest in FALA directory without going into the playwright directory will run every python test in the 
+project. Ensure you are in the correct directory when running playwright tests.
 
 ### Docker
 
@@ -34,6 +65,44 @@ To run container:
 This shell script contains commands that build and runs the fala app.
 
 If you're not using `Docker Desktop`, you may want to have two terminals open.
+
+### PlayWright Testing with Docker
+
+Playwright has its own Docker container. Tests are not executed in the FALA Docker container but instead inside a 
+Playwright Docker container, which looks for FALA's URLs to test against.
+
+You will need the FALA Docker container running in order for the tests to work, as the Playwright Docker container 
+interacts with FALA's URLs. You can do this by doing the following:
+
+`./run_local.sh`
+
+To spin up the Playwright Docker container, do the following:
+`docker-compose up -d --build playwright`
+
+This Playwright Docker container executes playwright tests (Copied from the repo's playwright directory) 
+against the FALA Dock container. It's important that you have set up your environment files correctly in your repo so
+the connections can work.
+
+The Playwright Docker container executes all Playwright tests within the playwright directory of the project. 
+Once the tests are complete, the container will shut itself down.
+
+### PlayWright Testing in Docker While Developing
+
+If you want to keep the Playwright Docker container running and use it alongside your development environment, 
+you can do the following:
+`docker-compose run --entrypoint sh playwright`
+
+Tip: Remember to type `bash` first when interacting with a Docker container.
+
+This allows you to bash into the Playwright Docker container. From there, you can change the directory to `fala_local`:
+`cd ../fala_local/playwright/`
+
+`fala_local` directory reflects your local IDE changes in the Playwright container. Here, you can interact with the 
+command line to run your tests as many times as you like without having to delete and rebuild the Playwright Docker 
+container.
+
+To run tests inside the bashed docker directory `fala_local/playwright/`, you can run:
+`pytest`
 
 ### Tips for developing with docker containers
 
