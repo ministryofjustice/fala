@@ -60,13 +60,6 @@ spec:
             secretKeyRef:
               name: zendesk-api
               key: ZENDESK_API_USERNAME
-        - name: STATIC_FILES_BACKEND
-          value: s3
-        - name: AWS_STORAGE_BUCKET_NAME
-          valueFrom:
-            secretKeyRef:
-              name: s3
-              key: bucket_name
         - name: FEATURE_FLAG_NO_MAP
           value: "true"
         - name: FEATURE_FLAG_SURVEY_MONKEY

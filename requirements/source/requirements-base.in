@@ -1,5 +1,3 @@
-boto3<2
-botocore<2
 django<5.1
 django-jinja==2.10.2
 django-storages==1.13.2
