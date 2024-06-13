@@ -38,6 +38,7 @@ docs/_build
 env
 env*
 venv
+.venv
 
 # intellij
 .idea/
@@ -54,12 +55,12 @@ bower_components/
 
 .sass-cache/
 
-venv
-
 # Fala
 .env
 fala/assets
 fala/static
+.cache
+.bash_history
 
 # Python version on local machine
 .python-version

@@ -39,3 +39,26 @@ SCOTTISH_PREFIXES = [
     "TD",
     "ZE",
 ]
+
+REGION_TO_LINK = {
+    Region.NI: {
+        "link": "https://www.nidirect.gov.uk/articles/legal-aid-schemes",
+        "region": "Northern Ireland",
+    },
+    Region.IOM: {
+        "link": "https://www.gov.im/categories/benefits-and-financial-support/legal-aid/",
+        "region": "the Isle of Man",
+    },
+    Region.JERSEY: {
+        "link": "https://www.legalaid.je/",
+        "region": "Jersey",
+    },
+    Region.GUERNSEY: {
+        "link": "https://www.gov.gg/legalaid",
+        "region": "Guernsey",
+    },
+    Region.SCOTLAND: {
+        "link": "https://www.mygov.scot/legal-aid/",
+        "region": "Scotland",
+    },
+}

@@ -13,28 +13,29 @@ class PostcodeValidationTest(SimpleTestCase):
         response = self.client.get(self.url, data)
         self.assertContains(response, "The postcode GY1 is in Guernsey")
 
-    def test_invalid_guernsey_postcode(self):
-        data = {"postcode": "GY1"}
+    def test_northern_ireland_postcode(self):
+        data = {"postcode": "BT93 8AD"}
         response = self.client.get(self.url, data)
-        self.assertContains(response, "Legal Aid in Guernsey")
-
-    def test_invalid_scottish_postcode(self):
-        data = {"postcode": "AB"}
-        response = self.client.get(self.url, data)
-        self.assertContains(response, "The postcode AB is in Scotland")
+        self.assertContains(response, "The postcode BT93 8AD is in Northern Ireland")
 
     def test_valid_scottish_postcode(self):
         data = {"postcode": "AB11 5BN"}
         response = self.client.get(self.url, data)
-        self.assertContains(response, "The postcode AB11 5BN is in Scotland")
+        self.assertContains(response, "These results cover England and Wales.")
 
     def dont_test_valid_english_postcode(self):
         data = {"postcode": "M2 3WQ"}
         response = self.client.get(self.url, data)
         self.assertContains(response, "in order of closeness to")
 
+    def test_lowercase_postcode_passes(self):
+        # Lower case postcode string
+        data = {"postcode": "im4"}
+        response = self.client.get(self.url, data)
+        self.assertContains(response, "The postcode IM4 is in the Isle of Man")
+
     def test_change_search_button_and_form_is_visible(self):
-        data = {"postcode": "AB11 5BN"}
+        data = {"postcode": "IM4"}
         response = self.client.get(self.url, data)
         soup = bs4.BeautifulSoup(response.content, "html.parser")
         form = soup.find("form", {"action": "/", "method": "get"})
@@ -42,12 +43,6 @@ class PostcodeValidationTest(SimpleTestCase):
         self.assertIsNotNone(form)
         self.assertIsNotNone(button)
         self.assertEqual(button.text.strip(), "Change search")
-
-    def test_lowercase_postcode_passes(self):
-        # Lower case postcode string
-        data = {"postcode": "ab"}
-        response = self.client.get(self.url, data)
-        self.assertContains(response, "The postcode AB is in Scotland")
 
 
 @override_settings(FEATURE_FLAG_NO_MAP=True)

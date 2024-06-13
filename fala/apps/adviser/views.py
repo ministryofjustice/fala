@@ -6,7 +6,7 @@ from django.views.generic import TemplateView, ListView
 from .forms import AdviserSearchForm
 from .laa_laa_paginator import LaaLaaPaginator
 from laalaa.api import PROVIDER_CATEGORIES
-from .regions import Region
+from .regions import Region, REGION_TO_LINK
 
 
 class AdviserView(TemplateView):
@@ -57,9 +57,10 @@ class SearchView(ListView):
             return {"form": self._form, "data": {}}
 
     class EnglandOrWalesState(object):
-        def __init__(self, form):
+        def __init__(self, form, region):
             self._form = form
             self._data = form.search()
+            self._region = region
 
         @property
         def template_name(self):
@@ -76,9 +77,12 @@ class SearchView(ListView):
             }
             # create list of tuples which can be passed to urlencode for pagination links
             categories = [("categories", c) for c in self._form.cleaned_data["categories"]]
+            region_data = REGION_TO_LINK[self._region]
             return {
                 "form": self._form,
                 "data": self._data,
+                "link": region_data["link"],
+                "region": region_data["region"],
                 "pages": pages,
                 "params": params,
                 "FEATURE_FLAG_SURVEY_MONKEY": settings.FEATURE_FLAG_SURVEY_MONKEY,
@@ -117,28 +121,6 @@ class SearchView(ListView):
             }
 
     class OtherJurisdictionState(object):
-        REGION_TO_LINK = {
-            Region.NI: {
-                "link": "https://www.nidirect.gov.uk/articles/legal-aid-schemes",
-                "region": "Northern Ireland",
-            },
-            Region.IOM: {
-                "link": "https://www.gov.im/categories/benefits-and-financial-support/legal-aid/",
-                "region": "the Isle of Man",
-            },
-            Region.JERSEY: {
-                "link": "https://www.legalaid.je/",
-                "region": "Jersey",
-            },
-            Region.GUERNSEY: {
-                "link": "https://www.gov.gg/legalaid",
-                "region": "Guernsey",
-            },
-            Region.SCOTLAND: {
-                "link": "https://www.mygov.scot/legal-aid/",
-                "region": "Scotland",
-            },
-        }
 
         def __init__(self, region, postcode):
             self._region = region
@@ -152,7 +134,7 @@ class SearchView(ListView):
             return "other_region.html"
 
         def get_context_data(self):
-            region_data = self.REGION_TO_LINK[self._region]
+            region_data = REGION_TO_LINK[self._region]
             return {
                 "postcode": self._postcode,
                 "link": region_data["link"],
@@ -164,8 +146,8 @@ class SearchView(ListView):
         if settings.FEATURE_FLAG_NO_MAP:
             if form.is_valid():
                 region = form.region
-                if region == Region.ENGLAND_OR_WALES:
-                    self.state = self.EnglandOrWalesState(form)
+                if region == Region.ENGLAND_OR_WALES or region == Region.SCOTLAND:
+                    self.state = self.EnglandOrWalesState(form, region)
                 else:
                     self.state = self.OtherJurisdictionState(region, form.cleaned_data["postcode"])
             else:

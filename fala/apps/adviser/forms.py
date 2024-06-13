@@ -51,7 +51,9 @@ class AdviserSearchForm(forms.Form):
     postcode = CapitalisedPostcodeField(
         label=_("Postcode"),
         max_length=30,
-        help_text=_(mark_safe("For example, <span class='notranslate' translate='no'>SW1H</span>")),
+        help_text=_(
+            mark_safe("For example, <span class='notranslate' translate='no' id='postcode-description'>" "SW1H</span>")
+        ),
         required=False,
         widget=FalaTextInput(),
     )
@@ -83,7 +85,7 @@ class AdviserSearchForm(forms.Form):
         if not settings.FEATURE_FLAG_NO_MAP:
             self.fields["postcode"].label = _("Enter postcode")
             self.fields["postcode"].help_text = _(
-                "For example, <span class='notranslate' translate='no'>SW1H 9AJ</span>"
+                "For example, <span class='notranslate' translate='no' id='postcode-description'>SW1H 9AJ</span>"
             )
 
     def clean(self):
