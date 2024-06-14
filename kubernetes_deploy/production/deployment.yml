@@ -57,16 +57,6 @@ spec:
             secretKeyRef:
               name: secret-key
               key: SECRET_KEY
-        - name: ZENDESK_API_TOKEN
-          valueFrom:
-            secretKeyRef:
-              name: zendesk-api
-              key: ZENDESK_API_TOKEN
-        - name: ZENDESK_API_USERNAME
-          valueFrom:
-            secretKeyRef:
-              name: zendesk-api
-              key: ZENDESK_API_USERNAME
         - name: FEATURE_FLAG_NO_MAP
           value: "false"
         - name: FEATURE_FLAG_SURVEY_MONKEY
