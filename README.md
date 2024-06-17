@@ -20,6 +20,7 @@ The REST API is https://prod.laalaa.dsd.io/.
 
 ### .env
 
+
 We need to do this for our developer settings, so please copy this file over if it doesn't exist and/or you're not using Docker. 
 
 You can use this command in your terminal or manually create a `.env` file: 
