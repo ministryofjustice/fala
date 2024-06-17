@@ -217,14 +217,6 @@ FEATURE_FLAG_NO_MAP = os.environ.get("FEATURE_FLAG_NO_MAP", "").lower() == "true
 
 ENVIRONMENT = os.environ.get("ENVIRONMENT", "unknown")
 
-# Zendesk settings for feedback
-ZENDESK_API_USERNAME = os.environ.get("ZENDESK_API_USERNAME")
-ZENDESK_API_TOKEN = os.environ.get("ZENDESK_API_TOKEN")
-ZENDESK_GROUP_ID = os.environ.get("ZENDESK_GROUP_ID", 26974037)  # Find a Legal Adviser (FALA)
-ZENDESK_API_ENDPOINT = "https://ministryofjustice.zendesk.com/api/v2/"
-ZENDESK_REQUESTER_ID = os.environ.get("ZENDESK_REQUESTER_ID", 649762516)
-# defaults to 'anonymous feedback <noreply@ministryofjustice.zendesk.com>'
-
 GOOGLE_MAPS_API_KEY = os.environ.get("GOOGLE_MAPS_API_KEY", "")
 
 CHECK_LEGAL_AID_URL = "https://www.gov.uk/check-legal-aid"
