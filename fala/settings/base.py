@@ -36,7 +36,7 @@ MANAGERS = ADMINS
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ.get("DB_NAME", "fala_db"),
+        "NAME": os.environ.get("DB_NAME", "fala_development"),
         "USER": os.environ.get("DB_USER", ""),
         "PASSWORD": os.environ.get("DB_PASSWORD", "postgres"),
         "PORT": os.environ.get("DB_PORT", "5432"),
@@ -216,14 +216,6 @@ LAALAA_API_HOST = os.environ.get("LAALAA_API_HOST", None)
 FEATURE_FLAG_NO_MAP = os.environ.get("FEATURE_FLAG_NO_MAP", "").lower() == "true"
 
 ENVIRONMENT = os.environ.get("ENVIRONMENT", "unknown")
-
-# Zendesk settings for feedback
-ZENDESK_API_USERNAME = os.environ.get("ZENDESK_API_USERNAME")
-ZENDESK_API_TOKEN = os.environ.get("ZENDESK_API_TOKEN")
-ZENDESK_GROUP_ID = os.environ.get("ZENDESK_GROUP_ID", 26974037)  # Find a Legal Adviser (FALA)
-ZENDESK_API_ENDPOINT = "https://ministryofjustice.zendesk.com/api/v2/"
-ZENDESK_REQUESTER_ID = os.environ.get("ZENDESK_REQUESTER_ID", 649762516)
-# defaults to 'anonymous feedback <noreply@ministryofjustice.zendesk.com>'
 
 GOOGLE_MAPS_API_KEY = os.environ.get("GOOGLE_MAPS_API_KEY", "")
 

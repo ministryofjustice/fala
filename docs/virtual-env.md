@@ -88,13 +88,18 @@ node --version
 
        `cp .env.example .env` 
 
-6. Use your local database credentials in your `.env` file, when you already have a postgres installed locally on your machine. (use HomeBrew and/or follow [official documentation](https://www.postgresql.org/download/macosx/) if not installed already)
+6. Install postgres (use HomeBrew and/or follow [official documentation](https://www.postgresql.org/download/macosx/)) and create the local database.
 
-- You can use `psql -l` to list available databases, then exit. This will show the credentials to use for `DB_USER` in the 'Owner' column. Update you `.env` file with the following:
+       `brew install postgres`
+       `createdb fala_development`
+
+Use your local database credentials in your `.env` file e.g.
 
        DB_HOST = "127.0.0.1"
        DB_USER = "[Owner name found in available databases]"
        DB_PASSWORD = ""
+
+You can use `psql -l` to list available databases, which will provide you with the database owner credential.
 
 - Run the first database migration 
 
