@@ -128,37 +128,6 @@
   </div>
 {% endblock %}
 
-{% block support_links_items %}
-  <li class="govuk-footer__inline-list-item laa-hide-if-no-js">
-    <a id="cookieReview" class="govuk-footer__link" href="#top">
-      Cookies
-    </a>
-  </li>
-  <noscript>
-    <li class="govuk-footer__inline-list-item">
-      <a class="govuk-footer__link" href="https://www.gov.uk/help/cookies">
-        Cookies
-      </a>
-    </li>
-  </noscript>
-  <li class="govuk-footer__inline-list-item">
-    <a class="govuk-footer__link"  href="https://www.gov.uk/government/organisations/legal-aid-agency">
-      Legal Aid Agency
-    </a>
-  </li>
-  <li class="govuk-footer__inline-list-item">
-    <a class="govuk-footer__link"  href="/accessibility-statement">
-      Accessibility statement
-    </a>
-  </li>
-  <li class="govuk-footer__inline-list-item">
-    Built by
-    <a class="govuk-footer__link" href="https://mojdigital.blog.gov.uk/">
-      <abbr title="Ministry of Justice">MoJ</abbr> Digital Services
-    </a>
-  </li>
-{% endblock %}
-
 {% block before_main_js %}
   {{ super() }}
   <script src="//maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}"></script>

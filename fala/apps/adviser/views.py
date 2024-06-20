@@ -41,6 +41,10 @@ class AccessibilityView(TemplateView):
     template_name = "adviser/accessibility-statement.html"
 
 
+class PrivacyView(TemplateView):
+    template_name = "adviser/privacy.html"
+
+
 class SearchView(ListView):
     class ErrorState(object):
         def __init__(self, form):
