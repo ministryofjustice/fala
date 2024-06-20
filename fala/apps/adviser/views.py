@@ -38,7 +38,12 @@ class AdviserView(TemplateView):
 
 
 class AccessibilityView(TemplateView):
-    template_name = "adviser/accessibility-statement.html"
+    def get_template_names(self) -> list[str]:
+        if settings.FEATURE_FLAG_NO_MAP:
+            template_name = "adviser/accessibility_statement.html"
+        else:
+            template_name = "adviser/accessibility-statement_old.html"
+        return [template_name]
 
 
 class PrivacyView(TemplateView):
