@@ -8,46 +8,41 @@ class PostcodeValidationTest(SimpleTestCase):
     client = Client()
     url = reverse("search")
 
-    def test_guernsey_postcode(self):
-        data = {"postcode": "GY1"}
-        response = self.client.get(self.url, data)
-        self.assertContains(response, "The postcode GY1 is in Guernsey")
+    def test_region_postcodes(self):
+        test_cases = [
+            {"postcode": "GY1", "message": "The postcode GY1 is in Guernsey"},
+            {"postcode": "BT93 8AD", "message": "The postcode BT93 8AD is in Northern Ireland"},
+            {"postcode": "IM4", "message": "The postcode IM4 is in the Isle of Man"},
+            {"postcode": "JE2 3FN", "message": "The postcode JE2 3FN is in Jersey"},
+            # English Postcode
+            {"postcode": "M2 3WQ", "message": "in order of closeness to"},
+            # Scottish Postcode
+            {"postcode": "AB11 5BN", "message": "These results cover England and Wales."},
+            # Lower case Postcode
+            {"postcode": "im4", "message": "The postcode IM4 is in the Isle of Man"},
+            # Invalid post code with no prefix numbers, results are found and search
+            # Region is recognised as Scotland.
+            {"postcode": "AB", "message": "These results cover England and Wales."},
+        ]
 
-    def test_invalid_guernsey_postcode(self):
-        data = {"postcode": "GY1"}
-        response = self.client.get(self.url, data)
-        self.assertContains(response, "Legal Aid in Guernsey")
+        for case in test_cases:
+            with self.subTest(postcode=case["postcode"]):
+                data = {"postcode": case["postcode"]}
+                response = self.client.get(self.url, data)
+                self.assertContains(response, case["message"])
 
-    def test_invalid_scottish_postcode(self):
-        data = {"postcode": "AB"}
-        response = self.client.get(self.url, data)
-        self.assertContains(response, "The postcode AB is in Scotland")
-
-    def test_valid_scottish_postcode(self):
-        data = {"postcode": "AB11 5BN"}
-        response = self.client.get(self.url, data)
-        self.assertContains(response, "The postcode AB11 5BN is in Scotland")
-
-    def dont_test_valid_english_postcode(self):
-        data = {"postcode": "M2 3WQ"}
-        response = self.client.get(self.url, data)
-        self.assertContains(response, "in order of closeness to")
-
-    def test_change_search_button_and_form_is_visible(self):
-        data = {"postcode": "AB11 5BN"}
+    def test_other_region_form_and_change_search_button_visible(self):
+        data = {"postcode": "IM4"}
         response = self.client.get(self.url, data)
         soup = bs4.BeautifulSoup(response.content, "html.parser")
         form = soup.find("form", {"action": "/", "method": "get"})
         button = soup.find("button", {"type": "submit", "data-module": "govuk-button"})
         self.assertIsNotNone(form)
         self.assertIsNotNone(button)
-        self.assertEqual(button.text.strip(), "Change search")
 
-    def test_lowercase_postcode_passes(self):
-        # Lower case postcode string
-        data = {"postcode": "ab"}
-        response = self.client.get(self.url, data)
-        self.assertContains(response, "The postcode AB is in Scotland")
+        change_search_button = soup.find("button", {"id": "otherRegionChangeSearchButton"})
+        self.assertIsNotNone(change_search_button)
+        self.assertEqual(change_search_button.text.strip(), "Change search")
 
 
 @override_settings(FEATURE_FLAG_NO_MAP=True)

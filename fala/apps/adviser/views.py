@@ -138,10 +138,6 @@ class SearchView(ListView):
                 "link": "https://www.gov.gg/legalaid",
                 "region": "Guernsey",
             },
-            Region.SCOTLAND: {
-                "link": "https://www.mygov.scot/legal-aid/",
-                "region": "Scotland",
-            },
         }
 
         def __init__(self, region, postcode):
@@ -168,7 +164,7 @@ class SearchView(ListView):
         if settings.FEATURE_FLAG_NO_MAP:
             if form.is_valid():
                 region = form.region
-                if region == Region.ENGLAND_OR_WALES:
+                if region == Region.ENGLAND_OR_WALES or region == Region.SCOTLAND:
                     self.state = self.EnglandOrWalesState(form)
                 else:
                     self.state = self.OtherJurisdictionState(region, form.cleaned_data["postcode"])
