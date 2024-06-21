@@ -58,6 +58,6 @@ spec:
               name: secret-key
               key: SECRET_KEY
         - name: FEATURE_FLAG_NO_MAP
-          value: "false"
+          value: "true"
         - name: FEATURE_FLAG_SURVEY_MONKEY
-          value: "false"
+          value: "true"
