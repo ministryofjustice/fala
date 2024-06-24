@@ -167,3 +167,20 @@ class NoResultsTest(SimpleTestCase):
 
     def test_no_results(self):
         self.assertContains(self.response, "There are no results")
+
+
+class AccessibilityViewTest(SimpleTestCase):
+    client = Client()
+
+    url = reverse("accessibility_statement")
+
+    @override_settings(FEATURE_FLAG_NO_MAP=True)
+    def test_shows_new_accessibility_statement(self):
+        response = self.client.get(self.url)
+        self.assertContains(response, "Accessibility statement for Find a legal advisor")
+
+    @override_settings(FEATURE_FLAG_NO_MAP=False)
+    def test_shows_old_accessibility_statement(self):
+        response = self.client.get(self.url)
+        self.assertContains(response, "Accessibility statement")
+        self.assertNotContains(response, "Accessibility statement for Find a legal advisor")
