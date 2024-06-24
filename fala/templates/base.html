@@ -61,7 +61,7 @@
         {% endif %}
       </strong>
       <span class="govuk-phase-banner__text">
-        This is a new service – your <a class="govuk-link" href="https://eu.surveymonkey.com/r/GLHPMFX">feedback</a> will help us to improve it.
+        This is a new service – your <a class="govuk-link" rel="noopener external noreferrer" href="https://eu.surveymonkey.com/r/VFP8CBD" target="_blank">feedback (opens in new tab)</a> will help us to improve it.
       </span>
     </p>
   </div>
@@ -160,11 +160,11 @@
     const fala_form = document.querySelector('#fala_questions');
     if (fala_form) {
       fala_form.addEventListener('submit', function(e){
-    
+
       // variables for postcode and organisation name
       const postcode = document.querySelector("#id_postcode").value;
       const organisation = document.querySelector("#id_name").value;
-      
+
       // variables for checkbox
       const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
       const selected = Array.from(checkboxes).map(x => x.value);
