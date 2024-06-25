@@ -182,7 +182,13 @@ ROOT_URLCONF = "fala.urls"
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = "fala.wsgi.application"
 
-INSTALLED_APPS = ("django.contrib.sessions", "django.contrib.messages", "django.contrib.staticfiles", "requests")
+INSTALLED_APPS = (
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "requests",
+    "pytest_django",
+)
 
 PROJECT_APPS = ("adviser", "fala", "laalaa")
 

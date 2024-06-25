@@ -1,33 +1,13 @@
 import pytest
-import os
-from playwright.sync_api import Page, expect, sync_playwright
-
-# This is not best practice, reconfigure when writing new playwright tests.
-FALA_URL = os.environ.get("FALA_URL", "http://127.0.0.1:8000/")
+from playwright.sync_api import expect
+from asgiref.sync import sync_to_async
 
 
-# This document is a simple playwright test file and should not be treated as a standard.
-# As part of EL-1480 a simple test is needed to prove Playwright works correctly.
-# Future FALA tickets to create correct playwright tests will come later.
-# Delete this example document when writing new playwright tickets and structure correctly.
-@pytest.fixture(scope="session")
-def browser():
-    with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
-        yield browser
-        browser.close()
-
-
-@pytest.fixture(scope="function")
-def page(browser):
-    context = browser.new_context()
-    page = context.new_page()
-    yield page
-    context.close()
-
-
-def test_check_landing_page(page: Page):
-    page.goto(f"{FALA_URL}")
+# class TestExample():
+@pytest.mark.usefixtures("live_server")
+def test_check_landing_page(page, live_server):
+    url = sync_to_async(live_server.url)()  # this isn't working - not happy with the combo of sync and async things
+    page.goto(url)
 
     # Page title
     expect(page).to_have_title("Find a legal aid adviser or family mediator")
