@@ -14,16 +14,12 @@
 {% endblock %}
 
 {% block main_js %}
-  <script src="{{ static('scripts/app.bundle.js') }}"></script>
+  <script nonce="{{request.csp_nonce}}" type="module" src="{{ static('js/all.js') }}"></script>
+  <script nonce="{{request.csp_nonce}}" type="module">
+      import { initAll } from "{{ static('js/all.js') }}";
+      initAll();
+  </script>
 {% endblock %}
 
 {% block template_type %}external{% endblock %}
 
-{% block govuk_logo %}
-  <div class="header-branding">
-    <a href="https://www.gov.uk" title="Go to the GOV.UK homepage" class="header-logo">
-      <img src="{{ static('images/crown-logo-black-2x.png') }}" width="35" alt="">
-      <span>HMG.UK</span>
-    </a>
-  </div>
-{% endblock %}

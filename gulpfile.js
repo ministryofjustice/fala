@@ -1,81 +1,58 @@
-/* jshint node: true */
+const gulp = require('gulp');
+const sourcemaps = require('gulp-sourcemaps');
+const concat = require('gulp-concat');
+const terser = require('gulp-terser');
+const cleanCss = require('gulp-clean-css');
+const sass = require('gulp-sass');
+const { src, parallel, dest} = require('gulp'); 
 
-var argv = require('yargs').argv;
-var gulp = require('gulp');
-var gutil = require("gulp-util");
-var sass = require('gulp-sass');
-var sourcemaps = require('gulp-sourcemaps');
-var webpack = require('webpack');
-try {
-  var browserSync = require('browser-sync').create();
-} catch(e) {}
+// FALA js & GOVUK js - copying over both if we ever want to add custom js
+const jsPath = [
+  'fala/assets-src/scripts/main.js',
+  'node_modules/govuk-frontend/dist/govuk/govuk-frontend.min.js'
+];
 
-var loadPaths = require('mojular/sass-paths')([
-  require('mojular-govuk-elements/package.json'),
-  require('mojular-moj-elements/package.json')
-]);
+// FALA css & GOVUK css - beacuse we import GOVUK scss into same file in order to overide/add to GOVUK classes
+const cssPath = 'fala/assets-src/sass/*.scss';
 
-var paths = {
-  src: 'fala/assets-src/',
-  dest: 'fala/assets/',
-  styles: 'fala/assets-src/sass/**/*.scss',
-  scripts: 'fala/assets-src/scripts/**/*.js',
-  images: [
-    'node_modules/mojular-govuk-elements/images/*',
-    'fala/assets-src/images/**/*'
-  ]
-};
+// GOVUK font & images only - because we have no FALA assets anymore
+const assetPath = 'node_modules/govuk-frontend/dist/govuk/assets/**';
 
-gulp.task('sass', function() {
-  var result = gulp.src(paths.styles)
-    .pipe(sourcemaps.init())
-    .pipe(sass({
-      includePaths: loadPaths,
-      outputStyle: argv.production ? 'compressed' : 'expanded'
-    }).on('error', sass.logError))
-    .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest(paths.dest + 'css/'));
 
-    try {
-      result.pipe(browserSync.stream({ match: '**/*.css' }));
-    } catch(e) {}
-  return result;
-});
+ function jsTask() {
+  return src(jsPath)
+  .pipe(sourcemaps.init())
+  // name of output file
+  .pipe(concat('all.js'))
+  // a JavaScript mangler/compressor toolkit for ES6+
+  .pipe(terser())
+  .pipe(sourcemaps.write('.'))
+  // destination of new files
+  .pipe(dest('fala/assets/js'));
+}
 
-gulp.task('scripts', function(callback) {
-  var config = argv.production ? require('./webpack.config.prod.js') : require('./webpack.config.js');
-  webpack(config).run(function(err, stats) {
-    if(err) throw new gutil.PluginError("webpack", err);
-    gutil.log("[webpack]", stats.toString({
-      colors: true,
-      modules: false,
-      chunkModules: false
-    }));
-    callback();
-  });
-});
+function cssTask() {
+  return src(cssPath)
+  .pipe(sourcemaps.init())
+  .pipe(sass())
+  // name of output file
+  .pipe(concat('style.css'))
+  // this minifies the CSS
+  .pipe(cleanCss())
+  .pipe(sourcemaps.write('.'))
+  // destination of new files
+  .pipe(dest('fala/assets/css'));
+}
 
-gulp.task('images', function() {
-  return gulp.src(paths.images)
-    .pipe(gulp.dest(paths.dest + 'images/'));
-});
+function assetTask() {
+  // { encoding: false } to copy over as binary files, GULP default is to encode into UTF:8 
+  return src(assetPath, { encoding: false })
+  .pipe(dest('fala/assets'));
+}
 
-gulp.task('serve', ['build'], function() {
-  browserSync.init({
-    proxy: 'localhost:8000',
-    open: false,
-    port: 3000
-  });
+exports.jsTask = jsTask;
+exports.cssTask = cssTask;
+exports.assetTask = assetTask;
 
-  gulp.watch(paths.images, ['images']);
-  gulp.watch(paths.styles, ['sass']);
-  gulp.watch([
-    'node_modules/mojular-govuk-elements/**/*.scss',
-    'node_modules/mojular-moj-elements/**/*.scss'
-  ], ['sass']);
-  gulp.watch(paths.scripts, ['scripts']).on('change', browserSync.reload);
-});
-
-gulp.task('build', ['sass', 'images', 'scripts']);
-
-gulp.task('default', ['build']);
+// build/execute the tasks
+exports.build = parallel(jsTask, cssTask, assetTask);

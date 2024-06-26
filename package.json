@@ -19,24 +19,22 @@
   },
   "homepage": "https://github.com/ministryofjustice/fala",
   "dependencies": {
-    "govuk-frontend": "^4.8.0",
-    "mojular": "mojular/mojular#0.2.0",
-    "mojular-govuk-elements": "mojular/govuk-elements#0.2.0",
-    "mojular-moj-elements": "mojular/moj-elements#0.2.0",
-    "mojular-templates": "mojular/templates#0.0.6",
-    "nunjucks": "^3.2.4"
+    "govuk-frontend": "^5.4.0"
   },
   "devDependencies": {
     "browser-sync": "^2.27.10",
-    "gulp": "^3.8.11",
+    "concat": "^1.0.3",
+    "gulp": "^5.0.0",
+    "gulp-clean-css": "^4.3.0",
     "gulp-concat": "~2.6",
-    "gulp-sass": "^4.0.1",
+    "gulp-sass": "^4.1.1",
     "gulp-sourcemaps": "^1.5.2",
+    "gulp-terser": "^2.1.0",
     "gulp-util": "^3.0.6",
     "merge-stream": "^1.0.0",
     "natives": "^1.1.6",
     "read-json-sync": "^1.1.0",
-    "webpack": "^1.12.2",
+    "sass": "^1.77.6",
     "yargs": "^3.27.0"
   }
 }

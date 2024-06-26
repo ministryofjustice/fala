@@ -37,7 +37,7 @@
 {% endblock %}
 
 {% block stylesheets %}
-  <link href="{{ static('css/main.css') }}" rel="stylesheet">
+  <link href="{{ static('css/style.css') }}" rel="stylesheet">
 {% endblock %}
 
 {% block page_title %}{{ title }}{% endblock %}
@@ -47,7 +47,7 @@
 {% endblock %}
 
 {% block global_subheader %}
-  <div class="govuk-phase-banner">
+  <div class="govuk-phase-banner" role="complementary">
     <p class="govuk-phase-banner__content">
       <strong class="govuk-tag govuk-phase-banner__content__tag">
         {% if ENVIRONMENT == "dev" %}
@@ -61,7 +61,7 @@
         {% endif %}
       </strong>
       <span class="govuk-phase-banner__text">
-        This is a new service – your <a class="govuk-link" href="https://eu.surveymonkey.com/r/GLHPMFX">feedback</a> will help us to improve it.
+        This is a new service – your <a class="govuk-link" rel="noopener external noreferrer" href="https://eu.surveymonkey.com/r/VFP8CBD" target="_blank">feedback (opens in new tab)</a> will help us to improve it.
       </span>
     </p>
   </div>
@@ -128,37 +128,6 @@
   </div>
 {% endblock %}
 
-{% block support_links_items %}
-  <li class="govuk-footer__inline-list-item laa-hide-if-no-js">
-    <a id="cookieReview" class="govuk-footer__link" href="#top">
-      Cookies
-    </a>
-  </li>
-  <noscript>
-    <li class="govuk-footer__inline-list-item">
-      <a class="govuk-footer__link" href="https://www.gov.uk/help/cookies">
-        Cookies
-      </a>
-    </li>
-  </noscript>
-  <li class="govuk-footer__inline-list-item">
-    <a class="govuk-footer__link"  href="https://www.gov.uk/government/organisations/legal-aid-agency">
-      Legal Aid Agency
-    </a>
-  </li>
-  <li class="govuk-footer__inline-list-item">
-    <a class="govuk-footer__link"  href="/accessibility-statement">
-      Accessibility statement
-    </a>
-  </li>
-  <li class="govuk-footer__inline-list-item">
-    Built by
-    <a class="govuk-footer__link" href="https://mojdigital.blog.gov.uk/">
-      <abbr title="Ministry of Justice">MoJ</abbr> Digital Services
-    </a>
-  </li>
-{% endblock %}
-
 {% block before_main_js %}
   {{ super() }}
   <script src="//maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}"></script>
@@ -191,11 +160,11 @@
     const fala_form = document.querySelector('#fala_questions');
     if (fala_form) {
       fala_form.addEventListener('submit', function(e){
-    
+
       // variables for postcode and organisation name
       const postcode = document.querySelector("#id_postcode").value;
       const organisation = document.querySelector("#id_name").value;
-      
+
       // variables for checkbox
       const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
       const selected = Array.from(checkboxes).map(x => x.value);
