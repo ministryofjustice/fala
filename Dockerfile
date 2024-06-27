@@ -24,6 +24,20 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       libpcre3 \
       libpcre3-dev
 
+# Install Playwright dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      libnss3 \
+      libatk1.0-0 \
+      libatk-bridge2.0-0 \
+      libcups2 \
+      libxcomposite1 \
+      libxrandr2 \
+      libxdamage1 \
+      libxkbcommon0 \
+      libpango-1.0-0 \
+      libxshmfence1 \
+      libgbm1
+
 ENV HOME /home/app
 ENV APP_HOME /home/app
 WORKDIR /home/app
@@ -31,6 +45,9 @@ WORKDIR /home/app
 # Install Python dependencies
 COPY ./requirements/generated/requirements-production.txt ./requirements.txt
 RUN pip3 install --user --requirement ./requirements.txt
+
+# Install Playwright and its browsers
+RUN pip3 install playwright && playwright install --with-deps
 
 COPY . .
 
