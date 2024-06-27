@@ -30,30 +30,16 @@ You can use this command in your terminal or manually create a `.env` file:
 ### Playwright
 
 Playwright is a tool for automating web browsers. It allows developers to write scripts to control web browsers and 
-interact with web pages programmatically.It's often used for automated testing, web scraping, and 
-browser automation tasks.
+interact with web pages programmatically. It's often used for automated testing, web scraping, and 
+browser automation tasks. We use it to test our end to end user journeys.
 
-Playwright will not work if FALA is not up and running as it interacts with its URL endpoints.
-
-### PlayWright Testing Locally
-
-PlayWright is used for browser based testing. Once you have performed * [Installation via virtualenv,](docs/virtual-env.md) Please perform the following below.
-
-You'll likely have a terminal which is being used to run FALA, you'll need to open another terminal
-and `source venv/bin/activate` within the new shell and copy and paste to install playwright browser plugins:
+For local development and when using playwright for the first time, run:
 
 `playwright install`
 
-This will install all required browsers support for playwright to work on. You will only need to do this once.
+This will install all required browsers support for playwright to work on.
 
-Using the same terminal from above, execute playwright tests:
-
-`pytest playwright`
-
-Note: The appended `playwright` is directory where to look for playwright related tests.
-
-Note: Running pytest in FALA directory without going into the playwright directory will run every python test in the 
-project. Ensure you are in the correct directory when running playwright tests.
+We've configured Playwright to run with the rest of the app's tests i.e. by running `./manage.py test`
 
 ### Docker
 
@@ -87,7 +73,7 @@ the connections can work.
 The Playwright Docker container executes all Playwright tests within the playwright directory of the project. 
 Once the tests are complete, the container will shut itself down.
 
-### PlayWright Testing in Docker While Developing
+### PlayWright Testing in Docker While Developing TODO
 
 If you want to keep the Playwright Docker container running and use it alongside your development environment, 
 you can do the following:
