@@ -1,0 +1,68 @@
+replicaCount: 5
+
+environment: "production"
+
+resources: {}
+
+image:
+  repository: nginx
+  tag: stable
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: "cd-serviceaccount"
+
+podSecurityContext: {}
+# fsGroup: 2000
+
+securityContext:
+ runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 8000
+
+ingress:
+  hosts:
+    - host: laa-fala-production.apps.live-1.cloud-platform.service.justice.gov.uk
+      secret: false
+    - host: find-legal-advice.justice.gov.uk
+      secret: fala-tls-certificate
+  annotations:
+    external-dns.alpha.kubernetes.io/set-identifier: laa-fala-fala-laa-fala-production-green
+    external-dns.alpha.kubernetes.io/aws-weight: "100"
+    nginx.ingress.kubernetes.io/enable-modsecurity: "true"
+    nginx.ingress.kubernetes.io/modsecurity-snippet: |
+      SecRuleEngine On
+
+postgresql:
+  enabled: false
+
+feature_flags:
+  no_map: "enabled"
+  survey_monkey: "enabled"
+
+laalaa_api:
+  host: "https://laa-legal-adviser-api-production.cloud-platform.service.justice.gov.uk"
+
+allowed_hosts: ".laa-fala-production.apps.live-1.cloud-platform.service.justice.gov.uk .find-legal-advice.justice.gov.uk"
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
