@@ -5,7 +5,6 @@ from django.views.generic import TemplateView, ListView
 
 from .forms import AdviserSearchForm
 from .laa_laa_paginator import LaaLaaPaginator
-from laalaa.api import PROVIDER_CATEGORIES
 from .regions import Region
 
 
@@ -90,14 +89,6 @@ class SearchView(ListView):
                 "params": params,
                 "FEATURE_FLAG_SURVEY_MONKEY": settings.FEATURE_FLAG_SURVEY_MONKEY,
             }
-
-        def _display_category(self):
-            if "categories" in self._form.cleaned_data:
-                categories = [PROVIDER_CATEGORIES[cat] for cat in self._form.cleaned_data["categories"]]
-                formatted_categories = ", ".join(map(str, categories))
-
-                return formatted_categories
-            return []
 
     class OldMapState(object):
         def __init__(self, form, current_url):
