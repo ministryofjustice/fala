@@ -28,13 +28,21 @@ sys.path.insert(0, root("apps"))
 
 DEBUG = os.environ.get("DEBUG", False)
 DEBUG = DEBUG == "True" or DEBUG is True
-DEBUG_STATIC = os.environ.get("DEBUG_STATIC", False)
 
 ADMINS = ()
 
 MANAGERS = ADMINS
 
-DATABASES = {}
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.environ.get("DB_NAME", "fala_development"),
+        "USER": os.environ.get("DB_USER", ""),
+        "PASSWORD": os.environ.get("DB_PASSWORD", "postgres"),
+        "PORT": os.environ.get("DB_PORT", "5432"),
+        "HOST": os.environ.get("DB_HOST", ""),
+    }
+}
 
 DEFAULT_ALLOWED_HOSTS = ".fala.dsd.io .find-legal-advice.justice.gov.uk"
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", DEFAULT_ALLOWED_HOSTS).split(" ")
@@ -55,13 +63,6 @@ MEDIA_URL = "/media/"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
-if os.environ.get("STATIC_FILES_BACKEND") == "s3":
-    STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
-
-AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME")
-AWS_DEFAULT_ACL = "public-read"
-AWS_QUERYSTRING_AUTH = False
-AWS_QUERYSTRING_EXPIRE = 60 * 60 * 24 * 7
 
 STATIC_URL = "/static/"
 STATIC_ROOT = root("static")
@@ -124,8 +125,6 @@ CSP_SCRIPT_SRC = [
     "*.googleusercontent.com",
     "blob:",
     "ajax.aspnetcdn.com",
-    "cloud-platform-3b0904ebacb2f3618f1979bba0bd0ce5.s3.amazonaws.com",
-    "cloud-platform-3300ca90491f7aed3b76d454a2e495a5.s3.amazonaws.com",
     "*.googletagmanager.com",
     "*.analytics.google.com",
     "*.g.doubleclick.net",
@@ -138,8 +137,6 @@ CSP_IMG_SRC = [
     "*.google.com",
     "*.googleusercontent.com",
     "data:",
-    "cloud-platform-3b0904ebacb2f3618f1979bba0bd0ce5.s3.amazonaws.com",
-    "cloud-platform-3300ca90491f7aed3b76d454a2e495a5.s3.amazonaws.com",
     "*.googletagmanager.com",
     "*.analytics.google.com",
     "*.google.co.uk",
@@ -164,8 +161,6 @@ CSP_FONT_SRC = [
     "'self'",
     "data:",
     "fonts.gstatic.com",
-    "cloud-platform-3b0904ebacb2f3618f1979bba0bd0ce5.s3.amazonaws.com",
-    "cloud-platform-3300ca90491f7aed3b76d454a2e495a5.s3.amazonaws.com",
 ]
 CSP_STYLE_SRC = [
     "'self'",
@@ -175,8 +170,6 @@ CSP_STYLE_SRC = [
     "*.google.co.uk",
     "fonts.googleapis.com",
     "*.gstatic.com",
-    "cloud-platform-3b0904ebacb2f3618f1979bba0bd0ce5.s3.amazonaws.com",
-    "cloud-platform-3300ca90491f7aed3b76d454a2e495a5.s3.amazonaws.com",
 ]
 CSP_WORKER_SRC = ["blob:"]
 
@@ -224,14 +217,8 @@ FEATURE_FLAG_NO_MAP = os.environ.get("FEATURE_FLAG_NO_MAP", "").lower() == "true
 
 ENVIRONMENT = os.environ.get("ENVIRONMENT", "unknown")
 
-# Zendesk settings for feedback
-ZENDESK_API_USERNAME = os.environ.get("ZENDESK_API_USERNAME")
-ZENDESK_API_TOKEN = os.environ.get("ZENDESK_API_TOKEN")
-ZENDESK_GROUP_ID = os.environ.get("ZENDESK_GROUP_ID", 26974037)  # Find a Legal Adviser (FALA)
-ZENDESK_API_ENDPOINT = "https://ministryofjustice.zendesk.com/api/v2/"
-ZENDESK_REQUESTER_ID = os.environ.get("ZENDESK_REQUESTER_ID", 649762516)
-# defaults to 'anonymous feedback <noreply@ministryofjustice.zendesk.com>'
-
 GOOGLE_MAPS_API_KEY = os.environ.get("GOOGLE_MAPS_API_KEY", "")
 
 CHECK_LEGAL_AID_URL = "https://www.gov.uk/check-legal-aid"
+
+FEATURE_FLAG_SURVEY_MONKEY = os.environ.get("FEATURE_FLAG_SURVEY_MONKEY", "").lower() == "true"

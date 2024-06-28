@@ -231,6 +231,10 @@ body.fala-dev {
   margin-top: govuk-spacing(4);
   border-top: 1px solid govuk-colour("mid-grey");
 
+  .telephone {
+    margin-top: govuk-spacing(2);
+  }
+
   .address {
     margin-top: govuk-spacing(2);
   }
@@ -249,3 +253,15 @@ body.fala-dev {
   }
 }
 
+.research-panel {
+  background: govuk-colour("blue");
+
+  text-align: left;
+
+  // All text on the blue background should be white for accessibility and legibility purposes.
+  // However, several govuk classes that provide handy spacing and typography rules also dictate a dark text colour.
+  // Therefore we use this strong rule to ensure that text stays white even when we use those classes.
+  * {
+    color: white !important;
+  }
+}

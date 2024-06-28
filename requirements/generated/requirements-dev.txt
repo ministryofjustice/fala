@@ -8,13 +8,6 @@ asgiref==3.8.1
     # via django
 beautifulsoup4==4.12.3
     # via -r requirements/source/requirements-dev.in
-boto3==1.34.94
-    # via -r requirements/source/requirements-base.in
-botocore==1.34.94
-    # via
-    #   -r requirements/source/requirements-base.in
-    #   boto3
-    #   s3transfer
 build==1.2.1
     # via pip-tools
 certifi==2024.2.2
@@ -31,7 +24,7 @@ click==8.1.7
     # via pip-tools
 distlib==0.3.8
     # via virtualenv
-django==5.0.4
+django==5.0.6
     # via
     #   -r requirements/source/requirements-base.in
     #   django-csp
@@ -47,18 +40,18 @@ django-storages==1.13.2
     # via -r requirements/source/requirements-base.in
 filelock==3.14.0
     # via virtualenv
+greenlet==3.0.3
+    # via playwright
 identify==2.5.36
     # via pre-commit
 idna==3.7
     # via requests
-jinja2==3.1.3
+iniconfig==2.0.0
+    # via pytest
+jinja2==3.1.4
     # via
     #   -r requirements/source/requirements-base.in
     #   django-jinja
-jmespath==1.0.1
-    # via
-    #   boto3
-    #   botocore
 logstash-formatter==0.5.17
     # via -r requirements/source/requirements-base.in
 markupsafe==2.1.5
@@ -66,31 +59,50 @@ markupsafe==2.1.5
 nodeenv==1.8.0
     # via pre-commit
 packaging==24.0
-    # via build
+    # via
+    #   build
+    #   pytest
 pip-tools==7.4.1
     # via -r requirements/source/requirements-dev.in
-platformdirs==4.2.1
+platformdirs==4.2.2
     # via virtualenv
-pre-commit==3.7.0
+playwright==1.44.0
+    # via
+    #   -r requirements/source/requirements-dev.in
+    #   pytest-playwright
+pluggy==1.5.0
+    # via pytest
+pre-commit==3.7.1
     # via -r requirements/source/requirements-pre-commit.in
+psycopg==3.1.19
+    # via -r requirements/source/requirements-base.in
+pyee==11.1.0
+    # via playwright
 pyproject-hooks==1.1.0
     # via
     #   build
     #   pip-tools
-python-dateutil==2.9.0.post0
+pytest==8.2.0
     # via
-    #   botocore
-    #   cla-common
+    #   pytest-base-url
+    #   pytest-playwright
+pytest-base-url==2.1.0
+    # via pytest-playwright
+pytest-playwright==0.5.0
+    # via -r requirements/source/requirements-dev.in
+python-dateutil==2.9.0.post0
+    # via cla-common
 python-dotenv==1.0.1
     # via -r requirements/source/requirements-base.in
+python-slugify==8.0.4
+    # via pytest-playwright
 pyyaml==6.0.1
     # via pre-commit
-requests==2.31.0
+requests==2.32.0
     # via
     #   -r requirements/source/requirements-base.in
     #   cla-common
-s3transfer==0.10.1
-    # via boto3
+    #   pytest-base-url
 sentry-sdk==1.45.0
     # via -r requirements/source/requirements-base.in
 six==1.16.0
@@ -99,14 +111,19 @@ soupsieve==2.5
     # via beautifulsoup4
 sqlparse==0.5.0
     # via django
-urllib3==2.2.1
+text-unidecode==1.3
+    # via python-slugify
+typing-extensions==4.11.0
     # via
-    #   botocore
+    #   psycopg
+    #   pyee
+urllib3==2.2.2
+    # via
     #   requests
     #   sentry-sdk
 uwsgi==2.0.25.1
     # via -r requirements/source/requirements-base.in
-virtualenv==20.26.1
+virtualenv==20.26.2
     # via pre-commit
 wheel==0.43.0
     # via pip-tools

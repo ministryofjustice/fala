@@ -3,7 +3,42 @@
 {% block content %}
   <div class="govuk-grid-column-full">
     <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
-    <h1>Search results</h1>
+  </div>
+  {% if FEATURE_FLAG_SURVEY_MONKEY %}
+    {% include 'research_banner.html' %}
+  {% endif %}
+
+  <div class="govuk-grid-column-full">
+    <h1 class="govuk-heading-xl">Search results</h1>
+  </div>
+  {% if form.region|string == "Region.SCOTLAND" %}
+    {% include 'adviser/scotland_warning.html' %}
+  {% endif %}
+  <div class="govuk-grid-column-two-thirds">
+    <div class="laa-fala__grey-box govuk-!-margin-bottom-6">
+      <ul class="govuk-list" role="list">
+        {% if form.postcode.value() %}
+          <li class="govuk-body notranslate" role="listitem" translate="no">Postcode: {{ form.postcode.value() }}</li>
+        {% endif %}
+        {% if form.name.value() %}
+          <li class="govuk-body notranslate" role="listitem" translate="no">Organisation: {{ form.name.value() }}</li>
+        {% endif %}
+        {% if category_selection %}
+          <li class="govuk-body notranslate" role="listitem" translate="no">Categories: {{ category_selection }} </li>
+        {% endif %}
+      </ul>
+
+      <form action="/" method="GET" novalidate>
+        <input type="hidden" name="postcode" value="{{ form.postcode.value() }}">
+        <input type="hidden" name="name" value="{{ form.name.value() }}">
+        {% for value, label_text in form.categories.field.choices %}
+          {% if label_text in category_selection.split(", ") %}
+            <input type="hidden" name="categories" value="{{ value }}">
+          {% endif %}
+        {% endfor %}
+        <button type="submit" class="govuk-button govuk-!-margin-bottom-2" id="changeSearchButton" name="search">Change search</button>
+      </form>
+    </div>
     <span class="results-header">
     {% if data.count > 0 %}
       {% if data.origin %}
@@ -28,13 +63,13 @@
         {% for item in data.results %}
           <li class="results-list-item">
             {% if item.distance %}
-              <p class="miles-away govuk-body govuk-!-margin-bottom-2">
+              <p class="miles-away govuk-body govuk-!-margin-top-2">
                 <span class="govuk-visually-hidden">{{ _('Distance') }}</span>
                 {% trans miles=item.distance|round(1) %}{{ miles }} miles away{% endtrans %}
               </p>
             {% endif %}
-            <h2 class="govuk-body-l govuk-!-font-weight-bold govuk-!-margin-bottom-2">{{ item.organisation.name }}</h2>
-            <div>
+            <h2 class="govuk-body-l govuk-!-font-weight-bold govuk-!-margin-bottom-2 govuk-!-margin-top-2">{{ item.organisation.name }}</h2>
+            <div class="telephone">
               <span>{{ _('Telephone') }}:</span>
               <span class="tel">{{ item.telephone }}</span>
             </div>
@@ -45,7 +80,7 @@
                       <span class="street-address notranslate" translate="no">{{ item.location.address }}</span>
                       <span class="city">{{ item.location.city }}</span>
                       <span class="postal-code notranslate" translate="no">{{ item.location.postcode }}</span>
-                    </span>
+              </span>
             </div>
             {% if item.organisation.website %}
               <div class="website">
@@ -57,7 +92,7 @@
             {% endif %}
             {% if item.categories|length %}
             <div class="categories">
-              <h3 class="govuk-heading-s govuk-!-margin-bottom-2">{{ _('Categories') }}</h3>
+              <h3 class="govuk-heading-s govuk-!-margin-top-2">{{ _('Categories') }}</h3>
               <ul class="govuk-list govuk-list--bullet">
                 {% for cat in item.categories %}
                   <li>{{ cat }}</li>
@@ -65,7 +100,7 @@
               </ul>
             </div>
             {% endif %}
-            <a class="govuk-link" class="url" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?{{ item.location|google_map_params|urlencode }}">
+            <a class="govuk-link" class="url" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?{{ item|google_map_params|urlencode }}">
               View on map (opens in new tab)
             </a>
           </li>

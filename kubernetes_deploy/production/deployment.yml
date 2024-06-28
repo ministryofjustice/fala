@@ -13,9 +13,8 @@ spec:
         app: laa-fala-app
     spec:
       terminationGracePeriodSeconds: 30
-      serviceAccountName: laa-fala-production-irsa-sevice-account
       containers:
-      - image: 754256621582.dkr.ecr.eu-west-2.amazonaws.com/laa-get-access/fala:master
+      - image: 754256621582.dkr.ecr.eu-west-2.amazonaws.com/laa-get-access/fala:main
         name: app
         readinessProbe:
           tcpSocket:
@@ -36,6 +35,13 @@ spec:
         ports:
         - containerPort: 8000
           name: http
+        resources:
+          limits:
+            cpu: 400m
+            memory: 500Mi
+          requests:
+            cpu: 200m
+            memory: 250Mi
         env:
         - name: ALLOWED_HOSTS
           value: ".laa-fala-production.apps.live-1.cloud-platform.service.justice.gov.uk .find-legal-advice.justice.gov.uk"
@@ -57,22 +63,7 @@ spec:
             secretKeyRef:
               name: secret-key
               key: SECRET_KEY
-        - name: ZENDESK_API_TOKEN
-          valueFrom:
-            secretKeyRef:
-              name: zendesk-api
-              key: ZENDESK_API_TOKEN
-        - name: ZENDESK_API_USERNAME
-          valueFrom:
-            secretKeyRef:
-              name: zendesk-api
-              key: ZENDESK_API_USERNAME
-        - name: STATIC_FILES_BACKEND
-          value: s3
-        - name: AWS_STORAGE_BUCKET_NAME
-          valueFrom:
-            secretKeyRef:
-              name: s3
-              key: bucket_name
         - name: FEATURE_FLAG_NO_MAP
-          value: "false"
+          value: "true"
+        - name: FEATURE_FLAG_SURVEY_MONKEY
+          value: "true"

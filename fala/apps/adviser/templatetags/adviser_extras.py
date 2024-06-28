@@ -33,10 +33,23 @@ def to_fala_page_url(context, value, url_path):
 
 
 @library.filter
-def google_map_params(location):
-    if "postcode" in location and "address" in location:
-        return {"api": 1, "query": f"{location['address']} {location['postcode']}"}
-    elif "address" in location:
-        return {"api": 1, "query": location["address"]}
+def google_map_params(item):
+    organisation_name = item.get("organisation", {}).get("name", "")
+    location = item.get("location", {})
+    office_type = location.get("type", "")
+    address = location.get("address", "")
+    postcode = location.get("postcode", "")
+
+    if "outreach" not in office_type.lower() and organisation_name:
+        if postcode and address:
+            return {"api": 1, "query": f"{organisation_name} {address} {postcode}"}
+        elif address:
+            return {"api": 1, "query": f"{organisation_name} {address}"}
+        else:
+            return {"api": 1, "query": f"{organisation_name} {postcode}"}
+    elif postcode and address:
+        return {"api": 1, "query": f"{address} {postcode}"}
+    elif address:
+        return {"api": 1, "query": address}
     else:
-        return {"api": 1, "query": location["postcode"]}
+        return {"api": 1, "query": postcode}

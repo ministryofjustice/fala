@@ -1,5 +1,3 @@
-boto3<2
-botocore<2
 django<5.1
 django-jinja==2.10.2
 django-storages==1.13.2
@@ -11,4 +9,4 @@ requests<3
 sentry-sdk<2
 uwsgi<3
 python-dotenv<1.5
-   
+psycopg==3.1.19

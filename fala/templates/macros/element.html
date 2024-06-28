@@ -19,7 +19,7 @@
     {% endif %}
     <div class="alert-message govuk-{{type}}-summary">
       {% if title %}
-        <h2 class="alert-header govuk-heading-l govuk-{{type}}-summary__title" id="alert-heading-{{type}}">{{ _(title) }}</h3>
+        <h2 class="alert-header govuk-heading-l govuk-{{type}}-summary__title" id="alert-heading-{{type}}">{{ _(title) }}</h2>
       {% endif %}
       {{ caller() }}
     </div>

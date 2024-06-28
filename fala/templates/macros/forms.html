@@ -54,9 +54,10 @@
       <div class="form-row {{ kwargs.row_class or '' }}">
         {% if field %}
           {% if field.errors and controlled_by and not controlled_by.errors or field.errors and not controlled_by %}
-            <input type="text" name="{{ field.name }}" value="{{ field.data or '' }}" class="govuk-input govuk-input--error govuk-!-width-one-third {{ field_attrs.class or '' }}" maxlength="{{ kwargs.max_length or '30' }}" id="id_{{ field.name }}">
+            <input type="text" name="{{ field.name }}" value="{{ field.data or '' }}" class="govuk-input govuk-input--error govuk-!-width-one-third {{ field_attrs.class or '' }}" maxlength="{{ kwargs.max_length or '30' }}" id="id_{{ field.name }}" {% if field.name == 'postcode' %}aria-describedby="field-description-postcode"{% endif %}>
           {% else %}
-            <input type="text" name="{{ field.name }}" value="{{ field.data or '' }}" class="govuk-input govuk-!-width-one-third {{ field_attrs.class or '' }}" maxlength="{{ kwargs.max_length or '30' }}" id="id_{{ field.name }}">
+            {# Because this is used part of a loop. Conditions for if field.name == 'postcode' is needed to only apply aria label to the postcode field#}
+            <input type="text" name="{{ field.name }}" value="{{ field.data or '' }}" class="govuk-input govuk-!-width-one-third {{ field_attrs.class or '' }}" maxlength="{{ kwargs.max_length or '30' }}" id="id_{{ field.name }}" {% if field.name == 'postcode' %}aria-describedby="field-description-postcode"{% endif %}>
           {% endif %}
         {% endif %}
         {% if caller %}
