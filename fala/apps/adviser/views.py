@@ -5,7 +5,6 @@ from django.views.generic import TemplateView, ListView
 
 from .forms import AdviserSearchForm
 from .laa_laa_paginator import LaaLaaPaginator
-from laalaa.api import PROVIDER_CATEGORIES
 from .regions import Region
 
 
