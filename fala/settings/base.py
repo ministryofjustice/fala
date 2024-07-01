@@ -9,6 +9,8 @@ from sentry_sdk.integrations.django import DjangoIntegration
 # Load environment variables from .env file
 from dotenv import load_dotenv
 
+from django_jinja.builtins import DEFAULT_EXTENSIONS
+
 # With override set to True the value of the variable in `.env` is loaded first https://pypi.org/project/python-dotenv/#variable-expansion
 load_dotenv(override=True)
 
@@ -33,16 +35,16 @@ ADMINS = ()
 
 MANAGERS = ADMINS
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ.get("DB_NAME", "fala_development"),
-        "USER": os.environ.get("DB_USER", ""),
-        "PASSWORD": os.environ.get("DB_PASSWORD", "postgres"),
-        "PORT": os.environ.get("DB_PORT", "5432"),
-        "HOST": os.environ.get("DB_HOST", ""),
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": os.environ.get("DB_NAME", "fala_development"),
+#         "USER": os.environ.get("DB_USER", ""),
+#         "PASSWORD": os.environ.get("DB_PASSWORD", "postgres"),
+#         "PORT": os.environ.get("DB_PORT", "5432"),
+#         "HOST": os.environ.get("DB_HOST", ""),
+#     }
+# }
 
 DEFAULT_ALLOWED_HOSTS = ".fala.dsd.io .find-legal-advice.justice.gov.uk"
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", DEFAULT_ALLOWED_HOSTS).split(" ")
@@ -72,6 +74,17 @@ project_root = abspath(root(".."))
 # Additional locations of static files
 STATICFILES_DIRS = (root("assets"),)
 
+WEBPACK_LOADER = {
+    "DEFAULT": {
+        "BUNDLE_DIR_NAME": "webpack_bundles/",
+        "CACHE": not DEBUG,
+        # 'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
+        "STATS_FILE": root("webpack-stats.json"),
+        "POLL_INTERVAL": 0.1,
+        "IGNORE": [r".+\.hot-update.js", r".+\.map"],
+    }
+}
+
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
@@ -88,6 +101,10 @@ TEMPLATES = [
         "DIRS": [root("templates"), abspath(root(project_root, "node_modules", "mojular-templates"))],
         "APP_DIRS": True,
         "OPTIONS": {
+            "extensions": DEFAULT_EXTENSIONS
+            + [
+                "webpack_loader.contrib.jinja2ext.WebpackExtension",
+            ],
             "match_extension": ".html",
             "context_processors": [
                 "django.template.context_processors.debug",
@@ -182,7 +199,13 @@ ROOT_URLCONF = "fala.urls"
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = "fala.wsgi.application"
 
-INSTALLED_APPS = ("django.contrib.sessions", "django.contrib.messages", "django.contrib.staticfiles", "requests")
+INSTALLED_APPS = (
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "requests",
+    "webpack_loader",
+)
 
 PROJECT_APPS = ("adviser", "fala", "laalaa")
 
