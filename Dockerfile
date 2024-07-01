@@ -1,4 +1,4 @@
-FROM node:10 as node_build
+FROM node:12 as node_build
 
 COPY package.json package-lock.json ./
 RUN npm install
