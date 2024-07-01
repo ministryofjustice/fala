@@ -5,12 +5,13 @@ services:
     build: .
     volumes:
       - ./fala:/home/app/fala
+      - ./node_modules:/home/app/fala/node_modules
       - /home/app/fala/assets
     command:
       - python3
       - manage.py
       - runserver
-      - "0.0.0.0:8000"
+      - 0.0.0.0:8000
 
     environment:
       LAALAA_API_HOST: "https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk"
