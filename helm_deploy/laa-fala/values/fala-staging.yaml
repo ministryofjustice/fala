@@ -2,7 +2,13 @@ replicaCount: 2
 
 environment: "staging"
 
-resources: {}
+resources:
+  limits:
+    cpu: 200m
+    memory: 350Mi
+  requests:
+    cpu: 50m
+    memory: 200Mi
 
 image:
   repository: nginx
