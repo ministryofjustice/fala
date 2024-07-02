@@ -1,15 +1,16 @@
-FROM node:10 as node_build
+FROM node:18-alpine as node_build
 
 COPY package.json package-lock.json ./
 RUN npm install
 
 COPY . .
 
-RUN ./node_modules/.bin/gulp build --production
+RUN NODE_ENV=production npm run build
 
 FROM python:3.12-bullseye
 
 COPY --from=node_build ./fala/assets /home/app/fala/assets
+COPY --from=node_build ./fala/webpack-stats.json /home/app/fala
 
 ENV LC_CTYPE=C.UTF-8
 

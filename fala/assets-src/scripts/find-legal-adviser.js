@@ -1,7 +1,7 @@
 var $ = require('jquery');
-var debounce = require('lodash/function/debounce');
-var find = require('lodash/collection/find');
-var reduce = require('lodash/collection/reduce');
+var debounce = require('lodash/debounce');
+var find = require('lodash/find');
+var reduce = require('lodash/reduce');
 const wideScreen = 641;
 const originalHeight = 465;
 
