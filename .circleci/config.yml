@@ -281,7 +281,7 @@ workflows:
          context: laa-fala
       - behave:
           requires:
-            - playwright
+            - build
           context: laa-fala
 
       - deploy_with_helm:
@@ -297,6 +297,7 @@ workflows:
           type: approval
           requires:
             - build
+            - playwright
 
       - deploy:
           name: Legacy staging deploy
