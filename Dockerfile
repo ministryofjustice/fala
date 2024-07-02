@@ -32,6 +32,15 @@ WORKDIR /home/app
 COPY ./requirements/generated/requirements-production.txt ./requirements.txt
 RUN pip3 install --user --requirement ./requirements.txt
 
+# Copy migrate_db.sh to the /home/app/fala directory
+COPY fala/migrate_db.sh /home/app/fala/migrate_db.sh
+
+# Ensure the correct ownership
+RUN chown app:app /home/app/fala/migrate_db.sh
+
+# Ensure the script has execute permissions
+RUN chmod +x /home/app/fala/migrate_db.sh
+
 COPY . .
 
 RUN ./manage.py collectstatic --noinput
