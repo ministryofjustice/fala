@@ -2,7 +2,13 @@ replicaCount: 5
 
 environment: "production"
 
-resources: {}
+resources:
+  limits:
+    cpu: 400m
+    memory: 500Mi
+  requests:
+    cpu: 200m
+    memory: 250Mi
 
 image:
   repository: nginx
