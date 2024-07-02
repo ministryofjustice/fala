@@ -10,6 +10,7 @@ RUN NODE_ENV=production npm run build
 FROM python:3.12-bullseye
 
 COPY --from=node_build ./fala/assets /home/app/fala/assets
+COPY --from=node_build ./node_modules/govuk-frontend/dist/govuk/assets /home/app/fala/node_modules/govuk-frontend/dist/govuk/assets
 COPY --from=node_build ./fala/webpack-stats.json /home/app/fala
 
 ENV LC_CTYPE=C.UTF-8

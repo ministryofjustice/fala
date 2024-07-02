@@ -68,6 +68,7 @@ MEDIA_URL = "/media/"
 
 STATIC_URL = "/static/"
 STATIC_ROOT = root("static")
+GOVUK_ASSETS_ROOT = root("node_modules/govuk-frontend/dist/govuk/assets")
 
 project_root = abspath(root(".."))
 

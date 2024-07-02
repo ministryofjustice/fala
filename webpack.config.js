@@ -5,12 +5,12 @@ const BundleTracker = require("webpack-bundle-tracker");
 module.exports = {
   context: __dirname,
   entry: [
-    "./fala/assets-src/scripts/find-legal-adviser.js",
+    "./fala/assets-src/scripts/main.js",
     "./fala/assets-src/sass/style.scss",
     ],
   output: {
     path: path.resolve(__dirname, "fala/assets/webpack_bundles/"),
-    publicPath: "auto", // necessary for CDNs/S3/blob storages
+    publicPath: "auto",
     filename: "[name]-[contenthash].js",
   },
   plugins: [
