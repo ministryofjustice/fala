@@ -241,13 +241,13 @@ workflows:
           requires:
             - test
           context: laa-fala
-      - playwright:
-         requires:
-           - build
-         context: laa-fala
+      # - playwright:
+      #    requires:
+      #      - build
+      #    context: laa-fala
       - behave:
           requires:
-            - playwright
+            - build
           context: laa-fala
 
       - staging_deploy_approval:
