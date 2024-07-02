@@ -39,7 +39,7 @@
         <button type="submit" class="govuk-button govuk-!-margin-bottom-2" id="changeSearchButton" name="search">Change search</button>
       </form>
     </div>
-    <span class="results-header">
+    <span class="govuk-body results-header">
     {% if data.count > 0 %}
       {% if data.origin %}
         {% trans page_count=data.results|length, result_count=data.count %}
