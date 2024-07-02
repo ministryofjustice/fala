@@ -1,0 +1,80 @@
+replicaCount: 2
+
+environment: "uat"
+
+resources:
+  limits:
+    cpu: 200m
+    memory: 350Mi
+  requests:
+    cpu: 50m
+    memory: 200Mi
+
+image:
+  repository: nginx
+  tag: stable
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: "cd-serviceaccount"
+
+podSecurityContext: {}
+# fsGroup: 2000
+
+securityContext:
+  runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 8000
+
+ingress:
+  annotations:
+    external-dns.alpha.kubernetes.io/aws-weight: "100"
+
+feature_flags:
+  no_map: "enabled"
+  survey_monkey: "enabled"
+
+laalaa_api:
+  host: "https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk"
+
+allowed_hosts: ".laa-fala-staging.apps.live-1.cloud-platform.service.justice.gov.uk .staging.find-legal-advice.justice.gov.uk"
+
+postgresql:
+  enabled: true
+  resources:
+    limits:
+      cpu: 250m
+      memory: 256Mi
+    requests:
+      cpu: 250m
+      memory: 256Mi
+  auth:
+    database: fala_staging
+    enablePostgresUser: true
+    postgresPassword: postgres
+    postgresqlUsername: postgres
+  primary:
+    persistence:
+      enabled: true
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
