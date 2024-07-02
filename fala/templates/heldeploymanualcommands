@@ -1,6 +1,0 @@
-helm upgrade fala ./helm_deploy/laa-fala/. \
-                          --install --wait \
-                          --namespace=laa-fala-staging \
-                          --values ./helm_deploy/laa-fala/values/fala-staging.yaml \
-                          --set image.repository="754256621582.dkr.ecr.eu-west-2.amazonaws.com/laa-get-access/fala" \
-                          --set image.tag="EL-1463-helm-chart"

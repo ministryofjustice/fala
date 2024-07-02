@@ -296,7 +296,6 @@ workflows:
       - staging_deploy_approval:
           type: approval
           requires:
-            - build
             - playwright
 
       - deploy:
