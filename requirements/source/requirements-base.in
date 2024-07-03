@@ -10,3 +10,4 @@ sentry-sdk<2
 uwsgi<3
 python-dotenv<1.5
 psycopg==3.1.19
+govuk-frontend-jinja==3.1.0

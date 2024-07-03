@@ -14,7 +14,7 @@ charset-normalizer==3.3.2
     # via requests
 cla-common @ https://github.com/ministryofjustice/cla_common/archive/refs/tags/0.3.3.tar.gz
     # via -r requirements/source/requirements-base.in
-django==5.0.6
+django==4.2.13
     # via
     #   -r requirements/source/requirements-base.in
     #   django-csp
@@ -28,12 +28,15 @@ django-jinja==2.10.2
     # via -r requirements/source/requirements-base.in
 django-storages==1.13.2
     # via -r requirements/source/requirements-base.in
+govuk-frontend-jinja==3.1.0
+    # via -r requirements/source/requirements-base.in
 idna==3.7
     # via requests
 jinja2==3.1.4
     # via
     #   -r requirements/source/requirements-base.in
     #   django-jinja
+    #   govuk-frontend-jinja
 logstash-formatter==0.5.17
     # via -r requirements/source/requirements-base.in
 markupsafe==2.1.5
