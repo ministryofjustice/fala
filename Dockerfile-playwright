@@ -1,7 +1,7 @@
 # Dockerfile for running playwright on CircleCi and locally
 
 # Use the Playwright image as the base image
-FROM mcr.microsoft.com/playwright/python:v1.44.0-jammy
+FROM mcr.microsoft.com/playwright/python:v1.45.0-jammy
 
 # Create a non-root user and group with a unique UID
 RUN groupadd -r appgroup && useradd -r -u 1010 -g appgroup -m -d /home/app appuser
