@@ -351,7 +351,7 @@ workflows:
             - laa-fala-live-production
 
       - deploy_with_helm:
-          name: production_deploy
+          name: helm_production_deploy
           environment: production
           requires:
             - production_deploy_approval
