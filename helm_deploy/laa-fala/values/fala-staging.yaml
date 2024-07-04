@@ -43,6 +43,7 @@ service:
   port: 8000
 
 ingress:
+  className: "default"
   hosts:
     - host: laa-fala-staging-helm.cloud-platform.service.justice.gov.uk
       secret: false
