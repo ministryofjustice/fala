@@ -44,12 +44,10 @@ service:
 
 ingress:
   hosts:
-    - host: laa-fala-production.apps.live-1.cloud-platform.service.justice.gov.uk
+    - host: laa-fala-production-helm.cloud-platform.service.justice.gov.uk
       secret: false
-    - host: find-legal-advice.justice.gov.uk
-      secret: fala-tls-certificate
   annotations:
-    external-dns.alpha.kubernetes.io/set-identifier: laa-fala-fala-laa-fala-production-green
+    external-dns.alpha.kubernetes.io/set-identifier: "fala-laa-fala-laa-fala-production-green"
     external-dns.alpha.kubernetes.io/aws-weight: "100"
     nginx.ingress.kubernetes.io/enable-modsecurity: "true"
     nginx.ingress.kubernetes.io/modsecurity-snippet: |
