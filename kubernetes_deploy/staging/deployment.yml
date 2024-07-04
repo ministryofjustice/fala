@@ -57,9 +57,9 @@ spec:
               name: secret-key
               key: SECRET_KEY
         - name: FEATURE_FLAG_NO_MAP
-          value: "true"
+          value: "enabled"
         - name: FEATURE_FLAG_SURVEY_MONKEY
-          value: "true"
+          value: "enabled"
         - name: DB_NAME
           valueFrom:
             secretKeyRef:
