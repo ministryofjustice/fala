@@ -6,7 +6,7 @@ module.exports = {
   context: __dirname,
   entry: [
     "./fala/assets-src/scripts/main.js",
-    "./fala/assets-src/sass/style.scss",
+    "./fala/assets-src/sass/main.scss",
     ],
   output: {
     path: path.resolve(__dirname, "fala/assets/webpack_bundles/"),

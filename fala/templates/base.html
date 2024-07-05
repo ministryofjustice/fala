@@ -36,6 +36,10 @@
   </script>
 {% endblock %}
 
+{% block stylesheets %}
+  {{ render_bundle('main', 'css') }}
+{% endblock %}
+
 {% block page_title %}{{ title }}{% endblock %}
 
 {% block proposition %}
