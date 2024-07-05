@@ -43,6 +43,7 @@ service:
   port: 8000
 
 ingress:
+  className: "modsec"
   hosts:
     - host: laa-fala-production-helm.cloud-platform.service.justice.gov.uk
       secret: false
