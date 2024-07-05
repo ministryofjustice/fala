@@ -10,12 +10,7 @@ from .regions import Region
 
 
 class AdviserView(TemplateView):
-    def get_template_names(self) -> list[str]:
-        if settings.FEATURE_FLAG_NO_MAP:
-            template_name = "adviser/search.html"
-        else:
-            template_name = "adviser/search_old.html"
-        return [template_name]
+    template_name = "adviser/search.html"
 
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
@@ -28,8 +23,6 @@ class AdviserView(TemplateView):
                 "form": form,
                 "data": form.search(),
                 "current_url": current_url,
-                "GOOGLE_MAPS_API_KEY": settings.GOOGLE_MAPS_API_KEY,
-                "FEATURE_FLAG_NO_MAP": settings.FEATURE_FLAG_NO_MAP,
                 "CHECK_LEGAL_AID_URL": settings.CHECK_LEGAL_AID_URL,
             }
         )
@@ -38,12 +31,7 @@ class AdviserView(TemplateView):
 
 
 class AccessibilityView(TemplateView):
-    def get_template_names(self) -> list[str]:
-        if settings.FEATURE_FLAG_NO_MAP:
-            template_name = "adviser/accessibility_statement.html"
-        else:
-            template_name = "adviser/accessibility-statement_old.html"
-        return [template_name]
+    template_name = "adviser/accessibility_statement.html"
 
 
 class PrivacyView(TemplateView):
@@ -90,7 +78,6 @@ class SearchView(ListView):
                 "data": self._data,
                 "pages": pages,
                 "params": params,
-                "FEATURE_FLAG_SURVEY_MONKEY": settings.FEATURE_FLAG_SURVEY_MONKEY,
                 "categories": categories,
                 "category_selection": self._display_category(),
             }
@@ -102,28 +89,6 @@ class SearchView(ListView):
 
                 return formatted_categories
             return []
-
-    class OldMapState(object):
-        def __init__(self, form, current_url):
-            self.current_url = current_url
-            self.form = form
-
-        def get_queryset(self):
-            return []
-
-        @property
-        def template_name(self):
-            return "search_old.html"
-
-        def get_context_data(self):
-            return {
-                "form": self.form,
-                "data": self.form.search(),
-                "current_url": self.current_url,
-                "GOOGLE_MAPS_API_KEY": settings.GOOGLE_MAPS_API_KEY,
-                "FEATURE_FLAG_NO_MAP": settings.FEATURE_FLAG_NO_MAP,
-                "CHECK_LEGAL_AID_URL": settings.CHECK_LEGAL_AID_URL,
-            }
 
     class OtherJurisdictionState(object):
         REGION_TO_LINK = {
@@ -166,19 +131,15 @@ class SearchView(ListView):
 
     def get(self, request, *args, **kwargs):
         form = AdviserSearchForm(data=request.GET or None)
-        if settings.FEATURE_FLAG_NO_MAP:
-            if form.is_valid():
-                region = form.region
-                if region == Region.ENGLAND_OR_WALES or region == Region.SCOTLAND:
-                    self.state = self.EnglandOrWalesState(form)
-                else:
-                    self.state = self.OtherJurisdictionState(region, form.cleaned_data["postcode"])
+        if form.is_valid():
+            region = form.region
+            if region == Region.ENGLAND_OR_WALES or region == Region.SCOTLAND:
+                self.state = self.EnglandOrWalesState(form)
             else:
-                self.state = self.ErrorState(form)
+                self.state = self.OtherJurisdictionState(region, form.cleaned_data["postcode"])
         else:
-            view_name = resolve(request.path_info).url_name
-            current_url = reverse(view_name)
-            self.state = self.OldMapState(form, current_url)
+            self.state = self.ErrorState(form)
+
         return super().get(self, request, *args, **kwargs)
 
     def get_template_names(self):

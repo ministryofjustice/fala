@@ -92,16 +92,9 @@ class AdviserSearchForm(forms.Form):
         if not postcode and not data.get("name"):
             raise forms.ValidationError(_("Enter a postcode or an organisation name"))
         else:
-            if settings.FEATURE_FLAG_NO_MAP:
-                if postcode and self.region == Region.ENGLAND_OR_WALES and not self._valid_postcode(postcode):
-                    self.add_error("postcode", (_("Enter a valid postcode")))
-            else:
-                region = self.region
-                if region != Region.ENGLAND_OR_WALES:
-                    region_error = self.REGION_NAMES[region]
-                    msg1 = "This service does not cover "
-                    msg2 = "Try a postcode, town or city in England or Wales."
-                    self.add_error("postcode", "%s %s" % (_(" ".join((msg1, region_error))), _(msg2)))
+            if postcode and self.region == Region.ENGLAND_OR_WALES and not self._valid_postcode(postcode):
+                self.add_error("postcode", (_("Enter a valid postcode")))
+
         return data
 
     @property

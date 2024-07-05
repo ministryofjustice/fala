@@ -128,16 +128,6 @@
   </div>
 {% endblock %}
 
-{% block before_main_js %}
-  {{ super() }}
-  <script src="//maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}"></script>
-  <script nonce="{{request.csp_nonce}}">
-    window.LABELS = {
-      loading: "{{ _('Loading…') }}"
-    };
-  </script>
-{% endblock %}
-
 {% block after_main_js %}
   <script  nonce="{{request.csp_nonce}}">
     function googleTranslateElementInit() {

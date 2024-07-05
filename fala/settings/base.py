@@ -219,8 +219,4 @@ FEATURE_FLAG_NO_MAP = os.environ.get("FEATURE_FLAG_NO_MAP", "").lower() == "enab
 
 ENVIRONMENT = os.environ.get("ENVIRONMENT", "unknown")
 
-GOOGLE_MAPS_API_KEY = os.environ.get("GOOGLE_MAPS_API_KEY", "")
-
 CHECK_LEGAL_AID_URL = "https://www.gov.uk/check-legal-aid"
-
-FEATURE_FLAG_SURVEY_MONKEY = os.environ.get("FEATURE_FLAG_SURVEY_MONKEY", "").lower() == "enabled"

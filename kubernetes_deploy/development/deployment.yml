@@ -34,11 +34,5 @@ spec:
         env:
         - name: ALLOWED_HOSTS
           value: localhost
-        - name: GOOGLE_MAPS_API_KEY
-          value: AIzaSyDdz1B1M2-2r0CQKJPscvmNEyxGwSZkXJk
         - name: LAALAA_API_HOST
           value: https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk
-        - name: FEATURE_FLAG_NO_MAP
-          value: "enabled"
-        - name: FEATURE_FLAG_SURVEY_MONKEY
-          value: "enabled"
