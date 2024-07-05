@@ -87,7 +87,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "SET_THIS_IN_ENV")
 TEMPLATES = [
     {
         "BACKEND": "django_jinja.backend.Jinja2",
-        "DIRS": [root("templates"), abspath(root(project_root, "node_modules", "mojular-templates"))],
+        "DIRS": [root("templates"), abspath(root(project_root, "node_modules"))],
         "APP_DIRS": True,
         "OPTIONS": {
             "match_extension": ".html",
