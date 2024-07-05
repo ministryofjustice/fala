@@ -24,7 +24,7 @@ click==8.1.7
     # via pip-tools
 distlib==0.3.8
     # via virtualenv
-django==4.2.13
+django==5.0.6
     # via
     #   -r requirements/source/requirements-base.in
     #   django-csp
@@ -35,9 +35,7 @@ django-csp==3.7
 django-extended-choices==0.3.0
     # via cla-common
 django-jinja==2.10.2
-    # via
-    #   -r requirements/source/requirements-base.in
-    #   -r requirements/source/requirements-dev.in
+    # via -r requirements/source/requirements-base.in
 django-storages==1.13.2
     # via -r requirements/source/requirements-base.in
 filelock==3.14.0
