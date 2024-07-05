@@ -8,9 +8,6 @@ The website address is https://find-legal-advice.justice.gov.uk/.
 
 The website uses the LAA Legal Adviser API. The code is hosted at https://github.com/ministryofjustice/laa-legal-adviser-api.
 
-The REST API is https://prod.laalaa.dsd.io/.
-
-
 ## Dependencies
 - [docker](https://www.docker.com/)
 
