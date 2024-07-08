@@ -1,5 +1,5 @@
 import bs4
-from django.test import SimpleTestCase, Client
+from django.test import SimpleTestCase, Client, override_settings
 from django.urls import reverse
 
 
@@ -110,9 +110,15 @@ class ResearchBannerTest(SimpleTestCase):
 
     research_message = "Help improve this legal adviser search"
 
-    def test_research_banner_present(self):
+    @override_settings(FEATURE_FLAG_SURVEY_MONKEY=True)
+    def test_research_banner_present_when_flag_set(self):
         response = self.client.get(self.url, self.data)
         self.assertContains(response, self.research_message)
+
+    @override_settings(FEATURE_FLAG_SURVEY_MONKEY=False)
+    def test_research_banner_absent_when_flag_unset(self):
+        response = self.client.get(self.url, self.data)
+        self.assertNotContains(response, self.research_message)
 
 
 class ResultsPageWithJustOrgTest(SimpleTestCase):

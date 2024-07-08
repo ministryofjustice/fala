@@ -61,3 +61,5 @@ spec:
             secretKeyRef:
               name: secret-key
               key: SECRET_KEY
+        - name: FEATURE_FLAG_SURVEY_MONKEY
+          value: "enabled"

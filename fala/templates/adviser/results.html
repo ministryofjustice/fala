@@ -4,10 +4,10 @@
   <div class="govuk-grid-column-full">
     <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
   </div>
-
-  {% include 'research_banner.html' %}
-
-
+  {% if FEATURE_FLAG_SURVEY_MONKEY %}
+    {% include 'research_banner.html' %}
+  {% endif %}
+  
   <div class="govuk-grid-column-full">
     <h1 class="govuk-heading-xl">Search results</h1>
   </div>

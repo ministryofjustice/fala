@@ -36,3 +36,5 @@ spec:
           value: localhost
         - name: LAALAA_API_HOST
           value: https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk
+        - name: FEATURE_FLAG_SURVEY_MONKEY
+          value: "enabled"
