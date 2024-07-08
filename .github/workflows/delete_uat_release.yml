@@ -3,15 +3,14 @@ name: Delete UAT release
 # This is a GitHub action because Circle:CI doesn't see PR closed events
 # but they are available to actions
 on:
-  pull_request:
+  # pull_request_target runs even when PRs have conflicts - pull_request does not
+  # here we just want to tidy up regardless of the state of the PR.
+  pull_request_target:
     types:
       - closed
 
 jobs:
   delete_uat_job:
-    # Adding a condition so that the `pull_request` workflow cathes merged PRs, if not caught when the PR closes. Have had some instances when the job runs but the UAT pod still exists.
-    # As per this documentation https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#running-your-pull_request-workflow-when-a-pull-request-merges
-    if: github.event.pull_request.merged == true || github.event.pull_request.merged == false
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
