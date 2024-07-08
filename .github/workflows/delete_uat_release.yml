@@ -1,5 +1,7 @@
 name: Delete UAT release
 
+# This is a GitHub action because Circle:CI doesn't see PR closed events
+# but they are available to actions
 on:
   pull_request:
     types:
