@@ -7,7 +7,10 @@ COPY . .
 
 RUN ./node_modules/.bin/gulp build --production
 
-FROM python:3.12-bullseye
+#################################################
+# BASE IMAGE USED BY ALL STAGES
+#################################################
+FROM python:3.12-bullseye as base
 
 COPY --from=node_build ./fala/assets /home/app/fala/assets
 
@@ -27,6 +30,36 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 ENV HOME /home/app
 ENV APP_HOME /home/app
 WORKDIR /home/app
+
+#################################################
+# DEVELOPMENT
+#################################################
+
+FROM base AS development
+
+# Install Python dependencies for development, includes tests.
+COPY ./requirements/generated/requirements-dev.txt ./requirements.txt
+RUN pip3 install --user --requirement ./requirements.txt
+
+# Add .local/bin to PATH to allow playwright command execution
+ENV PATH=/home/app/.local/bin:$PATH
+RUN playwright install --with-deps
+
+COPY . .
+
+RUN ./manage.py collectstatic --noinput
+
+# Project permissions
+RUN  chown -R app: /home/app
+
+USER 1000
+EXPOSE 8000
+CMD ["/home/app/docker/run.sh"]
+
+#################################################
+# PRODUCTION
+#################################################
+FROM base AS production
 
 # Install Python dependencies
 COPY ./requirements/generated/requirements-production.txt ./requirements.txt
