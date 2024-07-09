@@ -2,7 +2,9 @@ version: "3.9"
 services:
   webapp:
     container_name: fala
-    build: .
+    build:
+      context: .
+      target: ${ENVIRONMENT:-development}
     volumes:
       - ./fala:/home/app/fala
       - /home/app/fala/assets
@@ -35,24 +37,3 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: fala_development
-
-  playwright:
-    build:
-      context: .
-      dockerfile: Dockerfile-playwright
-    volumes:
-      - .:/fala_local
-    container_name: fala-playwright
-    network_mode: "host"
-    profiles:
-      - playwright
-    environment:
-      FALA_URL: "http://localhost:8013/"
-
-  aws_fala_image:
-    image: ${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG
-    container_name: fala_container
-    ports:
-      - "8013:8000"
-    profiles:
-      - aws
