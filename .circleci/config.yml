@@ -101,6 +101,7 @@ jobs:
           command: |
             source env/bin/activate
             pip install --requirement requirements/generated/requirements-dev.txt
+            playwright install --with-deps
             pip check
       - save_cache:
           key: pip-v1-{{ checksum "requirements/generated/requirements-dev.txt" }}
@@ -132,6 +133,8 @@ jobs:
           tag: $BUILD_TAGS
           region: $ECR_REGION # this will use the env var
           repo: $ECR_REPOSITORY # this will use the env var
+          extra_build_args: |
+            --build-arg target=production
       # Validate the python version as 3.12
       - run:
           name: Validate Python version
@@ -228,38 +231,6 @@ jobs:
           echo "Setting FALA image $ECR_DEPLOY_IMAGE"
       - cla-end-to-end-tests/behave
 
-  playwright:
-    docker:
-      - image: cimg/python:3.12
-    steps:
-      - checkout
-      - setup_remote_docker
-      - aws-login-to-ecr-and-tagging
-
-      - run:
-          name: Build AWS FALA Docker Image and run Playwright container tests
-          command: |
-            # Run the AWS FALA image so playwright can test against it.
-            docker-compose up --build -d aws_fala_image
-
-            # Wait a few seconds to ensure services are up and running
-            sleep 10
-
-            # Check if the FALA image is running
-            if [ "$(docker inspect -f '{{.State.Running}}' fala_container)" = "false" ]; then
-              echo "fala_container is not running"
-              exit 1
-            fi
-
-            # Run the the playwright tests from the playwright docker container. Container exits when tests are done.
-            docker-compose run playwright
-
-      - run:
-          name: Stop and Remove Docker Containers
-          command: |
-            docker-compose down
-
-
 workflows:
   version: 2
   build_test_and_deploy:
@@ -274,10 +245,6 @@ workflows:
           requires:
             - test
           context: laa-fala
-      - playwright:
-         requires:
-           - build
-         context: laa-fala
       - behave:
           requires:
             - build
@@ -295,7 +262,7 @@ workflows:
       - staging_deploy_approval:
           type: approval
           requires:
-            - playwright
+            - build
 
       - deploy:
           name: Legacy staging deploy
