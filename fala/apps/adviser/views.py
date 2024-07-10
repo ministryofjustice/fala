@@ -78,7 +78,6 @@ class SearchView(ListView):
                 "FEATURE_FLAG_SURVEY_MONKEY": settings.FEATURE_FLAG_SURVEY_MONKEY,
             }
 
-
     class OtherJurisdictionState(object):
         REGION_TO_LINK = {
             Region.NI: {
