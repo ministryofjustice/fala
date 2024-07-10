@@ -45,7 +45,8 @@ RUN pip3 install --user --requirement ./requirements.txt
 ENV PATH=/home/app/.local/bin:$PATH
 RUN playwright install --with-deps
 
-COPY . .
+COPY fala/ fala/
+COPY manage.py manage.py
 
 RUN ./manage.py collectstatic --noinput
 

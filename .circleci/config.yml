@@ -230,10 +230,6 @@ workflows:
           requires:
             - test
           context: laa-fala
-      - behave:
-          requires:
-            - build
-          context: laa-fala
 
       - deploy_with_helm:
           name: Deploy UAT branch
