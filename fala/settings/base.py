@@ -86,16 +86,21 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "SET_THIS_IN_ENV")
 
 TEMPLATES = [
     {
+        # this sets the template engine name and the backend’s import path
+        # newer version of `django-jinja` you can use `django_jinja.jinja2.Jinja2`
         "BACKEND": "django_jinja.backend.Jinja2",
-        "DIRS": [root("templates"), abspath(root(project_root, "node_modules"))],
+        "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
+            # need this so we know which files to pick up in 'templates' folder
             "match_extension": ".html",
+            # this is where we tell jinja2 the packages to use in it's environment
+            "environment": "fala.jinja2.environment",
             "context_processors": [
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",
-                # 'django.contrib.auth.context_processors.auth',
                 "django.contrib.messages.context_processors.messages",
+                "django.template.context_processors.i18n",
                 "adviser.context_processors.current_environment",
             ],
         },
@@ -106,8 +111,6 @@ MIDDLEWARE_CLASSES = (
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
-    # 'django.contrib.auth.middleware.AuthenticationMiddleware',
-    # 'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     "django.contrib.messages.middleware.MessageMiddleware",
 )
 
@@ -184,9 +187,16 @@ ROOT_URLCONF = "fala.urls"
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = "fala.wsgi.application"
 
-INSTALLED_APPS = ("django.contrib.sessions", "django.contrib.messages", "django.contrib.staticfiles", "requests")
+INSTALLED_APPS = [
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "requests",
+    "govuk_frontend_jinja",
+    "django_jinja",
+]
 
-PROJECT_APPS = ("adviser", "fala", "laalaa")
+PROJECT_APPS = ["adviser", "fala", "laalaa"]
 
 INSTALLED_APPS += PROJECT_APPS
 

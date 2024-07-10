@@ -7,6 +7,8 @@
 {% import "macros/element.html" as Element %}
 {% import "macros/forms.html" as Form %}
 
+{%- from 'govuk_frontend_jinja/components/button/macro.html' import govukButton -%}
+
 {% block content %}
   <div class="govuk-grid-column-two-thirds">
       <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
@@ -95,7 +97,13 @@
                   </div>
                 </fieldset>
               </div>
-              <button type="submit" class="govuk-button govuk-!-margin-bottom-2" id="searchButton" name="search">Search</button>
+              {{ govukButton({
+                'text': "Search",
+                'type': "submit",
+                'classes': "govuk-!-margin-bottom-2",
+                'id': "searchButton",
+                'name': "search"
+              }) }}
             </div>
           </form>
         </div>

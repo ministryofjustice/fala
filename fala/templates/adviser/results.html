@@ -22,8 +22,8 @@
         {% if form.name.value() %}
           <li class="govuk-body notranslate" role="listitem" translate="no">Organisation: {{ form.name.value() }}</li>
         {% endif %}
-        {% if category_selection %}
-          <li class="govuk-body notranslate" role="listitem" translate="no">Categories: {{ category_selection }} </li>
+        {% if form|category_selection %}
+          <li class="govuk-body notranslate" role="listitem" translate="no">Categories: {{ form|category_selection }} </li>
         {% endif %}
       </ul>
 
@@ -31,7 +31,7 @@
         <input type="hidden" name="postcode" value="{{ form.postcode.value() }}">
         <input type="hidden" name="name" value="{{ form.name.value() }}">
         {% for value, label_text in form.categories.field.choices %}
-          {% if label_text in category_selection.split(", ") %}
+          {% if label_text in form|category_selection_list %}
             <input type="hidden" name="categories" value="{{ value }}">
           {% endif %}
         {% endfor %}
@@ -111,7 +111,7 @@
         {% if current_page.has_previous() %}
           <div class="govuk-pagination__prev">
             {% if categories|length %}
-              <a class="govuk-link govuk-pagination__link" href="{{ url('search') }}?page={{ current_page.previous_page_number() }}&{{ params|urlencode }}&{{ categories|urlencode }}" rel="prev">
+              <a class="govuk-link govuk-pagination__link" href="{{ url('search') }}?page={{ current_page.previous_page_number() }}&{{ params|urlencode }}&{{ form|category_tuples|urlencode }}" rel="prev">
             {% else %}
               <a class="govuk-link govuk-pagination__link" href="{{ url('search') }}?page={{ current_page.previous_page_number() }}&{{ params|urlencode }}" rel="prev">
             {% endif %}

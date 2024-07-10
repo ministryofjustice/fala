@@ -28,12 +28,15 @@ django-jinja==2.10.2
     # via -r requirements/source/requirements-base.in
 django-storages==1.13.2
     # via -r requirements/source/requirements-base.in
+govuk-frontend-jinja==3.1.0
+    # via -r requirements/source/requirements-base.in
 idna==3.7
     # via requests
 jinja2==3.1.4
     # via
     #   -r requirements/source/requirements-base.in
     #   django-jinja
+    #   govuk-frontend-jinja
 logstash-formatter==0.5.17
     # via -r requirements/source/requirements-base.in
 markupsafe==2.1.5
