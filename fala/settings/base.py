@@ -9,6 +9,8 @@ from sentry_sdk.integrations.django import DjangoIntegration
 # Load environment variables from .env file
 from dotenv import load_dotenv
 
+from django_jinja.builtins import DEFAULT_EXTENSIONS
+
 # With override set to True the value of the variable in `.env` is loaded first https://pypi.org/project/python-dotenv/#variable-expansion
 load_dotenv(override=True)
 
@@ -68,11 +70,22 @@ MEDIA_URL = "/media/"
 
 STATIC_URL = "/static/"
 STATIC_ROOT = root("static")
+GOVUK_ASSETS_ROOT = root("node_modules/govuk-frontend/dist/govuk/assets")
 
 project_root = abspath(root(".."))
 
 # Additional locations of static files
 STATICFILES_DIRS = (root("assets"),)
+
+WEBPACK_LOADER = {
+    "DEFAULT": {
+        "BUNDLE_DIR_NAME": "webpack_bundles/",
+        "CACHE": not DEBUG,
+        "STATS_FILE": root("webpack-stats.json"),
+        "POLL_INTERVAL": 0.1,
+        "IGNORE": [r".+\.hot-update.js", r".+\.map"],
+    }
+}
 
 # List of finder classes that know how to find static files in
 # various locations.
@@ -86,16 +99,25 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "SET_THIS_IN_ENV")
 
 TEMPLATES = [
     {
+        # this sets the template engine name and the backend’s import path
+        # newer version of `django-jinja` you can use `django_jinja.jinja2.Jinja2`
         "BACKEND": "django_jinja.backend.Jinja2",
-        "DIRS": [root("templates"), abspath(root(project_root, "node_modules"))],
+        "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
+            # need this so we know which files to pick up in 'templates' folder
+            "extensions": DEFAULT_EXTENSIONS
+            + [
+                "webpack_loader.contrib.jinja2ext.WebpackExtension",
+            ],
             "match_extension": ".html",
+            # this is where we tell jinja2 the packages to use in it's environment
+            "environment": "fala.jinja2.environment",
             "context_processors": [
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",
-                # 'django.contrib.auth.context_processors.auth',
                 "django.contrib.messages.context_processors.messages",
+                "django.template.context_processors.i18n",
                 "adviser.context_processors.current_environment",
             ],
         },
@@ -106,8 +128,6 @@ MIDDLEWARE_CLASSES = (
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
-    # 'django.contrib.auth.middleware.AuthenticationMiddleware',
-    # 'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     "django.contrib.messages.middleware.MessageMiddleware",
 )
 
@@ -184,9 +204,17 @@ ROOT_URLCONF = "fala.urls"
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = "fala.wsgi.application"
 
-INSTALLED_APPS = ("django.contrib.sessions", "django.contrib.messages", "django.contrib.staticfiles", "requests")
+INSTALLED_APPS = [
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "requests",
+    "govuk_frontend_jinja",
+    "django_jinja",
+    "webpack_loader",
+]
 
-PROJECT_APPS = ("adviser", "fala", "laalaa")
+PROJECT_APPS = ["adviser", "fala", "laalaa"]
 
 INSTALLED_APPS += PROJECT_APPS
 
