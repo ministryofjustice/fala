@@ -10,7 +10,7 @@ beautifulsoup4==4.12.3
     # via -r requirements/source/requirements-dev.in
 build==1.2.1
     # via pip-tools
-certifi==2024.7.4
+certifi==2024.2.2
     # via
     #   requests
     #   sentry-sdk
