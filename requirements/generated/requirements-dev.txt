@@ -10,7 +10,7 @@ beautifulsoup4==4.12.3
     # via -r requirements/source/requirements-dev.in
 build==1.2.1
     # via pip-tools
-certifi==2024.2.2
+certifi==2024.7.4
     # via
     #   requests
     #   sentry-sdk
@@ -37,8 +37,6 @@ django-extended-choices==0.3.0
 django-jinja==2.10.2
     # via -r requirements/source/requirements-base.in
 django-storages==1.13.2
-    # via -r requirements/source/requirements-base.in
-django-webpack-loader==3.1.0
     # via -r requirements/source/requirements-base.in
 filelock==3.14.0
     # via virtualenv
