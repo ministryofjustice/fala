@@ -64,6 +64,33 @@ class ResultsPageWithBothOrgAndPostcodeTest(SimpleTestCase):
         response = self.client.get(self.url, self.data)
         self.assertNotContains(response, '<div class="govuk-pagination__previous">')
 
+@override_settings(FEATURE_FLAG_NO_MAP=True)
+class PaginationTest(SimpleTestCase):
+    client = Client()
+    url = reverse("search")
+
+    data = {"postcode": "PE30", "categories": "deb", "page" : "2"}
+
+    def test_prev_pagination_link_contains_category(self):
+        response = self.client.get(self.url, self.data)
+        soup = bs4.BeautifulSoup(response.content, "html.parser")
+        next = soup.find("div", class_="govuk-pagination__prev")
+        link = next.find("a").get('href')
+        self.assertIn("deb", link)
+
+    def test_next_pagination_link_contains_category(self):
+        response = self.client.get(self.url, self.data)
+        soup = bs4.BeautifulSoup(response.content, "html.parser")
+        next = soup.find("div", class_="govuk-pagination__next")
+        link = next.find("a").get('href')
+        self.assertIn("deb", link)
+
+    def test_2nd_pagination_link_contains_category(self):
+        response = self.client.get(self.url, self.data)
+        soup = bs4.BeautifulSoup(response.content, "html.parser")
+        next = soup.find("li", class_="govuk-pagination__item")
+        link = next.find("a").get('href')
+        self.assertIn("deb", link)
 
 @override_settings(FEATURE_FLAG_NO_MAP=True)
 class ResultsPageWithJustPostcodeTest(SimpleTestCase):
