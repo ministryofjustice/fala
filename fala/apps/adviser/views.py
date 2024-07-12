@@ -109,7 +109,6 @@ class SearchView(ListView):
                 "data": self.form.search(),
                 "current_url": self.current_url,
                 "GOOGLE_MAPS_API_KEY": settings.GOOGLE_MAPS_API_KEY,
-                "FEATURE_FLAG_NO_MAP": settings.FEATURE_FLAG_NO_MAP,
                 "CHECK_LEGAL_AID_URL": settings.CHECK_LEGAL_AID_URL,
             }
 

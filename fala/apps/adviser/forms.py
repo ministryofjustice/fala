@@ -3,7 +3,6 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
 from django.utils.safestring import mark_safe
-from django.conf import settings
 
 import laalaa.api as laalaa
 import re
@@ -37,15 +36,6 @@ class CapitalisedPostcodeField(forms.CharField):
 
 
 class AdviserSearchForm(forms.Form):
-    # Only used with FEATURE_FLAG_NO_MAP False
-    REGION_NAMES = {
-        Region.NI: "Northern Ireland. ",
-        Region.IOM: "the Isle of Man. ",
-        Region.JERSEY: "Jersey. ",
-        Region.GUERNSEY: "Guernsey. ",
-        Region.SCOTLAND: "Scotland. ",
-    }
-
     page = forms.IntegerField(required=False, widget=forms.HiddenInput())
 
     postcode = CapitalisedPostcodeField(
@@ -80,11 +70,6 @@ class AdviserSearchForm(forms.Form):
     def __init__(self, *args, **kwargs):
         kwargs.setdefault("label_suffix", "")
         super(AdviserSearchForm, self).__init__(*args, **kwargs)
-        if not settings.FEATURE_FLAG_NO_MAP:
-            self.fields["postcode"].label = _("Enter postcode")
-            self.fields["postcode"].help_text = _(
-                "For example, <span class='notranslate' translate='no'>SW1H 9AJ</span>"
-            )
 
     def clean(self):
         data = self.cleaned_data
