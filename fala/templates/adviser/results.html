@@ -111,7 +111,7 @@
         {% set current_page = pages.current_page() %}
         {% if current_page.has_previous() %}
           <div class="govuk-pagination__prev">
-            {% if categories|length %}
+            {% if form|category_tuples|length %}
               <a class="govuk-link govuk-pagination__link" href="{{ url('search') }}?page={{ current_page.previous_page_number() }}&{{ params|urlencode }}&{{ form|category_tuples|urlencode }}" rel="prev">
             {% else %}
               <a class="govuk-link govuk-pagination__link" href="{{ url('search') }}?page={{ current_page.previous_page_number() }}&{{ params|urlencode }}" rel="prev">
