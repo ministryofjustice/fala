@@ -285,7 +285,7 @@ workflows:
           context: laa-fala
 
       - deploy_with_helm:
-          name: UAT Ephemeral deploy
+          name: Deploy UAT branch
           environment: staging
           requires:
             - build
@@ -297,6 +297,10 @@ workflows:
           type: approval
           requires:
             - playwright
+          filters:
+            branches:
+              only:
+                - main
 
       - deploy:
           name: Legacy staging deploy
@@ -306,6 +310,10 @@ workflows:
           context:
             - laa-fala
             - laa-fala-live-staging
+          filters:
+            branches:
+              only:
+                - main
 
       - deploy_with_helm:
           name: Helm Staging Deploy
@@ -324,6 +332,10 @@ workflows:
           name: deploy_grafana
           requires:
             - staging_deploy_approval
+          filters:
+            branches:
+              only:
+                - main
           context:
             - laa-fala
             - laa-fala-live-staging
