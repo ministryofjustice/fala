@@ -132,8 +132,8 @@
             {% else %}
             <li class="govuk-pagination__item">
             {% endif %}
-              {% if categories|length %}
-              <a class="govuk-link govuk-pagination__link" href="{{ url('search') }}?page={{ page_num }}&{{ params|urlencode }}&{{ categories|urlencode }}" aria-label="Page {{ page_num }}" aria-current="page">
+              {% if form|category_tuples|length %}
+              <a class="govuk-link govuk-pagination__link" href="{{ url('search') }}?page={{ page_num }}&{{ params|urlencode }}&{{ form|category_tuples|urlencode }}" aria-label="Page {{ page_num }}" aria-current="page">
               {% else %}
               <a class="govuk-link govuk-pagination__link" href="{{ url('search') }}?page={{ page_num }}&{{ params|urlencode }}" aria-label="Page {{ page_num }}" aria-current="page">
               {% endif %}
@@ -144,8 +144,8 @@
         </ul>
         {% if current_page.has_next() %}
           <div class="govuk-pagination__next">
-             {% if categories|length %}
-              <a class="govuk-link govuk-pagination__link" href="{{ url('search') }}?page={{ current_page.next_page_number() }}&{{ params|urlencode }}&{{ categories|urlencode }}" rel="next">
+             {% if form|category_tuples|length %}
+              <a class="govuk-link govuk-pagination__link" href="{{ url('search') }}?page={{ current_page.next_page_number() }}&{{ params|urlencode }}&{{ form|category_tuples|urlencode }}" rel="next">
              {% else %}
               <a class="govuk-link govuk-pagination__link" href="{{ url('search') }}?page={{ current_page.next_page_number() }}&{{ params|urlencode }}" rel="next">
              {% endif %}
