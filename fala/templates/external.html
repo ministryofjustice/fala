@@ -14,11 +14,7 @@
 {% endblock %}
 
 {% block main_js %}
-  <script nonce="{{request.csp_nonce}}" type="module" src="{{ static('js/all.js') }}"></script>
-  <script nonce="{{request.csp_nonce}}" type="module">
-      import { initAll } from "{{ static('js/all.js') }}";
-      initAll();
-  </script>
+  {{ render_bundle('main', 'js') }}
 {% endblock %}
 
 {% block template_type %}external{% endblock %}

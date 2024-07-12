@@ -112,6 +112,7 @@ jobs:
             source env/bin/activate
             python manage.py test
           environment:
+            DJANGO_SETTINGS_MODULE: "fala.settings.test"
             LAALAA_API_HOST: "https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk"
             DB_NAME: test
             DB_USER: postgres

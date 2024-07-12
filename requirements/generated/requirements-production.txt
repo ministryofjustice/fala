@@ -28,6 +28,8 @@ django-jinja==2.10.2
     # via -r requirements/source/requirements-base.in
 django-storages==1.13.2
     # via -r requirements/source/requirements-base.in
+django-webpack-loader==3.1.0
+    # via -r requirements/source/requirements-base.in
 govuk-frontend-jinja==3.1.0
     # via -r requirements/source/requirements-base.in
 idna==3.7
