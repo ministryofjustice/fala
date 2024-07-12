@@ -5,6 +5,7 @@ from django.views.generic import TemplateView, ListView
 
 from .forms import AdviserSearchForm
 from .laa_laa_paginator import LaaLaaPaginator
+from laalaa.api import PROVIDER_CATEGORIES
 from .regions import Region
 
 
@@ -82,13 +83,25 @@ class SearchView(ListView):
                 "postcode": self._form.cleaned_data["postcode"],
                 "name": self._form.cleaned_data["name"],
             }
+            # create list of tuples which can be passed to urlencode for pagination links
+            categories = [("categories", c) for c in self._form.cleaned_data["categories"]]
             return {
                 "form": self._form,
                 "data": self._data,
                 "pages": pages,
                 "params": params,
                 "FEATURE_FLAG_SURVEY_MONKEY": settings.FEATURE_FLAG_SURVEY_MONKEY,
+                "categories": categories,
+                "category_selection": self._display_category(),
             }
+
+        def _display_category(self):
+            if "categories" in self._form.cleaned_data:
+                categories = [PROVIDER_CATEGORIES[cat] for cat in self._form.cleaned_data["categories"]]
+                formatted_categories = ", ".join(map(str, categories))
+
+                return formatted_categories
+            return []
 
     class OldMapState(object):
         def __init__(self, form, current_url):

@@ -4,7 +4,6 @@ import re
 from urllib.parse import urlparse, parse_qs, quote
 from django_jinja import library
 from jinja2 import pass_context
-from laalaa.api import PROVIDER_CATEGORIES
 
 
 @library.filter
@@ -54,27 +53,3 @@ def google_map_params(item):
         return {"api": 1, "query": address}
     else:
         return {"api": 1, "query": postcode}
-
-
-@library.filter
-def category_tuples(form):
-    # create list of tuples which can be passed to urlencode for pagination links
-    return [("categories", c) for c in form.cleaned_data["categories"]]
-
-
-@library.filter
-def category_selection(form):
-    if "categories" in form.cleaned_data:
-        categories = [PROVIDER_CATEGORIES[cat] for cat in form.cleaned_data["categories"]]
-        formatted_categories = ", ".join(map(str, categories))
-
-        return formatted_categories
-    return None
-
-
-@library.filter
-def category_selection_list(form):
-    if "categories" in form.cleaned_data:
-        categories = [PROVIDER_CATEGORIES[cat] for cat in form.cleaned_data["categories"]]
-        return map(str, categories)
-    return []
