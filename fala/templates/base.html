@@ -37,7 +37,7 @@
 {% endblock %}
 
 {% block stylesheets %}
-  {{ render_bundle('main', 'css') }}
+  <link href="{{ static('webpack_bundles/css/main.css') }}" rel="stylesheet">
 {% endblock %}
 
 {% block page_title %}{{ title }}{% endblock %}
