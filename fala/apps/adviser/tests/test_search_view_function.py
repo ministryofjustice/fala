@@ -67,31 +67,55 @@ class PaginationTest(SimpleTestCase):
     client = Client()
     url = reverse("search")
 
-    data = {"postcode": "PE30", "categories": "deb", "page": "2"}
-
     def test_prev_pagination_link_contains_category(self):
-        response = self.client.get(self.url, self.data)
+        data = {"postcode": "PE30", "categories": "deb", "page": "2"}
+
+        response = self.client.get(self.url, data)
         soup = bs4.BeautifulSoup(response.content, "html.parser")
         next = soup.find("div", class_="govuk-pagination__prev")
         link = next.find("a").get("href")
         self.assertEqual("/search?page=1&postcode=PE30&name=&categories=deb", link)
 
+    def test_prev_pagination_link_with_multiple_categories(self):
+        data = {"postcode": "PE30", "categories": ["deb", "aap"], "page": "2"}
+
+        response = self.client.get(self.url, data)
+        soup = bs4.BeautifulSoup(response.content, "html.parser")
+        next = soup.find("div", class_="govuk-pagination__prev")
+        link = next.find("a").get("href")
+        self.assertEqual("/search?page=1&postcode=PE30&name=&categories=deb&categories=aap", link)
+
+    def test_pagination_link_without_category(self):
+        data = {"postcode": "PE30", "page": "2"}
+
+        response = self.client.get(self.url, data)
+        soup = bs4.BeautifulSoup(response.content, "html.parser")
+        next = soup.find("div", class_="govuk-pagination__prev")
+        link = next.find("a").get("href")
+        self.assertEqual("/search?page=1&postcode=PE30&name=", link)
+
     def test_next_pagination_link_contains_category(self):
-        response = self.client.get(self.url, self.data)
+        data = {"postcode": "PE30", "categories": "deb", "page": "2"}
+
+        response = self.client.get(self.url, data)
         soup = bs4.BeautifulSoup(response.content, "html.parser")
         next = soup.find("div", class_="govuk-pagination__next")
         link = next.find("a").get("href")
         self.assertEqual("/search?page=3&postcode=PE30&name=&categories=deb", link)
 
     def test_2nd_pagination_link_contains_category(self):
-        response = self.client.get(self.url, self.data)
+        data = {"postcode": "PE30", "categories": "deb", "page": "2"}
+
+        response = self.client.get(self.url, data)
         soup = bs4.BeautifulSoup(response.content, "html.parser")
         next = soup.find("li", class_="govuk-pagination__item")
         link = next.find("a").get("href")
         self.assertEqual("/search?page=1&postcode=PE30&name=&categories=deb", link)
 
     def test_3nd_pagination_link_contains_category(self):
-        response = self.client.get(self.url, self.data)
+        data = {"postcode": "PE30", "categories": "deb", "page": "2"}
+
+        response = self.client.get(self.url, data)
         soup = bs4.BeautifulSoup(response.content, "html.parser")
         next = soup.findAll("li", class_="govuk-pagination__item")[2]
         link = next.find("a").get("href")
