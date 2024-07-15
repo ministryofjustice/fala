@@ -1,9 +1,8 @@
-from django.test import SimpleTestCase, Client, override_settings
+from django.test import SimpleTestCase, Client
 from django.urls import reverse
 import bs4
 
 
-@override_settings(FEATURE_FLAG_NO_MAP=True)
 class PostcodeValidationTest(SimpleTestCase):
     client = Client()
     url = reverse("search")
@@ -45,7 +44,6 @@ class PostcodeValidationTest(SimpleTestCase):
         self.assertEqual(change_search_button.text.strip(), "Change search")
 
 
-@override_settings(FEATURE_FLAG_NO_MAP=True)
 class InvalidEnglishPostcodeTest(SimpleTestCase):
     client = Client()
     url = reverse("search")

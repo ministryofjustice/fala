@@ -35,17 +35,10 @@ env:
         name: rds-postgresql-instance-output
         key: database_name
   {{ end }}
-  - name: FEATURE_FLAG_NO_MAP
-    value: {{ .Values.feature_flags.no_map }}
   - name: FEATURE_FLAG_SURVEY_MONKEY
     value: {{ .Values.feature_flags.survey_monkey }}
   - name: ALLOWED_HOSTS
     value: {{ .Values.allowed_hosts }}
-  - name: GOOGLE_MAPS_API_KEY
-    valueFrom:
-      secretKeyRef:
-        name: service-secrets
-        key: GOOGLE_MAPS_API_KEY
   - name: LAALAA_API_HOST
     value: {{ .Values.laalaa_api.host }}
   - name: ENVIRONMENT

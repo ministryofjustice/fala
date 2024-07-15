@@ -3,7 +3,6 @@ from django.test import SimpleTestCase, Client, override_settings
 from django.urls import reverse
 
 
-@override_settings(FEATURE_FLAG_NO_MAP=True)
 class SearchViewFunctionTest(SimpleTestCase):
     client = Client()
 
@@ -14,7 +13,6 @@ class SearchViewFunctionTest(SimpleTestCase):
         self.assertEqual({"postcode": ["Enter a valid postcode"]}, response.context_data["form"].errors)
 
 
-@override_settings(FEATURE_FLAG_NO_MAP=True)
 class ResultsPageWithBothOrgAndPostcodeTest(SimpleTestCase):
     client = Client()
     url = reverse("search")
@@ -65,7 +63,6 @@ class ResultsPageWithBothOrgAndPostcodeTest(SimpleTestCase):
         self.assertNotContains(response, '<div class="govuk-pagination__previous">')
 
 
-@override_settings(FEATURE_FLAG_NO_MAP=True)
 class ResultsPageWithJustPostcodeTest(SimpleTestCase):
     client = Client()
     url = reverse("search")
@@ -105,7 +102,6 @@ class ResultsPageWithJustPostcodeTest(SimpleTestCase):
         self.assertEqual(content, "Postcode: PE30Categories: Debt Change search")
 
 
-@override_settings(FEATURE_FLAG_NO_MAP=True)
 class ResearchBannerTest(SimpleTestCase):
     client = Client()
     url = reverse("search")
@@ -125,7 +121,6 @@ class ResearchBannerTest(SimpleTestCase):
         self.assertNotContains(response, self.research_message)
 
 
-@override_settings(FEATURE_FLAG_NO_MAP=True)
 class ResultsPageWithJustOrgTest(SimpleTestCase):
     client = Client()
     url = reverse("search")
@@ -141,7 +136,6 @@ class ResultsPageWithJustOrgTest(SimpleTestCase):
         self.assertEqual(content, "Organisation: fooCategories: Debt, Education Change search")
 
 
-@override_settings(FEATURE_FLAG_NO_MAP=True)
 class NewSearchViewTemplate(SimpleTestCase):
     client = Client()
 
@@ -157,7 +151,6 @@ class NewSearchViewTemplate(SimpleTestCase):
         self.assertContains(response, "laa-fala__grey-box")
 
 
-@override_settings(FEATURE_FLAG_NO_MAP=True)
 class NoResultsTest(SimpleTestCase):
     client = Client()
 
@@ -174,13 +167,6 @@ class AccessibilityViewTest(SimpleTestCase):
 
     url = reverse("accessibility_statement")
 
-    @override_settings(FEATURE_FLAG_NO_MAP=True)
     def test_shows_new_accessibility_statement(self):
         response = self.client.get(self.url)
         self.assertContains(response, "Accessibility statement for Find a legal advisor")
-
-    @override_settings(FEATURE_FLAG_NO_MAP=False)
-    def test_shows_old_accessibility_statement(self):
-        response = self.client.get(self.url)
-        self.assertContains(response, "Accessibility statement")
-        self.assertNotContains(response, "Accessibility statement for Find a legal advisor")

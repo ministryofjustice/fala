@@ -45,8 +45,6 @@ spec:
         env:
         - name: ALLOWED_HOSTS
           value: ".laa-fala-production.apps.live-1.cloud-platform.service.justice.gov.uk .find-legal-advice.justice.gov.uk"
-        - name: GOOGLE_MAPS_API_KEY
-          value: AIzaSyC3yE4iqalLcys8ZbjdZAPjDpcYuwd2GME
         - name: LAALAA_API_HOST
           value: https://laa-legal-adviser-api-production.cloud-platform.service.justice.gov.uk
         - name: ENVIRONMENT
@@ -63,7 +61,5 @@ spec:
             secretKeyRef:
               name: secret-key
               key: SECRET_KEY
-        - name: FEATURE_FLAG_NO_MAP
-          value: "enabled"
         - name: FEATURE_FLAG_SURVEY_MONKEY
           value: "enabled"

@@ -3,7 +3,6 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
 from django.utils.safestring import mark_safe
-from django.conf import settings
 
 import laalaa.api as laalaa
 import re
@@ -37,15 +36,6 @@ class CapitalisedPostcodeField(forms.CharField):
 
 
 class AdviserSearchForm(forms.Form):
-    # Only used with FEATURE_FLAG_NO_MAP False
-    REGION_NAMES = {
-        Region.NI: "Northern Ireland. ",
-        Region.IOM: "the Isle of Man. ",
-        Region.JERSEY: "Jersey. ",
-        Region.GUERNSEY: "Guernsey. ",
-        Region.SCOTLAND: "Scotland. ",
-    }
-
     page = forms.IntegerField(required=False, widget=forms.HiddenInput())
 
     postcode = CapitalisedPostcodeField(
@@ -80,11 +70,6 @@ class AdviserSearchForm(forms.Form):
     def __init__(self, *args, **kwargs):
         kwargs.setdefault("label_suffix", "")
         super(AdviserSearchForm, self).__init__(*args, **kwargs)
-        if not settings.FEATURE_FLAG_NO_MAP:
-            self.fields["postcode"].label = _("Enter postcode")
-            self.fields["postcode"].help_text = _(
-                "For example, <span class='notranslate' translate='no'>SW1H 9AJ</span>"
-            )
 
     def clean(self):
         data = self.cleaned_data
@@ -92,16 +77,9 @@ class AdviserSearchForm(forms.Form):
         if not postcode and not data.get("name"):
             raise forms.ValidationError(_("Enter a postcode or an organisation name"))
         else:
-            if settings.FEATURE_FLAG_NO_MAP:
-                if postcode and self.region == Region.ENGLAND_OR_WALES and not self._valid_postcode(postcode):
-                    self.add_error("postcode", (_("Enter a valid postcode")))
-            else:
-                region = self.region
-                if region != Region.ENGLAND_OR_WALES:
-                    region_error = self.REGION_NAMES[region]
-                    msg1 = "This service does not cover "
-                    msg2 = "Try a postcode, town or city in England or Wales."
-                    self.add_error("postcode", "%s %s" % (_(" ".join((msg1, region_error))), _(msg2)))
+            if postcode and self.region == Region.ENGLAND_OR_WALES and not self._valid_postcode(postcode):
+                self.add_error("postcode", (_("Enter a valid postcode")))
+
         return data
 
     @property

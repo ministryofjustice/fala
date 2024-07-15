@@ -225,11 +225,7 @@ if "SENTRY_DSN" in os.environ:
 
 LAALAA_API_HOST = os.environ.get("LAALAA_API_HOST", None)
 
-FEATURE_FLAG_NO_MAP = os.environ.get("FEATURE_FLAG_NO_MAP", "").lower() == "enabled"
-
 ENVIRONMENT = os.environ.get("ENVIRONMENT", "unknown")
-
-GOOGLE_MAPS_API_KEY = os.environ.get("GOOGLE_MAPS_API_KEY", "")
 
 CHECK_LEGAL_AID_URL = "https://www.gov.uk/check-legal-aid"
 
