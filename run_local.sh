@@ -8,6 +8,7 @@ echo "running environment $ENVIRONMENT"
 docker-compose down --remove-orphans
 
 docker-compose up -d --build
+NODE_ENV=production npm run build
 docker-compose exec webapp python3 manage.py migrate
 docker-compose logs -f webapp
 
