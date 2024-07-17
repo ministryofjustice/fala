@@ -1,5 +1,5 @@
 name: "Delete UAT deployment"
-description: 'Deletes a UAT deployment with a name that matches the merged or closed branch'
+description: 'Deletes a FALA UAT/Staging deployment with a name that matches the merged or closed branch'
 inputs:
   k8s_cluster:
     description: "Kubernetes cluster name"
@@ -36,9 +36,10 @@ runs:
       env:
         BRANCH_NAME: ${{ inputs.branch_name || 'not_given' }}
       run: |
+        echo "This is the branch name $BRANCH_NAME"
         if [ $BRANCH_NAME == "not_given" ]
         then
-          if [ $GITHUB_EVENT_NAME == "pull_request" ]
+          if [ $GITHUB_EVENT_NAME == "pull_request_target" ]
           then
             branch=$GITHUB_HEAD_REF
           else
