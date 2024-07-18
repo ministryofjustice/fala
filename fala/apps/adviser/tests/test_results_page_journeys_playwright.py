@@ -2,7 +2,7 @@ from playwright.sync_api import expect
 from fala.playwright.setup import PlaywrightTestSetup
 
 
-class TestEndToEndJourneys(PlaywrightTestSetup):
+class ResultPageEndToEndJourneys(PlaywrightTestSetup):
 
     def setUp(self) -> None:
         self.page = self.browser.new_page()
