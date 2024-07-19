@@ -2,7 +2,7 @@ import os
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from playwright.sync_api import sync_playwright
 from playwright.sync_api import expect
-from fala.apps.adviser.tests.page_objects import ResultsPage, OtherRegionPage
+from fala.apps.adviser.tests.page_objects import ResultsPage, OtherRegionPage, SearchPage
 
 
 class PlaywrightTestSetup(StaticLiveServerTestCase):
@@ -34,3 +34,8 @@ class PlaywrightTestSetup(StaticLiveServerTestCase):
         page.get_by_role("button", name="Search").click()
         expect(page.locator("p")).to_have_text("This search only covers England and Wales")
         return OtherRegionPage(page)
+
+    def visit_search_page(self):
+        page = self.browser.new_page()
+        page.goto(f"{self.live_server_url}")
+        return SearchPage(page)
