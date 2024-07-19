@@ -26,6 +26,10 @@ class ResultsPage(FalaPage):
     def listitem_for(self, postcode):
         return self._page.get_by_role("listitem").filter(has_text=f"Postcode: {postcode}")
 
+    def change_search(self):
+        self.item_from_text("Change Search").click()
+        return SearchPage(self._page)
+
 
 class OtherRegionPage(FalaPage):
     def change_search(self):
@@ -34,4 +38,6 @@ class OtherRegionPage(FalaPage):
 
 
 class SearchPage(FalaPage):
-    pass
+    @property
+    def postcode_input(self):
+        return self._page.get_by_label("Postcode")
