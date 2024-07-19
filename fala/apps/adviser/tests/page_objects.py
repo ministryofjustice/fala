@@ -1,7 +1,12 @@
-class ResultsPage(object):
+class FalaPage(object):
     def __init__(self, page):
         self._page = page
 
+    @property
+    def h1(self):
+        return self._page.locator("h1")
+
+class ResultsPage(FalaPage):
     @property
     def next_link(self):
         return self._page.locator('span.govuk-pagination__link-title:has-text(" Next")')
@@ -9,10 +14,6 @@ class ResultsPage(object):
     @property
     def pagination_link_title(self):
         return self._page.locator("span.govuk-pagination__link-title")
-
-    @property
-    def h1(self):
-        return self._page.locator("h1")
 
     @property
     def previous_link(self):
@@ -24,16 +25,10 @@ class ResultsPage(object):
     def item_from_text(self, text):
         return self._page.get_by_text(text)
 
-class OtherRegionPage(object):
-    def __init__(self, page):
-        self._page = page
+class OtherRegionPage(FalaPage):
+    pass
 
 
-class SearchPage(object):
-    def __init__(self, page):
-        self._page = page
-
-    @property
-    def h1(self):
-        return self._page.locator("h1")
+class SearchPage(FalaPage):
+    pass
 

@@ -24,8 +24,10 @@ class PlaywrightTestSetup(StaticLiveServerTestCase):
         page.goto(f"{self.live_server_url}")
         page.get_by_label("Postcode").fill(postcode)
         page.get_by_role("button", name="Search").click()
-        expect(page.locator("h1")).to_have_text("Search results")
-        return ResultsPage(page)
+        if "Search results" in page.content():
+            return ResultsPage(page)
+        else:
+            return OtherRegionPage(page)
 
     def visit_other_region_page(self, postcode):
         page = self.browser.new_page()
