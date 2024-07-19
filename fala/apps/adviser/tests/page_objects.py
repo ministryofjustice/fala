@@ -22,6 +22,11 @@ class ResultsPage(FalaPage):
     @property
     def previous_link(self):
         return self._page.locator('span.govuk-pagination__link-title:has-text(" Previous")')
+    
+    @property
+    def change_search_button(self):
+        return self._page.get_by_role("button", id="changeSearchButton")
+
 
     def listitem_for(self, postcode):
         return self._page.get_by_role("listitem").filter(has_text=f"Postcode: {postcode}")
@@ -34,4 +39,13 @@ class OtherRegionPage(FalaPage):
 
 
 class SearchPage(FalaPage):
-    pass
+    def __init__(self, page):
+        self._page = page
+
+    @property
+    def postcode_input_field(self):
+        return self._page.get_by_label("Postcode")
+
+    @property
+    def search_button(self):
+        return self._page.get_by_role("button", id="searchButton")
