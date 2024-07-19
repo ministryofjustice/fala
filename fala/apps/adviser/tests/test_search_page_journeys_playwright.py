@@ -18,3 +18,7 @@ class SearchPageEndToEndJourneys(PlaywrightTestSetup):
                 expect(page.h1).to_have_text("Search results")
                 expect(page.listitem_for(postcode)).to_be_visible()
                 expect(page.item_from_text("in order of closeness")).to_be_visible()
+
+    def test_invlaid_postcode_journey(self):
+        page = self.redirected_to_search_page()
+        expect(page.error_summary).to_be_visible()

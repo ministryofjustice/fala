@@ -27,7 +27,6 @@ class ResultsPage(FalaPage):
     def change_search_button(self):
         return self._page.get_by_role("button", id="changeSearchButton")
 
-
     def listitem_for(self, postcode):
         return self._page.get_by_role("listitem").filter(has_text=f"Postcode: {postcode}")
 
@@ -50,6 +49,10 @@ class SearchPage(FalaPage):
     @property
     def search_button(self):
         return self._page.get_by_role("button", id="searchButton")
+
+    @property
+    def error_summary(self):
+        return self._page.locator("css=govuk-error-summary")
 
     def checkbox_by_label(self, label):
         return self._page.get_by_label(label)
