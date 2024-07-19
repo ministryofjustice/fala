@@ -52,7 +52,7 @@ class SearchPage(FalaPage):
 
     @property
     def error_summary(self):
-        return self._page.locator("css=govuk-error-summary")
+        return self._page.locator("css=.govuk-error-summary")
 
     def checkbox_by_label(self, label):
         return self._page.get_by_label(label)
