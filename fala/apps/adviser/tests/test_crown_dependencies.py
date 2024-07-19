@@ -15,6 +15,8 @@ class CrownDependenciesTest(PlaywrightTestSetup):
         results_page = self.visit_results_page("TD13", checkboxes)
         expect(results_page.item_from_text("Legal Aid in Scotland")).to_be_visible()
         search_page = results_page.change_search()
+
+        # after switching back to the change search page, postcode and checkboxes are preserved
         expect(search_page.postcode_input_field).to_have_value("TD13")
         for checkbox in checkboxes:
             expect(search_page.checkbox_by_label(checkbox)).to_be_checked()
