@@ -19,6 +19,6 @@ class SearchPageEndToEndJourneys(PlaywrightTestSetup):
                 expect(page.listitem_for(postcode)).to_be_visible()
                 expect(page.item_from_text("in order of closeness")).to_be_visible()
 
-    def test_invlaid_postcode_journey(self):
+    def test_invalid_postcode_journey(self):
         page = self.invalid_postcode_search()
         expect(page.error_summary).to_be_visible()
