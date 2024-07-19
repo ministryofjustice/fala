@@ -13,4 +13,4 @@ class CrownDependenciesTest(PlaywrightTestSetup):
         results_page = self.visit_results_page("TD13")
         expect(results_page.item_from_text("Legal Aid in Scotland")).to_be_visible()
         search_page = results_page.change_search()
-        expect(search_page.postcode_input).to_have_value("TD13")
+        expect(search_page.postcode_input_field).to_have_value("TD13")

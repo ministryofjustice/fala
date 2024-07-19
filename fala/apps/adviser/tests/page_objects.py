@@ -44,10 +44,6 @@ class OtherRegionPage(FalaPage):
 
 class SearchPage(FalaPage):
     @property
-    def postcode_input(self):
-        return self._page.get_by_label("Postcode")
-
-    @property
     def postcode_input_field(self):
         return self._page.get_by_label("Postcode")
 
