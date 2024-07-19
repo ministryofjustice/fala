@@ -22,7 +22,7 @@ class ResultsPage(FalaPage):
     @property
     def previous_link(self):
         return self._page.locator('span.govuk-pagination__link-title:has-text(" Previous")')
-    
+
     def select_specific_page(self, page_no):
         return self._page.locator(f'a.govuk-pagination__link:has-text(" {page_no} ")')
 
@@ -63,10 +63,10 @@ class SearchPage(FalaPage):
     @property
     def language_dropdown(self):
         return self._page.locator('select[class="goog-te-combo"]')
-    
+
     def select_specific_page(self, page_no):
         return self._page.locator(f'a.govuk-pagination__link:has-text(" {page_no} ")')
-    
+
     def search(self, postcode):
         self._page.locator("#id_postcode").fill(postcode)
         self._page.locator("#searchButton").click()

@@ -17,4 +17,3 @@ class PaginationResults(PlaywrightTestSetup):
         expect(page.item_from_text("1576 results in order of closeness to M25 3JF.")).to_be_visible()
         page.previous_link.click()
         expect(page.item_from_text("1576 results in order of closeness to M25 3JF.")).to_be_visible()
-
