@@ -28,7 +28,7 @@ class PlaywrightTestSetup(StaticLiveServerTestCase):
         for label in checkbox_labels:
             page.get_by_label(label).check()
         page.get_by_role("button", name="Search").click()
-        if "Search results" in page.content():
+        if page.locator("#changeSearchButton"):
             return ResultsPage(page)
         else:
             return OtherRegionPage(page)
