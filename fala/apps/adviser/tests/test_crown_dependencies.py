@@ -9,8 +9,12 @@ class CrownDependenciesTest(PlaywrightTestSetup):
         search_page = results_page.change_search()
         expect(search_page.item_from_text("Organisation name")).to_be_visible()
 
-    def test_scotland(self):
-        results_page = self.visit_results_page("TD13")
+    def test_scotland_with_persistant_search_and_categories(self):
+        checkboxes = ["Family mediation", "Clinical Negligence"]
+
+        results_page = self.visit_results_page("TD13", checkboxes)
         expect(results_page.item_from_text("Legal Aid in Scotland")).to_be_visible()
         search_page = results_page.change_search()
         expect(search_page.postcode_input_field).to_have_value("TD13")
+        for checkbox in checkboxes:
+            expect(search_page.checkbox_by_label(checkbox)).to_be_checked()

@@ -19,10 +19,14 @@ class PlaywrightTestSetup(StaticLiveServerTestCase):
         cls.browser.close()
         cls.playwright.stop()
 
-    def visit_results_page(self, postcode):
+    def visit_results_page(self, postcode, checkbox_labels=None):
+        if checkbox_labels is None:
+            checkbox_labels = []
         page = self.browser.new_page()
         page.goto(f"{self.live_server_url}")
         page.get_by_label("Postcode").fill(postcode)
+        for label in checkbox_labels:
+            page.get_by_label(label).check()
         page.get_by_role("button", name="Search").click()
         if "Search results" in page.content():
             return ResultsPage(page)
