@@ -41,3 +41,11 @@ class PlaywrightTestSetup(StaticLiveServerTestCase):
         page = self.browser.new_page()
         page.goto(f"{self.live_server_url}")
         return SearchPage(page)
+
+    def redirected_to_search_page(self):
+        page = self.browser.new_page()
+        page.goto(f"{self.live_server_url}")
+        page.get_by_label("Postcode").fill("ZZZ1")
+        page.get_by_role("button", name="Search").click()
+        expect(page.locator("h1")).to_have_text("Find a legal aid adviser or family mediator")
+        return SearchPage(page)
