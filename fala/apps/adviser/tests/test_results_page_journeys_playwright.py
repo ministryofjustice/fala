@@ -3,7 +3,6 @@ from fala.playwright.setup import PlaywrightTestSetup
 
 
 class ResultPageEndToEndJourneys(PlaywrightTestSetup):
-
     def test_pagination(self):
         page = self.visit_results_page("SE11")
         expect(page.pagination_link_title).to_be_visible()

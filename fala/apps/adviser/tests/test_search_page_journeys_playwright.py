@@ -3,7 +3,6 @@ from fala.playwright.setup import PlaywrightTestSetup
 
 
 class SearchPageEndToEndJourneys(PlaywrightTestSetup):
-
     def test_landing_page(self):
         page = self.visit_search_page()
         expect(page.h1).to_have_text("Find a legal aid adviser or family mediator")

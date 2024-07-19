@@ -6,6 +6,7 @@ class FalaPage(object):
     def h1(self):
         return self._page.locator("h1")
 
+
 class ResultsPage(FalaPage):
     @property
     def next_link(self):
@@ -25,10 +26,10 @@ class ResultsPage(FalaPage):
     def item_from_text(self, text):
         return self._page.get_by_text(text)
 
+
 class OtherRegionPage(FalaPage):
     pass
 
 
 class SearchPage(FalaPage):
     pass
-
