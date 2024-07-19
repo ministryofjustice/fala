@@ -78,27 +78,6 @@ class SearchView(ListView):
                 "FEATURE_FLAG_SURVEY_MONKEY": settings.FEATURE_FLAG_SURVEY_MONKEY,
             }
 
-    class OldMapState(object):
-        def __init__(self, form, current_url):
-            self.current_url = current_url
-            self.form = form
-
-        def get_queryset(self):
-            return []
-
-        @property
-        def template_name(self):
-            return "search_old.html"
-
-        def get_context_data(self):
-            return {
-                "form": self.form,
-                "data": self.form.search(),
-                "current_url": self.current_url,
-                "GOOGLE_MAPS_API_KEY": settings.GOOGLE_MAPS_API_KEY,
-                "CHECK_LEGAL_AID_URL": settings.CHECK_LEGAL_AID_URL,
-            }
-
     class OtherJurisdictionState(object):
         REGION_TO_LINK = {
             Region.NI: {
