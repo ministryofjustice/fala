@@ -52,12 +52,20 @@ class SearchPage(FalaPage):
         return self._page.get_by_label("Postcode")
 
     @property
+    def organisation_input_field(self):
+        return self._page.get_by_label("Organisation name")
+
+    @property
     def search_button(self):
         return self.item_from_text("Search")
 
     @property
     def error_summary(self):
         return self._page.locator("css=.govuk-error-summary")
+
+    @property
+    def no_results_alert(self):
+        return self._page.get_by_role("alert")
 
     def checkbox_by_label(self, label):
         return self._page.get_by_label(label)

@@ -33,6 +33,19 @@ class PlaywrightTestSetup(StaticLiveServerTestCase):
         else:
             return OtherRegionPage(page)
 
+    def visit_results_page_with_full_search(self, postcode, organisation, checkbox_labels):
+        page = self.browser.new_page()
+        page.goto(f"{self.live_server_url}")
+        page.get_by_label("Postcode").fill(postcode)
+        page.get_by_label("Organisation name").fill(organisation)
+        for label in checkbox_labels:
+            page.get_by_label(label).check()
+        page.get_by_role("button", name="Search").click()
+        if page.locator("#changeSearchButton"):
+            return ResultsPage(page)
+        else:
+            return OtherRegionPage(page)
+
     def visit_other_region_page(self, postcode):
         page = self.browser.new_page()
         page.goto(f"{self.live_server_url}")
