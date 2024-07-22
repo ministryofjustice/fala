@@ -15,12 +15,12 @@ class TranslationSelection(PlaywrightTestSetup):
         # this tests that the language selection persists when pagination buttons are clicked
         expect(page.h1).to_have_text("Canlyniadau chwilio")
 
-    # def test_translate_to_irish(self):
-    #     page = self.visit_search_page()
-    #     page.language_dropdown.select_option(label="Irish Gaelic")
-    #     expect(page.h1).to_have_text("Aimsigh comhairleoir um chúnamh dlíthiúil nó idirghabhálaí teaghlaigh")
-
     def test_translate_to_scots(self):
         page = self.visit_search_page()
         page.language_dropdown.select_option(label="Scots Gaelic")
         expect(page.h1).to_have_text("Lorg comhairliche taic laghail no eadar-mheadhanair teaghlaich")
+
+    def test_translate_to_irish(self):
+        page = self.visit_search_page()
+        page.language_dropdown.select_option(label="Irish Gaelic")
+        expect(page.h1).to_have_text("Aimsigh comhairleoir um chúnamh dlíthiúil nó idirghabhálaí teaghlaigh")
