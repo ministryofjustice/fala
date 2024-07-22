@@ -17,12 +17,10 @@ class TranslationSelection(PlaywrightTestSetup):
 
     def test_translate_to_irish(self):
         page = self.visit_search_page()
-        page.language_dropdown.wait_for(state="visible")
-        page.language_dropdown.select_option(label="Irish Gaelic")
+        page.language_dropdown.select_option(value="ga")
         expect(page.h1).to_have_text("Aimsigh comhairleoir um chúnamh dlíthiúil nó idirghabhálaí teaghlaigh")
 
     def test_translate_to_scots(self):
         page = self.visit_search_page()
-        page.language_dropdown.wait_for(state="visible")
         page.language_dropdown.select_option(label="Scots Gaelic")
         expect(page.h1).to_have_text("Lorg comhairliche taic laghail no eadar-mheadhanair teaghlaich")
