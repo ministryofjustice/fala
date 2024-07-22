@@ -16,6 +16,10 @@ class FalaPage(object):
     def select_specific_page(self, page_no):
         return self._page.locator(f'a.govuk-pagination__link:has-text(" {page_no} ")')
 
+    def change_search(self):
+        self.item_from_text("Change Search").click()
+        return SearchPage(self._page)
+
 
 class ResultsPage(FalaPage):
     @property
@@ -31,21 +35,15 @@ class ResultsPage(FalaPage):
         return self._page.locator('span.govuk-pagination__link-title:has-text(" Previous")')
 
     @property
-    def change_search_button(self):
-        return self._page.get_by_role("button", id="changeSearchButton")
+    def change_search_grey_box(self):
+        return self._page.locator("li.govuk-body.notranslate")
 
     def listitem_for(self, postcode):
         return self._page.get_by_role("listitem").filter(has_text=f"Postcode: {postcode}")
 
-    def change_search(self):
-        self.item_from_text("Change Search").click()
-        return SearchPage(self._page)
-
 
 class OtherRegionPage(FalaPage):
-    def change_search(self):
-        self.item_from_text("Change Search").click()
-        return SearchPage(self._page)
+    pass
 
 
 class SearchPage(FalaPage):
@@ -55,7 +53,7 @@ class SearchPage(FalaPage):
 
     @property
     def search_button(self):
-        return self._page.get_by_role("button", id="searchButton")
+        return self.item_from_text("Search")
 
     @property
     def error_summary(self):
