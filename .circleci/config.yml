@@ -239,6 +239,10 @@ workflows:
           context:
             - laa-fala
             - laa-fala-live-staging
+          filters:
+            branches:
+              ignore:
+                - main
 
       - staging_deploy_approval:
           type: approval
