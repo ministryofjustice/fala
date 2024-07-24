@@ -236,6 +236,10 @@ workflows:
           environment: staging
           requires:
             - build
+          filters:
+            branches:
+              ignore:
+                - main
           context:
             - laa-fala
             - laa-fala-live-staging
