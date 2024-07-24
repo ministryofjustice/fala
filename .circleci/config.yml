@@ -236,13 +236,13 @@ workflows:
           environment: staging
           requires:
             - build
-          context:
-            - laa-fala
-            - laa-fala-live-staging
           filters:
             branches:
               ignore:
                 - main
+          context:
+            - laa-fala
+            - laa-fala-live-staging
 
       - staging_deploy_approval:
           type: approval
