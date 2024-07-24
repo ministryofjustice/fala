@@ -13,7 +13,7 @@ class PaginationResults(PlaywrightTestSetup):
         page.next_link.click()
         # this tests that changing page persists the category choice by not affecting the result count
         expect(page.item_from_text("1576 results in order of closeness to M25 3JF.")).to_be_visible()
-        page.select_specific_page(4).click()
+        page.select_page_number(4).click()
         expect(page.item_from_text("1576 results in order of closeness to M25 3JF.")).to_be_visible()
         page.previous_link.click()
         expect(page.item_from_text("1576 results in order of closeness to M25 3JF.")).to_be_visible()

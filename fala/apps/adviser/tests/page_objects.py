@@ -13,8 +13,8 @@ class FalaPage(object):
     def item_from_text(self, text):
         return self._page.get_by_text(text)
 
-    def select_specific_page(self, page_no):
-        return self._page.locator(f'a.govuk-pagination__link:has-text(" {page_no} ")')
+    def select_page_number(self, number):
+        return self._page.locator(f'a.govuk-pagination__link:has-text(" {number} ")')
 
     def change_search(self):
         self.item_from_text("Change Search").click()
@@ -58,10 +58,6 @@ class SearchPage(FalaPage):
     @property
     def search_button(self):
         return self.item_from_text("Search")
-
-    @property
-    def error_summary(self):
-        return self._page.locator("css=.govuk-error-summary")
 
     @property
     def no_results_alert(self):

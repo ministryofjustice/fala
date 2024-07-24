@@ -19,10 +19,6 @@ class SearchPageEndToEndJourneys(PlaywrightTestSetup):
                 expect(page.listitem_for(postcode)).to_be_visible()
                 expect(page.item_from_text("in order of closeness")).to_be_visible()
 
-    def test_invalid_postcode_journey(self):
-        page = self.invalid_postcode_search()
-        expect(page.error_summary).to_be_visible()
-
     def test_full_search_journey(self):
         page = self.visit_results_page_with_full_search(
             "SE11", "Islington Law Centre", ["Housing Loss Prevention Advice Service"]
@@ -36,3 +32,20 @@ class SearchPageEndToEndJourneys(PlaywrightTestSetup):
         page.organisation_input_field.fill("Test")
         page.search_button.click()
         expect(page.no_results_alert).to_be_visible()
+
+    def test_invalid_organisation_search(self):
+        page = self.browser.new_page()
+        page.goto(f"{self.live_server_url}")
+        expect(page.locator("h1")).to_have_text("Find a legal aid adviser or family mediator")
+        page.get_by_label("Organisation name").fill("test")
+        page.get_by_role("button", name="Search").click()
+        expect(page.locator("h1")).to_have_text("Search results")
+
+    def test_invalid_postcode_journey(self):
+        page = self.browser.new_page()
+        page.goto(f"{self.live_server_url}")
+        expect(page.locator("h1")).to_have_text("Find a legal aid adviser or family mediator")
+        page.get_by_label("Postcode").fill("ZZZ1")
+        page.get_by_role("button", name="Search").click()
+        expect(page.locator("h1")).to_have_text("Find a legal aid adviser or family mediator")
+        expect(page.locator("css=.govuk-error-summary")).to_be_visible()

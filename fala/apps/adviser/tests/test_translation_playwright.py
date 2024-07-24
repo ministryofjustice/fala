@@ -11,7 +11,7 @@ class TranslationSelection(PlaywrightTestSetup):
         page.search("SA31 3DP")
         # this tests that the language selection persists to the results page
         expect(page.h1).to_have_text("Canlyniadau chwilio")
-        page.select_specific_page(4).click()
+        page.select_page_number(4).click()
         # this tests that the language selection persists when pagination buttons are clicked
         expect(page.h1).to_have_text("Canlyniadau chwilio")
 
