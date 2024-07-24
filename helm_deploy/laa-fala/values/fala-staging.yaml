@@ -45,7 +45,7 @@ service:
 ingress:
   className: "default"
   hosts:
-    - host: laa-fala-staging.cloud-platform.service.justice.gov.uk
+    - host: laa-fala-staging.apps.live-1.cloud-platform.service.justice.gov.uk
       secret: false
     - host: staging.find-legal-advice.justice.gov.uk
       secret: fala-tls-certificate
