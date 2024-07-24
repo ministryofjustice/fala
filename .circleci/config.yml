@@ -244,18 +244,6 @@ workflows:
           type: approval
           requires:
             - build
-            - Legacy staging deploy
-          filters:
-            branches:
-              only:
-                - main
-
-      - deploy:
-          name: Legacy staging deploy
-          environment: staging
-          context:
-            - laa-fala
-            - laa-fala-live-staging
           filters:
             branches:
               only:
