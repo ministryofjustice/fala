@@ -24,14 +24,10 @@ class SearchPageEndToEndJourneys(PlaywrightTestSetup):
             "SE11", "Islington Law Centre", ["Housing Loss Prevention Advice Service"]
         )
         expect(page.h1).to_have_text("Search results")
-        # this selector matches multiple things so picking out the 2nd one in the list.
+        # this selector matches multiple things so picking out the things we want using 'nth()'
+        expect(page.change_search_grey_box.nth(0)).to_have_text("Postcode: SE11")
         expect(page.change_search_grey_box.nth(1)).to_have_text("Organisation: Islington Law Centre")
-
-    def test_no_results_journey(self):
-        page = self.visit_search_page()
-        page.organisation_input_field.fill("Test")
-        page.search_button.click()
-        expect(page.no_results_alert).to_be_visible()
+        expect(page.change_search_grey_box.nth(2)).to_have_text("Categories: Housing Loss Prevention Advice Service")
 
     def test_invalid_organisation_search(self):
         page = self.browser.new_page()
@@ -40,6 +36,7 @@ class SearchPageEndToEndJourneys(PlaywrightTestSetup):
         page.get_by_label("Organisation name").fill("test")
         page.get_by_role("button", name="Search").click()
         expect(page.locator("h1")).to_have_text("Search results")
+        expect(page.locator("#alert-heading-info")).to_have_text("No results")
 
     def test_invalid_postcode_journey(self):
         page = self.browser.new_page()
