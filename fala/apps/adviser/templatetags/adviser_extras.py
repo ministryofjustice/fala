@@ -57,12 +57,6 @@ def google_map_params(item):
 
 
 @library.filter
-def category_tuples(form):
-    # create list of tuples which can be passed to urlencode for pagination links
-    return [("categories", c) for c in form.cleaned_data["categories"]]
-
-
-@library.filter
 def category_selection(form):
     if "categories" in form.cleaned_data:
         categories = [PROVIDER_CATEGORIES[cat] for cat in form.cleaned_data["categories"]]
@@ -78,3 +72,11 @@ def category_selection_list(form):
         categories = [PROVIDER_CATEGORIES[cat] for cat in form.cleaned_data["categories"]]
         return map(str, categories)
     return []
+
+
+@library.filter
+def form_categories(categories):
+    x = []
+    for value, text in categories.field.choices:
+        x.append({"value": value, "text": text})
+    return x

@@ -1,10 +1,8 @@
+{%- from 'govuk_frontend_jinja/components/warning-text/macro.html' import govukWarningText -%}
+
 <div class="govuk-grid-column-two-thirds">
-  <div class="govuk-warning-text" id="legal_aid_in_scotland_warning_text">
-    <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-    <strong class="govuk-warning-text__text">
-      <span class="govuk-visually-hidden">Warning</span>
-      These results cover England and Wales. Find out about
-        <a class="govuk-link" href="https://www.mygov.scot/legal-aid/">Legal Aid in Scotland.</a>
-    </strong>
-  </div>
+  {{ govukWarningText({
+                'html': "These results cover England and Wales. Find out about <a class=\"govuk-link\" href=\"https://www.mygov.scot/legal-aid/\">Legal Aid in Scotland.</a>",
+                'id': "legal_aid_in_scotland_warning_text",
+              }) }}
 </div>
