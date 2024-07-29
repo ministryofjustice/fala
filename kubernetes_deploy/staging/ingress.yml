@@ -13,10 +13,7 @@ spec:
   ingressClassName: "modsec"
   tls:
   - hosts:
-    - laa-fala-staging.apps.live-1.cloud-platform.service.justice.gov.uk
-  - hosts:
-    - staging.find-legal-advice.justice.gov.uk
-    secretName: fala-tls-certificate
+    - laa-fala-staging-old-k-deploy.apps.live-1.cloud-platform.service.justice.gov.uk
   rules:
   - host: laa-fala-staging.apps.live-1.cloud-platform.service.justice.gov.uk
     http:

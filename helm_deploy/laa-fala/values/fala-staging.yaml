@@ -45,8 +45,10 @@ service:
 ingress:
   className: "default"
   hosts:
-    - host: laa-fala-staging-helm.cloud-platform.service.justice.gov.uk
+    - host: laa-fala-staging.apps.live-1.cloud-platform.service.justice.gov.uk
       secret: false
+    - host: staging.find-legal-advice.justice.gov.uk
+      secret: fala-tls-certificate
   annotations:
     external-dns.alpha.kubernetes.io/set-identifier: "fala-laa-fala-laa-fala-staging-green"
     external-dns.alpha.kubernetes.io/aws-weight: "100"

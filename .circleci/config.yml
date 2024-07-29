@@ -236,6 +236,10 @@ workflows:
           environment: staging
           requires:
             - build
+          filters:
+            branches:
+              ignore:
+                - main
           context:
             - laa-fala
             - laa-fala-live-staging
@@ -244,19 +248,6 @@ workflows:
           type: approval
           requires:
             - build
-          filters:
-            branches:
-              only:
-                - main
-
-      - deploy:
-          name: Legacy staging deploy
-          environment: staging
-          requires:
-            - staging_deploy_approval
-          context:
-            - laa-fala
-            - laa-fala-live-staging
           filters:
             branches:
               only:
@@ -290,7 +281,7 @@ workflows:
       - production_deploy_approval:
           type: approval
           requires:
-            - Legacy staging deploy
+            - Helm Staging Deploy
           filters:
             branches:
               only:
