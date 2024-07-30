@@ -41,9 +41,6 @@ class ResultsPage(FalaPage):
     def change_search_grey_box(self):
         return self._page.locator("li.govuk-body.notranslate")
 
-    def listitem_for(self, postcode):
-        return self._page.get_by_role("listitem").filter(has_text=f"Postcode: {postcode}")
-
 
 class OtherRegionPage(FalaPage):
     pass

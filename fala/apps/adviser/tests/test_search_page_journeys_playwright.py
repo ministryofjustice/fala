@@ -16,7 +16,7 @@ class SearchPageEndToEndJourneys(PlaywrightTestSetup):
             with self.subTest(postcode=postcode):
                 page = self.visit_results_page(postcode)
                 expect(page.h1).to_have_text("Search results")
-                expect(page.listitem_for(postcode)).to_be_visible()
+                expect(page.change_search_grey_box.nth(0)).to_have_text(f"Postcode: {postcode}")
                 expect(page.item_from_text("in order of closeness")).to_be_visible()
 
     def test_full_search_journey(self):
