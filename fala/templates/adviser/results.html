@@ -17,13 +17,13 @@
     <div class="laa-fala__grey-box govuk-!-margin-bottom-6">
       <ul class="govuk-list" role="list">
         {% if form.postcode.value() %}
-          <li class="govuk-body notranslate" role="listitem" translate="no">Postcode: {{ form.postcode.value() }}</li>
+          <li class="govuk-body" role="listitem">Postcode:<span class="notranslate"> {{ form.postcode.value() }}</span></li>
         {% endif %}
         {% if form.name.value() %}
-          <li class="govuk-body notranslate" role="listitem" translate="no">Organisation: {{ form.name.value() }}</li>
+          <li class="govuk-body" role="listitem">Organisation:<span class="notranslate"> {{ form.name.value() }}</span></li>
         {% endif %}
         {% if form|category_selection %}
-          <li class="govuk-body notranslate" role="listitem" translate="no">Categories: {{ form|category_selection }} </li>
+          <li class="govuk-body" role="listitem">Categories: {{ form|category_selection }} </li>
         {% endif %}
       </ul>
 
