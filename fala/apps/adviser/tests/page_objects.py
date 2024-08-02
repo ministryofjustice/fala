@@ -39,7 +39,7 @@ class ResultsPage(FalaPage):
 
     @property
     def change_search_grey_box(self):
-        return self._page.locator("li.govuk-body.notranslate")
+        return self._page.locator("li.govuk-body")
 
 
 class OtherRegionPage(FalaPage):
