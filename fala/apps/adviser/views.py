@@ -55,7 +55,11 @@ class SearchView(ListView):
         def get_context_data(self):
             errorList = []
             for field, error in self._form.errors.items():
-                item = {"text": error[0], "href": f"#{field}"}
+                # choose the first field is the error in form-wide
+                if field == "__all__":
+                    item = {"text": error[0], "href": "#id_postcode"}
+                else:
+                    item = {"text": error[0], "href": f"#{field}"}
                 errorList.append(item)
 
             return {"form": self._form, "data": {}, "errorList": errorList}
