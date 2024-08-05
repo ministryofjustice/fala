@@ -76,7 +76,4 @@ def category_selection_list(form):
 
 @library.filter
 def form_categories(categories):
-    x = []
-    for value, text in categories.field.choices:
-        x.append({"value": value, "text": text})
-    return x
+    return [{"value": value, "text": text, "id": f"id_categories_{text}"} for value, text in categories.field.choices]
