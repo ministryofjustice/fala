@@ -59,7 +59,7 @@ class SearchView(ListView):
                 if field == "__all__":
                     item = {"text": error[0], "href": "#id_postcode"}
                 else:
-                    item = {"text": error[0], "href": f"#{field}"}
+                    item = {"text": error[0], "href": f"#id_{field}"}
                 errorList.append(item)
 
             return {"form": self._form, "data": {}, "errorList": errorList}
