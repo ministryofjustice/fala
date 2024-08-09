@@ -47,7 +47,7 @@
                   'classes': 'govuk-label--s',
                 },
                 'value': form.postcode.value(),
-                'errorMessage': { 'text': errorMessage.err },
+                'errorMessage': { 'text': form.errors['postcode'][0] },
                 'hint': {
                   'text' : "For example, SW1H",
                 },
@@ -87,7 +87,7 @@
                    'maxLength': 100,
                 },
                 'value': form.name.value(),
-                'errorMessage': { 'text': errorMessage.err },
+                'errorMessage': { 'text': form.errors['name'][0] },
                 'id': 'name',
                 'classes': 'govuk-!-width-one-third',
                 'name': "name"

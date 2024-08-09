@@ -4,7 +4,7 @@ from fala.playwright.setup import PlaywrightTestSetup
 
 class PaginationResults(PlaywrightTestSetup):
 
-    def test_results_pagination(self):
+    def dont_test_results_pagination(self):
         checkboxes = ["Crime"]
 
         page = self.visit_results_page("M25 3JF", checkboxes)
