@@ -68,7 +68,7 @@ postgresql:
     database: fala_staging
     enablePostgresUser: true
     postgresPassword: postgres
-    postgresqlUsername: postgres
+    postgresUsername: postgres
   primary:
     persistence:
       enabled: true

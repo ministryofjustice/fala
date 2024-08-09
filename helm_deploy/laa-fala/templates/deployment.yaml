@@ -61,4 +61,59 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+---
+{{- if .Values.postgresql.enabled -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "app.fullname" . }}-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ include "app.fullname" . }}-db
+  template:
+    metadata:
+      labels:
+        app: {{ include "app.fullname" . }}-db
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      serviceAccountName: {{ include "app.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ include "app.fullname" . }}-db
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "bitnami/postgresql:14-debian-10"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 5432
+              protocol: TCP
+          resources:
+            {{- toYaml .Values.postgresql.resources | nindent 12 }}
+          env:
+            - name: POSTGRES_PASSWORD
+              value: {{ .Values.postgresql.auth.postgresPassword }}
+            - name: POSTGRES_USER
+              value: {{ .Values.postgresql.auth.postgresUsername }}
+            - name: POSTGRES_DB
+              value: {{ .Values.postgresql.auth.database }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+{{- end }}
 
