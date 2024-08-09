@@ -41,6 +41,10 @@ class ResultsPage(FalaPage):
     def change_search_grey_box(self):
         return self._page.locator("li.govuk-body")
 
+    @property
+    def result_count(self):
+        return self._page.locator("#result-count-overall")
+
 
 class OtherRegionPage(FalaPage):
     pass

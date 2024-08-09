@@ -43,7 +43,7 @@
       {% if data.origin %}
         {% trans page_count=data.results|length, result_count=data.count %}
           {% pluralize %}
-          <span class="govuk-!-font-weight-bold">{{ result_count }} results</span> in order of closeness to
+          <span class="govuk-!-font-weight-bold" id="result-count-overall">{{ result_count }} results</span> in order of closeness to
         {% endtrans %}
         <strong class="notranslate" translate="no">{{ form.postcode.value()|upper }}</strong>
         {%- if form.name.value() %}
@@ -54,7 +54,7 @@
       {% else %}
         {% trans result_count=data.count, page_count=data.results|length, org_name=form.name.value() %}
           {% pluralize %}
-          <span class="govuk-!-font-weight-bold">{{ result_count }} results</span> for <strong>{{ org_name }}</strong>.
+          <span class="govuk-!-font-weight-bold" id="result-count-org">{{ result_count }} results</span> for <strong>{{ org_name }}</strong>.
         {% endtrans %}
       {% endif %}
       </span>
