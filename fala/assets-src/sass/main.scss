@@ -56,6 +56,10 @@ $laa-dev-colour: govuk-colour("pink");
   }
 }
 
+.no-js .laa-cookie-policy {
+  display:none;
+}
+
 body:not(.fala-production) {
   .govuk-header__container {
     border-bottom-color:$laa-unknown-colour;
