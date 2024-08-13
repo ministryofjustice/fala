@@ -158,7 +158,7 @@ class ResultsPageWithJustPostcodeTest(SimpleTestCase):
         search_params_box = soup.find("div", class_="laa-fala__grey-box")
         # replace the spaces in the HTML for ease of comparison
         content = search_params_box.text.replace("\n", "")
-        self.assertEqual(content, "Postcode: PE30Categories: Debt Change search")
+        self.assertEqual(content, "Postcode: PE30Categories: Debt   Change search")
 
 
 class ResearchBannerTest(SimpleTestCase):
@@ -192,7 +192,7 @@ class ResultsPageWithJustOrgTest(SimpleTestCase):
         search_params_box = soup.find("div", class_="laa-fala__grey-box")
         # replace the spaces in the HTML for ease of comparison
         content = search_params_box.text.replace("\n", "")
-        self.assertEqual(content, "Organisation: fooCategories: Debt, Education Change search")
+        self.assertEqual(content, "Organisation: fooCategories: Debt, Education   Change search")
 
 
 class NewSearchViewTemplate(SimpleTestCase):

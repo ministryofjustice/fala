@@ -75,7 +75,8 @@ class AdviserSearchForm(forms.Form):
         data = self.cleaned_data
         postcode = data.get("postcode")
         if not postcode and not data.get("name"):
-            raise forms.ValidationError(_("Enter a postcode or an organisation name"))
+            self.add_error("postcode", (_("Enter a postcode")))
+            self.add_error("name", (_("Enter an organisation name")))
         else:
             if postcode and self.region == Region.ENGLAND_OR_WALES and not self._valid_postcode(postcode):
                 self.add_error("postcode", (_("Enter a valid postcode")))

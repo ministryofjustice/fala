@@ -3,6 +3,8 @@
 {% import "macros/forms.html" as Form %}
 {% import "macros/element.html" as Element %}
 
+{%- from 'govuk_frontend_jinja/components/button/macro.html' import govukButton -%}
+
 {% set title = _('Find a legal aid adviser or family mediator') %}
 
 {% block head %}
@@ -72,40 +74,6 @@
   <div class="govuk-grid-column-full">
     <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
 
-    {% if form.errors and form.errors['__all__'] %}
-      {% call Element.error('error', title='There is a problem') %}
-        <ul class="govuk-list govuk-error-summary__list">
-          {% for k, error in form.errors.items() %}
-            <li>
-              {% if "Enter a postcode or an organisation name" == error | striptags %}
-                <a href="#id_postcode" onclick="errorScroll(&quot;fala_questions&quot;,&quot;id_postcode&quot;);return false;" >
-                  Enter a postcode</a>
-                <b>or</b>
-                <a href="#id_name" onclick="errorScroll(&quot;fala_questions&quot;,&quot;id_name&quot;);return false;" >
-                  an organisation name
-                </a>
-              {% else %}
-                <a href="#id_postcode" onclick="errorScroll(&quot;fala_questions&quot;,&quot;id_postcode&quot;);return false;" >
-                  {{ error | striptags }}
-                </a>
-              {% endif %}
-            </li>
-          {% endfor %}
-        </ul>
-      {% endcall %}
-    {% elif (form.postcode and form.postcode.errors) or (form.name and form.name.errors) %}
-      <div class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary">
-        <h2 class="govuk-error-summary__title" id="error-summary-title">
-          There is a problem
-        </h2>
-        <div class="govuk-error-summary__body">
-          <ul class="govuk-list govuk-error-summary__list">
-            {{ Form.render_field_errors_for_summary(form.postcode) }}
-            {{ Form.render_field_errors_for_summary(form.name) }}
-          </ul>
-        </div>
-      </div>
-    {% endif %}
     <h1 class="govuk-heading-xl govuk-!-margin-top-7">
       Find a legal aid adviser <br />
       <span class="govuk-!-font-weight-regular govuk-!-font-size-36">or family mediator</span>
