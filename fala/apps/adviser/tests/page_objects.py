@@ -23,15 +23,6 @@ class FalaPage(object):
         self.item_from_text("Change Search").click()
         return SearchPage(self._page)
 
-    def accept_cookies_banner(self):
-        self._page.locator("#cookieAccept").click()
-
-    def reject_cookies_banner(self):
-        self._page.locator("#cookieReject").click()
-
-    def get_cookies(self):
-        return self._page.context.cookies()
-
 
 class ResultsPage(FalaPage):
     @property
@@ -81,14 +72,4 @@ class SearchPage(FalaPage):
 
 
 class CookiesPage(FalaPage):
-    @property
-    def accept_cookies_radio_option(self):
-        return self._page.locator("#cookies-analytics")
-
-    @property
-    def reject_cookies_radio_option(self):
-        return self._page.locator("#cookies-analytics-2")
-
-    @property
-    def save_cookie_settings_button(self):
-        return self._page.locator("#saveCookies")
+    pass
