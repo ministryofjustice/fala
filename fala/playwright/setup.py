@@ -9,14 +9,22 @@ class PlaywrightTestSetup(StaticLiveServerTestCase):
     def setUpClass(cls):
         os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
         super().setUpClass()
-        cls.playwright = sync_playwright().start()
-        cls.browser = cls.playwright.chromium.launch()
+        cls._playwright = sync_playwright().start()
+        cls._factory = cls._playwright.chromium.launch()
 
     @classmethod
     def tearDownClass(cls):
+        cls._factory.close()
+        cls._playwright.stop()
         super().tearDownClass()
-        cls.browser.close()
-        cls.playwright.stop()
+
+    def setUp(self):
+        super().setUp()
+        self.browser = self._factory.new_context()
+
+    def tearDown(self):
+        self.browser.close()
+        super().tearDown()
 
     def visit_results_page(self, postcode, checkbox_labels=None):
         if checkbox_labels is None:
