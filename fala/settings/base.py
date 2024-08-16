@@ -230,3 +230,5 @@ ENVIRONMENT = os.environ.get("ENVIRONMENT", "unknown")
 CHECK_LEGAL_AID_URL = "https://www.gov.uk/check-legal-aid"
 
 FEATURE_FLAG_SURVEY_MONKEY = os.environ.get("FEATURE_FLAG_SURVEY_MONKEY", "").lower() == "enabled"
+
+ROBOTS_TXT = os.environ.get("ROBOTS_TXT", "block_robots.txt")
