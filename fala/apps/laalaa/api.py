@@ -17,7 +17,8 @@ except NameError:
 def get_categories():
     if settings.LAALAA_API_HOST:
         categories = LaalaaProviderCategoriesApiClient.singleton(settings.LAALAA_API_HOST, _).get_categories()
-        return [item for item in sorted(categories.items())]
+        # sort by name (the second item in the tuple) rather than the code
+        return [item for item in sorted(categories.items(), key=lambda x: x[1])]
 
     return []
 
