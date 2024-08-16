@@ -13,22 +13,10 @@ spec:
   ingressClassName: "modsec"
   tls:
   - hosts:
-    - laa-fala-production.apps.live-1.cloud-platform.service.justice.gov.uk
-  - hosts:
-    - find-legal-advice.justice.gov.uk
+    - laa-fala-production-old.apps.live-1.cloud-platform.service.justice.gov.uk
     secretName: fala-tls-certificate
   rules:
-  - host: laa-fala-production.apps.live-1.cloud-platform.service.justice.gov.uk
-    http:
-      paths:
-      - path: /
-        pathType: ImplementationSpecific
-        backend:
-          service:
-            name: laa-fala
-            port:
-              number: 80
-  - host: find-legal-advice.justice.gov.uk
+  - host: laa-fala-production-old.apps.live-1.cloud-platform.service.justice.gov.uk
     http:
       paths:
       - path: /
