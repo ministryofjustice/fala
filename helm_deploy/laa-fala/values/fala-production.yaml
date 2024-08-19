@@ -60,8 +60,7 @@ postgresql:
 feature_flags:
   no_map: "enabled"
   survey_monkey: "enabled"
-
-robots_txt: "allow_robots.txt"
+  block_robots: "disabled"
 
 laalaa_api:
   host: "https://laa-legal-adviser-api-production.cloud-platform.service.justice.gov.uk"

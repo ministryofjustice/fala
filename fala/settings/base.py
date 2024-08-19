@@ -118,7 +118,9 @@ MIDDLEWARE = (
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "csp.middleware.CSPMiddleware",
+    "adviser.middleware.BlockRobotsFromStagingMiddleware",
 )
+
 CSP_DEFAULT_SRC = ["'self'", "*.googletagmanager.com"]
 CSP_INCLUDE_NONCE_IN = ["script-src"]
 CSP_SCRIPT_SRC = [
@@ -231,4 +233,4 @@ CHECK_LEGAL_AID_URL = "https://www.gov.uk/check-legal-aid"
 
 FEATURE_FLAG_SURVEY_MONKEY = os.environ.get("FEATURE_FLAG_SURVEY_MONKEY", "").lower() == "enabled"
 
-ROBOTS_TXT = os.environ.get("ROBOTS_TXT", "block_robots.txt")
+BLOCK_ROBOTS = os.environ.get("BLOCK_ROBOTS", "").lower() == "enabled"

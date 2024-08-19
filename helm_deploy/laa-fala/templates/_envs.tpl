@@ -40,8 +40,8 @@ env:
   {{ end }}
   - name: FEATURE_FLAG_SURVEY_MONKEY
     value: {{ .Values.feature_flags.survey_monkey }}
-  - name: ROBOTS_TXT
-    value: {{ .Values.robots_txt }}
+  - name: BLOCK_ROBOTS
+    value: {{ .Values.feature_flags.block_robots }}
   - name: ALLOWED_HOSTS
     value: {{ .Values.allowed_hosts }}
   - name: LAALAA_API_HOST
