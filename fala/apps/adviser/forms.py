@@ -35,9 +35,8 @@ class CapitalisedPostcodeField(forms.CharField):
         return super().to_python(capitalised_value)
 
 
-class AdviserSearchForm(forms.Form):
-    page = forms.IntegerField(required=False, widget=forms.HiddenInput())
-
+# This is so that we can hit the front page with query parameters in url and not see validation errors
+class AdviserRootForm(forms.Form):
     postcode = CapitalisedPostcodeField(
         label=_("Postcode"),
         max_length=30,
@@ -53,13 +52,6 @@ class AdviserSearchForm(forms.Form):
         widget=FalaTextInput(),
     )
 
-    type = forms.MultipleChoiceField(
-        label=_("Organisation type"),
-        choices=ORGANISATION_TYPES_CHOICES,
-        widget=forms.CheckboxSelectMultiple(),
-        required=False,
-    )
-
     categories = forms.MultipleChoiceField(
         label=_("Category"),
         choices=laalaa.PROVIDER_CATEGORY_CHOICES,
@@ -67,9 +59,13 @@ class AdviserSearchForm(forms.Form):
         required=False,
     )
 
+
+class AdviserSearchForm(AdviserRootForm):
+    page = forms.IntegerField(required=False, widget=forms.HiddenInput())
+
     def __init__(self, *args, **kwargs):
         kwargs.setdefault("label_suffix", "")
-        super(AdviserSearchForm, self).__init__(*args, **kwargs)
+        super(AdviserRootForm, self).__init__(*args, **kwargs)
 
     def clean(self):
         data = self.cleaned_data
