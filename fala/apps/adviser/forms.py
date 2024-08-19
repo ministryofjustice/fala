@@ -37,7 +37,7 @@ class CapitalisedPostcodeField(forms.CharField):
 
 # This is so that we can hit the front page with query parameters in url and not see form validation errors
 # In django, form validation happens when the data is cleaned, i.e. form validation, form errors, form cleaned
-# `def clean(self)` is the method triggering form validation, so have abstracted that into `AdviserSearchForm` form class
+# `def clean(self)` is the method triggering form validation, so have extracted that into `AdviserSearchForm` form class
 class AdviserRootForm(forms.Form):
     postcode = CapitalisedPostcodeField(
         label=_("Postcode"),
