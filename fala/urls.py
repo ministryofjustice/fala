@@ -1,7 +1,8 @@
 # coding=utf-8
-from adviser.views import AccessibilityView, AdviserView, SearchView, PrivacyView
 from django.conf import settings
+
 from django.urls import re_path
+from adviser.views import AccessibilityView, AdviserView, SearchView, PrivacyView
 from django.views.static import serve
 
 urlpatterns = [
