@@ -60,6 +60,10 @@ $laa-dev-colour: govuk-colour("pink");
   display:none;
 }
 
+.no-js .govuk-cookie-banner {
+  display:none;
+}
+
 body:not(.fala-production) {
   .govuk-header__container {
     border-bottom-color:$laa-unknown-colour;

@@ -1,4 +1,5 @@
 {%- from 'govuk_frontend_jinja/components/header/macro.html' import govukHeader -%}
+{%- from 'govuk_frontend_jinja/components/cookie-banner/macro.html' import govukCookieBanner -%}
 
 <!DOCTYPE html>
 <html lang="en" class="govuk-template no-js {% block template_type %}{% endblock %}">
@@ -14,36 +15,99 @@
   <body class="govuk-template__body {{ 'fala-' + ENVIRONMENT }} govuk-frontend-supported">
     <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
     <header class="govuk-header " role="banner" data-module="govuk-header">
-      <div id="cookie-message" class="laa-cookie-banner
-        {% if request.COOKIES.get('cookiePermission') == 'Allowed' %}
-          laa-cookies-accepted
-        {% elif request.COOKIES.get('cookiePermission') == 'Rejected' %}
-          laa-cookies-rejected
-        {% endif %}
-        " data-module="cookie-banner" role="region" aria-label="cookie banner">
-        <div class="govuk-width-container govuk-!-padding-top-3">
-          <div class="govuk-grid-row">
-            <div class=" govuk-grid-column-three-quarters">
-              <div>
-                <span class="govuk-heading-m">{% trans %}Cookies on Find a legal adviser or family mediator{% endtrans %}</span>
-                <p class="govuk-body">
-                  {% set cookie_info_url = '/cookies' %}
-                  <p>{% trans %}We use some essential cookies to make this website work.{% endtrans %}</p>
-                  <p>{% trans %}We’d like to set additional cookies so we can remember your settings, understand how people use the service and make improvements.{% endtrans %}</p>
-                </p>
-              </div>
-              <div class="govuk-button-group">
-                <button id="cookieAccept" class="govuk-button" type="submit" data-module="track-click" data-accept-cookies="true" data-track-category="cookieBanner" data-track-action="Cookie banner accepted">
-                  {% trans %}Accept analytics cookies{% endtrans %}
-                </button>
-                <button id="cookieReject" class="govuk-button govuk-button--secondary" data-module="track-click" data-accept-cookies="false" data-track-category="cookieBanner" data-track-action="Cookie banner rejected">
-                  {% trans %}Reject analytics cookies{% endtrans %}
-                </button>
-                {% trans %}<a id="cookies_banner_view_link" class="govuk-link" href="/cookies">View cookies</a>{% endtrans %}
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="fala-cookie-banner">
+        {% block bodyStart %}
+          {% if "cookiePermission" not in request.COOKIES %}
+            {% set html %}
+              <p class="govuk-body">We use some essential cookies to make this service work.</p>
+              <p class="govuk-body">We’d like to set additional cookies so we can remember your settings, understand how people use the service and make improvements.</p>
+            {% endset %}
+            
+            {% set acceptHtml %}
+              <p class="govuk-body">You’ve accepted additional cookies. You can <a class="govuk-link" href="/cookies">change your cookie settings</a> at any time.</p>
+            {% endset %}
+            
+            {% set rejectHtml %}
+              <p class="govuk-body">You’ve rejected additional cookies. You can <a class="govuk-link" href="/cookies">change your cookie settings</a> at any time.</p>
+            {% endset %}
+          
+            {{ govukCookieBanner({
+                  'ariaLabel': "Cookies on Find a legal adviser or family mediator",
+                  'attributes': {
+                    'id': "cookie-banner"
+                  },
+                  'messages': [
+                    {
+                      'attributes': {
+                        'id': "default-message"
+                      },
+                      'headingText': "Cookies on Find a legal adviser or family mediator",
+                      'html': html,
+                      'actions': [
+                        {
+                          'attributes': {
+                            'id': "accept-cookies"
+                          },
+                          'text': "Accept analytics cookies",
+                          'type': "button",
+                          'name': "cookies",
+                          'value': "accept"
+                        },
+                        {
+                          'attributes': {
+                            'id': "reject-cookies"
+                          },
+                          'text': "Reject analytics cookies",
+                          'type': "button",
+                          'name': "cookies",
+                          'value': "reject"
+                        },
+                        { 
+                          'attributes': {
+                            'id': "cookies_banner_view_link"
+                          },
+                          'text': "View cookies",
+                          'href': "/cookies"
+                        }
+                      ]
+                    },
+                    {
+                      'attributes': {
+                        'id': "accepted-message"
+                      },
+                      'html': acceptHtml,
+                      'role': "alert",
+                      'hidden': true,
+                      'actions': [
+                        {
+                          'attributes': {
+                            'id': "accepted-hide"
+                          },
+                          'text': "Hide this message"
+                        }
+                      ]
+                    },
+                    {
+                      'attributes': {
+                        'id': "rejected-message"
+                      },
+                      'html': rejectHtml,
+                      'role': "alert",
+                      'hidden': true,
+                      'actions': [
+                        {
+                          'attributes': {
+                            'id': "rejected-hide"
+                          },
+                          'text': "Hide this message"
+                        }
+                      ]
+                    }
+                  ]
+                }) 
+            }}
+          {% endif %}
+        {% endblock %}
       </div>
 
       {% block header %}
@@ -71,40 +135,5 @@
     {% block before_main_js %}{% endblock %}
     {% block main_js %}{% endblock %}
     {% block after_main_js %}{% endblock %}
-    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.0.min.js" type="text/javascript"></script>
-    <script nonce="{{request.csp_nonce}}">
-      function setCookie(key, value, expiry) {
-        var expires = new Date();
-        expires.setTime(expires.getTime() + (expiry * 24 * 60 * 60 * 1000));
-        document.cookie = key + '=' + value + ';expires=' + expires.toUTCString();
-      }
-
-      $(function() {
-        $("#cookieAccept").click(function() {
-          setCookie("cookiePermission", "Allowed", 30);
-          $(".laa-cookie-banner").addClass("laa-cookies-accepted");
-          tagMan();
-        });
-        $("#cookieReject").click(function() {
-          setCookie("cookiePermission", "Rejected", 30);
-          $(".laa-cookie-banner").addClass("laa-cookies-rejected");
-        });
-      });
-      $("#cookie_policy_page_choice").submit(function(e){
-        e.preventDefault();
-        var value = $("input[name='cookies']:checked").val();
-        if (value == "Allowed") {
-          setCookie("cookiePermission", "Allowed", 30);
-          $(".laa-cookie-banner").addClass("laa-cookies-accepted");
-          tagMan();
-          location.reload();
-        }
-        if (value == "Rejected") {
-          setCookie("cookiePermission", "Rejected", 30);
-          $(".laa-cookie-banner").addClass("laa-cookies-rejected");
-          location.reload();
-        }
-      });
-    </script>
   </body>
 </html>
