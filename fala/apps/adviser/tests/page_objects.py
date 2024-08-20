@@ -7,6 +7,10 @@ class FalaPage(object):
         return self._page.locator("h1")
 
     @property
+    def error_list(self):
+        return self._page.get_by_text("There is a problem")
+
+    @property
     def language_dropdown(self):
         return self._page.locator('select[class="goog-te-combo"]')
 

@@ -7,6 +7,23 @@ class SearchPageEndToEndJourneys(PlaywrightTestSetup):
         page = self.visit_search_page()
         expect(page.h1).to_have_text("Find a legal aid adviser or family mediator")
 
+    def test_landing_page_with_url_params(self):
+        page = self.visit_search_page_with_url_params("categories=hlpas")
+        expect(page.h1).to_have_text("Find a legal aid adviser or family mediator")
+        expect(page.error_list).not_to_be_visible()
+        expect(page.checkbox_by_label("Housing Loss Prevention Advice Service")).to_be_checked()
+
+    def test_landing_page_with_multiple_url_params(self):
+        page = self.visit_search_page_with_url_params("categories=hlpas&categories=edu")
+        expect(page.h1).to_have_text("Find a legal aid adviser or family mediator")
+        expect(page.error_list).not_to_be_visible()
+        expect(page.checkbox_by_label("Housing Loss Prevention Advice Service")).to_be_checked()
+        expect(page.checkbox_by_label("Education")).to_be_checked()
+        page._page.reload()
+        expect(page.error_list).not_to_be_visible()
+        expect(page.checkbox_by_label("Housing Loss Prevention Advice Service")).to_be_checked()
+        expect(page.checkbox_by_label("Education")).to_be_checked()
+
     def test_postcode_search_journey(self):
         test_cases = [
             "SW1H 9AJ",
