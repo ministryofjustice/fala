@@ -14,10 +14,11 @@
   <body class="govuk-template__body {{ 'fala-' + ENVIRONMENT }} govuk-frontend-supported">
     <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
     <header class="govuk-header " role="banner" data-module="govuk-header">
-      <div id="cookie-message" class="
-        laa-cookie-banner
+      <div id="cookie-message" class="laa-cookie-banner
         {% if request.COOKIES.get('cookiePermission') == 'Allowed' %}
           laa-cookies-accepted
+        {% elif request.COOKIES.get('cookiePermission') == 'Rejected' %}
+          laa-cookies-rejected
         {% endif %}
         " data-module="cookie-banner" role="region" aria-label="cookie banner">
         <div class="govuk-width-container govuk-!-padding-top-3">
@@ -27,16 +28,19 @@
                 <span class="govuk-heading-m">{% trans %}Cookies on Find a legal adviser or family mediator{% endtrans %}</span>
                 <p class="govuk-body">
                   {% set cookie_info_url = '/cookies' %}
-                  {% trans %}We use cookies to collect information about how you use GOV.UK.{% endtrans %}
-                  {% trans %}We use this information to make the website work as well as possible and improve government services.{% endtrans %}
+                  <p>{% trans %}We use some essential cookies to make this website work.{% endtrans %}</p>
+                  <p>{% trans %}We’d like to set additional cookies so we can remember your settings, understand how people use the service and make improvements.{% endtrans %}</p>
                 </p>
               </div>
-              <button id="cookieAccept" class="no-js-hide-inline-block govuk-button govuk-!-margin-bottom-4 govuk-!-margin-right-7" type="submit" data-module="track-click" data-accept-cookies="true" data-track-category="cookieBanner" data-track-action="Cookie banner accepted">
-                {% trans %}Accept cookies{% endtrans %}
-              </button>
-              <button id="cookieReject" class="govuk-button govuk-button--secondary" role="button" data-module="track-click" data-track-category="cookieBanner" data-track-action="Cookie banner settings clicked" href="/cookie-settings">
-                {% trans %}Reject cookies{% endtrans %}
-              </button>
+              <div class="govuk-button-group">
+                <button id="cookieAccept" class="govuk-button" type="submit" data-module="track-click" data-accept-cookies="true" data-track-category="cookieBanner" data-track-action="Cookie banner accepted">
+                  {% trans %}Accept analytics cookies{% endtrans %}
+                </button>
+                <button id="cookieReject" class="govuk-button govuk-button--secondary" data-module="track-click" data-accept-cookies="false" data-track-category="cookieBanner" data-track-action="Cookie banner rejected">
+                  {% trans %}Reject analytics cookies{% endtrans %}
+                </button>
+                {% trans %}<a id="cookies_banner_view_link" class="govuk-link" href="/cookies">View cookies</a>{% endtrans %}
+              </div>
             </div>
           </div>
         </div>
@@ -75,16 +79,6 @@
         document.cookie = key + '=' + value + ';expires=' + expires.toUTCString();
       }
 
-      function getCookie(key) {
-        var keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
-        return keyValue ? keyValue[2] : null;
-      }
-
-      function eraseCookie(key) {
-        var keyValue = getCookie(key);
-        setCookie(key, keyValue, '-1');
-      }
-
       $(function() {
         $("#cookieAccept").click(function() {
           setCookie("cookiePermission", "Allowed", 30);
@@ -92,21 +86,24 @@
           tagMan();
         });
         $("#cookieReject").click(function() {
-          eraseCookie("cookiePermission");
+          setCookie("cookiePermission", "Rejected", 30);
           $(".laa-cookie-banner").addClass("laa-cookies-rejected");
         });
-        $("#cookieReview").click(function() {
-          $(".laa-cookie-banner").removeClass("laa-cookies-accepted").removeClass("laa-cookies-rejected");
-          $("html, body").animate(
-            { scrollTop: 0 },
-            "slow",
-            "swing",
-            function(){
-              $("#cookieAccept").focus();
-            }
-          );
-          return false;
-        });
+      });
+      $("#cookie_policy_page_choice").submit(function(e){
+        e.preventDefault();
+        var value = $("input[name='cookies']:checked").val();
+        if (value == "Allowed") {
+          setCookie("cookiePermission", "Allowed", 30);
+          $(".laa-cookie-banner").addClass("laa-cookies-accepted");
+          tagMan();
+          location.reload();
+        }
+        if (value == "Rejected") {
+          setCookie("cookiePermission", "Rejected", 30);
+          $(".laa-cookie-banner").addClass("laa-cookies-rejected");
+          location.reload();
+        }
       });
     </script>
   </body>
