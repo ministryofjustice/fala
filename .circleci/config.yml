@@ -137,7 +137,7 @@ jobs:
       - run:
           name: Validate Python version
           command: |
-            docker run --rm --tty --interactive ${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG python --version | grep "3.12"
+            docker run --rm --tty --interactive ${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com/$ECR_REPOSITORY:$ECR_TAG python --version | grep "3.12"
 
   deploy_grafana:
     docker:
