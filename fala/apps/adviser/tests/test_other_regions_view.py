@@ -9,19 +9,21 @@ class PostcodeValidationTest(SimpleTestCase):
 
     def test_region_postcodes(self):
         test_cases = [
-            {"postcode": "GY1", "message": "The postcode GY1 is in Guernsey"},
+            {"postcode": "GY1 2HU", "message": "The postcode GY1 2HU is in Guernsey"},
             {"postcode": "BT93 8AD", "message": "The postcode BT93 8AD is in Northern Ireland"},
-            {"postcode": "IM4", "message": "The postcode IM4 is in the Isle of Man"},
+            {"postcode": "IM4 2HT", "message": "The postcode IM4 2HT is in the Isle of Man"},
+            # Postcode with incorrect prefix, but still picks up that it's isle of man
+            {"postcode": "IM4 TESTTTTTTTTTTTT", "message": "The postcode IM4 TESTTTTTTTTTTTT is in the Isle of Man"},
+            # Jersey Postcode
             {"postcode": "JE2 3FN", "message": "The postcode JE2 3FN is in Jersey"},
             # English Postcode
             {"postcode": "M2 3WQ", "message": "in order of closeness to"},
             # Scottish Postcode
             {"postcode": "AB11 5BN", "message": "These results cover England and Wales."},
-            # Lower case Postcode
+            # Lower case Postcode still works out region.
             {"postcode": "im4", "message": "The postcode IM4 is in the Isle of Man"},
-            # Invalid post code with no prefix numbers, results are found and search
-            # Region is recognised as Scotland.
-            {"postcode": "AB", "message": "These results cover England and Wales."},
+            # Invalid post code, results are found and search
+            {"postcode": "AB11 9EE", "message": "Enter a valid postcode"},
         ]
 
         for case in test_cases:
@@ -44,15 +46,23 @@ class PostcodeValidationTest(SimpleTestCase):
         self.assertEqual(change_search_button.text.strip(), "Change search")
 
 
-class InvalidEnglishPostcodeTest(SimpleTestCase):
+class InvalidPostcodeTest(SimpleTestCase):
     client = Client()
     url = reverse("search")
-    data = {"postcode": "ZZ1 1QQ"}
 
-    def test_there_is_a_problem(self):
-        response = self.client.get(self.url, self.data)
-        self.assertContains(response, "There is a problem")
+    def test_invalid_postcodes_error_messages(self):
+        invalid_postcodes = ["ML3 9PP", "INVALID1", "ZZ20 7QQ"]  # Add more invalid postcodes as needed
+        expected_messages = ["There is a problem", "Enter a valid postcode"]
 
-    def test_error_message(self):
-        response = self.client.get(self.url, self.data)
-        self.assertContains(response, "Enter a valid postcode")
+        for postcode in invalid_postcodes:
+            with self.subTest(postcode=postcode):
+                data = {"postcode": postcode}
+                response = self.client.get(self.url, data)
+
+                # Check that each expected message is in the response
+                for message in expected_messages:
+                    self.assertContains(
+                        response,
+                        message,
+                        msg_prefix=f"Failed on postcode '{postcode}' - Expected message: '{message}' - ",
+                    )

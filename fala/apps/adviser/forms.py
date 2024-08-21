@@ -74,12 +74,18 @@ class AdviserSearchForm(forms.Form):
     def clean(self):
         data = self.cleaned_data
         postcode = data.get("postcode")
-        if not postcode and not data.get("name"):
-            self.add_error("postcode", (_("Enter a postcode")))
-            self.add_error("name", (_("Enter an organisation name")))
-        else:
-            if postcode and self.region == Region.ENGLAND_OR_WALES and not self._valid_postcode(postcode):
-                self.add_error("postcode", (_("Enter a valid postcode")))
+        name = data.get("name")
+
+        # Check if both postcode and name are missing
+        if not postcode and not name:
+            self.add_error("postcode", _("Enter a postcode"))
+            self.add_error("name", _("Enter an organisation name"))
+            return data
+
+        # Validate postcode if provided and region is either England/Wales or Scotland
+        if postcode and self.region in {Region.ENGLAND_OR_WALES, Region.SCOTLAND}:
+            if not self._valid_postcode(postcode):
+                self.add_error("postcode", _("Enter a valid postcode"))
 
         return data
 
@@ -109,14 +115,23 @@ class AdviserSearchForm(forms.Form):
 
     def _valid_postcode(self, postcode):
         try:
+            # Check if the postcode is a valid string before proceeding
+            if not isinstance(postcode, str) or not postcode.strip():
+                return False
+
+            # Attempt to find the data using the LAALAA API
             data = laalaa.find(
-                postcode=postcode,
+                postcode=postcode.strip(),
                 page=1,
             )
+
+            # Check if the 'error' key is present in the data
             return "error" not in data
 
         except laalaa.LaaLaaError:
-            return False
+            # If there is an exception from LAALAA for example a postcode is not supported by our data. e.g. IM4
+            # Tell the user there was an error, but don't stop the usage of the site.
+            self.add_error("postcode", "%s %s" % (_("Error looking up legal advisers."), _("Please try again later.")))
 
     def search(self):
         if self.is_valid():
