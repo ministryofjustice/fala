@@ -13,12 +13,11 @@ commands:
           role_arn: $ECR_ROLE_TO_ASSUME # this will use the env var
           region: $ECR_REGION # this will use the env var
       - run:
-          name: Create target tags
+          name: Set ECR_TAG environment variable for use in next step
           command: |
-            source .circleci/define_build_environment_variables
-            echo "Created tags $TARGET_TAGS"
-            echo "export BUILD_TAGS=$TARGET_TAGS" >> $BASH_ENV
-            echo "export IMAGE_TAG=$IMAGE_TAG" >> $BASH_ENV
+            [[ "$CIRCLE_BRANCH" == "main" ]] && ECR_TAG="main-$CIRCLE_SHA1" || ECR_TAG="branch-$CIRCLE_SHA1"
+            echo "export ECR_TAG=$ECR_TAG" >> "$BASH_ENV"
+            source "$BASH_ENV"
       # Authenticate to the ECR repository using the standard command
       - run: |
           aws ecr get-login-password --region $ECR_REGION | docker login --username AWS --password-stdin ${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com
@@ -129,7 +128,7 @@ jobs:
           no_output_timeout: 15m
           push_image: true
           account_id: $AWS_ECR_REGISTRY_ID
-          tag: $BUILD_TAGS
+          tag: $ECR_TAG
           region: $ECR_REGION # this will use the env var
           repo: $ECR_REPOSITORY # this will use the env var
           extra_build_args: |
