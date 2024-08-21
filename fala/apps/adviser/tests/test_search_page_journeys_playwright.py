@@ -14,15 +14,18 @@ class SearchPageEndToEndJourneys(PlaywrightTestSetup):
         expect(page.checkbox_by_label("Housing Loss Prevention Advice Service")).to_be_checked()
 
     def test_landing_page_with_multiple_url_params(self):
+        hlpas = "Housing Loss Prevention Advice Service"
+        edu = "Education"
         page = self.visit_search_page_with_url_params("categories=hlpas&categories=edu")
         expect(page.h1).to_have_text("Find a legal aid adviser or family mediator")
         expect(page.error_list).not_to_be_visible()
-        expect(page.checkbox_by_label("Housing Loss Prevention Advice Service")).to_be_checked()
-        expect(page.checkbox_by_label("Education")).to_be_checked()
+        expect(page.checkbox_by_label(f"{hlpas}")).to_be_checked()
+        expect(page.checkbox_by_label(f"{edu}")).to_be_checked()
+        # we are reloading the page, as we wanted to verify that we would be presented with the same view
         page._page.reload()
         expect(page.error_list).not_to_be_visible()
-        expect(page.checkbox_by_label("Housing Loss Prevention Advice Service")).to_be_checked()
-        expect(page.checkbox_by_label("Education")).to_be_checked()
+        expect(page.checkbox_by_label(f"{hlpas}")).to_be_checked()
+        expect(page.checkbox_by_label(f"{edu}")).to_be_checked()
 
     def test_postcode_search_journey(self):
         test_cases = [
