@@ -69,3 +69,7 @@ class SearchPage(FalaPage):
     def search(self, postcode):
         self._page.locator("#id_postcode").fill(postcode)
         self._page.locator("#searchButton").click()
+
+
+class CookiesPage(FalaPage):
+    pass

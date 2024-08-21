@@ -40,6 +40,10 @@ class PrivacyView(TemplateView):
     template_name = "adviser/privacy.html"
 
 
+class CookiesView(TemplateView):
+    template_name = "adviser/cookies.html"
+
+
 class SearchView(ListView):
     class ErrorState(object):
         def __init__(self, form):
