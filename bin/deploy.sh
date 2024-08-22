@@ -7,7 +7,7 @@ BRANCH_RELEASE_NAME=$(echo $CIRCLE_BRANCH | tr '[:upper:]' '[:lower:]' | sed 's:
 deploy_branch() {
 # Set the deployment host, this will add the prefix of the branch name e.g el-257-deploy-with-circleci or just main
   RELEASE_HOST="$BRANCH_RELEASE_NAME-fala-staging.cloud-platform.service.justice.gov.uk"
-# Set the ingress name, needs <release name>-<chart name>-<namespace>-green
+# Set the ingress name, needs <release name>-<chart name>-<namespace>-green 
   IDENTIFIER="$BRANCH_RELEASE_NAME-laa-fala-$K8S_NAMESPACE-green"
   echo "this is the identifer ingress name $IDENTIFIER"
   echo "Deploying CIRCLE_SHA1: $CIRCLE_SHA1 under release name: '$BRANCH_RELEASE_NAME'..."
@@ -17,7 +17,7 @@ deploy_branch() {
                 --namespace=${K8S_NAMESPACE} \
                 --values ./helm_deploy/laa-fala/values/fala-uat.yaml \
                 --set image.repository="$ECR_ENDPOINT" \
-                --set image.tag="branch-$CIRCLE_SHA1" \
+                --set image.tag="$IMAGE_TAG" \
                 --set ingress.annotations."external-dns\.alpha\.kubernetes\.io/set-identifier"="$IDENTIFIER" \
                 --set ingress.hosts[0].host="$RELEASE_HOST"
 }
@@ -28,7 +28,7 @@ deploy_main() {
                           --namespace=${K8S_NAMESPACE} \
                           --values ./helm_deploy/laa-fala/values/fala-$ENVIRONMENT.yaml \
                           --set image.repository="${ECR_ENDPOINT}" \
-                          --set image.tag="main-$CIRCLE_SHA1"
+                          --set image.tag="$CIRCLE_SHA1"
 }
 
 
