@@ -5,7 +5,7 @@ from django.conf import settings
 from django.urls import resolve, reverse
 from django.views.generic import TemplateView, ListView
 
-from .forms import AdviserSearchForm
+from .forms import AdviserSearchForm, AdviserRootForm
 from .laa_laa_paginator import LaaLaaPaginator
 from .regions import Region
 
@@ -15,14 +15,14 @@ class AdviserView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
-        form = AdviserSearchForm(data=request.GET or None)
+        form = AdviserRootForm(data=request.GET or None)
         view_name = resolve(request.path_info).url_name
         current_url = reverse(view_name)
 
         context.update(
             {
                 "form": form,
-                "data": form.search(),
+                "data": {},
                 "errorList": [],
                 "current_url": current_url,
                 "CHECK_LEGAL_AID_URL": settings.CHECK_LEGAL_AID_URL,
@@ -186,6 +186,7 @@ class SearchView(ListView):
 
     def get(self, request, *args, **kwargs):
         form = AdviserSearchForm(data=request.GET or None)
+
         if form.is_valid():
             region = form.region
             if region == Region.ENGLAND_OR_WALES or region == Region.SCOTLAND:

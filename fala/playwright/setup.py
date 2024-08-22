@@ -53,6 +53,11 @@ class PlaywrightTestSetup(StaticLiveServerTestCase):
         else:
             return OtherRegionPage(page)
 
+    def visit_search_page_with_url_params(self, url_params):
+        page = self.browser.new_page()
+        page.goto(f"{self.live_server_url}/?{url_params}")
+        return SearchPage(page)
+
     def visit_search_page(self):
         page = self.browser.new_page()
         page.goto(f"{self.live_server_url}")
