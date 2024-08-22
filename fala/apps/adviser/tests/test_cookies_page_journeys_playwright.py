@@ -37,13 +37,11 @@ class CookiesPageEndToEndJourneysWithFreshSetUp(StaticLiveServerTestCase):
         # using `wait_for_selector` for this assertion to run in cricleci
         # reload page, as cookie rejected in banner and will not appear in browser until some time
         page.get_by_text("Accept analytics cookies", exact=True).click()
-        page.wait_for_selector(f"{self.banner_text}", state="hidden")
-        page.reload()
+        page.wait_for_selector(f"{self.banner_text}", state="hidden", strict=True)
 
     def reject_cookie_from_banner(self, page):
         page.get_by_text("Reject analytics cookies", exact=True).click()
-        page.wait_for_selector(f"{self.banner_text}", state="hidden")
-        page.reload()
+        page.wait_for_selector(f"{self.banner_text}", state="hidden", strict=True)
 
     def accept_cookie_on_policy_page(self, page):
         page.locator("#cookies_footer_link").click()

@@ -106,9 +106,21 @@ jobs:
           paths:
             - "~/.cache/pip"
       - run:
+          name: Install Node.js dependencies and build assets
+          command: |
+            rm .nvmrc
+            curl https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash 
+            export NVM_DIR="$HOME/.nvm"
+            . $NVM_DIR/nvm.sh
+            nvm install 10
+            nvm use 10
+            npm install
+            npm run build
+      - run:
           name: Run unit tests
           command: |
             source env/bin/activate
+            python manage.py collectstatic --noinput
             python manage.py test
           environment:
             LAALAA_API_HOST: "https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk"
