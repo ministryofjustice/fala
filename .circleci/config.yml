@@ -304,6 +304,7 @@ workflows:
           environment: production
           requires:
             - production_deploy_approval
+            - production_deploy
           filters:
             branches:
               only:
