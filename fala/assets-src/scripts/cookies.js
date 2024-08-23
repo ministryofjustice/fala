@@ -4,7 +4,7 @@ const acceptedMessage = document.getElementById("accepted-message");
 const rejectedMessage = document.getElementById("rejected-message");
 
 // Set cookies
-function setCookie(name, value, days) {
+const setCookie = (name, value, days) => {
   let expires = "";
   if (days) {
     const date = new Date();
@@ -52,7 +52,7 @@ if (hideCoookieRejecttMessage) {
   })
 };
 
-// Cookie poolicy form
+// Cookie policy form
 const cookiePolicyForm = document.getElementById("cookie_policy_page_choice");
 if (cookiePolicyForm) {
   cookiePolicyForm.addEventListener("submit", (e) => {
