@@ -22,7 +22,6 @@ class CookiesPageEndToEndJourneysWithFreshSetUp(StaticLiveServerTestCase):
     def verify_cookie_value(self, expected_value, my_cookies):
         cookie_found = False
         for cookie in my_cookies:
-            print(f"Name: {cookie['name']}, Value: {cookie['value']}")
             if cookie["value"] == expected_value:
                 cookie_found = True
                 break
@@ -49,6 +48,7 @@ class CookiesPageEndToEndJourneysWithFreshSetUp(StaticLiveServerTestCase):
         expect(page.locator("h1")).to_have_text("Cookies")
         page.get_by_text("Yes", exact=True).click()
         page.get_by_text("Save cookie settings").click()
+        page.wait_for_selector(f"{self.banner_text}", state="hidden", strict=True)
 
     def reject_cookie_on_policy_page(self, page):
         page.locator("#cookies_footer_link").click()
@@ -56,6 +56,7 @@ class CookiesPageEndToEndJourneysWithFreshSetUp(StaticLiveServerTestCase):
         expect(page.locator("h1")).to_have_text("Cookies")
         page.get_by_text("No", exact=True).click()
         page.get_by_text("Save cookie settings").click()
+        page.wait_for_selector(f"{self.banner_text}", state="hidden", strict=True)
 
     def test_cookie_has_appropriate_value_when_accepted_in_banner(self):
         with sync_playwright() as p:

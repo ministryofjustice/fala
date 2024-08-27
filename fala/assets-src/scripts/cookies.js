@@ -61,10 +61,14 @@ if (cookiePolicyForm) {
     if (selectedValue === "Allowed") {
       setCookie("cookiePermission", "Allowed", 30);
       tagMan();
-      location.reload();
+      if (cookieBanner) {
+        cookieBanner.hidden = true;
+      }
     } else if (selectedValue === "Rejected") {
       setCookie("cookiePermission", "Rejected", 30);
-      location.reload();
+      if (cookieBanner) {
+        cookieBanner.hidden = true;
+      }
     }
   });
 };
