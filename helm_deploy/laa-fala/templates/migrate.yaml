@@ -1,0 +1,43 @@
+{{- $fullName := include "app.fullname" . -}}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: "{{ $fullName }}-migrate"
+  labels:
+    helm.sh/chart: {{ include "app.chart" . }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/name: {{ include "app.name" . }}
+    app.kubernetes.io/instance: "{{ .Release.Name }}-migrate"
+  annotations:
+    "helm.sh/hook": pre-upgrade,post-install
+    "helm.sh/hook-weight": "-10"
+    "helm.sh/hook-delete-policy": before-hook-creation
+spec:
+  template:
+    metadata:
+      name: "{{ $fullName }}-migrate"
+      labels:
+        helm.sh/chart: {{ include "app.chart" . }}
+        app.kubernetes.io/managed-by: {{ .Release.Service }}
+        app.kubernetes.io/name: {{ include "app.name" . }}
+        app.kubernetes.io/instance: "{{ .Release.Name }}-migrate"
+    spec:
+      restartPolicy: Never
+      automountServiceAccountToken: false
+      containers:
+        - name: migrate-db
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["/bin/bash", "-c", "/home/app/fala/migrate_db.sh"]
+          {{ include "app.envs" . | nindent 10 }}
+          resources:
+              limits:
+                cpu: 500m
+                memory: 500Mi
+              requests:
+                cpu: 100m
+                memory: 125Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]

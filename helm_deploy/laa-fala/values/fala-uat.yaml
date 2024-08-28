@@ -49,6 +49,7 @@ ingress:
 feature_flags:
   no_map: "enabled"
   survey_monkey: "enabled"
+  block_robots: "enabled"
 
 laalaa_api:
   host: "https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk"
@@ -68,7 +69,7 @@ postgresql:
     database: fala_staging
     enablePostgresUser: true
     postgresPassword: postgres
-    postgresqlUsername: postgres
+    postgresUsername: postgres
   primary:
     persistence:
       enabled: true

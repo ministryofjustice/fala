@@ -35,9 +35,10 @@ class CapitalisedPostcodeField(forms.CharField):
         return super().to_python(capitalised_value)
 
 
-class AdviserSearchForm(forms.Form):
-    page = forms.IntegerField(required=False, widget=forms.HiddenInput())
-
+# This is so that we can hit the front page with query parameters in url and not see form validation errors
+# In django, form validation happens when the data is cleaned, i.e. form validation, form errors, form cleaned
+# `def clean(self)` is the method triggering form validation, so have extracted that into `AdviserSearchForm` form class
+class AdviserRootForm(forms.Form):
     postcode = CapitalisedPostcodeField(
         label=_("Postcode"),
         max_length=30,
@@ -53,13 +54,6 @@ class AdviserSearchForm(forms.Form):
         widget=FalaTextInput(),
     )
 
-    type = forms.MultipleChoiceField(
-        label=_("Organisation type"),
-        choices=ORGANISATION_TYPES_CHOICES,
-        widget=forms.CheckboxSelectMultiple(),
-        required=False,
-    )
-
     categories = forms.MultipleChoiceField(
         label=_("Category"),
         choices=laalaa.PROVIDER_CATEGORY_CHOICES,
@@ -67,18 +61,29 @@ class AdviserSearchForm(forms.Form):
         required=False,
     )
 
+
+class AdviserSearchForm(AdviserRootForm):
+    page = forms.IntegerField(required=False, widget=forms.HiddenInput())
+
     def __init__(self, *args, **kwargs):
         kwargs.setdefault("label_suffix", "")
-        super(AdviserSearchForm, self).__init__(*args, **kwargs)
+        super(AdviserRootForm, self).__init__(*args, **kwargs)
 
     def clean(self):
         data = self.cleaned_data
         postcode = data.get("postcode")
-        if not postcode and not data.get("name"):
-            raise forms.ValidationError(_("Enter a postcode or an organisation name"))
-        else:
-            if postcode and self.region == Region.ENGLAND_OR_WALES and not self._valid_postcode(postcode):
-                self.add_error("postcode", (_("Enter a valid postcode")))
+        name = data.get("name")
+
+        # Check if both postcode and name are missing
+        if not postcode and not name:
+            self.add_error("postcode", _("Enter a postcode"))
+            self.add_error("name", _("Enter an organisation name"))
+            return data
+
+        # Validate postcode if provided and region is either England/Wales or Scotland
+        if postcode and self.region in {Region.ENGLAND_OR_WALES, Region.SCOTLAND}:
+            if not self._valid_postcode(postcode):
+                self.add_error("postcode", _("Enter a valid postcode"))
 
         return data
 
@@ -108,14 +113,23 @@ class AdviserSearchForm(forms.Form):
 
     def _valid_postcode(self, postcode):
         try:
+            # Check if the postcode is a valid string before proceeding
+            if not isinstance(postcode, str) or not postcode.strip():
+                return False
+
+            # Attempt to find the data using the LAALAA API
             data = laalaa.find(
-                postcode=postcode,
+                postcode=postcode.strip(),
                 page=1,
             )
+
+            # Check if the 'error' key is present in the data
             return "error" not in data
 
         except laalaa.LaaLaaError:
-            return False
+            # If there is an exception from LAALAA for example a postcode is not supported by our data. e.g. IM4
+            # Tell the user there was an error, but don't stop the usage of the site.
+            self.add_error("postcode", "%s %s" % (_("Error looking up legal advisers."), _("Please try again later.")))
 
     def search(self):
         if self.is_valid():

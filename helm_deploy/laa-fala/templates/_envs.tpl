@@ -5,31 +5,34 @@ Environment variables for web and worker containers
 {{- define "app.envs" }}
 env:
   {{ if .Values.postgresql.enabled }}
-  - name: POSTGRES_USER
-    value: {{ .Values.postgresql.postgresqlUsername }}
-  - name: POSTGRES_PASSWORD
+  - name: DB_USER
+    value: {{ .Values.postgresql.auth.postgresUsername }}
+  - name: DB_PASSWORD
     value: {{ .Values.postgresql.auth.postgresPassword }}
-  - name: POSTGRES_HOST
-    value: {{ printf "%s-%s" .Release.Name "postgresql" | trunc 63 | trimSuffix "-" }}
-  - name: POSTGRES_DATABASE
+    {{/*
+    This is the name of the DB service which is in service.yaml
+    */}}
+  - name: DB_HOST
+    value: {{ include "app.fullname" . }}-db
+  - name: DB_NAME
     value: {{ .Values.postgresql.auth.database }}
   {{ else }}
-  - name: POSTGRES_USER
+  - name: DB_USER
     valueFrom:
       secretKeyRef:
         name: rds-postgresql-instance-output
         key: database_username
-  - name: POSTGRES_PASSWORD
+  - name: DB_PASSWORD
     valueFrom:
       secretKeyRef:
         name: rds-postgresql-instance-output
         key: database_password
-  - name: POSTGRES_HOST
+  - name: DB_HOST
     valueFrom:
       secretKeyRef:
         name: rds-postgresql-instance-output
         key: rds_instance_address
-  - name: POSTGRES_DATABASE
+  - name: DB_NAME
     valueFrom:
       secretKeyRef:
         name: rds-postgresql-instance-output
@@ -37,6 +40,8 @@ env:
   {{ end }}
   - name: FEATURE_FLAG_SURVEY_MONKEY
     value: {{ .Values.feature_flags.survey_monkey }}
+  - name: BLOCK_ROBOTS
+    value: {{ .Values.feature_flags.block_robots }}
   - name: ALLOWED_HOSTS
     value: {{ .Values.allowed_hosts }}
   - name: LAALAA_API_HOST

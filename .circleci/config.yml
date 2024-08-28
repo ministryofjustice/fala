@@ -13,12 +13,11 @@ commands:
           role_arn: $ECR_ROLE_TO_ASSUME # this will use the env var
           region: $ECR_REGION # this will use the env var
       - run:
-          name: Create target tags
+          name: Set ECR_TAG environment variable for use in next step
           command: |
-            source .circleci/define_build_environment_variables
-            echo "Created tags $TARGET_TAGS"
-            echo "export BUILD_TAGS=$TARGET_TAGS" >> $BASH_ENV
-            echo "export IMAGE_TAG=$IMAGE_TAG" >> $BASH_ENV
+            [[ "$CIRCLE_BRANCH" == "main" ]] && ECR_TAG="main-$CIRCLE_SHA1" || ECR_TAG="branch-$CIRCLE_SHA1"
+            echo "export ECR_TAG=$ECR_TAG" >> "$BASH_ENV"
+            source "$BASH_ENV"
       # Authenticate to the ECR repository using the standard command
       - run: |
           aws ecr get-login-password --region $ECR_REGION | docker login --username AWS --password-stdin ${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com
@@ -107,9 +106,21 @@ jobs:
           paths:
             - "~/.cache/pip"
       - run:
+          name: Install Node.js dependencies and build assets
+          command: |
+            rm .nvmrc
+            curl https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash 
+            export NVM_DIR="$HOME/.nvm"
+            . $NVM_DIR/nvm.sh
+            nvm install 10
+            nvm use 10
+            npm install
+            npm run build
+      - run:
           name: Run unit tests
           command: |
             source env/bin/activate
+            python manage.py collectstatic --noinput
             python manage.py test
           environment:
             LAALAA_API_HOST: "https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk"
@@ -129,7 +140,7 @@ jobs:
           no_output_timeout: 15m
           push_image: true
           account_id: $AWS_ECR_REGISTRY_ID
-          tag: $BUILD_TAGS
+          tag: $ECR_TAG
           region: $ECR_REGION # this will use the env var
           repo: $ECR_REPOSITORY # this will use the env var
           extra_build_args: |
@@ -138,7 +149,7 @@ jobs:
       - run:
           name: Validate Python version
           command: |
-            docker run --rm --tty --interactive ${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG python --version | grep "3.12"
+            docker run --rm --tty --interactive ${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com/$ECR_REPOSITORY:$ECR_TAG python --version | grep "3.12"
 
   deploy_grafana:
     docker:
@@ -236,6 +247,10 @@ workflows:
           environment: staging
           requires:
             - build
+          filters:
+            branches:
+              ignore:
+                - main
           context:
             - laa-fala
             - laa-fala-live-staging
@@ -244,19 +259,6 @@ workflows:
           type: approval
           requires:
             - build
-          filters:
-            branches:
-              only:
-                - main
-
-      - deploy:
-          name: Legacy staging deploy
-          environment: staging
-          requires:
-            - staging_deploy_approval
-          context:
-            - laa-fala
-            - laa-fala-live-staging
           filters:
             branches:
               only:
@@ -290,7 +292,7 @@ workflows:
       - production_deploy_approval:
           type: approval
           requires:
-            - Legacy staging deploy
+            - Helm Staging Deploy
           filters:
             branches:
               only:
@@ -314,6 +316,7 @@ workflows:
           environment: production
           requires:
             - production_deploy_approval
+            - production_deploy
           filters:
             branches:
               only:

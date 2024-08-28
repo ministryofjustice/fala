@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{%- from 'govuk_frontend_jinja/components/pagination/macro.html' import govukPagination %}
+
 {% block content %}
   <div class="govuk-grid-column-full">
     <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
@@ -17,13 +19,13 @@
     <div class="laa-fala__grey-box govuk-!-margin-bottom-6">
       <ul class="govuk-list" role="list">
         {% if form.postcode.value() %}
-          <li class="govuk-body notranslate" role="listitem" translate="no">Postcode: {{ form.postcode.value() }}</li>
+          <li class="govuk-body" role="listitem">Postcode:<span class="notranslate"> {{ form.postcode.value() }}</span></li>
         {% endif %}
         {% if form.name.value() %}
-          <li class="govuk-body notranslate" role="listitem" translate="no">Organisation: {{ form.name.value() }}</li>
+          <li class="govuk-body" role="listitem">Organisation:<span class="notranslate"> {{ form.name.value() }}</span></li>
         {% endif %}
         {% if form|category_selection %}
-          <li class="govuk-body notranslate" role="listitem" translate="no">Categories: {{ form|category_selection }} </li>
+          <li class="govuk-body" role="listitem">Categories: {{ form|category_selection }} </li>
         {% endif %}
       </ul>
 
@@ -35,7 +37,14 @@
             <input type="hidden" name="categories" value="{{ value }}">
           {% endif %}
         {% endfor %}
-        <button type="submit" class="govuk-button govuk-!-margin-bottom-2" id="changeSearchButton" name="search">Change search</button>
+
+        {{ govukButton({
+           'text': "Change search",
+           'type': "submit",
+           'classes': "govuk-!-margin-bottom-2",
+           'id': "changeSearchButton",
+           'name': "search"
+        }) }}
       </form>
     </div>
     <span class="govuk-body results-header">
@@ -43,7 +52,7 @@
       {% if data.origin %}
         {% trans page_count=data.results|length, result_count=data.count %}
           {% pluralize %}
-          <span class="govuk-!-font-weight-bold">{{ result_count }} results</span> in order of closeness to
+          <span class="govuk-!-font-weight-bold" id="result-count-overall">{{ result_count }} results</span> in order of closeness to
         {% endtrans %}
         <strong class="notranslate" translate="no">{{ form.postcode.value()|upper }}</strong>
         {%- if form.name.value() %}
@@ -54,7 +63,7 @@
       {% else %}
         {% trans result_count=data.count, page_count=data.results|length, org_name=form.name.value() %}
           {% pluralize %}
-          <span class="govuk-!-font-weight-bold">{{ result_count }} results</span> for <strong>{{ org_name }}</strong>.
+          <span class="govuk-!-font-weight-bold" id="result-count-org">{{ result_count }} results</span> for <strong>{{ org_name }}</strong>.
         {% endtrans %}
       {% endif %}
       </span>
@@ -105,59 +114,7 @@
           </li>
         {% endfor %}
       </ul>
-
-      <nav class="govuk-pagination" aria-label="Pagination">
-        {% set current_page = pages.current_page() %}
-        {% if current_page.has_previous() %}
-          <div class="govuk-pagination__prev">
-            {% if form|category_tuples|length %}
-              <a class="govuk-link govuk-pagination__link" href="{{ url('search') }}?page={{ current_page.previous_page_number() }}&{{ params|urlencode }}&{{ form|category_tuples|urlencode }}" rel="prev">
-            {% else %}
-              <a class="govuk-link govuk-pagination__link" href="{{ url('search') }}?page={{ current_page.previous_page_number() }}&{{ params|urlencode }}" rel="prev">
-            {% endif %}
-              <svg class="govuk-pagination__icon govuk-pagination__icon--prev" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
-                <path d="m6.5938-0.0078125-6.7266 6.7266 6.7441 6.4062 1.377-1.449-4.1856-3.9768h12.896v-2h-12.984l4.2931-4.293-1.414-1.414z"></path>
-              </svg>
-            <span class="govuk-pagination__link-title">
-               Previous<span class="govuk-visually-hidden"> page</span>
-            </span>
-            </a>
-          </div>
-        {% endif %}
-        <ul class="govuk-pagination__list">
-          {% for page_num in pages.page_range %}
-            {% if form.current_page == page_num %}
-            <li class="govuk-pagination__item govuk-pagination__item--current">
-            {% else %}
-            <li class="govuk-pagination__item">
-            {% endif %}
-              {% if form|category_tuples|length %}
-              <a class="govuk-link govuk-pagination__link" href="{{ url('search') }}?page={{ page_num }}&{{ params|urlencode }}&{{ form|category_tuples|urlencode }}" aria-label="Page {{ page_num }}" aria-current="page">
-              {% else %}
-              <a class="govuk-link govuk-pagination__link" href="{{ url('search') }}?page={{ page_num }}&{{ params|urlencode }}" aria-label="Page {{ page_num }}" aria-current="page">
-              {% endif %}
-                {{ page_num }}
-              </a>
-            </li>
-          {% endfor %}
-        </ul>
-        {% if current_page.has_next() %}
-          <div class="govuk-pagination__next">
-             {% if form|category_tuples|length %}
-              <a class="govuk-link govuk-pagination__link" href="{{ url('search') }}?page={{ current_page.next_page_number() }}&{{ params|urlencode }}&{{ form|category_tuples|urlencode }}" rel="next">
-             {% else %}
-              <a class="govuk-link govuk-pagination__link" href="{{ url('search') }}?page={{ current_page.next_page_number() }}&{{ params|urlencode }}" rel="next">
-             {% endif %}
-        <span class="govuk-pagination__link-title">
-          Next<span class="govuk-visually-hidden"> page</span>
-        </span>
-              <svg class="govuk-pagination__icon govuk-pagination__icon--next" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
-                <path d="m8.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z"></path>
-              </svg>
-            </a>
-          </div>
-        {% endif %}
-      </nav>
+      {{ govukPagination(pagination) }}
     {% else %}
       {% from "macros/element.html" import alert %}
       {% call alert(title=_('No results')) %}
