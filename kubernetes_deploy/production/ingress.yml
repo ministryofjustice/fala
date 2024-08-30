@@ -14,7 +14,6 @@ spec:
   tls:
   - hosts:
     - laa-fala-production-old.apps.live-1.cloud-platform.service.justice.gov.uk
-    secretName: fala-tls-certificate
   rules:
   - host: laa-fala-production-old.apps.live-1.cloud-platform.service.justice.gov.uk
     http:
