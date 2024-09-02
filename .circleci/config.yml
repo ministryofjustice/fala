@@ -84,6 +84,7 @@ jobs:
     docker:
       - image: cimg/python:3.12
       - image: cimg/postgres:16.3
+      - image: cimg/node:14.21.3
     steps:
       - checkout
       - run:
@@ -106,14 +107,9 @@ jobs:
           paths:
             - "~/.cache/pip"
       - run:
-          name: Install Node.js dependencies and build assets
+          name: Build assets
           command: |
             rm .nvmrc
-            curl https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash 
-            export NVM_DIR="$HOME/.nvm"
-            . $NVM_DIR/nvm.sh
-            nvm install 10
-            nvm use 10
             npm install
             npm run build
       - run:

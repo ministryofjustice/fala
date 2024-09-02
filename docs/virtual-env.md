@@ -44,9 +44,15 @@ pip install -r requirements/generated/requirements-dev.txt
 
 ### NodeJS
 
-It's suggested to use 'nvm' to install the required old version of Node.
+It's suggested to use 'nvm' to install the required old version of Node. Currently FALA runs on Node 14. A specific version of nvm is required to install Node 14 successfully via venv which TLDR is to do with older versions of Node not supporting ARM architecture.
 
-1. Install NVM: https://github.com/nvm-sh/nvm#install--update-script
+Some information around this:
+https://github.com/nvm-sh/nvm/issues/3284
+https://stackoverflow.com/questions/67254339/nvm-install-node-fails-to-install-on-macos-big-sur-m1-chip/67254340#67254340
+
+If you have previously installed nvm with Homebrew you may need to `brew uninstall nvm` to get this working.
+
+1. Install NVM 0.39.1 using instructions here: https://github.com/nvm-sh/nvm#install--update-script
 
 2. Install the NodeJS version (specified in `.nvmrc`):
 
