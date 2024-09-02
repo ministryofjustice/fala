@@ -108,7 +108,7 @@ jobs:
             - "~/.cache/pip"
       - node/install:
           install-yarn: true
-          node-version: '14.21.3'
+          node-version: '16.20.2'
       - run:
           name: Build assets
           command: |

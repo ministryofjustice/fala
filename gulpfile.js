@@ -3,7 +3,7 @@ const sourcemaps = require('gulp-sourcemaps');
 const concat = require('gulp-concat');
 const terser = require('gulp-terser');
 const cleanCss = require('gulp-clean-css');
-const sass = require('gulp-sass');
+const sass = require('gulp-sass')(require('sass'));
 const { src, parallel, dest} = require('gulp'); 
 
 // FALA js & GOVUK js - copying over both if we ever want to add custom js
