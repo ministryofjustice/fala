@@ -1,6 +1,6 @@
-FROM node:18 as node_build
+FROM node:20 as node_build
 
-WORKDIR /home/app
+WORKDIR /home/node
 
 COPY package.json package-lock.json ./
 RUN npm install
@@ -14,7 +14,7 @@ RUN ./node_modules/.bin/gulp build --production
 #################################################
 FROM python:3.12-bullseye as base
 
-COPY --from=node_build home/app/fala/assets /home/app/fala/assets
+COPY --from=node_build home/node/fala/assets /home/app/fala/assets
 
 ENV LC_CTYPE=C.UTF-8
 
