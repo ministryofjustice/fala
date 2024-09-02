@@ -3,6 +3,7 @@ orbs:
   slack: circleci/slack@2.5.0
   aws-cli: circleci/aws-cli@4.1 # use v4 of this orb
   aws-ecr: circleci/aws-ecr@9 # this orb doesn't support OIDC v2, so we use aws-cli to authenticate
+  node: circleci/node@6.1.0
 
 
 commands:
@@ -80,11 +81,19 @@ jobs:
       - run:
           name: Check for changes with pip-compile
           command: ls requirements/source/* | xargs pre-commit run pip-compile --show-diff-on-failure --files
+  install-node:
+    docker:
+      - image: cimg/base:stable-20.04
+    steps:
+      - checkout
+      - node/install:
+          install-yarn: true
+          node-version: '14.21.3'
+      - run: node --version
   test:
     docker:
       - image: cimg/python:3.12
       - image: cimg/postgres:16.3
-      - image: cimg/node:14.21.3
     steps:
       - checkout
       - run:
@@ -110,6 +119,7 @@ jobs:
           name: Build assets
           command: |
             rm .nvmrc
+            node --version
             npm install
             npm run build
       - run:
@@ -229,10 +239,12 @@ workflows:
     jobs:
       - lint
       - pip-compile
+      - install-node
       - test:
           requires:
             - lint
             - pip-compile
+            - install-node
       - build:
           requires:
             - test
