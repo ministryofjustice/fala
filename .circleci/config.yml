@@ -113,7 +113,6 @@ jobs:
           name: Build assets
           command: |
             rm .nvmrc
-            node --version
             npm install
             npm run build
       - run:
