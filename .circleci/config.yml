@@ -81,15 +81,6 @@ jobs:
       - run:
           name: Check for changes with pip-compile
           command: ls requirements/source/* | xargs pre-commit run pip-compile --show-diff-on-failure --files
-  install-node:
-    docker:
-      - image: cimg/base:stable-20.04
-    steps:
-      - checkout
-      - node/install:
-          install-yarn: true
-          node-version: '14.21.3'
-      - run: node --version
   test:
     docker:
       - image: cimg/python:3.12
@@ -115,6 +106,9 @@ jobs:
           key: pip-v1-{{ checksum "requirements/generated/requirements-dev.txt" }}
           paths:
             - "~/.cache/pip"
+      - node/install:
+          install-yarn: true
+          node-version: '14.21.3'
       - run:
           name: Build assets
           command: |
@@ -239,12 +233,10 @@ workflows:
     jobs:
       - lint
       - pip-compile
-      - install-node
       - test:
           requires:
             - lint
             - pip-compile
-            - install-node
       - build:
           requires:
             - test
