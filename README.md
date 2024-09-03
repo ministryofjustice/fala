@@ -84,6 +84,26 @@ When breakpoint() is reached, you will be able to debug from the command line.
 
 https://docs.python.org/3/library/pdb.html
 
+## Deploying to Staging and Production
+
+The service uses `helm` to deploy to Cloud Platform Environments via CircleCI. This can be installed using:
+
+`brew install helm`
+
+To view helm deployments in a namespace the command is:
+
+`helm -n <namespace> ls --all`
+
+e.g. `helm -n laa-fala-staging ls --all`
+
+Deployments can be deleted by running:
+
+`helm delete <name-of-deployment>`
+
+e.g. `helm -n  laa-fala-staging delete el-123-fee-change`
+
+It is also possible to manually deploy to an environment from the command line, the structure of the command can be found in `bin/deploy.sh`
+
 
 ## Documentation
 * [Installation via virtualenv](docs/virtual-env.md)
