@@ -44,7 +44,7 @@ pip install -r requirements/generated/requirements-dev.txt
 
 ### NodeJS
 
-It's suggested to use 'nvm' to install the required old version of Node.
+It's suggested to use 'nvm' to install Node.
 
 1. Install NVM: https://github.com/nvm-sh/nvm#install--update-script
 
@@ -82,7 +82,6 @@ node --version
        nvm use
        npm install
        npm run build
-       ./manage.py collectstatic --noinput
 
 5. Create a ``.env`` file from the example file:
 
@@ -134,7 +133,6 @@ Usage during frontend development:
        nvm use
        npm install
        npm run build
-       ./manage.py collectstatic --noinput
 
 3. Serve assets:
 

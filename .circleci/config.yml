@@ -3,6 +3,7 @@ orbs:
   slack: circleci/slack@2.5.0
   aws-cli: circleci/aws-cli@4.1 # use v4 of this orb
   aws-ecr: circleci/aws-ecr@9 # this orb doesn't support OIDC v2, so we use aws-cli to authenticate
+  node: circleci/node@6.1.0
 
 
 commands:
@@ -105,15 +106,11 @@ jobs:
           key: pip-v1-{{ checksum "requirements/generated/requirements-dev.txt" }}
           paths:
             - "~/.cache/pip"
+      - node/install:
+          node-version: '20.17.0'
       - run:
-          name: Install Node.js dependencies and build assets
+          name: Build assets
           command: |
-            rm .nvmrc
-            curl https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash 
-            export NVM_DIR="$HOME/.nvm"
-            . $NVM_DIR/nvm.sh
-            nvm install 10
-            nvm use 10
             npm install
             npm run build
       - run:
