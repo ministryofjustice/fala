@@ -12,10 +12,10 @@ const jsPath = [
   'node_modules/govuk-frontend/dist/govuk/govuk-frontend.min.js'
 ];
 
-// FALA css & GOVUK css - beacuse we import GOVUK scss into same file in order to overide/add to GOVUK classes
+// FALA css & GOVUK css - because we import GOVUK scss into same file in order to override/add to GOVUK classes
 const cssPath = 'fala/assets-src/sass/*.scss';
 
-// GOVUK font & images only - because we have no FALA assets anymore
+// GOVUK font & images only - because we have no FALA assets any more
 const assetPath = 'node_modules/govuk-frontend/dist/govuk/assets/**';
 
 

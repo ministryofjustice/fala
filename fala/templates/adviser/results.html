@@ -10,7 +10,12 @@
     {% include 'research_banner.html' %}
   {% endif %}
   <div class="govuk-grid-column-full">
-    <h1 class="govuk-heading-xl">Search results</h1>
+    {% if data.count < 1 %}
+        <h1 class="govuk-heading-xl govuk-!-margin-bottom-5">No search results</h1>
+        <p class="govuk-body-m" id="alert-heading-info">There are no results for your criteria.</p>
+    {% else %}
+        <h1 class="govuk-heading-xl">Search results</h1>
+    {% endif %}
   </div>
   {% if form.region|string == "Region.SCOTLAND" %}
     {% include 'adviser/scotland_warning.html' %}
@@ -115,11 +120,6 @@
         {% endfor %}
       </ul>
       {{ govukPagination(pagination) }}
-    {% else %}
-      {% from "macros/element.html" import alert %}
-      {% call alert(title=_('No results')) %}
-        {{ _('There are no results matching your search criteria.') }}
-      {% endcall %}
     {% endif %}
   </div>
 {% endblock %}
