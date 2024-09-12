@@ -25,7 +25,7 @@
           <li class="govuk-body" role="listitem">Organisation:<span class="notranslate"> {{ form.name.value() }}</span></li>
         {% endif %}
         {% if form|category_selection %}
-          <li class="govuk-body" role="listitem">Categories: {{ form|category_selection }} </li>
+          <li class="govuk-body" role="listitem">Legal problem: {{ form|category_selection }} </li>
         {% endif %}
       </ul>
 
@@ -100,7 +100,7 @@
             {% endif %}
             {% if item.categories|length %}
             <div class="categories">
-              <h3 class="govuk-heading-s govuk-!-margin-top-2">{{ _('Categories') }}</h3>
+              <h3 class="govuk-heading-s govuk-!-margin-top-4 govuk-!-margin-bottom-2">{{ _('Can help with') }}</h3>
               <ul class="govuk-list govuk-list--bullet">
                 {% for cat in item.categories %}
                   <li>{{ cat }}</li>

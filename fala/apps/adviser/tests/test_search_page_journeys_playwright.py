@@ -49,7 +49,9 @@ class SearchPageEndToEndJourneys(PlaywrightTestSetup):
         # this selector matches multiple things so picking out the things we want using 'nth()'
         expect(page.change_search_grey_box.nth(0)).to_have_text("Postcode: SE11")
         expect(page.change_search_grey_box.nth(1)).to_have_text("Organisation: Islington Law Centre")
-        expect(page.change_search_grey_box.nth(2)).to_have_text("Categories: Housing Loss Prevention Advice Service")
+        expect(page.change_search_grey_box.nth(2)).to_have_text(
+            "Legal problem: Housing Loss Prevention Advice Service"
+        )
 
     def test_invalid_organisation_search(self):
         page = self.browser.new_page()
