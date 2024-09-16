@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+<title>{% block page_title %}Search results{% endblock %}</title>
+
 {%- from 'govuk_frontend_jinja/components/pagination/macro.html' import govukPagination %}
 
 {% block content %}
