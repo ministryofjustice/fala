@@ -42,7 +42,7 @@ class AdviserRootForm(forms.Form):
     postcode = CapitalisedPostcodeField(
         label=_("Postcode"),
         max_length=30,
-        help_text=_(mark_safe("For example, <span class='notranslate' translate='no'>SW1H</span>")),
+        help_text=_(mark_safe("For example, <span class='notranslate' translate='no'>NE31 1SF</span>")),
         required=False,
         widget=FalaTextInput(),
     )
