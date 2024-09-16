@@ -12,7 +12,12 @@
     {% include 'research_banner.html' %}
   {% endif %}
   <div class="govuk-grid-column-full">
-    <h1 class="govuk-heading-xl">Search results</h1>
+    {% if data.count < 1 %}
+        <h1 class="govuk-heading-xl govuk-!-margin-bottom-5">No search results</h1>
+        <p class="govuk-body-m" id="no-results-info">There are no results for your criteria.</p>
+    {% else %}
+        <h1 class="govuk-heading-xl">Search results</h1>
+    {% endif %}
   </div>
   {% if form.region|string == "Region.SCOTLAND" %}
     {% include 'adviser/scotland_warning.html' %}
@@ -27,7 +32,7 @@
           <li class="govuk-body" role="listitem">Organisation:<span class="notranslate"> {{ form.name.value() }}</span></li>
         {% endif %}
         {% if form|category_selection %}
-          <li class="govuk-body" role="listitem">Categories: {{ form|category_selection }} </li>
+          <li class="govuk-body" role="listitem">Legal problem: {{ form|category_selection }} </li>
         {% endif %}
       </ul>
 
@@ -102,10 +107,16 @@
             {% endif %}
             {% if item.categories|length %}
             <div class="categories">
-              <h3 class="govuk-heading-s govuk-!-margin-top-2">{{ _('Categories') }}</h3>
+              <h3 class="govuk-heading-s govuk-!-margin-top-4 govuk-!-margin-bottom-2">{{ _('Can help with:') }}</h3>
               <ul class="govuk-list govuk-list--bullet">
-                {% for cat in item.categories %}
-                  <li>{{ cat }}</li>
+                {% for cat in item.categories|sort %}
+                  <li>
+                    {% if cat == "Housing Loss Prevention Advice Service" %}
+                      {{ cat }}
+                    {% else %}
+                     {{ cat|lower}}
+                    {% endif %}
+                  </li>
                 {% endfor %}
               </ul>
             </div>
@@ -117,11 +128,6 @@
         {% endfor %}
       </ul>
       {{ govukPagination(pagination) }}
-    {% else %}
-      {% from "macros/element.html" import alert %}
-      {% call alert(title=_('No results')) %}
-        {{ _('There are no results matching your search criteria.') }}
-      {% endcall %}
     {% endif %}
   </div>
 {% endblock %}
