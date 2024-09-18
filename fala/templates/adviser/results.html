@@ -108,7 +108,7 @@
             {% if item.categories|length %}
             <div class="categories">
               <h3 class="govuk-heading-s govuk-!-margin-top-4 govuk-!-margin-bottom-2">{{ _('Can help with:') }}</h3>
-              <ul class="govuk-list govuk-list--bullet">
+              <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-4">
                 {% for cat in item.categories|sort %}
                   <li>
                     {% if cat == "Housing Loss Prevention Advice Service" %}
