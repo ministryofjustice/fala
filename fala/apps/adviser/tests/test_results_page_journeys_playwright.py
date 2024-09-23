@@ -8,3 +8,5 @@ class ResultPageEndToEndJourneys(PlaywrightTestSetup):
         expect(results_page.change_search_grey_box).to_have_text("Postcode: SE11")
         search_page = results_page.change_search()
         expect(search_page.h1).to_have_text("Find a legal aid adviser or family mediator")
+
+        self.test_failed_take_screenshot = False

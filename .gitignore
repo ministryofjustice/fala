@@ -60,6 +60,7 @@ fala/assets
 fala/static
 .cache
 .bash_history
+fala/playwright/screenshots
 
 # Python version on local machine
 .python-version

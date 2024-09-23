@@ -1,16 +1,20 @@
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from playwright.sync_api import sync_playwright, expect
 from fala.playwright.setup import PlaywrightTestSetup
+import pathlib
+import datetime
 
 
 class CookiesPageEndToEndJourneys(PlaywrightTestSetup):
-    def test_cookies_page_view_accesed_from_footer(self):
+    def test_cookies_page_view_accessed_from_footer(self):
         page = self.visit_cookies_page_from_footer()
         expect(page.h1).to_have_text("Cookies")
+        self.test_failed_take_screenshot = False
 
-    def test_cookies_page_view_accesed_from_banner(self):
+    def test_cookies_page_view_accessed_from_banner(self):
         page = self.visit_cookies_page_from_banner()
         expect(page.h1).to_have_text("Cookies")
+        self.test_failed_take_screenshot = False
 
 
 class CookiesPageEndToEndJourneysWithFreshSetUp(StaticLiveServerTestCase):
@@ -31,8 +35,18 @@ class CookiesPageEndToEndJourneysWithFreshSetUp(StaticLiveServerTestCase):
         page.context.close()
         context.browser.close()
 
+    def take_screenshot(self, page):
+        screenshot_dir = pathlib.Path("fala/playwright/screenshots")
+        screenshot_dir.mkdir(exist_ok=True)
+
+        test_name = self._testMethodName
+        timestamp = datetime.datetime.now().strftime("%d-%-m-%Y %H:%M:%S")
+        screenshot_path = screenshot_dir / f"{test_name}_{timestamp}.png"
+
+        page.screenshot(path=str(screenshot_path), full_page=True)
+
     def accept_cookie_from_banner(self, page):
-        # check that banner disappers, once cookies accepted in banner
+        # check that banner disappears, once cookies accepted in banner
         # using `wait_for_selector` for this assertion to run in cricleci
         # reload page, as cookie rejected in banner and will not appear in browser until some time
         page.get_by_text("Accept analytics cookies", exact=True).click()
@@ -66,15 +80,21 @@ class CookiesPageEndToEndJourneysWithFreshSetUp(StaticLiveServerTestCase):
             page.goto(f"{self.live_server_url}")
             page.wait_for_load_state(state="domcontentloaded")
 
-            my_cookies = context.cookies()
-            self.check_no_cookies(my_cookies)
+            try:
+                my_cookies = context.cookies()
+                self.check_no_cookies(my_cookies)
 
-            self.accept_cookie_from_banner(page)
+                self.accept_cookie_from_banner(page)
 
-            my_cookies = context.cookies()
-            self.verify_cookie_value("Allowed", my_cookies)
+                my_cookies = context.cookies()
+                self.verify_cookie_value("Allowed", my_cookies)
 
-            self.tear_down(page, context)
+            except Exception as e:
+                self.take_screenshot(page)
+                raise e
+
+            finally:
+                self.tear_down(page, context)
 
     def test_cookie_has_appropriate_value_when_rejected_in_banner(self):
         with sync_playwright() as p:
@@ -84,15 +104,21 @@ class CookiesPageEndToEndJourneysWithFreshSetUp(StaticLiveServerTestCase):
             page.goto(f"{self.live_server_url}")
             page.wait_for_load_state(state="domcontentloaded")
 
-            my_cookies = context.cookies()
-            self.check_no_cookies(my_cookies)
+            try:
+                my_cookies = context.cookies()
+                self.check_no_cookies(my_cookies)
 
-            self.reject_cookie_from_banner(page)
+                self.reject_cookie_from_banner(page)
 
-            my_cookies = context.cookies()
-            self.verify_cookie_value("Rejected", my_cookies)
+                my_cookies = context.cookies()
+                self.verify_cookie_value("Rejected", my_cookies)
 
-            self.tear_down(page, context)
+            except Exception as e:
+                self.take_screenshot(page)
+                raise e
+
+            finally:
+                self.tear_down(page, context)
 
     def test_cookie_has_appropriate_value_when_accepted_on_policy_page(self):
         with sync_playwright() as p:
@@ -102,16 +128,22 @@ class CookiesPageEndToEndJourneysWithFreshSetUp(StaticLiveServerTestCase):
             page.goto(f"{self.live_server_url}")
             page.wait_for_load_state(state="domcontentloaded")
 
-            my_cookies = context.cookies()
-            self.check_no_cookies(my_cookies)
+            try:
+                my_cookies = context.cookies()
+                self.check_no_cookies(my_cookies)
 
-            self.accept_cookie_on_policy_page(page)
+                self.accept_cookie_on_policy_page(page)
 
-            my_cookies = context.cookies()
-            self.verify_cookie_value("Allowed", my_cookies)
-            expect(page.get_by_text(f"{self.banner_text}")).to_be_hidden()
+                my_cookies = context.cookies()
+                self.verify_cookie_value("Allowed", my_cookies)
+                expect(page.get_by_text(f"{self.banner_text}")).to_be_hidden()
 
-            self.tear_down(page, context)
+            except Exception as e:
+                self.take_screenshot(page)
+                raise e
+
+            finally:
+                self.tear_down(page, context)
 
     def test_cookie_has_appropriate_value_when_rejected_on_policy_page(self):
         with sync_playwright() as p:
@@ -121,16 +153,22 @@ class CookiesPageEndToEndJourneysWithFreshSetUp(StaticLiveServerTestCase):
             page.goto(f"{self.live_server_url}")
             page.wait_for_load_state(state="domcontentloaded")
 
-            my_cookies = context.cookies()
-            self.check_no_cookies(my_cookies)
+            try:
+                my_cookies = context.cookies()
+                self.check_no_cookies(my_cookies)
 
-            self.reject_cookie_on_policy_page(page)
+                self.reject_cookie_on_policy_page(page)
 
-            my_cookies = context.cookies()
-            self.verify_cookie_value("Rejected", my_cookies)
-            expect(page.get_by_text(f"{self.banner_text}")).to_be_hidden()
+                my_cookies = context.cookies()
+                self.verify_cookie_value("Rejected", my_cookies)
+                expect(page.get_by_text(f"{self.banner_text}")).to_be_hidden()
 
-            self.tear_down(page, context)
+            except Exception as e:
+                self.take_screenshot(page)
+                raise e
+
+            finally:
+                self.tear_down(page, context)
 
     def test_cookie_has_appropriate_value_across_pages(self):
         with sync_playwright() as p:
@@ -140,22 +178,28 @@ class CookiesPageEndToEndJourneysWithFreshSetUp(StaticLiveServerTestCase):
             page.goto(f"{self.live_server_url}")
             page.wait_for_load_state(state="domcontentloaded")
 
-            my_cookies = context.cookies()
-            self.check_no_cookies(my_cookies)
+            try:
+                my_cookies = context.cookies()
+                self.check_no_cookies(my_cookies)
 
-            self.accept_cookie_from_banner(page)
+                self.accept_cookie_from_banner(page)
 
-            my_cookies = context.cookies()
-            self.verify_cookie_value("Allowed", my_cookies)
+                my_cookies = context.cookies()
+                self.verify_cookie_value("Allowed", my_cookies)
 
-            self.reject_cookie_on_policy_page(page)
+                self.reject_cookie_on_policy_page(page)
 
-            my_cookies = context.cookies()
-            self.verify_cookie_value("Rejected", my_cookies)
+                my_cookies = context.cookies()
+                self.verify_cookie_value("Rejected", my_cookies)
 
-            self.accept_cookie_on_policy_page(page)
+                self.accept_cookie_on_policy_page(page)
 
-            my_cookies = context.cookies()
-            self.verify_cookie_value("Allowed", my_cookies)
+                my_cookies = context.cookies()
+                self.verify_cookie_value("Allowed", my_cookies)
 
-            self.tear_down(page, context)
+            except Exception as e:
+                self.take_screenshot(page)
+                raise e
+
+            finally:
+                self.tear_down(page, context)

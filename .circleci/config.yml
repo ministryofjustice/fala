@@ -124,6 +124,9 @@ jobs:
             DB_NAME: test
             DB_USER: postgres
             DB_HOST: localhost
+      - store_artifacts:
+          path: ./fala/playwright/screenshots
+          destination: /tmp/artifacts
 
   build:
     executor: aws-ecr/default # use the aws-ecr/default executor to start the docker daemon

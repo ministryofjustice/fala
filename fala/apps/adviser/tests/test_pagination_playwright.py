@@ -19,3 +19,5 @@ class PaginationResults(PlaywrightTestSetup):
         expect(page.result_count).to_have_text(first_page_result_count)
         page.previous_link.click()
         expect(page.result_count).to_have_text(first_page_result_count)
+
+        self.test_failed_take_screenshot = False

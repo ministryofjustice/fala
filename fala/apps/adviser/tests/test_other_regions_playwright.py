@@ -10,6 +10,8 @@ class OtherRegionsTest(PlaywrightTestSetup):
         # We don't preserve Jersey postcodes search term, by design, as we don't want residents from Jersey to use our service
         expect(search_page.item_from_text("Organisation name")).to_be_visible()
 
+        self.test_failed_take_screenshot = False
+
     def test_scotland_with_persistant_search_and_categories(self):
         checkboxes = ["Family mediation", "Clinical Negligence"]
 
@@ -21,3 +23,5 @@ class OtherRegionsTest(PlaywrightTestSetup):
         expect(search_page.postcode_input_field).to_have_value("TD13")
         for checkbox in checkboxes:
             expect(search_page.checkbox_by_label(checkbox)).to_be_checked()
+
+        self.test_failed_take_screenshot = False
