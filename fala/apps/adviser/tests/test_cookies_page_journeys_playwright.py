@@ -7,14 +7,24 @@ import datetime
 
 class CookiesPageEndToEndJourneys(PlaywrightTestSetup):
     def test_cookies_page_view_accessed_from_footer(self):
-        page = self.visit_cookies_page_from_footer()
-        expect(page.h1).to_have_text("Cookies")
-        self.test_failed_take_screenshot = False
+        try:
+            page = self.visit_cookies_page_from_footer()
+            expect(page.h1).to_have_text("Cookies")
+            self.test_failed_take_screenshot = False
+
+        except Exception as e:
+            self.take_screenshot()
+            raise e
 
     def test_cookies_page_view_accessed_from_banner(self):
-        page = self.visit_cookies_page_from_banner()
-        expect(page.h1).to_have_text("Cookies")
-        self.test_failed_take_screenshot = False
+        try:
+            page = self.visit_cookies_page_from_banner()
+            expect(page.h1).to_have_text("Cookies")
+            self.test_failed_take_screenshot = False
+
+        except Exception as e:
+            self.take_screenshot()
+            raise e
 
 
 class CookiesPageEndToEndJourneysWithFreshSetUp(StaticLiveServerTestCase):

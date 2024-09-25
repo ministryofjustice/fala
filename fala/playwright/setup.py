@@ -27,15 +27,7 @@ class PlaywrightTestSetup(StaticLiveServerTestCase):
         # Initialise the page object, in order to store the current page object whenever a new page is created
         self._page = None
 
-        # The rationale behind this approach is when the test reaches the last line, we know that the test passed (e.g. all the self.assert* passed).
-        # At this point, we reset the test_failed member, which was set to True in the setUp.
-        # In tearDown, we now can tell if a test passed or failed and take screenshot when appropriate.
-        # https://stackoverflow.com/questions/27879640/create-screenshot-only-on-test-failure?rq=3
-        self.test_failed_take_screenshot = True
-
     def tearDown(self):
-        if self.test_failed_take_screenshot:
-            self.take_screenshot()
         self.browser.close()
         super().tearDown()
 
