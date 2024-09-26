@@ -63,10 +63,18 @@ class SearchPageEndToEndJourneys(PlaywrightTestSetup):
         expect(page.locator("#no-results-info")).to_have_text("There are no results for your criteria.")
 
     def test_invalid_postcode_journey(self):
-        page = self.browser.new_page()
-        page.goto(f"{self.live_server_url}")
-        expect(page.locator("h1")).to_have_text(f"{self.front_page_heading}")
-        page.get_by_label("Postcode").fill("ZZZ1")
-        page.get_by_role("button", name="Search").click()
-        expect(page.locator("h1")).to_have_text(f"{self.front_page_heading}")
-        expect(page.locator("css=.govuk-error-summary")).to_be_visible()
+        test_cases = [
+            "ZZZ1",
+            "G12 OGJKLJGK",
+            "LS25 ghjkhjkh",
+            "IM4 TESTTTTTTTTTTTT",
+        ]
+        for postcode in test_cases:
+            with self.subTest(postcode=postcode):
+                page = self.browser.new_page()
+                page.goto(f"{self.live_server_url}")
+                expect(page.locator("h1")).to_have_text(f"{self.front_page_heading}")
+                page.get_by_label("Postcode").fill(f"{postcode}")
+                page.get_by_role("button", name="Search").click()
+                expect(page.locator("h1")).to_have_text(f"{self.front_page_heading}")
+                expect(page.locator("css=.govuk-error-summary")).to_be_visible()

@@ -3,11 +3,12 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
 from django.utils.safestring import mark_safe
+from django.conf import settings
 
 import laalaa.api as laalaa
-import re
+import requests
 
-from .regions import Region, SCOTTISH_PREFIXES
+from .regions import Region
 
 SEARCH_TYPE_CHOICES = [("location", _("Location")), ("organisation", _("Organisation"))]
 
@@ -69,67 +70,88 @@ class AdviserSearchForm(AdviserRootForm):
         kwargs.setdefault("label_suffix", "")
         super(AdviserRootForm, self).__init__(*args, **kwargs)
 
-    def clean(self):
+    def clean(self):  # noqa: max-complexity=13 (increasing the complexity of a function so flake8 is happy)
         data = self.cleaned_data
         postcode = data.get("postcode")
         name = data.get("name")
 
-        # Check if both postcode and name are missing
+        # Add error if both postcode and name are missing
         if not postcode and not name:
             self.add_error("postcode", _("Enter a postcode"))
             self.add_error("name", _("Enter an organisation name"))
             return data
 
-        # Validate postcode if provided and region is either England/Wales or Scotland
-        if postcode and self.region in {Region.ENGLAND_OR_WALES, Region.SCOTLAND}:
-            if not self._valid_postcode(postcode):
+        # Do search on organisation name even if postcode missing
+        if not postcode and name:
+            self._region = Region.ENGLAND_OR_WALES
+            return data
+
+        # Validate postcode if provided and then determine region
+        if postcode:
+            valid_postcode = self.validate_postcode_and_return_country(postcode)
+            if not valid_postcode:
                 self.add_error("postcode", _("Enter a valid postcode"))
+            else:
+                country, nhs_ha = valid_postcode
+                if country == "Northern Ireland":
+                    self._region = Region.NI
+                elif country == "Isle of Man":
+                    self._region = Region.IOM
+                elif country == "Channel Islands" and nhs_ha == "Jersey Health Authority":
+                    self._region = Region.JERSEY
+                elif country == "Channel Islands" and nhs_ha == "Guernsey Health Authority":
+                    self._region = Region.GUERNSEY
+                elif country == "Scotland":
+                    self._region = Region.SCOTLAND
+                elif country == "England" or country == "Wales":
+                    self._region = Region.ENGLAND_OR_WALES
+                else:
+                    self.add_error("postcode", _("This service is only available for England and Wales"))
 
         return data
 
     @property
     def region(self):
-        postcode_no_space = self.cleaned_data.get("postcode").replace(" ", "")
-        if re.search(r"^BT[0-9]", postcode_no_space, flags=re.IGNORECASE):
-            return Region.NI
-        elif re.search(r"^IM[0-9]", postcode_no_space, flags=re.IGNORECASE):
-            return Region.IOM
-        elif re.search(r"^JE[0-9]", postcode_no_space, flags=re.IGNORECASE):
-            return Region.JERSEY
-        elif re.search(r"^GY[1][0]", postcode_no_space, flags=re.IGNORECASE):
-            return Region.GUERNSEY
-        elif re.search(r"^GY[9]", postcode_no_space, flags=re.IGNORECASE):
-            return Region.GUERNSEY
-        elif re.search(r"^GY[0-8]", postcode_no_space, flags=re.IGNORECASE):
-            return Region.GUERNSEY
-        elif postcode_no_space[:2] in SCOTTISH_PREFIXES:
-            return Region.SCOTLAND
-        else:
-            return Region.ENGLAND_OR_WALES
+        # If no region was detected, return None.
+        return getattr(self, "_region", None)
 
     @property
     def current_page(self):
         return self.cleaned_data.get("page", 1)
 
-    def _valid_postcode(self, postcode):
+    def validate_postcode_and_return_country(self, postcode):
         try:
             # Check if the postcode is a valid string before proceeding
             if not isinstance(postcode, str) or not postcode.strip():
                 return False
 
-            # Attempt to find the data using the LAALAA API
-            data = laalaa.find(
-                postcode=postcode.strip(),
-                page=1,
-            )
+            # Call postcodes.io API using `api.postcodes.io/postcodes?q=` endpoint
+            # This one let's you use partial postcodes and returns the country in the `result`
+            url = settings.POSTCODE_IO_URL + f"{postcode}"
+            response = requests.get(url)
 
-            # Check if the 'error' key is present in the data
-            return "error" not in data
+            # Check if response was successful
+            if response.status_code != 200:
+                return False
 
-        except laalaa.LaaLaaError:
-            # If there is an exception from LAALAA for example a postcode is not supported by our data. e.g. IM4
-            # Tell the user there was an error, but don't stop the usage of the site.
-            self.add_error("postcode", "%s %s" % (_("Error looking up legal advisers."), _("Please try again later.")))
+            # If the 'result' key is Null, the postcode is invalid
+            data = response.json()
+            if not data.get("result"):
+                return False
+
+            first_result_in_list = data["result"][0]
+            country = first_result_in_list.get("country")
+            nhs_ha = first_result_in_list.get("nhs_ha")
+
+            if country and nhs_ha:
+                return country, nhs_ha
+            else:
+                return False
+
+        except requests.RequestException:
+            # If there is an exception from postcode.io, tell the user there was an error, but don't stop the usage of the site.
+            self.add_error("postcode", _("Error looking up legal advisers via our API. Please try again later."))
+            return False
 
     def search(self):
         if self.is_valid():

@@ -12,8 +12,6 @@ class PostcodeValidationTest(SimpleTestCase):
             {"postcode": "GY1 2HU", "message": "The postcode GY1 2HU is in Guernsey"},
             {"postcode": "BT93 8AD", "message": "The postcode BT93 8AD is in Northern Ireland"},
             {"postcode": "IM4 2HT", "message": "The postcode IM4 2HT is in the Isle of Man"},
-            # Postcode with incorrect prefix, but still picks up that it's isle of man
-            {"postcode": "IM4 TESTTTTTTTTTTTT", "message": "The postcode IM4 TESTTTTTTTTTTTT is in the Isle of Man"},
             # Jersey Postcode
             {"postcode": "JE2 3FN", "message": "The postcode JE2 3FN is in Jersey"},
             # English Postcode
@@ -24,6 +22,7 @@ class PostcodeValidationTest(SimpleTestCase):
             {"postcode": "im4", "message": "The postcode IM4 is in the Isle of Man"},
             # Invalid post code, results are found and search
             {"postcode": "AB11 9EE", "message": "Enter a valid postcode"},
+            {"postcode": "IM4 TESTTTTTTTTTTTT", "message": "Enter a valid postcode"},
         ]
 
         for case in test_cases:
