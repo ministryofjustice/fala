@@ -29,7 +29,7 @@
       <div class="govuk-grid-column-full">
         <div class="laa-fala__grey-box">
 
-          <form action="search" id="fala_questions" novalidate>
+          <form action="search" id="fala_questions">
             {% set errorMessage = {'err': ""} %}
 
             {% if form.errors %}
@@ -88,7 +88,7 @@
                 },
                 'value': form.name.value(),
                 'errorMessage': { 'text': form.errors['name'][0] },
-                'id': 'name',
+                'id': 'id_name',
                 'classes': 'govuk-!-width-one-third',
                 'name': "name"
               }) }}
@@ -102,7 +102,7 @@
                    'maxLength': 100,
                 },
                 'value': form.name.value(),
-                'id': 'name',
+                'id': 'id_name',
                 'classes': 'govuk-!-width-one-third',
                 'name': "name"
               }) }}
