@@ -17,18 +17,17 @@
     </style>
   {% endif %}
   <script nonce="{{request.csp_nonce}}">
-  function tagMan() {  // Activate Google Tag Manager
-    window.dataLayer = window.dataLayer || [];
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-WDJLHSKL');
-  }
+    function tagMan() {  // Activate Google Tag Manager
+      window.dataLayer = window.dataLayer || [];
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-WDJLHSKL');
+    }
   </script>
-
   {% if (request.COOKIES.get('cookiePermission') == 'Allowed') %}
-  <script nonce="{{request.csp_nonce}}">tagMan();</script>
+    <script nonce="{{request.csp_nonce}}">tagMan();</script>
   {% endif %}
 {% endblock %}
 
@@ -91,7 +90,7 @@
 {% endblock %}
 
 {% block after_main_js %}
-  <script  nonce="{{request.csp_nonce}}">
+  <script nonce="{{request.csp_nonce}}">
     function googleTranslateElementInit() {
       new google.translate.TranslateElement(
         {
@@ -102,32 +101,4 @@
     }
   </script>
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-  <script  nonce="{{request.csp_nonce}}">
-    function errorScroll(s,f) {
-      document.getElementById(s).scrollIntoView();
-      document.getElementById(f).focus();
-    }
-  </script>
-  <script nonce="{{request.csp_nonce}}">
-    const fala_form = document.querySelector('#fala_questions');
-    if (fala_form) {
-      fala_form.addEventListener('submit', function(e){
-
-      // variables for postcode and organisation name
-      const postcode = document.querySelector("#id_postcode").value;
-      const organisation = document.querySelector("#id_name").value;
-
-      // variables for checkbox
-      const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-      const selected = Array.from(checkboxes).map(x => x.value);
-
-      window.dataLayer.push({
-        'event': "formSubmission",
-        'postcode': postcode,
-        'organisation': organisation,
-        'checkbox': selected,
-      });
-    });
-  };
-  </script>
 {% endblock %}

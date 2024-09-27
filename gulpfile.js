@@ -9,6 +9,7 @@ const { src, parallel, dest} = require('gulp');
 // FALA js & GOVUK js - copying over both if we ever want to add custom js
 const jsPath = [
   'fala/assets-src/scripts/cookies.js',
+  'fala/assets-src/scripts/google_tag_manager_data_layer.js',
   'node_modules/govuk-frontend/dist/govuk/govuk-frontend.min.js'
 ];
 
