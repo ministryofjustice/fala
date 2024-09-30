@@ -61,7 +61,7 @@ class SearchPage(FalaPage):
 
     @property
     def organisation_input_field(self):
-        return self._page.get_by_label("Organisation name")
+        return self._page.get_by_label("Name of organisation you are looking for (optional)")
 
     @property
     def search_button(self):

@@ -76,7 +76,6 @@
                 'name': "postcode"
               }) }}
             {% endif %}
-            <p class="govuk-body">Or</p>
             {% if 'name' in form.errors or form.errors['__all__'] %}
               {{ govukInput({
                 'label': {
@@ -95,7 +94,7 @@
             {% else %}
               {{ govukInput({
                 'label': {
-                  'text': "Organisation name",
+                  'text': "Name of organisation you are looking for (optional)",
                   'classes': 'govuk-label--s',
                 },
                 'attributes': {
