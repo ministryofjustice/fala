@@ -44,7 +44,7 @@ class PlaywrightTestSetup(StaticLiveServerTestCase):
         page = self.browser.new_page()
         page.goto(f"{self.live_server_url}")
         page.get_by_label("Postcode").fill(postcode)
-        page.get_by_label("Organisation name").fill(organisation)
+        page.get_by_label("Name of organisation you are looking for (optional)").fill(organisation)
         for label in checkbox_labels:
             page.get_by_label(label).check()
         page.get_by_role("button", name="Search").click()
