@@ -7,6 +7,9 @@ from django.conf import settings
 
 import laalaa.api as laalaa
 import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
+
 
 from .regions import Region
 
@@ -70,7 +73,7 @@ class AdviserSearchForm(AdviserRootForm):
         kwargs.setdefault("label_suffix", "")
         super(AdviserRootForm, self).__init__(*args, **kwargs)
 
-    def clean(self):  # noqa: max-complexity=13 (increasing the complexity of a function so flake8 is happy)
+    def clean(self):
         data = self.cleaned_data
         postcode = data.get("postcode")
         name = data.get("name")
@@ -92,29 +95,38 @@ class AdviserSearchForm(AdviserRootForm):
             if not valid_postcode:
                 self.add_error("postcode", _("Enter a valid postcode"))
             else:
-                # for Guernsey & Jersey the country comes back as 'Channel Islands', we are using `nhs_ha` key, to distinguish between them
-                country, nhs_ha = valid_postcode
-                if country == "Northern Ireland":
-                    self._region = Region.NI
-                elif country == "Isle of Man":
-                    self._region = Region.IOM
-                elif country == "Channel Islands" and nhs_ha == "Jersey Health Authority":
-                    self._region = Region.JERSEY
-                elif country == "Channel Islands" and nhs_ha == "Guernsey Health Authority":
-                    self._region = Region.GUERNSEY
-                elif country == "Scotland":
-                    self._region = Region.SCOTLAND
-                elif country == "England" or country == "Wales":
-                    self._region = Region.ENGLAND_OR_WALES
-                else:
-                    self.add_error("postcode", _("This service is only available for England and Wales"))
+                # stick the results of the valid api call into this
+                self._country_from_valid_postcode = valid_postcode
 
         return data
 
     @property
     def region(self):
-        # If no region was detected, return None.
-        return getattr(self, "_region", None)
+        # retrieve the api call variables
+        country_from_valid_postcode = getattr(self, "_country_from_valid_postcode", None)
+
+        # Return `Region.ENGLAND_OR_WALES` from `clean` if set
+        if not country_from_valid_postcode:
+            return getattr(self, "_region", None)
+
+        # for Guernsey & Jersey the country comes back as 'Channel Islands', we are using `nhs_ha` key, to distinguish between them
+        country, nhs_ha = country_from_valid_postcode
+
+        if country == "Northern Ireland":
+            return Region.NI
+        elif country == "Isle of Man":
+            return Region.IOM
+        elif country == "Channel Islands" and nhs_ha == "Jersey Health Authority":
+            return Region.JERSEY
+        elif country == "Channel Islands" and nhs_ha == "Guernsey Health Authority":
+            return Region.GUERNSEY
+        elif country == "Scotland":
+            return Region.SCOTLAND
+        elif country == "England" or country == "Wales":
+            return Region.ENGLAND_OR_WALES
+        else:
+            self.add_error("postcode", _("This service is only available for England and Wales"))
+            return None
 
     @property
     def current_page(self):
@@ -126,10 +138,16 @@ class AdviserSearchForm(AdviserRootForm):
             if not isinstance(postcode, str) or not postcode.strip():
                 return False
 
+            # Retry set-up as per LAALAA API
+            session = requests.Session()
+            retry_strategy = Retry(total=5, backoff_factor=0.1)
+            adapter = HTTPAdapter(max_retries=retry_strategy)
+            session.mount("https://", adapter)
+
             # Call postcodes.io API using `api.postcodes.io/postcodes?q=` endpoint
             # This one let's you use partial postcodes and returns the country in the `result`
             url = settings.POSTCODE_IO_URL + f"{postcode}"
-            response = requests.get(url)
+            response = session.get(url, timeout=5)
 
             # Check if response was successful
             if response.status_code != 200:
