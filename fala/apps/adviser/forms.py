@@ -92,6 +92,7 @@ class AdviserSearchForm(AdviserRootForm):
             if not valid_postcode:
                 self.add_error("postcode", _("Enter a valid postcode"))
             else:
+                # for Guernsey & Jersey the country comes back as 'Channel Islands', we are using `nhs_ha` key, to distinguish between them
                 country, nhs_ha = valid_postcode
                 if country == "Northern Ireland":
                     self._region = Region.NI
