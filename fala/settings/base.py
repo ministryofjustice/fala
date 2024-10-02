@@ -231,6 +231,8 @@ ENVIRONMENT = os.environ.get("ENVIRONMENT", "unknown")
 
 CHECK_LEGAL_AID_URL = "https://www.gov.uk/check-legal-aid"
 
+POSTCODE_IO_URL = "https://api.postcodes.io/postcodes?q="
+
 FEATURE_FLAG_SURVEY_MONKEY = os.environ.get("FEATURE_FLAG_SURVEY_MONKEY", "").lower() == "enabled"
 
 BLOCK_ROBOTS = os.environ.get("BLOCK_ROBOTS", "").lower() == "enabled"
