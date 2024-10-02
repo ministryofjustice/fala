@@ -169,7 +169,7 @@ class AdviserSearchForm(AdviserRootForm):
 
         except requests.RequestException:
             # If there is an exception from postcode.io, tell the user there was an error, but don't stop the usage of the site.
-            self.add_error("postcode", _("Error looking up legal advisers via our API. Please try again later."))
+            self.add_error("postcode", _("Error looking up legal advisers. Please try again later."))
             return False
 
     def search(self):
