@@ -51,7 +51,7 @@ requests==2.32.0
     # via
     #   -r requirements/source/requirements-base.in
     #   cla-common
-sentry-sdk==1.45.0
+sentry-sdk==2.8.0
     # via -r requirements/source/requirements-base.in
 six==1.16.0
     # via python-dateutil
