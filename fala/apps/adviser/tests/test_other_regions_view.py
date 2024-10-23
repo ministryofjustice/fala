@@ -9,11 +9,12 @@ class PostcodeValidationTest(SimpleTestCase):
 
     def test_region_postcodes(self):
         test_cases = [
+            # Guernsey Postcode
             {"postcode": "GY1 2HU", "message": "The postcode GY1 2HU is in Guernsey"},
+            # Northern Ireland Postcode
             {"postcode": "BT93 8AD", "message": "The postcode BT93 8AD is in Northern Ireland"},
+            # Isle of Man Postcode
             {"postcode": "IM4 2HT", "message": "The postcode IM4 2HT is in the Isle of Man"},
-            # Postcode with incorrect prefix, but still picks up that it's isle of man
-            {"postcode": "IM4 TESTTTTTTTTTTTT", "message": "The postcode IM4 TESTTTTTTTTTTTT is in the Isle of Man"},
             # Jersey Postcode
             {"postcode": "JE2 3FN", "message": "The postcode JE2 3FN is in Jersey"},
             # English Postcode
@@ -22,8 +23,9 @@ class PostcodeValidationTest(SimpleTestCase):
             {"postcode": "AB11 5BN", "message": "These results cover England and Wales."},
             # Lower case Postcode still works out region.
             {"postcode": "im4", "message": "The postcode IM4 is in the Isle of Man"},
-            # Invalid post code, results are found and search
+            # Invalid post code, results are found on search
             {"postcode": "AB11 9EE", "message": "Enter a valid postcode"},
+            {"postcode": "IM4 TESTTTTTTTTTTTT", "message": "Enter a valid postcode"},
         ]
 
         for case in test_cases:
@@ -31,6 +33,19 @@ class PostcodeValidationTest(SimpleTestCase):
                 data = {"postcode": case["postcode"]}
                 response = self.client.get(self.url, data)
                 self.assertContains(response, case["message"])
+
+    def test_border_region_postcodes(self):
+        test_cases = [
+            # English Postcode on Scottish border
+            {"postcode": "TD15 1UY", "message": "These results cover England and Wales"},
+            {"postcode": "TD15", "message": "These results cover England and Wales"},
+        ]
+
+        for case in test_cases:
+            with self.subTest(postcode=case["postcode"]):
+                data = {"postcode": case["postcode"]}
+                response = self.client.get(self.url, data)
+                self.assertNotContains(response, case["message"])
 
     def test_other_region_form_and_change_search_button_visible(self):
         data = {"postcode": "IM4"}

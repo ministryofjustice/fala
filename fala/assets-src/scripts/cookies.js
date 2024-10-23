@@ -35,18 +35,18 @@ if (rejectCookieBanner) {
 };
 
 // Hide accepted message
-const hideCoookieAcceptMessage = document.getElementById("accepted-hide");
-if (hideCoookieAcceptMessage) {
-  hideCoookieAcceptMessage.addEventListener("click", () => {
+const hideCookieAcceptMessage = document.getElementById("accepted-hide");
+if (hideCookieAcceptMessage) {
+  hideCookieAcceptMessage.addEventListener("click", () => {
     acceptedMessage.hidden = true;
     cookieBanner.hidden = true;
   })
 };
 
 // Hide rejected message
-const hideCoookieRejecttMessage = document.getElementById("rejected-hide");
-if (hideCoookieRejecttMessage) {
-  hideCoookieRejecttMessage.addEventListener("click", () => {
+const hideCookieRejectMessage = document.getElementById("rejected-hide");
+if (hideCookieRejectMessage) {
+  hideCookieRejectMessage.addEventListener("click", () => {
     rejectedMessage.hidden = true;
     cookieBanner.hidden = true;
   })

@@ -49,22 +49,32 @@ class SearchPageEndToEndJourneys(PlaywrightTestSetup):
         # this selector matches multiple things so picking out the things we want using 'nth()'
         expect(page.change_search_grey_box.nth(0)).to_have_text("Postcode: SE11")
         expect(page.change_search_grey_box.nth(1)).to_have_text("Organisation: Islington Law Centre")
-        expect(page.change_search_grey_box.nth(2)).to_have_text("Categories: Housing Loss Prevention Advice Service")
+        expect(page.change_search_grey_box.nth(2)).to_have_text(
+            "Legal problem: Housing Loss Prevention Advice Service"
+        )
 
     def test_invalid_organisation_search(self):
         page = self.browser.new_page()
         page.goto(f"{self.live_server_url}")
         expect(page.locator("h1")).to_have_text(f"{self.front_page_heading}")
-        page.get_by_label("Organisation name").fill("test")
+        page.get_by_label("Name of organisation you are looking for (optional)").fill("test")
         page.get_by_role("button", name="Search").click()
-        expect(page.locator("h1")).to_have_text("Search results")
-        expect(page.locator("#alert-heading-info")).to_have_text("No results")
+        expect(page.locator("h1")).to_have_text("No search results")
+        expect(page.locator("#no-results-info")).to_have_text("There are no results for your criteria.")
 
     def test_invalid_postcode_journey(self):
-        page = self.browser.new_page()
-        page.goto(f"{self.live_server_url}")
-        expect(page.locator("h1")).to_have_text(f"{self.front_page_heading}")
-        page.get_by_label("Postcode").fill("ZZZ1")
-        page.get_by_role("button", name="Search").click()
-        expect(page.locator("h1")).to_have_text(f"{self.front_page_heading}")
-        expect(page.locator("css=.govuk-error-summary")).to_be_visible()
+        test_cases = [
+            "ZZZ1",
+            "G12 OGJKLJGK",
+            "LS25 ghjkhjkh",
+            "IM4 TESTTTTTTTTTTTT",
+        ]
+        for postcode in test_cases:
+            with self.subTest(postcode=postcode):
+                page = self.browser.new_page()
+                page.goto(f"{self.live_server_url}")
+                expect(page.locator("h1")).to_have_text(f"{self.front_page_heading}")
+                page.get_by_label("Postcode").fill(f"{postcode}")
+                page.get_by_role("button", name="Search").click()
+                expect(page.locator("h1")).to_have_text(f"{self.front_page_heading}")
+                expect(page.locator("css=.govuk-error-summary")).to_be_visible()

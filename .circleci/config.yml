@@ -3,6 +3,7 @@ orbs:
   slack: circleci/slack@2.5.0
   aws-cli: circleci/aws-cli@4.1 # use v4 of this orb
   aws-ecr: circleci/aws-ecr@9 # this orb doesn't support OIDC v2, so we use aws-cli to authenticate
+  node: circleci/node@6.1.0
 
 
 commands:
@@ -105,15 +106,11 @@ jobs:
           key: pip-v1-{{ checksum "requirements/generated/requirements-dev.txt" }}
           paths:
             - "~/.cache/pip"
+      - node/install:
+          node-version: '20.17.0'
       - run:
-          name: Install Node.js dependencies and build assets
+          name: Build assets
           command: |
-            rm .nvmrc
-            curl https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash 
-            export NVM_DIR="$HOME/.nvm"
-            . $NVM_DIR/nvm.sh
-            nvm install 10
-            nvm use 10
             npm install
             npm run build
       - run:
@@ -167,39 +164,12 @@ jobs:
       - run:
           name: Deploy Grafana Dashboards
           command: |
-            kubectl apply -f ./kubernetes_deploy/staging/ingress-dashboard.yml
-            kubectl apply -f ./kubernetes_deploy/staging/pods-dashboard.yml
+            if [ -f ./dashboards/${K8S_NAMESPACE}/ingress-dashboard.yml ]; then
+              kubectl apply -f ./dashboards/${K8S_NAMESPACE}/ingress-dashboard.yml
+            fi
+            kubectl apply -f ./dashboards/${K8S_NAMESPACE}/pods-dashboard.yml
 
   deploy:
-    parameters:
-      environment:
-        type: string
-    docker:
-      - image: ministryofjustice/cloud-platform-tools
-    steps:
-      - checkout
-      - aws-login-to-ecr-and-tagging
-      - run:
-          name: Authenticate with cluster
-          command: |
-            echo -n ${K8S_CLUSTER_CERT} | base64 -d > ./ca.crt
-            kubectl config set-cluster ${K8S_CLUSTER_NAME} --certificate-authority=./ca.crt --server=https://${K8S_CLUSTER_NAME}
-            kubectl config set-credentials circleci --token=${K8S_TOKEN}
-            kubectl config set-context ${K8S_CLUSTER_NAME} --cluster=${K8S_CLUSTER_NAME} --user=circleci --namespace=${K8S_NAMESPACE}
-            kubectl config use-context ${K8S_CLUSTER_NAME}
-            echo ${K8S_CLUSTER_NAME}
-      - run:
-          name: ECR config
-          command: |
-            echo "export ECR_ENDPOINT=$AWS_ECR_REGISTRY_ID.dkr.ecr.$ECR_REGION.amazonaws.com/$ECR_REPOSITORY" >> $BASH_ENV
-      - run:
-          name: Deploy to << parameters.environment >>
-          command: |
-            .circleci/deploy_to_kubernetes << parameters.environment >>
-      - slack/status
-
-
-  deploy_with_helm:
     parameters:
       environment:
         type: string
@@ -242,7 +212,7 @@ workflows:
             - test
           context: laa-fala
 
-      - deploy_with_helm:
+      - deploy:
           name: Deploy UAT branch
           environment: staging
           requires:
@@ -264,8 +234,8 @@ workflows:
               only:
                 - main
 
-      - deploy_with_helm:
-          name: Helm Staging Deploy
+      - deploy:
+          name: Deploy to Staging
           environment: staging
           requires:
             - staging_deploy_approval
@@ -278,7 +248,7 @@ workflows:
             - laa-fala-live-staging
 
       - deploy_grafana:
-          name: deploy_grafana
+          name: Deploy Grafana Staging Dashboards
           requires:
             - staging_deploy_approval
           filters:
@@ -292,15 +262,14 @@ workflows:
       - production_deploy_approval:
           type: approval
           requires:
-            - Helm Staging Deploy
+            - Deploy to Staging
           filters:
             branches:
               only:
                 - main
-
-      - deploy:
-          name: production_deploy
-          environment: production
+      
+      - deploy_grafana:
+          name: Deploy Grafana Production Dashboards
           requires:
             - production_deploy_approval
           filters:
@@ -311,12 +280,11 @@ workflows:
             - laa-fala
             - laa-fala-live-production
 
-      - deploy_with_helm:
-          name: helm_production_deploy
+      - deploy:
+          name: Deploy to Production
           environment: production
           requires:
             - production_deploy_approval
-            - production_deploy
           filters:
             branches:
               only:

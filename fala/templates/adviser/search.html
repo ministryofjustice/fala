@@ -29,7 +29,7 @@
       <div class="govuk-grid-column-full">
         <div class="laa-fala__grey-box">
 
-          <form action="search" id="fala_questions" novalidate>
+          <form action="search" id="fala_questions">
             {% set errorMessage = {'err': ""} %}
 
             {% if form.errors %}
@@ -49,7 +49,7 @@
                 'value': form.postcode.value(),
                 'errorMessage': { 'text': form.errors['postcode'][0] },
                 'hint': {
-                  'text' : "For example, SW1H",
+                  'text' : "For example, NE31 1SF",
                 },
                 'attributes': {
                    'maxLength': 30,
@@ -66,7 +66,7 @@
                 },
                 'value': form.postcode.value(),
                 'hint': {
-                  'text' : "For example, SW1H",
+                  'text' : "For example, NE31 1SF",
                 },
                 'attributes': {
                    'maxLength': 30,
@@ -76,7 +76,6 @@
                 'name': "postcode"
               }) }}
             {% endif %}
-            <p class="govuk-body">Or</p>
             {% if 'name' in form.errors or form.errors['__all__'] %}
               {{ govukInput({
                 'label': {
@@ -88,21 +87,21 @@
                 },
                 'value': form.name.value(),
                 'errorMessage': { 'text': form.errors['name'][0] },
-                'id': 'name',
+                'id': 'id_name',
                 'classes': 'govuk-!-width-one-third',
                 'name': "name"
               }) }}
             {% else %}
               {{ govukInput({
                 'label': {
-                  'text': "Organisation name",
+                  'text': "Name of organisation you are looking for (optional)",
                   'classes': 'govuk-label--s',
                 },
                 'attributes': {
                    'maxLength': 100,
                 },
                 'value': form.name.value(),
-                'id': 'name',
+                'id': 'id_name',
                 'classes': 'govuk-!-width-one-third',
                 'name': "name"
               }) }}
@@ -115,9 +114,9 @@
                 'classes': 'govuk-checkboxes--small',
                 'fieldset': {
                     'legend': {
-                      'text': "Categories of law (optional)",
+                      'text': "Legal problem (optional)",
                       'isPageHeading': false,
-                      'classes': "govuk-fieldset__legend--m"
+                      'classes': "govuk-fieldset__legend--s"
                     },
                     'classes': 'fala-tickbox-columns_new'
                 },

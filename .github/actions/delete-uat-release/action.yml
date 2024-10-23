@@ -84,7 +84,6 @@ runs:
         if [[ ! -z "$found" ]]
         then
           helm delete $release_name
-          kubectl delete pvc data-$release_name-postgresql-0
           echo "message=\"Deleted UAT release ${release_name}\"" >> $GITHUB_OUTPUT
         else
           echo "message=\"UAT release, ${release_name}, not found\"" >> $GITHUB_OUTPUT
