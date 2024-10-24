@@ -63,3 +63,6 @@ fala/static
 
 # Python version on local machine
 .python-version
+
+# VSCode
+.vscode

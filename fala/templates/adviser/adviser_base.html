@@ -1,9 +1,7 @@
-{% extends 'external.html' %}
+{% extends 'generic_base.html' %}
 
 {% import "macros/forms.html" as Form %}
 {% import "macros/element.html" as Element %}
-
-{%- from 'govuk_frontend_jinja/components/button/macro.html' import govukButton -%}
 
 {% set title = _('Find a legal aid adviser or family mediator') %}
 
@@ -31,18 +29,20 @@
   {% endif %}
 {% endblock %}
 
-{% block stylesheets %}
-  <link href="{{ static('css/style.css') }}" rel="stylesheet">
+{% block main_js %}
+  <script nonce="{{request.csp_nonce}}" type="module" src="{{ static('js/all.js') }}"></script>
+  <script nonce="{{request.csp_nonce}}" type="module">
+      import { initAll } from "{{ static('js/all.js') }}";
+      initAll();
+  </script>
 {% endblock %}
-
-{% block page_title %}{{ title }}{% endblock %}
 
 {% block proposition %}
   <a href="{{ url('adviser') }}" class="govuk-header__link govuk-header__link--service-name">{{ title }}</a>
 {% endblock %}
 
 {% block global_subheader %}
-  <div class="govuk-phase-banner" role="complementary">
+  <aside class="govuk-phase-banner">
     <p class="govuk-phase-banner__content">
       <strong class="govuk-tag govuk-phase-banner__content__tag">
         {% if ENVIRONMENT == "dev" %}
@@ -59,14 +59,12 @@
         This is a new service – your <a class="govuk-link" rel="noopener external noreferrer" href="https://eu.surveymonkey.com/r/VFP8CBD" target="_blank">feedback (opens in new tab)</a> will help us to improve it.
       </span>
     </p>
-  </div>
+  </aside>
 
 {% endblock %}
 
 {% block content %}
   <div class="govuk-grid-column-full">
-    <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
-
     <h1 class="govuk-heading-xl govuk-!-margin-top-7">
       Find a legal aid adviser <br />
       <span class="govuk-!-font-weight-regular govuk-!-font-size-36">or family mediator</span>
@@ -78,10 +76,8 @@
 
   <div class="find-legal-adviser">
     <div class="govuk-grid-column-full">
-      {% block search_results %}
-        {% include 'adviser/_results.html' %}
-      {% endblock %}
-      {% block search_form %}{% endblock %}
+      {% include 'results.html' %}
+      {% include 'search.html' %}
     </div>
     <div class="govuk-grid-column-two-thirds">
       <p class="govuk-body">If you are a provider and your details are incorrect, please contact your contract manager.</p>
@@ -90,15 +86,16 @@
 {% endblock %}
 
 {% block after_main_js %}
+  <script nonce="{{request.csp_nonce}}" src="//translate.google.com/translate_a/element.js" defer></script>
   <script nonce="{{request.csp_nonce}}">
-    function googleTranslateElementInit() {
+    window.addEventListener('load', function() {
       new google.translate.TranslateElement(
         {
           pageLanguage: 'en',
           layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT
         },
-        'google_translate_element');
-    }
+        'google_translate_element'
+      );
+    });
   </script>
-  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 {% endblock %}
