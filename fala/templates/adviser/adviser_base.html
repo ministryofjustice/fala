@@ -1,4 +1,4 @@
-{% extends 'generic_base.html' %}
+{% extends 'base.html' %}
 
 {% import "macros/forms.html" as Form %}
 {% import "macros/element.html" as Element %}
@@ -42,7 +42,7 @@
 {% endblock %}
 
 {% block global_subheader %}
-  <aside class="govuk-phase-banner">
+  <aside class="govuk-phase-banner ">
     <p class="govuk-phase-banner__content">
       <strong class="govuk-tag govuk-phase-banner__content__tag">
         {% if ENVIRONMENT == "dev" %}
@@ -60,7 +60,6 @@
       </span>
     </p>
   </aside>
-
 {% endblock %}
 
 {% block content %}
