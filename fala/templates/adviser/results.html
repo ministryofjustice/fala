@@ -6,7 +6,7 @@
 
 {% block content %}
   <div class="govuk-grid-column-full">
-    <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
+    <div id="google_translate_element" class="govuk-!-margin-bottom-6 govuk-!-display-none-print"></div>
   </div>
   {% if FEATURE_FLAG_SURVEY_MONKEY %}
     {% include 'adviser/_research_banner.html' %}
@@ -23,7 +23,7 @@
     {% include 'adviser/_scotland_warning.html' %}
   {% endif %}
   <div class="govuk-grid-column-two-thirds">
-    <div class="laa-fala__grey-box govuk-!-margin-bottom-6">
+    <div class="laa-fala__grey-box govuk-!-margin-bottom-6 govuk-!-display-none-print">
       <ul class="govuk-list" role="list">
         {% if form.postcode.value() %}
           <li class="govuk-body" role="listitem">Postcode:<span class="notranslate"> {{ form.postcode.value() }}</span></li>
@@ -54,6 +54,14 @@
         }) }}
       </form>
     </div>
+
+    <div class="print-link__background govuk-!-display-none-print govuk-!-margin-top-3 govuk-!-margin-bottom-5">
+      <button id="printButton" class="govuk-link govuk-body-s print-link__button">
+        <img src="/static/images/icon-print.png" alt="Print Icon" class="print-link__icon">
+        Print this page
+      </button>
+    </div>
+
     <span class="govuk-body results-header">
     {% if data.count > 0 %}
       {% if data.origin %}
@@ -121,13 +129,15 @@
               </ul>
             </div>
             {% endif %}
-            <a class="govuk-link" class="url" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?{{ item|google_map_params|urlencode }}">
+            <a class="govuk-link govuk-!-display-none-print" class="url" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?{{ item|google_map_params|urlencode }}">
               View on map (opens in new tab)
             </a>
           </li>
         {% endfor %}
       </ul>
-      {{ govukPagination(pagination) }}
+      <nav class="govuk-!-display-none-print"> 
+        {{ govukPagination(pagination) }}
+      </nav>
     {% endif %}
   </div>
 {% endblock %}

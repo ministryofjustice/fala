@@ -29,6 +29,12 @@ $laa-dev-colour: govuk-colour("pink");
   }
 }
 
+@media print {
+  a[href]:after {
+    content: none !important;
+  }
+}
+
 .fala-tickbox-columns_new .govuk-checkboxes__item {
   // Ensure items do not break across columns
   break-inside: avoid;
@@ -129,4 +135,38 @@ body.fala-dev {
 .results-header {
   font-size: 19px;
   -webkit-font-smoothing: antialiased;
+}
+
+.print-link__background, .print-link__button {
+  background: none;
+  background-size: 16px 16px;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  text-decoration: none;
+}
+
+.print-link__button:hover {
+  background-color: govuk-colour("light-grey");
+}
+
+.print-link__icon {
+  width: 16px; 
+  height: 18px; 
+  vertical-align: middle; 
+  margin-right: 8px;
+  margin-left: 5px;
+}
+
+.print-link__button {
+  border: 1px solid govuk-colour("dark-grey");
+  color: $govuk-link-colour;
+  cursor: pointer;
+  margin: govuk-spacing(0);
+
+  &:focus {
+    @include govuk-focused-text;
+    background-color: $govuk-focus-colour;
+    border-color: transparent;
+  }
 }

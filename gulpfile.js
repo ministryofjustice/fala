@@ -16,9 +16,11 @@ const jsPath = [
 // FALA css & GOVUK css - because we import GOVUK scss into same file in order to override/add to GOVUK classes
 const cssPath = 'fala/assets-src/sass/*.scss';
 
-// GOVUK font & images only - because we have no FALA assets any more
+// GOVUK font & images 
 const assetPath = 'node_modules/govuk-frontend/dist/govuk/assets/**';
 
+// Icon for 'print this page' button
+const imagePath =   'fala/assets-src/images/icon-print.png';
 
  function jsTask() {
   return src(jsPath)
@@ -51,9 +53,15 @@ function assetTask() {
   .pipe(dest('fala/assets'));
 }
 
+function imageTask() {
+  return src(imagePath, { encoding: false })
+  .pipe(dest('fala/assets/images'));
+}
+
 exports.jsTask = jsTask;
 exports.cssTask = cssTask;
 exports.assetTask = assetTask;
+exports.imageTask = imageTask;
 
 // build/execute the tasks
-exports.build = parallel(jsTask, cssTask, assetTask);
+exports.build = parallel(jsTask, cssTask, assetTask, imageTask);
