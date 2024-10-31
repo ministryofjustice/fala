@@ -1,6 +1,6 @@
-{% extends 'base.html' %}
+{% extends 'adviser/adviser_base.html' %}
 
-<title>{% block page_title %}Search results{% endblock %}</title>
+{% block pageTitle %}Search results{% endblock %}
 
 {%- from 'govuk_frontend_jinja/components/pagination/macro.html' import govukPagination %}
 
@@ -9,7 +9,7 @@
     <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
   </div>
   {% if FEATURE_FLAG_SURVEY_MONKEY %}
-    {% include 'research_banner.html' %}
+    {% include 'adviser/_research_banner.html' %}
   {% endif %}
   <div class="govuk-grid-column-full">
     {% if data.count < 1 %}
@@ -20,7 +20,7 @@
     {% endif %}
   </div>
   {% if form.region|string == "Region.SCOTLAND" %}
-    {% include 'adviser/scotland_warning.html' %}
+    {% include 'adviser/_scotland_warning.html' %}
   {% endif %}
   <div class="govuk-grid-column-two-thirds">
     <div class="laa-fala__grey-box govuk-!-margin-bottom-6">

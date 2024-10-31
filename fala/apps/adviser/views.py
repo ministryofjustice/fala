@@ -10,7 +10,22 @@ from .laa_laa_paginator import LaaLaaPaginator
 from .regions import Region
 
 
-class AdviserView(TemplateView):
+class CommonContextMixin:
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context.update(
+            {
+                # this is so that `govuk_frontend_jinja/template.html` can be extended and without CSP complaining
+                "cspNonce": getattr(self.request, "csp_nonce", None),
+                # this is added in so that an additional class is added the <body>
+                "bodyClasses": f"fala-{settings.ENVIRONMENT}",
+            }
+        )
+        return context
+
+
+class AdviserView(CommonContextMixin, TemplateView):
     template_name = "adviser/search.html"
 
     def get(self, request, *args, **kwargs):
@@ -32,19 +47,19 @@ class AdviserView(TemplateView):
         return self.render_to_response(context)
 
 
-class AccessibilityView(TemplateView):
+class AccessibilityView(CommonContextMixin, TemplateView):
     template_name = "adviser/accessibility_statement.html"
 
 
-class PrivacyView(TemplateView):
+class PrivacyView(CommonContextMixin, TemplateView):
     template_name = "adviser/privacy.html"
 
 
-class CookiesView(TemplateView):
+class CookiesView(CommonContextMixin, TemplateView):
     template_name = "adviser/cookies.html"
 
 
-class SearchView(ListView):
+class SearchView(CommonContextMixin, ListView):
     class ErrorState(object):
         def __init__(self, form):
             self._form = form

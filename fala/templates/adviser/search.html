@@ -1,8 +1,6 @@
-{% if request.headers.get('x-requested-with') == 'XMLHttpRequest' %}
-  {% extends 'ajax-base.html' %}
-{% else %}
-  {% extends 'base.html' %}
-{% endif %}
+{% extends 'adviser/adviser_base.html' %}
+
+{% block pageTitle %}Find a Legal Aid Adviser or Family Mediator{% endblock %}
 
 {% import "macros/element.html" as Element %}
 {% import "macros/forms.html" as Form %}
@@ -103,7 +101,8 @@
                 'value': form.name.value(),
                 'id': 'id_name',
                 'classes': 'govuk-!-width-one-third',
-                'name': "name"
+                'name': "name",
+                'autocomplete': "on"
               }) }}
             {% endif %}
 

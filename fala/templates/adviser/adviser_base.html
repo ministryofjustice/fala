@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% import "macros/forms.html" as Form %}
+{% import "macros/element.html" as Element %}
+
+{% set title = _('Find a legal aid adviser or family mediator') %}
+
+{% block head %}
+  {{ super() }}
+  {% if request %}
+    <style media="print">
+      a[href^="/"]:after {
+        content: ' ({{ request.META.HTTP_HOST }}' attr(href) ')';
+      }
+    </style>
+  {% endif %}
+  <script nonce="{{request.csp_nonce}}">
+    function tagMan() {  // Activate Google Tag Manager
+      window.dataLayer = window.dataLayer || [];
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-WDJLHSKL');
+    }
+  </script>
+  {% if (request.COOKIES.get('cookiePermission') == 'Allowed') %}
+    <script nonce="{{request.csp_nonce}}">tagMan();</script>
+  {% endif %}
+{% endblock %}
+
+{% block main_js %}
+  <script nonce="{{request.csp_nonce}}" type="module" src="{{ static('js/all.js') }}"></script>
+  <script nonce="{{request.csp_nonce}}" type="module">
+      import { initAll } from "{{ static('js/all.js') }}";
+      initAll();
+  </script>
+{% endblock %}
+
+{% block proposition %}
+  <a href="{{ url('adviser') }}" class="govuk-header__link govuk-header__link--service-name">{{ title }}</a>
+{% endblock %}
+
+{% block global_subheader %}
+  <aside class="govuk-phase-banner ">
+    <p class="govuk-phase-banner__content">
+      <strong class="govuk-tag govuk-phase-banner__content__tag">
+        {% if ENVIRONMENT == "dev" %}
+          Development
+        {% elif ENVIRONMENT == "staging" %}
+          Staging
+        {% elif ENVIRONMENT == "production" %}
+          Beta
+        {% else %}
+          {{ ENVIRONMENT.title() }}
+        {% endif %}
+      </strong>
+      <span class="govuk-phase-banner__text">
+        This is a new service – your <a class="govuk-link" rel="noopener external noreferrer" href="https://eu.surveymonkey.com/r/VFP8CBD" target="_blank">feedback (opens in new tab)</a> will help us to improve it.
+      </span>
+    </p>
+  </aside>
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-column-full">
+    <h1 class="govuk-heading-xl govuk-!-margin-top-7">
+      Find a legal aid adviser <br />
+      <span class="govuk-!-font-weight-regular govuk-!-font-size-36">or family mediator</span>
+    </h1>
+  </div>
+  <div class="govuk-grid-column-two-thirds">
+    <p class="govuk-body-l">Search for a legal adviser or family mediator with a legal aid contract in England and Wales.</p>
+  </div>
+
+  <div class="find-legal-adviser">
+    <div class="govuk-grid-column-full">
+      {% include 'results.html' %}
+      {% include 'search.html' %}
+    </div>
+    <div class="govuk-grid-column-two-thirds">
+      <p class="govuk-body">If you are a provider and your details are incorrect, please contact your contract manager.</p>
+    </div>
+  </div>
+{% endblock %}
+
+{% block after_main_js %}
+  <script nonce="{{request.csp_nonce}}" src="//translate.google.com/translate_a/element.js" defer></script>
+  <script nonce="{{request.csp_nonce}}">
+    window.addEventListener('load', function() {
+      new google.translate.TranslateElement(
+        {
+          pageLanguage: 'en',
+          layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT
+        },
+        'google_translate_element'
+      );
+    });
+  </script>
+{% endblock %}

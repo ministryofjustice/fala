@@ -1,10 +1,9 @@
 {% set error = "500" %}
-{% extends 'base.html' %}
+{% extends 'adviser/adviser_base.html' %}
 
-{% block before_main_js %}{% endblock %}
 {% block main_js %}{% endblock %}
 
-{% block page_title %}{{ _('Sorry, there is a problem with the service - Find a legal advisor or family mediator - GOV.UK') }} - {{ super() }}{% endblock %}
+{% block pageTitle %}{{ _('Sorry, there is a problem with the service - Find a legal advisor or family mediator - GOV.UK') }} - {{ super() }}{% endblock %}
 
 {% block content %}
   <div class="govuk-grid-column-two-thirds">
