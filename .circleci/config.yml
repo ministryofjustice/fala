@@ -84,7 +84,6 @@ jobs:
   test:
     docker:
       - image: cimg/python:3.12
-      - image: cimg/postgres:16.3
     steps:
       - checkout
       - run:

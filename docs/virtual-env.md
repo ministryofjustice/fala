@@ -87,26 +87,6 @@ node --version
 
        `cp .env.example .env` 
 
-6. Install postgres (use HomeBrew and/or follow [official documentation](https://www.postgresql.org/download/macosx/)) and create the local database.
-
-       `brew install postgres`
-       `createdb fala_development`
-
-Use your local database credentials in your `.env` file e.g.
-
-       DB_HOST = "127.0.0.1"
-       DB_USER = "[Owner name found in available databases]"
-       DB_PASSWORD = ""
-
-You can use `psql -l` to list available databases, which will provide you with the database owner credential.
-
-- Run the first database migration 
-
-       `python manage.py migrate`
-
-- Use below command if you need exit postgres in terminal
-       `control + D`
-
 ## Running
 
 Run the Django server with:
