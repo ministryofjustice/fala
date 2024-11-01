@@ -41,6 +41,8 @@ logstash-formatter==0.5.17
     # via -r requirements/source/requirements-base.in
 markupsafe==2.1.5
     # via jinja2
+psycopg==3.1.19
+    # via -r requirements/source/requirements-base.in
 python-dateutil==2.9.0.post0
     # via cla-common
 python-dotenv==1.0.1
@@ -55,6 +57,8 @@ six==1.16.0
     # via python-dateutil
 sqlparse==0.5.0
     # via django
+typing-extensions==4.12.2
+    # via psycopg
 urllib3==2.2.2
     # via
     #   requests
