@@ -84,7 +84,6 @@ jobs:
   test:
     docker:
       - image: cimg/python:3.12
-      - image: cimg/postgres:16.3
     steps:
       - checkout
       - run:
@@ -121,9 +120,6 @@ jobs:
             python manage.py test
           environment:
             LAALAA_API_HOST: "https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk"
-            DB_NAME: test
-            DB_USER: postgres
-            DB_HOST: localhost
 
   build:
     executor: aws-ecr/default # use the aws-ecr/default executor to start the docker daemon
