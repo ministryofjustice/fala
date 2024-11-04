@@ -47,19 +47,17 @@ $laa-dev-colour: govuk-colour("pink");
 }
 
 .laa-cookie-policy {
-  display:none;
-}
-
-.js-enabled .laa-cookie-policy {
-  display:block;
+  display: none;
+  .js-enabled & {
+    display: block;
+  }
 }
 
 .fala-cookie-banner {
-  display:none;
-}
-
-.js-enabled .fala-cookie-banner {
-  display:block;
+  display: none;
+  .js-enabled & {
+    display: block;
+  }
 }
 
 .printing-button {
