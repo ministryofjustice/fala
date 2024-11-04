@@ -156,24 +156,22 @@ body.fala-dev {
 }
 
 .print-link {
-  &__button {
-    background: url("icon-print.png") no-repeat govuk-spacing(2) 50%;
-    background-size: $gem-c-print-link-background-width $gem-c-print-link-background-height;
-    padding: govuk-spacing(2) govuk-spacing(2) govuk-spacing(2) (govuk-spacing(4) + $gem-c-print-link-background-width);
-    text-decoration: none;
-    border: 1px solid govuk-colour("dark-grey");
-    color: $govuk-link-colour;
-    cursor: pointer;
-    margin: govuk-spacing(0);
+  background: url("icon-print.png") no-repeat govuk-spacing(2) 50%;
+  background-size: $gem-c-print-link-background-width $gem-c-print-link-background-height;
+  padding: govuk-spacing(2) govuk-spacing(2) govuk-spacing(2) (govuk-spacing(4) + $gem-c-print-link-background-width);
+  text-decoration: none;
+  border: 1px solid govuk-colour("dark-grey");
+  color: $govuk-link-colour;
+  cursor: pointer;
+  margin: govuk-spacing(0);
 
-    &:hover {
-      background-color: govuk-colour("light-grey");
-    }
-    
-    &:focus {
-      @include govuk-focused-text;
-      background-color: $govuk-focus-colour;
-      border-color: transparent;
-    }
+  &:hover {
+    background-color: govuk-colour("light-grey");
+  }
+  
+  &:focus {
+    @include govuk-focused-text;
+    background-color: $govuk-focus-colour;
+    border-color: transparent;
   }
 }
