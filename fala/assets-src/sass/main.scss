@@ -40,12 +40,18 @@ $laa-dev-colour: govuk-colour("pink");
   }
 }
 
-.no-js .laa-cookie-policy {
-  display:none;
+.laa-cookie-policy {
+  display: none;
+  .js-enabled & {
+    display: block;
+  }
 }
 
-.no-js .govuk-cookie-banner {
-  display:none;
+.fala-cookie-banner {
+  display: none;
+  .js-enabled & {
+    display: block;
+  }
 }
 
 body:not(.fala-production) {
