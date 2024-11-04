@@ -5,6 +5,8 @@ $govuk-fonts-path: "/static/fonts/";
 $govuk-new-typography-scale: true;
 $govuk-global-styles: true;
 $govuk-new-link-styles: true;
+$gem-c-print-link-background-width: 16px;
+$gem-c-print-link-background-height: 18px;
 
 @import "node_modules/govuk-frontend/dist/govuk/all";
 
@@ -32,6 +34,9 @@ $laa-dev-colour: govuk-colour("pink");
 @media print {
   a[href]:after {
     content: none !important;
+  }
+  html, body, div, h2, h3, p, ul, li, span {
+    font-size: 14px !important;
   }
 }
 
@@ -61,11 +66,10 @@ $laa-dev-colour: govuk-colour("pink");
 }
 
 .printing-button {
-  display:none;
-}
-
-.js-enabled .printing-button {
-  display:block;
+  display: none;
+  .js-enabled & {
+    display: block;
+  }
 }
 
 body:not(.fala-production) {
@@ -151,36 +155,25 @@ body.fala-dev {
   -webkit-font-smoothing: antialiased;
 }
 
-.print-link__background, .print-link__button {
-  background: none;
-  background-size: 16px 16px;
-  padding-top: 10px;
-  padding-right: 10px;
-  padding-bottom: 10px;
-  text-decoration: none;
-}
+.print-link {
+  &__button {
+    background: url("icon-print.png") no-repeat govuk-spacing(2) 50%;
+    background-size: $gem-c-print-link-background-width $gem-c-print-link-background-height;
+    padding: govuk-spacing(2) govuk-spacing(2) govuk-spacing(2) (govuk-spacing(4) + $gem-c-print-link-background-width);
+    text-decoration: none;
+    border: 1px solid govuk-colour("dark-grey");
+    color: $govuk-link-colour;
+    cursor: pointer;
+    margin: govuk-spacing(0);
 
-.print-link__button:hover {
-  background-color: govuk-colour("light-grey");
-}
-
-.print-link__icon {
-  width: 16px; 
-  height: 18px; 
-  vertical-align: middle; 
-  margin-right: 8px;
-  margin-left: 5px;
-}
-
-.print-link__button {
-  border: 1px solid govuk-colour("dark-grey");
-  color: $govuk-link-colour;
-  cursor: pointer;
-  margin: govuk-spacing(0);
-
-  &:focus {
-    @include govuk-focused-text;
-    background-color: $govuk-focus-colour;
-    border-color: transparent;
+    &:hover {
+      background-color: govuk-colour("light-grey");
+    }
+    
+    &:focus {
+      @include govuk-focused-text;
+      background-color: $govuk-focus-colour;
+      border-color: transparent;
+    }
   }
 }

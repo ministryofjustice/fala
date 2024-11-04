@@ -10,6 +10,7 @@ const { src, parallel, dest} = require('gulp');
 const jsPath = [
   'fala/assets-src/scripts/cookies.js',
   'fala/assets-src/scripts/google_tag_manager_data_layer.js',
+  'fala/assets-src/scripts/print_results.js',
   'node_modules/govuk-frontend/dist/govuk/govuk-frontend.min.js'
 ];
 
@@ -55,7 +56,7 @@ function assetTask() {
 
 function imageTask() {
   return src(imagePath, { encoding: false })
-  .pipe(dest('fala/assets/images'));
+  .pipe(dest('fala/assets/css'));
 }
 
 exports.jsTask = jsTask;
