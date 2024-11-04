@@ -55,14 +55,16 @@
       </form>
     </div>
 
-    <div class="printing-button">
-      <div class="print-link__background govuk-!-display-none-print govuk-!-margin-top-3 govuk-!-margin-bottom-5">
-        <button id="printButton" class="govuk-link govuk-body-s print-link__button">
-          <img src="/static/images/icon-print.png" alt="Print Icon" class="print-link__icon">
-          Print this page
-        </button>
+    {% if data.count >= 1 %}
+      <div class="printing-button">
+        <div class="print-link__background govuk-!-display-none-print govuk-!-margin-top-3 govuk-!-margin-bottom-5">
+          <button id="printButton" class="govuk-link govuk-body-s print-link__button">
+            <img src="/static/images/icon-print.png" alt="Print Icon" class="print-link__icon">
+            Print this page
+          </button>
+        </div>
       </div>
-    </div>
+    {% endif %}
 
     <span class="govuk-body results-header">
     {% if data.count > 0 %}
