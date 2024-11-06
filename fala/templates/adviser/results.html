@@ -23,7 +23,7 @@
     {% include 'adviser/_scotland_warning.html' %}
   {% endif %}
   <div class="govuk-grid-column-two-thirds">
-    <div class="laa-fala__grey-box govuk-!-margin-bottom-6 govuk-!-display-none-print">
+    <div class="laa-fala__grey-box govuk-!-margin-bottom-6">
       <ul class="govuk-list" role="list">
         {% if form.postcode.value() %}
           <li class="govuk-body" role="listitem">Postcode:<span class="notranslate"> {{ form.postcode.value() }}</span></li>
@@ -48,7 +48,7 @@
         {{ govukButton({
            'text': "Change search",
            'type': "submit",
-           'classes': "govuk-!-margin-bottom-2",
+           'classes': "govuk-!-margin-bottom-2 govuk-!-display-none-print",
            'id': "changeSearchButton",
            'name': "search"
         }) }}
