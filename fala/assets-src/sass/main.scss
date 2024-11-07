@@ -5,6 +5,8 @@ $govuk-fonts-path: "/static/fonts/";
 $govuk-new-typography-scale: true;
 $govuk-global-styles: true;
 $govuk-new-link-styles: true;
+$gem-c-print-link-background-width: 16px;
+$gem-c-print-link-background-height: 18px;
 
 @import "node_modules/govuk-frontend/dist/govuk/all";
 
@@ -29,6 +31,15 @@ $laa-dev-colour: govuk-colour("pink");
   }
 }
 
+@media print {
+  a[href]:after {
+    content: none !important;
+  }
+  html, body, div, h2, h3, p, ul, li, span {
+    font-size: 14px !important;
+  }
+}
+
 .fala-tickbox-columns_new .govuk-checkboxes__item {
   // Ensure items do not break across columns
   break-inside: avoid;
@@ -48,6 +59,13 @@ $laa-dev-colour: govuk-colour("pink");
 }
 
 .fala-cookie-banner {
+  display: none;
+  .js-enabled & {
+    display: block;
+  }
+}
+
+.printing-button {
   display: none;
   .js-enabled & {
     display: block;
@@ -135,4 +153,25 @@ body.fala-dev {
 .results-header {
   font-size: 19px;
   -webkit-font-smoothing: antialiased;
+}
+
+.print-link {
+  background: url("icon-print.png") no-repeat govuk-spacing(2) 50%;
+  background-size: $gem-c-print-link-background-width $gem-c-print-link-background-height;
+  padding: govuk-spacing(2) govuk-spacing(2) govuk-spacing(2) (govuk-spacing(4) + $gem-c-print-link-background-width);
+  text-decoration: none;
+  border: 1px solid govuk-colour("dark-grey");
+  color: $govuk-link-colour;
+  cursor: pointer;
+  margin: govuk-spacing(0);
+
+  &:hover {
+    background-color: govuk-colour("light-grey");
+  }
+  
+  &:focus {
+    @include govuk-focused-text;
+    background-color: $govuk-focus-colour;
+    border-color: transparent;
+  }
 }
