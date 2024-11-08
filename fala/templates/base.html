@@ -28,7 +28,9 @@
 
 {% block header %}
   {% block cookie_banner %}
-    {% include 'adviser/_cookie_banner.html' %}
+    {% if not FEATURE_FLAG_MAINTENANCE_MODE %}
+      {% include 'adviser/_cookie_banner.html' %}
+    {% endif %}
   {% endblock %}
 
   {{ govukHeader({
@@ -43,7 +45,11 @@
     {% block global_subheader %}{% endblock %}
     <main id="main-content" class="govuk-main-wrapper" role="main">
       <div class="govuk-grid-row">
-        {% block content %}{% endblock %}
+        {% if FEATURE_FLAG_MAINTENANCE_MODE %}
+          {% include 'maintenance_mode.html' %}
+        {% else %}
+          {% block content %}{% endblock %}
+        {% endif %}
       </div>
     </main>
   </div>
