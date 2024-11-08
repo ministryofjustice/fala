@@ -4,10 +4,35 @@ import urllib
 from django.conf import settings
 from django.urls import resolve, reverse
 from django.views.generic import TemplateView, ListView
+from django.http import HttpResponse
+import os
 
 from .forms import AdviserSearchForm, AdviserRootForm
 from .laa_laa_paginator import LaaLaaPaginator
 from .regions import Region
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+
+def robots_txt(request):
+    environment = os.getenv("ENVIRONMENT", "development").lower()
+
+    if environment == "production":
+        content = "User-agent: *\nDisallow:\n"  # Allow all
+    else:
+        content = "User-agent: *\nDisallow: /\n"  # Disallow all for staging/UAT
+
+    return HttpResponse(content, content_type="text/plain")
+
+
+def security_txt(request):
+    file_path = os.path.join(BASE_DIR, "public", "security.txt")
+    try:
+        with open(file_path, "r") as f:
+            content = f.read()
+        return HttpResponse(content, content_type="text/plain")
+    except FileNotFoundError:
+        return HttpResponse("security.txt not found.", content_type="text/plain", status=404)
 
 
 class CommonContextMixin:

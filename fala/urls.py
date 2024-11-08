@@ -2,7 +2,15 @@
 from django.conf import settings
 
 from django.urls import re_path
-from adviser.views import AccessibilityView, AdviserView, SearchView, PrivacyView, CookiesView
+from adviser.views import (
+    AccessibilityView,
+    AdviserView,
+    SearchView,
+    PrivacyView,
+    CookiesView,
+    robots_txt,
+    security_txt,
+)
 from django.views.static import serve
 
 urlpatterns = [
@@ -11,4 +19,6 @@ urlpatterns = [
     re_path(r"^privacy$", PrivacyView.as_view(), name="privacy"),
     re_path(r"^$", AdviserView.as_view(), name="adviser"),
     re_path(r"^search$", SearchView.as_view(), name="search"),
+    re_path(r"^robots\.txt$", robots_txt, name="robots_txt"),
+    re_path(r"^security\.txt$", security_txt, name="security_txt"),
 ] + [re_path(r"^static/(?P<path>.*)$", serve, {"document_root": settings.STATIC_ROOT})]
