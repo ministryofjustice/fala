@@ -61,7 +61,7 @@ postgresql:
 
 feature_flags:
   no_map: "enabled"
-  survey_monkey: "enabled"
+  survey_monkey: "disabled"
   block_robots: "disabled"
   maintenance_mode: "disabled"
 
