@@ -88,38 +88,31 @@
       <ul class="govuk-list results-list">
         {% for item in data.results %}
           <li class="results-list-item">
+            <h2 class="govuk-body-l govuk-!-font-weight-bold govuk-!-margin-bottom-0 govuk-!-margin-top-5">{{ item.organisation.name }}</h2>
             {% if item.distance %}
-              <p class="miles-away govuk-body govuk-!-margin-top-2">
+              <p class="govuk-body-s govuk-!-margin-top-0">
                 <span class="govuk-visually-hidden">{{ _('Distance') }}</span>
                 {% trans miles=item.distance|round(1) %}{{ miles }} miles away{% endtrans %}
               </p>
             {% endif %}
-            <h2 class="govuk-body-l govuk-!-font-weight-bold govuk-!-margin-bottom-2 govuk-!-margin-top-2">{{ item.organisation.name }}</h2>
             <div class="telephone">
-              <span>{{ _('Telephone') }}:</span>
               <span class="tel">{{ item.telephone }}</span>
             </div>
             <div class="address">
-              <span>{{ _('Address') }}:</span>
               <span class="govuk-visually-hidden">{{ _('Address') }}:</span>
               <span class="adr">
-                      <span class="street-address notranslate" translate="no">{{ item.location.address }}</span>
-                      <span class="city">{{ item.location.city }}</span>
+                      <span class="street-address notranslate" translate="no">{{ item.location.address }},</span>
+                      <span class="city">{{ item.location.city }}, </span>
                       <span class="postal-code notranslate" translate="no">{{ item.location.postcode }}</span>
               </span>
             </div>
-            {% if item.organisation.website %}
-              <div class="website">
-                <span>{{ _('Website') }}:</span>
-                <a class="govuk-link" href="{{ item.organisation.website|human_to_url }}" class="url" target="_blank" rel="noopener">
-                  {{ item.organisation.website|url_to_human + " (opens in new tab)" }}
-                </a>
-              </div>
-            {% endif %}
+            <a class="govuk-link govuk-!-display-none-print" class="url" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?{{ item|google_map_params|urlencode }}">
+              View on map (opens in new tab)
+            </a>
             {% if item.categories|length %}
             <div class="categories">
-              <h3 class="govuk-heading-s govuk-!-margin-top-4 govuk-!-margin-bottom-2">{{ _('Can help with:') }}</h3>
-              <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-4">
+              <h3 class="govuk-heading-s govuk-!-margin-top-4 govuk-!-margin-bottom-0">{{ _('Can help with') }}</h3>
+              <ul class="govuk-list govuk-list--bullet govuk-!-margin-top-0 govuk-!-margin-bottom-3">
                 {% for cat in item.categories|sort %}
                   <li>
                     {% if cat == "Housing Loss Prevention Advice Service" %}
@@ -132,9 +125,13 @@
               </ul>
             </div>
             {% endif %}
-            <a class="govuk-link govuk-!-display-none-print" class="url" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?{{ item|google_map_params|urlencode }}">
-              View on map (opens in new tab)
-            </a>
+            {% if item.organisation.website %}
+            <div class="website">
+              <a class="govuk-link" href="{{ item.organisation.website|human_to_url }}" class="url" target="_blank" rel="noopener">
+                {{ item.organisation.website|url_to_human + " (opens in new tab)" }}
+              </a>
+            </div>
+          {% endif %}
           </li>
         {% endfor %}
       </ul>
