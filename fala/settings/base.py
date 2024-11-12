@@ -12,7 +12,6 @@ from dotenv import load_dotenv
 # With override set to True the value of the variable in `.env` is loaded first https://pypi.org/project/python-dotenv/#variable-expansion
 load_dotenv(override=True)
 
-
 def here(*x):
     return join(abspath(dirname(__file__)), *x)
 
@@ -232,4 +231,7 @@ POSTCODE_IO_URL = "https://api.postcodes.io/postcodes?q="
 
 FEATURE_FLAG_SURVEY_MONKEY = os.environ.get("FEATURE_FLAG_SURVEY_MONKEY", "").lower() == "enabled"
 
-BLOCK_ROBOTS = os.environ.get("BLOCK_ROBOTS", "").lower() == "enabled"
+BLOCK_ROBOTS = os.environ.get("BLOCK_ROBOTS", "").lower() == "enabled"\
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+print(f"BASE_DIR is set to: {BASE_DIR}")

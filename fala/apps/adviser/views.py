@@ -6,27 +6,26 @@ from django.urls import resolve, reverse
 from django.views.generic import TemplateView, ListView
 from django.http import HttpResponse
 import os
+from django.views import View
 
 from .forms import AdviserSearchForm, AdviserRootForm
 from .laa_laa_paginator import LaaLaaPaginator
 from .regions import Region
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+class RobotsTxtView(View):
+    def get(self, request):
+        environment = os.getenv("ENVIRONMENT", "development").lower()
 
+        if environment == "production":
+            content = "User-agent: *\nDisallow:\n"  # Allow all
+        else:
+            content = "User-agent: *\nDisallow: /\n"  # Disallow all for staging/UAT
 
-def robots_txt(request):
-    environment = os.getenv("ENVIRONMENT", "development").lower()
-
-    if environment == "production":
-        content = "User-agent: *\nDisallow:\n"  # Allow all
-    else:
-        content = "User-agent: *\nDisallow: /\n"  # Disallow all for staging/UAT
-
-    return HttpResponse(content, content_type="text/plain")
+        return HttpResponse(content, content_type="text/plain")
 
 
 def security_txt(request):
-    file_path = os.path.join(BASE_DIR, "public", "security.txt")
+    file_path = os.path.join(settings.BASE_DIR, "fala", "public", "security.txt")
     try:
         with open(file_path, "r") as f:
             content = f.read()
