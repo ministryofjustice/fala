@@ -12,6 +12,7 @@ from .forms import AdviserSearchForm, AdviserRootForm
 from .laa_laa_paginator import LaaLaaPaginator
 from .regions import Region
 
+
 class RobotsTxtView(View):
     def get(self, request):
         environment = os.getenv("ENVIRONMENT", "development").lower()
@@ -24,14 +25,15 @@ class RobotsTxtView(View):
         return HttpResponse(content, content_type="text/plain")
 
 
-def security_txt(request):
-    file_path = os.path.join(settings.BASE_DIR, "fala", "public", "security.txt")
-    try:
-        with open(file_path, "r") as f:
-            content = f.read()
-        return HttpResponse(content, content_type="text/plain")
-    except FileNotFoundError:
-        return HttpResponse("security.txt not found.", content_type="text/plain", status=404)
+class SecurityTxtView(View):
+    def get(self, request):
+        file_path = os.path.join(settings.BASE_DIR, "fala", "public", "security.txt")
+        try:
+            with open(file_path, "r") as f:
+                content = f.read()
+            return HttpResponse(content, content_type="text/plain")
+        except FileNotFoundError:
+            return HttpResponse("security.txt not found.", content_type="text/plain", status=404)
 
 
 class CommonContextMixin:

@@ -9,7 +9,7 @@ from adviser.views import (
     PrivacyView,
     CookiesView,
     RobotsTxtView,
-    security_txt,
+    SecurityTxtView,
 )
 from django.views.static import serve
 
@@ -20,5 +20,5 @@ urlpatterns = [
     re_path(r"^$", AdviserView.as_view(), name="adviser"),
     re_path(r"^search$", SearchView.as_view(), name="search"),
     re_path(r"^robots\.txt$", RobotsTxtView.as_view(), name="robots_txt"),
-    re_path(r"^security\.txt$", security_txt, name="security_txt"),
+    re_path(r"^security\.txt$", SecurityTxtView.as_view(), name="security_txt"),
 ] + [re_path(r"^static/(?P<path>.*)$", serve, {"document_root": settings.STATIC_ROOT})]
