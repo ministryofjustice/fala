@@ -234,4 +234,3 @@ FEATURE_FLAG_SURVEY_MONKEY = os.environ.get("FEATURE_FLAG_SURVEY_MONKEY", "").lo
 
 BLOCK_ROBOTS = os.environ.get("BLOCK_ROBOTS", "").lower() == "enabled"
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-print(f"BASE_DIR is set to: {BASE_DIR}")
