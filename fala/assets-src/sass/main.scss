@@ -17,6 +17,10 @@ $laa-unknown-colour: govuk-colour("orange");
 $laa-staging-colour: govuk-colour("turquoise");
 $laa-dev-colour: govuk-colour("pink");
 
+body {
+  min-height: 0 !important;
+}
+
 .fala-tickbox-columns_new {
   // Default for mobile (1 column)
   column-count: 1; 
