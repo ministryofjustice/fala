@@ -35,14 +35,11 @@ MANAGERS = ADMINS
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+# When playwright is addressed set back to empty dictionary.
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ.get("DB_NAME", "fala_development"),
-        "USER": os.environ.get("DB_USER", ""),
-        "PASSWORD": os.environ.get("DB_PASSWORD", "postgres"),
-        "PORT": os.environ.get("DB_PORT", "5432"),
-        "HOST": os.environ.get("DB_HOST", ""),
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": ":memory:",
     }
 }
 
