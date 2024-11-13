@@ -232,5 +232,7 @@ POSTCODE_IO_URL = "https://api.postcodes.io/postcodes?q="
 
 FEATURE_FLAG_SURVEY_MONKEY = os.environ.get("FEATURE_FLAG_SURVEY_MONKEY", "").lower() == "enabled"
 
+FEATURE_FLAG_MAINTENANCE_MODE = os.environ.get("FEATURE_FLAG_MAINTENANCE_MODE", "").lower() == "enabled"
+
 BLOCK_ROBOTS = os.environ.get("BLOCK_ROBOTS", "").lower() == "enabled"
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))

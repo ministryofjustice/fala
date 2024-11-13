@@ -46,6 +46,7 @@ class CommonContextMixin:
                 "cspNonce": getattr(self.request, "csp_nonce", None),
                 # this is added in so that an additional class is added the <body>
                 "bodyClasses": f"fala-{settings.ENVIRONMENT}",
+                "FEATURE_FLAG_MAINTENANCE_MODE": settings.FEATURE_FLAG_MAINTENANCE_MODE,
             }
         )
         return context
