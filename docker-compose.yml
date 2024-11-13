@@ -19,6 +19,7 @@ services:
       DJANGO_SETTINGS_MODULE: "fala.settings"
       DB_USER: ${DB_USER:-postgres}
       DB_HOST: ${DB_HOST:-db}
+      FEATURE_FLAG_MAINTENANCE_MODE: "disabled"
     ports:
       - "8013:8000"
     stdin_open: true
