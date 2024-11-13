@@ -48,4 +48,6 @@ env:
     value: {{ .Values.laalaa_api.host }}
   - name: ENVIRONMENT
     value: {{ .Values.environment }}
+  - name: FEATURE_FLAG_MAINTENANCE_MODE
+    value: {{ .Values.feature_flags.maintenance_mode }}
 {{- end }}
