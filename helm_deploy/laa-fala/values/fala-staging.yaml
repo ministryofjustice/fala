@@ -55,16 +55,14 @@ ingress:
 
 feature_flags:
   no_map: "enabled"
-  survey_monkey: "enabled"
+  survey_monkey: "disabled"
   block_robots: "enabled"
+  maintenance_mode: "disabled"
 
 laalaa_api:
   host: "https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk"
 
 allowed_hosts: ".laa-fala-staging.apps.live-1.cloud-platform.service.justice.gov.uk .staging.find-legal-advice.justice.gov.uk"
-
-postgresql:
-  enabled: false
 
 autoscaling:
   enabled: false

@@ -180,6 +180,25 @@ class ResearchBannerTest(SimpleTestCase):
         self.assertNotContains(response, self.research_message)
 
 
+class MaintenanceModeTest(SimpleTestCase):
+    client = Client()
+    url = reverse("search")
+
+    data = {"name": "foo", "categories": ["deb", "edu"]}
+
+    maintenance_mode_h1 = "Sorry, the service is unavailable"
+
+    @override_settings(FEATURE_FLAG_MAINTENANCE_MODE=True)
+    def test_maintenance_mode_viewable_when_flag_set(self):
+        response = self.client.get(self.url, self.data)
+        self.assertContains(response, self.maintenance_mode_h1)
+
+    @override_settings(FEATURE_FLAG_MAINTENANCE_MODE=False)
+    def test_maintenance_mode_hidden_when_flag_unset(self):
+        response = self.client.get(self.url, self.data)
+        self.assertNotContains(response, self.maintenance_mode_h1)
+
+
 class ResultsPageWithJustOrgTest(SimpleTestCase):
     client = Client()
     url = reverse("search")

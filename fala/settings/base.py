@@ -35,14 +35,11 @@ MANAGERS = ADMINS
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+# When playwright is addressed set back to empty dictionary.
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ.get("DB_NAME", "fala_development"),
-        "USER": os.environ.get("DB_USER", ""),
-        "PASSWORD": os.environ.get("DB_PASSWORD", "postgres"),
-        "PORT": os.environ.get("DB_PORT", "5432"),
-        "HOST": os.environ.get("DB_HOST", ""),
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": ":memory:",
     }
 }
 
@@ -234,5 +231,7 @@ CHECK_LEGAL_AID_URL = "https://www.gov.uk/check-legal-aid"
 POSTCODE_IO_URL = "https://api.postcodes.io/postcodes?q="
 
 FEATURE_FLAG_SURVEY_MONKEY = os.environ.get("FEATURE_FLAG_SURVEY_MONKEY", "").lower() == "enabled"
+
+FEATURE_FLAG_MAINTENANCE_MODE = os.environ.get("FEATURE_FLAG_MAINTENANCE_MODE", "").lower() == "enabled"
 
 BLOCK_ROBOTS = os.environ.get("BLOCK_ROBOTS", "").lower() == "enabled"
