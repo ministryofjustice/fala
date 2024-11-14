@@ -56,13 +56,11 @@ ingress:
     nginx.ingress.kubernetes.io/modsecurity-snippet: |
       SecRuleEngine On
 
-postgresql:
-  enabled: false
-
 feature_flags:
   no_map: "enabled"
-  survey_monkey: "enabled"
+  survey_monkey: "disabled"
   block_robots: "disabled"
+  maintenance_mode: "disabled"
 
 laalaa_api:
   host: "https://laa-legal-adviser-api-production.cloud-platform.service.justice.gov.uk"
