@@ -57,24 +57,6 @@ laalaa_api:
 
 allowed_hosts: ".laa-fala-staging.apps.live-1.cloud-platform.service.justice.gov.uk .staging.find-legal-advice.justice.gov.uk"
 
-postgresql:
-  enabled: true
-  resources:
-    limits:
-      cpu: 250m
-      memory: 256Mi
-    requests:
-      cpu: 250m
-      memory: 256Mi
-  auth:
-    database: fala_staging
-    enablePostgresUser: true
-    postgresPassword: postgres
-    postgresUsername: postgres
-  primary:
-    persistence:
-      enabled: true
-
 autoscaling:
   enabled: false
   minReplicas: 1

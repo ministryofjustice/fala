@@ -64,9 +64,6 @@ laalaa_api:
 
 allowed_hosts: ".laa-fala-staging.apps.live-1.cloud-platform.service.justice.gov.uk .staging.find-legal-advice.justice.gov.uk"
 
-postgresql:
-  enabled: false
-
 autoscaling:
   enabled: false
   minReplicas: 1

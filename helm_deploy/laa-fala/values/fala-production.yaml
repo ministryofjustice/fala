@@ -56,9 +56,6 @@ ingress:
     nginx.ingress.kubernetes.io/modsecurity-snippet: |
       SecRuleEngine On
 
-postgresql:
-  enabled: false
-
 feature_flags:
   no_map: "enabled"
   survey_monkey: "enabled"
