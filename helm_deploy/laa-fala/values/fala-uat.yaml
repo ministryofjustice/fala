@@ -48,7 +48,7 @@ ingress:
 
 feature_flags:
   no_map: "enabled"
-  survey_monkey: "enabled"
+  survey_monkey: "disabled"
   block_robots: "enabled"
   maintenance_mode: "disabled"
 
