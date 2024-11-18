@@ -3,10 +3,29 @@
 {% block pageTitle %}Cookies{% endblock %}
 
 {%- from 'govuk_frontend_jinja/components/radios/macro.html' import govukRadios -%}
+{%- from 'govuk_frontend_jinja/components/notification-banner/macro.html' import govukNotificationBanner -%}
 
 {% block content %}
   <div class="govuk-grid-column-full">
     <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        {{ govukNotificationBanner({
+          'type': 'success',
+          'role': 'alert',
+          'titleText': 'Success',
+          'text': 'Your cookie settings were saved',
+          'html': '<h3 class="govuk-notification-banner__heading">Your cookie settings were saved</h3>
+                   <p>Other government services may set additional cookies. These will have a separate cookie policy and banner.</p>
+                   <p class="govuk-body"><a class="govuk-notification-banner__link" href="/">Go back to the page you were looking at</a></p>',
+          'classes': 'hidden',
+          'attributes': {
+            'id': 'cookieChoiceNotificationBanner'
+          }
+        }) }}
+      </div>
+    </div>
 
     <h1 class="govuk-heading-xl">Cookies</h1>
 

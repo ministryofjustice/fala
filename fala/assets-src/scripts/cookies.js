@@ -58,16 +58,25 @@ if (cookiePolicyForm) {
   cookiePolicyForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const selectedValue = document.querySelector("input[name='cookies']:checked").value;
+    const notificationBanner = document.getElementById('cookieChoiceNotificationBanner');
     if (selectedValue === "Allowed") {
       setCookie("cookiePermission", "Allowed", 30);
       tagMan();
       if (cookieBanner) {
         cookieBanner.hidden = true;
       }
+      if (notificationBanner) {
+        notificationBanner.classList.remove("hidden");
+        notificationBanner.scrollIntoView()
+      }
     } else if (selectedValue === "Rejected") {
       setCookie("cookiePermission", "Rejected", 30);
       if (cookieBanner) {
         cookieBanner.hidden = true;
+      }
+      if (notificationBanner) {
+        notificationBanner.classList.remove("hidden");
+        notificationBanner.scrollIntoView()
       }
     }
   });
