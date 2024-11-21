@@ -52,39 +52,74 @@ class CommonContextMixin:
             }
         )
         return context
-from django.shortcuts import redirect
-from .utils import get_category_display_name
+
 
 class SingleCategorySearchView(CommonContextMixin, TemplateView):
     template_name = "adviser/single_category_search.html"
 
+    CATEGORY_MESSAGES = {
+        "hlpas": "Tell the adviser your home is at risk and you want advice through the Housing Loss Prevention Advice Service.",
+        "welfare-benefits": """Legal aid for advice about welfare benefits is only available if you are appealing a decision made by the social security tribunal. This appeal must be in the Upper Tribunal, Court of Appeal or Supreme Court.
+
+                For any other benefits issue, ask the legal adviser if you can get free legal advice or if you will have to pay for it.""",
+        "clinical-negligence": "Legal aid for advice about clinical negligence is usually only available if you have a child that suffered a brain injury during pregnancy, birth or the first 8 weeks of life.",
+    }
+
+    CATEGORY_DISPLAY_NAMES = {
+        "hlpas": "Housing Loss Prevention Advice Service",
+    }
+
     def get(self, request, *args, **kwargs):
-        category_code = request.GET.get("categories")
-        if category_code:
+
+        category_code = request.GET.get("categories")  # Extract `categories` from query parameters
+        if category_code:  # Redirect to the correct category-based URL
             category_slug = get_category_display_name(category_code)
             if category_slug:
-                return redirect('single_category_search', category=category_slug)
+                return redirect("single_category_search", category=category_slug)
             else:
-                return redirect('search')
-
+                return redirect("search")
+            
         category_slug = kwargs.get("category")
         if not category_slug:
-            return redirect('search')
+            return redirect("search")
 
         context = self.get_context_data(**kwargs)
         form = AdviserRootForm(data=request.GET or None)
+        category_message = self.CATEGORY_MESSAGES.get(category_slug, "")
+        category_display_name = self.CATEGORY_DISPLAY_NAMES.get(category_slug, category_slug.replace("-", " ").title())
 
         context.update(
             {
                 "form": form,
                 "category_slug": category_slug,
-                "category_display_name": category_slug.replace("-", " ").title(),
-                "current_url": request.path,
-                "CHECK_LEGAL_AID_URL": settings.CHECK_LEGAL_AID_URL,
+                "category_display_name": category_display_name,
+                "category_message": category_message,
             }
         )
 
+        if form.is_valid():
+            postcode = form.cleaned_data.get("postcode")
+            if postcode:
+                # Perform the search using the postcode and category_slug
+                results = self.perform_search(postcode, category_slug)
+                context.update({"results": results})
+
         return self.render_to_response(context)
+
+    def perform_search(self, postcode, category):
+        try:
+            data = laalaa.find(
+                postcode=postcode,
+                categories=[category],
+                page=1,  # Assuming you want the first page of results
+            )
+            return data.get("results", [])
+        except laalaa.LaaLaaError:
+            return []
+
+
+
+
 class AdviserView(CommonContextMixin, TemplateView):
     template_name = "adviser/search.html"
 
