@@ -1,0 +1,93 @@
+{% extends 'adviser/adviser_base.html' %}
+
+{% block pageTitle %}Find a Legal Aid Adviser or Family Mediator{% endblock %}
+
+{% import "macros/element.html" as Element %}
+{% import "macros/forms.html" as Form %}
+
+{%- from 'govuk_frontend_jinja/components/error-summary/macro.html' import govukErrorSummary %}
+{%- from 'govuk_frontend_jinja/components/checkboxes/macro.html' import govukCheckboxes %}
+{%- from "govuk_frontend_jinja/components/input/macro.html" import govukInput %}
+
+{% block content %}
+  <div class="govuk-grid-column-two-thirds">
+      <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
+      {% if form.errors %}
+        {{ govukErrorSummary({
+          "titleText": "There is a problem",
+          "errorList": errorList
+        }) }}
+      {% endif %}
+      <h1 class="govuk-heading-xl"> Find a legal aid adviser or family mediator </h1>
+      <p class="govuk-body">You need to provide information about your finances to find out if you qualify for legal aid.</p>
+      <p class="govuk-body"><a class="govuk-link" href="{{ CHECK_LEGAL_AID_URL }}" target="_blank" rel="noopener">Check if you qualify for legal aid (opens in a new tab)</a></p>
+  </div>
+
+  {% block search_form %}
+      <div class="govuk-grid-column-full">
+        <div class="laa-fala__grey-box">
+
+          <form action="search" id="fala_questions">
+            {% set errorMessage = {'err': ""} %}
+
+            {% if form.errors %}
+              {% call Element.errorText() %}
+                {% for k, error in form.errors.items() %}
+                  {% if errorMessage.update({'err': error | striptags}) %}{% endif %}
+                {% endfor %}
+              {% endcall %}
+            {% endif %}
+
+            {% if 'postcode' in form.errors or form.errors['__all__'] %}
+              {{ govukInput({
+                'label': {
+                  'text': "Postcode",
+                  'classes': 'govuk-label--s',
+                },
+                'value': form.postcode.value(),
+                'errorMessage': { 'text': form.errors['postcode'][0] },
+                'hint': {
+                  'text' : "For example, NE31 1SF",
+                },
+                'attributes': {
+                   'maxLength': 30,
+                },
+                'id': 'id_postcode',
+                'classes': 'govuk-input--width-10',
+                'name': "postcode"
+              }) }}
+            {% else %}
+              {{ govukInput({
+                'label': {
+                  'text': "Postcode",
+                  'classes': 'govuk-label--s',
+                },
+                'value': form.postcode.value(),
+                'hint': {
+                  'text' : "For example, NE31 1SF",
+                },
+                'attributes': {
+                   'maxLength': 30,
+                },
+                'id': 'id_postcode',
+                'classes': 'govuk-input--width-10',
+                'name': "postcode"
+              }) }}
+            {% endif %}
+
+            {{ govukButton({
+              'text': "Search",
+              'type': "submit",
+              'classes': "govuk-!-margin-bottom-2",
+              'id': "searchButton",
+              'name': "search"
+            }) }}
+          </form>
+        </div>
+      </div>
+  {% endblock %}
+
+    <div class="govuk-grid-column-full">
+      <p class="govuk-body govuk-!-margin-top-5">If you are a provider and your details are incorrect, please contact your contract manager.</p>
+    </div>
+{% endblock %}
