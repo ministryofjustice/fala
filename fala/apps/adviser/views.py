@@ -11,6 +11,8 @@ from django.views import View
 from .forms import AdviserSearchForm, AdviserRootForm
 from .laa_laa_paginator import LaaLaaPaginator
 from .regions import Region
+from django.shortcuts import redirect
+from .utils import get_category_display_name
 
 
 class RobotsTxtView(View):
@@ -50,8 +52,39 @@ class CommonContextMixin:
             }
         )
         return context
+from django.shortcuts import redirect
+from .utils import get_category_display_name
 
+class SingleCategorySearchView(CommonContextMixin, TemplateView):
+    template_name = "adviser/single_category_search.html"
 
+    def get(self, request, *args, **kwargs):
+        category_code = request.GET.get("categories")
+        if category_code:
+            category_slug = get_category_display_name(category_code)
+            if category_slug:
+                return redirect('single_category_search', category=category_slug)
+            else:
+                return redirect('search')
+
+        category_slug = kwargs.get("category")
+        if not category_slug:
+            return redirect('search')
+
+        context = self.get_context_data(**kwargs)
+        form = AdviserRootForm(data=request.GET or None)
+
+        context.update(
+            {
+                "form": form,
+                "category_slug": category_slug,
+                "category_display_name": category_slug.replace("-", " ").title(),
+                "current_url": request.path,
+                "CHECK_LEGAL_AID_URL": settings.CHECK_LEGAL_AID_URL,
+            }
+        )
+
+        return self.render_to_response(context)
 class AdviserView(CommonContextMixin, TemplateView):
     template_name = "adviser/search.html"
 
