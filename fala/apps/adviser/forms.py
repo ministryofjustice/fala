@@ -4,14 +4,13 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 from django.utils.safestring import mark_safe
 from django.conf import settings
+from .regions import Region
 
 import laalaa.api as laalaa
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
-
-from .regions import Region
 
 SEARCH_TYPE_CHOICES = [("location", _("Location")), ("organisation", _("Organisation"))]
 
@@ -193,3 +192,141 @@ class AdviserSearchForm(AdviserRootForm):
                 return {}
         else:
             return {}
+
+
+class SingleCategorySearchForm(forms.Form):
+    postcode = CapitalisedPostcodeField(
+        label=_("Postcode"),
+        max_length=30,
+        required=True,  # Postcode is required in this form
+        widget=FalaTextInput(attrs={"class": "govuk-input govuk-!-width-two-thirds"}),
+    )
+
+    def __init__(self, categories=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Ensure categories is a list and assign it to self.categories
+        self.categories = categories if categories is not None else []
+        self._region = None
+        self._country_from_valid_postcode = None
+
+    def clean_postcode(self):
+        postcode = self.cleaned_data.get("postcode")
+        if not postcode:
+            raise forms.ValidationError(_("Enter a valid postcode"))
+        return postcode
+
+    def clean(self):
+        cleaned_data = super().clean()
+        postcode = cleaned_data.get("postcode")
+        categories = self.data.get("category")
+
+        # Validate postcode and set `_country_from_valid_postcode`
+        if postcode:
+            valid_postcode = self.validate_postcode_and_return_country(postcode)
+            if not valid_postcode:
+                self.add_error("postcode", _("Enter a valid postcode"))
+            else:
+                self._country_from_valid_postcode = valid_postcode  # This is used by the `region` property
+
+        # Check if categories are provided
+        if not categories:
+            self.add_error("categories", _("Category is required."))
+        else:
+            self.categories = [categories]
+
+        return cleaned_data
+
+    @property
+    def region(self):
+        # retrieve the api call variables
+        country_from_valid_postcode = getattr(self, "_country_from_valid_postcode", None)
+
+        # Return `Region.ENGLAND_OR_WALES` from `clean` if set
+        if not country_from_valid_postcode:
+            region = getattr(self, "_region", None)
+            return region
+
+        # for Guernsey & Jersey the country comes back as 'Channel Islands', we are using `nhs_ha` key to distinguish between them
+        country, nhs_ha = country_from_valid_postcode
+
+        if country == "Northern Ireland":
+            return Region.NI
+        elif country == "Isle of Man":
+            return Region.IOM
+        elif country == "Channel Islands" and nhs_ha == "Jersey Health Authority":
+            return Region.JERSEY
+        elif country == "Channel Islands" and nhs_ha == "Guernsey Health Authority":
+            return Region.GUERNSEY
+        elif country == "Scotland":
+            return Region.SCOTLAND
+        elif country in ["England", "Wales"]:
+            return Region.ENGLAND_OR_WALES
+        else:
+            self.add_error("postcode", _("This service is only available for England and Wales"))
+            return None
+
+    @property
+    def current_page(self):
+        page = self.cleaned_data.get("page", 1)
+        return page
+
+    def validate_postcode_and_return_country(self, postcode):
+        try:
+            if not isinstance(postcode, str) or not postcode.strip():
+                return False
+
+            session = requests.Session()
+            retry_strategy = Retry(total=5, backoff_factor=0.1)
+            adapter = HTTPAdapter(max_retries=retry_strategy)
+            session.mount("https://", adapter)
+
+            url = settings.POSTCODE_IO_URL + f"{postcode}"
+            response = session.get(url, timeout=5)
+
+            if response.status_code != 200:
+                return False
+
+            data = response.json()
+
+            if not data.get("result"):
+                return False
+
+            first_result_in_list = data["result"][0]
+            country = first_result_in_list.get("country")
+            nhs_ha = first_result_in_list.get("nhs_ha")
+
+            if country and nhs_ha:
+                return country, nhs_ha
+            else:
+                return False
+
+        except requests.RequestException:
+            self.add_error("postcode", _("Error looking up legal advisers. Please try again later."))
+            return False
+
+    def search(self):
+        if self.is_valid():
+            try:
+                postcode = self.cleaned_data.get("postcode")
+                categories = self.categories
+                page = self.cleaned_data.get("page", 1)
+
+                data = laalaa.find(
+                    postcode=postcode,
+                    categories=categories,
+                    page=page,
+                )
+
+                if "error" in data:
+                    self.add_error("postcode", data["error"])
+                    return {}
+
+                return data
+
+            except laalaa.LaaLaaError:
+                self.add_error(
+                    "postcode", "%s %s" % (_("Error looking up legal advisers."), _("Please try again later."))
+                )
+                return {}
+
+        return {}
