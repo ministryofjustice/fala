@@ -1,18 +1,16 @@
 # coding=utf-8
-import urllib
-
 from django.conf import settings
 from django.urls import resolve, reverse
 from django.views.generic import TemplateView, ListView
 from django.http import HttpResponse
 import os
 from django.views import View
-
 from .forms import AdviserSearchForm, AdviserRootForm
-from .laa_laa_paginator import LaaLaaPaginator
 from .regions import Region
-from django.shortcuts import redirect
-from .utils import get_category_display_name
+from django.shortcuts import redirect, render
+from .models import EnglandOrWalesState, ErrorState, OtherJurisdictionState
+from .forms import SingleCategorySearchForm
+from .utils import CATEGORY_MESSAGES, CATEGORY_DISPLAY_NAMES, get_category_display_name, get_category_code_from_slug
 
 
 class RobotsTxtView(View):
@@ -54,70 +52,53 @@ class CommonContextMixin:
         return context
 
 
-class SingleCategorySearchView(CommonContextMixin, TemplateView):
+class SingleCategorySearchView(TemplateView):
     template_name = "adviser/single_category_search.html"
 
-    CATEGORY_MESSAGES = {
-        "hlpas": "Tell the adviser your home is at risk and you want advice through the Housing Loss Prevention Advice Service.",
-        "welfare-benefits": """Legal aid for advice about welfare benefits is only available if you are appealing a decision made by the social security tribunal. This appeal must be in the Upper Tribunal, Court of Appeal or Supreme Court.
-
-                For any other benefits issue, ask the legal adviser if you can get free legal advice or if you will have to pay for it.""",
-        "clinical-negligence": "Legal aid for advice about clinical negligence is usually only available if you have a child that suffered a brain injury during pregnancy, birth or the first 8 weeks of life.",
-    }
-
-    CATEGORY_DISPLAY_NAMES = {
-        "hlpas": "Housing Loss Prevention Advice Service",
-    }
-
     def get(self, request, *args, **kwargs):
+        category_code = request.GET.get("categories")
 
-        category_code = request.GET.get("categories")  # Extract `categories` from query parameters
-        if category_code:  # Redirect to the correct category-based URL
+        if category_code:
             category_slug = get_category_display_name(category_code)
             if category_slug:
                 return redirect("single_category_search", category=category_slug)
             else:
                 return redirect("search")
-            
+
         category_slug = kwargs.get("category")
         if not category_slug:
             return redirect("search")
 
-        context = self.get_context_data(**kwargs)
-        form = AdviserRootForm(data=request.GET or None)
-        category_message = self.CATEGORY_MESSAGES.get(category_slug, "")
-        category_display_name = self.CATEGORY_DISPLAY_NAMES.get(category_slug, category_slug.replace("-", " ").title())
+        if not category_code or category_code == "None":
+            category_code = get_category_code_from_slug(category_slug)
 
-        context.update(
-            {
-                "form": form,
-                "category_slug": category_slug,
-                "category_display_name": category_display_name,
-                "category_message": category_message,
-            }
-        )
+        category_message = CATEGORY_MESSAGES.get(category_slug, "")
+        category_display_name = CATEGORY_DISPLAY_NAMES.get(category_slug, category_slug.replace("-", " ").title())
 
+        form = SingleCategorySearchForm(categories=category_slug, data=request.GET or None)
         if form.is_valid():
-            postcode = form.cleaned_data.get("postcode")
-            if postcode:
-                # Perform the search using the postcode and category_slug
-                results = self.perform_search(postcode, category_slug)
-                context.update({"results": results})
+            results = form.search()
+        else:
+            results = None
 
-        return self.render_to_response(context)
+        search_url = reverse("single_category_search", kwargs={"category": category_slug})
 
-    def perform_search(self, postcode, category):
-        try:
-            data = laalaa.find(
-                postcode=postcode,
-                categories=[category],
-                page=1,  # Assuming you want the first page of results
-            )
-            return data.get("results", [])
-        except laalaa.LaaLaaError:
-            return []
+        context = {
+            "form": form,
+            "category_slug": category_slug,
+            "category_code": category_code,
+            "category_display_name": category_display_name,
+            "category_message": category_message,
+            "results": results,
+            "search_url": search_url,
+        }
 
+        return render(request, self.template_name, context)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["search_url"] = reverse("single_category_search", kwargs={"category": kwargs.get("category_slug")})
+        return context
 
 
 class AdviserView(CommonContextMixin, TemplateView):
@@ -154,157 +135,18 @@ class CookiesView(CommonContextMixin, TemplateView):
     template_name = "adviser/cookies.html"
 
 
-class SearchView(CommonContextMixin, ListView):
-    class ErrorState(object):
-        def __init__(self, form):
-            self._form = form
-
-        @property
-        def template_name(self):
-            return "search.html"
-
-        def get_queryset(self):
-            return []
-
-        def get_context_data(self):
-            errorList = []
-            for field, error in self._form.errors.items():
-                # choose the first field is the error in form-wide
-                if field == "__all__":
-                    item = {"text": error[0], "href": "#id_postcode"}
-                else:
-                    item = {"text": error[0], "href": f"#id_{field}"}
-                errorList.append(item)
-
-            return {"form": self._form, "data": {}, "errorList": errorList}
-
-    class EnglandOrWalesState(object):
-        def __init__(self, form):
-            self._form = form
-            self._data = form.search()
-
-        @property
-        def template_name(self):
-            return "results.html"
-
-        def get_queryset(self):
-            return self._data.get("results", None)
-
-        def get_context_data(self):
-            pages = LaaLaaPaginator(self._data["count"], 10, 3, self._form.current_page)
-            current_page = pages.current_page()
-            params = {
-                "postcode": self._form.cleaned_data["postcode"],
-                "name": self._form.cleaned_data["name"],
-            }
-            categories = self._form.cleaned_data["categories"]
-
-            # create list of tuples which can be passed to urlencode for pagination links
-            category_tuples = [("categories", c) for c in categories]
-
-            def item_for(page_num):
-                if len(categories) > 0:
-                    page_params = {"page": page_num}
-                    href = (
-                        "/search?"
-                        + urllib.parse.urlencode({**page_params, **params})
-                        + "&"
-                        + urllib.parse.urlencode(category_tuples)
-                    )
-                else:
-                    page_params = {"page": page_num}
-                    href = "/search?" + urllib.parse.urlencode({**page_params, **params})
-
-                return {"number": page_num, "current": self._form.current_page == page_num, "href": href}
-
-            pagination = {"items": [item_for(page_num) for page_num in pages.page_range]}
-
-            if current_page.has_previous():
-                if len(categories) > 0:
-                    page_params = {"page": current_page.previous_page_number()}
-                    prev_link = (
-                        "/search?"
-                        + urllib.parse.urlencode({**page_params, **params})
-                        + "&"
-                        + urllib.parse.urlencode(category_tuples)
-                    )
-                else:
-                    page_params = {"page": current_page.previous_page_number()}
-                    prev_link = "/search?" + urllib.parse.urlencode({**page_params, **params})
-                pagination["previous"] = {"href": prev_link}
-
-            if current_page.has_next():
-                if len(categories) > 0:
-                    page_params = {"page": current_page.next_page_number()}
-                    href = (
-                        "/search?"
-                        + urllib.parse.urlencode({**page_params, **params})
-                        + "&"
-                        + urllib.parse.urlencode(category_tuples)
-                    )
-                else:
-                    page_params = {"page": current_page.next_page_number()}
-                    href = "/search?" + urllib.parse.urlencode({**page_params, **params})
-                pagination["next"] = {"href": href}
-
-            return {
-                "form": self._form,
-                "data": self._data,
-                "params": params,
-                "FEATURE_FLAG_SURVEY_MONKEY": settings.FEATURE_FLAG_SURVEY_MONKEY,
-                "pagination": pagination,
-            }
-
-    class OtherJurisdictionState(object):
-        REGION_TO_LINK = {
-            Region.NI: {
-                "link": "https://www.nidirect.gov.uk/articles/legal-aid-schemes",
-                "region": "Northern Ireland",
-            },
-            Region.IOM: {
-                "link": "https://www.gov.im/categories/benefits-and-financial-support/legal-aid/",
-                "region": "the Isle of Man",
-            },
-            Region.JERSEY: {
-                "link": "https://www.legalaid.je/",
-                "region": "Jersey",
-            },
-            Region.GUERNSEY: {
-                "link": "https://www.gov.gg/legalaid",
-                "region": "Guernsey",
-            },
-        }
-
-        def __init__(self, region, postcode):
-            self._region = region
-            self._postcode = postcode
-
-        def get_queryset(self):
-            return []
-
-        @property
-        def template_name(self):
-            return "other_region.html"
-
-        def get_context_data(self):
-            region_data = self.REGION_TO_LINK[self._region]
-            return {
-                "postcode": self._postcode,
-                "link": region_data["link"],
-                "region": region_data["region"],
-            }
-
+class SearchView(CommonContextMixin, ListView, EnglandOrWalesState, OtherJurisdictionState):
     def get(self, request, *args, **kwargs):
         form = AdviserSearchForm(data=request.GET or None)
 
         if form.is_valid():
             region = form.region
             if region == Region.ENGLAND_OR_WALES or region == Region.SCOTLAND:
-                self.state = self.EnglandOrWalesState(form)
+                self.state = EnglandOrWalesState(form)
             else:
-                self.state = self.OtherJurisdictionState(region, form.cleaned_data["postcode"])
+                self.state = OtherJurisdictionState(region, form.cleaned_data["postcode"])
         else:
-            self.state = self.ErrorState(form)
+            self.state = ErrorState(form)
 
         return super().get(self, request, *args, **kwargs)
 

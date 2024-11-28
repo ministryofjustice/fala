@@ -4,7 +4,6 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 from django.utils.safestring import mark_safe
 from django.conf import settings
-
 import laalaa.api as laalaa
 import requests
 from requests.adapters import HTTPAdapter
@@ -193,3 +192,61 @@ class AdviserSearchForm(AdviserRootForm):
                 return {}
         else:
             return {}
+
+
+class SingleCategorySearchForm(forms.Form):
+    postcode = CapitalisedPostcodeField(
+        label=_("Postcode"),
+        max_length=30,
+        required=True,  # Postcode is required in this form
+        widget=FalaTextInput(attrs={"class": "govuk-input govuk-!-width-two-thirds"}),
+    )
+
+    def __init__(self, categories=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Ensure categories is a list and assign it to self.categories
+        self.categories = categories if categories is not None else []
+
+    def clean_postcode(self):
+        postcode = self.cleaned_data.get("postcode")
+        if not postcode:
+            raise forms.ValidationError(_("Enter a valid postcode"))
+        return postcode
+
+    def clean(self):
+        cleaned_data = super().clean()
+        categories = self.data.get("category")
+        if not categories:
+            self.add_error("categories", "Category is required.")
+        else:
+            self.categories = [categories]
+        return cleaned_data
+
+    # this is required if i want to rename category to categories in the single_category_search.html file
+    # however this then breaks the search as it just reloads the page
+
+    def search(self):
+        if self.is_valid():
+            try:
+                postcode = self.cleaned_data.get("postcode")
+                if not postcode:
+                    self.add_error("postcode", _("Enter a valid postcode"))
+                    return {}
+
+                # Use `self.categories` for the search (ensure it is passed as a list)
+                data = laalaa.find(
+                    postcode=postcode,
+                    categories=self.categories,  # Pass the list of categories
+                    page=1,  # Always default to the first page for simplicity
+                )
+
+                if "error" in data:
+                    self.add_error("postcode", data["error"])
+                    return {}
+                return data
+
+            except laalaa.LaaLaaError:
+                self.add_error("postcode", _("Error looking up legal advisers. Please try again later."))
+                return {}
+
+        return {}

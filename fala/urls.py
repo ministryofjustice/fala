@@ -1,6 +1,7 @@
 # coding=utf-8
 from django.conf import settings
 from django.urls import re_path
+
 from adviser.views import (
     AccessibilityView,
     AdviserView,

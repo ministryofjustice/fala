@@ -34,7 +34,12 @@
   {% block search_form %}
       <div class="govuk-grid-column-two-thirds">
 
-        <form action="search" id="fala_questions">
+          <form action="{{ search_url }}" method="get" id="fala_questions">
+            <input type="hidden" name="category" value="{{ category_code }}">
+
+            <p>DEBUG: Category slug: {{ category_slug }}</p>
+            <p>DEBUG: Category code: {{ category_code }}</p>
+
           {% set errorMessage = {'err': ""} %}
 
           {% if form.errors %}
