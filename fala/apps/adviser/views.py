@@ -13,6 +13,7 @@ from .forms import SingleCategorySearchForm
 from .utils import CATEGORY_MESSAGES, CATEGORY_DISPLAY_NAMES, get_category_display_name, get_category_code_from_slug
 import logging
 
+
 class RobotsTxtView(View):
     def get(self, request):
         environment = os.getenv("ENVIRONMENT", "development").lower()
@@ -51,7 +52,10 @@ class CommonContextMixin:
         )
         return context
 
+
 logger = logging.getLogger(__name__)
+
+
 class SingleCategorySearchView(TemplateView):
     template_name = "adviser/single_category_search.html"
 
@@ -108,8 +112,10 @@ class SingleCategorySearchView(TemplateView):
             "search_url": search_url,
         }
 
-        return render(request, template_name, context)
-
+        return render(request, self.template_name, context)
+        # so to show the search page this must be self.template_name
+        # but when i want to show results it needs to be template_name
+        # so that it can take it from EnglandOrWalesState which uses results.html
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

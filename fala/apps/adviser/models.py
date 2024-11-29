@@ -16,7 +16,10 @@ class SatisfactionFeedback(models.Model):
     def __str__(self):
         return f"Feedback {self.id}"
 
+
 logger = logging.getLogger(__name__)
+
+
 class EnglandOrWalesState(object):
     def __init__(self, form):
         self._form = form
