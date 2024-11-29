@@ -287,7 +287,7 @@ class SingleCategorySearchForm(forms.Form):
 
         # for Guernsey & Jersey the country comes back as 'Channel Islands', we are using `nhs_ha` key to distinguish between them
         country, nhs_ha = country_from_valid_postcode
-        logger.debug("Country: %s, NHS HA: %s", country, nhs_ha)
+        logger.debug("fefvasefvbsefCountry: %s, NHS HA: %s", country, nhs_ha)
 
         if country == "Northern Ireland":
             return Region.NI

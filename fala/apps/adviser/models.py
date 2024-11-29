@@ -4,6 +4,7 @@ from .regions import Region
 from .laa_laa_paginator import LaaLaaPaginator
 import urllib
 from django.conf import settings
+import logging
 
 
 class SatisfactionFeedback(models.Model):
@@ -15,7 +16,7 @@ class SatisfactionFeedback(models.Model):
     def __str__(self):
         return f"Feedback {self.id}"
 
-
+logger = logging.getLogger(__name__)
 class EnglandOrWalesState(object):
     def __init__(self, form):
         self._form = form
@@ -23,13 +24,18 @@ class EnglandOrWalesState(object):
 
     @property
     def template_name(self):
-        return "results.html"
+        return "adviser/results.html"
 
     def get_queryset(self):
-        return self._data.get("results", None)
+        if isinstance(self._data, list):  # Ensure it is a list before returning
+            return self._data
+        else:
+            logger.error("Unexpected data format: %s", self._data)
+            return []  # Return an empty list if data is not valid
 
     def get_context_data(self):
         pages = LaaLaaPaginator(self._data["count"], 10, 3, self._form.current_page)
+        logger.debug("343434Validating pages: %s", pages)
         current_page = pages.current_page()
         params = {
             "postcode": self._form.cleaned_data["postcode"],
@@ -123,7 +129,7 @@ class OtherJurisdictionState(object):
 
     @property
     def template_name(self):
-        return "other_region.html"
+        return "adviser/other_region.html"
 
     def get_context_data(self):
         region_data = self.REGION_TO_LINK[self._region]

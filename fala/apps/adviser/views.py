@@ -76,18 +76,24 @@ class SingleCategorySearchView(TemplateView):
         category_display_name = CATEGORY_DISPLAY_NAMES.get(category_slug, category_slug.replace("-", " ").title())
 
         form = SingleCategorySearchForm(categories=category_slug, data=request.GET or None)
+
+        # Determine the state and results
         if form.is_valid():
             logger.debug("Form is valid. Determining region.")
             region = form.region  # Now `region` will be correctly determined
-            if region == Region.ENGLAND_OR_WALES:
-                logger.debug("Region is England or Wales.")
-                results = form.search()
+            if region in [Region.ENGLAND_OR_WALES, Region.SCOTLAND]:
+                logger.debug("Region is England or Wales or Scotland.")
+                state = EnglandOrWalesState(form)
             else:
-                logger.warning("Region is outside of England or Wales. Results will be empty.")
-                results = []
+                logger.warning("Region is outside of England or Wales. Using OtherJurisdictionState.")
+                state = OtherJurisdictionState(region, form.cleaned_data["postcode"])
         else:
             logger.error("Form is invalid: %s", form.errors)
-            results = []
+            state = ErrorState(form)
+
+        # Let the state handle the logic for results
+        results = state.get_queryset()
+        template_name = state.template_name
 
         search_url = reverse("single_category_search", kwargs={"category": category_slug})
 
@@ -98,10 +104,12 @@ class SingleCategorySearchView(TemplateView):
             "category_display_name": category_display_name,
             "category_message": category_message,
             "results": results,
+            "data": results,
             "search_url": search_url,
         }
 
-        return render(request, self.template_name, context)
+        return render(request, template_name, context)
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
