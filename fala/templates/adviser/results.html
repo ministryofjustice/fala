@@ -109,6 +109,7 @@
                 <span class="notranslate" translate="no">{{ item.location.postcode }}</span>
             </div>
             <a class="govuk-link govuk-!-display-none-print" class="url" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?{{ item|google_map_params|urlencode }}">
+              <p class="govuk-visually-hidden">{{ item.organisation.name }}</p>
               View on map (opens in new tab)
             </a>
             {% if item.categories|length %}
