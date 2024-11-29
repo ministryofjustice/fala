@@ -2,6 +2,7 @@
 from urllib.parse import urlencode
 from collections import OrderedDict
 import requests
+import logging
 
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
@@ -13,7 +14,7 @@ try:
 except NameError:
     basestring = str
 
-
+logger = logging.getLogger(__name__)
 def get_categories():
     if settings.LAALAA_API_HOST:
         categories = LaalaaProviderCategoriesApiClient.singleton(settings.LAALAA_API_HOST, _).get_categories()
@@ -66,5 +67,6 @@ def find(postcode=None, categories=None, page=1, organisation_types=None, organi
     )
 
     data["results"] = list(map(decode_categories, data.get("results", [])))
+    logger.debug(f"find: processed results type={type(data['results'])}, processed results={data['results'][:3]}")  # Log first 3 processed results
 
     return data

@@ -11,7 +11,7 @@ from django.shortcuts import redirect, render
 from .models import EnglandOrWalesState, ErrorState, OtherJurisdictionState
 from .forms import SingleCategorySearchForm
 from .utils import CATEGORY_MESSAGES, CATEGORY_DISPLAY_NAMES, get_category_display_name, get_category_code_from_slug
-
+import logging
 
 class RobotsTxtView(View):
     def get(self, request):
@@ -51,7 +51,7 @@ class CommonContextMixin:
         )
         return context
 
-
+logger = logging.getLogger(__name__)
 class SingleCategorySearchView(TemplateView):
     template_name = "adviser/single_category_search.html"
 
@@ -77,9 +77,17 @@ class SingleCategorySearchView(TemplateView):
 
         form = SingleCategorySearchForm(categories=category_slug, data=request.GET or None)
         if form.is_valid():
-            results = form.search()
+            logger.debug("Form is valid. Determining region.")
+            region = form.region  # Now `region` will be correctly determined
+            if region == Region.ENGLAND_OR_WALES:
+                logger.debug("Region is England or Wales.")
+                results = form.search()
+            else:
+                logger.warning("Region is outside of England or Wales. Results will be empty.")
+                results = []
         else:
-            results = None
+            logger.error("Form is invalid: %s", form.errors)
+            results = []
 
         search_url = reverse("single_category_search", kwargs={"category": category_slug})
 
