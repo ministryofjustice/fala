@@ -97,7 +97,7 @@ class SingleCategorySearchView(TemplateView):
 
         # Let the state handle the logic for results
         results = state.get_queryset()
-        template_name = state.template_name
+        # template_name = state.template_name
 
         search_url = reverse("single_category_search", kwargs={"category": category_slug})
 

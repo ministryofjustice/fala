@@ -300,7 +300,7 @@ class SingleCategorySearchForm(forms.Form):
             else:
                 return False
 
-        except requests.RequestException as e:
+        except requests.RequestException:
             self.add_error("postcode", _("Error looking up legal advisers. Please try again later."))
             return False
 
@@ -324,7 +324,7 @@ class SingleCategorySearchForm(forms.Form):
                 # block called 'data' within which exists `results`` so data.results cntains the search results
                 results = data.get("results", [])
                 return results
-            except laalaa.LaaLaaError as e:
+            except laalaa.LaaLaaError:
                 self.add_error("postcode", _("Error looking up legal advisers. Please try again later."))
                 return []
         return []
