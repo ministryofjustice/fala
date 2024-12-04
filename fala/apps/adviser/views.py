@@ -124,7 +124,7 @@ class SearchView(CommonContextMixin, ListView):
             return self._data.get("results", None)
 
         def get_context_data(self):
-            # if there is no count, we can assume this is a 404 page scenario
+            # if there is an error in the data, we can assume it is appropriate to show 'Page not found'
             if "error" in self._data:
                 self._alternative_template = "laalaa_404.html"
 
