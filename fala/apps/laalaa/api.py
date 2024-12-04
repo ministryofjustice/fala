@@ -71,10 +71,9 @@ def find(postcode=None, categories=None, page=1, organisation_types=None, organi
     )
 
     # because of the way the current error capture and forms are set up, it is
-    # easier to allow the 404 errors through and treat them separately here by using
-    # the count attribute and returning an empty dictionary.
-    if "count" not in data:
-        return {}
+    # easier to allow the 404 errors through as a valid response and treat them separately.
+    if "error" in data:
+        return data
     else:
         data["results"] = list(map(decode_categories, data.get("results", [])))
         return data
