@@ -195,7 +195,7 @@ class SearchView(CommonContextMixin, ListView):
                     "data": self._data,
                     "params": params,
                     "FEATURE_FLAG_SURVEY_MONKEY": settings.FEATURE_FLAG_SURVEY_MONKEY,
-                    "pagination": pagination,
+                    "pagination": pagination if len(pagination["items"]) > 1 else {},
                 }
 
     class OtherJurisdictionState(object):

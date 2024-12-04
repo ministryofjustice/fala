@@ -1,3 +1,6 @@
+import math
+
+
 class LaaLaaPaginator(object):
     def __init__(self, count, page_size, window_size, current_page):
         self._window_size = window_size
@@ -5,7 +8,7 @@ class LaaLaaPaginator(object):
             self._current_page = 1
         else:
             self._current_page = current_page
-        self._very_last_page = count // page_size + 1
+        self._very_last_page = math.ceil(count / page_size)
 
     @property
     def page_range(self):
