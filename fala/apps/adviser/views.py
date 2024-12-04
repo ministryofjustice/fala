@@ -61,7 +61,7 @@ class SingleCategorySearchView(TemplateView):
     def get(self, request, *args, **kwargs):
         if not settings.FEATURE_FLAG_SINGLE_CATEGORY_SEARCH_FORM:
             return redirect("search")  # Redirect to a main search page if the feature is disabled
-        
+
         category_code = request.GET.get("categories")
 
         if category_code:

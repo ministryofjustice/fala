@@ -2,6 +2,7 @@
 import re
 from django.test import TestCase, Client
 from django.urls import reverse
+from django.conf import settings
 
 
 class SingleCategorySearchViewTests(TestCase):
@@ -13,6 +14,8 @@ class SingleCategorySearchViewTests(TestCase):
         self.welfare_benefits_code = "wb"
         self.clinical_negligence_url = reverse("single_category_search", kwargs={"category": "clinical-negligence"})
         self.welfare_benefits_url = reverse("single_category_search", kwargs={"category": "welfare-benefits"})
+
+        settings.FEATURE_FLAG_SINGLE_CATEGORY_SEARCH_FORM = True
 
     def test_redirects_to_correct_category_url_clinical_negligence(self):
         response = self.client.get(
