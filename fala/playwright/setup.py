@@ -26,7 +26,11 @@ class PlaywrightTestSetup(StaticLiveServerTestCase):
         self.browser.close()
         super().tearDown()
 
-    def visit_results_page(self, postcode, organisation=None, checkbox_labels=None):
+    def visit_results_page(self, **kwargs):
+        postcode = kwargs.get("postcode")
+        organisation = kwargs.get("organisation", None)
+        checkbox_labels = kwargs.get("checkbox_labels", None)
+
         if checkbox_labels is None:
             checkbox_labels = []
         page = self.browser.new_page()
