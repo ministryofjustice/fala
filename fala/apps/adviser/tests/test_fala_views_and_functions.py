@@ -248,3 +248,14 @@ class AccessibilityViewTest(SimpleTestCase):
     def test_shows_new_accessibility_statement(self):
         response = self.client.get(self.url)
         self.assertContains(response, "Accessibility statement for Find a legal advisor")
+
+
+class ErrorPageTest(SimpleTestCase):
+    client = Client()
+    url = reverse("search")
+
+    def test_shows_error_page_for_404(
+        self,
+    ):
+        response = self.client.get(self.url, {"postcode": "SE11", "page": 500})
+        self.assertContains(response, "Page not found")

@@ -26,12 +26,18 @@ class PlaywrightTestSetup(StaticLiveServerTestCase):
         self.browser.close()
         super().tearDown()
 
-    def visit_results_page(self, postcode, checkbox_labels=None):
+    def visit_results_page(self, **kwargs):
+        postcode = kwargs.get("postcode")
+        organisation = kwargs.get("organisation", None)
+        checkbox_labels = kwargs.get("checkbox_labels", None)
+
         if checkbox_labels is None:
             checkbox_labels = []
         page = self.browser.new_page()
         page.goto(f"{self.live_server_url}")
         page.get_by_label("Postcode").fill(postcode)
+        if organisation:
+            page.get_by_label("Name of organisation you are looking for (optional)").fill(organisation)
         for label in checkbox_labels:
             page.get_by_label(label).check()
         page.get_by_role("button", name="Search").click()

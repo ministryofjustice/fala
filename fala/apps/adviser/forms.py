@@ -184,7 +184,7 @@ class AdviserSearchForm(AdviserRootForm):
                 )
                 if "error" in data:
                     self.add_error("postcode", (data["error"]))
-                    return {}
+                    return data
                 return data
             except laalaa.LaaLaaError:
                 self.add_error(
