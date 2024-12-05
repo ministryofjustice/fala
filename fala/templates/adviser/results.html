@@ -23,6 +23,10 @@
     {% include 'adviser/_scotland_warning.html' %}
   {% endif %}
   <div class="govuk-grid-column-two-thirds">
+    {% if data.count >= 1 %}
+      <p class="govuk-body">You can contact any legal adviser on the list but you might need to contact a few to find one near you that can help. Those based further away may be able to help by telephone.</p>
+      <p class="govuk-body">These advisers are contracted by the government and regulated by the Solicitors Regulation Authority.</p>
+    {% endif %}
     <div class="laa-fala__grey-box govuk-!-margin-bottom-6">
       <ul class="govuk-list" role="list">
         {% if form.postcode.value() %}
@@ -105,6 +109,7 @@
                 <span class="notranslate" translate="no">{{ item.location.postcode }}</span>
             </div>
             <a class="govuk-link govuk-!-display-none-print" class="url" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?{{ item|google_map_params|urlencode }}">
+              <span class="govuk-visually-hidden">{{ item.organisation.name }}</span>
               View on map (opens in new tab)
             </a>
             {% if item.categories|length %}

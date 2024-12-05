@@ -76,4 +76,9 @@ def category_selection_list(form):
 
 @library.filter
 def form_categories(categories):
-    return [{"value": value, "text": text, "id": f"id_categories_{text}"} for value, text in categories.field.choices]
+    processed_categories = []
+    for value, text in categories.field.choices:
+        if text == "Claims Against Public Authorities":
+            text = "Claims against public authorities"
+        processed_categories.append({"value": value, "text": text, "id": f"id_categories_{text}"})
+    return processed_categories
