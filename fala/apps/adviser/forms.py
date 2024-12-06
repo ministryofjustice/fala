@@ -10,6 +10,7 @@ import laalaa.api as laalaa
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
+from fala.apps.adviser.utils import validate_postcode_and_return_country
 
 
 SEARCH_TYPE_CHOICES = [("location", _("Location")), ("organisation", _("Organisation"))]
@@ -132,45 +133,8 @@ class AdviserSearchForm(AdviserRootForm):
         return self.cleaned_data.get("page", 1)
 
     def validate_postcode_and_return_country(self, postcode):
-        try:
-            # Check if the postcode is a valid string before proceeding
-            if not isinstance(postcode, str) or not postcode.strip():
-                return False
-
-            # Retry set-up as per LAALAA API
-            session = requests.Session()
-            retry_strategy = Retry(total=5, backoff_factor=0.1)
-            adapter = HTTPAdapter(max_retries=retry_strategy)
-            session.mount("https://", adapter)
-
-            # Call postcodes.io API using `api.postcodes.io/postcodes?q=` endpoint
-            # This one let's you use partial postcodes and returns the country in the `result`
-            url = settings.POSTCODE_IO_URL + f"{postcode}"
-            response = session.get(url, timeout=5)
-
-            # Check if response was successful
-            if response.status_code != 200:
-                return False
-
-            # If the 'result' key is Null, the postcode is invalid
-            data = response.json()
-            if not data.get("result"):
-                return False
-
-            first_result_in_list = data["result"][0]
-            country = first_result_in_list.get("country")
-            nhs_ha = first_result_in_list.get("nhs_ha")
-
-            if country and nhs_ha:
-                return country, nhs_ha
-            else:
-                return False
-
-        except requests.RequestException:
-            # If there is an exception from postcode.io, tell the user there was an error, but don't stop the usage of the site.
-            self.add_error("postcode", _("Error looking up legal advisers. Please try again later."))
-            return False
-
+        return validate_postcode_and_return_country(postcode, form=self)
+    
     def search(self):
         if self.is_valid():
             try:
@@ -232,38 +196,7 @@ class SingleCategorySearchForm(AdviserRootForm):
         return self.cleaned_data.get("page", 1)
 
     def validate_postcode_and_return_country(self, postcode):
-        try:
-            if not isinstance(postcode, str) or not postcode.strip():
-                return False
-
-            session = requests.Session()
-            retry_strategy = Retry(total=5, backoff_factor=0.1)
-            adapter = HTTPAdapter(max_retries=retry_strategy)
-            session.mount("https://", adapter)
-
-            url = settings.POSTCODE_IO_URL + f"{postcode}"
-            response = session.get(url, timeout=5)
-
-            if response.status_code != 200:
-                return False
-
-            data = response.json()
-
-            if not data.get("result"):
-                return False
-
-            first_result_in_list = data["result"][0]
-            country = first_result_in_list.get("country")
-            nhs_ha = first_result_in_list.get("nhs_ha")
-
-            if country and nhs_ha:
-                return country, nhs_ha
-            else:
-                return False
-
-        except requests.RequestException:
-            self.add_error("postcode", _("Error looking up legal advisers. Please try again later."))
-            return False
+        return validate_postcode_and_return_country(postcode, form=self)
 
     def search(self):
         if self.is_valid():
