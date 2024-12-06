@@ -194,25 +194,22 @@ class AdviserSearchForm(AdviserRootForm):
             return {}
 
 
-class SingleCategorySearchForm(forms.Form):
-    postcode = CapitalisedPostcodeField(
-        label=_("Postcode"),
-        max_length=30,
-        required=True,  # Postcode is required in this form
-        widget=FalaTextInput(attrs={"class": "govuk-input govuk-!-width-two-thirds"}),
-    )
+class SingleCategorySearchForm(AdviserRootForm):
+    page = forms.IntegerField(required=False, widget=forms.HiddenInput())
 
     def __init__(self, categories=None, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        # Ensure categories is a list and assign it to self.categories
+        kwargs.setdefault("label_suffix", "")
+        super(AdviserRootForm, self).__init__(*args, **kwargs)
         self.categories = categories if categories is not None else []
-        self._region = None
-        self._country_from_valid_postcode = None
 
     def clean(self):
-        cleaned_data = super().clean()
-        postcode = cleaned_data.get("postcode")
-        categories = self.data.get("category")
+        data = self.cleaned_data
+        postcode = data.get("postcode")
+        categories = self.data.get("categories")
+
+        if not postcode:
+            self.add_error("postcode", _("Enter a postcode"))
+            return data
 
         # Validate postcode and set `_country_from_valid_postcode`
         if postcode:
@@ -228,12 +225,11 @@ class SingleCategorySearchForm(forms.Form):
         else:
             self.categories = [categories]
 
-        return cleaned_data
+        return data
 
     @property
     def current_page(self):
-        page = self.cleaned_data.get("page", 1)
-        return page
+        return self.cleaned_data.get("page", 1)
 
     def validate_postcode_and_return_country(self, postcode):
         try:
@@ -272,26 +268,21 @@ class SingleCategorySearchForm(forms.Form):
     def search(self):
         if self.is_valid():
             try:
-                postcode = self.cleaned_data.get("postcode")
-                categories = self.categories
-                page = self.cleaned_data.get("page", 1)
-
                 data = laalaa.find(
-                    postcode=postcode,
-                    categories=categories,
-                    page=page,
+                    postcode=self.cleaned_data.get("postcode"),
+                    categories=self.cleaned_data.get("categories"),
+                    page=self.cleaned_data.get("page", 1),
+                    organisation_types=self.cleaned_data.get("type"),
+                    organisation_name=self.cleaned_data.get("name"),
                 )
-
                 if "error" in data:
                     self.add_error("postcode", data["error"])
                     return {}
-
                 return data
-
             except laalaa.LaaLaaError:
                 self.add_error(
                     "postcode", "%s %s" % (_("Error looking up legal advisers."), _("Please try again later."))
                 )
                 return {}
-
-        return {}
+        else:
+            return {}

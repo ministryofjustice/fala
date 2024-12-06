@@ -6,7 +6,7 @@ from django.http import HttpResponse
 import os
 from .forms import AdviserSearchForm, AdviserRootForm, SingleCategorySearchForm
 from .regions import Region
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
 from .models import EnglandOrWalesState, ErrorState, OtherJurisdictionState
 from .utils import CATEGORY_MESSAGES, CATEGORY_DISPLAY_NAMES, get_category_display_name, get_category_code_from_slug
 import logging
@@ -53,59 +53,64 @@ class CommonContextMixin:
         return context
 
 
-class SingleCategorySearchView(TemplateView):
+class CategoryMixin:
+    def setup_category(self, request, *args, **kwargs):
+        category_code = request.GET.get("categories")
+
+        if not category_code:
+            self.category_slug = kwargs.get("category")
+            if not self.category_slug:  # Redirect if no category specified
+                return redirect("search")
+            # if there is a slug, then retrieve the code based on the slug.
+            category_code = get_category_code_from_slug(self.category_slug)
+            if not category_code:
+                return redirect("search")
+        else:
+            self.category_slug = get_category_display_name(category_code)
+            if self.category_slug:
+                return redirect("single_category_search", category=self.category_slug)
+            else:
+                return redirect("search")
+        return category_code
+
+
+class SingleCategorySearchView(CommonContextMixin, CategoryMixin, TemplateView):
     template_name = "adviser/single_category_search.html"
 
     def get(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
+
         if not settings.FEATURE_FLAG_SINGLE_CATEGORY_SEARCH_FORM:
-            return redirect("search")  # Redirect to a main search page if the feature is disabled
-
-        category_code = request.GET.get("categories")
-
-        if category_code:
-            category_slug = get_category_display_name(category_code)
-            if category_slug:
-                return redirect("single_category_search", category=category_slug)
-            else:
-                return redirect("search")
-
-        category_slug = kwargs.get("category")
-        if not category_slug:
             return redirect("search")
 
-        if not category_code or category_code == "None":
-            category_code = get_category_code_from_slug(category_slug)
+        result = self.setup_category(request, *args, **kwargs)
+        if isinstance(result, HttpResponse):
+            return result
 
-        category_message = CATEGORY_MESSAGES.get(category_slug, "")
-        category_display_name = CATEGORY_DISPLAY_NAMES.get(category_slug, category_slug.replace("-", " ").title())
+        self.category_code = result
 
-        form = SingleCategorySearchForm(categories=category_slug, data=request.GET or None)
-        if form.is_valid():
-            results = form.search()
-            logger.info(f"0909090909Single category search results: {results}")
-            # results includes a section called organisation which has a name attribute
-            # this is not being accessed by the template
-        else:
-            results = None
+        category_message = CATEGORY_MESSAGES.get(self.category_slug, "")
+        category_display_name = CATEGORY_DISPLAY_NAMES.get(
+            self.category_slug, self.category_slug.replace("-", " ").title()
+        )
 
-        search_url = reverse("single_category_search", kwargs={"category": category_slug})
+        form = SingleCategorySearchForm(initial={"categories": [self.category_code]}, data=request.GET or None)
 
-        context = {
-            "form": form,
-            "category_slug": category_slug,
-            "category_code": category_code,
-            "category_display_name": category_display_name,
-            "category_message": category_message,
-            "results": results,
-            "search_url": search_url,
-        }
+        search_url = reverse("search") + f"?categories={self.category_code}"
 
-        return render(request, self.template_name, context)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["search_url"] = reverse("single_category_search", kwargs={"category": kwargs.get("category_slug")})
-        return context
+        context.update(
+            {
+                "form": form,
+                "data": {},
+                "errorList": [],
+                "category_slug": self.category_slug,
+                "category_code": self.category_code,
+                "category_display_name": category_display_name,
+                "category_message": category_message,
+                "search_url": search_url,
+            }
+        )
+        return self.render_to_response(context)
 
 
 class AdviserView(CommonContextMixin, TemplateView):
