@@ -1,26 +1,8 @@
 # utils.py
 
-CATEGORY_TRANSLATIONS = {
-    "aap": "claims-against-public-authorities",
-    "med": "clinical-negligence",
-    "com": "community-care",
-    "crm": "crime",
-    "deb": "debt",
-    "disc": "discrimination",
-    "edu": "education",
-    "mat": "family",
-    "fmed": "family-mediation",
-    "hou": "housing",
-    "hlpas": "hlpas",
-    "immas": "immigration-asylum",
-    "mhe": "mental-health",
-    "mosl": "modern-slavery",
-    "pl": "prison-law",
-    "pub": "public-law",
-    "wb": "welfare-benefits",
-}
+from fala.apps.constants.categories import CATEGORY_TRANSLATIONS
 
-SLUG_TO_CODE = {v: k for k, v in CATEGORY_TRANSLATIONS.items()}
+SLUG_TO_CODE = {display_name: category_code for category_code, display_name in CATEGORY_TRANSLATIONS.items()}
 
 
 def get_category_code_from_slug(slug):

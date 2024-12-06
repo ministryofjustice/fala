@@ -1,15 +1,13 @@
 # coding=utf-8
 from django.conf import settings
 from django.urls import resolve, reverse
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, View
 from django.http import HttpResponse
 import os
-from django.views import View
-from .forms import AdviserSearchForm, AdviserRootForm
+from .forms import AdviserSearchForm, AdviserRootForm, SingleCategorySearchForm
 from .regions import Region
 from django.shortcuts import redirect, render
 from .models import EnglandOrWalesState, ErrorState, OtherJurisdictionState
-from .forms import SingleCategorySearchForm
 from .utils import CATEGORY_MESSAGES, CATEGORY_DISPLAY_NAMES, get_category_display_name, get_category_code_from_slug
 import logging
 
