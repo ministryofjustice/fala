@@ -3,14 +3,9 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
 from django.utils.safestring import mark_safe
-from django.conf import settings
 from .regions import Region
-
-import laalaa.api as laalaa
-import requests
-from requests.adapters import HTTPAdapter
-from urllib3.util.retry import Retry
 from fala.apps.adviser.utils import validate_postcode_and_return_country
+import laalaa.api as laalaa
 
 
 SEARCH_TYPE_CHOICES = [("location", _("Location")), ("organisation", _("Organisation"))]
@@ -64,6 +59,25 @@ class AdviserRootForm(forms.Form):
         widget=forms.CheckboxSelectMultiple(),
         required=False,
     )
+
+
+# Shared method to handle searches
+def perform_search(form, postcode, categories, page):
+    try:
+        data = laalaa.find(
+            postcode=postcode,
+            categories=categories,
+            page=page,
+            organisation_types=form.cleaned_data.get("type"),
+            organisation_name=form.cleaned_data.get("name"),
+        )
+        if "error" in data:
+            form.add_error("postcode", data["error"])
+            return {}
+        return data
+    except laalaa.LaaLaaError:
+        form.add_error("postcode", "%s %s" % (_("Error looking up legal advisers."), _("Please try again later.")))
+        return {}
 
 
 class AdviserSearchForm(AdviserRootForm):
@@ -134,28 +148,14 @@ class AdviserSearchForm(AdviserRootForm):
 
     def validate_postcode_and_return_country(self, postcode):
         return validate_postcode_and_return_country(postcode, form=self)
-    
+
     def search(self):
-        if self.is_valid():
-            try:
-                data = laalaa.find(
-                    postcode=self.cleaned_data.get("postcode"),
-                    categories=self.cleaned_data.get("categories"),
-                    page=self.cleaned_data.get("page", 1),
-                    organisation_types=self.cleaned_data.get("type"),
-                    organisation_name=self.cleaned_data.get("name"),
-                )
-                if "error" in data:
-                    self.add_error("postcode", (data["error"]))
-                    return {}
-                return data
-            except laalaa.LaaLaaError:
-                self.add_error(
-                    "postcode", "%s %s" % (_("Error looking up legal advisers."), _("Please try again later."))
-                )
-                return {}
-        else:
-            return {}
+        return perform_search(
+            self,
+            self.cleaned_data.get("postcode"),
+            self.cleaned_data.get("categories"),
+            self.cleaned_data.get("page", 1),
+        )
 
 
 class SingleCategorySearchForm(AdviserRootForm):
@@ -199,23 +199,9 @@ class SingleCategorySearchForm(AdviserRootForm):
         return validate_postcode_and_return_country(postcode, form=self)
 
     def search(self):
-        if self.is_valid():
-            try:
-                data = laalaa.find(
-                    postcode=self.cleaned_data.get("postcode"),
-                    categories=self.cleaned_data.get("categories"),
-                    page=self.cleaned_data.get("page", 1),
-                    organisation_types=self.cleaned_data.get("type"),
-                    organisation_name=self.cleaned_data.get("name"),
-                )
-                if "error" in data:
-                    self.add_error("postcode", data["error"])
-                    return {}
-                return data
-            except laalaa.LaaLaaError:
-                self.add_error(
-                    "postcode", "%s %s" % (_("Error looking up legal advisers."), _("Please try again later."))
-                )
-                return {}
-        else:
-            return {}
+        return perform_search(
+            self,
+            self.cleaned_data.get("postcode"),
+            self.categories,
+            self.cleaned_data.get("page", 1),
+        )
