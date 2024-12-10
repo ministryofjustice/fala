@@ -47,7 +47,7 @@ class SingleCategorySearchViewTests(TestCase):
             content,
             re.compile(r"Legal aid for advice about clinical negligence is usually only available", re.IGNORECASE),
         )
-        self.assertRegex(content, re.compile(r'<input type="hidden" name="category" value="med">', re.IGNORECASE))
+        self.assertRegex(content, re.compile(r'<input type="hidden" name="categories" value="med">', re.IGNORECASE))
 
     def test_displays_search_form_welfare_benefits(self):
         response = self.client.get(self.welfare_benefits_url)
@@ -62,7 +62,7 @@ class SingleCategorySearchViewTests(TestCase):
                 re.IGNORECASE,
             ),
         )
-        self.assertRegex(content, re.compile(r'<input type="hidden" name="category" value="wb">', re.IGNORECASE))
+        self.assertRegex(content, re.compile(r'<input type="hidden" name="categories" value="wb">', re.IGNORECASE))
         self.assertRegex(
             content,
             re.compile(

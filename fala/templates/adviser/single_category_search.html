@@ -35,12 +35,19 @@
     {% if category_message %}
       <p class="govuk-body">{{ category_message | linebreaks }}</p>
     {% endif %}
+    <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-1">Next steps</p>
+    <ol class="govuk-list govuk-list--number">
+      <li>We'll show you a list of legal advisers.</li>
+      <li>When you contact the adviser they'll ask about your problem and finances
+        to work out if you can get legal aid.</li>
+    </ol>
   </div>
 
   {% block search_form %}
     <div class="govuk-grid-column-two-thirds">
       <form action="{{ search_url }}" method="get" id="fala_questions">
-        <input type="hidden" name="category" value="{{ category_code }}">
+        <input type="hidden" name="categories" value="{{ category_code }}">
+        <input type="hidden" name="single_category_search_redirect" value="true">
         {% if 'postcode' in form.errors or form.errors['__all__'] %}
           {{ govukInput({
             'label': {'text': "What is your postcode?", 'classes': 'govuk-label--s'},

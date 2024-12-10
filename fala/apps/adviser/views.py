@@ -168,6 +168,7 @@ class SearchView(CommonContextMixin, ListView, EnglandOrWalesState, OtherJurisdi
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context["is_single_category_search"] = self.request.GET.get("is_single_category_search", False)
 
         context.update(self.state.get_context_data())
         return context
