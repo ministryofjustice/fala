@@ -168,7 +168,7 @@ class SearchView(CommonContextMixin, ListView, EnglandOrWalesState, OtherJurisdi
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["single_category_search_redirect"] = self.request.GET.get("single_category_search_redirect", False)
+        context["tailored_results"] = self.request.GET.get("tailored_results", False)
 
         context.update(self.state.get_context_data())
         return context

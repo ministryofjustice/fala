@@ -27,7 +27,7 @@
       <p class="govuk-body">You can contact any legal adviser on the list but you might need to contact a few to find one near you that can help. Those based further away may be able to help by telephone.</p>
       <p class="govuk-body">These advisers are contracted by the government and regulated by the Solicitors Regulation Authority.</p>
     {% endif %}
-    {% if not single_category_search_redirect %}
+    {% if not tailored_results %}
       <div class="laa-fala__grey-box govuk-!-margin-bottom-6">
         <ul class="govuk-list" role="list">
           {% if form.postcode.value() %}
