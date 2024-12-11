@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.http import Http404
 from .regions import Region
 from .laa_laa_paginator import LaaLaaPaginator
 import urllib
@@ -29,69 +30,72 @@ class EnglandOrWalesState(object):
         return self._data.get("results", None)
 
     def get_context_data(self):
-        pages = LaaLaaPaginator(self._data["count"], 10, 3, self._form.current_page)
-        current_page = pages.current_page()
-        params = {
-            "postcode": self._form.cleaned_data["postcode"],
-            "name": self._form.cleaned_data["name"],
-        }
-        categories = self._form.cleaned_data["categories"]
+        if "Invalid page" in self._data.get("error", []):
+            raise Http404("Page not found")
+        else:
+            pages = LaaLaaPaginator(self._data["count"], 10, 3, self._form.current_page)
+            current_page = pages.current_page()
+            params = {
+                "postcode": self._form.cleaned_data["postcode"],
+                "name": self._form.cleaned_data["name"],
+            }
+            categories = self._form.cleaned_data["categories"]
 
-        # create list of tuples which can be passed to urlencode for pagination links
-        category_tuples = [("categories", c) for c in categories]
+            # create list of tuples which can be passed to urlencode for pagination links
+            category_tuples = [("categories", c) for c in categories]
 
-        def item_for(page_num):
-            if len(categories) > 0:
-                page_params = {"page": page_num}
-                href = (
-                    "/search?"
-                    + urllib.parse.urlencode({**page_params, **params})
-                    + "&"
-                    + urllib.parse.urlencode(category_tuples)
-                )
-            else:
-                page_params = {"page": page_num}
-                href = "/search?" + urllib.parse.urlencode({**page_params, **params})
+            def item_for(page_num):
+                if len(categories) > 0:
+                    page_params = {"page": page_num}
+                    href = (
+                        "/search?"
+                        + urllib.parse.urlencode({**page_params, **params})
+                        + "&"
+                        + urllib.parse.urlencode(category_tuples)
+                    )
+                else:
+                    page_params = {"page": page_num}
+                    href = "/search?" + urllib.parse.urlencode({**page_params, **params})
 
-            return {"number": page_num, "current": self._form.current_page == page_num, "href": href}
+                return {"number": page_num, "current": self._form.current_page == page_num, "href": href}
 
-        pagination = {"items": [item_for(page_num) for page_num in pages.page_range]}
+            pagination = {"items": [item_for(page_num) for page_num in pages.page_range]}
 
-        if current_page.has_previous():
-            if len(categories) > 0:
-                page_params = {"page": current_page.previous_page_number()}
-                prev_link = (
-                    "/search?"
-                    + urllib.parse.urlencode({**page_params, **params})
-                    + "&"
-                    + urllib.parse.urlencode(category_tuples)
-                )
-            else:
-                page_params = {"page": current_page.previous_page_number()}
-                prev_link = "/search?" + urllib.parse.urlencode({**page_params, **params})
-            pagination["previous"] = {"href": prev_link}
+            if current_page.has_previous():
+                if len(categories) > 0:
+                    page_params = {"page": current_page.previous_page_number()}
+                    prev_link = (
+                        "/search?"
+                        + urllib.parse.urlencode({**page_params, **params})
+                        + "&"
+                        + urllib.parse.urlencode(category_tuples)
+                    )
+                else:
+                    page_params = {"page": current_page.previous_page_number()}
+                    prev_link = "/search?" + urllib.parse.urlencode({**page_params, **params})
+                pagination["previous"] = {"href": prev_link}
 
-        if current_page.has_next():
-            if len(categories) > 0:
-                page_params = {"page": current_page.next_page_number()}
-                href = (
-                    "/search?"
-                    + urllib.parse.urlencode({**page_params, **params})
-                    + "&"
-                    + urllib.parse.urlencode(category_tuples)
-                )
-            else:
-                page_params = {"page": current_page.next_page_number()}
-                href = "/search?" + urllib.parse.urlencode({**page_params, **params})
-            pagination["next"] = {"href": href}
+            if current_page.has_next():
+                if len(categories) > 0:
+                    page_params = {"page": current_page.next_page_number()}
+                    href = (
+                        "/search?"
+                        + urllib.parse.urlencode({**page_params, **params})
+                        + "&"
+                        + urllib.parse.urlencode(category_tuples)
+                    )
+                else:
+                    page_params = {"page": current_page.next_page_number()}
+                    href = "/search?" + urllib.parse.urlencode({**page_params, **params})
+                pagination["next"] = {"href": href}
 
-        return {
-            "form": self._form,
-            "data": self._data,
-            "params": params,
-            "FEATURE_FLAG_SURVEY_MONKEY": settings.FEATURE_FLAG_SURVEY_MONKEY,
-            "pagination": pagination,
-        }
+            return {
+                "form": self._form,
+                "data": self._data,
+                "params": params,
+                "FEATURE_FLAG_SURVEY_MONKEY": settings.FEATURE_FLAG_SURVEY_MONKEY,
+                "pagination": pagination if len(pagination["items"]) > 1 else {},
+            }
 
 
 class OtherJurisdictionState(object):

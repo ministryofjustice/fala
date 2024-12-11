@@ -2,7 +2,7 @@
 from django.conf import settings
 from django.urls import resolve, reverse
 from django.views.generic import TemplateView, ListView, View
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse
 import os
 from .forms import AdviserSearchForm, AdviserRootForm, SingleCategorySearchForm
 from .regions import Region
