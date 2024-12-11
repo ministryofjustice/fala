@@ -58,6 +58,7 @@ feature_flags:
   survey_monkey: "disabled"
   block_robots: "enabled"
   maintenance_mode: "disabled"
+  single_category_search: "disabled"
 
 laalaa_api:
   host: "https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk"

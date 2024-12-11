@@ -1,0 +1,77 @@
+{% extends 'adviser/adviser_base.html' %}
+
+{% block pageTitle %}
+  {% if results %}
+    Search results
+  {% else %}
+    Find a Legal Aid Adviser or Family Mediator
+  {% endif %}
+{% endblock %}
+
+{% import "macros/element.html" as Element %}
+{% import "macros/forms.html" as Form %}
+
+{%- from 'govuk_frontend_jinja/components/error-summary/macro.html' import govukErrorSummary %}
+{%- from 'govuk_frontend_jinja/components/checkboxes/macro.html' import govukCheckboxes %}
+{%- from "govuk_frontend_jinja/components/input/macro.html" import govukInput %}
+
+{% block content %}
+  <div class="govuk-grid-column-two-thirds">
+    <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
+    {% if form.errors %}
+      {{ govukErrorSummary({
+        "titleText": "There is a problem",
+        "errorList": errorList
+      }) }}
+    {% endif %}
+    <h1 class="govuk-heading-xl"> Find a legal aid adviser for 
+      {% if category_slug == 'hlpas' %}
+        {{ category_display_name }}
+      {% else %}
+        {{ category_display_name | lower }}
+      {% endif %}
+    </h1>
+    <p class="govuk-body">Search for official legal aid advisers in England and Wales.</p>
+    {% if category_message %}
+      <p class="govuk-body">{{ category_message | linebreaks }}</p>
+    {% endif %}
+    <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-1">Next steps</p>
+    <ol class="govuk-list govuk-list--number">
+      <li>We'll show you a list of legal advisers.</li>
+      <li>When you contact the adviser they'll ask about your problem and finances
+        to work out if you can get legal aid.</li>
+    </ol>
+  </div>
+
+  {% block search_form %}
+    <div class="govuk-grid-column-two-thirds">
+      <form action="{{ search_url }}" method="get" id="fala_questions">
+        <input type="hidden" name="categories" value="{{ category_code }}">
+        <input type="hidden" name="tailored_results" value="true">
+        {% if 'postcode' in form.errors or form.errors['__all__'] %}
+          {{ govukInput({
+            'label': {'text': "What is your postcode?", 'classes': 'govuk-label--s'},
+            'value': form.postcode.value(),
+            'errorMessage': {'text': form.errors['postcode'][0]},
+            'hint': {'text': "For example, SW1H 9AJ"},
+            'attributes': {'maxLength': 30},
+            'id': 'id_postcode',
+            'classes': 'govuk-input--width-10',
+            'name': "postcode"
+          }) }}
+        {% else %}
+          {{ govukInput({
+            'label': {'text': "What is your postcode?", 'classes': 'govuk-label--s'},
+            'value': form.postcode.value(),
+            'hint': {'text': "For example, SW1H 9AJ"},
+            'attributes': {'maxLength': 30},
+            'id': 'id_postcode',
+            'classes': 'govuk-input--width-10',
+            'name': "postcode"
+          }) }}
+        {% endif %}
+        {{ govukButton({'text': "Search", 'type': "submit", 'classes': "govuk-!-margin-bottom-2"}) }}
+      </form>
+    </div>
+  {% endblock %}
+{% endblock %}

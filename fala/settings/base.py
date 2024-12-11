@@ -234,5 +234,9 @@ FEATURE_FLAG_SURVEY_MONKEY = os.environ.get("FEATURE_FLAG_SURVEY_MONKEY", "").lo
 
 FEATURE_FLAG_MAINTENANCE_MODE = os.environ.get("FEATURE_FLAG_MAINTENANCE_MODE", "").lower() == "enabled"
 
+FEATURE_FLAG_SINGLE_CATEGORY_SEARCH_FORM = (
+    os.environ.get("FEATURE_FLAG_SINGLE_CATEGORY_SEARCH_FORM", "").lower() == "enabled"
+)
+
 BLOCK_ROBOTS = os.environ.get("BLOCK_ROBOTS", "").lower() == "enabled"
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
