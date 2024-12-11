@@ -156,3 +156,27 @@ class ErrorState(object):
             errorList.append(item)
 
         return {"form": self._form, "data": {}, "errorList": errorList}
+
+
+class SingleSearchErrorState(object):
+    def __init__(self, form):
+        self._form = form
+
+    @property
+    def template_name(self):
+        return "single_category_search.html"
+
+    def get_queryset(self):
+        return []
+
+    def get_context_data(self):
+        errorList = []
+        for field, error in self._form.errors.items():
+            # choose the first field is the error in form-wide
+            if field == "__all__":
+                item = {"text": error[0], "href": "#id_postcode"}
+            else:
+                item = {"text": error[0], "href": f"#id_{field}"}
+            errorList.append(item)
+
+        return {"form": self._form, "data": {}, "errorList": errorList}

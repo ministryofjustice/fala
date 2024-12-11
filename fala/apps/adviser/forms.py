@@ -192,6 +192,31 @@ class SingleCategorySearchForm(AdviserRootForm):
         return data
 
     @property
+    def region(self):
+        country_from_valid_postcode = getattr(self, "_country_from_valid_postcode", None)
+
+        if not country_from_valid_postcode:
+            return getattr(self, "_region", None)
+
+        country, nhs_ha = country_from_valid_postcode
+
+        if country == "Northern Ireland":
+            return Region.NI
+        elif country == "Isle of Man":
+            return Region.IOM
+        elif country == "Channel Islands" and nhs_ha == "Jersey Health Authority":
+            return Region.JERSEY
+        elif country == "Channel Islands" and nhs_ha == "Guernsey Health Authority":
+            return Region.GUERNSEY
+        elif country == "Scotland":
+            return Region.SCOTLAND
+        elif country == "England" or country == "Wales":
+            return Region.ENGLAND_OR_WALES
+        else:
+            self.add_error("postcode", _("This service is only available for England and Wales"))
+            return None
+
+    @property
     def current_page(self):
         return self.cleaned_data.get("page", 1)
 
