@@ -73,7 +73,6 @@ def perform_search(form, postcode, categories, page):
         )
         if "error" in data:
             form.add_error("postcode", data["error"])
-            return {}
         return data
     except laalaa.LaaLaaError:
         form.add_error("postcode", "%s %s" % (_("Error looking up legal advisers."), _("Please try again later.")))
