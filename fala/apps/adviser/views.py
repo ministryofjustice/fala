@@ -175,8 +175,11 @@ class SearchView(CommonContextMixin, CategoryMixin, ListView, EnglandOrWalesStat
                 category_code = self.request.GET.get("categories", "")
                 search_url = reverse("search")
 
+                # this is so that we can get correct hlpas display name onto SingleSearchErrorState view
+                category_slug = self.request.GET.get("categories")
+
                 self.state = SingleSearchErrorState(
-                    form, category_display_name, category_message, category_code, search_url
+                    form, category_display_name, category_message, category_code, search_url, category_slug
                 )
             else:
                 self.state = ErrorState(form)
