@@ -159,8 +159,10 @@ class ErrorState(object):
 
 
 class SingleSearchErrorState(object):
-    def __init__(self, form):
+    def __init__(self, form, category_display_name, category_message):
         self._form = form
+        self._category_display_name = category_display_name
+        self.category_message = category_message
 
     @property
     def template_name(self):
@@ -179,4 +181,10 @@ class SingleSearchErrorState(object):
                 item = {"text": error[0], "href": f"#id_{field}"}
             errorList.append(item)
 
-        return {"form": self._form, "data": {}, "errorList": errorList}
+        return {
+            "form": self._form,
+            "data": {},
+            "errorList": errorList,
+            "category_display_name": self._category_display_name,
+            "category_message": self.category_message,
+        }

@@ -145,7 +145,7 @@ class CookiesView(CommonContextMixin, TemplateView):
     template_name = "adviser/cookies.html"
 
 
-class SearchView(CommonContextMixin, ListView, EnglandOrWalesState, OtherJurisdictionState):
+class SearchView(CommonContextMixin, CategoryMixin, ListView, EnglandOrWalesState, OtherJurisdictionState):
     def get(self, request, *args, **kwargs):
         self.tailored_results = self.request.GET.get("tailored_results", False)
 
@@ -164,7 +164,13 @@ class SearchView(CommonContextMixin, ListView, EnglandOrWalesState, OtherJurisdi
                 self.state = OtherJurisdictionState(region, form.cleaned_data["postcode"])
         else:
             if self.tailored_results:
-                self.state = SingleSearchErrorState(form)
+                # Use CategoryMixin to access category information
+                self.setup_category(request, *args, **kwargs)
+                category_display_name = CATEGORY_DISPLAY_NAMES.get(
+                    self.category_slug, self.category_slug.replace("-", " ").title()
+                )
+                category_message = CATEGORY_MESSAGES.get(self.category_slug, "")
+                self.state = SingleSearchErrorState(form, category_display_name, category_message)
             else:
                 self.state = ErrorState(form)
 
