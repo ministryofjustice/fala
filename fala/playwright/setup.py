@@ -1,7 +1,13 @@
 import os
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from playwright.sync_api import sync_playwright
-from fala.apps.adviser.tests.page_objects import ResultsPage, OtherRegionPage, SearchPage, CookiesPage
+from fala.apps.adviser.tests.page_objects import (
+    ResultsPage,
+    OtherRegionPage,
+    SearchPage,
+    CookiesPage,
+    SingleCategorySearchPage,
+)
 
 
 class PlaywrightTestSetup(StaticLiveServerTestCase):
@@ -68,6 +74,11 @@ class PlaywrightTestSetup(StaticLiveServerTestCase):
         page = self.browser.new_page()
         page.goto(f"{self.live_server_url}")
         return SearchPage(page)
+
+    def visit_single_category_search_page(self, url_params):
+        page = self.browser.new_page()
+        page.goto(f"{self.live_server_url}/single-category-search{url_params}")
+        return SingleCategorySearchPage(page)
 
     def visit_cookies_page_from_footer(self):
         page = self.browser.new_page()

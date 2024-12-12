@@ -75,5 +75,19 @@ class SearchPage(FalaPage):
         self._page.locator("#searchButton").click()
 
 
+class SingleCategorySearchPage(FalaPage):
+    @property
+    def postcode_input_field(self):
+        return self._page.get_by_label("Postcode")
+
+    @property
+    def search_button(self):
+        return self.item_from_text("Search")
+
+    def search(self, postcode):
+        self._page.locator("#id_postcode").fill(postcode)
+        self._page.locator("#searchButton").click()
+
+
 class CookiesPage(FalaPage):
     pass
