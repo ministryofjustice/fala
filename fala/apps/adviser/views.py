@@ -164,13 +164,20 @@ class SearchView(CommonContextMixin, CategoryMixin, ListView, EnglandOrWalesStat
                 self.state = OtherJurisdictionState(region, form.cleaned_data["postcode"])
         else:
             if self.tailored_results:
-                # Use CategoryMixin to access category information
+                # using CategoryMixin to access category_display_name & category_message, so we show this on SingleSearchErrorState view
                 self.setup_category(request, *args, **kwargs)
                 category_display_name = CATEGORY_DISPLAY_NAMES.get(
                     self.category_slug, self.category_slug.replace("-", " ").title()
                 )
                 category_message = CATEGORY_MESSAGES.get(self.category_slug, "")
-                self.state = SingleSearchErrorState(form, category_display_name, category_message)
+
+                # this is so we can use category_code & search_url, when conducting a search from SingleSearchErrorState view
+                category_code = self.request.GET.get("categories", "")
+                search_url = reverse("search")
+
+                self.state = SingleSearchErrorState(
+                    form, category_display_name, category_message, category_code, search_url
+                )
             else:
                 self.state = ErrorState(form)
 
