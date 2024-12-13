@@ -8,7 +8,7 @@ from .forms import AdviserSearchForm, AdviserRootForm, SingleCategorySearchForm
 from .regions import Region
 from django.shortcuts import redirect
 from .models import EnglandOrWalesState, OtherJurisdictionState, ErrorState, SingleSearchErrorState
-from .utils import CATEGORY_DISPLAY_NAMES, get_category_display_name, get_category_code_from_slug
+from fala.apps.constants.category_manager import CategoryManager
 from fala.apps.constants.category_messages import CATEGORY_MESSAGES
 
 
@@ -60,11 +60,11 @@ class CategoryMixin:
             if not self.category_slug:  # Redirect if no category specified
                 return redirect("search")
             # if there is a slug, then retrieve the code based on the slug.
-            category_code = get_category_code_from_slug(self.category_slug)
+            category_code = CategoryManager.category_code_from(self.category_slug)
             if not category_code:
                 return redirect("search")
         else:
-            self.category_slug = get_category_display_name(category_code)
+            self.category_slug = CategoryManager.slug_from(category_code)
             if self.category_slug:
                 return redirect("single_category_search", category=self.category_slug)
             else:
@@ -88,9 +88,7 @@ class SingleCategorySearchView(CommonContextMixin, CategoryMixin, TemplateView):
         self.category_code = result
 
         category_message = CATEGORY_MESSAGES.get(self.category_slug, "")
-        category_display_name = CATEGORY_DISPLAY_NAMES.get(
-            self.category_slug, self.category_slug.replace("-", " ").title()
-        )
+        category_display_name = self.category_slug.replace("-", " ").title()
 
         form = SingleCategorySearchForm(initial={"categories": [self.category_code]}, data=request.GET or None)
 
