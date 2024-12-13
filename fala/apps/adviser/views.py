@@ -7,7 +7,7 @@ import os
 from .forms import AdviserSearchForm, AdviserRootForm, SingleCategorySearchForm
 from .regions import Region
 from django.shortcuts import redirect
-from .models import EnglandOrWalesState, ErrorState, OtherJurisdictionState
+from common.states import EnglandOrWalesState, ErrorState, OtherJurisdictionState
 from .utils import CATEGORY_DISPLAY_NAMES, get_category_display_name, get_category_code_from_slug
 from fala.apps.constants.category_messages import CATEGORY_MESSAGES
 
