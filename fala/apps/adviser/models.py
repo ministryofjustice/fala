@@ -160,3 +160,44 @@ class ErrorState(object):
             errorList.append(item)
 
         return {"form": self._form, "data": {}, "errorList": errorList}
+
+
+class SingleSearchErrorState(object):
+    def __init__(self, form, category_display_name, category_message, category_code, search_url, category_slug):
+        self._form = form
+        self.category_display_name = category_display_name
+        self.category_message = category_message
+        self.category_code = category_code
+        self.search_url = search_url
+        self.category_slug = category_slug
+
+    @property
+    def template_name(self):
+        return "single_category_search.html"
+
+    def get_queryset(self):
+        return []
+
+    def get_context_data(self):
+        errorList = []
+        for field, error in self._form.errors.items():
+            # choose the first field is the error in form-wide
+            if field == "__all__":
+                item = {"text": error[0], "href": "#id_postcode"}
+            else:
+                item = {"text": error[0], "href": f"#id_{field}"}
+            errorList.append(item)
+
+        if self.category_slug == "hlpas":
+            self.category_display_name = "Housing Loss Prevention Advice Service"
+
+        return {
+            "form": self._form,
+            "data": {},
+            "errorList": errorList,
+            "category_slug": self.category_slug,
+            "category_code": self.category_code,
+            "category_display_name": self.category_display_name,
+            "category_message": self.category_message,
+            "search_url": self.search_url,
+        }

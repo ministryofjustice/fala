@@ -61,25 +61,53 @@ class AdviserRootForm(forms.Form):
     )
 
 
-# Shared method to handle searches
-def perform_search(form, postcode, categories, page):
-    try:
-        data = laalaa.find(
-            postcode=postcode,
-            categories=categories,
-            page=page,
-            organisation_types=form.cleaned_data.get("type"),
-            organisation_name=form.cleaned_data.get("name"),
-        )
-        if "error" in data:
-            form.add_error("postcode", data["error"])
-        return data
-    except laalaa.LaaLaaError:
-        form.add_error("postcode", "%s %s" % (_("Error looking up legal advisers."), _("Please try again later.")))
-        return {}
+class BaseSearch:
+    def perform_search(self, form, postcode, categories, page):
+        try:
+            data = laalaa.find(
+                postcode=postcode,
+                categories=categories,
+                page=page,
+                organisation_types=form.cleaned_data.get("type"),
+                organisation_name=form.cleaned_data.get("name"),
+            )
+            if "error" in data:
+                form.add_error("postcode", data["error"])
+            return data
+        except laalaa.LaaLaaError:
+            form.add_error("postcode", "%s %s" % (_("Error looking up legal advisers."), _("Please try again later.")))
+            return {}
+
+    @property
+    def region(self):
+        # retrieve the api call variables
+        country_from_valid_postcode = getattr(self, "_country_from_valid_postcode", None)
+
+        # Return `Region.ENGLAND_OR_WALES` from `clean` if set
+        if not country_from_valid_postcode:
+            return getattr(self, "_region", None)
+
+        # for Guernsey & Jersey the country comes back as 'Channel Islands', we are using `nhs_ha` key, to distinguish between them
+        country, nhs_ha = country_from_valid_postcode
+
+        if country == "Northern Ireland":
+            return Region.NI
+        elif country == "Isle of Man":
+            return Region.IOM
+        elif country == "Channel Islands" and nhs_ha == "Jersey Health Authority":
+            return Region.JERSEY
+        elif country == "Channel Islands" and nhs_ha == "Guernsey Health Authority":
+            return Region.GUERNSEY
+        elif country == "Scotland":
+            return Region.SCOTLAND
+        elif country == "England" or country == "Wales":
+            return Region.ENGLAND_OR_WALES
+        else:
+            self.add_error("postcode", _("This service is only available for England and Wales"))
+            return None
 
 
-class AdviserSearchForm(AdviserRootForm):
+class AdviserSearchForm(AdviserRootForm, BaseSearch):
     page = forms.IntegerField(required=False, widget=forms.HiddenInput())
 
     def __init__(self, *args, **kwargs):
@@ -114,34 +142,6 @@ class AdviserSearchForm(AdviserRootForm):
         return data
 
     @property
-    def region(self):
-        # retrieve the api call variables
-        country_from_valid_postcode = getattr(self, "_country_from_valid_postcode", None)
-
-        # Return `Region.ENGLAND_OR_WALES` from `clean` if set
-        if not country_from_valid_postcode:
-            return getattr(self, "_region", None)
-
-        # for Guernsey & Jersey the country comes back as 'Channel Islands', we are using `nhs_ha` key, to distinguish between them
-        country, nhs_ha = country_from_valid_postcode
-
-        if country == "Northern Ireland":
-            return Region.NI
-        elif country == "Isle of Man":
-            return Region.IOM
-        elif country == "Channel Islands" and nhs_ha == "Jersey Health Authority":
-            return Region.JERSEY
-        elif country == "Channel Islands" and nhs_ha == "Guernsey Health Authority":
-            return Region.GUERNSEY
-        elif country == "Scotland":
-            return Region.SCOTLAND
-        elif country == "England" or country == "Wales":
-            return Region.ENGLAND_OR_WALES
-        else:
-            self.add_error("postcode", _("This service is only available for England and Wales"))
-            return None
-
-    @property
     def current_page(self):
         return self.cleaned_data.get("page", 1)
 
@@ -149,7 +149,7 @@ class AdviserSearchForm(AdviserRootForm):
         return validate_postcode_and_return_country(postcode, form=self)
 
     def search(self):
-        return perform_search(
+        return self.perform_search(
             self,
             self.cleaned_data.get("postcode"),
             self.cleaned_data.get("categories"),
@@ -157,7 +157,7 @@ class AdviserSearchForm(AdviserRootForm):
         )
 
 
-class SingleCategorySearchForm(AdviserRootForm):
+class SingleCategorySearchForm(AdviserRootForm, BaseSearch):
     page = forms.IntegerField(required=False, widget=forms.HiddenInput())
 
     def __init__(self, categories=None, *args, **kwargs):
@@ -174,13 +174,12 @@ class SingleCategorySearchForm(AdviserRootForm):
             self.add_error("postcode", _("Enter a postcode"))
             return data
 
-        # Validate postcode and set `_country_from_valid_postcode`
         if postcode:
             valid_postcode = self.validate_postcode_and_return_country(postcode)
             if not valid_postcode:
                 self.add_error("postcode", _("Enter a valid postcode"))
             else:
-                self._country_from_valid_postcode = valid_postcode  # This is used by the `region` property
+                self._country_from_valid_postcode = valid_postcode
 
         # Check if categories are provided
         if not categories:
@@ -198,7 +197,7 @@ class SingleCategorySearchForm(AdviserRootForm):
         return validate_postcode_and_return_country(postcode, form=self)
 
     def search(self):
-        return perform_search(
+        return self.perform_search(
             self,
             self.cleaned_data.get("postcode"),
             self.categories,

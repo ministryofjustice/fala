@@ -7,7 +7,7 @@ import os
 from .forms import AdviserSearchForm, AdviserRootForm, SingleCategorySearchForm
 from .regions import Region
 from django.shortcuts import redirect
-from .models import EnglandOrWalesState, ErrorState, OtherJurisdictionState
+from .models import EnglandOrWalesState, OtherJurisdictionState, ErrorState, SingleSearchErrorState
 from .utils import CATEGORY_DISPLAY_NAMES, get_category_display_name, get_category_code_from_slug
 from fala.apps.constants.category_messages import CATEGORY_MESSAGES
 
@@ -94,7 +94,7 @@ class SingleCategorySearchView(CommonContextMixin, CategoryMixin, TemplateView):
 
         form = SingleCategorySearchForm(initial={"categories": [self.category_code]}, data=request.GET or None)
 
-        search_url = reverse("search") + f"?categories={self.category_code}"
+        search_url = reverse("search")
 
         context.update(
             {
@@ -145,9 +145,16 @@ class CookiesView(CommonContextMixin, TemplateView):
     template_name = "adviser/cookies.html"
 
 
-class SearchView(CommonContextMixin, ListView, EnglandOrWalesState, OtherJurisdictionState):
+class SearchView(CommonContextMixin, CategoryMixin, ListView, EnglandOrWalesState, OtherJurisdictionState):
     def get(self, request, *args, **kwargs):
-        form = AdviserSearchForm(data=request.GET or None)
+        self.tailored_results = self.request.GET.get("tailored_results", False)
+
+        if self.tailored_results:
+            form_class = SingleCategorySearchForm
+        else:
+            form_class = AdviserSearchForm
+
+        form = form_class(data=request.GET or None)
 
         if form.is_valid():
             region = form.region
@@ -156,7 +163,26 @@ class SearchView(CommonContextMixin, ListView, EnglandOrWalesState, OtherJurisdi
             else:
                 self.state = OtherJurisdictionState(region, form.cleaned_data["postcode"])
         else:
-            self.state = ErrorState(form)
+            if self.tailored_results:
+                # using CategoryMixin to access category_display_name & category_message, so we show this on SingleSearchErrorState view
+                self.setup_category(request, *args, **kwargs)
+                category_display_name = CATEGORY_DISPLAY_NAMES.get(
+                    self.category_slug, self.category_slug.replace("-", " ").title()
+                )
+                category_message = CATEGORY_MESSAGES.get(self.category_slug, "")
+
+                # this is so we can use category_code & search_url, when conducting a search from SingleSearchErrorState view
+                category_code = self.request.GET.get("categories", "")
+                search_url = reverse("search")
+
+                # this is so that we can get correct hlpas display name onto SingleSearchErrorState view
+                category_slug = self.request.GET.get("categories")
+
+                self.state = SingleSearchErrorState(
+                    form, category_display_name, category_message, category_code, search_url, category_slug
+                )
+            else:
+                self.state = ErrorState(form)
 
         return super().get(self, request, *args, **kwargs)
 
@@ -168,7 +194,6 @@ class SearchView(CommonContextMixin, ListView, EnglandOrWalesState, OtherJurisdi
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["tailored_results"] = self.request.GET.get("tailored_results", False)
-
+        context["tailored_results"] = self.tailored_results
         context.update(self.state.get_context_data())
         return context
