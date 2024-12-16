@@ -164,9 +164,7 @@ class SearchView(CommonContextMixin, CategoryMixin, ListView, EnglandOrWalesStat
             if self.tailored_results:
                 # using CategoryMixin to access category_display_name & category_message, so we show this on SingleSearchErrorState view
                 self.setup_category(request, *args, **kwargs)
-                category_display_name = CATEGORY_DISPLAY_NAMES.get(
-                    self.category_slug, self.category_slug.replace("-", " ").title()
-                )
+                category_display_name = self.category_slug.replace("-", " ").title()
                 category_message = CATEGORY_MESSAGES.get(self.category_slug, "")
 
                 # this is so we can use category_code & search_url, when conducting a search from SingleSearchErrorState view
