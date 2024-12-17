@@ -220,6 +220,26 @@ class ResultsPageWithJustOrgTest(SimpleTestCase):
         self.assertEqual(content, "Organisation: fooLegal problem: Debt, Education   Change search")
 
 
+class SingleCategoryResultsPageTest(SimpleTestCase):
+    client = Client()
+    url = reverse("search")
+
+    def test_single_category_results_for_mental_health(self):
+        self.data = {"tailored_results": "true", "postcode": "SE11", "categories": ["mhe"]}
+        response = self.client.get(self.url, self.data)
+        self.assertContains(response, "Your closest legal aid advisers for mental health")
+
+    def test_single_category_results_for_family(self):
+        self.data = {"tailored_results": "true", "postcode": "SE11", "categories": ["mat"]}
+        response = self.client.get(self.url, self.data)
+        self.assertContains(response, "Your closest legal aid advisers and family mediators")
+
+    def test_single_category_results_for_hlpas(self):
+        self.data = {"tailored_results": "true", "postcode": "SE11", "categories": ["hlpas"]}
+        response = self.client.get(self.url, self.data)
+        self.assertContains(response, "Your closest legal aid advisers for Housing Loss Prevention Advice Service")
+
+
 class NewSearchViewTemplate(SimpleTestCase):
     client = Client()
 
