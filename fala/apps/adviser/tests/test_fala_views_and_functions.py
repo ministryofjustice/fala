@@ -214,6 +214,31 @@ class ResultsPageWithJustOrgTest(SimpleTestCase):
         self.assertEqual(content, "Organisation: fooLegal problem: Debt, Education   Change search")
 
 
+class ResultsPageWhenCategoryIsFamily(SimpleTestCase):
+    client = Client()
+    url = reverse("search")
+
+    def test_results_for_exit_button_when_tailored_results(self):
+        self.data = {"tailored_results": "true", "postcode": "SE11", "categories": ["mat"]}
+        response = self.client.get(self.url, self.data)
+        self.assertContains(response, "Exit this page")
+
+    def test_results_for_exit_button_without_tailored_results(self):
+        self.data = {"postcode": "SE11", "categories": ["mat"]}
+        response = self.client.get(self.url, self.data)
+        self.assertContains(response, "Exit this page")
+
+    def test_results_for_no_exit_button_when_tailored_results(self):
+        self.data = {"tailored_results": "true", "postcode": "SE11", "categories": ["com"]}
+        response = self.client.get(self.url, self.data)
+        self.assertNotContains(response, "Exit this page")
+
+    def test_results_for_no_exit_button_without_tailored_results(self):
+        self.data = {"postcode": "SE11", "categories": ["com"]}
+        response = self.client.get(self.url, self.data)
+        self.assertNotContains(response, "Exit this page")
+
+
 class NewSearchViewTemplate(SimpleTestCase):
     client = Client()
 
