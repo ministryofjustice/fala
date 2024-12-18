@@ -1,6 +1,5 @@
 # utils.py
 
-from fala.apps.constants.categories import CATEGORY_TRANSLATIONS
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
@@ -42,19 +41,3 @@ def validate_postcode_and_return_country(postcode, form=None):
         if form:
             form.add_error("postcode", _("Error looking up legal advisers. Please try again later."))
         return False
-
-
-SLUG_TO_CODE = {display_name: category_code for category_code, display_name in CATEGORY_TRANSLATIONS.items()}
-
-
-def get_category_code_from_slug(slug):
-    return SLUG_TO_CODE.get(slug)
-
-
-def get_category_display_name(category_code):
-    return CATEGORY_TRANSLATIONS.get(category_code)
-
-
-CATEGORY_DISPLAY_NAMES = {
-    "hlpas": "Housing Loss Prevention Advice Service",
-}
