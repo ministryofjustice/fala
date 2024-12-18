@@ -5,9 +5,9 @@ from django.views.generic import TemplateView, ListView, View
 from django.http import HttpResponse
 import os
 from .forms import AdviserSearchForm, AdviserRootForm, SingleCategorySearchForm
-from .regions import Region
+from fala.apps.adviser.regions import Region
 from django.shortcuts import redirect
-from .models import EnglandOrWalesState, OtherJurisdictionState, ErrorState, SingleSearchErrorState
+from common.states import EnglandOrWalesState, OtherJurisdictionState, ErrorState, SingleSearchErrorState
 from fala.apps.constants.category_manager import CategoryManager
 from fala.apps.constants.category_messages import CATEGORY_MESSAGES
 
