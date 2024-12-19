@@ -3,7 +3,7 @@ from fala.playwright.setup import PlaywrightTestSetup
 
 
 class SingleCategorySearchPageEndToEndJourneys(PlaywrightTestSetup):
-    hlpas_front_page_heading = "Find a legal aid adviser for Housing Loss Prevention Advice Service"
+    hlpas_front_page_heading = "Find a legal aid adviser for the Housing Loss Prevention Advice Service"
     med_front_page_heading = "Find a legal aid adviser for clinical negligence"
 
     def test_landing_page_with_hlpas(self):
