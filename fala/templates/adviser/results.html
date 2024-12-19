@@ -57,7 +57,7 @@
         <form action="/" method="GET" novalidate>
           <input type="hidden" name="postcode" value="{{ form.postcode.value() }}">
           <input type="hidden" name="name" value="{{ form.name.value() }}">
-          {% for category in form.categories %}
+          {% for value, label_text in form.categories.field.choices %}
             {% if label_text in form|category_selection_list %}
               <input type="hidden" name="categories" value="{{ value }}">
             {% endif %}
