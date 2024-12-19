@@ -3,7 +3,7 @@
       {% if form|category_selection|lower == "family" %}
           <h1 class="govuk-heading-xl">Your closest legal aid advisers and family mediators</h1>
       {% elif form|category_selection|lower == "housing loss prevention advice service" %}
-          <h1 class="govuk-heading-xl">Your closest legal aid advisers for {{ form|category_selection|title }}</h1>
+          <h1 class="govuk-heading-xl">Your closest legal aid advisers for the {{ form|category_selection|title }}</h1>
       {% else %}
           <h1 class="govuk-heading-xl">Your closest legal aid advisers for {{ form|category_selection|lower }}</h1>
       {% endif %}
