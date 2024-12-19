@@ -3,10 +3,18 @@
 {% block pageTitle %}Search results{% endblock %}
 
 {%- from 'govuk_frontend_jinja/components/pagination/macro.html' import govukPagination %}
+{%- from "govuk_frontend_jinja/components/exit-this-page/macro.html" import govukExitThisPage -%}
 
 {% block content %}
   <div class="govuk-grid-column-full">
-    <div id="google_translate_element" class="govuk-!-margin-bottom-6 govuk-!-display-none-print"></div>
+    <span class="language-and-exit-container">
+      <div id="google_translate_element" class="govuk-!-margin-bottom-6 govuk-!-display-none-print"></div>
+      <div id="exit_button">
+      {% if 'mat' in request.GET.getlist('categories') %}
+        {{ govukExitThisPage("Exit this page")}}
+      {% endif %}
+     </div>
+    </span>
   </div>
   {% if tailored_results %}
     <div class="govuk-grid-column-full">

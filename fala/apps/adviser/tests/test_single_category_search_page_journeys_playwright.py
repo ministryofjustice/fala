@@ -5,14 +5,22 @@ from fala.playwright.setup import PlaywrightTestSetup
 class SingleCategorySearchPageEndToEndJourneys(PlaywrightTestSetup):
     hlpas_front_page_heading = "Find a legal aid adviser for Housing Loss Prevention Advice Service"
     med_front_page_heading = "Find a legal aid adviser for clinical negligence"
+    mat_front_page_heading = "Find a legal aid adviser for family"
 
     def test_landing_page_with_hlpas(self):
         page = self.visit_single_category_search_page("?categories=hlpas")
         expect(page.h1).to_have_text(f"{self.hlpas_front_page_heading}")
+        expect(page.exit_button).to_be_hidden()
 
     def test_landing_page_with_med(self):
         page = self.visit_single_category_search_page("?categories=med")
         expect(page.h1).to_have_text(f"{self.med_front_page_heading}")
+        expect(page.exit_button).to_be_hidden()
+
+    def test_landing_page_with_mat(self):
+        page = self.visit_single_category_search_page("?categories=mat")
+        expect(page.h1).to_have_text(f"{self.mat_front_page_heading}")
+        expect(page.exit_button).to_be_visible()
 
     def test_postcode_search_journey(self):
         test_cases = [

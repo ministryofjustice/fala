@@ -14,10 +14,20 @@
 {%- from 'govuk_frontend_jinja/components/error-summary/macro.html' import govukErrorSummary %}
 {%- from 'govuk_frontend_jinja/components/checkboxes/macro.html' import govukCheckboxes %}
 {%- from "govuk_frontend_jinja/components/input/macro.html" import govukInput %}
+{%- from "govuk_frontend_jinja/components/exit-this-page/macro.html" import govukExitThisPage -%}
 
 {% block content %}
+  <div class="govuk-grid-column-full">
+    <span class="language-and-exit-container">
+      <div id="google_translate_element" class="govuk-!-margin-bottom-6 govuk-!-display-none-print"></div>
+      <div id="exit_button">
+      {% if category_code == 'mat' %}
+        {{ govukExitThisPage("Exit this page")}}
+      {% endif %}
+    </div>
+    </span>
+  </div>
   <div class="govuk-grid-column-two-thirds">
-    <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
     {% if form.errors %}
       {{ govukErrorSummary({
         "titleText": "There is a problem",
