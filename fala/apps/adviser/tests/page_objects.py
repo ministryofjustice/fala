@@ -11,6 +11,10 @@ class FalaPage(object):
         return self._page.get_by_text("There is a problem")
 
     @property
+    def exit_button(self):
+        return self._page.get_by_text("Exit this page")
+
+    @property
     def language_dropdown(self):
         return self._page.locator('select[class="goog-te-combo"]')
 

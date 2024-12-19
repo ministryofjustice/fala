@@ -224,7 +224,7 @@ class ResultsPageWhenCategoryIsFamily(SimpleTestCase):
         self.assertContains(response, "Exit this page")
 
     def test_results_for_exit_button_without_tailored_results(self):
-        self.data = {"postcode": "SE11", "categories": ["mat"]}
+        self.data = {"postcode": "SE11", "categories": ["mat", "hlpas"]}
         response = self.client.get(self.url, self.data)
         self.assertContains(response, "Exit this page")
 
@@ -234,7 +234,7 @@ class ResultsPageWhenCategoryIsFamily(SimpleTestCase):
         self.assertNotContains(response, "Exit this page")
 
     def test_results_for_no_exit_button_without_tailored_results(self):
-        self.data = {"postcode": "SE11", "categories": ["com"]}
+        self.data = {"postcode": "SE11", "categories": ["com", "pl"]}
         response = self.client.get(self.url, self.data)
         self.assertNotContains(response, "Exit this page")
 

@@ -10,7 +10,7 @@
     <span class="language-and-exit-container">
       <div id="google_translate_element" class="govuk-!-margin-bottom-6 govuk-!-display-none-print"></div>
       <div id="exit_button">
-      {% if request.GET.categories == 'mat' %}
+      {% if 'mat' in request.GET.getlist('categories') %}
         {{ govukExitThisPage("Exit this page")}}
       {% endif %}
      </div>
