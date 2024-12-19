@@ -237,7 +237,7 @@ class SingleCategoryResultsPageTest(SimpleTestCase):
     def test_single_category_results_for_hlpas(self):
         self.data = {"tailored_results": "true", "postcode": "SE11", "categories": ["hlpas"]}
         response = self.client.get(self.url, self.data)
-        self.assertContains(response, "Your closest legal aid advisers for Housing Loss Prevention Advice Service")
+        self.assertContains(response, "Your closest legal aid advisers for the Housing Loss Prevention Advice Service")
 
 
 class NewSearchViewTemplate(SimpleTestCase):
