@@ -62,6 +62,12 @@ class ResultsPageWithBothOrgAndPostcodeTest(SimpleTestCase):
         response = self.client.get(self.url, self.data)
         self.assertNotContains(response, '<div class="govuk-pagination__previous">')
 
+    def test_back_link_is_not_visible(self):
+        response = self.client.get(self.url, self.data)
+        soup = bs4.BeautifulSoup(response.content, "html.parser")
+        back_link = soup.find("a", class_="govuk-back-link")
+        self.assertIsNone(back_link)
+
 
 class PaginationTest(SimpleTestCase):
     client = Client()

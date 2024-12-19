@@ -11,17 +11,16 @@
   {% if tailored_results %}
     <div class="govuk-grid-column-full">
       <form action="/single-category-search" method="GET" novalidate>
-        {% for value, label_text in form.categories.field.choices %}
-          {% if label_text in form|category_selection_list %}
-            <input type="hidden" name="categories" value="{{ value }}">
-          {% endif %}
+        {% for category in form.categories %}
+          <input type="hidden" name="categories" value="{{ category }}">
         {% endfor %}
-        <a href="/single-category-search?{% for value, label_text in form.categories.field.choices %}{% if label_text in form|category_selection_list %}categories={{ value }}{% endif %}{% endfor %}" class="govuk-back-link govuk-!-margin-bottom-5 govuk-!-display-none-print">
+        <a href="/single-category-search?categories={% for category in form.categories %}{{ category }}{% if not loop.last %},{% endif %}{% endfor %}" class="govuk-back-link govuk-!-margin-bottom-5 govuk-!-display-none-print">
           Back
         </a>
       </form>
     </div>
   {% endif %}
+
   {% if FEATURE_FLAG_SURVEY_MONKEY %}
     {% include 'adviser/_research_banner.html' %}
   {% endif %}
