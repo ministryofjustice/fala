@@ -187,3 +187,15 @@ body.fala-dev {
 .hint-colour-override {
   color: $govuk-text-colour;
 }
+
+.language-and-exit-container{
+  display: block;
+}
+
+@media only screen and (min-width: 730px) {
+  .language-and-exit-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
