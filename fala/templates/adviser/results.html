@@ -32,14 +32,14 @@
   {% if FEATURE_FLAG_SURVEY_MONKEY %}
     {% include 'adviser/_research_banner.html' %}
   {% endif %}
-  <div class="govuk-grid-column-full">
     {% if data.count < 1 %}
+    <div class="govuk-grid-column-full">
         <h1 class="govuk-heading-xl govuk-!-margin-bottom-5">No search results</h1>
         <p class="govuk-body-m" id="no-results-info">There are no results for your criteria.</p>
+    </div>
     {% else %}
-        <h1 class="govuk-heading-xl">Search results</h1>
+        {% include 'adviser/_results_heading.html' %}
     {% endif %}
-  </div>
   {% if form.region|string == "Region.SCOTLAND" %}
     {% include 'adviser/_scotland_warning.html' %}
   {% endif %}
