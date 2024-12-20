@@ -221,20 +221,9 @@ workflows:
             - laa-fala
             - laa-fala-live-staging
 
-      - staging_deploy_approval:
-          type: approval
-          requires:
-            - build
-          filters:
-            branches:
-              only:
-                - main
-
       - deploy:
           name: Deploy to Staging
           environment: staging
-          requires:
-            - staging_deploy_approval
           filters:
             branches:
               only:
@@ -245,8 +234,6 @@ workflows:
 
       - deploy_grafana:
           name: Deploy Grafana Staging Dashboards
-          requires:
-            - staging_deploy_approval
           filters:
             branches:
               only:
