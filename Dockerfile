@@ -1,7 +1,6 @@
 FROM node:20 as node_build
 
 WORKDIR /home/node
-ENV PYTHONPATH=/home/app/fala:$PYTHONPATH
 
 COPY package.json package-lock.json ./
 RUN npm install
@@ -33,8 +32,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 ENV HOME /home/app
 ENV APP_HOME /home/app
 WORKDIR /home/app
-ENV PYTHONPATH=/home/app/fala:$PYTHONPATH
-
 
 #################################################
 # DEVELOPMENT
