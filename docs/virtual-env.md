@@ -106,7 +106,7 @@ FALA uses [Gulp](http://gulpjs.com/) for this build. The following Gulp tasks ar
 
 Usage during frontend development:
 
-1. Ensure you have the correct NodeJS version - see [NodeJS install](docs/virtual-env.md#nodejs)
+1. Ensure you have the correct NodeJS version - see [NodeJS install](virtual-env.md#nodejs)
 
 2. Run the build:
 
