@@ -224,6 +224,8 @@ workflows:
       - deploy:
           name: Deploy to Staging
           environment: staging
+          requires:
+            - build
           filters:
             branches:
               only:
