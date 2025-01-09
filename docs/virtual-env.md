@@ -34,7 +34,7 @@ $ python --version
 If you have the wrong python version in your virtual environment, then it's easiest to delete it and re-create it with the right python version:
 ```
 rm -rf venv
-pyenv use
+pyenv local 3.12
 python --version  # check the version is now correct
 python3 -m venv venv
 source venv/bin/activate
