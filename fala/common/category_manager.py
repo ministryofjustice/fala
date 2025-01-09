@@ -13,7 +13,7 @@ class CategoryManager:
         "fmed": "family-mediation",
         "hou": "housing",
         "hlpas": "housing-loss-prevention-advice-service",
-        "immas": "immigration-asylum",
+        "immas": "immigration-or-asylum",
         "mhe": "mental-health",
         "mosl": "modern-slavery",
         "pl": "prison-law",
