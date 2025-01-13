@@ -34,7 +34,7 @@ $ python --version
 If you have the wrong python version in your virtual environment, then it's easiest to delete it and re-create it with the right python version:
 ```
 rm -rf venv
-pyenv use
+pyenv local 3.12
 python --version  # check the version is now correct
 python3 -m venv venv
 source venv/bin/activate
@@ -106,7 +106,7 @@ FALA uses [Gulp](http://gulpjs.com/) for this build. The following Gulp tasks ar
 
 Usage during frontend development:
 
-1. Ensure you have the correct NodeJS version - see [NodeJS install](docs/virtual-env.md#nodejs)
+1. Ensure you have the correct NodeJS version - see [NodeJS install](virtual-env.md#nodejs)
 
 2. Run the build:
 

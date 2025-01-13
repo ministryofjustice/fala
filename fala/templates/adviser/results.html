@@ -3,22 +3,43 @@
 {% block pageTitle %}Search results{% endblock %}
 
 {%- from 'govuk_frontend_jinja/components/pagination/macro.html' import govukPagination %}
+{%- from "govuk_frontend_jinja/components/exit-this-page/macro.html" import govukExitThisPage -%}
 
 {% block content %}
   <div class="govuk-grid-column-full">
-    <div id="google_translate_element" class="govuk-!-margin-bottom-6 govuk-!-display-none-print"></div>
+    <span class="language-and-exit-container">
+      <div id="google_translate_element" class="govuk-!-margin-bottom-6 govuk-!-display-none-print"></div>
+      <div id="exit_button">
+      {% if 'mat' in request.GET.getlist('categories') %}
+        {{ govukExitThisPage("Exit this page")}}
+      {% endif %}
+     </div>
+    </span>
   </div>
+  {% if tailored_results %}
+    <div class="govuk-grid-column-full">
+      <form action="/single-category-search" method="GET" novalidate>
+        {% for category in form.categories %}
+          <input type="hidden" name="categories" value="{{ category }}">
+        {% endfor %}
+        <a href="/single-category-search?categories={% for category in form.categories %}{{ category }}{% if not loop.last %},{% endif %}{% endfor %}" class="govuk-back-link govuk-!-margin-bottom-5 govuk-!-display-none-print">
+          Back
+        </a>
+      </form>
+    </div>
+  {% endif %}
+
   {% if FEATURE_FLAG_SURVEY_MONKEY %}
     {% include 'adviser/_research_banner.html' %}
   {% endif %}
-  <div class="govuk-grid-column-full">
     {% if data.count < 1 %}
+    <div class="govuk-grid-column-full">
         <h1 class="govuk-heading-xl govuk-!-margin-bottom-5">No search results</h1>
         <p class="govuk-body-m" id="no-results-info">There are no results for your criteria.</p>
+    </div>
     {% else %}
-        <h1 class="govuk-heading-xl">Search results</h1>
+        {% include 'adviser/_results_heading.html' %}
     {% endif %}
-  </div>
   {% if form.region|string == "Region.SCOTLAND" %}
     {% include 'adviser/_scotland_warning.html' %}
   {% endif %}
@@ -27,37 +48,39 @@
       <p class="govuk-body">You can contact any legal adviser on the list but you might need to contact a few to find one near you that can help. Those based further away may be able to help by telephone.</p>
       <p class="govuk-body">These advisers are contracted by the government and regulated by the Solicitors Regulation Authority.</p>
     {% endif %}
-    <div class="laa-fala__grey-box govuk-!-margin-bottom-6">
-      <ul class="govuk-list" role="list">
-        {% if form.postcode.value() %}
-          <li class="govuk-body" role="listitem">Postcode:<span class="notranslate"> {{ form.postcode.value() }}</span></li>
-        {% endif %}
-        {% if form.name.value() %}
-          <li class="govuk-body" role="listitem">Organisation:<span class="notranslate"> {{ form.name.value() }}</span></li>
-        {% endif %}
-        {% if form|category_selection %}
-          <li class="govuk-body" role="listitem">Legal problem: {{ form|category_selection }} </li>
-        {% endif %}
-      </ul>
-
-      <form action="/" method="GET" novalidate>
-        <input type="hidden" name="postcode" value="{{ form.postcode.value() }}">
-        <input type="hidden" name="name" value="{{ form.name.value() }}">
-        {% for value, label_text in form.categories.field.choices %}
-          {% if label_text in form|category_selection_list %}
-            <input type="hidden" name="categories" value="{{ value }}">
+    {% if not tailored_results %}
+      <div class="laa-fala__grey-box govuk-!-margin-bottom-6">
+        <ul class="govuk-list" role="list">
+          {% if form.postcode.value() %}
+            <li class="govuk-body" role="listitem">Postcode:<span class="notranslate"> {{ form.postcode.value() }}</span></li>
           {% endif %}
-        {% endfor %}
+          {% if form.name.value() %}
+            <li class="govuk-body" role="listitem">Organisation:<span class="notranslate"> {{ form.name.value() }}</span></li>
+          {% endif %}
+          {% if form|category_selection %}
+            <li class="govuk-body" role="listitem">Legal problem: {{ form|category_selection }} </li>
+          {% endif %}
+        </ul>
 
-        {{ govukButton({
-           'text': "Change search",
-           'type': "submit",
-           'classes': "govuk-!-margin-bottom-2 govuk-!-display-none-print",
-           'id': "changeSearchButton",
-           'name': "search"
-        }) }}
-      </form>
-    </div>
+        <form action="/" method="GET" novalidate>
+          <input type="hidden" name="postcode" value="{{ form.postcode.value() }}">
+          <input type="hidden" name="name" value="{{ form.name.value() }}">
+          {% for value, label_text in form.categories.field.choices %}
+            {% if label_text in form|category_selection_list %}
+              <input type="hidden" name="categories" value="{{ value }}">
+            {% endif %}
+          {% endfor %}
+
+          {{ govukButton({
+            'text': "Change search",
+            'type': "submit",
+            'classes': "govuk-!-margin-bottom-2 govuk-!-display-none-print",
+            'id': "changeSearchButton",
+            'name': "search"
+          }) }}
+        </form>
+      </div>
+    {% endif %}
 
     {% if data.count >= 1 %}
       <div class="printing-button">

@@ -62,6 +62,12 @@ class ResultsPageWithBothOrgAndPostcodeTest(SimpleTestCase):
         response = self.client.get(self.url, self.data)
         self.assertNotContains(response, '<div class="govuk-pagination__previous">')
 
+    def test_back_link_is_not_visible(self):
+        response = self.client.get(self.url, self.data)
+        soup = bs4.BeautifulSoup(response.content, "html.parser")
+        back_link = soup.find("a", class_="govuk-back-link")
+        self.assertIsNone(back_link)
+
 
 class PaginationTest(SimpleTestCase):
     client = Client()
@@ -214,6 +220,51 @@ class ResultsPageWithJustOrgTest(SimpleTestCase):
         self.assertEqual(content, "Organisation: fooLegal problem: Debt, Education   Change search")
 
 
+class SingleCategoryResultsPageTest(SimpleTestCase):
+    client = Client()
+    url = reverse("search")
+
+    def test_single_category_results_for_mental_health(self):
+        self.data = {"tailored_results": "true", "postcode": "SE11", "categories": ["mhe"]}
+        response = self.client.get(self.url, self.data)
+        self.assertContains(response, "Your closest legal aid advisers for mental health")
+
+    def test_single_category_results_for_family(self):
+        self.data = {"tailored_results": "true", "postcode": "SE11", "categories": ["mat"]}
+        response = self.client.get(self.url, self.data)
+        self.assertContains(response, "Your closest legal aid advisers and family mediators")
+
+    def test_single_category_results_for_hlpas(self):
+        self.data = {"tailored_results": "true", "postcode": "SE11", "categories": ["hlpas"]}
+        response = self.client.get(self.url, self.data)
+        self.assertContains(response, "Your closest legal aid advisers for the Housing Loss Prevention Advice Service")
+
+
+class ResultsPageWhenCategoryIsFamily(SimpleTestCase):
+    client = Client()
+    url = reverse("search")
+
+    def test_results_for_exit_button_when_tailored_results(self):
+        self.data = {"tailored_results": "true", "postcode": "SE11", "categories": ["mat"]}
+        response = self.client.get(self.url, self.data)
+        self.assertContains(response, "Exit this page")
+
+    def test_results_for_exit_button_without_tailored_results(self):
+        self.data = {"postcode": "SE11", "categories": ["mat", "hlpas"]}
+        response = self.client.get(self.url, self.data)
+        self.assertContains(response, "Exit this page")
+
+    def test_results_for_no_exit_button_when_tailored_results(self):
+        self.data = {"tailored_results": "true", "postcode": "SE11", "categories": ["com"]}
+        response = self.client.get(self.url, self.data)
+        self.assertNotContains(response, "Exit this page")
+
+    def test_results_for_no_exit_button_without_tailored_results(self):
+        self.data = {"postcode": "SE11", "categories": ["com", "pl"]}
+        response = self.client.get(self.url, self.data)
+        self.assertNotContains(response, "Exit this page")
+
+
 class NewSearchViewTemplate(SimpleTestCase):
     client = Client()
 
@@ -248,3 +299,14 @@ class AccessibilityViewTest(SimpleTestCase):
     def test_shows_new_accessibility_statement(self):
         response = self.client.get(self.url)
         self.assertContains(response, "Accessibility statement for Find a legal advisor")
+
+
+class ErrorPageTest(SimpleTestCase):
+    client = Client()
+    url = reverse("search")
+
+    def test_raises_404_when_page_number_does_not_exist(
+        self,
+    ):
+        response = self.client.get(self.url, {"postcode": "SE11", "page": 500})
+        self.assertEqual(response.status_code, 404)

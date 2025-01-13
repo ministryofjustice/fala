@@ -1,16 +1,15 @@
 # coding=utf-8
-import urllib
-
 from django.conf import settings
 from django.urls import resolve, reverse
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, View
 from django.http import HttpResponse
 import os
-from django.views import View
-
-from .forms import AdviserSearchForm, AdviserRootForm
-from .laa_laa_paginator import LaaLaaPaginator
-from .regions import Region
+from .forms import AdviserSearchForm, AdviserRootForm, SingleCategorySearchForm
+from fala.apps.adviser.regions import Region
+from django.shortcuts import redirect
+from fala.common.states import EnglandOrWalesState, OtherJurisdictionState, ErrorState, SingleSearchErrorState
+from fala.apps.constants.category_manager import CategoryManager
+from fala.apps.constants.category_messages import CATEGORY_MESSAGES
 
 
 class RobotsTxtView(View):
@@ -52,6 +51,64 @@ class CommonContextMixin:
         return context
 
 
+class CategoryMixin:
+    def setup_category(self, request, *args, **kwargs):
+        category_code = request.GET.get("categories")
+
+        if not category_code:
+            self.category_slug = kwargs.get("category")
+            if not self.category_slug:  # Redirect if no category specified
+                return redirect("search")
+            # if there is a slug, then retrieve the code based on the slug.
+            category_code = CategoryManager.category_code_from(self.category_slug)
+            if not category_code:
+                return redirect("search")
+        else:
+            self.category_slug = CategoryManager.slug_from(category_code)
+            if self.category_slug:
+                return redirect("single_category_search", category=self.category_slug)
+            else:
+                return redirect("search")
+        return category_code
+
+
+class SingleCategorySearchView(CommonContextMixin, CategoryMixin, TemplateView):
+    template_name = "adviser/single_category_search.html"
+
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
+
+        if not settings.FEATURE_FLAG_SINGLE_CATEGORY_SEARCH_FORM:
+            return redirect("search")
+
+        result = self.setup_category(request, *args, **kwargs)
+        if isinstance(result, HttpResponse):
+            return result
+
+        self.category_code = result
+
+        category_message = CATEGORY_MESSAGES.get(self.category_slug, "")
+        category_display_name = self.category_slug.replace("-", " ").title()
+
+        form = SingleCategorySearchForm(initial={"categories": [self.category_code]}, data=request.GET or None)
+
+        search_url = reverse("search")
+
+        context.update(
+            {
+                "form": form,
+                "data": {},
+                "errorList": [],
+                "category_slug": self.category_slug,
+                "category_code": self.category_code,
+                "category_display_name": category_display_name,
+                "category_message": category_message,
+                "search_url": search_url,
+            }
+        )
+        return self.render_to_response(context)
+
+
 class AdviserView(CommonContextMixin, TemplateView):
     template_name = "adviser/search.html"
 
@@ -86,157 +143,42 @@ class CookiesView(CommonContextMixin, TemplateView):
     template_name = "adviser/cookies.html"
 
 
-class SearchView(CommonContextMixin, ListView):
-    class ErrorState(object):
-        def __init__(self, form):
-            self._form = form
-
-        @property
-        def template_name(self):
-            return "search.html"
-
-        def get_queryset(self):
-            return []
-
-        def get_context_data(self):
-            errorList = []
-            for field, error in self._form.errors.items():
-                # choose the first field is the error in form-wide
-                if field == "__all__":
-                    item = {"text": error[0], "href": "#id_postcode"}
-                else:
-                    item = {"text": error[0], "href": f"#id_{field}"}
-                errorList.append(item)
-
-            return {"form": self._form, "data": {}, "errorList": errorList}
-
-    class EnglandOrWalesState(object):
-        def __init__(self, form):
-            self._form = form
-            self._data = form.search()
-
-        @property
-        def template_name(self):
-            return "results.html"
-
-        def get_queryset(self):
-            return self._data.get("results", None)
-
-        def get_context_data(self):
-            pages = LaaLaaPaginator(self._data["count"], 10, 3, self._form.current_page)
-            current_page = pages.current_page()
-            params = {
-                "postcode": self._form.cleaned_data["postcode"],
-                "name": self._form.cleaned_data["name"],
-            }
-            categories = self._form.cleaned_data["categories"]
-
-            # create list of tuples which can be passed to urlencode for pagination links
-            category_tuples = [("categories", c) for c in categories]
-
-            def item_for(page_num):
-                if len(categories) > 0:
-                    page_params = {"page": page_num}
-                    href = (
-                        "/search?"
-                        + urllib.parse.urlencode({**page_params, **params})
-                        + "&"
-                        + urllib.parse.urlencode(category_tuples)
-                    )
-                else:
-                    page_params = {"page": page_num}
-                    href = "/search?" + urllib.parse.urlencode({**page_params, **params})
-
-                return {"number": page_num, "current": self._form.current_page == page_num, "href": href}
-
-            pagination = {"items": [item_for(page_num) for page_num in pages.page_range]}
-
-            if current_page.has_previous():
-                if len(categories) > 0:
-                    page_params = {"page": current_page.previous_page_number()}
-                    prev_link = (
-                        "/search?"
-                        + urllib.parse.urlencode({**page_params, **params})
-                        + "&"
-                        + urllib.parse.urlencode(category_tuples)
-                    )
-                else:
-                    page_params = {"page": current_page.previous_page_number()}
-                    prev_link = "/search?" + urllib.parse.urlencode({**page_params, **params})
-                pagination["previous"] = {"href": prev_link}
-
-            if current_page.has_next():
-                if len(categories) > 0:
-                    page_params = {"page": current_page.next_page_number()}
-                    href = (
-                        "/search?"
-                        + urllib.parse.urlencode({**page_params, **params})
-                        + "&"
-                        + urllib.parse.urlencode(category_tuples)
-                    )
-                else:
-                    page_params = {"page": current_page.next_page_number()}
-                    href = "/search?" + urllib.parse.urlencode({**page_params, **params})
-                pagination["next"] = {"href": href}
-
-            return {
-                "form": self._form,
-                "data": self._data,
-                "params": params,
-                "FEATURE_FLAG_SURVEY_MONKEY": settings.FEATURE_FLAG_SURVEY_MONKEY,
-                "pagination": pagination,
-            }
-
-    class OtherJurisdictionState(object):
-        REGION_TO_LINK = {
-            Region.NI: {
-                "link": "https://www.nidirect.gov.uk/articles/legal-aid-schemes",
-                "region": "Northern Ireland",
-            },
-            Region.IOM: {
-                "link": "https://www.gov.im/categories/benefits-and-financial-support/legal-aid/",
-                "region": "the Isle of Man",
-            },
-            Region.JERSEY: {
-                "link": "https://www.legalaid.je/",
-                "region": "Jersey",
-            },
-            Region.GUERNSEY: {
-                "link": "https://www.gov.gg/legalaid",
-                "region": "Guernsey",
-            },
-        }
-
-        def __init__(self, region, postcode):
-            self._region = region
-            self._postcode = postcode
-
-        def get_queryset(self):
-            return []
-
-        @property
-        def template_name(self):
-            return "other_region.html"
-
-        def get_context_data(self):
-            region_data = self.REGION_TO_LINK[self._region]
-            return {
-                "postcode": self._postcode,
-                "link": region_data["link"],
-                "region": region_data["region"],
-            }
-
+class SearchView(CommonContextMixin, CategoryMixin, ListView, EnglandOrWalesState, OtherJurisdictionState):
     def get(self, request, *args, **kwargs):
-        form = AdviserSearchForm(data=request.GET or None)
+        self.tailored_results = self.request.GET.get("tailored_results", False)
+
+        if self.tailored_results:
+            form_class = SingleCategorySearchForm
+        else:
+            form_class = AdviserSearchForm
+
+        form = form_class(data=request.GET or None)
 
         if form.is_valid():
             region = form.region
             if region == Region.ENGLAND_OR_WALES or region == Region.SCOTLAND:
-                self.state = self.EnglandOrWalesState(form)
+                self.state = EnglandOrWalesState(form)
             else:
-                self.state = self.OtherJurisdictionState(region, form.cleaned_data["postcode"])
+                self.state = OtherJurisdictionState(region, form.cleaned_data["postcode"])
         else:
-            self.state = self.ErrorState(form)
+            if self.tailored_results:
+                # using CategoryMixin to access category_display_name & category_message, so we show this on SingleSearchErrorState view
+                self.setup_category(request, *args, **kwargs)
+                category_display_name = self.category_slug.replace("-", " ").title()
+                category_message = CATEGORY_MESSAGES.get(self.category_slug, "")
+
+                # this is so we can use category_code & search_url, when conducting a search from SingleSearchErrorState view
+                category_code = self.request.GET.get("categories", "")
+                search_url = reverse("search")
+
+                # this is so that we can get correct hlpas display name onto SingleSearchErrorState view
+                category_slug = self.request.GET.get("categories")
+
+                self.state = SingleSearchErrorState(
+                    form, category_display_name, category_message, category_code, search_url, category_slug
+                )
+            else:
+                self.state = ErrorState(form)
 
         return super().get(self, request, *args, **kwargs)
 
@@ -248,6 +190,6 @@ class SearchView(CommonContextMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
+        context["tailored_results"] = self.tailored_results
         context.update(self.state.get_context_data())
         return context

@@ -1,7 +1,13 @@
 import os
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from playwright.sync_api import sync_playwright
-from fala.apps.adviser.tests.page_objects import ResultsPage, OtherRegionPage, SearchPage, CookiesPage
+from fala.apps.adviser.tests.page_objects import (
+    ResultsPage,
+    OtherRegionPage,
+    SearchPage,
+    CookiesPage,
+    SingleCategorySearchPage,
+)
 
 
 class PlaywrightTestSetup(StaticLiveServerTestCase):
@@ -26,12 +32,18 @@ class PlaywrightTestSetup(StaticLiveServerTestCase):
         self.browser.close()
         super().tearDown()
 
-    def visit_results_page(self, postcode, checkbox_labels=None):
+    def visit_results_page(self, **kwargs):
+        postcode = kwargs.get("postcode")
+        organisation = kwargs.get("organisation", None)
+        checkbox_labels = kwargs.get("checkbox_labels", None)
+
         if checkbox_labels is None:
             checkbox_labels = []
         page = self.browser.new_page()
         page.goto(f"{self.live_server_url}")
         page.get_by_label("Postcode").fill(postcode)
+        if organisation:
+            page.get_by_label("Name of organisation you are looking for (optional)").fill(organisation)
         for label in checkbox_labels:
             page.get_by_label(label).check()
         page.get_by_role("button", name="Search").click()
@@ -62,6 +74,11 @@ class PlaywrightTestSetup(StaticLiveServerTestCase):
         page = self.browser.new_page()
         page.goto(f"{self.live_server_url}")
         return SearchPage(page)
+
+    def visit_single_category_search_page(self, url_params):
+        page = self.browser.new_page()
+        page.goto(f"{self.live_server_url}/single-category-search{url_params}")
+        return SingleCategorySearchPage(page)
 
     def visit_cookies_page_from_footer(self):
         page = self.browser.new_page()

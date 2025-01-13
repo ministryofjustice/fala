@@ -11,6 +11,10 @@ class FalaPage(object):
         return self._page.get_by_text("There is a problem")
 
     @property
+    def exit_button(self):
+        return self._page.get_by_text("Exit this page")
+
+    @property
     def language_dropdown(self):
         return self._page.locator('select[class="goog-te-combo"]')
 
@@ -69,6 +73,20 @@ class SearchPage(FalaPage):
 
     def checkbox_by_label(self, label):
         return self._page.get_by_label(label)
+
+    def search(self, postcode):
+        self._page.locator("#id_postcode").fill(postcode)
+        self._page.locator("#searchButton").click()
+
+
+class SingleCategorySearchPage(FalaPage):
+    @property
+    def postcode_input_field(self):
+        return self._page.get_by_label("Postcode")
+
+    @property
+    def search_button(self):
+        return self.item_from_text("Search")
 
     def search(self, postcode):
         self._page.locator("#id_postcode").fill(postcode)
