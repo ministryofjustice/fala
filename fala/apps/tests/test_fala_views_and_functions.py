@@ -6,7 +6,7 @@ from django.urls import reverse
 class SearchViewFunctionTest(SimpleTestCase):
     client = Client()
 
-    url = reverse("search")
+    url = reverse("results")
 
     def test_invalid_postcode_generates_error(self):
         response = self.client.get(self.url, {"postcode": "ZZZ"})
@@ -15,7 +15,7 @@ class SearchViewFunctionTest(SimpleTestCase):
 
 class ResultsPageWithBothOrgAndPostcodeTest(SimpleTestCase):
     client = Client()
-    url = reverse("search")
+    url = reverse("results")
 
     data = {"postcode": "pe30", "name": "bu", "categories": "deb"}
 
@@ -71,7 +71,7 @@ class ResultsPageWithBothOrgAndPostcodeTest(SimpleTestCase):
 
 class PaginationTest(SimpleTestCase):
     client = Client()
-    url = reverse("search")
+    url = reverse("results")
 
     def test_prev_pagination_link_contains_category(self):
         data = {"postcode": "PE30", "categories": "deb", "page": "2"}
@@ -130,7 +130,7 @@ class PaginationTest(SimpleTestCase):
 
 class ResultsPageWithJustPostcodeTest(SimpleTestCase):
     client = Client()
-    url = reverse("search")
+    url = reverse("results")
 
     data = {"postcode": "PE30", "categories": "deb"}
 
@@ -169,7 +169,7 @@ class ResultsPageWithJustPostcodeTest(SimpleTestCase):
 
 class ResearchBannerTest(SimpleTestCase):
     client = Client()
-    url = reverse("search")
+    url = reverse("results")
 
     data = {"name": "foo", "categories": ["deb", "edu"]}
 
@@ -188,7 +188,7 @@ class ResearchBannerTest(SimpleTestCase):
 
 class MaintenanceModeTest(SimpleTestCase):
     client = Client()
-    url = reverse("search")
+    url = reverse("results")
 
     data = {"name": "foo", "categories": ["deb", "edu"]}
 
@@ -207,7 +207,7 @@ class MaintenanceModeTest(SimpleTestCase):
 
 class ResultsPageWithJustOrgTest(SimpleTestCase):
     client = Client()
-    url = reverse("search")
+    url = reverse("results")
 
     data = {"name": "foo", "categories": ["deb", "edu"]}
 
@@ -222,7 +222,7 @@ class ResultsPageWithJustOrgTest(SimpleTestCase):
 
 class SingleCategoryResultsPageTest(SimpleTestCase):
     client = Client()
-    url = reverse("search")
+    url = reverse("results")
 
     def test_single_category_results_for_mental_health(self):
         self.data = {"tailored_results": "true", "postcode": "SE11", "categories": ["mhe"]}
@@ -242,7 +242,7 @@ class SingleCategoryResultsPageTest(SimpleTestCase):
 
 class ResultsPageWhenCategoryIsFamily(SimpleTestCase):
     client = Client()
-    url = reverse("search")
+    url = reverse("results")
 
     def test_results_for_exit_button_when_tailored_results(self):
         self.data = {"tailored_results": "true", "postcode": "SE11", "categories": ["mat"]}
@@ -283,7 +283,7 @@ class NewSearchViewTemplate(SimpleTestCase):
 class NoResultsTest(SimpleTestCase):
     client = Client()
 
-    url = reverse("search")
+    url = reverse("results")
 
     response = client.get(url, {"name": "burns", "categories": "com"})
 
@@ -303,7 +303,7 @@ class AccessibilityViewTest(SimpleTestCase):
 
 class ErrorPageTest(SimpleTestCase):
     client = Client()
-    url = reverse("search")
+    url = reverse("results")
 
     def test_raises_404_when_page_number_does_not_exist(
         self,

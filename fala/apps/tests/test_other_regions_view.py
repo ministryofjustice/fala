@@ -5,7 +5,7 @@ import bs4
 
 class PostcodeValidationTest(SimpleTestCase):
     client = Client()
-    url = reverse("search")
+    url = reverse("results")
 
     def test_region_postcodes(self):
         test_cases = [
@@ -63,7 +63,7 @@ class PostcodeValidationTest(SimpleTestCase):
 
 class InvalidPostcodeTest(SimpleTestCase):
     client = Client()
-    url = reverse("search")
+    url = reverse("results")
 
     def test_invalid_postcodes_error_messages(self):
         invalid_postcodes = ["ML3 9PP", "INVALID1", "ZZ20 7QQ"]  # Add more invalid postcodes as needed
