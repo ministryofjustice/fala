@@ -2,7 +2,7 @@
 from django.conf import settings
 from django.urls import re_path
 from fala.apps.adviser.views import AdviserSearchView
-from fala.apps.cla_search.views import SingleCategorySearchView
+from fala.apps.category_search.views import SingleCategorySearchView
 from fala.common.results_view import ResultsView
 from fala.common.footer_views import (
     AccessibilityView,
