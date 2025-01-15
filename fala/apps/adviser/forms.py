@@ -1,10 +1,9 @@
 # coding=utf-8
-
 from django import forms
 from django.utils.translation import gettext_lazy as _
 from django.utils.safestring import mark_safe
-from fala.apps.adviser.regions import Region
-from fala.apps.adviser.utils import validate_postcode_and_return_country
+from fala.common.regions import Region
+from fala.common.utils import validate_postcode_and_return_country
 import laalaa.api as laalaa
 
 

@@ -1,6 +1,6 @@
 from django.http import Http404
-from fala.apps.adviser.regions import Region
-from fala.apps.adviser.laa_laa_paginator import LaaLaaPaginator
+from fala.common.regions import Region
+from fala.common.laa_laa_paginator import LaaLaaPaginator
 import urllib
 from django.conf import settings
 
