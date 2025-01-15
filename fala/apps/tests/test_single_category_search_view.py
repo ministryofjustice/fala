@@ -25,7 +25,7 @@ class SingleCategorySearchViewTests(TestCase):
 
     def test_handles_invalid_category_code_clinical_negligence(self):
         response = self.client.get(reverse("single_category_search_query") + "?categories=invalid")
-        self.assertRedirects(response, reverse("search"))
+        self.assertRedirects(response, reverse("adviser"))
 
     def test_redirects_to_correct_category_url_welfare_benefits(self):
         response = self.client.get(
@@ -35,7 +35,7 @@ class SingleCategorySearchViewTests(TestCase):
 
     def test_handles_invalid_category_code_welfare_benefits(self):
         response = self.client.get(reverse("single_category_search_query") + "?categories=invalid")
-        self.assertRedirects(response, reverse("search"))
+        self.assertRedirects(response, reverse("adviser"))
 
     def test_displays_search_form_clinical_negligence(self):
         response = self.client.get(self.clinical_negligence_url)

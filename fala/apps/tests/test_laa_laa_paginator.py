@@ -1,6 +1,6 @@
 from django.test import SimpleTestCase
 
-from fala.apps.adviser.laa_laa_paginator import LaaLaaPaginator
+from fala.common.laa_laa_paginator import LaaLaaPaginator
 
 
 class LaaLaaPaginatorTest(SimpleTestCase):
