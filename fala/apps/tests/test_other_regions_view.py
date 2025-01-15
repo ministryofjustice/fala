@@ -47,18 +47,12 @@ class PostcodeValidationTest(SimpleTestCase):
                 response = self.client.get(self.url, data)
                 self.assertNotContains(response, case["message"])
 
-    def test_other_region_form_and_change_search_button_visible(self):
+    def test_back_link_is_visible(self):
         data = {"postcode": "IM4"}
         response = self.client.get(self.url, data)
         soup = bs4.BeautifulSoup(response.content, "html.parser")
-        form = soup.find("form", {"action": "/", "method": "get"})
-        button = soup.find("button", {"type": "submit", "data-module": "govuk-button"})
-        self.assertIsNotNone(form)
-        self.assertIsNotNone(button)
-
-        change_search_button = soup.find("button", {"id": "otherRegionChangeSearchButton"})
-        self.assertIsNotNone(change_search_button)
-        self.assertEqual(change_search_button.text.strip(), "Change search")
+        back_link = soup.find("a", class_="govuk-back-link")
+        self.assertIsNotNone(back_link, "Back button is not visible on the results page.")
 
 
 class InvalidPostcodeTest(SimpleTestCase):
