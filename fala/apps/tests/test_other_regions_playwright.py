@@ -4,11 +4,11 @@ from fala.playwright.setup import PlaywrightTestSetup
 
 class OtherRegionsTest(PlaywrightTestSetup):
     def test_jersey(self):
-        results_page = self.visit_results_page(postcode="JE1")
-        expect(results_page.h1).to_have_text("The postcode JE1 is in Jersey")
-        search_page = results_page.change_search()
-        # We don't preserve Jersey postcodes search term, by design, as we don't want residents from Jersey to use our service
-        expect(search_page.item_from_text("Name of organisation you are looking for (optional)")).to_be_visible()
+        page = self.visit_results_page(postcode="JE1")
+        expect(page.h1).to_have_text("The postcode JE1 is in Jersey")
+        back_link = page.back_link
+        back_link.click()
+        expect(page.h1).to_have_text("Find a legal aid adviser or family mediator")
 
     def test_scotland_with_persistant_search_and_categories(self):
         checkboxes = ["Family mediation", "Clinical Negligence"]

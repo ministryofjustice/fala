@@ -55,7 +55,9 @@ class ResultsPage(FalaPage):
 
 
 class OtherRegionPage(FalaPage):
-    pass
+    @property
+    def back_link(self):
+        return self._page.locator(".govuk-back-link")
 
 
 class SearchPage(FalaPage):
