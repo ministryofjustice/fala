@@ -18,4 +18,6 @@ env:
     value: {{ .Values.feature_flags.maintenance_mode }}
   - name: FEATURE_FLAG_SINGLE_CATEGORY_SEARCH_FORM
     value: {{ .Values.feature_flags.single_category_search }}
+  - name: FEATURE_FLAG_WELSH_TRANSLATION
+    value: {{ .Values.feature_flags.welsh_translation }}
 {{- end }}
