@@ -2,7 +2,7 @@
 from django.conf import settings
 from django.urls import resolve, reverse
 from django.views.generic import TemplateView
-from .forms import AdviserRootForm
+from fala.common.base_form_components import AdviserRootForm
 from fala.common.mixin_for_views import CommonContextMixin
 
 

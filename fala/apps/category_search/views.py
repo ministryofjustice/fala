@@ -3,7 +3,7 @@ from django.conf import settings
 from django.urls import reverse
 from django.views.generic import TemplateView
 from django.http import HttpResponse
-from adviser.forms import SingleCategorySearchForm
+from category_search.forms import SingleCategorySearchForm
 from django.shortcuts import redirect
 from fala.common.mixin_for_views import CommonContextMixin, CategoryMixin
 from fala.common.category_messages import CATEGORY_MESSAGES
