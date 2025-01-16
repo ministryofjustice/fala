@@ -1,4 +1,5 @@
 from jinja2 import Environment, ChoiceLoader, PrefixLoader, PackageLoader
+from django.utils import translation
 
 
 def environment(**options):
@@ -8,5 +9,6 @@ def environment(**options):
     )
     options["loader"] = loader_with_govuk_frontend
 
-    env = Environment(**options)
+    env = Environment(**options, extensions=["jinja2.ext.i18n", "jinja2.ext.with_"])
+    env.install_gettext_translations(translation)
     return env
