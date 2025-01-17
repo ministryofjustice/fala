@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fala\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-17 15:23+0000\n"
+"POT-Creation-Date: 2025-01-17 16:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -114,13 +114,245 @@ msgid ""
 "mediator - GOV.UK"
 msgstr ""
 
+#: fala/templates/adviser/_cookie_banner.html:5
+msgid "We use some essential cookies to make this service work."
+msgstr ""
+
+#: fala/templates/adviser/_cookie_banner.html:6
+msgid ""
+"We’d like to set additional cookies so we can remember your settings, "
+"understand how people use the service and make improvements."
+msgstr ""
+
+#: fala/templates/adviser/_cookie_banner.html:10
+msgid "You’ve accepted additional cookies. You can "
+msgstr ""
+
+#: fala/templates/adviser/_cookie_banner.html:10
+#: fala/templates/adviser/_cookie_banner.html:14
+msgid "change your cookie settings"
+msgstr ""
+
+#: fala/templates/adviser/_cookie_banner.html:10
+#: fala/templates/adviser/_cookie_banner.html:14
+msgid " at any time."
+msgstr ""
+
+#: fala/templates/adviser/_cookie_banner.html:14
+msgid "You’ve rejected additional cookies. You can "
+msgstr ""
+
+#: fala/templates/adviser/_cookie_banner.html:17
+#: fala/templates/adviser/_cookie_banner.html:18
+msgid "Cookies on Find a legal adviser or family mediator"
+msgstr ""
+
+#: fala/templates/adviser/_cookie_banner.html:19
+msgid "Accept analytics cookies"
+msgstr ""
+
+#: fala/templates/adviser/_cookie_banner.html:20
+msgid "Reject analytics cookies"
+msgstr ""
+
+#: fala/templates/adviser/_cookie_banner.html:21
+msgid "View cookies"
+msgstr ""
+
+#: fala/templates/adviser/_cookie_banner.html:22
+msgid "Hide this message"
+msgstr ""
+
+#: fala/templates/adviser/_footer.html:5
+msgid "Support links"
+msgstr ""
+
+#: fala/templates/adviser/_footer.html:9 fala/templates/adviser/privacy.html:3
+#: fala/templates/adviser/privacy.html:9
+msgid "Privacy"
+msgstr ""
+
+#: fala/templates/adviser/_footer.html:14
+msgid "Cookies"
+msgstr ""
+
+#: fala/templates/adviser/_footer.html:19
+#: fala/templates/adviser/privacy.html:15
+msgid "Legal Aid Agency"
+msgstr ""
+
+#: fala/templates/adviser/_footer.html:24
+msgid "Accessibility statement"
+msgstr ""
+
+#: fala/templates/adviser/_footer.html:28
+msgid "Built by"
+msgstr ""
+
+#: fala/templates/adviser/_footer.html:30
+msgid "Digital Services"
+msgstr ""
+
+#: fala/templates/adviser/_footer.html:39
+msgid "All content is available under the"
+msgstr ""
+
+#: fala/templates/adviser/_footer.html:40
+msgid "Open Government Licence v3.0"
+msgstr ""
+
+#: fala/templates/adviser/_footer.html:40
+msgid ", except where otherwise stated"
+msgstr ""
+
+#: fala/templates/adviser/_footer.html:44
+msgid "© Crown copyright"
+msgstr ""
+
+#: fala/templates/adviser/_research_banner.html:4
+msgid "Help improve this legal adviser search"
+msgstr ""
+
+#: fala/templates/adviser/_research_banner.html:6
+msgid "Take part (opens in new tab)"
+msgstr ""
+
+#: fala/templates/adviser/_results_heading.html:4
+msgid "Your closest legal aid advisers and family mediators"
+msgstr ""
+
+#: fala/templates/adviser/_results_heading.html:6
+msgid "Your closest legal aid advisers for the "
+msgstr ""
+
+#: fala/templates/adviser/_results_heading.html:8
+msgid "Your closest legal aid advisers for "
+msgstr ""
+
+#: fala/templates/adviser/_results_heading.html:11
+#: fala/templates/adviser/single_category_search.html:5
+msgid "Search results"
+msgstr ""
+
+#: fala/templates/adviser/_scotland_warning.html:3
+msgid ""
+"These results cover England and Wales. Find out about <a class=\"govuk-"
+"link\" href=\"https://www.mygov.scot/legal-aid/\">Legal Aid in Scotland.</a>"
+msgstr ""
+
+#: fala/templates/adviser/accessibility_statement.html:3
+#: fala/templates/adviser/accessibility_statement.html:9
+msgid "Accessibility statement for Find a legal advisor"
+msgstr ""
+
+#: fala/templates/adviser/accessibility_statement.html:12
+msgid ""
+"This accessibility statement applies to the ‘Find a legal advisor’ service."
+msgstr ""
+
+#: fala/templates/adviser/accessibility_statement.html:21
+msgid ""
+"change colours, contrast levels and fonts using browser or device settings"
+msgstr ""
+
+#: fala/templates/adviser/accessibility_statement.html:22
+#, python-format
+msgid "zoom in up to 400%% without the text spilling off the screen"
+msgstr ""
+
+#: fala/templates/adviser/accessibility_statement.html:23
+msgid ""
+"navigate most of the website using a keyboard or speech recognition software"
+msgstr ""
+
+#: fala/templates/adviser/accessibility_statement.html:24
+msgid ""
+"listen to most of the website using a screen reader (including the most "
+"recent versions of JAWS, NVDA and VoiceOver)"
+msgstr ""
+
+#: fala/templates/adviser/accessibility_statement.html:28
+msgid "We’ve also made the website text as simple as possible to understand."
+msgstr ""
+
+#: fala/templates/adviser/accessibility_statement.html:36
+msgid "How accessible this website is"
+msgstr ""
+
+#: fala/templates/adviser/accessibility_statement.html:39
+msgid "We know some parts of this website are not fully accessible:"
+msgstr ""
+
+#: fala/templates/adviser/accessibility_statement.html:43
+msgid "elements of the results page do not meet minimum contrast standards"
+msgstr ""
+
+#: fala/templates/adviser/accessibility_statement.html:44
+msgid "Google Translate does not translate technical terms into Plain English"
+msgstr ""
+
+#: fala/templates/adviser/accessibility_statement.html:45
+msgid ""
+"hyperlinks to google maps are not specific about the listing they are "
+"related to"
+msgstr ""
+
+#: fala/templates/adviser/accessibility_statement.html:48
+msgid "Feedback and contact information"
+msgstr ""
+
+#: fala/templates/adviser/accessibility_statement.html:56
+msgid "Enforcement procedure"
+msgstr ""
+
+#: fala/templates/adviser/accessibility_statement.html:67
+msgid "Technical information about this website’s accessibility"
+msgstr ""
+
+#: fala/templates/adviser/accessibility_statement.html:76
+msgid "Compliance status"
+msgstr ""
+
+#: fala/templates/adviser/accessibility_statement.html:83
+msgid "Non-accessible content"
+msgstr ""
+
+#: fala/templates/adviser/accessibility_statement.html:85
+msgid "The content listed below is non-accessible for the following reasons."
+msgstr ""
+
+#: fala/templates/adviser/accessibility_statement.html:96
+msgid "Disproportionate burden"
+msgstr ""
+
+#: fala/templates/adviser/accessibility_statement.html:98
+#: fala/templates/adviser/accessibility_statement.html:102
+msgid "Not applicable"
+msgstr ""
+
+#: fala/templates/adviser/accessibility_statement.html:100
+msgid "Content that’s not within the scope of the accessibility regulations"
+msgstr ""
+
+#: fala/templates/adviser/accessibility_statement.html:104
+msgid "Preparation of this accessibility statement"
+msgstr ""
+
+#: fala/templates/adviser/accessibility_statement.html:107
+msgid ""
+"This statement was prepared on 11 November 2020. It was last reviewed on 13 "
+"June 2024."
+msgstr ""
+
+#: fala/templates/adviser/accessibility_statement.html:116
+msgid ""
+"This statement will be reviewed by June 2025. We plan to audit the website "
+"against the WCAG 2.2 AA standard by June 2025."
+msgstr ""
+
 #: fala/templates/adviser/adviser_base.html:6
 #: fala/templates/adviser/search.html:21
 msgid "Find a legal aid adviser or family mediator"
-msgstr ""
-
-#: fala/templates/adviser/privacy.html:3 fala/templates/adviser/privacy.html:9
-msgid "Privacy"
 msgstr ""
 
 #: fala/templates/adviser/privacy.html:11
@@ -129,10 +361,6 @@ msgstr ""
 
 #: fala/templates/adviser/privacy.html:14
 msgid "This service is provided by the"
-msgstr ""
-
-#: fala/templates/adviser/privacy.html:15
-msgid "Legal Aid Agency"
 msgstr ""
 
 #: fala/templates/adviser/privacy.html:16
@@ -549,10 +777,6 @@ msgstr ""
 msgid ""
 "If you are a provider and your details are incorrect, contact your contract "
 "manager."
-msgstr ""
-
-#: fala/templates/adviser/single_category_search.html:5
-msgid "Search results"
 msgstr ""
 
 #: fala/templates/adviser/single_category_search.html:37
