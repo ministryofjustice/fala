@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# FALA WELSH TRANSLATIONS.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# FIRST AUTHOR: MASUM.KHAN@DIGITAL.JUSTICE.GOV.UK, 2025.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: fala\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-17 10:28+0000\n"
+"POT-Creation-Date: 2025-01-17 12:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -89,8 +89,153 @@ msgstr ""
 msgid "Find a legal aid adviser or family mediator"
 msgstr ""
 
-#: fala/templates/adviser/privacy.html:3
+#: fala/templates/adviser/privacy.html:3 fala/templates/adviser/privacy.html:9
 msgid "Privacy"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:11
+msgid "What data we collect"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:14
+msgid "This service is provided by the"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:15
+msgid "Legal Aid Agency"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:15
+msgid "LAA"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:16
+msgid "part of the Ministry of Justice"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:16
+msgid "MoJ"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:20
+msgid "We do not collect any"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:21
+msgid "personal information"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:22
+msgid "that could identify an individual in this service."
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:26
+msgid ""
+"We do collect personal information about individuals using this website. "
+"This information is collected separately from and cannot be linked to "
+"information submitted. We collect:"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:28
+msgid "your Internet Protocol "
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:28
+msgid "IP"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:28
+msgid " address"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:29
+msgid "details of which version of "
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:29
+msgid "web browser"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:29
+msgid " you used"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:30
+msgid ""
+"information on how you use the site, using cookies and page tagging "
+"techniques"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:31
+msgid "the search information you enter, such as postcode or organisation"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:36
+msgid "Where you provide your consent, we use "
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:36
+msgid "Google Analytics"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:36
+msgid " cookies. Google Analytics processes information about:"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:38
+msgid "the pages you visit"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:39
+msgid "the categories you use to search"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:40
+msgid "the postcode you use to search"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:41
+msgid "how long you spend on each page"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:42
+msgid "how you arrived at the service"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:43
+msgid "what you click on while you visit the service"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:44
+msgid "the device and browser you use"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:49
+msgid "We make sure you cannot be identified by Google Analytics data. "
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:50
+msgid ""
+"We do not pass any of your personal data to Google Analytics, and Google "
+"Analytics does not store your IP address."
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:54
+msgid ""
+"We will not combine analytics information with other data sets in a way that "
+"would identify who you are."
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:57
+msgid "Why we need your data"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:60
+msgid "We collect your data to:"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:62
+msgid "provide you with information about local services"
 msgstr ""
 
 #: fala/templates/adviser/results.html:98
