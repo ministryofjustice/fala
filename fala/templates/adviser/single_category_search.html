@@ -59,10 +59,10 @@
         <input type="hidden" name="tailored_results" value="true">
         {% if 'postcode' in form.errors or form.errors['__all__'] %}
           {{ govukInput({
-            'label': {'text': _("What is your postcode?"), 'classes': 'govuk-label--s'},
+            'label': {'text': POSTCODE_CATEGORY_LABEL, 'classes': 'govuk-label--s'},
             'value': form.postcode.value(),
             'errorMessage': {'text': form.errors['postcode'][0]},
-            'hint': {'text': _("For example, SW1H 9AJ")},
+            'hint': {'text': POSTCODE_CATEGORY_HINT},
             'attributes': {'maxLength': 30},
             'id': 'id_postcode',
             'classes': 'govuk-input--width-10',
@@ -70,9 +70,9 @@
           }) }}
         {% else %}
           {{ govukInput({
-            'label': {'text': _("What is your postcode?"), 'classes': 'govuk-label--s'},
+            'label': {'text': POSTCODE_CATEGORY_LABEL, 'classes': 'govuk-label--s'},
             'value': form.postcode.value(),
-            'hint': {'text': _("For example, SW1H 9AJ")},
+            'hint': {'text': POSTCODE_CATEGORY_HINT},
             'attributes': {'maxLength': 30},
             'id': 'id_postcode',
             'classes': 'govuk-input--width-10',

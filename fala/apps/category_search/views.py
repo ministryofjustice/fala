@@ -7,6 +7,7 @@ from adviser.forms import SingleCategorySearchForm
 from django.shortcuts import redirect
 from fala.common.mixin_for_views import CommonContextMixin, CategoryMixin
 from fala.common.category_messages import CATEGORY_MESSAGES
+from fala.common.utils import POSTCODE_CATEGORY_LABEL, POSTCODE_CATEGORY_HINT
 
 
 class SingleCategorySearchView(CommonContextMixin, CategoryMixin, TemplateView):
@@ -41,6 +42,8 @@ class SingleCategorySearchView(CommonContextMixin, CategoryMixin, TemplateView):
                 "category_display_name": category_display_name,
                 "category_message": category_message,
                 "search_url": search_url,
+                "POSTCODE_CATEGORY_LABEL": POSTCODE_CATEGORY_LABEL,
+                "POSTCODE_CATEGORY_HINT": POSTCODE_CATEGORY_HINT,
             }
         )
         return self.render_to_response(context)

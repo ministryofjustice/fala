@@ -3,6 +3,7 @@ from fala.common.regions import Region
 from fala.common.laa_laa_paginator import LaaLaaPaginator
 import urllib
 from django.conf import settings
+from fala.common.utils import POSTCODE_CATEGORY_LABEL, POSTCODE_CATEGORY_HINT
 
 
 class EnglandOrWalesState(object):
@@ -189,4 +190,6 @@ class SingleSearchErrorState(object):
             "category_display_name": self.category_display_name,
             "category_message": self.category_message,
             "search_url": self.search_url,
+            "POSTCODE_CATEGORY_LABEL": POSTCODE_CATEGORY_LABEL,
+            "POSTCODE_CATEGORY_HINT": POSTCODE_CATEGORY_HINT,
         }
