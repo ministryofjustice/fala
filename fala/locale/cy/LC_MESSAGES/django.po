@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fala\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-17 12:03+0000\n"
+"POT-Creation-Date: 2025-01-17 12:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -105,16 +105,8 @@ msgstr ""
 msgid "Legal Aid Agency"
 msgstr ""
 
-#: fala/templates/adviser/privacy.html:15
-msgid "LAA"
-msgstr ""
-
 #: fala/templates/adviser/privacy.html:16
 msgid "part of the Ministry of Justice"
-msgstr ""
-
-#: fala/templates/adviser/privacy.html:16
-msgid "MoJ"
 msgstr ""
 
 #: fala/templates/adviser/privacy.html:20
@@ -138,10 +130,6 @@ msgstr ""
 
 #: fala/templates/adviser/privacy.html:28
 msgid "your Internet Protocol "
-msgstr ""
-
-#: fala/templates/adviser/privacy.html:28
-msgid "IP"
 msgstr ""
 
 #: fala/templates/adviser/privacy.html:28
@@ -236,6 +224,237 @@ msgstr ""
 
 #: fala/templates/adviser/privacy.html:62
 msgid "provide you with information about local services"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:63
+msgid "gather feedback to improve our services"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:64
+msgid "monitor use of the site to identify security threats"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:69
+msgid ""
+"We use the information we collect through Google Analytics to see how you "
+"use the service and to see how well it performs on your device."
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:73
+msgid "We do this to help:"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:75
+msgid "make sure the service is meeting the needs of its users"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:76
+msgid "make improvements to the service"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:77
+msgid ""
+"make performance improvements, for example improving page load time and data "
+"usage"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:81
+msgid "Our legal basis for processing your data"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:84
+msgid ""
+"The legal basis for processing personal data in relation to site security is "
+"our legitimate interests, and the legitimate interests of our users, in "
+"ensuring the security and integrity of this service."
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:85
+msgid ""
+"The legal basis for processing all other data is that it’s necessary to "
+"provide a service and our legitimate interest in understanding the usage of "
+"our service."
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:89
+msgid ""
+"The legal basis for processing data collected with Google Analytics in this "
+"service is your consent."
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:92
+msgid "What we do with your data"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:95
+msgid ""
+"The data we collect with Google Analytics cookies is transferred and stored "
+"with Google where we analyse it with Google Analytics software (Google "
+"Analytics 4). "
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:96
+msgid ""
+"We do not allow Google to use or share this data for their own purposes."
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:100
+msgid ""
+"No information that you provide will be shared outside the MoJ, other than "
+"with MoJ IT providers that provide services supporting the running of this "
+"service."
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:104
+msgid "We will not:"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:106
+msgid "sell or rent data to third parties"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:107
+msgid "share data with third parties for marketing purposes"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:111
+msgid "How long we keep your data"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:114
+msgid ""
+"We will only retain your data for as long as it is needed for the purposes "
+"set out on this page."
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:118
+msgid ""
+"We will retain summary logs of interactions with the service, but these logs "
+"are fully anonymous."
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:121
+msgid "Where your data is processed and stored"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:124
+msgid ""
+"We design, build and run our systems to make sure that your data is as safe "
+"as possible at all stages, both while it’s processed and when it’s stored. "
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:125
+msgid "All personal data is processed in the  "
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:128
+msgid "How we protect your data and keep it secure"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:131
+msgid "We are committed to doing all that we can to keep your data secure."
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:132
+msgid ""
+"We have set up systems and processes to prevent unauthorised access or "
+"disclosure of your data. "
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:135
+msgid "Links to other websites"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:138
+msgid "This service contains links to other websites."
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:142
+msgid ""
+"This privacy notice only applies to this service and does not cover other "
+"government services and transactions that we link to."
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:146
+msgid ""
+"If you follow a link to a service provided by another government department "
+"or agency, that organisation will:"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:148
+msgid "be the data controller"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:149
+msgid "be responsible for processing any data you share with them"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:150
+msgid ""
+"publish and manage their own privacy notice with details of how to contact "
+"them"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:154
+msgid "Contact us or make a complaint"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:157
+msgid "Contact us by email at "
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:157
+msgid " if you:"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:159
+msgid "have a question about anything in this privacy notice"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:160
+msgid "think that your personal data has been misused or mishandled"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:165
+msgid "You can also contact our Data Protection Officer "
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:181
+msgid "The DPO leads on all aspects of data protection for the MoJ."
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:185
+msgid "When we ask you for information, we will comply with the law. "
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:186
+msgid ""
+"If you consider that your information has been handled incorrectly, you can "
+"contact the Information Commissioner for independent advice about data "
+"protection."
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:187
+msgid "You can contact the Information Commissioner at:"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:196
+msgid "Find out about call charges"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:207
+msgid "Changes to this policy"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:210
+msgid ""
+"We may change this privacy policy. In that case, the ‘last updated’ date at "
+"the bottom of this page will also change. Any changes to this privacy policy "
+"will apply to you and your data immediately."
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:214
+msgid "Last updated 25 June 2024"
 msgstr ""
 
 #: fala/templates/adviser/results.html:98
