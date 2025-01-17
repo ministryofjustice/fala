@@ -1,8 +1,10 @@
 {%- from 'govuk_frontend_jinja/components/warning-text/macro.html' import govukWarningText -%}
 
+{% set legal_aid_in_scotland_warning_text = _("These results cover England and Wales. Find out about <a class=\"govuk-link\" href=\"https://www.mygov.scot/legal-aid/\">Legal Aid in Scotland.</a>") %}
+
 <div class="govuk-grid-column-two-thirds">
   {{ govukWarningText({
-                'html': "These results cover England and Wales. Find out about <a class=\"govuk-link\" href=\"https://www.mygov.scot/legal-aid/\">Legal Aid in Scotland.</a>",
+                'html': legal_aid_in_scotland_warning_text,
                 'id': "legal_aid_in_scotland_warning_text",
               }) }}
 </div>

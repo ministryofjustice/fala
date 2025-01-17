@@ -40,3 +40,15 @@ def validate_postcode_and_return_country(postcode, form=None):
         if form:
             form.add_error("postcode", _("Error looking up legal advisers. Please try again later."))
         return False
+
+
+# Django `makemessages` struggles to extract translation strings properly when they are part of nested dictionaries or templates.
+# Have extracted form labels & hints into this file.
+POSTCODE_CATEGORY_LABEL = _("What is your postcode?")
+POSTCODE_CATEGORY_HINT = _("For example, SW1H 9AJ")
+POSTCODE_LABEL = _("Postcode")
+POSTCODE_HINT = _("For example, NE31 1SF")
+ORG_LABEL = _("Name of organisation you are looking for (optional)")
+ORG_HINT = _("For example, Citizens Advice or Shelter")
+LEGAL_HINT = _("Legal problem (optional)")
+SEARCH_LABEL = _("Search")

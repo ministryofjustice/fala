@@ -2,20 +2,27 @@
   {% block bodyStart %}
     {% if "cookiePermission" not in request.COOKIES %}
       {% set html %}
-        <p class="govuk-body">We use some essential cookies to make this service work.</p>
-        <p class="govuk-body">We’d like to set additional cookies so we can remember your settings, understand how people use the service and make improvements.</p>
+        <p class="govuk-body">{{_('We use some essential cookies to make this service work.')}}</p>
+        <p class="govuk-body">{{_('We’d like to set additional cookies so we can remember your settings, understand how people use the service and make improvements.')}}</p>
       {% endset %}
       
       {% set acceptHtml %}
-        <p class="govuk-body">You’ve accepted additional cookies. You can <a class="govuk-link" href="/cookies">change your cookie settings</a> at any time.</p>
+        <p class="govuk-body">{{_('You’ve accepted additional cookies. You can ')}}<a class="govuk-link" href="/cookies">{{_('change your cookie settings')}}</a>{{_(' at any time.')}}</p>
       {% endset %}
       
       {% set rejectHtml %}
-        <p class="govuk-body">You’ve rejected additional cookies. You can <a class="govuk-link" href="/cookies">change your cookie settings</a> at any time.</p>
+        <p class="govuk-body">{{_('You’ve rejected additional cookies. You can ')}}<a class="govuk-link" href="/cookies">{{_('change your cookie settings')}}</a>{{_(' at any time.')}}</p>
       {% endset %}
-    
+
+      {% set ariaLabel = _("Cookies on Find a legal adviser or family mediator") %}
+      {% set headingText = _("Cookies on Find a legal adviser or family mediator") %}
+      {% set acceptCookies = _("Accept analytics cookies") %}
+      {% set rejectCookies = _("Reject analytics cookies") %}
+      {% set viewLink = _("View cookies") %}
+      {% set hideText = _("Hide this message") %}
+
       {{ govukCookieBanner({
-            'ariaLabel': "Cookies on Find a legal adviser or family mediator",
+            'ariaLabel': ariaLabel,
             'attributes': {
               'id': "cookie-banner"
             },
@@ -24,14 +31,14 @@
                 'attributes': {
                   'id': "default-message"
                 },
-                'headingText': "Cookies on Find a legal adviser or family mediator",
+                'headingText': headingText,
                 'html': html,
                 'actions': [
                   {
                     'attributes': {
                       'id': "accept-cookies"
                     },
-                    'text': "Accept analytics cookies",
+                    'text': acceptCookies,
                     'type': "button",
                     'name': "cookies",
                     'value': "accept"
@@ -40,7 +47,7 @@
                     'attributes': {
                       'id': "reject-cookies"
                     },
-                    'text': "Reject analytics cookies",
+                    'text': rejectCookies,
                     'type': "button",
                     'name': "cookies",
                     'value': "reject"
@@ -49,7 +56,7 @@
                     'attributes': {
                       'id': "cookies_banner_view_link"
                     },
-                    'text': "View cookies",
+                    'text': viewLink,
                     'href': "/cookies"
                   }
                 ]
@@ -66,7 +73,7 @@
                     'attributes': {
                       'id': "accepted-hide"
                     },
-                    'text': "Hide this message"
+                    'text': hideText
                   }
                 ]
               },
@@ -82,7 +89,7 @@
                     'attributes': {
                       'id': "rejected-hide"
                     },
-                    'text': "Hide this message"
+                    'text': hideText
                   }
                 ]
               }

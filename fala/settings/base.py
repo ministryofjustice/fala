@@ -9,6 +9,8 @@ from sentry_sdk.integrations.django import DjangoIntegration
 # Load environment variables from .env file
 from dotenv import load_dotenv
 
+from django.utils.translation import gettext_lazy as _
+
 # With override set to True the value of the variable in `.env` is loaded first https://pypi.org/project/python-dotenv/#variable-expansion
 load_dotenv(override=True)
 
@@ -55,6 +57,17 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+
+LOCALE_PATHS = (os.path.join(PROJECT_ROOT, "locale"),)
+
+
+LANGUAGE_CODE = "en"  # default language
+
+LANGUAGES = (
+    ("en", _("English")),
+    ("cy", _("Cymraeg")),
+)
 
 MEDIA_ROOT = root("assets", "uploads")
 
@@ -116,6 +129,7 @@ MIDDLEWARE = (
     "django.middleware.security.SecurityMiddleware",
     "csp.middleware.CSPMiddleware",
     "adviser.middleware.BlockRobotsFromStagingMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
 )
 
 CSP_DEFAULT_SRC = ["'self'", "*.googletagmanager.com"]

@@ -4,6 +4,7 @@ from django.urls import resolve, reverse
 from django.views.generic import TemplateView
 from .forms import AdviserRootForm
 from fala.common.mixin_for_views import CommonContextMixin
+from fala.common.utils import POSTCODE_LABEL, POSTCODE_HINT, ORG_LABEL, ORG_HINT, LEGAL_HINT, SEARCH_LABEL
 
 
 class AdviserSearchView(CommonContextMixin, TemplateView):
@@ -22,6 +23,12 @@ class AdviserSearchView(CommonContextMixin, TemplateView):
                 "errorList": [],
                 "current_url": current_url,
                 "CHECK_LEGAL_AID_URL": settings.CHECK_LEGAL_AID_URL,
+                "POSTCODE_LABEL": POSTCODE_LABEL,
+                "POSTCODE_HINT": POSTCODE_HINT,
+                "ORG_LABEL": ORG_LABEL,
+                "ORG_HINT": ORG_HINT,
+                "LEGAL_HINT": LEGAL_HINT,
+                "SEARCH_LABEL": SEARCH_LABEL,
             }
         )
 

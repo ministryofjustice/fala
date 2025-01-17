@@ -3,6 +3,16 @@ from fala.common.regions import Region
 from fala.common.laa_laa_paginator import LaaLaaPaginator
 import urllib
 from django.conf import settings
+from fala.common.utils import (
+    POSTCODE_CATEGORY_LABEL,
+    POSTCODE_CATEGORY_HINT,
+    POSTCODE_HINT,
+    POSTCODE_LABEL,
+    ORG_LABEL,
+    ORG_HINT,
+    LEGAL_HINT,
+    SEARCH_LABEL,
+)
 
 
 class EnglandOrWalesState(object):
@@ -148,7 +158,17 @@ class ErrorState(object):
                 item = {"text": error[0], "href": f"#id_{field}"}
             errorList.append(item)
 
-        return {"form": self._form, "data": {}, "errorList": errorList}
+        return {
+            "form": self._form,
+            "data": {},
+            "errorList": errorList,
+            "POSTCODE_LABEL": POSTCODE_LABEL,
+            "POSTCODE_HINT": POSTCODE_HINT,
+            "ORG_LABEL": ORG_LABEL,
+            "ORG_HINT": ORG_HINT,
+            "LEGAL_HINT": LEGAL_HINT,
+            "SEARCH_LABEL": SEARCH_LABEL,
+        }
 
 
 class SingleSearchErrorState(object):
@@ -189,4 +209,6 @@ class SingleSearchErrorState(object):
             "category_display_name": self.category_display_name,
             "category_message": self.category_message,
             "search_url": self.search_url,
+            "POSTCODE_CATEGORY_LABEL": POSTCODE_CATEGORY_LABEL,
+            "POSTCODE_CATEGORY_HINT": POSTCODE_CATEGORY_HINT,
         }
