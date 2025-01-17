@@ -8,7 +8,8 @@ def environment(**options):
         [current_loader, PrefixLoader({"govuk_frontend_jinja": PackageLoader("govuk_frontend_jinja")})]
     )
     options["loader"] = loader_with_govuk_frontend
+    options["extensions"] = options.get("extensions", []) + ["jinja2.ext.i18n"]
 
-    env = Environment(**options, extensions=["jinja2.ext.i18n", "jinja2.ext.with_"])
+    env = Environment(**options)
     env.install_gettext_translations(translation)
     return env

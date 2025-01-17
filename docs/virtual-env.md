@@ -150,3 +150,25 @@ To run them manually:
 ```
 pre-commit run --all-files
 ```
+
+## Translations and Internalisations
+
+Django is the web-framework, Jinja2 is a templating language for Python, and i18n is an acronym which stands for internationalization.
+
+
+Typical workflow:
+
+- Create/update the `django.po` file with translatable strings (these `-i` flags, ignore folders where we don't want to translate):
+
+```bash
+python manage.py makemessages -l cy -i fala/locale -i locale -i venv
+```
+
+- Add translations in `django.po` file
+
+- Compile the translated `django.po` file into the optimised `django.mo` file:
+```bash
+python manage.py compilemessages -l cy -i locale -i venv
+``` 
+
+Django will use the `django.mo` file to display your application in Welsh when the user's language preference is set to Welsh.

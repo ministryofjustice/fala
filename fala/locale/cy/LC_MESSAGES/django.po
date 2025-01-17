@@ -1,0 +1,129 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-17 10:28+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n==1) ? 0 : (n==2) ? 1 : (n != 8 && n != "
+"11) ? 2 : 3;\n"
+
+#: fala/apps/adviser/forms.py:10
+msgid "Location"
+msgstr ""
+
+#: fala/apps/adviser/forms.py:10
+msgid "Organisation"
+msgstr ""
+
+#: fala/apps/adviser/forms.py:41
+msgid "Postcode"
+msgstr ""
+
+#: fala/apps/adviser/forms.py:49
+msgid "Organisation name"
+msgstr ""
+
+#: fala/apps/adviser/forms.py:56
+msgid "Category"
+msgstr ""
+
+#: fala/apps/adviser/forms.py:77
+msgid "Error looking up legal advisers."
+msgstr ""
+
+#: fala/apps/adviser/forms.py:77
+msgid "Please try again later."
+msgstr ""
+
+#: fala/apps/adviser/forms.py:105
+msgid "This service is only available for England and Wales"
+msgstr ""
+
+#: fala/apps/adviser/forms.py:123 fala/apps/adviser/forms.py:173
+msgid "Enter a postcode"
+msgstr ""
+
+#: fala/apps/adviser/forms.py:124
+msgid "Enter an organisation name"
+msgstr ""
+
+#: fala/apps/adviser/forms.py:136 fala/apps/adviser/forms.py:179
+msgid "Enter a valid postcode"
+msgstr ""
+
+#: fala/apps/adviser/forms.py:185
+msgid "Category is required."
+msgstr ""
+
+#: fala/common/utils.py:41
+msgid "Error looking up legal advisers. Please try again later."
+msgstr ""
+
+#: fala/settings/base.py:68
+msgid "English"
+msgstr ""
+
+#: fala/settings/base.py:69
+msgid "Cymraeg"
+msgstr ""
+
+#: fala/templates/500.html:6
+msgid ""
+"Sorry, there is a problem with the service - Find a legal advisor or family "
+"mediator - GOV.UK"
+msgstr ""
+
+#: fala/templates/adviser/adviser_base.html:6
+msgid "Find a legal aid adviser or family mediator"
+msgstr ""
+
+#: fala/templates/adviser/privacy.html:3
+msgid "Privacy"
+msgstr ""
+
+#: fala/templates/adviser/results.html:98
+#: fala/templates/adviser/results.html:109
+#, python-format
+msgid ""
+"\n"
+"          "
+msgid_plural ""
+"\n"
+"          <span class=\"govuk-!-font-weight-bold\" id=\"result-count-"
+"overall\">%(result_count)s results</span> in order of closeness to\n"
+"        "
+msgstr[0] ""
+msgstr[1] ""
+
+#: fala/templates/adviser/results.html:104
+msgid "matching"
+msgstr ""
+
+#: fala/templates/adviser/results.html:121
+msgid "Distance"
+msgstr ""
+
+#: fala/templates/adviser/results.html:122
+#, python-format
+msgid "%(miles)s miles away"
+msgstr ""
+
+#: fala/templates/adviser/results.html:129
+msgid "Address"
+msgstr ""
+
+#: fala/templates/adviser/results.html:140
+msgid "Can help with"
+msgstr ""
