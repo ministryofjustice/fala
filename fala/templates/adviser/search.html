@@ -41,13 +41,13 @@
             {% if 'postcode' in form.errors or form.errors['__all__'] %}
               {{ govukInput({
                 'label': {
-                  'text': _("Postcode"),
+                  'text': POSTCODE_LABEL,
                   'classes': 'govuk-label--s',
                 },
                 'value': form.postcode.value(),
                 'errorMessage': { 'text': form.errors['postcode'][0] },
                 'hint': {
-                  'text' : _("For example, NE31 1SF"),
+                  'text' : POSTCODE_HINT,
                   'classes': 'hint-colour-override',
                 },
                 'attributes': {
@@ -60,12 +60,12 @@
             {% else %}
               {{ govukInput({
                 'label': {
-                  'text': _("Postcode"),
+                  'text': POSTCODE_LABEL,
                   'classes': 'govuk-label--s',
                 },
                 'value': form.postcode.value(),
                 'hint': {
-                  'text' : _("For example, NE31 1SF"),
+                  'text' : POSTCODE_HINT,
                   'classes': 'hint-colour-override',
                 },
                 'attributes': {
@@ -79,7 +79,7 @@
             {% if 'name' in form.errors or form.errors['__all__'] %}
               {{ govukInput({
                 'label': {
-                  'text': _("Name of organisation you are looking for (optional)"),
+                  'text': ORG_LABEL,
                   'classes': 'govuk-label--s',
                 },
                 'attributes': {
@@ -88,7 +88,7 @@
                 'value': form.name.value(),
                 'errorMessage': { 'text': form.errors['name'][0] },
                 'hint': {
-                  'text' : _("For example, Citizens Advice or Shelter"),
+                  'text' : ORG_HINT,
                   'classes': 'hint-colour-override',
                 },
                 'id': 'id_name',
@@ -98,7 +98,7 @@
             {% else %}
               {{ govukInput({
                 'label': {
-                  'text': _("Name of organisation you are looking for (optional)"),
+                  'text': ORG_LABEL,
                   'classes': 'govuk-label--s',
                 },
                 'attributes': {
@@ -106,7 +106,7 @@
                 },
                 'value': form.name.value(),
                 'hint': {
-                  'text' : _("For example, Citizens Advice or Shelter"),
+                  'text' : ORG_HINT,
                   'classes': 'hint-colour-override',
                 },
                 'id': 'id_name',
@@ -123,7 +123,7 @@
                 'classes': 'govuk-checkboxes--small',
                 'fieldset': {
                     'legend': {
-                      'text': _("Legal problem (optional)"),
+                      'text': LEGAL_HINT,
                       'isPageHeading': false,
                       'classes': "govuk-fieldset__legend--s"
                     },
@@ -133,7 +133,7 @@
               }) }}
 
               {{ govukButton({
-                'text': _("Search"),
+                'text': SEARCH_LABEL,
                 'type': "submit",
                 'classes': "govuk-!-margin-bottom-2",
                 'id': "searchButton",

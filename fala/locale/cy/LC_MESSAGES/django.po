@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fala\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-17 15:01+0000\n"
+"POT-Creation-Date: 2025-01-17 15:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,7 +27,7 @@ msgstr ""
 msgid "Organisation"
 msgstr ""
 
-#: fala/apps/adviser/forms.py:41
+#: fala/apps/adviser/forms.py:41 fala/common/utils.py:49
 msgid "Postcode"
 msgstr ""
 
@@ -71,12 +71,33 @@ msgstr ""
 msgid "Error looking up legal advisers. Please try again later."
 msgstr ""
 
-#: fala/common/utils.py:46
+#: fala/common/utils.py:47
 msgid "What is your postcode?"
 msgstr ""
 
-#: fala/common/utils.py:47
+#: fala/common/utils.py:48
 msgid "For example, SW1H 9AJ"
+msgstr ""
+
+#: fala/common/utils.py:50
+msgid "For example, NE31 1SF"
+msgstr ""
+
+#: fala/common/utils.py:51
+msgid "Name of organisation you are looking for (optional)"
+msgstr ""
+
+#: fala/common/utils.py:52
+msgid "For example, Citizens Advice or Shelter"
+msgstr ""
+
+#: fala/common/utils.py:53
+msgid "Legal problem (optional)"
+msgstr ""
+
+#: fala/common/utils.py:54
+#: fala/templates/adviser/single_category_search.html:82
+msgid "Search"
 msgstr ""
 
 #: fala/settings/base.py:68
@@ -558,8 +579,4 @@ msgstr ""
 msgid ""
 "When you contact the adviser they'll ask about your problem and finances to "
 "work out if you can get legal aid."
-msgstr ""
-
-#: fala/templates/adviser/single_category_search.html:82
-msgid "Search"
 msgstr ""
