@@ -62,7 +62,7 @@ USE_TZ = True
 LOCALE_PATHS = (os.path.join(PROJECT_ROOT, "locale"),)
 
 
-LANGUAGE_CODE = "en"  # set default language
+LANGUAGE_CODE = "en"  # default language
 
 LANGUAGES = (
     ("en", _("English")),
