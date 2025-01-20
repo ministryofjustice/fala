@@ -167,7 +167,7 @@ python manage.py makemessages -l cy -i locale -i venv
 
 - Compile the translated `django.po` file into the optimised `django.mo` file:
 ```bash
-python manage.py compilemessages -l cy -i locale -i venv
+python manage.py compilemessages -l cy
 ``` 
 
 Django will use the `django.mo` file to display translations.
