@@ -25,8 +25,8 @@ body {
 
 .fala-tickbox-columns_new {
   // Default for mobile (1 column)
-  column-count: 1; 
-  // Adjust the gap between columns 
+  column-count: 1;
+  // Adjust the gap between columns
   column-gap: 16px;
 }
 
@@ -154,6 +154,10 @@ body.fala-dev {
   }
 }
 
+.language-switcher {
+  text-align: right;
+}
+
 .results-header {
   font-size: 19px;
   -webkit-font-smoothing: antialiased;
@@ -172,7 +176,7 @@ body.fala-dev {
   &:hover {
     background-color: govuk-colour("light-grey");
   }
-  
+
   &:focus {
     @include govuk-focused-text;
     background-color: $govuk-focus-colour;

@@ -44,6 +44,9 @@
   <div class="govuk-width-container">
     {% block global_subheader %}{% endblock %}
     <main id="main-content" class="govuk-main-wrapper" role="main">
+      {% if FEATURE_FLAG_WELSH_TRANSLATION %}
+        {% include 'adviser/_language_switcher.html' %}
+      {% endif %}
       <div class="govuk-grid-row">
         {% if FEATURE_FLAG_MAINTENANCE_MODE %}
           {% include 'maintenance_mode.html' %}
