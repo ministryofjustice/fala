@@ -2,6 +2,7 @@
 
 {%- from 'govuk_frontend_jinja/components/cookie-banner/macro.html' import govukCookieBanner -%}
 {%- from 'govuk_frontend_jinja/components/button/macro.html' import govukButton -%}
+{%- from 'govuk_frontend_jinja/components/back-link/macro.html' import govukBackLink -%}
 
 <head>
   <title {%- if pageTitleLang %} lang="{{ pageTitleLang }}"{% endif %}>{% block pageTitle %}{{_('GOV.UK - The best place to find government services and information')}}{% endblock %}</title>
