@@ -3,7 +3,7 @@ from django.conf import settings
 from django.urls import reverse
 from django.views.generic import TemplateView
 from django.http import HttpResponse
-from adviser.forms import SingleCategorySearchForm
+from category_search.forms import SingleCategorySearchForm
 from django.shortcuts import redirect
 from fala.common.mixin_for_views import CommonContextMixin, CategoryMixin
 from fala.common.category_messages import CATEGORY_MESSAGES
@@ -16,7 +16,7 @@ class SingleCategorySearchView(CommonContextMixin, CategoryMixin, TemplateView):
         context = self.get_context_data(**kwargs)
 
         if not settings.FEATURE_FLAG_SINGLE_CATEGORY_SEARCH_FORM:
-            return redirect("search")
+            return redirect("adviser")
 
         result = self.setup_category(request, *args, **kwargs)
         if isinstance(result, HttpResponse):

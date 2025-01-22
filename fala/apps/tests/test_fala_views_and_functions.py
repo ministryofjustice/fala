@@ -17,7 +17,7 @@ class ResultsPageWithBothOrgAndPostcodeTest(SimpleTestCase):
     client = Client()
     url = reverse("results")
 
-    data = {"postcode": "pe30", "name": "bu", "categories": "deb"}
+    data = {"postcode": "pe30", "name": "bu", "categories": "mat"}
 
     def test_category_search_has_just_user_input(self):
         response = self.client.get(self.url, self.data)
