@@ -1,7 +1,8 @@
 # coding=utf-8
 from django.urls import reverse
 from django.views.generic import ListView
-from fala.apps.adviser.forms import AdviserSearchForm, SingleCategorySearchForm
+from fala.apps.adviser.forms import AdviserSearchForm
+from fala.apps.category_search.forms import SingleCategorySearchForm
 from fala.common.states import EnglandOrWalesState, OtherJurisdictionState, ErrorState, SingleSearchErrorState
 from fala.common.mixin_for_views import CommonContextMixin, CategoryMixin
 from fala.common.category_messages import CATEGORY_MESSAGES
