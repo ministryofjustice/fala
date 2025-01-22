@@ -239,7 +239,7 @@ workflows:
           filters:
             branches:
               only:
-                - main
+                - build
           context:
             - laa-fala
             - laa-fala-live-staging
