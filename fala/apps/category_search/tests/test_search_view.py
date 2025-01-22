@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.conf import settings
 
 
-class SingleCategorySearchViewTests(TestCase):
+class SearchViewTests(TestCase):
     def setUp(self):
         self.client = Client()
         self.clinical_negligence_slug = "clinical-negligence"

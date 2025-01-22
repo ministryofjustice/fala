@@ -1,7 +1,7 @@
 import os
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from playwright.sync_api import sync_playwright
-from fala.apps.tests.page_objects import (
+from fala.common.test_utils.playwright.page_objects import (
     ResultsPage,
     OtherRegionPage,
     SearchPage,
