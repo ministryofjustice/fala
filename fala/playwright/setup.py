@@ -47,10 +47,7 @@ class PlaywrightTestSetup(StaticLiveServerTestCase):
         for label in checkbox_labels:
             page.get_by_label(label).check()
         page.get_by_role("button", name="Search").click()
-        if page.locator("#changeSearchButton").is_visible():
-            return ResultsPage(page)
-        else:
-            return OtherRegionPage(page)
+        return ResultsPage(page)
 
     def visit_results_page_with_full_search(self, postcode, organisation, checkbox_labels):
         page = self.browser.new_page()
@@ -60,10 +57,7 @@ class PlaywrightTestSetup(StaticLiveServerTestCase):
         for label in checkbox_labels:
             page.get_by_label(label).check()
         page.get_by_role("button", name="Search").click()
-        if page.locator("#changeSearchButton").is_visible():
-            return ResultsPage(page)
-        else:
-            return OtherRegionPage(page)
+        return ResultsPage(page)
 
     def visit_search_page_with_url_params(self, url_params):
         page = self.browser.new_page()
@@ -79,6 +73,16 @@ class PlaywrightTestSetup(StaticLiveServerTestCase):
         page = self.browser.new_page()
         page.goto(f"{self.live_server_url}/single-category-search{url_params}")
         return SingleCategorySearchPage(page)
+
+    def visit_single_category_search_results_page(self, url_params, postcode):
+        page = self.browser.new_page()
+        page.goto(f"{self.live_server_url}/single-category-search{url_params}")
+        page.get_by_label("Postcode").fill(postcode)
+        page.get_by_role("button", name="Search").click()
+        if page.locator("#changeSearchButton").is_visible():
+            return ResultsPage(page)
+        else:
+            return OtherRegionPage(page)
 
     def visit_cookies_page_from_footer(self):
         page = self.browser.new_page()
