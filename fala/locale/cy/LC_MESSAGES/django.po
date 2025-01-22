@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fala\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-20 12:44+0000\n"
+"POT-Creation-Date: 2025-01-22 11:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,52 +19,67 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n==1) ? 0 : (n==2) ? 1 : (n != 8 && n != "
 "11) ? 2 : 3;\n"
 
-#: fala/apps/adviser/forms.py:10
-msgid "Location"
-msgstr ""
-
-#: fala/apps/adviser/forms.py:10
-msgid "Organisation"
-msgstr ""
-
-#: fala/apps/adviser/forms.py:41 fala/templates/adviser/search.html:41
-msgid "Postcode"
-msgstr ""
-
-#: fala/apps/adviser/forms.py:49
-msgid "Organisation name"
-msgstr ""
-
-#: fala/apps/adviser/forms.py:56
-msgid "Category"
-msgstr ""
-
-#: fala/apps/adviser/forms.py:77
-msgid "Error looking up legal advisers."
-msgstr ""
-
-#: fala/apps/adviser/forms.py:77
-msgid "Please try again later."
-msgstr ""
-
-#: fala/apps/adviser/forms.py:105
-msgid "This service is only available for England and Wales"
-msgstr ""
-
-#: fala/apps/adviser/forms.py:123 fala/apps/adviser/forms.py:173
+#: fala/apps/adviser/forms.py:23 fala/apps/category_search/forms.py:22
 msgid "Enter a postcode"
 msgstr ""
 
-#: fala/apps/adviser/forms.py:124
+#: fala/apps/adviser/forms.py:24
 msgid "Enter an organisation name"
 msgstr ""
 
-#: fala/apps/adviser/forms.py:136 fala/apps/adviser/forms.py:179
+#: fala/apps/adviser/forms.py:36 fala/apps/category_search/forms.py:28
 msgid "Enter a valid postcode"
 msgstr ""
 
-#: fala/apps/adviser/forms.py:185
+#: fala/apps/category_search/forms.py:34
 msgid "Category is required."
+msgstr ""
+
+#: fala/common/base_form_components.py:30 fala/templates/adviser/search.html:41
+msgid "Postcode"
+msgstr ""
+
+#: fala/common/base_form_components.py:38
+msgid "Organisation name"
+msgstr ""
+
+#: fala/common/base_form_components.py:45
+msgid "Category"
+msgstr ""
+
+#: fala/common/base_form_components.py:66
+msgid "Error looking up legal advisers."
+msgstr ""
+
+#: fala/common/base_form_components.py:66
+msgid "Please try again later."
+msgstr ""
+
+#: fala/common/base_form_components.py:94
+msgid "This service is only available for England and Wales"
+msgstr ""
+
+#: fala/common/category_messages.py:4
+msgid ""
+"Tell the adviser your home is at risk and you want advice through the "
+"Housing Loss Prevention Advice Service."
+msgstr ""
+
+#: fala/common/category_messages.py:6
+msgid ""
+"Legal aid for advice about welfare benefits is only available if you are "
+"appealing a decision made by the social security tribunal. This appeal must "
+"be in the Upper Tribunal, Court of Appeal or Supreme Court.\n"
+"\n"
+"For any other benefits issue, ask the legal adviser if you can get free "
+"legal advice or if you will have to pay for it."
+msgstr ""
+
+#: fala/common/category_messages.py:10
+msgid ""
+"Legal aid for advice about clinical negligence is usually only available if "
+"you have a child that suffered a brain injury during pregnancy, birth or the "
+"first 8 weeks of life."
 msgstr ""
 
 #: fala/common/utils.py:41

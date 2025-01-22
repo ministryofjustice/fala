@@ -5,16 +5,20 @@
 {%- from 'govuk_frontend_jinja/components/radios/macro.html' import govukRadios -%}
 {%- from 'govuk_frontend_jinja/components/notification-banner/macro.html' import govukNotificationBanner -%}
 
+{% set successTitle = _('Success') %}
+{% set bodyText = _('Your cookie settings were saved') %}
+{% set bodyHTML = _('<h3 class="govuk-notification-banner__heading">Your cookie settings were saved</h3><p>Other government services may set additional cookies. These will have a separate cookie policy and banner.</p><p class="govuk-body"><a class="govuk-notification-banner__link" href="/">Go back to the page you were looking at</a></p>') %}
+{% set titleText = _("Do you want to accept analytics cookies?") %}
+{% set yes = _("Yes") %}
+{% set no = _("No") %}
+{% set buttonText = _("Save cookie settings") %}
+
 {% block content %}
   <div class="govuk-grid-column-full">
     <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
 
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
-        {% set successTitle = _('Success') %}
-        {% set bodyText = _('Your cookie settings were saved') %}
-        {% set bodyHTML = _('<h3 class="govuk-notification-banner__heading">Your cookie settings were saved</h3><p>Other government services may set additional cookies. These will have a separate cookie policy and banner.</p><p class="govuk-body"><a class="govuk-notification-banner__link" href="/">Go back to the page you were looking at</a></p>') %}
-
         {{ govukNotificationBanner({
           'type': 'success',
           'role': 'alert',
@@ -129,10 +133,6 @@
       </table>
 
       <form id="cookie_policy_page_choice">
-        {% set titleText = _("Do you want to accept analytics cookies?") %}
-        {% set yes = _("Yes") %}
-        {% set no = _("No") %}
-
         {{ govukRadios({
           'name': "cookies",
           'idPrefix': "cookies-analytics",
@@ -156,8 +156,6 @@
             }
           ]
         }) }}
-      
-        {% set buttonText = _("Save cookie settings") %}
 
         {{ govukButton({
           'text': buttonText,
