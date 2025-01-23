@@ -99,15 +99,7 @@
 
       <p class="govuk-body">
         {{_('Google Analytics stores information about')}}
-        <ul class="govuk-list govuk-list--bullet">
-          <li>{{_('the pages you visit')}}</li>
-          <li>{{_('the categories you use to search')}}</li>
-          <li>{{_('the postcode you use to search')}}</li>     
-          <li>{{_('how long you spend on each page')}}</li>
-          <li>{{_('how you arrived at the service')}}</li>
-          <li>{{_('what you click on while you visit the service')}}</li>
-          <li>{{_('the device and browser you use')}}</li>
-        </ul>
+        {% include 'adviser/_analytics_and_privacy_list.html' %}
       </p>
       
       <table class="govuk-table"><caption class="govuk-table__caption">{{_('Analytics cookies we use')}}</caption>
