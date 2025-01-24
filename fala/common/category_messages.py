@@ -1,7 +1,7 @@
 from django.utils.translation import gettext_lazy as _
 
 CATEGORY_MESSAGES = {
-    "hlpas": _(
+    "housing-loss-prevention-advice-service": _(
         "Tell the adviser your home is at risk and you want advice through the Housing Loss Prevention Advice Service."
     ),
     "welfare-benefits": _(
