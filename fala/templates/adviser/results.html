@@ -128,7 +128,9 @@
             <div class="address">
               <span class="govuk-visually-hidden">{{ _('Address') }}:</span>
                 <span class="notranslate" translate="no">{{ item.location.address.replace('\n', ', ') }},</span>
-                <span class="notranslate" translate="no">{{ item.location.city }},</span>
+                {% if item.location.city %}
+                  <span class="notranslate" translate="no">{{ item.location.city }},</span>
+                {% endif%}
                 <span class="notranslate" translate="no">{{ item.location.postcode }}</span>
             </div>
             <a class="govuk-link govuk-!-display-none-print" class="url" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?{{ item|google_map_params|urlencode }}">
