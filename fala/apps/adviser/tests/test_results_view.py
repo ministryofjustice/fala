@@ -199,7 +199,6 @@ class PaginationTest(SimpleTestCase):
 
 
 class ResearchBannerTest(SimpleTestCase):
-
     def setUp(self):
         self.client = Client()
         self.url = reverse("results")

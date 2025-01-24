@@ -1,11 +1,10 @@
-# single_category_search.py
 import re
 from django.test import TestCase, Client
 from django.urls import reverse
 from django.conf import settings
 
 
-class SearchViewTests(TestCase):
+class SearchViewTest(TestCase):
     def setUp(self):
         self.client = Client()
         self.clinical_negligence_slug = "clinical-negligence"

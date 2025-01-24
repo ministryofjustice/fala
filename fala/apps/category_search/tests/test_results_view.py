@@ -3,7 +3,7 @@ from django.urls import reverse
 from fala.common.test_utils.helpers import parse_html, find_element
 
 
-class ResultsViewTests(SimpleTestCase):
+class ResultsViewTest(SimpleTestCase):
     client = Client()
     url = reverse("results")
 
