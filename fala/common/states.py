@@ -3,6 +3,7 @@ from fala.common.regions import Region
 from fala.common.laa_laa_paginator import LaaLaaPaginator
 import urllib
 from django.conf import settings
+from django.utils.translation import gettext_lazy as _
 
 
 class EnglandOrWalesState(object):
@@ -90,19 +91,19 @@ class OtherJurisdictionState(object):
     REGION_TO_LINK = {
         Region.NI: {
             "link": "https://www.nidirect.gov.uk/articles/legal-aid-schemes",
-            "region": "Northern Ireland",
+            "region": _("Northern Ireland"),
         },
         Region.IOM: {
             "link": "https://www.gov.im/categories/benefits-and-financial-support/legal-aid/",
-            "region": "the Isle of Man",
+            "region": _("the Isle of Man"),
         },
         Region.JERSEY: {
             "link": "https://www.legalaid.je/",
-            "region": "Jersey",
+            "region": _("Jersey"),
         },
         Region.GUERNSEY: {
             "link": "https://www.gov.gg/legalaid",
-            "region": "Guernsey",
+            "region": _("Guernsey"),
         },
     }
 
