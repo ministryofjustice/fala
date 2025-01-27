@@ -1057,13 +1057,13 @@ msgstr "Problem gyfreithiol (dewisol)"
 #: fala/templates/adviser/search.html:46
 #: fala/templates/adviser/single_category_search.html:86
 msgid "Search"
-msgstr ""
+msgstr "Chwilio"
 
 #: fala/templates/adviser/search.html:156
 msgid ""
 "If you are a provider and your details are incorrect, contact your contract "
 "manager."
-msgstr ""
+msgstr "Os ydych chi’n ddarparwr ac mae eich manylion yn anghywir, cysylltwch rheolwr eich contract."
 
 #: fala/templates/adviser/single_category_search.html:37
 msgid "Find a legal aid adviser for "
