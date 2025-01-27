@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fala\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-23 15:14+0000\n"
+"POT-Creation-Date: 2025-01-27 12:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -574,33 +574,38 @@ msgid ""
 "device."
 msgstr ""
 
-#: fala/templates/adviser/other_region.html:8
+#: fala/templates/adviser/other_region.html:4
+#: fala/templates/adviser/results.html:26
+msgid "Back"
+msgstr ""
+
+#: fala/templates/adviser/other_region.html:5
+#: fala/templates/adviser/results.html:74
+msgid "Change search"
+msgstr ""
+
+#: fala/templates/adviser/other_region.html:15
 msgid "The postcode "
 msgstr ""
 
-#: fala/templates/adviser/other_region.html:8
+#: fala/templates/adviser/other_region.html:15
 msgid " is in "
 msgstr ""
 
-#: fala/templates/adviser/other_region.html:9
+#: fala/templates/adviser/other_region.html:16
 msgid "This search only covers England and Wales."
 msgstr ""
 
-#: fala/templates/adviser/other_region.html:11
+#: fala/templates/adviser/other_region.html:18
 msgid "Find out about "
 msgstr ""
 
-#: fala/templates/adviser/other_region.html:11
+#: fala/templates/adviser/other_region.html:18
 msgid "Legal Aid in "
 msgstr ""
 
-#: fala/templates/adviser/other_region.html:12
+#: fala/templates/adviser/other_region.html:19
 msgid "or try a different search."
-msgstr ""
-
-#: fala/templates/adviser/other_region.html:17
-#: fala/templates/adviser/results.html:74
-msgid "Change search"
 msgstr ""
 
 #: fala/templates/adviser/privacy.html:11
@@ -935,10 +940,6 @@ msgstr ""
 msgid "Last updated 25 June 2024"
 msgstr ""
 
-#: fala/templates/adviser/results.html:26
-msgid "Back"
-msgstr ""
-
 #: fala/templates/adviser/results.html:37
 msgid "No search results"
 msgstr ""
@@ -1099,6 +1100,6 @@ msgstr ""
 msgid "For example, SW1H 9AJ"
 msgstr "Er enghraifft, SW1H 9AJ"
 
-#: fala/templates/base.html:7
+#: fala/templates/base.html:8
 msgid "GOV.UK - The best place to find government services and information"
 msgstr ""

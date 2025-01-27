@@ -60,6 +60,13 @@ class PostcodeValidationTest(SimpleTestCase):
         self.assertIsNotNone(change_search_button)
         self.assertEqual(change_search_button.text.strip(), "Change search")
 
+    def test_back_link_is_visible(self):
+        data = {"tailored_results": "true", "categories": "immas", "postcode": "IM4"}
+        response = self.client.get(self.url, data)
+        soup = bs4.BeautifulSoup(response.content, "html.parser")
+        back_link = soup.find("a", class_="govuk-back-link")
+        self.assertIsNotNone(back_link, "Back button is not visible on the results page.")
+
 
 class InvalidPostcodeTest(SimpleTestCase):
     client = Client()
