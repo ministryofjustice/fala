@@ -12,6 +12,7 @@ from fala.common.regions import Region
 class ResultsView(CommonContextMixin, CategoryMixin, ListView, EnglandOrWalesState, OtherJurisdictionState):
     def get(self, request, *args, **kwargs):
         self.tailored_results = self.request.GET.get("tailored_results", False)
+        self.category_code = self.request.GET.get("categories", False)
 
         if self.tailored_results:
             form_class = SingleCategorySearchForm
@@ -57,5 +58,6 @@ class ResultsView(CommonContextMixin, CategoryMixin, ListView, EnglandOrWalesSta
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["tailored_results"] = self.tailored_results
+        context["category_code"] = self.category_code
         context.update(self.state.get_context_data())
         return context
