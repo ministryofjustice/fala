@@ -1,13 +1,14 @@
 {% extends 'adviser/adviser_base.html' %}
 
 {% block pageTitle %}{{_('Search results')}}{% endblock %}
-
+{% set BACK_LABEL = _("Back") %}
+{% set CHANGE_SEARCH = _("Change search") %}
 {% block content %}
   <div class="govuk-grid-column-full">
     <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
     {% if tailored_results %}
       {{ govukBackLink({
-        'text': "Back",
+        'text': BACK_LABEL,
         'href': "/single-category-search?categories="+category_code,
       }) }}
     {% endif %}
@@ -21,7 +22,7 @@
     {% if not tailored_results %}
       <form action="/" method="get" novalidate>
         {{ govukButton({
-          'text': _('Change search'),
+          'text': CHANGE_SEARCH,
           'type': "submit",
           'classes': "govuk-!-margin-bottom-2",
           'id': "otherRegionChangeSearchButton",
