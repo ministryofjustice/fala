@@ -29,7 +29,7 @@ msgstr ""
 
 #: fala/apps/adviser/forms.py:36 fala/apps/category_search/forms.py:28
 msgid "Enter a valid postcode"
-msgstr ""
+msgstr "Rhowch god post dilys"
 
 #: fala/apps/category_search/forms.py:34
 msgid "Category is required."
@@ -130,13 +130,15 @@ msgstr ""
 
 #: fala/templates/adviser/_cookie_banner.html:5
 msgid "We use some essential cookies to make this service work."
-msgstr ""
+msgstr "Rydym yn defnyddio rhai cwcis hanfodol i wneud i’r gwasanaeth hwn weithio."
 
 #: fala/templates/adviser/_cookie_banner.html:6
 msgid ""
 "We’d like to set additional cookies so we can remember your settings, "
 "understand how people use the service and make improvements."
 msgstr ""
+"Hoffem hefyd ddefnyddio cwcis ychwanegol er mwyn i ni allu cofio eich gosodiadau, "
+"deall sut mae pobl yn defnyddio’r gwasanaeth a gwneud gwelliannau."
 
 #: fala/templates/adviser/_cookie_banner.html:10
 msgid "You’ve accepted additional cookies. You can "
@@ -159,19 +161,19 @@ msgstr ""
 #: fala/templates/adviser/_cookie_banner.html:17
 #: fala/templates/adviser/_cookie_banner.html:18
 msgid "Cookies on Find a legal adviser or family mediator"
-msgstr ""
+msgstr "Cwcis ar Dod o hyd i gynghorydd cyfreithiol neu gyfryngwr teulu"
 
 #: fala/templates/adviser/_cookie_banner.html:19
 msgid "Accept analytics cookies"
-msgstr ""
+msgstr "Derbyn cwcis dadansoddol"
 
 #: fala/templates/adviser/_cookie_banner.html:20
 msgid "Reject analytics cookies"
-msgstr ""
+msgstr "Gwrthod cwcis dadansoddol"
 
 #: fala/templates/adviser/_cookie_banner.html:21
 msgid "View cookies"
-msgstr ""
+msgstr "Gweld y cwcis"
 
 #: fala/templates/adviser/_cookie_banner.html:22
 msgid "Hide this message"
@@ -370,7 +372,7 @@ msgstr ""
 #: fala/templates/adviser/adviser_base.html:6
 #: fala/templates/adviser/cookies.html:39 fala/templates/adviser/search.html:21
 msgid "Find a legal aid adviser or family mediator"
-msgstr ""
+msgstr "Dod o hyd i gynghorydd cymorth cyfreithiol neu gyfryngwr teulu"
 
 #: fala/templates/adviser/adviser_base.html:49
 msgid "Development"
@@ -382,19 +384,19 @@ msgstr ""
 
 #: fala/templates/adviser/adviser_base.html:53
 msgid "Beta"
-msgstr ""
+msgstr "Beta"
 
 #: fala/templates/adviser/adviser_base.html:59
 msgid "This is a new service – your "
-msgstr ""
+msgstr "Mae hwn yn wasanaeth newydd – bydd eich "
 
 #: fala/templates/adviser/adviser_base.html:59
 msgid "feedback (opens in new tab)"
-msgstr ""
+msgstr "adborth (mae’n agor mewn tab newydd)"
 
 #: fala/templates/adviser/adviser_base.html:59
 msgid " will help us to improve it."
-msgstr ""
+msgstr " yn ein helpu i’w wella"
 
 #: fala/templates/adviser/adviser_base.html:68
 msgid "Find a legal aid adviser "
@@ -960,7 +962,7 @@ msgstr ""
 
 #: fala/templates/adviser/results.html:55
 msgid "Postcode:"
-msgstr ""
+msgstr "Cod post:"
 
 #: fala/templates/adviser/results.html:58
 msgid "Organisation:"
@@ -1016,7 +1018,7 @@ msgstr ""
 #: fala/templates/adviser/search.html:3
 #: fala/templates/adviser/single_category_search.html:7
 msgid "Find a Legal Aid Adviser or Family Mediator"
-msgstr ""
+msgstr "Dod o hyd i gynghorydd cymorth cyfreithiol neu gyfryngwr teulu"
 
 #: fala/templates/adviser/search.html:22
 msgid ""
@@ -1038,11 +1040,11 @@ msgstr ""
 
 #: fala/templates/adviser/search.html:42
 msgid "For example, NE31 1SF"
-msgstr ""
+msgstr "Er enghraifft, NE31 1SF"
 
 #: fala/templates/adviser/search.html:43
 msgid "Name of organisation you are looking for (optional)"
-msgstr ""
+msgstr "Enw’r sefydliad rydych chi’n chwilio amdano (dewisol)"
 
 #: fala/templates/adviser/search.html:44
 msgid "For example, Citizens Advice or Shelter"
@@ -1050,7 +1052,7 @@ msgstr ""
 
 #: fala/templates/adviser/search.html:45
 msgid "Legal problem (optional)"
-msgstr ""
+msgstr "Problem gyfreithiol (dewisol)"
 
 #: fala/templates/adviser/search.html:46
 #: fala/templates/adviser/single_category_search.html:86
@@ -1095,7 +1097,7 @@ msgstr ""
 
 #: fala/templates/adviser/single_category_search.html:62
 msgid "For example, SW1H 9AJ"
-msgstr ""
+msgstr "Er enghraifft, SW1H 9AJ"
 
 #: fala/templates/base.html:7
 msgid "GOV.UK - The best place to find government services and information"
