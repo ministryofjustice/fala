@@ -186,6 +186,27 @@ class ResearchBannerTest(SimpleTestCase):
         self.assertNotContains(response, self.research_message)
 
 
+class LanguageSwitcherTest(SimpleTestCase):
+    client = Client()
+    url = reverse("results")
+
+    data = {"name": "foo", "categories": ["deb", "edu"]}
+
+    @override_settings(FEATURE_FLAG_WELSH_TRANSLATION=True)
+    def test_language_switcher_visible_when_flag_set(self):
+        response = self.client.get(self.url, self.data)
+        soup = bs4.BeautifulSoup(response.content, features="html.parser")
+        language_switcher = soup.find("div", class_="language-switcher")
+        self.assertIsNotNone(language_switcher)
+
+    @override_settings(FEATURE_FLAG_WELSH_TRANSLATION=False)
+    def test_language_switcher_not_visible_when_flag_unset(self):
+        response = self.client.get(self.url, self.data)
+        soup = bs4.BeautifulSoup(response.content, features="html.parser")
+        language_switcher = soup.find("div", class_="language-switcher")
+        self.assertIsNone(language_switcher)
+
+
 class MaintenanceModeTest(SimpleTestCase):
     client = Client()
     url = reverse("results")

@@ -1,6 +1,6 @@
 {% extends 'adviser/adviser_base.html' %}
 
-{% block pageTitle %}Find a Legal Aid Adviser or Family Mediator{% endblock %}
+{% block pageTitle %}{{_('Find a Legal Aid Adviser or Family Mediator')}}{% endblock %}
 
 {% import "macros/element.html" as Element %}
 {% import "macros/forms.html" as Form %}
@@ -14,13 +14,13 @@
       <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
       {% if form.errors %}
         {{ govukErrorSummary({
-          "titleText": "There is a problem",
+          "titleText": _("There is a problem"),
           "errorList": errorList
         }) }}
       {% endif %}
-      <h1 class="govuk-heading-xl"> Find a legal aid adviser or family mediator </h1>
-      <p class="govuk-body">Use this service to find legal aid advisers near you. They will ask about your problem and finances to work out if you can get legal aid.</p>
-      <p class="govuk-body">You can <a class="govuk-link" href="{{ CHECK_LEGAL_AID_URL }}" target="_blank" rel="noopener">check if your problem is covered by legal aid (opens in a new tab)</a> before your call.</p>
+      <h1 class="govuk-heading-xl">{{_('Find a legal aid adviser or family mediator')}}</h1>
+      <p class="govuk-body">{{_('Use this service to find legal aid advisers near you. They will ask about your problem and finances to work out if you can get legal aid.')}}</p>
+      <p class="govuk-body">{{_('You can ')}}<a class="govuk-link" href="{{ CHECK_LEGAL_AID_URL }}" target="_blank" rel="noopener">{{_('check if your problem is covered by legal aid (opens in a new tab)')}}</a>{{_(' before your call.')}}</p>
   </div>
 
   {% block search_form %}
@@ -38,16 +38,23 @@
               {% endcall %}
             {% endif %}
 
+            {% set POSTCODE_LABEL = _("Postcode") %}
+            {% set POSTCODE_HINT = _("For example, NE31 1SF") %}
+            {% set ORG_LABEL = _("Name of organisation you are looking for (optional)") %}
+            {% set ORG_HINT = _("For example, Citizens Advice or Shelter") %}
+            {% set LEGAL_HINT = _("Legal problem (optional)") %}
+            {% set SEARCH_LABEL = _("Search") %}
+
             {% if 'postcode' in form.errors or form.errors['__all__'] %}
               {{ govukInput({
                 'label': {
-                  'text': "Postcode",
+                  'text': POSTCODE_LABEL,
                   'classes': 'govuk-label--s',
                 },
                 'value': form.postcode.value(),
                 'errorMessage': { 'text': form.errors['postcode'][0] },
                 'hint': {
-                  'text' : "For example, NE31 1SF",
+                  'text' : POSTCODE_HINT,
                   'classes': 'hint-colour-override',
                 },
                 'attributes': {
@@ -60,12 +67,12 @@
             {% else %}
               {{ govukInput({
                 'label': {
-                  'text': "Postcode",
+                  'text': POSTCODE_LABEL,
                   'classes': 'govuk-label--s',
                 },
                 'value': form.postcode.value(),
                 'hint': {
-                  'text' : "For example, NE31 1SF",
+                  'text' : POSTCODE_HINT,
                   'classes': 'hint-colour-override',
                 },
                 'attributes': {
@@ -79,7 +86,7 @@
             {% if 'name' in form.errors or form.errors['__all__'] %}
               {{ govukInput({
                 'label': {
-                  'text': "Organisation name",
+                  'text': ORG_LABEL,
                   'classes': 'govuk-label--s',
                 },
                 'attributes': {
@@ -88,7 +95,7 @@
                 'value': form.name.value(),
                 'errorMessage': { 'text': form.errors['name'][0] },
                 'hint': {
-                  'text' : "For example, Citizens Advice or Shelter",
+                  'text' : ORG_HINT,
                   'classes': 'hint-colour-override',
                 },
                 'id': 'id_name',
@@ -98,7 +105,7 @@
             {% else %}
               {{ govukInput({
                 'label': {
-                  'text': "Name of organisation you are looking for (optional)",
+                  'text': ORG_LABEL,
                   'classes': 'govuk-label--s',
                 },
                 'attributes': {
@@ -106,7 +113,7 @@
                 },
                 'value': form.name.value(),
                 'hint': {
-                  'text' : "For example, Citizens Advice or Shelter",
+                  'text' : ORG_HINT,
                   'classes': 'hint-colour-override',
                 },
                 'id': 'id_name',
@@ -123,7 +130,7 @@
                 'classes': 'govuk-checkboxes--small',
                 'fieldset': {
                     'legend': {
-                      'text': "Legal problem (optional)",
+                      'text': LEGAL_HINT,
                       'isPageHeading': false,
                       'classes': "govuk-fieldset__legend--s"
                     },
@@ -133,7 +140,7 @@
               }) }}
 
               {{ govukButton({
-                'text': "Search",
+                'text': SEARCH_LABEL,
                 'type': "submit",
                 'classes': "govuk-!-margin-bottom-2",
                 'id': "searchButton",
@@ -146,7 +153,7 @@
   {% endblock %}
 
     <div class="govuk-grid-column-full">
-      <p class="govuk-body govuk-!-margin-top-5">If you are a provider and your details are incorrect, contact your contract manager.</p>
+      <p class="govuk-body govuk-!-margin-top-5">{{_('If you are a provider and your details are incorrect, contact your contract manager.')}}</p>
     </div>
 {% endblock %}
 
