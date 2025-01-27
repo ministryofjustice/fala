@@ -16,6 +16,8 @@
 {%- from "govuk_frontend_jinja/components/input/macro.html" import govukInput %}
 {%- from "govuk_frontend_jinja/components/exit-this-page/macro.html" import govukExitThisPage -%}
 
+{% set titleText = _("There is a problem")%}
+
 {% block content %}
   <div class="govuk-grid-column-full">
     <span class="language-and-exit-container">
@@ -30,7 +32,7 @@
   <div class="govuk-grid-column-two-thirds">
     {% if form.errors %}
       {{ govukErrorSummary({
-        "titleText": "There is a problem",
+        "titleText": titleText,
         "errorList": errorList
       }) }}
     {% endif %}
