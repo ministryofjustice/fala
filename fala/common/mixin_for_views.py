@@ -15,6 +15,7 @@ class CommonContextMixin:
                 # this is added in so that an additional class is added the <body>
                 "bodyClasses": f"fala-{settings.ENVIRONMENT}",
                 "FEATURE_FLAG_MAINTENANCE_MODE": settings.FEATURE_FLAG_MAINTENANCE_MODE,
+                "FEATURE_FLAG_WELSH_TRANSLATION": settings.FEATURE_FLAG_WELSH_TRANSLATION,
             }
         )
         return context

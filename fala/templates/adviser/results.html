@@ -1,6 +1,6 @@
 {% extends 'adviser/adviser_base.html' %}
 
-{% block pageTitle %}Search results{% endblock %}
+{% block pageTitle %}{{_('Search results')}}{% endblock %}
 
 {%- from 'govuk_frontend_jinja/components/pagination/macro.html' import govukPagination %}
 {%- from "govuk_frontend_jinja/components/exit-this-page/macro.html" import govukExitThisPage -%}
@@ -23,7 +23,7 @@
           <input type="hidden" name="categories" value="{{ category }}">
         {% endfor %}
         <a href="/single-category-search?categories={% for category in form.categories %}{{ category }}{% if not loop.last %},{% endif %}{% endfor %}" class="govuk-back-link govuk-!-margin-bottom-5 govuk-!-display-none-print">
-          Back
+          {{_('Back')}}
         </a>
       </form>
     </div>
@@ -34,8 +34,8 @@
   {% endif %}
     {% if data.count < 1 %}
     <div class="govuk-grid-column-full">
-        <h1 class="govuk-heading-xl govuk-!-margin-bottom-5">No search results</h1>
-        <p class="govuk-body-m" id="no-results-info">There are no results for your criteria.</p>
+        <h1 class="govuk-heading-xl govuk-!-margin-bottom-5">{{_('No search results')}}</h1>
+        <p class="govuk-body-m" id="no-results-info">{{_('There are no results for your criteria.')}}</p>
     </div>
     {% else %}
         {% include 'adviser/_results_heading.html' %}
@@ -45,20 +45,20 @@
   {% endif %}
   <div class="govuk-grid-column-two-thirds">
     {% if data.count >= 1 %}
-      <p class="govuk-body">You can contact any legal adviser on the list but you might need to contact a few to find one near you that can help. Those based further away may be able to help by telephone.</p>
-      <p class="govuk-body">These advisers are contracted by the government and regulated by the Solicitors Regulation Authority.</p>
+      <p class="govuk-body">{{_('You can contact any legal adviser on the list but you might need to contact a few to find one near you that can help. Those based further away may be able to help by telephone.')}}</p>
+      <p class="govuk-body">{{_('These advisers are contracted by the government and regulated by the Solicitors Regulation Authority.')}}</p>
     {% endif %}
     {% if not tailored_results %}
       <div class="laa-fala__grey-box govuk-!-margin-bottom-6">
         <ul class="govuk-list" role="list">
           {% if form.postcode.value() %}
-            <li class="govuk-body" role="listitem">Postcode:<span class="notranslate"> {{ form.postcode.value() }}</span></li>
+            <li class="govuk-body" role="listitem">{{_('Postcode:')}}<span class="notranslate"> {{ form.postcode.value() }}</span></li>
           {% endif %}
           {% if form.name.value() %}
-            <li class="govuk-body" role="listitem">Organisation:<span class="notranslate"> {{ form.name.value() }}</span></li>
+            <li class="govuk-body" role="listitem">{{_('Organisation:')}}<span class="notranslate"> {{ form.name.value() }}</span></li>
           {% endif %}
           {% if form|category_selection %}
-            <li class="govuk-body" role="listitem">Legal problem: {{ form|category_selection }} </li>
+            <li class="govuk-body" role="listitem">{{_('Legal problem: ')}}{{ form|category_selection }} </li>
           {% endif %}
         </ul>
 
@@ -71,8 +71,10 @@
             {% endif %}
           {% endfor %}
 
+          {% set changeSearchButton = _("Change search") %}
+
           {{ govukButton({
-            'text': "Change search",
+            'text': changeSearchButton,
             'type': "submit",
             'classes': "govuk-!-margin-bottom-2 govuk-!-display-none-print",
             'id': "changeSearchButton",
@@ -86,7 +88,7 @@
       <div class="printing-button">
         <div class="govuk-!-display-none-print govuk-!-margin-top-3 govuk-!-margin-bottom-5">
           <button id="printButton" class="govuk-link govuk-body-s print-link">
-            Print this page
+            {{_('Print this page')}}
           </button>
         </div>
       </div>
@@ -128,12 +130,14 @@
             <div class="address">
               <span class="govuk-visually-hidden">{{ _('Address') }}:</span>
                 <span class="notranslate" translate="no">{{ item.location.address.replace('\n', ', ') }},</span>
-                <span class="notranslate" translate="no">{{ item.location.city }},</span>
+                {% if item.location.city %}
+                  <span class="notranslate" translate="no">{{ item.location.city }},</span>
+                {% endif%}
                 <span class="notranslate" translate="no">{{ item.location.postcode }}</span>
             </div>
             <a class="govuk-link govuk-!-display-none-print" class="url" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?{{ item|google_map_params|urlencode }}">
               <span class="govuk-visually-hidden">{{ item.organisation.name }}</span>
-              View on map (opens in new tab)
+              {{_('View on map (opens in new tab)')}}
             </a>
             {% if item.categories|length %}
             <div class="categories">

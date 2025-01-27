@@ -1,168 +1,160 @@
 {% extends 'adviser/adviser_base.html' %}
 
-{% block pageTitle %}Privacy{% endblock %}
+{% block pageTitle %}{{_('Privacy')}}{% endblock %}
 
 {% block content %}
   <div class="govuk-grid-column-two-thirds">
     <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
 
-    <h1 class="govuk-heading-xl">Privacy</h1>
+    <h1 class="govuk-heading-xl">{{_('Privacy')}}</h1>
 
-    <h2 class="govuk-heading-m">What data we collect</h2>
+    <h2 class="govuk-heading-m">{{_('What data we collect')}}</h2>
 
     <p class="govuk-body">
-      This service is provided by the 
-      <a class="govuk-link" href="https://www.gov.uk/government/organisations/legal-aid-agency">Legal Aid Agency</a> (<abbr>LAA</abbr>),
-      part of the Ministry of Justice (<abbr>MoJ</abbr>).
+      {{_('This service is provided by the')}} 
+      <a class="govuk-link" href="https://www.gov.uk/government/organisations/legal-aid-agency">{{_('Legal Aid Agency')}}</a> <abbr>(LAA)</abbr>,
+      {{_('part of the Ministry of Justice')}} <abbr>(MoJ)</abbr>.
     </p>
 
     <p class="govuk-body">
-      We do not collect any 
-      <a class="govuk-link" href="https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/personal-information-what-is-it/what-is-personal-information-a-guide/">personal information</a>
-      that could identify an individual in this service.
+      {{_('We do not collect any')}} 
+      <a class="govuk-link" href="https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/personal-information-what-is-it/what-is-personal-information-a-guide/">{{_('personal information')}}</a>
+      {{_('that could identify an individual in this service.')}}
     </p>
 
     <p class="govuk-body">
-      We do collect personal information about individuals using this website. This information is collected separately from and cannot be linked to information submitted. We collect:
+      {{_('We do collect personal information about individuals using this website. This information is collected separately from and cannot be linked to information submitted. We collect:')}}
       <ul class="govuk-list govuk-list--bullet">
-        <li>your Internet Protocol (<abbr>IP</abbr>) address</li>
-        <li>details of which version of <a class="govuk-link" href="https://www.gov.uk/support/browsers/">web browser</a> you used</li>
-        <li>information on how you use the site, using cookies and page tagging techniques</li>
-        <li>the search information you enter, such as postcode or organisation</li>
+        <li>{{_('your Internet Protocol ')}}<abbr>(IP)</abbr>{{_(' address')}}</li>
+        <li>{{_('details of which version of ')}}<a class="govuk-link" href="https://www.gov.uk/support/browsers/">{{_('web browser')}}</a>{{_(' you used')}}</li>
+        <li>{{_('information on how you use the site, using cookies and page tagging techniques')}}</li>
+        <li>{{_('the search information you enter, such as postcode or organisation')}}</li>
       </ul>
     </p>
 
     <p class="govuk-body">
-      Where you provide your consent, we use <a class="govuk-link" href="https://support.google.com/analytics/topic/2919631/">Google Analytics</a> cookies. Google Analytics processes information about:
+      {{_('Where you provide your consent, we use ')}}<a class="govuk-link" href="https://support.google.com/analytics/topic/2919631/">{{_('Google Analytics')}}</a>{{_(' cookies. Google Analytics processes information about:')}}
+      {% include 'adviser/_analytics_and_privacy_list.html' %}
+    </p>
+
+    <p class="govuk-body">
+      {{_('We make sure you cannot be identified by Google Analytics data. ')}}
+      {{_('We do not pass any of your personal data to Google Analytics, and Google Analytics does not store your IP address.')}}
+    </p>
+
+    <p class="govuk-body">
+      {{_('We will not combine analytics information with other data sets in a way that would identify who you are.')}}
+    </p>
+
+    <h2 class="govuk-heading-m">{{_('Why we need your data')}}</h2>
+
+    <p class="govuk-body">
+      {{_('We collect your data to:')}}
       <ul class="govuk-list govuk-list--bullet">
-        <li>the pages you visit</li>
-        <li>the categories you use to search</li>
-        <li>the postcode you use to search</li>     
-        <li>how long you spend on each page</li>
-        <li>how you arrived at the service</li>
-        <li>what you click on while you visit the service</li>
-        <li>the device and browser you use</li>
+        <li>{{_('provide you with information about local services')}}</li>
+        <li>{{_('gather feedback to improve our services')}}</li>
+        <li>{{_('monitor use of the site to identify security threats')}}</li>
       </ul>
     </p>
 
     <p class="govuk-body">
-      We make sure you cannot be identified by Google Analytics data. 
-      We do not pass any of your personal data to Google Analytics, and Google Analytics does not store your IP address.
+      {{_('We use the information we collect through Google Analytics to see how you use the service and to see how well it performs on your device.')}}
     </p>
 
     <p class="govuk-body">
-      We will not combine analytics information with other data sets in a way that would identify who you are.
-    </p>
-
-    <h2 class="govuk-heading-m">Why we need your data</h2>
-
-    <p class="govuk-body">
-      We collect your data to:
+      {{_('We do this to help:')}}
       <ul class="govuk-list govuk-list--bullet">
-        <li>provide you with information about local services</li>
-        <li>gather feedback to improve our services</li>
-        <li>monitor use of the site to identify security threats</li>
+        <li>{{_('make sure the service is meeting the needs of its users')}}</li>
+        <li>{{_('make improvements to the service')}}</li>
+        <li>{{_('make performance improvements, for example improving page load time and data usage')}}</li>
       </ul>
     </p>
 
-    <p class="govuk-body">
-      We use the information we collect through Google Analytics to see how you use the service and to see how well it performs on your device.
-    </p>
-
-    <p class="govuk-body">
-      We do this to help:
-      <ul class="govuk-list govuk-list--bullet">
-        <li>make sure the service is meeting the needs of its users</li>
-        <li>make improvements to the service</li>
-        <li>make performance improvements, for example improving page load time and data usage</li>
-      </ul>
-    </p>
-
-    <h2 class="govuk-heading-m">Our legal basis for processing your data</h2>
+    <h2 class="govuk-heading-m">{{_('Our legal basis for processing your data')}}</h2>
   
     <p class="govuk-body">
-      The legal basis for processing personal data in relation to site security is our legitimate interests, and the legitimate interests of our users, in ensuring the security and integrity of this service. 
-      The legal basis for processing all other data is that it’s necessary to provide a service and our legitimate interest in understanding the usage of our service. 
+      {{_('The legal basis for processing personal data in relation to site security is our legitimate interests, and the legitimate interests of our users, in ensuring the security and integrity of this service.')}} 
+      {{_('The legal basis for processing all other data is that it’s necessary to provide a service and our legitimate interest in understanding the usage of our service.')}} 
     </p>
 
     <p class="govuk-body">
-      The legal basis for processing data collected with Google Analytics in this service is your consent.
+      {{_('The legal basis for processing data collected with Google Analytics in this service is your consent.')}}
     </p>
 
-    <h2 class="govuk-heading-m">What we do with your data</h2>
+    <h2 class="govuk-heading-m">{{_('What we do with your data')}}</h2>
 
     <p class="govuk-body">
-      The data we collect with Google Analytics cookies is transferred and stored with Google where we analyse it with Google Analytics software (Google Analytics 4). 
-      We do not allow Google to use or share this data for their own purposes.
-    </p>
-
-    <p class="govuk-body">
-      No information that you provide will be shared outside the MoJ, other than with MoJ IT providers that provide services supporting the running of this service.
+      {{_('The data we collect with Google Analytics cookies is transferred and stored with Google where we analyse it with Google Analytics software (Google Analytics 4). ')}}
+      {{_('We do not allow Google to use or share this data for their own purposes.')}}
     </p>
 
     <p class="govuk-body">
-      We will not:
+      {{_('No information that you provide will be shared outside the MoJ, other than with MoJ IT providers that provide services supporting the running of this service.')}}
+    </p>
+
+    <p class="govuk-body">
+      {{_('We will not:')}}
       <ul class="govuk-list govuk-list--bullet">
-        <li>sell or rent data to third parties</li>
-        <li>share data with third parties for marketing purposes</li>
+        <li>{{_('sell or rent data to third parties')}}</li>
+        <li>{{_('share data with third parties for marketing purposes')}}</li>
       </ul>
     </p>
 
-    <h2 class="govuk-heading-m">How long we keep your data</h2>
+    <h2 class="govuk-heading-m">{{_('How long we keep your data')}}</h2>
 
     <p class="govuk-body">
-      We will only retain your data for as long as it is needed for the purposes set out on this page.
+      {{_('We will only retain your data for as long as it is needed for the purposes set out on this page.')}}
     </p>
 
     <p class="govuk-body">
-      We will retain summary logs of interactions with the service, but these logs are fully anonymous.
+      {{_('We will retain summary logs of interactions with the service, but these logs are fully anonymous.')}}
     </p>
 
-    <h2 class="govuk-heading-m">Where your data is processed and stored</h2>
+    <h2 class="govuk-heading-m">{{_('Where your data is processed and stored')}}</h2>
 
     <p class="govuk-body">
-      We design, build and run our systems to make sure that your data is as safe as possible at all stages, both while it’s processed and when it’s stored. 
-      All personal data is processed in the  <abbr title="European Economic Area">EEA</abbr>.
+      {{_('We design, build and run our systems to make sure that your data is as safe as possible at all stages, both while it’s processed and when it’s stored. ')}}
+      {{_('All personal data is processed in the  ')}}<abbr title="European Economic Area">EEA</abbr>.
     </p>
 
-    <h2 class="govuk-heading-m">How we protect your data and keep it secure</h2>
+    <h2 class="govuk-heading-m">{{_('How we protect your data and keep it secure')}}</h2>
 
     <p class="govuk-body">
-      We are committed to doing all that we can to keep your data secure. 
-      We have set up systems and processes to prevent unauthorised access or disclosure of your data. 
+      {{_('We are committed to doing all that we can to keep your data secure.')}} 
+      {{_('We have set up systems and processes to prevent unauthorised access or disclosure of your data. ')}}
     </p>
 
-    <h2 class="govuk-heading-m">Links to other websites</h2>
+    <h2 class="govuk-heading-m">{{_('Links to other websites')}}</h2>
 
     <p class="govuk-body">
-      This service contains links to other websites.
-    </p>
-
-    <p class="govuk-body">
-      This privacy notice only applies to this service and does not cover other government services and transactions that we link to.
+      {{_('This service contains links to other websites.')}}
     </p>
 
     <p class="govuk-body">
-      If you follow a link to a service provided by another government department or agency, that organisation will:
+      {{_('This privacy notice only applies to this service and does not cover other government services and transactions that we link to.')}}
+    </p>
+
+    <p class="govuk-body">
+      {{_('If you follow a link to a service provided by another government department or agency, that organisation will:')}}
       <ul class="govuk-list govuk-list--bullet">
-        <li>be the data controller</li>
-        <li>be responsible for processing any data you share with them</li>
-        <li>publish and manage their own privacy notice with details of how to contact them</li>
+        <li>{{_('be the data controller')}}</li>
+        <li>{{_('be responsible for processing any data you share with them')}}</li>
+        <li>{{_('publish and manage their own privacy notice with details of how to contact them')}}</li>
       </ul>
     </p>
 
-    <h2 class="govuk-heading-m">Contact us or make a complaint</h2>
+    <h2 class="govuk-heading-m">{{_('Contact us or make a complaint')}}</h2>
 
     <p class="govuk-body">
-      Contact us by email at <a class="govuk-link email" href="mailto:eligibility@justice.gov.uk">eligibility@justice.gov.uk</a> if you:
+      {{_('Contact us by email at ')}}<a class="govuk-link email" href="mailto:eligibility@justice.gov.uk">eligibility@justice.gov.uk</a>{{_(' if you:')}}
       <ul class="govuk-list govuk-list--bullet">
-        <li>have a question about anything in this privacy notice</li>
-        <li>think that your personal data has been misused or mishandled</li>
+        <li>{{_('have a question about anything in this privacy notice')}}</li>
+        <li>{{_('think that your personal data has been misused or mishandled')}}</li>
       </ul>
     </p>
 
     <p class="govuk-body">
-      You can also contact our Data Protection Officer <abbr>(DPO)</abbr>:
+      {{_('You can also contact our Data Protection Officer ')}}<abbr>(DPO)</abbr>:
     </p>
 
     <p class="govuk-body">
@@ -178,13 +170,13 @@
     </ul>
 
     <p class="govuk-body">
-      The DPO leads on all aspects of data protection for the MoJ.
+      {{_('The DPO leads on all aspects of data protection for the MoJ.')}}
     </p>
 
     <p class="govuk-body">
-      When we ask you for information, we will comply with the law. 
-      If you consider that your information has been handled incorrectly, you can contact the Information Commissioner for independent advice about data protection. 
-      You can contact the Information Commissioner at:
+      {{_('When we ask you for information, we will comply with the law. ')}}
+      {{_('If you consider that your information has been handled incorrectly, you can contact the Information Commissioner for independent advice about data protection.')}} 
+      {{_('You can contact the Information Commissioner at:')}}
     </p>
 
     <ul class="govuk-list">
@@ -193,7 +185,7 @@
       <li>Telephone: 0303 123 1113</li>
       <li>Textphone: 01625 545860</li>
       <li>Monday to Friday, 9am to 4:30pm</li>
-      <li><a class="govuk-link" href="https://www.gov.uk/call-charges">Find out about call charges</a></li>
+      <li><a class="govuk-link" href="https://www.gov.uk/call-charges">{{_('Find out about call charges')}}</a></li>
     </ul>
 
     <ul class="govuk-list address">
@@ -204,14 +196,14 @@
       <li>SK9 5AF</li>
     </ul>
 
-    <h2 class="govuk-heading-m">Changes to this policy</h2>
+    <h2 class="govuk-heading-m">{{_('Changes to this policy')}}</h2>
 
     <p class="govuk-body">
-      We may change this privacy policy. In that case, the ‘last updated’ date at the bottom of this page will also change. Any changes to this privacy policy will apply to you and your data immediately.
+      {{_('We may change this privacy policy. In that case, the ‘last updated’ date at the bottom of this page will also change. Any changes to this privacy policy will apply to you and your data immediately.')}}
     </p>
 
     <p class="govuk-body">
-      Last updated 25 June 2024
+      {{_('Last updated 25 June 2024')}}
     </p>
   </div>
 {% endblock %}

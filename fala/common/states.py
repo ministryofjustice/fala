@@ -148,7 +148,11 @@ class ErrorState(object):
                 item = {"text": error[0], "href": f"#id_{field}"}
             errorList.append(item)
 
-        return {"form": self._form, "data": {}, "errorList": errorList}
+        return {
+            "form": self._form,
+            "data": {},
+            "errorList": errorList,
+        }
 
 
 class SingleSearchErrorState(object):
