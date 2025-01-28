@@ -1,5 +1,6 @@
 from django.test import SimpleTestCase, Client, override_settings
 from django.urls import reverse
+from fala.common.test_utils.helpers import parse_html, find_element
 
 
 class MaintenanceModeTest(SimpleTestCase):
@@ -40,3 +41,24 @@ class ErrorPageTest(SimpleTestCase):
     ):
         response = self.client.get(self.url, {"postcode": "SE11", "page": 500})
         self.assertEqual(response.status_code, 404)
+
+
+class LanguageSwitcherTest(SimpleTestCase):
+    client = Client()
+    url = reverse("results")
+
+    data = {"name": "foo", "categories": ["deb", "edu"]}
+
+    @override_settings(FEATURE_FLAG_WELSH_TRANSLATION=True)
+    def test_language_switcher_visible_when_flag_set(self):
+        response = self.client.get(self.url, self.data)
+        html = parse_html(response.content)
+        language_switcher = find_element(html, "div", "language-switcher")
+        self.assertIsNotNone(language_switcher)
+
+    @override_settings(FEATURE_FLAG_WELSH_TRANSLATION=False)
+    def test_language_switcher_not_visible_when_flag_unset(self):
+        response = self.client.get(self.url, self.data)
+        html = parse_html(response.content)
+        language_switcher = find_element(html, "div", "language-switcher")
+        self.assertIsNone(language_switcher)

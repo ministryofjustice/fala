@@ -1,6 +1,6 @@
 from django.test import SimpleTestCase, Client
 from django.urls import reverse
-from fala.common.test_utils.helpers import parse_html
+from fala.common.test_utils.helpers import parse_html, find_element
 
 
 class PostcodeValidationTest(SimpleTestCase):
@@ -63,8 +63,8 @@ class PostcodeValidationTest(SimpleTestCase):
     def test_back_link_is_visible(self):
         data = {"tailored_results": "true", "categories": "immas", "postcode": "IM4"}
         response = self.client.get(self.url, data)
-        soup = bs4.BeautifulSoup(response.content, "html.parser")
-        back_link = soup.find("a", class_="govuk-back-link")
+        html = parse_html(response.content)
+        back_link = find_element(html, "a", "govuk-back-link")
         self.assertIsNotNone(back_link, "Back button is not visible on the results page.")
 
 
