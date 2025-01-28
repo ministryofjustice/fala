@@ -1,4 +1,5 @@
 class FalaPage(object):
+    # used with playwright tests
     def __init__(self, page):
         self._page = page
 

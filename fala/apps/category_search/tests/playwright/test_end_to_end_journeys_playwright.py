@@ -1,8 +1,8 @@
 from playwright.sync_api import expect
-from fala.playwright.setup import PlaywrightTestSetup
+from fala.common.test_utils.playwright.setup import PlaywrightTestSetup
 
 
-class SingleCategorySearchPageEndToEndJourneys(PlaywrightTestSetup):
+class EndToEndJourneys(PlaywrightTestSetup):
     hlpas_front_page_heading = "Find a legal aid adviser for the Housing Loss Prevention Advice Service"
     med_front_page_heading = "Find a legal aid adviser for clinical negligence"
     mat_front_page_heading = "Find a legal aid adviser for family"
