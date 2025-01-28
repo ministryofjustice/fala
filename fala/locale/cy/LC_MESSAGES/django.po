@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fala\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-28 15:13+0000\n"
+"POT-Creation-Date: 2025-01-28 16:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -225,7 +225,6 @@ msgid "Cookies"
 msgstr "Cwcis"
 
 #: fala/templates/adviser/_footer.html:19
-#: fala/templates/adviser/accessibility_statement.html:16
 #: fala/templates/adviser/privacy.html:15
 msgid "Legal Aid Agency"
 msgstr "Yr Asiantaeth Cymorth Cyfreithiol"
@@ -307,41 +306,40 @@ msgstr ""
 "gynghorydd cyfreithiol’."
 
 #: fala/templates/adviser/accessibility_statement.html:16
-msgid "This website is run by the "
-msgstr "Mae'r wefan hon yn cael ei rhedeg gan y "
-
-#: fala/templates/adviser/accessibility_statement.html:16
-msgid ", part of the Ministry of Justice "
-msgstr ", rhan o'r Weinyddiaeth Gyfiawnder "
-
-#: fala/templates/adviser/accessibility_statement.html:17
 msgid ""
+"This website is run by the <a class='govuk-link' href='https://www.gov.uk/"
+"government/organisations/legal-aid-agency' rel='external'>Legal Aid Agency</"
+"a> (<abbr>LAA</abbr>), part of the Ministry of Justice (<abbr>MoJ</abbr>). "
 "We want as many people as possible to be able to use this website. For "
 "example, that means you should be able to:"
 msgstr ""
-"Rydyn ni eisiau i gynifer o bobl ag sy’n bosibl allu defnyddio’r wefan hon. "
-"Er enghraifft, mae hynny’n golygu y dylech allu:"
+"Yr <a class='govuk-link' href='https://www.gov.uk/government/organisations/"
+"legal-aid-agency' rel='external'>Asiantaeth Cymorth Cyfreithiol</a> "
+"(<abbr>LAA</abbr>), sy’n rhan o’r Weinyddiaeth Gyfiawnder (<abbr>MoJ</"
+"abbr>), sy’n rhedeg y wefan hon. Rydyn ni eisiau i gynifer o bobl ag sy’n "
+"bosibl allu defnyddio’r wefan hon. Er enghraifft, mae hynny’n golygu y "
+"dylech allu:"
 
-#: fala/templates/adviser/accessibility_statement.html:21
+#: fala/templates/adviser/accessibility_statement.html:20
 msgid ""
 "change colours, contrast levels and fonts using browser or device settings"
 msgstr ""
 "newid lliwiau, lefelau cyferbynnedd a ffontiau gan ddefnyddio gosodiadau’r "
 "porwr neu’r ddyfais"
 
-#: fala/templates/adviser/accessibility_statement.html:22
+#: fala/templates/adviser/accessibility_statement.html:21
 #, python-format
 msgid "zoom in up to 400%% without the text spilling off the screen"
 msgstr "chwyddo mewn hyd at 400%% heb i’r testun lifo oddi ar y sgrin"
 
-#: fala/templates/adviser/accessibility_statement.html:23
+#: fala/templates/adviser/accessibility_statement.html:22
 msgid ""
 "navigate most of the website using a keyboard or speech recognition software"
 msgstr ""
 "llywio drwy’r rhan fwyaf o’r wefan gan ddefnyddio bysellfwrdd neu feddalwedd "
 "adnabod llais"
 
-#: fala/templates/adviser/accessibility_statement.html:24
+#: fala/templates/adviser/accessibility_statement.html:23
 msgid ""
 "listen to most of the website using a screen reader (including the most "
 "recent versions of JAWS, NVDA and VoiceOver)"
@@ -349,41 +347,41 @@ msgstr ""
 "gwrando ar y rhan fwyaf o’r wefan gan ddefnyddio darllenydd sgrin (gan "
 "gynnwys y fersiynau diweddaraf o JAWS, NVDA a VoiceOver)"
 
-#: fala/templates/adviser/accessibility_statement.html:28
+#: fala/templates/adviser/accessibility_statement.html:27
 msgid "We’ve also made the website text as simple as possible to understand."
 msgstr ""
 "Rydyn ni hefyd wedi gwneud testun y wefan mor hawdd i’w ddeall ag sy’n "
 "bosibl."
 
-#: fala/templates/adviser/accessibility_statement.html:32
-msgid "AbilityNet"
-msgstr "Mae gan AbilityNet"
-
-#: fala/templates/adviser/accessibility_statement.html:32
+#: fala/templates/adviser/accessibility_statement.html:31
 msgid ""
-" has advice on making your device easier to use if you have a disability."
+"<a class='govuk-link' href='https://mcmw.abilitynet.org.uk/' "
+"rel='external'>AbilityNet</a> has advice on making your device easier to use "
+"if you have a disability."
 msgstr ""
-" gyngor ar wneud eich dyfais yn haws ei defnyddio os oes gennych anabledd."
+"Mae gan <a class='govuk-link' href='https://mcmw.abilitynet.org.uk/' "
+"rel='external'>AbilityNet</a> gyngor ar wneud eich dyfais yn haws ei "
+"defnyddio os oes gennych chi anabledd."
 
-#: fala/templates/adviser/accessibility_statement.html:35
+#: fala/templates/adviser/accessibility_statement.html:34
 msgid "How accessible this website is"
 msgstr "Pa mor hygyrch yw’r wefan hon"
 
-#: fala/templates/adviser/accessibility_statement.html:38
+#: fala/templates/adviser/accessibility_statement.html:37
 msgid "We know some parts of this website are not fully accessible:"
 msgstr "Rydyn ni’n ymwybodol nad yw rhannau o’r wefan hon yn gwbl hygyrch:"
 
-#: fala/templates/adviser/accessibility_statement.html:42
+#: fala/templates/adviser/accessibility_statement.html:41
 msgid "elements of the results page do not meet minimum contrast standards"
 msgstr ""
 "mae elfennau o’r dudalen canlyniadau nad ydynt yn bodloni’r safonau "
 "cyferbynnedd gofynnol"
 
-#: fala/templates/adviser/accessibility_statement.html:43
+#: fala/templates/adviser/accessibility_statement.html:42
 msgid "Google Translate does not translate technical terms into Plain English"
 msgstr "Nid yw Google Translate yn cyfieithu termau technegol i Saesneg clir"
 
-#: fala/templates/adviser/accessibility_statement.html:44
+#: fala/templates/adviser/accessibility_statement.html:43
 msgid ""
 "hyperlinks to google maps are not specific about the listing they are "
 "related to"
@@ -391,11 +389,11 @@ msgstr ""
 "nid yw hyperddolenni at fapiau google yn benodol i’r eitem y maent yn "
 "gysylltiedig â hi"
 
-#: fala/templates/adviser/accessibility_statement.html:47
+#: fala/templates/adviser/accessibility_statement.html:46
 msgid "Feedback and contact information"
 msgstr "Adborth a gwybodaeth gyswllt"
 
-#: fala/templates/adviser/accessibility_statement.html:50
+#: fala/templates/adviser/accessibility_statement.html:49
 msgid ""
 "We’re always looking to improve the accessibility of this website. If you "
 "find any problems not listed on this page or think we’re not meeting "
@@ -406,11 +404,11 @@ msgstr ""
 "ydych chi’n credu nad ydym yn bodloni gofynion hygyrchedd, anfonwch e-bost "
 "i: "
 
-#: fala/templates/adviser/accessibility_statement.html:53
+#: fala/templates/adviser/accessibility_statement.html:52
 msgid "Enforcement procedure"
 msgstr "Gweithdrefn orfodi"
 
-#: fala/templates/adviser/accessibility_statement.html:56
+#: fala/templates/adviser/accessibility_statement.html:55
 msgid ""
 "The Equality and Human Rights Commission (<abbr>EHRC</abbr>) is responsible "
 "for enforcing the Public Sector Bodies (Websites and Mobile Applications) "
@@ -428,11 +426,11 @@ msgstr ""
 "rel=\"external\">cysylltwch â’r Gwasanaeth Cynghori a Chefnogi Cydraddoldeb "
 "(<abbr>EASS</abbr>)</a>."
 
-#: fala/templates/adviser/accessibility_statement.html:60
+#: fala/templates/adviser/accessibility_statement.html:59
 msgid "Technical information about this website’s accessibility"
 msgstr "Gwybodaeth dechnegol am hygyrchedd y wefan hon"
 
-#: fala/templates/adviser/accessibility_statement.html:64
+#: fala/templates/adviser/accessibility_statement.html:63
 msgid ""
 "The Legal Aid Agency is committed to making its website accessible, in "
 "accordance with the Public Sector Bodies (Websites and Mobile Applications) "
@@ -442,11 +440,11 @@ msgstr ""
 "hygyrch, yn unol â Rheoliadau Hygyrchedd Cyrff Sector Cyhoeddus (Gwefannau a "
 "Rhaglenni Symudol) (Rhif 2) 2018."
 
-#: fala/templates/adviser/accessibility_statement.html:67
+#: fala/templates/adviser/accessibility_statement.html:66
 msgid "Compliance status"
 msgstr "Statws cydymffurfio"
 
-#: fala/templates/adviser/accessibility_statement.html:70
+#: fala/templates/adviser/accessibility_statement.html:69
 msgid ""
 "This website is <strong>partially compliant</strong> with the Web Content "
 "Accessibility Guidelines (<abbr>WCAG</abbr>) version 2.2 AA standard, due to "
@@ -456,15 +454,15 @@ msgstr ""
 "Canllawiau Hygyrchedd Cynnwys y We (<abbr>WCAG</abbr>) fersiwn 2.2, oherwydd "
 "y materion sy’n bodoli eisoes a restrir isod."
 
-#: fala/templates/adviser/accessibility_statement.html:73
+#: fala/templates/adviser/accessibility_statement.html:72
 msgid "Non-accessible content"
 msgstr "Cynnwys nad yw’n hygyrch"
 
-#: fala/templates/adviser/accessibility_statement.html:75
+#: fala/templates/adviser/accessibility_statement.html:74
 msgid "The content listed below is non-accessible for the following reasons."
 msgstr "Nid yw’r cynnwys a restrir isod yn hygyrch am y rhesymau canlynol."
 
-#: fala/templates/adviser/accessibility_statement.html:78
+#: fala/templates/adviser/accessibility_statement.html:77
 msgid ""
 "The results page border does not have sufficient colour contrast. This fails "
 "WCAG success criterion 1.4.3 Contrast (Minimum). We plan to fix this by the "
@@ -474,7 +472,7 @@ msgstr ""
 "yn methu maen prawf llwyddiant WCAG 1.4.3 Cyferbynnedd (Gofynnol). Rydym yn "
 "gobeithio cywiro hyn erbyn diwedd mis Gorffennaf 2024."
 
-#: fala/templates/adviser/accessibility_statement.html:79
+#: fala/templates/adviser/accessibility_statement.html:78
 msgid ""
 "The links to google maps elements are not identifiable from the link text "
 "alone. This fails WCAG success criterion 2.4.9 Link Purpose. We plan to fix "
@@ -484,7 +482,7 @@ msgstr ""
 "ddolen yn unig. Mae hyn yn methu maen prawf llwyddiant WCAG 2.4.9 Diben "
 "Dolenni. Rydym yn gobeithio cywiro hyn erbyn diwedd mis Hydref 2024."
 
-#: fala/templates/adviser/accessibility_statement.html:80
+#: fala/templates/adviser/accessibility_statement.html:79
 msgid ""
 "The results page title is the same as the main page and so does not clearly "
 "describe the topic or purpose. This fails WCAG success criterion 2.4.2 Page "
@@ -495,24 +493,24 @@ msgstr ""
 "llwyddiant WCAG 2.4.2 Teitlau Tudalennau. Rydym yn gobeithio cywiro hyn "
 "erbyn diwedd mis Hydref 2024."
 
-#: fala/templates/adviser/accessibility_statement.html:83
+#: fala/templates/adviser/accessibility_statement.html:82
 msgid "Disproportionate burden"
 msgstr "Baich anghymesur"
 
-#: fala/templates/adviser/accessibility_statement.html:85
-#: fala/templates/adviser/accessibility_statement.html:89
+#: fala/templates/adviser/accessibility_statement.html:84
+#: fala/templates/adviser/accessibility_statement.html:88
 msgid "Not applicable"
 msgstr "Ddim yn berthnasol"
 
-#: fala/templates/adviser/accessibility_statement.html:87
+#: fala/templates/adviser/accessibility_statement.html:86
 msgid "Content that’s not within the scope of the accessibility regulations"
 msgstr "Cynnwys nad yw o fewn cwmpas y rheoliadau hygyrchedd"
 
-#: fala/templates/adviser/accessibility_statement.html:91
+#: fala/templates/adviser/accessibility_statement.html:90
 msgid "Preparation of this accessibility statement"
 msgstr "Paratoi’r datganiad hygyrchedd hwn"
 
-#: fala/templates/adviser/accessibility_statement.html:94
+#: fala/templates/adviser/accessibility_statement.html:93
 msgid ""
 "This statement was prepared on 11 November 2020. It was last reviewed on 13 "
 "June 2024."
@@ -520,7 +518,7 @@ msgstr ""
 "Cafodd y datganiad hwn ei baratoi ar 11 Tachwedd 2020. Cafodd ei adolygu "
 "ddiwethaf ar 13 Mehefin 2024."
 
-#: fala/templates/adviser/accessibility_statement.html:98
+#: fala/templates/adviser/accessibility_statement.html:97
 msgid ""
 "This website was last tested on 12 June 2024. The test was carried out by "
 "the Ministry of Justice. We tested all of the pages using a basic "
@@ -530,7 +528,7 @@ msgstr ""
 "prawf gan y Weinyddiaeth Gyfiawnder. Fe wnaethom brofi’r holl dudalennau gan "
 "ddefnyddio prawf hygyrchedd sylfaenol, ond nid oedd hwn yn archwiliad llawn. "
 
-#: fala/templates/adviser/accessibility_statement.html:102
+#: fala/templates/adviser/accessibility_statement.html:101
 msgid ""
 "This statement will be reviewed by June 2025. We plan to audit the website "
 "against the WCAG 2.2 AA standard by June 2025."
