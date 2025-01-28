@@ -14,6 +14,19 @@ const setCookie = (name, value, days) => {
   document.cookie = `${name}=${value}${expires};path=/;samesite=lax`;
 }
 
+// django-language cookie
+const language_switcher_link = document.getElementById('language_switcher_link');
+if (language_switcher_link) {
+  language_switcher_link.addEventListener("click", () => {
+    if (language_switcher_link.text == "Cymraeg") {
+      setCookie("django_language", "cy", 30);
+    }
+    else  {
+      setCookie("django_language", "en", 30);
+    }
+  })
+};
+
 // Accept analytics cookies
 const acceptCookieBanner = document.getElementById("accept-cookies");
 if (acceptCookieBanner) {
