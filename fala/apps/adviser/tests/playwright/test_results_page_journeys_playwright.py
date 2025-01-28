@@ -1,5 +1,5 @@
 from playwright.sync_api import expect
-from fala.playwright.setup import PlaywrightTestSetup
+from fala.common.test_utils.playwright.setup import PlaywrightTestSetup
 
 
 class ResultPageEndToEndJourneys(PlaywrightTestSetup):

@@ -125,17 +125,17 @@ python3 ./manage.py test
 
 To run a single test, specify the app name, file structure to access the test, test class and test method name:
 ```
-python3 ./manage.py test tests.<test_file_name>.<test_class>.<test_method>
+python3 ./manage.py test <app_folder>.<test_folder>.<test_file_name>.<test_class>.<test_method>
 ```
 
 For example:
 ```
-python3 ./manage.py test tests.test_fala_views_and_functions.ResultsPageWithBothOrgAndPostcodeTest.test_search_parameters_box_is_visible
+python3 ./manage.py test adviser.tests.test_results_view.ResultsPageWithBothOrgAndPostcodeTest.test_search_parameters_box_is_visible
 ```
 
 You can also omit the test method from the command and run the whole class.
 
-Your test methods must be prefixed with the word 'test' e.g. `def test_search_parameters_box_is_visible`
+Your test files and methods must be prefixed with the word 'test' e.g. `def test_search_parameters_box_is_visible`
 
 ## Lint and pre-commit hooks
 
