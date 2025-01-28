@@ -5,11 +5,11 @@ from django.views.generic import TemplateView
 from django.http import HttpResponse
 from category_search.forms import SingleCategorySearchForm
 from django.shortcuts import redirect
-from fala.common.mixin_for_views import CommonContextMixin, CategoryMixin
+from fala.common.mixin_for_views import CommonContextMixin, TranslationMixin, CategoryMixin
 from fala.common.category_messages import CATEGORY_MESSAGES
 
 
-class SingleCategorySearchView(CommonContextMixin, CategoryMixin, TemplateView):
+class SingleCategorySearchView(CommonContextMixin, TranslationMixin, CategoryMixin, TemplateView):
     template_name = "adviser/single_category_search.html"
 
     def get(self, request, *args, **kwargs):
@@ -41,6 +41,7 @@ class SingleCategorySearchView(CommonContextMixin, CategoryMixin, TemplateView):
                 "category_display_name": category_display_name,
                 "category_message": category_message,
                 "search_url": search_url,
+                "translation_link": self.translation_link(request, *args, **kwargs),
             }
         )
         return self.render_to_response(context)

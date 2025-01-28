@@ -1,6 +1,7 @@
 # coding=utf-8
 from django.conf import settings
 from django.shortcuts import redirect
+from django.utils import translation
 from fala.common.category_manager import CategoryManager
 
 
@@ -19,6 +20,16 @@ class CommonContextMixin:
             }
         )
         return context
+
+
+class TranslationMixin:
+    def translation_link(self, request, *args, **kwargs):
+        user_language = request.COOKIES.get("django_language", "en")
+        translation.activate(user_language)
+        if user_language == "cy":
+            return "<a class='govuk-body govuk-link' id='language_switcher_link' href=''>English</a> / Cymraeg"
+        else:
+            return "English / <a class='govuk-body govuk-link' id='language_switcher_link' href=''>Cymraeg</a>"
 
 
 class CategoryMixin:
