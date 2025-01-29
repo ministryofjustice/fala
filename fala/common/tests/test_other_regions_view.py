@@ -1,6 +1,6 @@
 from django.test import SimpleTestCase, Client
 from django.urls import reverse
-import bs4
+from fala.common.test_utils.helpers import parse_html, find_element
 
 
 class PostcodeValidationTest(SimpleTestCase):
@@ -50,21 +50,21 @@ class PostcodeValidationTest(SimpleTestCase):
     def test_other_region_form_and_change_search_button_visible(self):
         data = {"postcode": "IM4"}
         response = self.client.get(self.url, data)
-        soup = bs4.BeautifulSoup(response.content, "html.parser")
-        form = soup.find("form", {"action": "/", "method": "get"})
-        button = soup.find("button", {"type": "submit", "data-module": "govuk-button"})
+        html = parse_html(response.content)
+        form = html.find("form", {"action": "/", "method": "get"})
+        button = html.find("button", {"type": "submit", "data-module": "govuk-button"})
         self.assertIsNotNone(form)
         self.assertIsNotNone(button)
 
-        change_search_button = soup.find("button", {"id": "otherRegionChangeSearchButton"})
+        change_search_button = html.find("button", {"id": "otherRegionChangeSearchButton"})
         self.assertIsNotNone(change_search_button)
         self.assertEqual(change_search_button.text.strip(), "Change search")
 
     def test_back_link_is_visible(self):
         data = {"tailored_results": "true", "categories": "immas", "postcode": "IM4"}
         response = self.client.get(self.url, data)
-        soup = bs4.BeautifulSoup(response.content, "html.parser")
-        back_link = soup.find("a", class_="govuk-back-link")
+        html = parse_html(response.content)
+        back_link = find_element(html, "a", "govuk-back-link")
         self.assertIsNotNone(back_link, "Back button is not visible on the results page.")
 
 

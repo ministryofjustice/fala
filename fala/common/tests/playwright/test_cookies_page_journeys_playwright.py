@@ -1,6 +1,6 @@
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from playwright.sync_api import sync_playwright, expect
-from fala.playwright.setup import PlaywrightTestSetup
+from fala.common.test_utils.playwright.setup import PlaywrightTestSetup
 
 
 class CookiesPageEndToEndJourneys(PlaywrightTestSetup):
