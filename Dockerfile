@@ -80,7 +80,7 @@ RUN chmod +x /home/app/fala/migrate_db.sh
 COPY . .
 
 # Compile translation files
-RUN django-admin compilemessages
+RUN python manage.py compilemessages -l cy
 
 RUN ./manage.py collectstatic --noinput
 
