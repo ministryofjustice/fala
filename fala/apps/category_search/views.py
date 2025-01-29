@@ -9,8 +9,8 @@ from fala.common.mixin_for_views import CommonContextMixin, CategoryMixin
 from fala.common.category_messages import CATEGORY_MESSAGES
 
 
-class SingleCategorySearchView(CommonContextMixin, CategoryMixin, TemplateView):
-    template_name = "adviser/single_category_search.html"
+class CategorySearchView(CommonContextMixin, CategoryMixin, TemplateView):
+    template_name = "adviser/category_search.html"
 
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)

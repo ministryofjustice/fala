@@ -9,7 +9,7 @@
     {% if tailored_results %}
       {{ govukBackLink({
         'text': BACK_LABEL,
-        'href': "/single-category-search?categories="+category_code,
+        'href': "/search-results?categories="+category_code,
       }) }}
     {% endif %}
     <h1 class="govuk-heading-xl">{{_('The postcode ')}}{{ postcode }}{{_(' is in ')}}{{ region }}</h1>
