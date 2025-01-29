@@ -64,6 +64,9 @@ CMD ["/home/app/docker/run.sh"]
 #################################################
 FROM base AS production
 
+# Install system dependencies, including gettext for translations
+RUN apt-get update && apt-get install -y --no-install-recommends gettext
+
 # Install Python dependencies
 COPY ./requirements/generated/requirements-production.txt ./requirements.txt
 RUN pip3 install --user --requirement ./requirements.txt
