@@ -74,14 +74,13 @@ COPY fala/migrate_db.sh /home/app/fala/migrate_db.sh
 # Ensure the correct ownership
 RUN chown app:app /home/app/fala/migrate_db.sh
 
-# Included gettext to help with translations
-RUN apt update
-RUN apt install gettext -y
-
 # Ensure the script has execute permissions
 RUN chmod +x /home/app/fala/migrate_db.sh
 
 COPY . .
+
+# Compile translation files
+RUN django-admin compilemessages
 
 RUN ./manage.py collectstatic --noinput
 
