@@ -1230,7 +1230,7 @@ msgstr "Cod post:"
 
 #: fala/templates/adviser/results.html:58
 msgid "Organisation:"
-msgstr "Sefydliad"
+msgstr "Sefydliad:"
 
 #: fala/templates/adviser/results.html:61
 msgid "Legal problem: "
