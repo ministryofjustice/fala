@@ -22,7 +22,7 @@
         {% for category in form.categories %}
           <input type="hidden" name="categories" value="{{ category }}">
         {% endfor %}
-        <a href="/single-category-search?categories={% for category in form.categories %}{{ category }}{% if not loop.last %},{% endif %}{% endfor %}" class="govuk-back-link govuk-!-margin-bottom-5 govuk-!-display-none-print">
+        <a href="/single-category-search?categories={% for category in form.categories %}{{ category }}{% if not loop.last %},{% endif %}{% endfor %}" class="govuk-back-link govuk-!-margin-bottom-5 govuk-!-display-none-print" id="back_link">
           {{_('Back')}}
         </a>
       </form>

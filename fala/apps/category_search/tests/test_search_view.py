@@ -72,7 +72,7 @@ class SearchViewTest(TestCase):
         self.assertRegex(
             content,
             re.compile(
-                r'type="submit" class="govuk-button govuk-!-margin-bottom-2" data-module="govuk-button">\n  Search\n</button>',
+                r'type="submit" class="govuk-button govuk-!-margin-bottom-2" data-module="govuk-button" id="searchButtonForTailoredResults">\n  Search\n</button>',
                 re.IGNORECASE,
             ),
         )

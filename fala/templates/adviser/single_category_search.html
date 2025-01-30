@@ -54,7 +54,7 @@
 
   {% block search_form %}
     <div class="govuk-grid-column-two-thirds">
-      <form action="{{ search_url }}" method="get" id="fala_questions">
+      <form action="{{ search_url }}" method="get" id="fala_questions_for_tailored_results">
         <input type="hidden" name="categories" value="{{ category_code }}">
         <input type="hidden" name="tailored_results" value="true">
 
@@ -83,7 +83,7 @@
             'name': "postcode"
           }) }}
         {% endif %}
-        {{ govukButton({'text': _("Search"), 'type': "submit", 'classes': "govuk-!-margin-bottom-2"}) }}
+        {{ govukButton({'text': _("Search"), 'type': "submit", 'classes': "govuk-!-margin-bottom-2", 'id': "searchButtonForTailoredResults"}) }}
       </form>
     </div>
   {% endblock %}
