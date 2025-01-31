@@ -4,7 +4,12 @@
   {% if results %}
     {{_('Search results')}}
   {% else %}
-    {{_('Find a Legal Aid Adviser or Family Mediator')}}
+    {{_('Find a legal aid adviser for ')}}
+    {% if category_code == 'hlpas' %}
+      {{_('the')}} {{ category_display_name }}
+    {% else %}
+      {{ category_display_name | lower }}
+    {% endif %}
   {% endif %}
 {% endblock %}
 
