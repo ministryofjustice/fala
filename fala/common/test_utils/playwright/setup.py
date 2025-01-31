@@ -71,12 +71,12 @@ class PlaywrightTestSetup(StaticLiveServerTestCase):
 
     def visit_category_search_page(self, url_params):
         page = self.browser.new_page()
-        page.goto(f"{self.live_server_url}/search-results{url_params}")
+        page.goto(f"{self.live_server_url}/check{url_params}")
         return SingleCategorySearchPage(page)
 
     def visit_category_search_results_page(self, url_params, postcode):
         page = self.browser.new_page()
-        page.goto(f"{self.live_server_url}/search-results{url_params}")
+        page.goto(f"{self.live_server_url}/check{url_params}")
         page.get_by_label("Postcode").fill(postcode)
         page.get_by_role("button", name="Search").click()
         if page.locator("#changeSearchButton").is_visible():

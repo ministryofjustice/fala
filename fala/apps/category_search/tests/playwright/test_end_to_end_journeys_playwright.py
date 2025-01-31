@@ -42,13 +42,13 @@ class EndToEndJourneys(PlaywrightTestSetup):
         for postcode in test_cases:
             with self.subTest(postcode=postcode):
                 page = self.browser.new_page()
-                page.goto(f"{self.live_server_url}/search-results?categories=hlpas")
+                page.goto(f"{self.live_server_url}/check?categories=hlpas")
                 expect(page.locator("h1")).to_have_text(f"{self.hlpas_front_page_heading}")
                 page.get_by_label("Postcode").fill(f"{postcode}")
                 page.get_by_role("button", name="Search").click()
                 expect(page.locator("h1")).to_have_text(f"{self.hlpas_front_page_heading}")
                 expect(page.locator("css=.govuk-error-summary")).to_be_visible()
-                page.goto(f"{self.live_server_url}/search-results?categories=med")
+                page.goto(f"{self.live_server_url}/check?categories=med")
                 expect(page.locator("h1")).to_have_text(f"{self.med_front_page_heading}")
                 page.get_by_label("Postcode").fill(f"{postcode}")
                 page.get_by_role("button", name="Search").click()

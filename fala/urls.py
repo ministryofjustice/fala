@@ -24,9 +24,9 @@ urlpatterns = [
     re_path(r"^robots\.txt$", RobotsTxtView.as_view(), name="robots_txt"),
     re_path(r"^security\.txt$", SecurityTxtView.as_view(), name="security_txt"),
     re_path(
-        r"^search-results/(?P<category>[\w-]+)$",
+        r"^check/(?P<category>[\w-]+)$",
         CategorySearchView.as_view(),
         name="category_search",
     ),
-    re_path(r"^search-results$", CategorySearchView.as_view(), name="category_search_query"),
+    re_path(r"^check$", CategorySearchView.as_view(), name="category_search_query"),
 ] + [re_path(r"^static/(?P<path>.*)$", serve, {"document_root": settings.STATIC_ROOT})]
