@@ -16,7 +16,6 @@ class SingleCategorySearchForm(AdviserRootForm, BaseSearch):
     def clean(self):
         data = self.cleaned_data
         postcode = data.get("postcode")
-        categories = self.data.get("categories")
 
         if not postcode:
             self.add_error("postcode", _("Enter a postcode"))
@@ -28,12 +27,6 @@ class SingleCategorySearchForm(AdviserRootForm, BaseSearch):
                 self.add_error("postcode", _("Enter a valid postcode"))
             else:
                 self._country_from_valid_postcode = valid_postcode
-
-        # Check if categories are provided
-        if not categories:
-            self.add_error("categories", _("Category is required."))
-        else:
-            self.categories = [categories]
 
         return data
 
