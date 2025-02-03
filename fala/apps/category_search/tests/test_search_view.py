@@ -11,29 +11,25 @@ class SearchViewTest(TestCase):
         self.clinical_negligence_code = "med"
         self.welfare_benefits_slug = "welfare-benefits"
         self.welfare_benefits_code = "wb"
-        self.clinical_negligence_url = reverse("single_category_search", kwargs={"category": "clinical-negligence"})
-        self.welfare_benefits_url = reverse("single_category_search", kwargs={"category": "welfare-benefits"})
+        self.clinical_negligence_url = reverse("category_search", kwargs={"category": "clinical-negligence"})
+        self.welfare_benefits_url = reverse("category_search", kwargs={"category": "welfare-benefits"})
 
         settings.FEATURE_FLAG_SINGLE_CATEGORY_SEARCH_FORM = True
 
     def test_redirects_to_correct_category_url_clinical_negligence(self):
-        response = self.client.get(
-            reverse("single_category_search_query") + f"?categories={self.clinical_negligence_code}"
-        )
+        response = self.client.get(reverse("category_search_query") + f"?categories={self.clinical_negligence_code}")
         self.assertRedirects(response, self.clinical_negligence_url)
 
     def test_handles_invalid_category_code_clinical_negligence(self):
-        response = self.client.get(reverse("single_category_search_query") + "?categories=invalid")
+        response = self.client.get(reverse("category_search_query") + "?categories=invalid")
         self.assertRedirects(response, reverse("adviser"))
 
     def test_redirects_to_correct_category_url_welfare_benefits(self):
-        response = self.client.get(
-            reverse("single_category_search_query") + f"?categories={self.welfare_benefits_code}"
-        )
+        response = self.client.get(reverse("category_search_query") + f"?categories={self.welfare_benefits_code}")
         self.assertRedirects(response, self.welfare_benefits_url)
 
     def test_handles_invalid_category_code_welfare_benefits(self):
-        response = self.client.get(reverse("single_category_search_query") + "?categories=invalid")
+        response = self.client.get(reverse("category_search_query") + "?categories=invalid")
         self.assertRedirects(response, reverse("adviser"))
 
     def test_displays_search_form_clinical_negligence(self):
