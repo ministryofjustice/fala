@@ -2,8 +2,8 @@
 from django.urls import reverse
 from django.views.generic import ListView
 from fala.apps.adviser.forms import AdviserSearchForm
-from fala.apps.category_search.forms import SingleCategorySearchForm
-from fala.common.states import EnglandOrWalesState, OtherJurisdictionState, ErrorState, SingleSearchErrorState
+from fala.apps.category_search.forms import CategorySearchForm
+from fala.common.states import EnglandOrWalesState, OtherJurisdictionState, ErrorState, CategorySearchErrorState
 from fala.common.mixin_for_views import CommonContextMixin, CategoryMixin
 from fala.common.category_messages import CATEGORY_MESSAGES
 from fala.common.regions import Region
@@ -15,7 +15,7 @@ class ResultsView(CommonContextMixin, CategoryMixin, ListView, EnglandOrWalesSta
         self.category_code = self.request.GET.get("categories", False)
 
         if self.tailored_results:
-            form_class = SingleCategorySearchForm
+            form_class = CategorySearchForm
         else:
             form_class = AdviserSearchForm
 
@@ -29,19 +29,19 @@ class ResultsView(CommonContextMixin, CategoryMixin, ListView, EnglandOrWalesSta
                 self.state = OtherJurisdictionState(region, form.cleaned_data["postcode"])
         else:
             if self.tailored_results:
-                # using CategoryMixin to access category_display_name & category_message, so we show this on SingleSearchErrorState view
+                # using CategoryMixin to access category_display_name & category_message, so we show this on CategorySearchErrorState view
                 self.setup_category(request, *args, **kwargs)
-                category_display_name = self.category_slug.replace("-", " ").title()
+                category_display_name = (self.category_slug or "").replace("-", " ").title()
                 category_message = CATEGORY_MESSAGES.get(self.category_slug, "")
 
-                # this is so we can use category_code & search_url, when conducting a search from SingleSearchErrorState view
+                # this is so we can use category_code & search_url, when conducting a search from CategorySearchErrorState view
                 category_code = self.request.GET.get("categories", "")
                 search_url = reverse("results")
 
-                # this is so that we can get correct hlpas display name onto SingleSearchErrorState view
+                # this is so that we can get correct hlpas display name onto CategorySearchErrorState view
                 category_slug = self.request.GET.get("categories")
 
-                self.state = SingleSearchErrorState(
+                self.state = CategorySearchErrorState(
                     form, category_display_name, category_message, category_code, search_url, category_slug
                 )
             else:

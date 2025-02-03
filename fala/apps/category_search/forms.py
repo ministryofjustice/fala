@@ -5,7 +5,7 @@ from fala.common.utils import validate_postcode_and_return_country
 from fala.common.base_form_components import AdviserRootForm, BaseSearch
 
 
-class SingleCategorySearchForm(AdviserRootForm, BaseSearch):
+class CategorySearchForm(AdviserRootForm, BaseSearch):
     page = forms.IntegerField(required=False, widget=forms.HiddenInput())
 
     def __init__(self, categories=None, *args, **kwargs):
@@ -16,7 +16,6 @@ class SingleCategorySearchForm(AdviserRootForm, BaseSearch):
     def clean(self):
         data = self.cleaned_data
         postcode = data.get("postcode")
-        categories = self.data.get("categories")
 
         if not postcode:
             self.add_error("postcode", _("Enter a postcode"))
@@ -28,12 +27,6 @@ class SingleCategorySearchForm(AdviserRootForm, BaseSearch):
                 self.add_error("postcode", _("Enter a valid postcode"))
             else:
                 self._country_from_valid_postcode = valid_postcode
-
-        # Check if categories are provided
-        if not categories:
-            self.add_error("categories", _("Category is required."))
-        else:
-            self.categories = [categories]
 
         return data
 

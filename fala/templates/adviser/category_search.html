@@ -61,6 +61,9 @@
     <div class="govuk-grid-column-two-thirds">
       <form action="{{ search_url }}" method="get" id="fala_questions_for_tailored_results">
         <input type="hidden" name="categories" value="{{ category_code }}">
+        {% if secondary_category_code %}
+          <input type="hidden" name="categories" value="{{ secondary_category_code }}">
+        {% endif %}
         <input type="hidden" name="tailored_results" value="true">
 
         {% set POSTCODE_CATEGORY_LABEL = _("What is your postcode?") %}

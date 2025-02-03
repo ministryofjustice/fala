@@ -1,4 +1,5 @@
 from django.http import Http404
+from fala.common.category_manager import CategoryManager
 from fala.common.regions import Region
 from fala.common.laa_laa_paginator import LaaLaaPaginator
 import urllib
@@ -155,7 +156,7 @@ class ErrorState(object):
         }
 
 
-class SingleSearchErrorState(object):
+class CategorySearchErrorState(object):
     def __init__(self, form, category_display_name, category_message, category_code, search_url, category_slug):
         self._form = form
         self.category_display_name = category_display_name
@@ -181,7 +182,10 @@ class SingleSearchErrorState(object):
                 item = {"text": error[0], "href": f"#id_{field}"}
             errorList.append(item)
 
-        if self.category_slug == "hlpas":
+        # TO-DO need to get the first category code from URL not the second one
+        self.category_display_name = CategoryManager.slug_from(self.category_code).replace("-", " ").title()
+
+        if self.category_code == "hlpas":
             self.category_display_name = "Housing Loss Prevention Advice Service"
 
         return {

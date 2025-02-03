@@ -23,20 +23,32 @@ class CommonContextMixin:
 
 class CategoryMixin:
     def setup_category(self, request, *args, **kwargs):
-        category_code = request.GET.get("categories")
+        category_code = request.GET.get("categories", "")
 
-        if not category_code:
+        # default variables
+        main_category_code = category_code
+        # TO-DO, hard coded for now
+        secondary_category_code = "immas"
+
+        # assign value to variable if there is a comma
+        if "," in category_code:
+            main_category_code = category_code.split(",")[0]
+            secondary_category_code = category_code.split(",")[1]
+
+        if not main_category_code:
             self.category_slug = kwargs.get("category")
             if not self.category_slug:  # Redirect if no category specified
                 return redirect("adviser")
             # if there is a slug, then retrieve the code based on the slug.
-            category_code = CategoryManager.category_code_from(self.category_slug)
-            if not category_code:
+            main_category_code = CategoryManager.category_code_from(self.category_slug)
+            if not main_category_code:
                 return redirect("adviser")
         else:
-            self.category_slug = CategoryManager.slug_from(category_code)
+            self.category_slug = CategoryManager.slug_from(main_category_code)
             if self.category_slug:
                 return redirect("category_search", category=self.category_slug)
             else:
                 return redirect("adviser")
-        return category_code
+
+        category_codes = [main_category_code, secondary_category_code]
+        return category_codes

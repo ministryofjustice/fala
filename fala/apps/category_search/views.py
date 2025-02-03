@@ -3,7 +3,7 @@ from django.conf import settings
 from django.urls import reverse
 from django.views.generic import TemplateView
 from django.http import HttpResponse
-from category_search.forms import SingleCategorySearchForm
+from category_search.forms import CategorySearchForm
 from django.shortcuts import redirect
 from fala.common.mixin_for_views import CommonContextMixin, CategoryMixin
 from fala.common.category_messages import CATEGORY_MESSAGES
@@ -22,12 +22,15 @@ class CategorySearchView(CommonContextMixin, CategoryMixin, TemplateView):
         if isinstance(result, HttpResponse):
             return result
 
-        self.category_code = result
+        self.category_code = result[0]
+        self.secondary_category_code = result[1]
 
         category_message = CATEGORY_MESSAGES.get(self.category_slug, "")
-        category_display_name = self.category_slug.replace("-", " ").title()
+        category_display_name = (self.category_slug or "").replace("-", " ").title()
 
-        form = SingleCategorySearchForm(initial={"categories": [self.category_code]}, data=request.GET or None)
+        form = CategorySearchForm(
+            initial={"categories": [self.category_code, self.secondary_category_code]}, data=request.GET or None
+        )
 
         search_url = reverse("results")
 
@@ -38,6 +41,7 @@ class CategorySearchView(CommonContextMixin, CategoryMixin, TemplateView):
                 "errorList": [],
                 "category_slug": self.category_slug,
                 "category_code": self.category_code,
+                "secondary_category_code": self.secondary_category_code,
                 "category_display_name": category_display_name,
                 "category_message": category_message,
                 "search_url": search_url,
