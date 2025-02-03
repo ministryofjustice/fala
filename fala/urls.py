@@ -2,7 +2,7 @@
 from django.conf import settings
 from django.urls import re_path
 from fala.apps.adviser.views import AdviserSearchView
-from fala.apps.category_search.views import SingleCategorySearchView
+from fala.apps.category_search.views import CategorySearchView
 from fala.common.results_view import ResultsView
 from fala.common.footer_views import (
     AccessibilityView,
@@ -24,9 +24,9 @@ urlpatterns = [
     re_path(r"^robots\.txt$", RobotsTxtView.as_view(), name="robots_txt"),
     re_path(r"^security\.txt$", SecurityTxtView.as_view(), name="security_txt"),
     re_path(
-        r"^single-category-search/(?P<category>[\w-]+)$",
-        SingleCategorySearchView.as_view(),
-        name="single_category_search",
+        r"^check/(?P<category>[\w-]+)$",
+        CategorySearchView.as_view(),
+        name="category_search",
     ),
-    re_path(r"^single-category-search$", SingleCategorySearchView.as_view(), name="single_category_search_query"),
+    re_path(r"^check$", CategorySearchView.as_view(), name="category_search_query"),
 ] + [re_path(r"^static/(?P<path>.*)$", serve, {"document_root": settings.STATIC_ROOT})]

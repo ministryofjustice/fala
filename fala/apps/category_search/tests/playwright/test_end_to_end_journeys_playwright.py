@@ -8,17 +8,17 @@ class EndToEndJourneys(PlaywrightTestSetup):
     mat_front_page_heading = "Find a legal aid adviser for family"
 
     def test_landing_page_with_hlpas(self):
-        page = self.visit_single_category_search_page("?categories=hlpas")
+        page = self.visit_category_search_page("?categories=hlpas")
         expect(page.h1).to_have_text(f"{self.hlpas_front_page_heading}")
         expect(page.exit_button).to_be_hidden()
 
     def test_landing_page_with_med(self):
-        page = self.visit_single_category_search_page("?categories=med")
+        page = self.visit_category_search_page("?categories=med")
         expect(page.h1).to_have_text(f"{self.med_front_page_heading}")
         expect(page.exit_button).to_be_hidden()
 
     def test_landing_page_with_mat(self):
-        page = self.visit_single_category_search_page("?categories=mat")
+        page = self.visit_category_search_page("?categories=mat")
         expect(page.h1).to_have_text(f"{self.mat_front_page_heading}")
         expect(page.exit_button).to_be_visible()
 
@@ -42,13 +42,13 @@ class EndToEndJourneys(PlaywrightTestSetup):
         for postcode in test_cases:
             with self.subTest(postcode=postcode):
                 page = self.browser.new_page()
-                page.goto(f"{self.live_server_url}/single-category-search?categories=hlpas")
+                page.goto(f"{self.live_server_url}/check?categories=hlpas")
                 expect(page.locator("h1")).to_have_text(f"{self.hlpas_front_page_heading}")
                 page.get_by_label("Postcode").fill(f"{postcode}")
                 page.get_by_role("button", name="Search").click()
                 expect(page.locator("h1")).to_have_text(f"{self.hlpas_front_page_heading}")
                 expect(page.locator("css=.govuk-error-summary")).to_be_visible()
-                page.goto(f"{self.live_server_url}/single-category-search?categories=med")
+                page.goto(f"{self.live_server_url}/check?categories=med")
                 expect(page.locator("h1")).to_have_text(f"{self.med_front_page_heading}")
                 page.get_by_label("Postcode").fill(f"{postcode}")
                 page.get_by_role("button", name="Search").click()
