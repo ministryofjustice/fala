@@ -36,7 +36,7 @@ class CategoryMixin:
         else:
             self.category_slug = CategoryManager.slug_from(category_code)
             if self.category_slug:
-                return redirect("single_category_search", category=self.category_slug)
+                return redirect("category_search", category=self.category_slug)
             else:
                 return redirect("adviser")
         return category_code

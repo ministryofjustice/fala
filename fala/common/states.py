@@ -167,7 +167,7 @@ class SingleSearchErrorState(object):
 
     @property
     def template_name(self):
-        return "single_category_search.html"
+        return "category_search.html"
 
     def get_queryset(self):
         return []

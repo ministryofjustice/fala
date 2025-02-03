@@ -3,7 +3,7 @@ from django.conf import settings
 from django.urls import re_path, path
 from django.conf.urls.i18n import i18n_patterns
 from fala.apps.adviser.views import AdviserSearchView
-from fala.apps.category_search.views import SingleCategorySearchView
+from fala.apps.category_search.views import CategorySearchView
 from fala.common.results_view import ResultsView
 from fala.common.footer_views import (
     AccessibilityView,
@@ -29,10 +29,10 @@ urlpatterns += i18n_patterns(
     path("", AdviserSearchView.as_view(), name="adviser"),
     path("search", ResultsView.as_view(), name="results"),
     path(
-        "single-category-search/<str:category>",
-        SingleCategorySearchView.as_view(),
-        name="single_category_search",
+        "check/<str:category>",
+        CategorySearchView.as_view(),
+        name="category_search",
     ),
-    path("single-category-search", SingleCategorySearchView.as_view(), name="single_category_search_query"),
+    path("check", CategorySearchView.as_view(), name="category_search_query"),
     prefix_default_language=False,
 )
