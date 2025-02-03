@@ -8,7 +8,9 @@
 {% block content %}
   <div class="govuk-grid-column-full">
     <span class="language-and-exit-container">
-      <div id="google_translate_element" class="govuk-!-margin-bottom-6 govuk-!-display-none-print"></div>
+      {% if not FEATURE_FLAG_WELSH_TRANSLATION %}
+        <div id="google_translate_element" class="govuk-!-margin-bottom-6 govuk-!-display-none-print"></div>
+        {% endif %}
       <div id="exit_button">
       {% if 'mat' in request.GET.getlist('categories') %}
         {{ govukExitThisPage("Exit this page")}}
@@ -165,7 +167,7 @@
           </li>
         {% endfor %}
       </ul>
-      <nav class="govuk-!-display-none-print"> 
+      <nav class="govuk-!-display-none-print">
         {{ govukPagination(pagination) }}
       </nav>
     {% endif %}

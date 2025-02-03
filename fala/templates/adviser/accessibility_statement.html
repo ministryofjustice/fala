@@ -4,7 +4,9 @@
 
 {% block content %}
   <div class="govuk-grid-column-two-thirds">
-    <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
+    {% if not FEATURE_FLAG_WELSH_TRANSLATION %}
+      <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
+    {% endif %}
 
     <h1 class="govuk-heading-xl">{{_('Accessibility statement for Find a legal advisor')}}</h1>
 
@@ -44,12 +46,12 @@
       <li>{{_('Google Translate does not translate technical terms into Plain English')}}</li>
       <li>{{_('hyperlinks to google maps are not specific about the listing they are related to')}}</li>
     </ul>
-   
+
     <h2 class="govuk-heading-m">{{_('Feedback and contact information')}}</h2>
 
     <p class="govuk-body">
-      {{_('We’re always looking to improve the accessibility of this website. 
-      If you find any problems not listed on this page or think we’re not meeting accessibility requirements, contact us by email at')}} 
+      {{_('We’re always looking to improve the accessibility of this website.
+      If you find any problems not listed on this page or think we’re not meeting accessibility requirements, contact us by email at')}}
       <a class="govuk-link email" href="mailto:eligibility@justice.gov.uk">eligibility@justice.gov.uk</a>.
     </p>
 
@@ -85,11 +87,11 @@
     <p class="govuk-body">{{_('The content listed below is non-accessible for the following reasons.')}}</p>
 
     <ul class="govuk-list govuk-list--bullet">
-      <li>{{_('The results page border does not have sufficient colour contrast. 
+      <li>{{_('The results page border does not have sufficient colour contrast.
         This fails WCAG success criterion 1.4.3 Contrast (Minimum). We plan to fix this by the end of July 2024.')}}</li>
-      <li>{{_('The links to google maps elements are not identifiable from the link text alone. This fails WCAG success criterion 2.4.9 Link Purpose. 
+      <li>{{_('The links to google maps elements are not identifiable from the link text alone. This fails WCAG success criterion 2.4.9 Link Purpose.
         We plan to fix this by the end of October 2024.')}}</li>
-      <li>{{_('The results page title is the same as the main page and so does not clearly describe the topic or purpose. This fails WCAG success criterion 2.4.2 Page Titled. 
+      <li>{{_('The results page title is the same as the main page and so does not clearly describe the topic or purpose. This fails WCAG success criterion 2.4.2 Page Titled.
         We plan to fix this by the end of October 2024.')}}</li>
     </ul>
 
@@ -98,7 +100,7 @@
     <p class="govuk-body">{{_('Not applicable')}}</p>
 
     <h3 class="govuk-heading-s">{{_('Content that’s not within the scope of the accessibility regulations')}}</h3>
-   
+
     <p class="govuk-body">{{_('Not applicable')}}</p>
 
     <h2 class="govuk-heading-m">{{_('Preparation of this accessibility statement')}}</h2>
@@ -108,7 +110,7 @@
     </p>
 
     <p class="govuk-body">
-      {{_('This website was last tested on 12 June 2024. The test was carried out by the Ministry of Justice. 
+      {{_('This website was last tested on 12 June 2024. The test was carried out by the Ministry of Justice.
       We tested all of the pages using a basic accessibility test, but this was not a full audit.')}}
     </p>
 

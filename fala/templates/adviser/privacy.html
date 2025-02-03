@@ -4,20 +4,22 @@
 
 {% block content %}
   <div class="govuk-grid-column-two-thirds">
-    <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
+    {% if not FEATURE_FLAG_WELSH_TRANSLATION %}
+      <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
+    {% endif %}
 
     <h1 class="govuk-heading-xl">{{_('Privacy')}}</h1>
 
     <h2 class="govuk-heading-m">{{_('What data we collect')}}</h2>
 
     <p class="govuk-body">
-      {{_('This service is provided by the')}} 
+      {{_('This service is provided by the')}}
       <a class="govuk-link" href="https://www.gov.uk/government/organisations/legal-aid-agency">{{_('Legal Aid Agency')}}</a> <abbr>(LAA)</abbr>,
       {{_('part of the Ministry of Justice')}} <abbr>(MoJ)</abbr>.
     </p>
 
     <p class="govuk-body">
-      {{_('We do not collect any')}} 
+      {{_('We do not collect any')}}
       <a class="govuk-link" href="https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/personal-information-what-is-it/what-is-personal-information-a-guide/">{{_('personal information')}}</a>
       {{_('that could identify an individual in this service.')}}
     </p>
@@ -71,10 +73,10 @@
     </p>
 
     <h2 class="govuk-heading-m">{{_('Our legal basis for processing your data')}}</h2>
-  
+
     <p class="govuk-body">
-      {{_('The legal basis for processing personal data in relation to site security is our legitimate interests, and the legitimate interests of our users, in ensuring the security and integrity of this service.')}} 
-      {{_('The legal basis for processing all other data is that it’s necessary to provide a service and our legitimate interest in understanding the usage of our service.')}} 
+      {{_('The legal basis for processing personal data in relation to site security is our legitimate interests, and the legitimate interests of our users, in ensuring the security and integrity of this service.')}}
+      {{_('The legal basis for processing all other data is that it’s necessary to provide a service and our legitimate interest in understanding the usage of our service.')}}
     </p>
 
     <p class="govuk-body">
@@ -120,7 +122,7 @@
     <h2 class="govuk-heading-m">{{_('How we protect your data and keep it secure')}}</h2>
 
     <p class="govuk-body">
-      {{_('We are committed to doing all that we can to keep your data secure.')}} 
+      {{_('We are committed to doing all that we can to keep your data secure.')}}
       {{_('We have set up systems and processes to prevent unauthorised access or disclosure of your data. ')}}
     </p>
 
@@ -175,7 +177,7 @@
 
     <p class="govuk-body">
       {{_('When we ask you for information, we will comply with the law. ')}}
-      {{_('If you consider that your information has been handled incorrectly, you can contact the Information Commissioner for independent advice about data protection.')}} 
+      {{_('If you consider that your information has been handled incorrectly, you can contact the Information Commissioner for independent advice about data protection.')}}
       {{_('You can contact the Information Commissioner at:')}}
     </p>
 
