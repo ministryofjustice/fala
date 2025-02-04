@@ -8,6 +8,7 @@
     <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
     {% if tailored_results %}
       {{ govukBackLink({
+        'classes': "back_link_other_region",
         'text': BACK_LABEL,
         'href': "/check?categories="+category_code,
       }) }}

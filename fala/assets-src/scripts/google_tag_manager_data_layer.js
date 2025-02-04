@@ -1,4 +1,5 @@
 const fala_form = document.querySelector('#fala_questions');
+const fala_postcode_only_form = document.querySelector('#fala_questions_for_tailored_results');
 
 function getCookie(name) {
   const value = `; ${document.cookie}`;
@@ -28,3 +29,17 @@ if (fala_form && cookie_value) {
     });
   });
 };
+
+if (fala_postcode_only_form && cookie_value) {
+  fala_postcode_only_form.addEventListener('submit', function(e){
+
+  // variables for postcode
+  const postcode = document.querySelector("#id_postcode").value;
+
+  window.dataLayer.push({
+    'event': "formSubmissionForTailoredResults",
+    'postcode': postcode,
+  });
+});
+};
+
