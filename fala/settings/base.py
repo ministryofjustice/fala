@@ -207,7 +207,6 @@ INSTALLED_APPS = [
     "requests",
     "govuk_frontend_jinja",
     "django_jinja",
-    "django_extensions",
 ]
 
 PROJECT_APPS = ["adviser", "fala", "laalaa"]

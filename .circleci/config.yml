@@ -204,9 +204,10 @@ workflows:
             - lint
             - pip-compile
       - build:
-          requires:
-            - test
           context: laa-fala
+          requires:
+            - lint
+            - pip-compile
 
       - deploy:
           name: Deploy UAT branch
@@ -252,7 +253,7 @@ workflows:
             branches:
               only:
                 - main
-      
+
       - deploy_grafana:
           name: Deploy Grafana Production Dashboards
           requires:
