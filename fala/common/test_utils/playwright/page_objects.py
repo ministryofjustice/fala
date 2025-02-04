@@ -32,6 +32,10 @@ class FalaPage(object):
         self.item_from_text("Change Search").click()
         return SearchPage(self._page)
 
+    @property
+    def language_switcher_link(self):
+        return self._page.locator("#language_switcher_link")
+
 
 class ResultsPage(FalaPage):
     @property
