@@ -1,5 +1,18 @@
 <div class="govuk-grid-row govuk-!-display-none-print language-switcher">
-  <p class="govuk-body">
-    English / <a class="govuk-body govuk-link" href="/" target="_blank">Cymraeg</a>
-  </p>
+  <!-- {% set redirect_to = "." %} -->
+  <form id="language_choice" action="{{ url('set_language') }}" method="post">
+    {% csrf_token %}
+    <!-- <input name="next" type="hidden" value="{{ request.build_absolute_uri }}"> -->
+    <!-- <input name="next" type="hidden" value=""> -->
+    <!-- <<input name="language" type="hidden" value="cy"> -->
+    <label for="language-select">Choose your language:</label>
+    <select id="language-select" name="language">
+        <option value="en">English</option>
+        <option value="cy">Cymraeg</option>
+     </select>
+    {{ govukButton({
+      'text': "Go",
+      'type': "submit",
+    }) }}
+  </form>
 </div>

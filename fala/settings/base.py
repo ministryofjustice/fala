@@ -48,7 +48,7 @@ DATABASES = {
 DEFAULT_ALLOWED_HOSTS = ".fala.dsd.io .find-legal-advice.justice.gov.uk"
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", DEFAULT_ALLOWED_HOSTS).split(" ")
 
-LANGUAGE_CODE = "en-gb"
+# LANGUAGE_CODE = "en-gb"
 
 TIME_ZONE = "UTC"
 
@@ -207,6 +207,7 @@ INSTALLED_APPS = [
     "requests",
     "govuk_frontend_jinja",
     "django_jinja",
+    "django_extensions",
 ]
 
 PROJECT_APPS = ["adviser", "fala", "laalaa"]
