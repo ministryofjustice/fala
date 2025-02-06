@@ -2,6 +2,7 @@
 from django.conf import settings
 from django.shortcuts import redirect
 from fala.common.category_manager import CategoryManager
+from django.utils import translation
 
 
 class CommonContextMixin:
@@ -21,8 +22,18 @@ class CommonContextMixin:
         return context
 
 
+class TranslationMixin:
+    def translation_link(self, request):
+        user_language = request.COOKIES.get("django_language", "en")
+        translation.activate(user_language)
+        if user_language == "cy":
+            return f"<a class='govuk-body govuk-link' id='language_switcher_link' href='/set_language?language_code=en&return_link={request.get_full_path()}'>English</a> / Cymraeg"
+        else:
+            return f"English / <a class='govuk-body govuk-link' id='language_switcher_link' href='/set_language?language_code=cy&return_link={request.get_full_path()}'>Cymraeg</a>"
+
+
 class CategoryMixin:
-    def setup_category(self, request, *args, **kwargs):
+    def setup_category(self, request, **kwargs):
         category_code = request.GET.get("categories")
 
         if not category_code:
