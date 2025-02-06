@@ -2,6 +2,7 @@ django>5
 django-jinja==2.10.2
 django-storages==1.13.2
 django-csp==3.7
+django_extensions==3.2.3
 jinja2<4
 logstash-formatter<1
 https://github.com/ministryofjustice/cla_common/archive/refs/tags/0.3.3.tar.gz

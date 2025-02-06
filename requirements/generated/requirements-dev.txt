@@ -28,12 +28,15 @@ django==5.0.11
     # via
     #   -r requirements/source/requirements-base.in
     #   django-csp
+    #   django-extensions
     #   django-jinja
     #   django-storages
 django-csp==3.7
     # via -r requirements/source/requirements-base.in
 django-extended-choices==0.3.0
     # via cla-common
+django-extensions==3.2.3
+    # via -r requirements/source/requirements-base.in
 django-jinja==2.10.2
     # via -r requirements/source/requirements-base.in
 django-storages==1.13.2
