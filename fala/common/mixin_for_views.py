@@ -1,6 +1,7 @@
 # coding=utf-8
 from django.conf import settings
 from django.shortcuts import redirect
+from django.urls import reverse
 from fala.common.category_manager import CategoryManager
 
 
@@ -20,35 +21,32 @@ class CommonContextMixin:
         )
         return context
 
-
 class CategoryMixin:
     def setup_category(self, request, *args, **kwargs):
         category_code = request.GET.get("categories", "")
 
-        # default variables
-        main_category_code = category_code
-        # TO-DO, hard coded for now
-        secondary_category_code = "immas"
+        # Check if main category is in the URL (e.g., /check/family) i.e we have already redirected the user once
+        main_category_from_url = kwargs.get("category")
 
-        # assign value to variable if there is a comma
-        if "," in category_code:
-            main_category_code = category_code.split(",")[0]
-            secondary_category_code = category_code.split(",")[1]
+        category_list = [c.strip() for c in category_code.split(",") if c.strip()]
 
-        if not main_category_code:
-            self.category_slug = kwargs.get("category")
-            if not self.category_slug:  # Redirect if no category specified
-                return redirect("adviser")
-            # if there is a slug, then retrieve the code based on the slug.
-            main_category_code = CategoryManager.category_code_from(self.category_slug)
-            if not main_category_code:
-                return redirect("adviser")
+        if main_category_from_url:
+            main_category_code = CategoryManager.category_code_from(main_category_from_url)
+            self.category_slug = main_category_from_url
         else:
-            self.category_slug = CategoryManager.slug_from(main_category_code)
-            if self.category_slug:
-                return redirect("category_search", category=self.category_slug)
-            else:
-                return redirect("adviser")
+            main_category_code = category_list[0] if category_list else None
+            self.category_slug = CategoryManager.slug_from(main_category_code) if main_category_code else None
 
-        category_codes = [main_category_code, secondary_category_code]
-        return category_codes
+        main_category_code, secondary_category_code = (category_list + [None])[:2]
+
+        # This prrevents a redirect loop that forces the user onto the search page for the secondary category
+        if main_category_from_url == self.category_slug:
+            return [main_category_code, secondary_category_code]
+
+        redirect_url = reverse("category_search", kwargs={"category": self.category_slug})
+
+        if secondary_category_code:
+            redirect_url += f"?categories={secondary_category_code}"
+
+        return redirect(redirect_url)
+
