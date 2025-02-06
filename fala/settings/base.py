@@ -46,7 +46,7 @@ DATABASES = {
     }
 }
 
-DEFAULT_ALLOWED_HOSTS = ".fala.dsd.io .find-legal-advice.justice.gov.uk"
+DEFAULT_ALLOWED_HOSTS = ".fala.dsd.io .find-legal-advice.justice.gov.uk .cloud-platform.service.justice.gov.uk"
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", DEFAULT_ALLOWED_HOSTS)
 
 # Ensure ALLOWED_HOSTS splits correctly by both spaces and commas
