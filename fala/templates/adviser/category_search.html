@@ -4,7 +4,12 @@
   {% if results %}
     {{_('Search results')}}
   {% else %}
-    {{_('Find a Legal Aid Adviser or Family Mediator')}}
+    {{_('Find a legal aid adviser for ')}}
+    {% if category_code == 'hlpas' %}
+      {{_('the')}} {{ category_display_name }}
+    {% else %}
+      {{ category_display_name | lower }}
+    {% endif %}
   {% endif %}
 {% endblock %}
 
@@ -21,7 +26,9 @@
 {% block content %}
   <div class="govuk-grid-column-full">
     <span class="language-and-exit-container">
-      <div id="google_translate_element" class="govuk-!-margin-bottom-6 govuk-!-display-none-print"></div>
+      {% if not FEATURE_FLAG_WELSH_TRANSLATION %}
+        <div id="google_translate_element" class="govuk-!-margin-bottom-6 govuk-!-display-none-print"></div>
+      {% endif %}
       <div id="exit_button">
       {% if category_code == 'mat' %}
         {{ govukExitThisPage("Exit this page")}}
@@ -56,7 +63,7 @@
 
   {% block search_form %}
     <div class="govuk-grid-column-two-thirds">
-      <form action="{{ search_url }}" method="get" id="fala_questions">
+      <form action="{{ search_url }}" method="get" id="fala_questions_for_tailored_results">
         <input type="hidden" name="categories" value="{{ category_code }}">
         <input type="hidden" name="tailored_results" value="true">
 
@@ -85,7 +92,7 @@
             'name': "postcode"
           }) }}
         {% endif %}
-        {{ govukButton({'text': _("Search"), 'type': "submit", 'classes': "govuk-!-margin-bottom-2"}) }}
+        {{ govukButton({'text': _("Search"), 'type': "submit", 'classes': "govuk-!-margin-bottom-2", 'id': "searchButtonForTailoredResults"}) }}
       </form>
     </div>
   {% endblock %}

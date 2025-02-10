@@ -4,7 +4,9 @@
 
 {% block content %}
   <div class="govuk-grid-column-two-thirds">
-    <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
+    {% if not FEATURE_FLAG_WELSH_TRANSLATION %}
+      <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
+    {% endif %}
 
     <h1 class="govuk-heading-xl">{{_('Accessibility statement for Find a legal advisor')}}</h1>
 
@@ -42,7 +44,7 @@
       <li>{{_('Google Translate does not translate technical terms into Plain English')}}</li>
       <li>{{_('hyperlinks to google maps are not specific about the listing they are related to')}}</li>
     </ul>
-   
+
     <h2 class="govuk-heading-m">{{_('Feedback and contact information')}}</h2>
 
     <p class="govuk-body">
@@ -84,7 +86,7 @@
     <p class="govuk-body">{{_('Not applicable')}}</p>
 
     <h3 class="govuk-heading-s">{{_('Content that’s not within the scope of the accessibility regulations')}}</h3>
-   
+
     <p class="govuk-body">{{_('Not applicable')}}</p>
 
     <h2 class="govuk-heading-m">{{_('Preparation of this accessibility statement')}}</h2>
