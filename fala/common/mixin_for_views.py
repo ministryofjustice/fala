@@ -21,8 +21,24 @@ class CommonContextMixin:
         return context
 
 
+class TranslationMixin:
+    def translation_link(self, request):
+        user_language = request.COOKIES.get("django_language", "en")
+        if user_language == "cy":
+            return "<a class='govuk-body govuk-link' id='language_switcher_link'>English</a> / Cymraeg"
+        else:
+            return "English / <a class='govuk-body govuk-link' id='language_switcher_link'>Cymraeg</a>"
+
+    def language(self, request):
+        user_language = request.COOKIES.get("django_language", "en")
+        if user_language == "cy":
+            return "en"
+        else:
+            return "cy"
+
+
 class CategoryMixin:
-    def setup_category(self, request, *args, **kwargs):
+    def setup_category(self, request, **kwargs):
         category_code = request.GET.get("categories")
 
         if not category_code:
