@@ -5,7 +5,9 @@
 {% set CHANGE_SEARCH = _("Change search") %}
 {% block content %}
   <div class="govuk-grid-column-full">
-    <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
+    {% if not FEATURE_FLAG_WELSH_TRANSLATION %}
+      <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
+    {% endif %}
     {% if tailored_results %}
       {{ govukBackLink({
         'classes': "back_link_other_region",
