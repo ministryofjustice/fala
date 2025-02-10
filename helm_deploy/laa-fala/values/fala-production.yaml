@@ -67,7 +67,7 @@ feature_flags:
 laalaa_api:
   host: "https://laa-legal-adviser-api-production.cloud-platform.service.justice.gov.uk"
 
-allowed_hosts: ".laa-fala-production.apps.live-1.cloud-platform.service.justice.gov.uk .find-legal-advice.justice.gov.uk"
+allowed_hosts: ".laa-fala-production.apps.live-1.cloud-platform.service.justice.gov.uk .find-legal-advice.justice.gov.uk .cloud-platform.service.justice.gov.uk"
 
 autoscaling:
   enabled: false

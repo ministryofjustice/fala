@@ -45,14 +45,11 @@ DATABASES = {
     }
 }
 
-DEFAULT_ALLOWED_HOSTS = "*"
+DEFAULT_ALLOWED_HOSTS = ".fala.dsd.io .find-legal-advice.justice.gov.uk .cloud-platform.service.justice.gov.uk"
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", DEFAULT_ALLOWED_HOSTS)
 
 # Split correctly to handle both space-separated and comma-separated values
 ALLOWED_HOSTS = ALLOWED_HOSTS.replace(" ", ",").split(",")
-
-print("PATSUNE", ALLOWED_HOSTS)
-
 
 # LANGUAGE_CODE = "en-gb"
 
