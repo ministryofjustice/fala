@@ -58,7 +58,7 @@ laalaa_api:
   host: "https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk"
 
 # Accept any subdomain that ends in the following
-allowed_hosts: ".cloud-platform.service.justice.gov.uk .staging.find-legal-advice.justice.gov.uk"
+allowed_hosts: ".laa-fala-staging.apps.live-1.cloud-platform.service.justice.gov.uk .cloud-platform.service.justice.gov.uk .staging.find-legal-advice.justice.gov.uk uat.staging.find-legal-advice.justice.gov.uk"
 
 autoscaling:
   enabled: false
