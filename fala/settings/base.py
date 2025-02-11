@@ -46,9 +46,7 @@ DATABASES = {
 }
 
 DEFAULT_ALLOWED_HOSTS = ".fala.dsd.io .find-legal-advice.justice.gov.uk"
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", DEFAULT_ALLOWED_HOSTS).split(" ")
-
-LANGUAGE_CODE = "en-gb"
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", DEFAULT_ALLOWED_HOSTS).split(",")
 
 TIME_ZONE = "UTC"
 
