@@ -21,6 +21,9 @@
 {%- from "govuk_frontend_jinja/components/input/macro.html" import govukInput %}
 {%- from "govuk_frontend_jinja/components/exit-this-page/macro.html" import govukExitThisPage -%}
 
+{% set titleText = _("There is a problem")%}
+{% set exitText = _("Exit this page")%}
+
 {% block content %}
   <div class="govuk-grid-column-full">
     <span class="language-and-exit-container">
@@ -29,7 +32,7 @@
       {% endif %}
       <div id="exit_button">
       {% if category_code == 'mat' %}
-        {{ govukExitThisPage("Exit this page")}}
+        {{ govukExitThisPage({"text": exitText})}}
       {% endif %}
     </div>
     </span>
@@ -37,7 +40,7 @@
   <div class="govuk-grid-column-two-thirds">
     {% if form.errors %}
       {{ govukErrorSummary({
-        "titleText": "There is a problem",
+        "titleText": titleText,
         "errorList": errorList
       }) }}
     {% endif %}

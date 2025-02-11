@@ -9,6 +9,8 @@
 {%- from 'govuk_frontend_jinja/components/checkboxes/macro.html' import govukCheckboxes %}
 {%- from "govuk_frontend_jinja/components/input/macro.html" import govukInput %}
 
+{% set titleText = _("There is a problem")%}
+
 {% block content %}
   <div class="govuk-grid-column-two-thirds">
       {% if not FEATURE_FLAG_WELSH_TRANSLATION %}
@@ -16,7 +18,7 @@
       {% endif %}
       {% if form.errors %}
         {{ govukErrorSummary({
-          "titleText": _("There is a problem"),
+          "titleText": titleText,
           "errorList": errorList
         }) }}
       {% endif %}

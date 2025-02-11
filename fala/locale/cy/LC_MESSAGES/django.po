@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fala\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-27 12:06+0000\n"
+"POT-Creation-Date: 2025-02-11 11:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,21 +21,21 @@ msgstr ""
 
 #: fala/apps/adviser/forms.py:23 fala/apps/category_search/forms.py:22
 msgid "Enter a postcode"
-msgstr ""
+msgstr "Rhowch god post"
 
 #: fala/apps/adviser/forms.py:24
 msgid "Enter an organisation name"
-msgstr ""
+msgstr "Rhowch enw eich sefydliad"
 
 #: fala/apps/adviser/forms.py:36 fala/apps/category_search/forms.py:28
 msgid "Enter a valid postcode"
-msgstr ""
+msgstr "Rhowch god post dilys"
 
 #: fala/apps/category_search/forms.py:34
 msgid "Category is required."
 msgstr ""
 
-#: fala/common/base_form_components.py:30 fala/templates/adviser/search.html:41
+#: fala/common/base_form_components.py:30 fala/templates/adviser/search.html:45
 msgid "Postcode"
 msgstr ""
 
@@ -64,6 +64,8 @@ msgid ""
 "Tell the adviser your home is at risk and you want advice through the "
 "Housing Loss Prevention Advice Service."
 msgstr ""
+"Dywedwch wrth y cynghorydd bod eich cartref mewn perygl a’ch bod am gael "
+"cyngor drwy’r Gwasanaeth Cynghori Rhag Colli Tŷ."
 
 #: fala/common/category_messages.py:8
 msgid ""
@@ -74,6 +76,14 @@ msgid ""
 "For any other benefits issue, ask the legal adviser if you can get free "
 "legal advice or if you will have to pay for it."
 msgstr ""
+"Nid yw cymorth cyfreithiol i gael cyngor am fudd-daliadau lles ond ar gael "
+"os ydych yn apelio yn erbyn penderfyniad a wnaed gan y tribiwnlys nawdd "
+"cymdeithasol. Rhaid i’r apêl hon fod yn yr Uwch Dribiwnlys, yn y Llys Apêl "
+"neu’r Goruchaf Lys.\n"
+"\n"
+"Gydag unrhyw fater arall sy’n ymwneud â budd-daliadau, gofynnwch i’r "
+"cynghorydd cyfreithiol a allwch gael cyngor cyfreithiol am ddim ynteu a fydd "
+"rhaid ichi dalu amdano."
 
 #: fala/common/category_messages.py:13
 msgid ""
@@ -81,6 +91,25 @@ msgid ""
 "you have a child that suffered a brain injury during pregnancy, birth or the "
 "first 8 weeks of life."
 msgstr ""
+"Nid yw cymorth cyfreithiol am esgeuluster clinigol fel arfer ond ar gael os "
+"oes gennych blentyn sydd wedi cael anaf i’r ymennydd yn ystod beichiogrwydd, "
+"genedigaeth neu yn ystod 8 wythnos gyntaf ei fywyd."
+
+#: fala/common/states.py:94
+msgid "Northern Ireland"
+msgstr "Gogledd Iwerddon"
+
+#: fala/common/states.py:98
+msgid "the Isle of Man"
+msgstr "Ynys Manaw"
+
+#: fala/common/states.py:102
+msgid "Jersey"
+msgstr "Jersey"
+
+#: fala/common/states.py:106
+msgid "Guernsey"
+msgstr "Gurnsey"
 
 #: fala/common/utils.py:41
 msgid "Error looking up legal advisers. Please try again later."
@@ -94,135 +123,189 @@ msgstr ""
 msgid "Cymraeg"
 msgstr ""
 
+#: fala/templates/404.html:6
+msgid "Page not found - 404 - "
+msgstr ""
+
+#: fala/templates/404.html:10
+msgid "Page not found"
+msgstr ""
+
+#: fala/templates/404.html:12
+msgid "If you entered a web address please check it was correct."
+msgstr ""
+
+#: fala/templates/404.html:13
+msgid "Alternatively return to "
+msgstr ""
+
+#: fala/templates/404.html:13
+msgid " homepage"
+msgstr ""
+
+#: fala/templates/404.html:13
+msgid " and try again."
+msgstr ""
+
 #: fala/templates/500.html:6
 msgid ""
 "Sorry, there is a problem with the service - Find a legal advisor or family "
 "mediator - GOV.UK"
 msgstr ""
 
+#: fala/templates/500.html:10
+msgid "Sorry, there is a problem with the service"
+msgstr ""
+
+#: fala/templates/500.html:11
+msgid "Try again later."
+msgstr ""
+
+#: fala/templates/500.html:12
+msgid "You can also "
+msgstr ""
+
+#: fala/templates/500.html:12
+msgid "find a solicitor"
+msgstr ""
+
+#: fala/templates/500.html:12
+msgid " on the Law Society website."
+msgstr ""
+
+#: fala/templates/500.html:13
+msgid ""
+"Search using your location, then select ‘Accepts legal aid’ to show legal "
+"aid solicitors near you."
+msgstr ""
+
 #: fala/templates/adviser/_analytics_and_privacy_list.html:2
 msgid "the pages you visit"
-msgstr ""
+msgstr "y tudalennau rydych chi’n ymweld â nhw"
 
 #: fala/templates/adviser/_analytics_and_privacy_list.html:3
 msgid "the categories you use to search"
-msgstr ""
+msgstr "y categorïau rydych chi’n eu defnyddio i chwilio"
 
 #: fala/templates/adviser/_analytics_and_privacy_list.html:4
 msgid "the postcode you use to search"
-msgstr ""
+msgstr "y cod post rydych chi’n ei ddefnyddio i chwilio"
 
 #: fala/templates/adviser/_analytics_and_privacy_list.html:5
 msgid "how long you spend on each page"
-msgstr ""
+msgstr "faint o amser rydych chi’n ei dreulio ar bob tudalen"
 
 #: fala/templates/adviser/_analytics_and_privacy_list.html:6
 msgid "how you arrived at the service"
-msgstr ""
+msgstr "sut gwnaethoch gyrraedd y gwasanaeth"
 
 #: fala/templates/adviser/_analytics_and_privacy_list.html:7
 msgid "what you click on while you visit the service"
-msgstr ""
+msgstr "beth rydych yn clicio arno wrth ddefnyddio’r gwasanaeth"
 
 #: fala/templates/adviser/_analytics_and_privacy_list.html:8
 msgid "the device and browser you use"
-msgstr ""
+msgstr "y ddyfais a’r porwr rydych chi’n eu defnyddio"
 
 #: fala/templates/adviser/_cookie_banner.html:5
 msgid "We use some essential cookies to make this service work."
 msgstr ""
+"Rydym yn defnyddio rhai cwcis hanfodol i wneud i’r gwasanaeth hwn weithio."
 
 #: fala/templates/adviser/_cookie_banner.html:6
 msgid ""
 "We’d like to set additional cookies so we can remember your settings, "
 "understand how people use the service and make improvements."
 msgstr ""
+"Hoffem hefyd ddefnyddio cwcis ychwanegol er mwyn i ni allu cofio eich "
+"gosodiadau, deall sut mae pobl yn defnyddio’r gwasanaeth a gwneud "
+"gwelliannau."
 
 #: fala/templates/adviser/_cookie_banner.html:10
 msgid "You’ve accepted additional cookies. You can "
-msgstr ""
+msgstr "Rydych wedi derbyn cwcis ychwanegol. Gallwch "
 
 #: fala/templates/adviser/_cookie_banner.html:10
 #: fala/templates/adviser/_cookie_banner.html:14
 msgid "change your cookie settings"
-msgstr ""
+msgstr "newid eich gosodiadau cwcis ar"
 
 #: fala/templates/adviser/_cookie_banner.html:10
 #: fala/templates/adviser/_cookie_banner.html:14
 msgid " at any time."
-msgstr ""
+msgstr " unrhyw adeg."
 
 #: fala/templates/adviser/_cookie_banner.html:14
 msgid "You’ve rejected additional cookies. You can "
-msgstr ""
+msgstr "Rydych wedi gwrthod cwcis ychwanegol. Gallwch "
 
 #: fala/templates/adviser/_cookie_banner.html:17
 #: fala/templates/adviser/_cookie_banner.html:18
 msgid "Cookies on Find a legal adviser or family mediator"
-msgstr ""
+msgstr "Cwcis ar Dod o hyd i gynghorydd cyfreithiol neu gyfryngwr teulu"
 
 #: fala/templates/adviser/_cookie_banner.html:19
 msgid "Accept analytics cookies"
-msgstr ""
+msgstr "Derbyn cwcis dadansoddol"
 
 #: fala/templates/adviser/_cookie_banner.html:20
 msgid "Reject analytics cookies"
-msgstr ""
+msgstr "Gwrthod cwcis dadansoddol"
 
 #: fala/templates/adviser/_cookie_banner.html:21
 msgid "View cookies"
-msgstr ""
+msgstr "Gweld y cwcis"
 
 #: fala/templates/adviser/_cookie_banner.html:22
 msgid "Hide this message"
-msgstr ""
+msgstr "Cuddio’r neges hon"
 
 #: fala/templates/adviser/_footer.html:5
 msgid "Support links"
 msgstr ""
 
 #: fala/templates/adviser/_footer.html:9 fala/templates/adviser/privacy.html:3
-#: fala/templates/adviser/privacy.html:9
+#: fala/templates/adviser/privacy.html:11
 msgid "Privacy"
-msgstr ""
+msgstr "Preifatrwydd"
 
 #: fala/templates/adviser/_footer.html:14
-#: fala/templates/adviser/cookies.html:36
+#: fala/templates/adviser/cookies.html:38
 msgid "Cookies"
-msgstr ""
+msgstr "Cwcis"
 
 #: fala/templates/adviser/_footer.html:19
-#: fala/templates/adviser/privacy.html:15
+#: fala/templates/adviser/privacy.html:17
 msgid "Legal Aid Agency"
-msgstr ""
+msgstr "Yr Asiantaeth Cymorth Cyfreithiol"
 
 #: fala/templates/adviser/_footer.html:24
 msgid "Accessibility statement"
-msgstr ""
+msgstr "Datganiad Hygyrchedd"
 
 #: fala/templates/adviser/_footer.html:28
 msgid "Built by"
-msgstr ""
+msgstr "Crëwyd gan"
 
 #: fala/templates/adviser/_footer.html:30
 msgid "Digital Services"
-msgstr ""
+msgstr "Wasanaethau Digidol"
 
 #: fala/templates/adviser/_footer.html:39
 msgid "All content is available under the"
-msgstr ""
+msgstr "Mae’r holl gynnwys ar gael o dan"
 
 #: fala/templates/adviser/_footer.html:40
 msgid "Open Government Licence v3.0"
-msgstr ""
+msgstr "Drwydded Llywodraeth Agored f3.0"
 
 #: fala/templates/adviser/_footer.html:40
 msgid ", except where otherwise stated"
-msgstr ""
+msgstr ", ac eithrio lle nodir fel arall"
 
 #: fala/templates/adviser/_footer.html:44
 msgid "© Crown copyright"
-msgstr ""
+msgstr "© Hawlfraint y goron"
 
 #: fala/templates/adviser/_research_banner.html:4
 msgid "Help improve this legal adviser search"
@@ -234,167 +317,295 @@ msgstr ""
 
 #: fala/templates/adviser/_results_heading.html:4
 msgid "Your closest legal aid advisers and family mediators"
-msgstr ""
+msgstr "Eich cynghorwyr cymorth cyfreithiol a’ch cyfryngwyr teuluol agosaf"
 
 #: fala/templates/adviser/_results_heading.html:6
 msgid "Your closest legal aid advisers for the "
-msgstr ""
+msgstr "Eich cynghorwyr cymorth cyfreithiol agosaf ar gyfer y "
 
 #: fala/templates/adviser/_results_heading.html:8
 msgid "Your closest legal aid advisers for "
-msgstr ""
+msgstr "Eich cynghorwyr cymorth cyfreithiol agosaf ar gyfer "
 
 #: fala/templates/adviser/_results_heading.html:11
+#: fala/templates/adviser/category_search.html:5
 #: fala/templates/adviser/other_region.html:3
 #: fala/templates/adviser/results.html:3
-#: fala/templates/adviser/single_category_search.html:5
 msgid "Search results"
-msgstr ""
+msgstr "Canlyniad chwilio"
 
 #: fala/templates/adviser/_scotland_warning.html:3
 msgid ""
 "These results cover England and Wales. Find out about <a class=\"govuk-"
 "link\" href=\"https://www.mygov.scot/legal-aid/\">Legal Aid in Scotland.</a>"
 msgstr ""
+"Mae'r canlyniadau hyn yn berthnasol i Gymru a Lloegr. Cael gwybod am <a "
+"class=\"govuk-link\" href=\"https://www.mygov.scot/legal-aid/\">Gymorth "
+"Cyfreithiol yn yr Alban.</a>"
 
 #: fala/templates/adviser/accessibility_statement.html:3
-#: fala/templates/adviser/accessibility_statement.html:9
+#: fala/templates/adviser/accessibility_statement.html:11
 msgid "Accessibility statement for Find a legal advisor"
-msgstr ""
+msgstr "Datganiad hygyrchedd ar gyfer Dod o hyd i gynghorydd cyfreithiol"
 
-#: fala/templates/adviser/accessibility_statement.html:12
+#: fala/templates/adviser/accessibility_statement.html:14
 msgid ""
 "This accessibility statement applies to the ‘Find a legal advisor’ service."
 msgstr ""
+"Mae’r datganiad hygyrchedd hwn yn berthnasol i’r gwasanaeth ‘Dod o hyd i "
+"gynghorydd cyfreithiol’."
 
-#: fala/templates/adviser/accessibility_statement.html:21
+#: fala/templates/adviser/accessibility_statement.html:18
+msgid ""
+"This website is run by the <a class='govuk-link' href='https://www.gov.uk/"
+"government/organisations/legal-aid-agency' rel='external'>Legal Aid Agency</"
+"a> (<abbr>LAA</abbr>), part of the Ministry of Justice (<abbr>MoJ</abbr>). "
+"We want as many people as possible to be able to use this website. For "
+"example, that means you should be able to:"
+msgstr ""
+"Yr <a class='govuk-link' href='https://www.gov.uk/government/organisations/"
+"legal-aid-agency' rel='external'>Asiantaeth Cymorth Cyfreithiol</a> "
+"(<abbr>LAA</abbr>), sy’n rhan o’r Weinyddiaeth Gyfiawnder (<abbr>MoJ</"
+"abbr>), sy’n rhedeg y wefan hon. Rydyn ni eisiau i gynifer o bobl ag sy’n "
+"bosibl allu defnyddio’r wefan hon. Er enghraifft, mae hynny’n golygu y "
+"dylech allu:"
+
+#: fala/templates/adviser/accessibility_statement.html:22
 msgid ""
 "change colours, contrast levels and fonts using browser or device settings"
 msgstr ""
-
-#: fala/templates/adviser/accessibility_statement.html:22
-#, python-format
-msgid "zoom in up to 400%% without the text spilling off the screen"
-msgstr ""
+"newid lliwiau, lefelau cyferbynnedd a ffontiau gan ddefnyddio gosodiadau’r "
+"porwr neu’r ddyfais"
 
 #: fala/templates/adviser/accessibility_statement.html:23
+#, python-format
+msgid "zoom in up to 400%% without the text spilling off the screen"
+msgstr "chwyddo mewn hyd at 400%% heb i’r testun lifo oddi ar y sgrin"
+
+#: fala/templates/adviser/accessibility_statement.html:24
 msgid ""
 "navigate most of the website using a keyboard or speech recognition software"
 msgstr ""
+"llywio drwy’r rhan fwyaf o’r wefan gan ddefnyddio bysellfwrdd neu feddalwedd "
+"adnabod llais"
 
-#: fala/templates/adviser/accessibility_statement.html:24
+#: fala/templates/adviser/accessibility_statement.html:25
 msgid ""
 "listen to most of the website using a screen reader (including the most "
 "recent versions of JAWS, NVDA and VoiceOver)"
 msgstr ""
+"gwrando ar y rhan fwyaf o’r wefan gan ddefnyddio darllenydd sgrin (gan "
+"gynnwys y fersiynau diweddaraf o JAWS, NVDA a VoiceOver)"
 
-#: fala/templates/adviser/accessibility_statement.html:28
+#: fala/templates/adviser/accessibility_statement.html:29
 msgid "We’ve also made the website text as simple as possible to understand."
 msgstr ""
+"Rydyn ni hefyd wedi gwneud testun y wefan mor hawdd i’w ddeall ag sy’n "
+"bosibl."
+
+#: fala/templates/adviser/accessibility_statement.html:33
+msgid ""
+"<a class='govuk-link' href='https://mcmw.abilitynet.org.uk/' "
+"rel='external'>AbilityNet</a> has advice on making your device easier to use "
+"if you have a disability."
+msgstr ""
+"Mae gan <a class='govuk-link' href='https://mcmw.abilitynet.org.uk/' "
+"rel='external'>AbilityNet</a> gyngor ar wneud eich dyfais yn haws ei "
+"defnyddio os oes gennych chi anabledd."
 
 #: fala/templates/adviser/accessibility_statement.html:36
 msgid "How accessible this website is"
-msgstr ""
+msgstr "Pa mor hygyrch yw’r wefan hon"
 
 #: fala/templates/adviser/accessibility_statement.html:39
 msgid "We know some parts of this website are not fully accessible:"
-msgstr ""
+msgstr "Rydyn ni’n ymwybodol nad yw rhannau o’r wefan hon yn gwbl hygyrch:"
 
 #: fala/templates/adviser/accessibility_statement.html:43
 msgid "elements of the results page do not meet minimum contrast standards"
 msgstr ""
+"mae elfennau o’r dudalen canlyniadau nad ydynt yn bodloni’r safonau "
+"cyferbynnedd gofynnol"
 
 #: fala/templates/adviser/accessibility_statement.html:44
 msgid "Google Translate does not translate technical terms into Plain English"
-msgstr ""
+msgstr "Nid yw Google Translate yn cyfieithu termau technegol i Saesneg clir"
 
 #: fala/templates/adviser/accessibility_statement.html:45
 msgid ""
 "hyperlinks to google maps are not specific about the listing they are "
 "related to"
 msgstr ""
+"nid yw hyperddolenni at fapiau google yn benodol i’r eitem y maent yn "
+"gysylltiedig â hi"
 
 #: fala/templates/adviser/accessibility_statement.html:48
 msgid "Feedback and contact information"
-msgstr ""
+msgstr "Adborth a gwybodaeth gyswllt"
 
-#: fala/templates/adviser/accessibility_statement.html:56
+#: fala/templates/adviser/accessibility_statement.html:51
+msgid ""
+"We’re always looking to improve the accessibility of this website. If you "
+"find any problems not listed on this page or think we’re not meeting "
+"accessibility requirements, contact us by email at"
+msgstr ""
+"Rydyn ni bob amser yn awyddus i wella hygyrchedd y wefan hon. Os ydych chi’n "
+"dod ar draws unrhyw broblemau sydd heb eu rhestru ar y dudalen hon neu os "
+"ydych chi’n credu nad ydym yn bodloni gofynion hygyrchedd, anfonwch e-bost "
+"i: "
+
+#: fala/templates/adviser/accessibility_statement.html:54
 msgid "Enforcement procedure"
-msgstr ""
+msgstr "Gweithdrefn orfodi"
 
-#: fala/templates/adviser/accessibility_statement.html:67
-msgid "Technical information about this website’s accessibility"
+#: fala/templates/adviser/accessibility_statement.html:57
+msgid ""
+"The Equality and Human Rights Commission (<abbr>EHRC</abbr>) is responsible "
+"for enforcing the Public Sector Bodies (Websites and Mobile Applications) "
+"(No. 2) Accessibility Regulations 2018 (the ‘accessibility regulations’). If "
+"you’re not happy with how we respond to your complaint, <a class=\"govuk-"
+"link\" href=\"https://www.equalityadvisoryservice.com/\" "
+"rel=\"external\">contact the Equality Advisory and Support Service "
+"(<abbr>EASS</abbr>)</a>."
 msgstr ""
+"Y Comisiwn Cydraddoldeb a Hawliau Dynol (<abbr>EHRC</abbr>) sy’n gyfrifol am "
+"orfodi Rheoliadau Hygyrchedd Cyrff Sector Cyhoeddus (Gwefannau a "
+"Chymwysiadau Symudol) (Rhif 2) 2018 (y ‘rheoliadau hygyrchedd’). Os nad "
+"ydych chi’n fodlon â sut rydyn ni’n ymateb i’ch cwyn, <a class=\"govuk-"
+"link\" href=\"https://www.equalityadvisoryservice.com/\" "
+"rel=\"external\">cysylltwch â’r Gwasanaeth Cynghori a Chefnogi Cydraddoldeb "
+"(<abbr>EASS</abbr>)</a>."
+
+#: fala/templates/adviser/accessibility_statement.html:61
+msgid "Technical information about this website’s accessibility"
+msgstr "Gwybodaeth dechnegol am hygyrchedd y wefan hon"
+
+#: fala/templates/adviser/accessibility_statement.html:65
+msgid ""
+"The Legal Aid Agency is committed to making its website accessible, in "
+"accordance with the Public Sector Bodies (Websites and Mobile Applications) "
+"(No. 2) Accessibility Regulations 2018."
+msgstr ""
+"Mae’r Asiantaeth Cymorth Cyfreithiol wedi ymrwymo i wneud ei gwefan yn "
+"hygyrch, yn unol â Rheoliadau Hygyrchedd Cyrff Sector Cyhoeddus (Gwefannau a "
+"Rhaglenni Symudol) (Rhif 2) 2018."
+
+#: fala/templates/adviser/accessibility_statement.html:68
+msgid "Compliance status"
+msgstr "Statws cydymffurfio"
+
+#: fala/templates/adviser/accessibility_statement.html:71
+msgid ""
+"This website is <strong>partially compliant</strong> with the Web Content "
+"Accessibility Guidelines (<abbr>WCAG</abbr>) version 2.2 AA standard, due to "
+"the existing issues listed below."
+msgstr ""
+"Mae’r gwefan hon yn <strong>cydymffurfio’n rhannol</strong> â safon AA "
+"Canllawiau Hygyrchedd Cynnwys y We (<abbr>WCAG</abbr>) fersiwn 2.2, oherwydd "
+"y materion sy’n bodoli eisoes a restrir isod."
+
+#: fala/templates/adviser/accessibility_statement.html:74
+msgid "Non-accessible content"
+msgstr "Cynnwys nad yw’n hygyrch"
 
 #: fala/templates/adviser/accessibility_statement.html:76
-msgid "Compliance status"
-msgstr ""
-
-#: fala/templates/adviser/accessibility_statement.html:83
-msgid "Non-accessible content"
-msgstr ""
-
-#: fala/templates/adviser/accessibility_statement.html:85
 msgid "The content listed below is non-accessible for the following reasons."
-msgstr ""
+msgstr "Nid yw’r cynnwys a restrir isod yn hygyrch am y rhesymau canlynol."
 
-#: fala/templates/adviser/accessibility_statement.html:96
+#: fala/templates/adviser/accessibility_statement.html:79
+msgid ""
+"The results page border does not have sufficient colour contrast. This fails "
+"WCAG success criterion 1.4.3 Contrast (Minimum). We plan to fix this by the "
+"end of July 2024."
+msgstr ""
+"Nid oes gan forder y dudalen ganlyniadau gyferbynnedd lliw digonol. Mae hyn "
+"yn methu maen prawf llwyddiant WCAG 1.4.3 Cyferbynnedd (Gofynnol). Rydym yn "
+"gobeithio cywiro hyn erbyn diwedd mis Gorffennaf 2024."
+
+#: fala/templates/adviser/accessibility_statement.html:80
+msgid ""
+"The links to google maps elements are not identifiable from the link text "
+"alone. This fails WCAG success criterion 2.4.9 Link Purpose. We plan to fix "
+"this by the end of October 2024."
+msgstr ""
+"Nid oes modd adnabod y dolenni i elfennau google maps oddi wrth destun y "
+"ddolen yn unig. Mae hyn yn methu maen prawf llwyddiant WCAG 2.4.9 Diben "
+"Dolenni. Rydym yn gobeithio cywiro hyn erbyn diwedd mis Hydref 2024."
+
+#: fala/templates/adviser/accessibility_statement.html:81
+msgid ""
+"The results page title is the same as the main page and so does not clearly "
+"describe the topic or purpose. This fails WCAG success criterion 2.4.2 Page "
+"Titled. We plan to fix this by the end of October 2024."
+msgstr ""
+"Mae teitl y dudalen ganlyniadau yr un fath â’r brif dudalen ac felly nid "
+"yw’n disgrifio’r pwnc na’r diben yn glir. Mae hyn yn methu maen prawf "
+"llwyddiant WCAG 2.4.2 Teitlau Tudalennau. Rydym yn gobeithio cywiro hyn "
+"erbyn diwedd mis Hydref 2024."
+
+#: fala/templates/adviser/accessibility_statement.html:84
 msgid "Disproportionate burden"
-msgstr ""
+msgstr "Baich anghymesur"
 
-#: fala/templates/adviser/accessibility_statement.html:98
-#: fala/templates/adviser/accessibility_statement.html:102
+#: fala/templates/adviser/accessibility_statement.html:86
+#: fala/templates/adviser/accessibility_statement.html:90
 msgid "Not applicable"
-msgstr ""
+msgstr "Ddim yn berthnasol"
 
-#: fala/templates/adviser/accessibility_statement.html:100
+#: fala/templates/adviser/accessibility_statement.html:88
 msgid "Content that’s not within the scope of the accessibility regulations"
-msgstr ""
+msgstr "Cynnwys nad yw o fewn cwmpas y rheoliadau hygyrchedd"
 
-#: fala/templates/adviser/accessibility_statement.html:104
+#: fala/templates/adviser/accessibility_statement.html:92
 msgid "Preparation of this accessibility statement"
-msgstr ""
+msgstr "Paratoi’r datganiad hygyrchedd hwn"
 
-#: fala/templates/adviser/accessibility_statement.html:107
+#: fala/templates/adviser/accessibility_statement.html:95
 msgid ""
 "This statement was prepared on 11 November 2020. It was last reviewed on 13 "
 "June 2024."
 msgstr ""
+"Cafodd y datganiad hwn ei baratoi ar 11 Tachwedd 2020. Cafodd ei adolygu "
+"ddiwethaf ar 13 Mehefin 2024."
 
-#: fala/templates/adviser/accessibility_statement.html:116
+#: fala/templates/adviser/accessibility_statement.html:99
+msgid ""
+"This website was last tested on 12 June 2024. The test was carried out by "
+"the Ministry of Justice. We tested all of the pages using a basic "
+"accessibility test, but this was not a full audit."
+msgstr ""
+"Cafodd y wefan hon ei phrofi ddiwethaf ar 12 Mehefin 2024. Cynhaliwyd y "
+"prawf gan y Weinyddiaeth Gyfiawnder. Fe wnaethom brofi’r holl dudalennau gan "
+"ddefnyddio prawf hygyrchedd sylfaenol, ond nid oedd hwn yn archwiliad llawn. "
+
+#: fala/templates/adviser/accessibility_statement.html:103
 msgid ""
 "This statement will be reviewed by June 2025. We plan to audit the website "
 "against the WCAG 2.2 AA standard by June 2025."
 msgstr ""
+"Bydd y datganiad hwn yn cael ei adolygu erbyn Mehefin 2025. Rydym yn bwriadu "
+"archwilio’r wefan yn erbyn safon AA WCAG 2.2 erbyn mis Mehefin 2025."
 
 #: fala/templates/adviser/adviser_base.html:6
-#: fala/templates/adviser/cookies.html:39 fala/templates/adviser/search.html:21
+#: fala/templates/adviser/cookies.html:41 fala/templates/adviser/search.html:25
 msgid "Find a legal aid adviser or family mediator"
-msgstr ""
-
-#: fala/templates/adviser/adviser_base.html:49
-msgid "Development"
-msgstr ""
-
-#: fala/templates/adviser/adviser_base.html:51
-msgid "Staging"
-msgstr ""
+msgstr "Dod o hyd i gynghorydd cymorth cyfreithiol neu gyfryngwr teulu"
 
 #: fala/templates/adviser/adviser_base.html:53
 msgid "Beta"
-msgstr ""
+msgstr "Beta"
 
 #: fala/templates/adviser/adviser_base.html:59
 msgid "This is a new service – your "
-msgstr ""
+msgstr "Mae hwn yn wasanaeth newydd – bydd eich "
 
 #: fala/templates/adviser/adviser_base.html:59
 msgid "feedback (opens in new tab)"
-msgstr ""
+msgstr "adborth (mae’n agor mewn tab newydd)"
 
 #: fala/templates/adviser/adviser_base.html:59
 msgid " will help us to improve it."
-msgstr ""
+msgstr " yn ein helpu i’w wella"
 
 #: fala/templates/adviser/adviser_base.html:68
 msgid "Find a legal aid adviser "
@@ -416,6 +627,57 @@ msgid ""
 "contract manager."
 msgstr ""
 
+#: fala/templates/adviser/category_search.html:7
+#: fala/templates/adviser/category_search.html:47
+msgid "Find a legal aid adviser for "
+msgstr ""
+
+#: fala/templates/adviser/category_search.html:9
+#: fala/templates/adviser/category_search.html:49
+msgid "the"
+msgstr ""
+
+#: fala/templates/adviser/category_search.html:24
+#: fala/templates/adviser/search.html:12
+msgid "There is a problem"
+msgstr "Mae problem"
+
+#: fala/templates/adviser/category_search.html:25
+#: fala/templates/adviser/results.html:8
+msgid "Exit this page"
+msgstr ""
+
+#: fala/templates/adviser/category_search.html:54
+msgid "Search for official legal aid advisers in England and Wales."
+msgstr ""
+
+#: fala/templates/adviser/category_search.html:58
+msgid "Next steps"
+msgstr ""
+
+#: fala/templates/adviser/category_search.html:60
+msgid "We'll show you a list of legal advisers."
+msgstr ""
+
+#: fala/templates/adviser/category_search.html:61
+msgid ""
+"When you contact the adviser they'll ask about your problem and finances to "
+"work out if you can get legal aid."
+msgstr ""
+
+#: fala/templates/adviser/category_search.html:71
+msgid "What is your postcode?"
+msgstr ""
+
+#: fala/templates/adviser/category_search.html:72
+msgid "For example, SW1H 9AJ"
+msgstr "Er enghraifft, SW1H 9AJ"
+
+#: fala/templates/adviser/category_search.html:96
+#: fala/templates/adviser/search.html:50
+msgid "Search"
+msgstr "Chwilio"
+
 #: fala/templates/adviser/cookies.html:8
 msgid "Success"
 msgstr ""
@@ -435,548 +697,686 @@ msgstr ""
 
 #: fala/templates/adviser/cookies.html:11
 msgid "Do you want to accept analytics cookies?"
-msgstr ""
+msgstr "Ydych chi eisiau derbyn cwcis dadansoddol?"
 
 #: fala/templates/adviser/cookies.html:12
 msgid "Yes"
-msgstr ""
+msgstr "Ydw"
 
 #: fala/templates/adviser/cookies.html:13
 msgid "No"
-msgstr ""
+msgstr "Nac ydw"
 
 #: fala/templates/adviser/cookies.html:14
 msgid "Save cookie settings"
 msgstr ""
 
-#: fala/templates/adviser/cookies.html:39
+#: fala/templates/adviser/cookies.html:41
 msgid " puts small files (known as ‘cookies’) on your computer."
-msgstr ""
+msgstr " yn rhoi ffeiliau bach (a elwir yn ‘gwcis’) ar eich cyfrifiadur."
 
-#: fala/templates/adviser/cookies.html:43
+#: fala/templates/adviser/cookies.html:45
 msgid ""
 "These cookies are used across the Find a legal aid adviser or family "
 "mediator website."
 msgstr ""
+"Defnyddir y cwcis hyn ar draws gwefan Dod o hyd i gynghorydd cymorth "
+"cyfreithiol neu gyfryngwr teulu."
 
-#: fala/templates/adviser/cookies.html:47
+#: fala/templates/adviser/cookies.html:49
 msgid "Find out "
-msgstr ""
+msgstr "Mae rhagor o wybodaeth am "
 
-#: fala/templates/adviser/cookies.html:47
+#: fala/templates/adviser/cookies.html:49
 msgid "how to manage cookies"
-msgstr ""
+msgstr "sut i reoli cwcis"
 
-#: fala/templates/adviser/cookies.html:47
+#: fala/templates/adviser/cookies.html:49
 msgid " from the Information Commissioner's Office."
-msgstr ""
+msgstr " ar gael gan Swyddfa’r Comisiynydd Gwybodaeth."
 
-#: fala/templates/adviser/cookies.html:51
+#: fala/templates/adviser/cookies.html:53
 msgid "Cookie settings"
 msgstr ""
 
-#: fala/templates/adviser/cookies.html:54
+#: fala/templates/adviser/cookies.html:56
 msgid ""
 "We use Javascript to set most of our cookies. Unfortunately Javascript is "
 "not running on your browser, so you cannot change your settings. You can try:"
 msgstr ""
 
-#: fala/templates/adviser/cookies.html:56
+#: fala/templates/adviser/cookies.html:58
 msgid "reloading the page"
 msgstr ""
 
-#: fala/templates/adviser/cookies.html:57
+#: fala/templates/adviser/cookies.html:59
 msgid "turning on Javascript in your browser"
 msgstr ""
 
-#: fala/templates/adviser/cookies.html:63
+#: fala/templates/adviser/cookies.html:65
 msgid "Essential cookies (strictly necessary)"
-msgstr ""
+msgstr "Cwcis hanfodol (rhai cwbl angenrheidiol)"
 
-#: fala/templates/adviser/cookies.html:66
+#: fala/templates/adviser/cookies.html:68
 msgid ""
 "We use an essential cookie to remember when you accept or reject cookies on "
 "our website."
 msgstr ""
+"Rydym yn defnyddio cwci hanfodol i gofio pan fyddwch yn derbyn neu’n gwrthod "
+"cwcis ar ein gwefan."
 
-#: fala/templates/adviser/cookies.html:69
+#: fala/templates/adviser/cookies.html:71
 msgid "Essential cookies we use"
-msgstr ""
-
-#: fala/templates/adviser/cookies.html:72
-#: fala/templates/adviser/cookies.html:108
-msgid "Name"
-msgstr ""
-
-#: fala/templates/adviser/cookies.html:73
-#: fala/templates/adviser/cookies.html:109
-msgid "Purpose"
-msgstr ""
+msgstr "Cwcis hanfodol rydym yn eu defnyddio"
 
 #: fala/templates/adviser/cookies.html:74
 #: fala/templates/adviser/cookies.html:110
+msgid "Name"
+msgstr "Enw"
+
+#: fala/templates/adviser/cookies.html:75
+#: fala/templates/adviser/cookies.html:111
+msgid "Purpose"
+msgstr "Pwrpas"
+
+#: fala/templates/adviser/cookies.html:76
+#: fala/templates/adviser/cookies.html:112
 msgid "Expires"
-msgstr ""
+msgstr "Daw i ben"
 
-#: fala/templates/adviser/cookies.html:80
+#: fala/templates/adviser/cookies.html:82
 msgid "Saves your cookie consent settings"
-msgstr ""
+msgstr "Mae’n cadw eich gosodiadau caniatâd cwcis"
 
-#: fala/templates/adviser/cookies.html:81
+#: fala/templates/adviser/cookies.html:83
 msgid "1 year"
-msgstr ""
+msgstr "1 flwyddyn"
 
-#: fala/templates/adviser/cookies.html:86
+#: fala/templates/adviser/cookies.html:88
 msgid "Analytics cookies (optional)"
-msgstr ""
+msgstr "Cwcis dadansoddol (dewisol)"
 
-#: fala/templates/adviser/cookies.html:89
+#: fala/templates/adviser/cookies.html:91
 msgid ""
 "We use Google Analytics software to understand how people use Find a legal "
 "aid adviser or family mediator. We do this to help make sure the site is "
 "meeting the needs of its users and to help us make improvements."
 msgstr ""
+"Rydym yn defnyddio meddalwedd Google Analytics i ddeall sut mae pobl yn "
+"defnyddio Dod o hyd i gynghorydd cymorth cyfreithiol neu gyfryngwr teulu. Fe "
+"wnawn hyn i sicrhau bod y wefan yn diwallu anghenion ei defnyddwyr ac i’n "
+"helpu ni i wneud gwelliannau."
 
-#: fala/templates/adviser/cookies.html:93
+#: fala/templates/adviser/cookies.html:95
 msgid ""
 "We do not collect or store your personal information (for example your name "
 "or address) so this information cannot be used to identify who you are."
 msgstr ""
+"Nid ydym yn casglu nac yn storio eich gwybodaeth bersonol (er enghraifft "
+"eich enw neu’ch cyfeiriad) felly ni ellir defnyddio’r wybodaeth hon i "
+"ddatgelu pwy ydych chi."
 
-#: fala/templates/adviser/cookies.html:97
+#: fala/templates/adviser/cookies.html:99
 msgid "We do not allow Google to use or share our analytics data."
 msgstr ""
+"Nid ydym yn caniatáu i Google ddefnyddio na rhannu ein data dadansoddol."
 
-#: fala/templates/adviser/cookies.html:101
+#: fala/templates/adviser/cookies.html:103
 msgid "Google Analytics stores information about"
-msgstr ""
+msgstr "Mae Google Analytics yn storio gwybodaeth am y canlynol"
 
-#: fala/templates/adviser/cookies.html:105
+#: fala/templates/adviser/cookies.html:107
 msgid "Analytics cookies we use"
-msgstr ""
+msgstr "Cwcis dadansoddol rydym yn eu defnyddio"
 
-#: fala/templates/adviser/cookies.html:116
+#: fala/templates/adviser/cookies.html:118
 msgid ""
 "Helps us count how many people visit Find a legal aid adviser or family "
 "mediator by telling us if you’ve visited before."
 msgstr ""
+"Mae’n ein helpu i gyfrif faint o bobl sy’n ymweld â Dod o hyd i gynghorydd "
+"cymorth cyfreithiol neu gyfryngwr teulu drwy ddweud wrthym a ydych chi wedi "
+"ymweld o’r blaen."
 
-#: fala/templates/adviser/cookies.html:117
-#: fala/templates/adviser/cookies.html:122
+#: fala/templates/adviser/cookies.html:119
+#: fala/templates/adviser/cookies.html:124
 msgid "2 years"
-msgstr ""
+msgstr "2 flynedd"
 
-#: fala/templates/adviser/cookies.html:121
+#: fala/templates/adviser/cookies.html:123
 msgid ""
 "Used by Google Analytics to find and track an individual session with your "
 "device."
 msgstr ""
+"Mae Google Analytics yn ei ddefnyddio i ganfod a thracio sesiynau unigol "
+"gyda’ch dyfais."
 
 #: fala/templates/adviser/other_region.html:4
-#: fala/templates/adviser/results.html:26
+#: fala/templates/adviser/results.html:30
 msgid "Back"
-msgstr ""
+msgstr "Yn ôl"
 
 #: fala/templates/adviser/other_region.html:5
-#: fala/templates/adviser/results.html:74
+#: fala/templates/adviser/results.html:78
 msgid "Change search"
-msgstr ""
+msgstr "Newid y manylion chwilio"
 
-#: fala/templates/adviser/other_region.html:15
+#: fala/templates/adviser/other_region.html:18
 msgid "The postcode "
-msgstr ""
+msgstr "Mae’r cod post "
 
-#: fala/templates/adviser/other_region.html:15
+#: fala/templates/adviser/other_region.html:18
 msgid " is in "
-msgstr ""
+msgstr " yn "
 
-#: fala/templates/adviser/other_region.html:16
+#: fala/templates/adviser/other_region.html:19
 msgid "This search only covers England and Wales."
 msgstr ""
 
-#: fala/templates/adviser/other_region.html:18
+#: fala/templates/adviser/other_region.html:21
 msgid "Find out about "
-msgstr ""
+msgstr "Cael gwybod am "
 
-#: fala/templates/adviser/other_region.html:18
+#: fala/templates/adviser/other_region.html:21
 msgid "Legal Aid in "
-msgstr ""
+msgstr "Gymorth Cyfreithiol yn "
 
-#: fala/templates/adviser/other_region.html:19
+#: fala/templates/adviser/other_region.html:22
 msgid "or try a different search."
-msgstr ""
+msgstr "neu chwiliwch am rywbeth gwahanol."
 
-#: fala/templates/adviser/privacy.html:11
+#: fala/templates/adviser/privacy.html:13
 msgid "What data we collect"
-msgstr ""
-
-#: fala/templates/adviser/privacy.html:14
-msgid "This service is provided by the"
-msgstr ""
+msgstr "Pa ddata rydym yn ei gasglu"
 
 #: fala/templates/adviser/privacy.html:16
+msgid "This service is provided by the"
+msgstr "Darperir y gwasanaeth hwn gan yr"
+
+#: fala/templates/adviser/privacy.html:18
 msgid "part of the Ministry of Justice"
-msgstr ""
-
-#: fala/templates/adviser/privacy.html:20
-msgid "We do not collect any"
-msgstr ""
-
-#: fala/templates/adviser/privacy.html:21
-msgid "personal information"
-msgstr ""
+msgstr "sy’n rhan o’r Weinyddiaeth Gyfiawnder"
 
 #: fala/templates/adviser/privacy.html:22
-msgid "that could identify an individual in this service."
-msgstr ""
+msgid "We do not collect any"
+msgstr "Nid ydym yn casglu unrhyw"
 
-#: fala/templates/adviser/privacy.html:26
+#: fala/templates/adviser/privacy.html:23
+msgid "personal information"
+msgstr "wybodaeth bersonol"
+
+#: fala/templates/adviser/privacy.html:24
+msgid "that could identify an individual in this service."
+msgstr "a allai ddatgelu pwy yw unigolyn yn y gwasanaeth hwn."
+
+#: fala/templates/adviser/privacy.html:28
 msgid ""
 "We do collect personal information about individuals using this website. "
 "This information is collected separately from and cannot be linked to "
 "information submitted. We collect:"
 msgstr ""
-
-#: fala/templates/adviser/privacy.html:28
-msgid "your Internet Protocol "
-msgstr ""
-
-#: fala/templates/adviser/privacy.html:28
-msgid " address"
-msgstr ""
-
-#: fala/templates/adviser/privacy.html:29
-msgid "details of which version of "
-msgstr ""
-
-#: fala/templates/adviser/privacy.html:29
-msgid "web browser"
-msgstr ""
-
-#: fala/templates/adviser/privacy.html:29
-msgid " you used"
-msgstr ""
+"Rydym yn casglu gwybodaeth bersonol am unigolion sy’n defnyddio’r wefan hon. "
+"Cesglir y wybodaeth hon ar wahân i’r wybodaeth a gyflwynir ac ni ellir eu "
+"cysylltu â’i gilydd. Rydym yn casglu:"
 
 #: fala/templates/adviser/privacy.html:30
+msgid "your Internet Protocol "
+msgstr "eich cyfeiriad Protocol Rhyngrwyd "
+
+#: fala/templates/adviser/privacy.html:30
+msgid " address"
+msgstr " "
+
+#: fala/templates/adviser/privacy.html:31
+msgid "details of which version of "
+msgstr "manylion pa fersiwn o "
+
+#: fala/templates/adviser/privacy.html:31
+msgid "web browser"
+msgstr "borwr gwe"
+
+#: fala/templates/adviser/privacy.html:31
+msgid " you used"
+msgstr " y gwnaethoch ei defnyddio"
+
+#: fala/templates/adviser/privacy.html:32
 msgid ""
 "information on how you use the site, using cookies and page tagging "
 "techniques"
 msgstr ""
+"gwybodaeth am sut rydych chi’n defnyddio’r wefan, gan ddefnyddio cwcis a "
+"thechnegau tagio tudalennau"
 
-#: fala/templates/adviser/privacy.html:31
+#: fala/templates/adviser/privacy.html:33
 msgid "the search information you enter, such as postcode or organisation"
-msgstr ""
+msgstr "y wybodaeth a roddwch wrth chwilio, fel cod post neu sefydliad"
 
-#: fala/templates/adviser/privacy.html:36
+#: fala/templates/adviser/privacy.html:38
 msgid "Where you provide your consent, we use "
-msgstr ""
+msgstr "Os ydych wedi rhoi eich caniatâd, rydym yn defnyddio cwcis "
 
-#: fala/templates/adviser/privacy.html:36
+#: fala/templates/adviser/privacy.html:38
 msgid "Google Analytics"
-msgstr ""
+msgstr "Google Analytics. "
 
-#: fala/templates/adviser/privacy.html:36
+#: fala/templates/adviser/privacy.html:38
 msgid " cookies. Google Analytics processes information about:"
-msgstr ""
+msgstr "Mae Google Analytics yn prosesu gwybodaeth am y canlynol:"
 
-#: fala/templates/adviser/privacy.html:41
+#: fala/templates/adviser/privacy.html:43
 msgid "We make sure you cannot be identified by Google Analytics data. "
 msgstr ""
+"Rydym yn gwneud yn siŵr nad yw data Google Analytics yn datgelu pwy ydych "
+"chi. "
 
-#: fala/templates/adviser/privacy.html:42
+#: fala/templates/adviser/privacy.html:44
 msgid ""
 "We do not pass any of your personal data to Google Analytics, and Google "
 "Analytics does not store your IP address."
 msgstr ""
+"Nid ydym yn trosglwyddo unrhyw ran o’ch data personol i Google Analytics, ac "
+"nid yw Google Analytics yn storio eich cyfeiriad IP."
 
-#: fala/templates/adviser/privacy.html:46
+#: fala/templates/adviser/privacy.html:48
 msgid ""
 "We will not combine analytics information with other data sets in a way that "
 "would identify who you are."
 msgstr ""
+"Ni fyddwn yn cyfuno gwybodaeth ddadansoddi â setiau data eraill mewn ffordd "
+"a fyddai’n datgelu pwy ydych chi."
 
-#: fala/templates/adviser/privacy.html:49
+#: fala/templates/adviser/privacy.html:51
 msgid "Why we need your data"
-msgstr ""
-
-#: fala/templates/adviser/privacy.html:52
-msgid "We collect your data to:"
-msgstr ""
+msgstr "Pam mae angen eich data arnom"
 
 #: fala/templates/adviser/privacy.html:54
-msgid "provide you with information about local services"
-msgstr ""
-
-#: fala/templates/adviser/privacy.html:55
-msgid "gather feedback to improve our services"
-msgstr ""
+msgid "We collect your data to:"
+msgstr "Rydym yn casglu eich data er mwyn:"
 
 #: fala/templates/adviser/privacy.html:56
+msgid "provide you with information about local services"
+msgstr "rhoi gwybodaeth i chi am wasanaethau lleol"
+
+#: fala/templates/adviser/privacy.html:57
+msgid "gather feedback to improve our services"
+msgstr "casglu adborth i wella ein gwasanaethau"
+
+#: fala/templates/adviser/privacy.html:58
 msgid "monitor use of the site to identify security threats"
 msgstr ""
+"monitro sut caiff y wefan ei defnyddio i ganfod bygythiadau i ddiogelwch"
 
-#: fala/templates/adviser/privacy.html:61
+#: fala/templates/adviser/privacy.html:63
 msgid ""
 "We use the information we collect through Google Analytics to see how you "
 "use the service and to see how well it performs on your device."
 msgstr ""
-
-#: fala/templates/adviser/privacy.html:65
-msgid "We do this to help:"
-msgstr ""
+"Rydym yn defnyddio’r wybodaeth rydym yn ei chasglu drwy Google Analytics i "
+"weld sut rydych chi’n defnyddio’r gwasanaeth ac i weld pa mor dda mae’n "
+"perfformio ar eich dyfais."
 
 #: fala/templates/adviser/privacy.html:67
-msgid "make sure the service is meeting the needs of its users"
-msgstr ""
-
-#: fala/templates/adviser/privacy.html:68
-msgid "make improvements to the service"
-msgstr ""
+msgid "We do this to help:"
+msgstr "Rydym yn gwneud hyn i helpu i wneud y canlynol:"
 
 #: fala/templates/adviser/privacy.html:69
+msgid "make sure the service is meeting the needs of its users"
+msgstr "sicrhau bod y gwasanaeth yn diwallu anghenion ei ddefnyddwyr"
+
+#: fala/templates/adviser/privacy.html:70
+msgid "make improvements to the service"
+msgstr "gwella’r gwasanaeth"
+
+#: fala/templates/adviser/privacy.html:71
 msgid ""
 "make performance improvements, for example improving page load time and data "
 "usage"
 msgstr ""
+"gwella perfformiad, er enghraifft, gwella amser llwytho tudalennau a’r data "
+"a ddefnyddir"
 
-#: fala/templates/adviser/privacy.html:73
+#: fala/templates/adviser/privacy.html:75
 msgid "Our legal basis for processing your data"
-msgstr ""
+msgstr "Ein sail gyfreithiol dros ddefnyddio eich data"
 
-#: fala/templates/adviser/privacy.html:76
+#: fala/templates/adviser/privacy.html:78
 msgid ""
 "The legal basis for processing personal data in relation to site security is "
 "our legitimate interests, and the legitimate interests of our users, in "
 "ensuring the security and integrity of this service."
 msgstr ""
+"Y sail gyfreithiol dros brosesu data personol mewn perthynas â diogelwch y "
+"wefan yw ein buddiannau dilys, a buddiannau dilys ein defnyddwyr, i sicrhau "
+"diogelwch ac uniondeb y gwasanaeth hwn."
 
-#: fala/templates/adviser/privacy.html:77
+#: fala/templates/adviser/privacy.html:79
 msgid ""
 "The legal basis for processing all other data is that it’s necessary to "
 "provide a service and our legitimate interest in understanding the usage of "
 "our service."
 msgstr ""
+"Y sail gyfreithiol dros brosesu’r holl ddata arall yw ei fod yn "
+"angenrheidiol i ddarparu gwasanaeth a’n buddiant dilys yw deall sut caiff "
+"ein gwasanaeth ei ddefnyddio."
 
-#: fala/templates/adviser/privacy.html:81
+#: fala/templates/adviser/privacy.html:83
 msgid ""
 "The legal basis for processing data collected with Google Analytics in this "
 "service is your consent."
 msgstr ""
+"Eich caniatâd chi yw’r sail gyfreithiol dros brosesu data a gesglir gyda "
+"Google Analytics yn y gwasanaeth hwn."
 
-#: fala/templates/adviser/privacy.html:84
+#: fala/templates/adviser/privacy.html:86
 msgid "What we do with your data"
-msgstr ""
+msgstr "Beth rydym yn ei wneud â’ch data"
 
-#: fala/templates/adviser/privacy.html:87
+#: fala/templates/adviser/privacy.html:89
 msgid ""
 "The data we collect with Google Analytics cookies is transferred and stored "
 "with Google where we analyse it with Google Analytics software (Google "
 "Analytics 4). "
 msgstr ""
+"Mae’r data rydym yn ei gasglu gyda chwcis Google Analytics yn cael ei "
+"drosglwyddo a’i storio gyda Google lle rydym yn ei ddadansoddi gyda "
+"meddalwedd Google Analytics (Google Analytics 4). "
 
-#: fala/templates/adviser/privacy.html:88
+#: fala/templates/adviser/privacy.html:90
 msgid ""
 "We do not allow Google to use or share this data for their own purposes."
 msgstr ""
+"Nid ydym yn caniatáu i Google ddefnyddio na rhannu’r data hwn at ei "
+"ddibenion ei hun."
 
-#: fala/templates/adviser/privacy.html:92
+#: fala/templates/adviser/privacy.html:94
 msgid ""
 "No information that you provide will be shared outside the MoJ, other than "
 "with MoJ IT providers that provide services supporting the running of this "
 "service."
 msgstr ""
-
-#: fala/templates/adviser/privacy.html:96
-msgid "We will not:"
-msgstr ""
+"Ni fydd unrhyw wybodaeth a roddwch yn cael ei rhannu y tu allan i’r "
+"Weinyddiaeth Gyfiawnder, heblaw gyda darparwyr TG y Weinyddiaeth Gyfiawnder "
+"sy’n darparu gwasanaethau sy’n helpu i redeg y gwasanaeth hwn."
 
 #: fala/templates/adviser/privacy.html:98
+msgid "We will not:"
+msgstr "Ni fyddwn yn gwneud y canlynol:"
+
+#: fala/templates/adviser/privacy.html:100
 msgid "sell or rent data to third parties"
-msgstr ""
+msgstr "gwerthu na rhentu eich data i drydydd partïon"
 
-#: fala/templates/adviser/privacy.html:99
+#: fala/templates/adviser/privacy.html:101
 msgid "share data with third parties for marketing purposes"
-msgstr ""
+msgstr "rhannu data â thrydydd partïon at ddibenion marchnata"
 
-#: fala/templates/adviser/privacy.html:103
+#: fala/templates/adviser/privacy.html:105
 msgid "How long we keep your data"
-msgstr ""
+msgstr "Am ba mor hir y byddwn yn cadw eich data"
 
-#: fala/templates/adviser/privacy.html:106
+#: fala/templates/adviser/privacy.html:108
 msgid ""
 "We will only retain your data for as long as it is needed for the purposes "
 "set out on this page."
 msgstr ""
+"Byddwn ond yn cadw eich data cyhyd ag y bydd ei angen at y dibenion a nodir "
+"ar y dudalen hon."
 
-#: fala/templates/adviser/privacy.html:110
+#: fala/templates/adviser/privacy.html:112
 msgid ""
 "We will retain summary logs of interactions with the service, but these logs "
 "are fully anonymous."
 msgstr ""
+"Byddwn yn cadw cofnodion cryno o gysylltiadau â’r gwasanaeth, ond mae’r "
+"cofnodion hyn yn gwbl ddienw."
 
-#: fala/templates/adviser/privacy.html:113
+#: fala/templates/adviser/privacy.html:115
 msgid "Where your data is processed and stored"
-msgstr ""
+msgstr "Ble caiff eich data ei brosesu a’i storio"
 
-#: fala/templates/adviser/privacy.html:116
+#: fala/templates/adviser/privacy.html:118
 msgid ""
 "We design, build and run our systems to make sure that your data is as safe "
 "as possible at all stages, both while it’s processed and when it’s stored. "
 msgstr ""
+"Rydym yn dylunio, yn creu ac yn rhedeg ein systemau i wneud yn siŵr bod eich "
+"data mor ddiogel â phosibl ym mhob cam, pan gaiff ei brosesu a phan gaiff ei "
+"storio. "
 
-#: fala/templates/adviser/privacy.html:117
+#: fala/templates/adviser/privacy.html:119
 msgid "All personal data is processed in the  "
-msgstr ""
+msgstr "Caiff yr holl ddata personol ei brosesu yn yr "
 
-#: fala/templates/adviser/privacy.html:120
+#: fala/templates/adviser/privacy.html:122
 msgid "How we protect your data and keep it secure"
-msgstr ""
+msgstr "Sut rydym yn diogelu eich data ac yn ei gadw’n ddiogel"
 
-#: fala/templates/adviser/privacy.html:123
+#: fala/templates/adviser/privacy.html:125
 msgid "We are committed to doing all that we can to keep your data secure."
 msgstr ""
+"Rydym wedi ymrwymo i wneud popeth o fewn ein gallu i gadw eich data’n "
+"ddiogel."
 
-#: fala/templates/adviser/privacy.html:124
+#: fala/templates/adviser/privacy.html:126
 msgid ""
 "We have set up systems and processes to prevent unauthorised access or "
 "disclosure of your data. "
 msgstr ""
+"Rydym wedi creu systemau a phrosesau i sicrhau nad oes neb sydd heb ei "
+"awdurdodi yn gweld nac yn datgelu eich data."
 
-#: fala/templates/adviser/privacy.html:127
+#: fala/templates/adviser/privacy.html:129
 msgid "Links to other websites"
-msgstr ""
+msgstr "Dolenni i wefannau eraill"
 
-#: fala/templates/adviser/privacy.html:130
+#: fala/templates/adviser/privacy.html:132
 msgid "This service contains links to other websites."
-msgstr ""
+msgstr "Mae’r gwasanaeth hwn yn cynnwys dolenni i wefannau eraill."
 
-#: fala/templates/adviser/privacy.html:134
+#: fala/templates/adviser/privacy.html:136
 msgid ""
 "This privacy notice only applies to this service and does not cover other "
 "government services and transactions that we link to."
 msgstr ""
+"Dim ond i’r gwasanaeth hwn y mae’r hysbysiad preifatrwydd hwn yn berthnasol "
+"ac nid yw’n berthnasol i wasanaethau a thrafodion eraill y llywodraeth yr "
+"ydym darparu dolenni atynt."
 
-#: fala/templates/adviser/privacy.html:138
+#: fala/templates/adviser/privacy.html:140
 msgid ""
 "If you follow a link to a service provided by another government department "
 "or agency, that organisation will:"
 msgstr ""
-
-#: fala/templates/adviser/privacy.html:140
-msgid "be the data controller"
-msgstr ""
-
-#: fala/templates/adviser/privacy.html:141
-msgid "be responsible for processing any data you share with them"
-msgstr ""
+"Os byddwch yn dilyn dolen i wasanaeth a ddarperir gan un o adrannau neu "
+"asiantaethau eraill y llywodraeth, y sefydliad hwnnw:"
 
 #: fala/templates/adviser/privacy.html:142
+msgid "be the data controller"
+msgstr "fydd yn rheolydd data"
+
+#: fala/templates/adviser/privacy.html:143
+msgid "be responsible for processing any data you share with them"
+msgstr ""
+"fydd yn gyfrifol am brosesu unrhyw ddata rydych chi’n ei rannu gyda nhw"
+
+#: fala/templates/adviser/privacy.html:144
 msgid ""
 "publish and manage their own privacy notice with details of how to contact "
 "them"
 msgstr ""
+"a bydd yn cyhoeddi ac yn rheoli ei hysbysiad preifatrwydd ei hun gyda "
+"manylion am sut i gysylltu â nhw"
 
-#: fala/templates/adviser/privacy.html:146
+#: fala/templates/adviser/privacy.html:148
 msgid "Contact us or make a complaint"
-msgstr ""
-
-#: fala/templates/adviser/privacy.html:149
-msgid "Contact us by email at "
-msgstr ""
-
-#: fala/templates/adviser/privacy.html:149
-msgid " if you:"
-msgstr ""
+msgstr "Cysylltu â ni neu wneud cwyn"
 
 #: fala/templates/adviser/privacy.html:151
+msgid "Contact us by email at "
+msgstr "Cysylltwch â ni drwy anfon e-bost at "
+
+#: fala/templates/adviser/privacy.html:151
+msgid " if you:"
+msgstr ":"
+
+#: fala/templates/adviser/privacy.html:153
 msgid "have a question about anything in this privacy notice"
 msgstr ""
+"oes gennych chi gwestiwn am unrhyw beth yn yr hysbysiad preifatrwydd hwn"
 
-#: fala/templates/adviser/privacy.html:152
+#: fala/templates/adviser/privacy.html:154
 msgid "think that your personal data has been misused or mishandled"
 msgstr ""
+"os ydych chi’n meddwl bod eich data personol wedi cael ei drin neu ei "
+"ddefnyddio’n amhriodol"
 
-#: fala/templates/adviser/privacy.html:157
+#: fala/templates/adviser/privacy.html:159
 msgid "You can also contact our Data Protection Officer "
-msgstr ""
+msgstr "Gallwch hefyd gysylltu â’n Swyddog Diogelu Data "
 
-#: fala/templates/adviser/privacy.html:173
+#: fala/templates/adviser/privacy.html:175
 msgid "The DPO leads on all aspects of data protection for the MoJ."
 msgstr ""
+"Y DPO sy’n arwain ar bob agwedd ar ddiogelu data ar gyfer y Weinyddiaeth "
+"Gyfiawnder."
 
-#: fala/templates/adviser/privacy.html:177
+#: fala/templates/adviser/privacy.html:179
 msgid "When we ask you for information, we will comply with the law. "
 msgstr ""
+"Pan fyddwn yn gofyn i chi am wybodaeth, byddwn yn cydymffurfio â’r gyfraith. "
 
-#: fala/templates/adviser/privacy.html:178
+#: fala/templates/adviser/privacy.html:180
 msgid ""
 "If you consider that your information has been handled incorrectly, you can "
 "contact the Information Commissioner for independent advice about data "
 "protection."
 msgstr ""
+"Os ydych chi’n credu bod eich gwybodaeth bersonol wedi cael ei thrin yn "
+"anghywir, gallwch gysylltu â’r Comisiynydd Gwybodaeth i gael cyngor "
+"annibynnol ar ddiogelu data."
 
-#: fala/templates/adviser/privacy.html:179
+#: fala/templates/adviser/privacy.html:181
 msgid "You can contact the Information Commissioner at:"
-msgstr ""
+msgstr "Gallwch gysylltu â’r Comisiynydd Gwybodaeth gyda’r manylion hyn:"
+
+#: fala/templates/adviser/privacy.html:185
+msgid "Information Commissioner"
+msgstr "Y Comisiynydd Gwybodaeth"
+
+#: fala/templates/adviser/privacy.html:187
+msgid "Telephone: 0303 123 1113"
+msgstr "Ffôn: 0303 123 1113"
 
 #: fala/templates/adviser/privacy.html:188
+msgid "Textphone: 01625 545860"
+msgstr "Ffôn testun: 01625 545860"
+
+#: fala/templates/adviser/privacy.html:189
+msgid "Monday to Friday, 9am to 4:30pm"
+msgstr "Dydd Llun i ddydd Gwener 9am tan 4:30pm"
+
+#: fala/templates/adviser/privacy.html:190
 msgid "Find out about call charges"
-msgstr ""
+msgstr "Costau galwadau"
 
-#: fala/templates/adviser/privacy.html:199
+#: fala/templates/adviser/privacy.html:201
 msgid "Changes to this policy"
-msgstr ""
+msgstr "Newidiadau i’r polisi hwn"
 
-#: fala/templates/adviser/privacy.html:202
+#: fala/templates/adviser/privacy.html:204
 msgid ""
 "We may change this privacy policy. In that case, the ‘last updated’ date at "
 "the bottom of this page will also change. Any changes to this privacy policy "
 "will apply to you and your data immediately."
 msgstr ""
+"Efallai y byddwn yn newid y polisi preifatrwydd hwn. Os felly, bydd y "
+"dyddiad ‘diweddarwyd ddiwethaf’ ar waelod y dudalen hon hefyd yn newid. Bydd "
+"unrhyw newidiadau i’r hysbysiad preifatrwydd hwn yn weithredol i chi a’ch "
+"data ar unwaith."
 
-#: fala/templates/adviser/privacy.html:206
+#: fala/templates/adviser/privacy.html:208
 msgid "Last updated 25 June 2024"
-msgstr ""
+msgstr "Diweddarwyd ddiwethaf 25 June 2024"
 
-#: fala/templates/adviser/results.html:37
+#: fala/templates/adviser/results.html:41
 msgid "No search results"
-msgstr ""
+msgstr "Dim canlyniadau chwilio"
 
-#: fala/templates/adviser/results.html:38
+#: fala/templates/adviser/results.html:42
 msgid "There are no results for your criteria."
-msgstr ""
+msgstr "Nid oes dim canlyniadau ar gyfer eich meini prawf."
 
-#: fala/templates/adviser/results.html:48
+#: fala/templates/adviser/results.html:52
 msgid ""
 "You can contact any legal adviser on the list but you might need to contact "
 "a few to find one near you that can help. Those based further away may be "
 "able to help by telephone."
 msgstr ""
+"Gallwch gysylltu ag unrhyw gynghorydd cyfreithiol ar y rhestr ond efallai y "
+"bydd angen i chi gysylltu ag un neu ddau cyn dod o hyd i un yn eich ardal "
+"chi a all helpu. Efallai y bydd y rheini sydd wedi’u lleoli ymhellach i "
+"ffwrdd yn gallu helpu dros y ffôn."
 
-#: fala/templates/adviser/results.html:49
+#: fala/templates/adviser/results.html:53
 msgid ""
 "These advisers are contracted by the government and regulated by the "
 "Solicitors Regulation Authority."
 msgstr ""
+"Caiff y cynghorwyr hyn eu contractio gan y llywodraeth a’u rheoleiddio gan "
+"yr Awdurdod Rheoleiddio Cyfreithwyr."
 
-#: fala/templates/adviser/results.html:55
+#: fala/templates/adviser/results.html:59
 msgid "Postcode:"
-msgstr ""
+msgstr "Cod post:"
 
-#: fala/templates/adviser/results.html:58
+#: fala/templates/adviser/results.html:62
 msgid "Organisation:"
-msgstr ""
+msgstr "Sefydliad:"
 
-#: fala/templates/adviser/results.html:61
+#: fala/templates/adviser/results.html:65
 msgid "Legal problem: "
 msgstr ""
 
-#: fala/templates/adviser/results.html:91
+#: fala/templates/adviser/results.html:95
 msgid "Print this page"
-msgstr ""
+msgstr "Argraffu’r dudalen hon"
 
-#: fala/templates/adviser/results.html:100
-#: fala/templates/adviser/results.html:111
+#: fala/templates/adviser/results.html:104
+#, python-format
+msgid ""
+"\n"
+"            "
+msgid_plural ""
+"\n"
+"            <span class=\"govuk-!-font-weight-bold\" id=\"result-count-"
+"overall\">%(result_count)s results</span> in order of closeness to\n"
+"          "
+msgstr[0] ""
+"\n"
+"            <span class=\"govuk-!-font-weight-bold\" id=\"result-count-"
+"overall\">%(result_count)s canlyniad</span> yn ôl pa mor agos ydynt i\n"
+"          "
+msgstr[1] ""
+"\n"
+"            <span class=\"govuk-!-font-weight-bold\" id=\"result-count-"
+"overall\">%(result_count)s canlyniad</span> yn ôl pa mor agos ydynt i\n"
+"          "
+msgstr[2] ""
+"\n"
+"            <span class=\"govuk-!-font-weight-bold\" id=\"result-count-"
+"overall\">%(result_count)s canlyniad</span> yn ôl pa mor agos ydynt i\n"
+"          "
+msgstr[3] ""
+"\n"
+"            <span class=\"govuk-!-font-weight-bold\" id=\"result-count-"
+"overall\">%(result_count)s canlyniad</span> yn ôl pa mor agos ydynt i\n"
+"          "
+
+#: fala/templates/adviser/results.html:110
+msgid "matching"
+msgstr "sy’n cyfateb i"
+
+#: fala/templates/adviser/results.html:115
 #, python-format
 msgid ""
 "\n"
@@ -984,120 +1384,120 @@ msgid ""
 msgid_plural ""
 "\n"
 "          <span class=\"govuk-!-font-weight-bold\" id=\"result-count-"
-"overall\">%(result_count)s results</span> in order of closeness to\n"
+"org\">%(result_count)s results</span> for <strong>%(org_name)s</strong>.\n"
 "        "
 msgstr[0] ""
+"\n"
+"          <span class=\"govuk-!-font-weight-bold\" id=\"result-count-"
+"org\">%(result_count)s canlyniad</span> ar gyfer <strong>%(org_name)s</"
+"strong>.\n"
+"        "
 msgstr[1] ""
+"\n"
+"          <span class=\"govuk-!-font-weight-bold\" id=\"result-count-"
+"org\">%(result_count)s canlyniad</span> ar gyfer <strong>%(org_name)s</"
+"strong>.\n"
+"        "
+msgstr[2] ""
+"\n"
+"          <span class=\"govuk-!-font-weight-bold\" id=\"result-count-"
+"org\">%(result_count)s canlyniad</span> ar gyfer <strong>%(org_name)s</"
+"strong>.\n"
+"        "
+msgstr[3] ""
+"\n"
+"          <span class=\"govuk-!-font-weight-bold\" id=\"result-count-"
+"org\">%(result_count)s canlyniad</span> ar gyfer <strong>%(org_name)s</"
+"strong>.\n"
+"        "
 
-#: fala/templates/adviser/results.html:106
-msgid "matching"
-msgstr ""
-
-#: fala/templates/adviser/results.html:123
+#: fala/templates/adviser/results.html:127
 msgid "Distance"
 msgstr ""
 
-#: fala/templates/adviser/results.html:124
+#: fala/templates/adviser/results.html:128
 #, python-format
 msgid "%(miles)s miles away"
-msgstr ""
+msgstr "%(miles)s milltir i ffwrdd"
 
-#: fala/templates/adviser/results.html:131
+#: fala/templates/adviser/results.html:135
 msgid "Address"
 msgstr ""
 
-#: fala/templates/adviser/results.html:138
+#: fala/templates/adviser/results.html:144
 msgid "View on map (opens in new tab)"
-msgstr ""
+msgstr "Gweld ar fap (mae’n agor mewn tab newydd)"
 
-#: fala/templates/adviser/results.html:142
+#: fala/templates/adviser/results.html:148
 msgid "Can help with"
-msgstr ""
+msgstr "Yn gallu helpu gyda"
 
 #: fala/templates/adviser/search.html:3
-#: fala/templates/adviser/single_category_search.html:7
 msgid "Find a Legal Aid Adviser or Family Mediator"
-msgstr ""
+msgstr "Dod o hyd i gynghorydd cymorth cyfreithiol neu gyfryngwr teulu"
 
-#: fala/templates/adviser/search.html:22
+#: fala/templates/adviser/search.html:26
 msgid ""
 "Use this service to find legal aid advisers near you. They will ask about "
 "your problem and finances to work out if you can get legal aid."
 msgstr ""
 
-#: fala/templates/adviser/search.html:23
+#: fala/templates/adviser/search.html:27
 msgid "You can "
 msgstr ""
 
-#: fala/templates/adviser/search.html:23
+#: fala/templates/adviser/search.html:27
 msgid "check if your problem is covered by legal aid (opens in a new tab)"
 msgstr ""
 
-#: fala/templates/adviser/search.html:23
+#: fala/templates/adviser/search.html:27
 msgid " before your call."
 msgstr ""
 
-#: fala/templates/adviser/search.html:42
+#: fala/templates/adviser/search.html:46
 msgid "For example, NE31 1SF"
-msgstr ""
+msgstr "Er enghraifft, NE31 1SF"
 
-#: fala/templates/adviser/search.html:43
+#: fala/templates/adviser/search.html:47
 msgid "Name of organisation you are looking for (optional)"
-msgstr ""
+msgstr "Enw’r sefydliad rydych chi’n chwilio amdano (dewisol)"
 
-#: fala/templates/adviser/search.html:44
+#: fala/templates/adviser/search.html:48
 msgid "For example, Citizens Advice or Shelter"
 msgstr ""
 
-#: fala/templates/adviser/search.html:45
+#: fala/templates/adviser/search.html:49
 msgid "Legal problem (optional)"
-msgstr ""
+msgstr "Problem gyfreithiol (dewisol)"
 
-#: fala/templates/adviser/search.html:46
-#: fala/templates/adviser/single_category_search.html:86
-msgid "Search"
-msgstr ""
-
-#: fala/templates/adviser/search.html:156
+#: fala/templates/adviser/search.html:160
 msgid ""
 "If you are a provider and your details are incorrect, contact your contract "
 "manager."
 msgstr ""
-
-#: fala/templates/adviser/single_category_search.html:37
-msgid "Find a legal aid adviser for "
-msgstr ""
-
-#: fala/templates/adviser/single_category_search.html:39
-msgid "the"
-msgstr ""
-
-#: fala/templates/adviser/single_category_search.html:44
-msgid "Search for official legal aid advisers in England and Wales."
-msgstr ""
-
-#: fala/templates/adviser/single_category_search.html:48
-msgid "Next steps"
-msgstr ""
-
-#: fala/templates/adviser/single_category_search.html:50
-msgid "We'll show you a list of legal advisers."
-msgstr ""
-
-#: fala/templates/adviser/single_category_search.html:51
-msgid ""
-"When you contact the adviser they'll ask about your problem and finances to "
-"work out if you can get legal aid."
-msgstr ""
-
-#: fala/templates/adviser/single_category_search.html:61
-msgid "What is your postcode?"
-msgstr ""
-
-#: fala/templates/adviser/single_category_search.html:62
-msgid "For example, SW1H 9AJ"
-msgstr ""
+"Os ydych chi’n ddarparwr ac mae eich manylion yn anghywir, cysylltwch "
+"rheolwr eich contract."
 
 #: fala/templates/base.html:8
 msgid "GOV.UK - The best place to find government services and information"
+msgstr ""
+
+#: fala/templates/maintenance_mode.html:3
+msgid "Sorry, the service is unavailable"
+msgstr ""
+
+#: fala/templates/maintenance_mode.html:4
+msgid "You will be able to use the service soon."
+msgstr ""
+
+#: fala/templates/maintenance_mode.html:5
+msgid "You might be able to get help from "
+msgstr ""
+
+#: fala/templates/maintenance_mode.html:5
+msgid "Civil Legal Advice "
+msgstr ""
+
+#: fala/templates/maintenance_mode.html:5
+msgid "if you’re in England or Wales."
 msgstr ""

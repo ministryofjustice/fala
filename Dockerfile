@@ -64,6 +64,9 @@ CMD ["/home/app/docker/run.sh"]
 #################################################
 FROM base AS production
 
+# Install system dependencies, including gettext for translations
+RUN apt-get update && apt-get install -y --no-install-recommends gettext
+
 # Install Python dependencies
 COPY ./requirements/generated/requirements-production.txt ./requirements.txt
 RUN pip3 install --user --requirement ./requirements.txt
@@ -78,6 +81,9 @@ RUN chown app:app /home/app/fala/migrate_db.sh
 RUN chmod +x /home/app/fala/migrate_db.sh
 
 COPY . .
+
+# Compile translation files
+RUN python manage.py compilemessages -l cy
 
 RUN ./manage.py collectstatic --noinput
 
