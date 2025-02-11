@@ -48,6 +48,8 @@ DATABASES = {
 DEFAULT_ALLOWED_HOSTS = ".fala.dsd.io .find-legal-advice.justice.gov.uk"
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", DEFAULT_ALLOWED_HOSTS).split(",")
 
+print("FINDME", ALLOWED_HOSTS)
+
 TIME_ZONE = "UTC"
 
 USE_I18N = True
