@@ -177,7 +177,7 @@ class TranslationLink(StaticLiveServerTestCase):
             page.locator("#language_switcher_link").click()
             my_cookies = context.cookies()
             assert len(my_cookies) == 1
-            # expect(page.locator("h1")).to_have_text("Dod o hyd i gynghorydd cymorth cyfreithiol neu gyfryngwr teulu")
+            expect(page.locator("h1")).to_have_text("Dod o hyd i gynghorydd cymorth cyfreithiol neu gyfryngwr teulu")
             expect(page.locator("#language_switcher_link")).to_have_text("English")
             my_cookies = context.cookies()
             assert my_cookies[0]["name"] == "django_language"
