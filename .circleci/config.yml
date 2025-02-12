@@ -100,6 +100,7 @@ jobs:
             source env/bin/activate
             pip install --requirement requirements/generated/requirements-dev.txt
             playwright install --with-deps
+            sudo apt-get install -y --no-install-recommends gettext
             pip check
       - save_cache:
           key: pip-v1-{{ checksum "requirements/generated/requirements-dev.txt" }}
@@ -116,6 +117,7 @@ jobs:
           name: Run unit tests
           command: |
             source env/bin/activate
+            python manage.py compilemessages -l cy
             python manage.py collectstatic --noinput
             python manage.py test
           environment:
@@ -252,7 +254,7 @@ workflows:
             branches:
               only:
                 - main
-      
+
       - deploy_grafana:
           name: Deploy Grafana Production Dashboards
           requires:
