@@ -34,15 +34,34 @@ class ResultsView(CommonContextMixin, CategoryMixin, ListView, EnglandOrWalesSta
                 category_display_name = (self.category_slug or "").replace("-", " ").title()
                 category_message = CATEGORY_MESSAGES.get(self.category_slug, "")
 
-                # this is so we can use category_code & search_url, when conducting a search from CategorySearchErrorState view
-                category_code = self.request.GET.get("categories", "")
+                # this is so we can use category_code, sub_category_code & search_url, when conducting a search from CategorySearchErrorState view
+                category_code = (
+                    self.request.GET.getlist("categories")[0]
+                    if len(self.request.GET.getlist("categories")) > 0
+                    else ""
+                )
+                sub_category_code = (
+                    self.request.GET.getlist("categories")[1]
+                    if len(self.request.GET.getlist("categories")) > 1
+                    else ""
+                )
                 search_url = reverse("results")
 
                 # this is so that we can get correct hlpas display name onto CategorySearchErrorState view
-                category_slug = self.request.GET.get("categories")
+                category_slug = (
+                    self.request.GET.getlist("categories")[0]
+                    if len(self.request.GET.getlist("categories")) > 0
+                    else ""
+                )
 
                 self.state = CategorySearchErrorState(
-                    form, category_display_name, category_message, category_code, search_url, category_slug
+                    form,
+                    category_display_name,
+                    category_message,
+                    category_code,
+                    sub_category_code,
+                    search_url,
+                    category_slug,
                 )
             else:
                 self.state = ErrorState(form)

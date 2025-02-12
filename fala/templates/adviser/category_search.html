@@ -26,7 +26,7 @@
     <span class="language-and-exit-container">
       <div id="google_translate_element" class="govuk-!-margin-bottom-6 govuk-!-display-none-print"></div>
       <div id="exit_button">
-      {% if category_code == 'mat' %}
+      {% if category_code == 'mat' or sub_category_code == 'mat' %}
         {{ govukExitThisPage("Exit this page")}}
       {% endif %}
     </div>
