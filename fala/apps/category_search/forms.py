@@ -17,8 +17,8 @@ class CategorySearchForm(AdviserRootForm, BaseSearch):
         data = self.cleaned_data
         postcode = data.get("postcode")
 
-        if not postcode:
-            self.add_error("postcode", _("Enter a postcode"))
+        # this skips form validation if no postcode is in the request (e.g. during redirects)
+        if "postcode" not in self.data:
             return data
 
         if postcode:
@@ -27,6 +27,9 @@ class CategorySearchForm(AdviserRootForm, BaseSearch):
                 self.add_error("postcode", _("Enter a valid postcode"))
             else:
                 self._country_from_valid_postcode = valid_postcode
+        else:
+            self.add_error("postcode", _("Enter a postcode"))
+            return data
 
         return data
 
