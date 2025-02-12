@@ -23,13 +23,16 @@ class CategorySearchView(CommonContextMixin, CategoryMixin, TemplateView):
             return result
 
         self.category_code = result[0]
-        self.secondary_category_code = result[1]
+        self.sub_category_code = result[1]
 
         category_message = CATEGORY_MESSAGES.get(self.category_slug, "")
         category_display_name = (self.category_slug or "").replace("-", " ").title()
 
         form = CategorySearchForm(
-            initial={"categories": [self.category_code, self.secondary_category_code]}, data=request.GET or None
+            initial={
+                "categories": [self.category_code] + ([self.sub_category_code] if self.sub_category_code else [])
+            },
+            data=request.GET or None,
         )
 
         search_url = reverse("results")
@@ -41,7 +44,7 @@ class CategorySearchView(CommonContextMixin, CategoryMixin, TemplateView):
                 "errorList": [],
                 "category_slug": self.category_slug,
                 "category_code": self.category_code,
-                "secondary_category_code": self.secondary_category_code,
+                "sub_category_code": self.sub_category_code,
                 "category_display_name": category_display_name,
                 "category_message": category_message,
                 "search_url": search_url,
