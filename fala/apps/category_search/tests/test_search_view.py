@@ -34,14 +34,16 @@ class SearchViewTest(TestCase):
 
     def test_redirects_to_correct_category_url_with_multiple_categories(self):
         response = self.client.get(
-            reverse("category_search_query") + f"?categories={self.clinical_negligence_code},{self.welfare_benefits_code}"
+            reverse("category_search_query")
+            + f"?categories={self.clinical_negligence_code},{self.welfare_benefits_code}"
         )
         expected_url = f"{self.clinical_negligence_url}?categories={self.welfare_benefits_code}"
         self.assertRedirects(response, expected_url)
-    
+
     def test_does_not_redirect_to_secondary_category_url(self):
         response = self.client.get(
-            reverse("category_search_query") + f"?categories={self.clinical_negligence_code},{self.welfare_benefits_code}"
+            reverse("category_search_query")
+            + f"?categories={self.clinical_negligence_code},{self.welfare_benefits_code}"
         )
 
         # Ensure we are not redirected to the secondary category page
