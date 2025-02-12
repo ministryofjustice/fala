@@ -12,7 +12,9 @@ from fala.common.regions import Region
 class ResultsView(CommonContextMixin, CategoryMixin, ListView, EnglandOrWalesState, OtherJurisdictionState):
     def get(self, request, *args, **kwargs):
         self.tailored_results = self.request.GET.get("tailored_results", False)
-        self.category_code = self.request.GET.get("categories", False)
+        categories = self.request.GET.getlist("categories", [])
+        self.category_code = categories[0] if len(categories) > 0 else ""
+        self.sub_category_code = categories[1] if len(categories) > 1 else ""
 
         if self.tailored_results:
             form_class = CategorySearchForm
@@ -40,12 +42,12 @@ class ResultsView(CommonContextMixin, CategoryMixin, ListView, EnglandOrWalesSta
                     if len(self.request.GET.getlist("categories")) > 0
                     else ""
                 )
+
                 sub_category_code = (
                     self.request.GET.getlist("categories")[1]
                     if len(self.request.GET.getlist("categories")) > 1
                     else ""
                 )
-                search_url = reverse("results")
 
                 # this is so that we can get correct hlpas display name onto CategorySearchErrorState view
                 category_slug = (
@@ -53,6 +55,8 @@ class ResultsView(CommonContextMixin, CategoryMixin, ListView, EnglandOrWalesSta
                     if len(self.request.GET.getlist("categories")) > 0
                     else ""
                 )
+
+                search_url = reverse("results")
 
                 self.state = CategorySearchErrorState(
                     form,
@@ -78,5 +82,6 @@ class ResultsView(CommonContextMixin, CategoryMixin, ListView, EnglandOrWalesSta
         context = super().get_context_data(**kwargs)
         context["tailored_results"] = self.tailored_results
         context["category_code"] = self.category_code
+        context["sub_category_code"] = self.sub_category_code
         context.update(self.state.get_context_data())
         return context

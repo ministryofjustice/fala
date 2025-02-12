@@ -7,11 +7,19 @@
   <div class="govuk-grid-column-full">
     <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
     {% if tailored_results %}
-      {{ govukBackLink({
-        'classes': "back_link_other_region",
-        'text': BACK_LABEL,
-        'href': "/check?categories="+category_code,
-      }) }}
+      {% if request.GET.getlist('categories')|length > 1 %}
+        {{ govukBackLink({
+          'classes': "back_link_other_region",
+          'text': BACK_LABEL,
+          'href': "/check?categories="+category_code+"&sub-categories="+sub_category_code,
+        }) }}
+      {% else %}
+        {{ govukBackLink({
+          'classes': "back_link_other_region",
+          'text': BACK_LABEL,
+          'href': "/check?categories="+category_code,
+        }) }}
+      {% endif %}
     {% endif %}
     <h1 class="govuk-heading-xl">{{_('The postcode ')}}{{ postcode }}{{_(' is in ')}}{{ region }}</h1>
     <p class="govuk-body">{{_('This search only covers England and Wales.')}}</p>
