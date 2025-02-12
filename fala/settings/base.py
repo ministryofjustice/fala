@@ -1,6 +1,7 @@
 # coding=utf-8
 import sys
 import os
+import re
 from os.path import join, abspath, dirname
 
 import sentry_sdk
@@ -46,7 +47,10 @@ DATABASES = {
 }
 
 DEFAULT_ALLOWED_HOSTS = ".fala.dsd.io .find-legal-advice.justice.gov.uk"
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", DEFAULT_ALLOWED_HOSTS).split(",")
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", DEFAULT_ALLOWED_HOSTS)
+
+# Ensure ALLOWED_HOSTS splits correctly by both spaces and commas
+ALLOWED_HOSTS = re.split(r"[\s,]+", ALLOWED_HOSTS.strip())
 
 print("FINDME", ALLOWED_HOSTS)
 
