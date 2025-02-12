@@ -3,13 +3,13 @@
 
 {% block main_js %}{% endblock %}
 
-{% block pageTitle %}Page not found - 404 - {{ title }}{% endblock %}
+{% block pageTitle %}{{_('Page not found - 404 - ')}}{{ title }}{% endblock %}
 
 {% block content %}
   <div class="govuk-grid-column-two-thirds">
-    <h1 class="govuk-heading-xl">Page not found</h1>
+    <h1 class="govuk-heading-xl">{{_('Page not found')}}</h1>
 
-    <p class="govuk-body">If you entered a web address please check it was correct.</p>
-    <p class="govuk-body">Alternatively return to <a class="govuk-link" href="{{ url('adviser') }}">{{ title }} homepage</a> and try again.</p>
+    <p class="govuk-body">{{_('If you entered a web address please check it was correct.')}}</p>
+    <p class="govuk-body">{{_('Alternatively return to ')}}<a class="govuk-link" href="{{ url('adviser') }}">{{ title }}{{_(' homepage')}}</a>{{_(' and try again.')}}</p>
   </div>
 {% endblock %}

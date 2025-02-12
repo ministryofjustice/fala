@@ -5,13 +5,17 @@
 {%- from 'govuk_frontend_jinja/components/pagination/macro.html' import govukPagination %}
 {%- from "govuk_frontend_jinja/components/exit-this-page/macro.html" import govukExitThisPage -%}
 
+{% set exitText = _("Exit this page")%}
+
 {% block content %}
   <div class="govuk-grid-column-full">
     <span class="language-and-exit-container">
-      <div id="google_translate_element" class="govuk-!-margin-bottom-6 govuk-!-display-none-print"></div>
+      {% if not FEATURE_FLAG_WELSH_TRANSLATION %}
+        <div id="google_translate_element" class="govuk-!-margin-bottom-6 govuk-!-display-none-print"></div>
+        {% endif %}
       <div id="exit_button">
       {% if 'mat' in request.GET.getlist('categories') %}
-        {{ govukExitThisPage("Exit this page")}}
+        {{ govukExitThisPage({"text": exitText})}}
       {% endif %}
      </div>
     </span>
@@ -92,17 +96,17 @@
     {% endif %}
 
     <span class="govuk-body results-header">
-    {% if data.count > 0 %}
-      {% if data.origin %}
-        {% trans page_count=data.results|length, result_count=data.count %}
-          {% pluralize %}
-          <span class="govuk-!-font-weight-bold" id="result-count-overall">{{ result_count }} results</span> in order of closeness to
-        {% endtrans %}
-        <strong class="notranslate" translate="no">{{ form.postcode.value()|upper }}</strong>
-        {%- if form.name.value() %}
-          {{ _('matching') }} <strong>{{ form.name.value() }}</strong>.
-        {%- else -%}
-          .
+      {% if data.count > 0 %}
+        {% if data.origin %}
+          {% trans page_count=data.results|length, result_count=data.count %}
+            {% pluralize %}
+            <span class="govuk-!-font-weight-bold" id="result-count-overall">{{ result_count }} results</span> in order of closeness to
+          {% endtrans %}
+          <strong class="notranslate" translate="no">{{ form.postcode.value()|upper }}</strong>
+          {%- if form.name.value() %}
+            {{ _('matching') }} <strong>{{ form.name.value() }}</strong>.
+          {%- else -%}
+            .
         {% endif %}
       {% else %}
         {% trans result_count=data.count, page_count=data.results|length, org_name=form.name.value() %}
@@ -110,7 +114,7 @@
           <span class="govuk-!-font-weight-bold" id="result-count-org">{{ result_count }} results</span> for <strong>{{ org_name }}</strong>.
         {% endtrans %}
       {% endif %}
-      </span>
+    </span>
       <ul class="govuk-list results-list">
         {% for item in data.results %}
           <li class="results-list-item govuk-!-margin-bottom-6">
@@ -162,7 +166,7 @@
           </li>
         {% endfor %}
       </ul>
-      <nav class="govuk-!-display-none-print"> 
+      <nav class="govuk-!-display-none-print">
         {{ govukPagination(pagination) }}
       </nav>
     {% endif %}

@@ -1,7 +1,7 @@
 {% block content %}
   <div class="govuk-grid-column-two-thirds">
-    <h1 class="govuk-heading-xl">Sorry, the service is unavailable</h1>
-    <p class="govuk-body">You will be able to use the service soon.</p>
-    <p class="govuk-body">You might be able to get help from <a class="govuk-link" href="https://www.gov.uk/civil-legal-advice">Civil Legal Advice </a>if you’re in England or Wales.</p>
+    <h1 class="govuk-heading-xl">{{_('Sorry, the service is unavailable')}}</h1>
+    <p class="govuk-body">{{_('You will be able to use the service soon.')}}</p>
+    <p class="govuk-body">{{_('You might be able to get help from ')}}<a class="govuk-link" href="https://www.gov.uk/civil-legal-advice">{{_('Civil Legal Advice ')}}</a>{{_('if you’re in England or Wales.')}}</p>
   </div>
 {% endblock %}

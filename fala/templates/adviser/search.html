@@ -9,12 +9,16 @@
 {%- from 'govuk_frontend_jinja/components/checkboxes/macro.html' import govukCheckboxes %}
 {%- from "govuk_frontend_jinja/components/input/macro.html" import govukInput %}
 
+{% set titleText = _("There is a problem")%}
+
 {% block content %}
   <div class="govuk-grid-column-two-thirds">
-      <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
+      {% if not FEATURE_FLAG_WELSH_TRANSLATION %}
+        <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
+      {% endif %}
       {% if form.errors %}
         {{ govukErrorSummary({
-          "titleText": _("There is a problem"),
+          "titleText": titleText,
           "errorList": errorList
         }) }}
       {% endif %}
