@@ -76,7 +76,6 @@ class ResultsView(
         context["tailored_results"] = self.tailored_results
         context["category_code"] = self.category_code
         context["sub_category_code"] = self.sub_category_code
-        context.update({"translation_link": self.translation_link})
-        context.update({"language": self.language})
+        context.update({"translation_link": self.translation_link, "language": self.language})
         context.update(self.state.get_context_data())
         return context

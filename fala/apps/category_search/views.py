@@ -48,8 +48,8 @@ class CategorySearchView(CommonContextMixin, TranslationMixin, CategoryMixin, Te
                 "category_display_name": category_display_name,
                 "category_message": category_message,
                 "search_url": search_url,
+                "translation_link": self.translation_link(request),
+                "language": self.language(request),
             }
         )
-        context.update({"translation_link": self.translation_link(request)})
-        context.update({"language": self.language(request)})
         return self.render_to_response(context)
