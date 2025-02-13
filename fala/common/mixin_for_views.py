@@ -25,7 +25,7 @@ class CommonContextMixin:
 class CategoryMixin:
     def setup_category(self, request, *args, **kwargs):
         category_code = request.GET.get("categories", "")
-        sub_category_code = request.GET.get("sub-categories", "")
+        sub_category_code = request.GET.get("sub-category", "")
 
         if not category_code:
             self.category_slug = kwargs.get("category")
@@ -39,7 +39,7 @@ class CategoryMixin:
             self.category_slug = CategoryManager.slug_from(category_code)
             if sub_category_code:
                 url = reverse("category_search", kwargs={"category": self.category_slug})
-                return redirect(f"{url}?sub-categories={sub_category_code}")
+                return redirect(f"{url}?sub-category={sub_category_code}")
             if self.category_slug:
                 return redirect("category_search", category=self.category_slug)
             else:

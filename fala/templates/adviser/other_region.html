@@ -11,13 +11,13 @@
     {% if tailored_results %}
       {% if request.GET.getlist('categories')|length > 1 %}
         {{ govukBackLink({
-          'classes': "back_link_other_region",
+          'classes': "back_link_other_region, govuk-!-margin-bottom-5",
           'text': BACK_LABEL,
-          'href': "/check?categories="+category_code+"&sub-categories="+sub_category_code,
+          'href': "/check?categories="+category_code+"&sub-category="+sub_category_code,
         }) }}
       {% else %}
         {{ govukBackLink({
-          'classes': "back_link_other_region",
+          'classes': "back_link_other_region, govuk-!-margin-bottom-5",
           'text': BACK_LABEL,
           'href': "/check?categories="+category_code,
         }) }}

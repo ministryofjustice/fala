@@ -68,10 +68,11 @@ def category_selection(form):
 
 @library.filter
 def category_selection_first_item(form):
-    if "categories" in form.cleaned_data:
-        categories = [PROVIDER_CATEGORIES[cat] for cat in form.cleaned_data["categories"]]
-        if categories:
-            return categories[0]
+    categories = form.cleaned_data.get("categories", [])
+
+    if categories:
+        return PROVIDER_CATEGORIES.get(categories[0], None)
+
     return None
 
 

@@ -13,7 +13,7 @@ class ResultsView(CommonContextMixin, CategoryMixin, ListView, EnglandOrWalesSta
     def get(self, request, *args, **kwargs):
         self.tailored_results = self.request.GET.get("tailored_results", False)
         categories = self.request.GET.getlist("categories", [])
-        self.category_code = categories[0] if len(categories) > 0 else ""
+        self.category_code = categories[0] if categories else ""
         self.sub_category_code = categories[1] if len(categories) > 1 else ""
 
         if self.tailored_results:
@@ -35,26 +35,14 @@ class ResultsView(CommonContextMixin, CategoryMixin, ListView, EnglandOrWalesSta
                 self.setup_category(request, *args, **kwargs)
                 category_display_name = (self.category_slug or "").replace("-", " ").title()
                 category_message = CATEGORY_MESSAGES.get(self.category_slug, "")
+                categories = self.request.GET.getlist("categories", [])
 
                 # this is so we can use category_code, sub_category_code & search_url, when conducting a search from CategorySearchErrorState view
-                category_code = (
-                    self.request.GET.getlist("categories")[0]
-                    if len(self.request.GET.getlist("categories")) > 0
-                    else ""
-                )
-
-                sub_category_code = (
-                    self.request.GET.getlist("categories")[1]
-                    if len(self.request.GET.getlist("categories")) > 1
-                    else ""
-                )
+                category_code = categories[0] if categories else ""
+                sub_category_code = categories[1] if len(categories) > 1 else ""
 
                 # this is so that we can get correct hlpas display name onto CategorySearchErrorState view
-                category_slug = (
-                    self.request.GET.getlist("categories")[0]
-                    if len(self.request.GET.getlist("categories")) > 0
-                    else ""
-                )
+                category_slug = categories[0] if categories else ""
 
                 search_url = reverse("results")
 

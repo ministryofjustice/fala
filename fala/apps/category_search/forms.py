@@ -16,6 +16,7 @@ class CategorySearchForm(AdviserRootForm, BaseSearch):
     def clean(self):
         data = self.cleaned_data
         postcode = data.get("postcode")
+        self.categories = data.get("categories", [])
 
         # this skips form validation if no postcode is in the request (e.g. during redirects)
         if "postcode" not in self.data:
