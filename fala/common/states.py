@@ -1,4 +1,6 @@
 from django.http import Http404
+from fala.common.category_manager import CategoryManager
+from fala.common.category_messages import CATEGORY_MESSAGES
 from fala.common.regions import Region
 from fala.common.laa_laa_paginator import LaaLaaPaginator
 import urllib
@@ -156,12 +158,22 @@ class ErrorState(object):
         }
 
 
-class SingleSearchErrorState(object):
-    def __init__(self, form, category_display_name, category_message, category_code, search_url, category_slug):
+class CategorySearchErrorState(object):
+    def __init__(
+        self,
+        form,
+        category_display_name,
+        category_message,
+        category_code,
+        sub_category_code,
+        search_url,
+        category_slug,
+    ):
         self._form = form
         self.category_display_name = category_display_name
         self.category_message = category_message
         self.category_code = category_code
+        self.sub_category_code = sub_category_code
         self.search_url = search_url
         self.category_slug = category_slug
 
@@ -182,8 +194,12 @@ class SingleSearchErrorState(object):
                 item = {"text": error[0], "href": f"#id_{field}"}
             errorList.append(item)
 
-        if self.category_slug == "hlpas":
+        self.category_display_name = CategoryManager.slug_from(self.category_code).replace("-", " ").title()
+
+        if self.category_code == "hlpas":
             self.category_display_name = "Housing Loss Prevention Advice Service"
+
+        self.category_message = CATEGORY_MESSAGES.get(CategoryManager.slug_from(self.category_code))
 
         return {
             "form": self._form,
@@ -191,6 +207,7 @@ class SingleSearchErrorState(object):
             "errorList": errorList,
             "category_slug": self.category_slug,
             "category_code": self.category_code,
+            "sub_category_code": self.sub_category_code,
             "category_display_name": self.category_display_name,
             "category_message": self.category_message,
             "search_url": self.search_url,

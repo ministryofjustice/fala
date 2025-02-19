@@ -20,18 +20,23 @@
      </div>
     </span>
   </div>
-  {% if tailored_results %}
-    <div class="govuk-grid-column-full">
-      <form action="/check" method="GET" novalidate>
-        {% for category in form.categories %}
-          <input type="hidden" name="categories" value="{{ category }}">
-        {% endfor %}
-        <a href="/check?categories={% for category in form.categories %}{{ category }}{% if not loop.last %},{% endif %}{% endfor %}" class="govuk-back-link govuk-!-margin-bottom-5 govuk-!-display-none-print" id="back_link">
-          {{_('Back')}}
-        </a>
-      </form>
-    </div>
-  {% endif %}
+  <div class="govuk-grid-column-full">
+    {% if tailored_results %}
+      {% if request.GET.getlist('categories')|length > 1 %}
+        {{ govukBackLink({
+          'classes': "back_link, govuk-!-display-none-print, govuk-!-margin-bottom-5",
+          'text': BACK_LABEL,
+          'href': "/check?categories="+category_code+"&sub-category="+sub_category_code,
+        }) }}
+      {% else %}
+        {{ govukBackLink({
+          'classes': "back_link, govuk-!-display-none-print, govuk-!-margin-bottom-5",
+          'text': BACK_LABEL,
+          'href': "/check?categories="+category_code,
+        }) }}
+      {% endif %}
+    {% endif %}
+  </div>
 
   {% if FEATURE_FLAG_SURVEY_MONKEY %}
     {% include 'adviser/_research_banner.html' %}

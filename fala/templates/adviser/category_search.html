@@ -31,7 +31,7 @@
         <div id="google_translate_element" class="govuk-!-margin-bottom-6 govuk-!-display-none-print"></div>
       {% endif %}
       <div id="exit_button">
-      {% if category_code == 'mat' %}
+      {% if category_code == 'mat' or sub_category_code == 'mat' %}
         {{ govukExitThisPage({"text": exitText})}}
       {% endif %}
     </div>
@@ -66,6 +66,9 @@
     <div class="govuk-grid-column-two-thirds">
       <form action="{{ search_url }}" method="get" id="fala_questions_for_tailored_results">
         <input type="hidden" name="categories" value="{{ category_code }}">
+        {% if sub_category_code %}
+          <input type="hidden" name="categories" value="{{ sub_category_code }}">
+        {% endif %}
         <input type="hidden" name="tailored_results" value="true">
 
         {% set POSTCODE_CATEGORY_LABEL = _("What is your postcode?") %}

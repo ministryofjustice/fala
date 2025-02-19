@@ -32,6 +32,24 @@ class SearchViewTest(TestCase):
         response = self.client.get(reverse("category_search_query") + "?categories=invalid")
         self.assertRedirects(response, reverse("adviser"))
 
+    def test_redirects_to_correct_category_url_with_multiple_categories(self):
+        response = self.client.get(
+            reverse("category_search_query")
+            + f"?categories={self.clinical_negligence_code}&sub-category={self.welfare_benefits_code}"
+        )
+        expected_url = f"{self.clinical_negligence_url}?sub-category={self.welfare_benefits_code}"
+        self.assertRedirects(response, expected_url)
+
+    def test_does_not_redirect_to_secondary_category_url(self):
+        response = self.client.get(
+            reverse("category_search_query")
+            + f"?categories={self.clinical_negligence_code}&sub-category={self.welfare_benefits_code}"
+        )
+
+        # Ensure we are not redirected to the secondary category page
+        self.assertNotEqual(response.url, self.welfare_benefits_url)
+        self.assertNotIn(f"/{self.welfare_benefits_slug}", response.url)
+
     def test_displays_search_form_clinical_negligence(self):
         response = self.client.get(self.clinical_negligence_url)
         self.assertEqual(response.status_code, 200)
