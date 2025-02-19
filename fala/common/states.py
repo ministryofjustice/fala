@@ -49,11 +49,7 @@ class EnglandOrWalesState(object):
                     )
                 else:
                     page_params = {"page": page_num}
-                    href = (
-                        "/search?"
-                        + urllib.parse.urlencode({**page_params, **params})
-                        + ("&tailored_results=true" if self.tailored_results else "")
-                    )
+                    href = "/search?" + urllib.parse.urlencode({**page_params, **params})
 
                 return {"number": page_num, "current": self._form.current_page == page_num, "href": href}
 
@@ -71,11 +67,7 @@ class EnglandOrWalesState(object):
                     )
                 else:
                     page_params = {"page": current_page.previous_page_number()}
-                    prev_link = (
-                        "/search?"
-                        + urllib.parse.urlencode({**page_params, **params})
-                        + ("&tailored_results=true" if self.tailored_results else "")
-                    )
+                    prev_link = "/search?" + urllib.parse.urlencode({**page_params, **params})
                 pagination["previous"] = {"href": prev_link}
 
             if current_page.has_next():
@@ -90,11 +82,7 @@ class EnglandOrWalesState(object):
                     )
                 else:
                     page_params = {"page": current_page.next_page_number()}
-                    href = (
-                        "/search?"
-                        + urllib.parse.urlencode({**page_params, **params})
-                        + ("&tailored_results=true" if self.tailored_results else "")
-                    )
+                    href = "/search?" + urllib.parse.urlencode({**page_params, **params})
                 pagination["next"] = {"href": href}
 
             return {
