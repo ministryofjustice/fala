@@ -9,7 +9,8 @@ from django.utils.translation import gettext_lazy as _
 
 
 class EnglandOrWalesState(object):
-    def __init__(self, form):
+    def __init__(self, request, form):
+        self.request = request
         self._form = form
         self._data = form.search()
 
@@ -31,6 +32,7 @@ class EnglandOrWalesState(object):
                 "name": self._form.cleaned_data["name"],
             }
             categories = self._form.cleaned_data["categories"]
+            self.tailored_results = self.request.GET.get("tailored_results", False)
 
             # create list of tuples which can be passed to urlencode for pagination links
             category_tuples = [("categories", c) for c in categories]
@@ -43,10 +45,15 @@ class EnglandOrWalesState(object):
                         + urllib.parse.urlencode({**page_params, **params})
                         + "&"
                         + urllib.parse.urlencode(category_tuples)
+                        + ("&tailored_results=true" if self.tailored_results else "")
                     )
                 else:
                     page_params = {"page": page_num}
-                    href = "/search?" + urllib.parse.urlencode({**page_params, **params})
+                    href = (
+                        "/search?"
+                        + urllib.parse.urlencode({**page_params, **params})
+                        + ("&tailored_results=true" if self.tailored_results else "")
+                    )
 
                 return {"number": page_num, "current": self._form.current_page == page_num, "href": href}
 
@@ -60,10 +67,15 @@ class EnglandOrWalesState(object):
                         + urllib.parse.urlencode({**page_params, **params})
                         + "&"
                         + urllib.parse.urlencode(category_tuples)
+                        + ("&tailored_results=true" if self.tailored_results else "")
                     )
                 else:
                     page_params = {"page": current_page.previous_page_number()}
-                    prev_link = "/search?" + urllib.parse.urlencode({**page_params, **params})
+                    prev_link = (
+                        "/search?"
+                        + urllib.parse.urlencode({**page_params, **params})
+                        + ("&tailored_results=true" if self.tailored_results else "")
+                    )
                 pagination["previous"] = {"href": prev_link}
 
             if current_page.has_next():
@@ -74,10 +86,15 @@ class EnglandOrWalesState(object):
                         + urllib.parse.urlencode({**page_params, **params})
                         + "&"
                         + urllib.parse.urlencode(category_tuples)
+                        + ("&tailored_results=true" if self.tailored_results else "")
                     )
                 else:
                     page_params = {"page": current_page.next_page_number()}
-                    href = "/search?" + urllib.parse.urlencode({**page_params, **params})
+                    href = (
+                        "/search?"
+                        + urllib.parse.urlencode({**page_params, **params})
+                        + ("&tailored_results=true" if self.tailored_results else "")
+                    )
                 pagination["next"] = {"href": href}
 
             return {
