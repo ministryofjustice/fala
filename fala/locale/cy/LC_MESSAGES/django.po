@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fala\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-21 12:01+0000\n"
+"POT-Creation-Date: 2025-02-21 14:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -92,19 +92,19 @@ msgstr ""
 "oes gennych blentyn sydd wedi cael anaf i’r ymennydd yn ystod beichiogrwydd, "
 "genedigaeth neu yn ystod 8 wythnos gyntaf ei fywyd."
 
-#: fala/common/states.py:96
+#: fala/common/states.py:101
 msgid "Northern Ireland"
 msgstr "Gogledd Iwerddon"
 
-#: fala/common/states.py:100
+#: fala/common/states.py:105
 msgid "the Isle of Man"
 msgstr "Ynys Manaw"
 
-#: fala/common/states.py:104
+#: fala/common/states.py:109
 msgid "Jersey"
 msgstr "Jersey"
 
-#: fala/common/states.py:108
+#: fala/common/states.py:113
 msgid "Guernsey"
 msgstr "Gurnsey"
 
@@ -871,11 +871,12 @@ msgstr ""
 "gyda’ch dyfais."
 
 #: fala/templates/adviser/other_region.html:4
+#: fala/templates/adviser/results.html:9
 msgid "Back"
 msgstr "Yn ôl"
 
 #: fala/templates/adviser/other_region.html:5
-#: fala/templates/adviser/results.html:83
+#: fala/templates/adviser/results.html:84
 msgid "Change search"
 msgstr "Newid y manylion chwilio"
 
@@ -1316,15 +1317,15 @@ msgstr ""
 msgid "Last updated 25 June 2024"
 msgstr "Diweddarwyd ddiwethaf 25 June 2024"
 
-#: fala/templates/adviser/results.html:46
+#: fala/templates/adviser/results.html:47
 msgid "No search results"
 msgstr "Dim canlyniadau chwilio"
 
-#: fala/templates/adviser/results.html:47
+#: fala/templates/adviser/results.html:48
 msgid "There are no results for your criteria."
 msgstr "Nid oes dim canlyniadau ar gyfer eich meini prawf."
 
-#: fala/templates/adviser/results.html:57
+#: fala/templates/adviser/results.html:58
 msgid ""
 "You can contact any legal adviser on the list but you might need to contact "
 "a few to find one near you that can help. Those based further away may be "
@@ -1335,7 +1336,7 @@ msgstr ""
 "chi a all helpu. Efallai y bydd y rheini sydd wedi’u lleoli ymhellach i "
 "ffwrdd yn gallu helpu dros y ffôn."
 
-#: fala/templates/adviser/results.html:58
+#: fala/templates/adviser/results.html:59
 msgid ""
 "These advisers are contracted by the government and regulated by the "
 "Solicitors Regulation Authority."
@@ -1343,23 +1344,23 @@ msgstr ""
 "Caiff y cynghorwyr hyn eu contractio gan y llywodraeth a’u rheoleiddio gan "
 "yr Awdurdod Rheoleiddio Cyfreithwyr."
 
-#: fala/templates/adviser/results.html:64
+#: fala/templates/adviser/results.html:65
 msgid "Postcode:"
 msgstr "Cod post:"
 
-#: fala/templates/adviser/results.html:67
+#: fala/templates/adviser/results.html:68
 msgid "Organisation:"
 msgstr "Sefydliad:"
 
-#: fala/templates/adviser/results.html:70
+#: fala/templates/adviser/results.html:71
 msgid "Legal problem: "
 msgstr "Problem gyfreithiol: "
 
-#: fala/templates/adviser/results.html:100
+#: fala/templates/adviser/results.html:101
 msgid "Print this page"
 msgstr "Argraffu’r dudalen hon"
 
-#: fala/templates/adviser/results.html:109
+#: fala/templates/adviser/results.html:110
 #, python-format
 msgid ""
 "\n"
@@ -1390,11 +1391,11 @@ msgstr[3] ""
 "overall\">%(result_count)s canlyniad</span> yn ôl pa mor agos ydynt i\n"
 "          "
 
-#: fala/templates/adviser/results.html:115
+#: fala/templates/adviser/results.html:116
 msgid "matching"
 msgstr "sy’n cyfateb i"
 
-#: fala/templates/adviser/results.html:120
+#: fala/templates/adviser/results.html:121
 #, python-format
 msgid ""
 "\n"
@@ -1429,24 +1430,24 @@ msgstr[3] ""
 "strong>.\n"
 "        "
 
-#: fala/templates/adviser/results.html:132
+#: fala/templates/adviser/results.html:133
 msgid "Distance"
 msgstr "Pellter"
 
-#: fala/templates/adviser/results.html:133
+#: fala/templates/adviser/results.html:134
 #, python-format
 msgid "%(miles)s miles away"
 msgstr "%(miles)s milltir i ffwrdd"
 
-#: fala/templates/adviser/results.html:140
+#: fala/templates/adviser/results.html:141
 msgid "Address"
 msgstr "Cyfeiriad"
 
-#: fala/templates/adviser/results.html:149
+#: fala/templates/adviser/results.html:150
 msgid "View on map (opens in new tab)"
 msgstr "Gweld ar fap (mae’n agor mewn tab newydd)"
 
-#: fala/templates/adviser/results.html:153
+#: fala/templates/adviser/results.html:154
 msgid "Can help with"
 msgstr "Yn gallu helpu gyda"
 
