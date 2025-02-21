@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fala\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-11 11:05+0000\n"
+"POT-Creation-Date: 2025-02-21 14:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n==1) ? 0 : (n==2) ? 1 : (n != 8 && n != "
 "11) ? 2 : 3;\n"
 
-#: fala/apps/adviser/forms.py:23 fala/apps/category_search/forms.py:22
+#: fala/apps/adviser/forms.py:23 fala/apps/category_search/forms.py:32
 msgid "Enter a postcode"
 msgstr "Rhowch god post"
 
@@ -31,33 +31,30 @@ msgstr "Rhowch enw eich sefydliad"
 msgid "Enter a valid postcode"
 msgstr "Rhowch god post dilys"
 
-#: fala/apps/category_search/forms.py:34
-msgid "Category is required."
-msgstr ""
-
 #: fala/common/base_form_components.py:30 fala/templates/adviser/search.html:45
 msgid "Postcode"
-msgstr ""
+msgstr "Cod post"
 
 #: fala/common/base_form_components.py:38
 msgid "Organisation name"
-msgstr ""
+msgstr "Enw'r sefydliad"
 
 #: fala/common/base_form_components.py:45
 msgid "Category"
-msgstr ""
+msgstr "Categori"
 
 #: fala/common/base_form_components.py:66
 msgid "Error looking up legal advisers."
-msgstr ""
+msgstr "Profwyd gwall wrth geisio dod o hyd i gynghorwyr cyfreithiol"
 
 #: fala/common/base_form_components.py:66
 msgid "Please try again later."
-msgstr ""
+msgstr "Rhowch gynnig arall arni yn hwyrach ymlaen."
 
 #: fala/common/base_form_components.py:94
 msgid "This service is only available for England and Wales"
 msgstr ""
+"Mae’r gwasanaeth hwn ar gyfer pobl sy’n byw yng Nghymru a Lloegr yn unig"
 
 #: fala/common/category_messages.py:5
 msgid ""
@@ -95,89 +92,95 @@ msgstr ""
 "oes gennych blentyn sydd wedi cael anaf i’r ymennydd yn ystod beichiogrwydd, "
 "genedigaeth neu yn ystod 8 wythnos gyntaf ei fywyd."
 
-#: fala/common/states.py:94
+#: fala/common/states.py:101
 msgid "Northern Ireland"
 msgstr "Gogledd Iwerddon"
 
-#: fala/common/states.py:98
+#: fala/common/states.py:105
 msgid "the Isle of Man"
 msgstr "Ynys Manaw"
 
-#: fala/common/states.py:102
+#: fala/common/states.py:109
 msgid "Jersey"
 msgstr "Jersey"
 
-#: fala/common/states.py:106
+#: fala/common/states.py:113
 msgid "Guernsey"
 msgstr "Gurnsey"
 
 #: fala/common/utils.py:41
 msgid "Error looking up legal advisers. Please try again later."
 msgstr ""
+"Profwyd gwall wrth geisio dod o hyd i gynghorwyr cyfreithiol. Rhowch gynnig "
+"arall arni yn hwyrach ymlaen."
 
-#: fala/settings/base.py:68
+#: fala/settings/base.py:66
 msgid "English"
-msgstr ""
+msgstr "Saesneg"
 
-#: fala/settings/base.py:69
+#: fala/settings/base.py:67
 msgid "Cymraeg"
-msgstr ""
+msgstr "Cymraeg"
 
 #: fala/templates/404.html:6
 msgid "Page not found - 404 - "
-msgstr ""
+msgstr "Heb ddod o hyd i’r dudalen - 404- "
 
 #: fala/templates/404.html:10
 msgid "Page not found"
-msgstr ""
+msgstr "Heb ddod o hyd i’r dudalen"
 
 #: fala/templates/404.html:12
 msgid "If you entered a web address please check it was correct."
-msgstr ""
+msgstr "Os bu ichi deipio cyfeiriad gwefan, gwiriwch ei fod yn gywir."
 
 #: fala/templates/404.html:13
 msgid "Alternatively return to "
-msgstr ""
+msgstr "Fel arall, dychwelwch i "
 
 #: fala/templates/404.html:13
 msgid " homepage"
-msgstr ""
+msgstr " hafan"
 
 #: fala/templates/404.html:13
 msgid " and try again."
-msgstr ""
+msgstr " a rhowch gynnig arall arni."
 
 #: fala/templates/500.html:6
 msgid ""
 "Sorry, there is a problem with the service - Find a legal advisor or family "
 "mediator - GOV.UK"
 msgstr ""
+"Mae’n ddrwg gennym, ond mae problem gyda’r gwasanaeth - Dod o hyd i "
+"gynghorydd cymorth cyfreithiol neu gyfryngwr teulu - GOV.UK"
 
 #: fala/templates/500.html:10
 msgid "Sorry, there is a problem with the service"
-msgstr ""
+msgstr "Mae’n ddrwg gennym, ond mae problem gyda’r gwasanaeth"
 
 #: fala/templates/500.html:11
 msgid "Try again later."
-msgstr ""
+msgstr "Rhowch gynnig arall arni hwyrach ymlaen."
 
 #: fala/templates/500.html:12
 msgid "You can also "
-msgstr ""
+msgstr "Gallwch hefyd "
 
 #: fala/templates/500.html:12
 msgid "find a solicitor"
-msgstr ""
+msgstr "ddod o hyd i gyfreithiwr"
 
 #: fala/templates/500.html:12
 msgid " on the Law Society website."
-msgstr ""
+msgstr " ar wefan Cymdeithas y Gyfraith."
 
 #: fala/templates/500.html:13
 msgid ""
 "Search using your location, then select ‘Accepts legal aid’ to show legal "
 "aid solicitors near you."
 msgstr ""
+"Chwilio gan ddefnyddio eich lleoliad, yna dewiswch ‘Derbyn cymorth "
+"cyfreithiol’ i ddangos cyfreithwyr cymorth cyfreithiol yn agos atoch chi."
 
 #: fala/templates/adviser/_analytics_and_privacy_list.html:2
 msgid "the pages you visit"
@@ -262,7 +265,7 @@ msgstr "Cuddio’r neges hon"
 
 #: fala/templates/adviser/_footer.html:5
 msgid "Support links"
-msgstr ""
+msgstr "Dolenni Cefnogi"
 
 #: fala/templates/adviser/_footer.html:9 fala/templates/adviser/privacy.html:3
 #: fala/templates/adviser/privacy.html:11
@@ -309,11 +312,11 @@ msgstr "© Hawlfraint y goron"
 
 #: fala/templates/adviser/_research_banner.html:4
 msgid "Help improve this legal adviser search"
-msgstr ""
+msgstr "Helpwch i wella’r chwiliad hwn am gynghorwyr cyfreithiol"
 
 #: fala/templates/adviser/_research_banner.html:6
 msgid "Take part (opens in new tab)"
-msgstr ""
+msgstr "Cymryd rhan (yn agor mewn tab newydd)"
 
 #: fala/templates/adviser/_results_heading.html:4
 msgid "Your closest legal aid advisers and family mediators"
@@ -588,6 +591,7 @@ msgstr ""
 
 #: fala/templates/adviser/adviser_base.html:6
 #: fala/templates/adviser/cookies.html:41 fala/templates/adviser/search.html:25
+#: fala/templates/base.html:6
 msgid "Find a legal aid adviser or family mediator"
 msgstr "Dod o hyd i gynghorydd cymorth cyfreithiol neu gyfryngwr teulu"
 
@@ -609,33 +613,37 @@ msgstr " yn ein helpu i’w wella"
 
 #: fala/templates/adviser/adviser_base.html:68
 msgid "Find a legal aid adviser "
-msgstr ""
+msgstr "Dod o hyd i gynghorydd cymorth cyfreithiol "
 
 #: fala/templates/adviser/adviser_base.html:69
 msgid "or family mediator"
-msgstr ""
+msgstr "neu gyfryngwr teulu"
 
 #: fala/templates/adviser/adviser_base.html:73
 msgid ""
 "Search for a legal adviser or family mediator with a legal aid contract in "
 "England and Wales."
 msgstr ""
+"Chwilio am gynghorydd cyfreithiol neu gyfryngwr teuluol gyda chontract "
+"cymorth cyfreithiol yng Nghymru a Lloegr."
 
 #: fala/templates/adviser/adviser_base.html:82
 msgid ""
 "If you are a provider and your details are incorrect, please contact your "
 "contract manager."
 msgstr ""
+"Os ydych chi’n ddarparwr ac mae eich manylion yn anghywir, cysylltwch "
+"rheolwr eich contract."
 
 #: fala/templates/adviser/category_search.html:7
 #: fala/templates/adviser/category_search.html:47
 msgid "Find a legal aid adviser for "
-msgstr ""
+msgstr "Dod o hyd i gynghorydd cymorth cyfreithiol ar gyfer "
 
 #: fala/templates/adviser/category_search.html:9
 #: fala/templates/adviser/category_search.html:49
 msgid "the"
-msgstr ""
+msgstr "y"
 
 #: fala/templates/adviser/category_search.html:24
 #: fala/templates/adviser/search.html:12
@@ -645,46 +653,49 @@ msgstr "Mae problem"
 #: fala/templates/adviser/category_search.html:25
 #: fala/templates/adviser/results.html:8
 msgid "Exit this page"
-msgstr ""
+msgstr "Gadael y dudalen hon"
 
 #: fala/templates/adviser/category_search.html:54
 msgid "Search for official legal aid advisers in England and Wales."
 msgstr ""
+"Chwilio am gynghorwyr cymorth cyfreithiol swyddogol yng Nghymru a Lloegr."
 
 #: fala/templates/adviser/category_search.html:58
 msgid "Next steps"
-msgstr ""
+msgstr "Y camau nesaf"
 
 #: fala/templates/adviser/category_search.html:60
 msgid "We'll show you a list of legal advisers."
-msgstr ""
+msgstr "Byddwn yn dangos rhestr o gynghorwyr cyfreithiol i chi."
 
 #: fala/templates/adviser/category_search.html:61
 msgid ""
 "When you contact the adviser they'll ask about your problem and finances to "
 "work out if you can get legal aid."
 msgstr ""
+"Pan fyddwch chi'n cysylltu â'r cynghorydd, bydd yn gofyn am eich problem "
+"a’ch sefyllfa ariannol i weld a allwch chi gael cymorth cyfreithiol."
 
-#: fala/templates/adviser/category_search.html:71
+#: fala/templates/adviser/category_search.html:74
 msgid "What is your postcode?"
-msgstr ""
+msgstr "Beth yw eich cod post?"
 
-#: fala/templates/adviser/category_search.html:72
+#: fala/templates/adviser/category_search.html:75
 msgid "For example, SW1H 9AJ"
 msgstr "Er enghraifft, SW1H 9AJ"
 
-#: fala/templates/adviser/category_search.html:96
+#: fala/templates/adviser/category_search.html:99
 #: fala/templates/adviser/search.html:50
 msgid "Search"
 msgstr "Chwilio"
 
 #: fala/templates/adviser/cookies.html:8
 msgid "Success"
-msgstr ""
+msgstr "Llwyddiant"
 
 #: fala/templates/adviser/cookies.html:9
 msgid "Your cookie settings were saved"
-msgstr ""
+msgstr "Cafodd eich gosodiadau cwcis eu cadw"
 
 #: fala/templates/adviser/cookies.html:10
 msgid ""
@@ -694,6 +705,11 @@ msgid ""
 "class=\"govuk-notification-banner__link\" href=\"/\">Go back to the page you "
 "were looking at</a></p>"
 msgstr ""
+"<h3 class=\"govuk-notification-banner__heading\">Cafodd eich gosodiadau "
+"cwcis eu cadw</h3><p>Efallai y bydd gwasanaethau eraill y llywodraeth yn "
+"gosod cwcis ychwanegol. Bydd gan y rhainfaner a pholisi cwcis ar wahân.</"
+"p><p class=\"govuk-body\"><a class=\"govuk-notification-banner__link\" "
+"href=\"/\">Mynd yn ôl i’r dudalen roeddech chi’n edrych arni</a></p>"
 
 #: fala/templates/adviser/cookies.html:11
 msgid "Do you want to accept analytics cookies?"
@@ -709,7 +725,7 @@ msgstr "Nac ydw"
 
 #: fala/templates/adviser/cookies.html:14
 msgid "Save cookie settings"
-msgstr ""
+msgstr "Cadw’r gosodiadau cwcis"
 
 #: fala/templates/adviser/cookies.html:41
 msgid " puts small files (known as ‘cookies’) on your computer."
@@ -737,21 +753,24 @@ msgstr " ar gael gan Swyddfa’r Comisiynydd Gwybodaeth."
 
 #: fala/templates/adviser/cookies.html:53
 msgid "Cookie settings"
-msgstr ""
+msgstr "Gosodiadau cwcis"
 
 #: fala/templates/adviser/cookies.html:56
 msgid ""
 "We use Javascript to set most of our cookies. Unfortunately Javascript is "
 "not running on your browser, so you cannot change your settings. You can try:"
 msgstr ""
+"Rydym yn defnyddio Javascript i osod y rhan fwyaf o’n cwcis. Yn anffodus, "
+"nid yw Javascript yn rhedeg ar eich porwr, felly ni allwch newid eich "
+"gosodiadau. Gallwch geisio:"
 
 #: fala/templates/adviser/cookies.html:58
 msgid "reloading the page"
-msgstr ""
+msgstr "ail-lwytho'r dudalen"
 
 #: fala/templates/adviser/cookies.html:59
 msgid "turning on Javascript in your browser"
-msgstr ""
+msgstr "rhoi Javascript ar waith yn eich porwr"
 
 #: fala/templates/adviser/cookies.html:65
 msgid "Essential cookies (strictly necessary)"
@@ -852,36 +871,36 @@ msgstr ""
 "gyda’ch dyfais."
 
 #: fala/templates/adviser/other_region.html:4
-#: fala/templates/adviser/results.html:30
+#: fala/templates/adviser/results.html:9
 msgid "Back"
 msgstr "Yn ôl"
 
 #: fala/templates/adviser/other_region.html:5
-#: fala/templates/adviser/results.html:78
+#: fala/templates/adviser/results.html:84
 msgid "Change search"
 msgstr "Newid y manylion chwilio"
 
-#: fala/templates/adviser/other_region.html:18
+#: fala/templates/adviser/other_region.html:26
 msgid "The postcode "
 msgstr "Mae’r cod post "
 
-#: fala/templates/adviser/other_region.html:18
+#: fala/templates/adviser/other_region.html:26
 msgid " is in "
 msgstr " yn "
 
-#: fala/templates/adviser/other_region.html:19
+#: fala/templates/adviser/other_region.html:27
 msgid "This search only covers England and Wales."
-msgstr ""
+msgstr "Dim ond ar gyfer Cymru a Lloegr y mae’r chwiliad hwn yn berthnasol."
 
-#: fala/templates/adviser/other_region.html:21
+#: fala/templates/adviser/other_region.html:29
 msgid "Find out about "
 msgstr "Cael gwybod am "
 
-#: fala/templates/adviser/other_region.html:21
+#: fala/templates/adviser/other_region.html:29
 msgid "Legal Aid in "
 msgstr "Gymorth Cyfreithiol yn "
 
-#: fala/templates/adviser/other_region.html:22
+#: fala/templates/adviser/other_region.html:30
 msgid "or try a different search."
 msgstr "neu chwiliwch am rywbeth gwahanol."
 
@@ -925,7 +944,7 @@ msgstr "eich cyfeiriad Protocol Rhyngrwyd "
 
 #: fala/templates/adviser/privacy.html:30
 msgid " address"
-msgstr " "
+msgstr " cyfeiriad"
 
 #: fala/templates/adviser/privacy.html:31
 msgid "details of which version of "
@@ -1298,15 +1317,15 @@ msgstr ""
 msgid "Last updated 25 June 2024"
 msgstr "Diweddarwyd ddiwethaf 25 June 2024"
 
-#: fala/templates/adviser/results.html:41
+#: fala/templates/adviser/results.html:47
 msgid "No search results"
 msgstr "Dim canlyniadau chwilio"
 
-#: fala/templates/adviser/results.html:42
+#: fala/templates/adviser/results.html:48
 msgid "There are no results for your criteria."
 msgstr "Nid oes dim canlyniadau ar gyfer eich meini prawf."
 
-#: fala/templates/adviser/results.html:52
+#: fala/templates/adviser/results.html:58
 msgid ""
 "You can contact any legal adviser on the list but you might need to contact "
 "a few to find one near you that can help. Those based further away may be "
@@ -1317,7 +1336,7 @@ msgstr ""
 "chi a all helpu. Efallai y bydd y rheini sydd wedi’u lleoli ymhellach i "
 "ffwrdd yn gallu helpu dros y ffôn."
 
-#: fala/templates/adviser/results.html:53
+#: fala/templates/adviser/results.html:59
 msgid ""
 "These advisers are contracted by the government and regulated by the "
 "Solicitors Regulation Authority."
@@ -1325,23 +1344,23 @@ msgstr ""
 "Caiff y cynghorwyr hyn eu contractio gan y llywodraeth a’u rheoleiddio gan "
 "yr Awdurdod Rheoleiddio Cyfreithwyr."
 
-#: fala/templates/adviser/results.html:59
+#: fala/templates/adviser/results.html:65
 msgid "Postcode:"
 msgstr "Cod post:"
 
-#: fala/templates/adviser/results.html:62
+#: fala/templates/adviser/results.html:68
 msgid "Organisation:"
 msgstr "Sefydliad:"
 
-#: fala/templates/adviser/results.html:65
+#: fala/templates/adviser/results.html:71
 msgid "Legal problem: "
-msgstr ""
+msgstr "Problem gyfreithiol: "
 
-#: fala/templates/adviser/results.html:95
+#: fala/templates/adviser/results.html:101
 msgid "Print this page"
 msgstr "Argraffu’r dudalen hon"
 
-#: fala/templates/adviser/results.html:104
+#: fala/templates/adviser/results.html:110
 #, python-format
 msgid ""
 "\n"
@@ -1372,11 +1391,11 @@ msgstr[3] ""
 "overall\">%(result_count)s canlyniad</span> yn ôl pa mor agos ydynt i\n"
 "          "
 
-#: fala/templates/adviser/results.html:110
+#: fala/templates/adviser/results.html:116
 msgid "matching"
 msgstr "sy’n cyfateb i"
 
-#: fala/templates/adviser/results.html:115
+#: fala/templates/adviser/results.html:121
 #, python-format
 msgid ""
 "\n"
@@ -1411,24 +1430,24 @@ msgstr[3] ""
 "strong>.\n"
 "        "
 
-#: fala/templates/adviser/results.html:127
+#: fala/templates/adviser/results.html:133
 msgid "Distance"
-msgstr ""
+msgstr "Pellter"
 
-#: fala/templates/adviser/results.html:128
+#: fala/templates/adviser/results.html:134
 #, python-format
 msgid "%(miles)s miles away"
 msgstr "%(miles)s milltir i ffwrdd"
 
-#: fala/templates/adviser/results.html:135
+#: fala/templates/adviser/results.html:141
 msgid "Address"
-msgstr ""
+msgstr "Cyfeiriad"
 
-#: fala/templates/adviser/results.html:144
+#: fala/templates/adviser/results.html:150
 msgid "View on map (opens in new tab)"
 msgstr "Gweld ar fap (mae’n agor mewn tab newydd)"
 
-#: fala/templates/adviser/results.html:148
+#: fala/templates/adviser/results.html:154
 msgid "Can help with"
 msgstr "Yn gallu helpu gyda"
 
@@ -1441,18 +1460,23 @@ msgid ""
 "Use this service to find legal aid advisers near you. They will ask about "
 "your problem and finances to work out if you can get legal aid."
 msgstr ""
+"Defnyddiwch y gwasanaeth hwn i ddod o hyd i gynghorwyr cymorth cyfreithiol "
+"yn eich ardal chi. Byddant yn gofyn am eich problem a’ch sefyllfa ariannol i "
+"weld a allwch chi gael cymorth cyfreithiol."
 
 #: fala/templates/adviser/search.html:27
 msgid "You can "
-msgstr ""
+msgstr "Gallwch "
 
 #: fala/templates/adviser/search.html:27
 msgid "check if your problem is covered by legal aid (opens in a new tab)"
 msgstr ""
+"wirio a yw’ch problem yn gymwys i gael cymorth cyfreithiol (yn agor mewn tab "
+"newydd)"
 
 #: fala/templates/adviser/search.html:27
 msgid " before your call."
-msgstr ""
+msgstr " cyn eich galwad."
 
 #: fala/templates/adviser/search.html:46
 msgid "For example, NE31 1SF"
@@ -1464,7 +1488,7 @@ msgstr "Enw’r sefydliad rydych chi’n chwilio amdano (dewisol)"
 
 #: fala/templates/adviser/search.html:48
 msgid "For example, Citizens Advice or Shelter"
-msgstr ""
+msgstr "Er enghraifft, Cyngor ar Bopeth neu Shelter"
 
 #: fala/templates/adviser/search.html:49
 msgid "Legal problem (optional)"
@@ -1478,26 +1502,27 @@ msgstr ""
 "Os ydych chi’n ddarparwr ac mae eich manylion yn anghywir, cysylltwch "
 "rheolwr eich contract."
 
-#: fala/templates/base.html:8
+#: fala/templates/base.html:9
 msgid "GOV.UK - The best place to find government services and information"
 msgstr ""
+"GOV.UK - Y lle gorau i ddod o hyd i wybodaeth a gwasanaethau’r llywodraeth"
 
 #: fala/templates/maintenance_mode.html:3
 msgid "Sorry, the service is unavailable"
-msgstr ""
+msgstr "Yn anffodus, nid yw’r gwasanaeth ar gael"
 
 #: fala/templates/maintenance_mode.html:4
 msgid "You will be able to use the service soon."
-msgstr ""
+msgstr "Byddwch yn gallu defnyddio’r gwasanaeth hwn yn fuan."
 
 #: fala/templates/maintenance_mode.html:5
 msgid "You might be able to get help from "
-msgstr ""
+msgstr "Efallai y gallwch gael cymorth gan "
 
 #: fala/templates/maintenance_mode.html:5
 msgid "Civil Legal Advice "
-msgstr ""
+msgstr "Civil Legal Advice "
 
 #: fala/templates/maintenance_mode.html:5
 msgid "if you’re in England or Wales."
-msgstr ""
+msgstr "os ydych yn byw yng Nghymru neu Loegr."
