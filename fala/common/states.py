@@ -9,7 +9,8 @@ from django.utils.translation import gettext_lazy as _
 
 
 class EnglandOrWalesState(object):
-    def __init__(self, form):
+    def __init__(self, request, form):
+        self.request = request
         self._form = form
         self._data = form.search()
 
@@ -31,6 +32,7 @@ class EnglandOrWalesState(object):
                 "name": self._form.cleaned_data["name"],
             }
             categories = self._form.cleaned_data["categories"]
+            self.tailored_results = self.request.GET.get("tailored_results", False)
 
             # create list of tuples which can be passed to urlencode for pagination links
             category_tuples = [("categories", c) for c in categories]
@@ -43,6 +45,7 @@ class EnglandOrWalesState(object):
                         + urllib.parse.urlencode({**page_params, **params})
                         + "&"
                         + urllib.parse.urlencode(category_tuples)
+                        + ("&tailored_results=true" if self.tailored_results else "")
                     )
                 else:
                     page_params = {"page": page_num}
@@ -60,6 +63,7 @@ class EnglandOrWalesState(object):
                         + urllib.parse.urlencode({**page_params, **params})
                         + "&"
                         + urllib.parse.urlencode(category_tuples)
+                        + ("&tailored_results=true" if self.tailored_results else "")
                     )
                 else:
                     page_params = {"page": current_page.previous_page_number()}
@@ -74,6 +78,7 @@ class EnglandOrWalesState(object):
                         + urllib.parse.urlencode({**page_params, **params})
                         + "&"
                         + urllib.parse.urlencode(category_tuples)
+                        + ("&tailored_results=true" if self.tailored_results else "")
                     )
                 else:
                     page_params = {"page": current_page.next_page_number()}

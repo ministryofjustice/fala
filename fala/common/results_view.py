@@ -26,7 +26,7 @@ class ResultsView(CommonContextMixin, CategoryMixin, ListView, EnglandOrWalesSta
         if form.is_valid():
             region = form.region
             if region == Region.ENGLAND_OR_WALES or region == Region.SCOTLAND:
-                self.state = EnglandOrWalesState(form)
+                self.state = EnglandOrWalesState(request, form)
             else:
                 self.state = OtherJurisdictionState(region, form.cleaned_data["postcode"])
         else:
