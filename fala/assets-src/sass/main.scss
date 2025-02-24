@@ -193,8 +193,10 @@ body.fala-dev {
   margin-right: govuk-spacing(0);
 }
 
-.language-and-back-container{
-  display: flex;
-  justify-content: space-between; 
-  align-items: center;
+@media only screen and (min-width: 730px) {
+  .language-and-exit-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }
