@@ -26,16 +26,26 @@
 
 {% block content %}
   <div class="govuk-grid-column-full">
-    <span class="language-and-exit-container">
-      {% if not FEATURE_FLAG_WELSH_TRANSLATION %}
-        <div id="google_translate_element" class="govuk-!-margin-bottom-6 govuk-!-display-none-print"></div>
-      {% endif %}
+    {% if FEATURE_FLAG_WELSH_TRANSLATION %}
       <div id="exit_button">
-      {% if category_code == 'mat' or sub_category_code == 'mat' %}
-        {{ govukExitThisPage({"text": exitText})}}
-      {% endif %}
-    </div>
-    </span>
+        {% if category_code == 'mat' or sub_category_code == 'mat' %}
+          {{ govukExitThisPage({"text": exitText})}}
+        {% endif %}
+      </div>
+    {% else %}
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-half">
+          <div id="google_translate_element" class="govuk-!-margin-bottom-6 govuk-!-display-none-print"></div>
+        </div>
+        <div class="govuk-grid-column-one-half">
+          <div id="exit_button">
+            {% if category_code == 'mat' or sub_category_code == 'mat' %}
+              {{ govukExitThisPage({"text": exitText})}}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
   </div>
   <div class="govuk-grid-column-two-thirds">
     {% if form.errors %}
