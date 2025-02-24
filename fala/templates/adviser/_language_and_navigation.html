@@ -1,0 +1,46 @@
+{% if FEATURE_FLAG_WELSH_TRANSLATION %}
+  <div class="govuk-grid-row language-and-back-container">
+    <div class="govuk-grid-column-one-half">
+      {% if tailored_results %}
+        {% if request.GET.getlist('categories')|length > 1 %}
+          {{ govukBackLink({
+            'classes': "back_link, govuk-!-display-none-print, govuk-!-margin-top-0",
+            'text': BACK_LABEL,
+            'href': "/check?categories="+category_code+"&sub-category="+sub_category_code,
+          }) }}
+        {% else %}
+          {{ govukBackLink({
+            'classes': "back_link, govuk-!-display-none-print, govuk-!-margin-top-0",
+            'text': BACK_LABEL,
+            'href': "/check?categories="+category_code,
+          }) }}
+        {% endif %}
+    {% endif %}
+    </div>
+    <div class="govuk-grid-column-one-half language-switcher govuk-!-display-none-print">
+      <p class="govuk-body">
+        English / <a class="govuk-body govuk-link" href="/" target="_blank">Cymraeg</a>
+      </p>
+    </div>
+  </div>
+{% else %}
+  <div class="govuk-grid-row language-and-back-container">
+    <div class="govuk-grid-column-one-half">
+      {% if tailored_results %}
+        {% if request.GET.getlist('categories')|length > 1 %}
+          {{ govukBackLink({
+            'classes': "back_link, govuk-!-display-none-print, govuk-!-margin-top-0",
+            'text': BACK_LABEL,
+            'href': "/check?categories="+category_code+"&sub-category="+sub_category_code,
+          }) }}
+        {% else %}
+          {{ govukBackLink({
+            'classes': "back_link, govuk-!-display-none-print, govuk-!-margin-top-0",
+            'text': BACK_LABEL,
+            'href': "/check?categories="+category_code,
+          }) }}
+        {% endif %}
+    {% endif %}
+    </div>
+  </div>
+{% endif %}
