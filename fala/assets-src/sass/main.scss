@@ -157,6 +157,10 @@ body.fala-dev {
 .language-switcher {
   text-align: right;
   margin-right: govuk-spacing(0);
+  display: none;
+  .js-enabled & {
+    display: block;
+  }
 }
 
 .results-header {

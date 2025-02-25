@@ -4,20 +4,21 @@ const concat = require('gulp-concat');
 const terser = require('gulp-terser');
 const cleanCss = require('gulp-clean-css');
 const sass = require('gulp-sass')(require('sass'));
-const { src, parallel, dest} = require('gulp'); 
+const { src, parallel, dest} = require('gulp');
 
 // FALA js & GOVUK js - copying over both if we ever want to add custom js
 const jsPath = [
   'fala/assets-src/scripts/cookies.js',
   'fala/assets-src/scripts/google_tag_manager_data_layer.js',
   'fala/assets-src/scripts/print_results.js',
+  'fala/assets-src/scripts/translations.js',
   'node_modules/govuk-frontend/dist/govuk/govuk-frontend.min.js'
 ];
 
 // FALA css & GOVUK css - because we import GOVUK scss into same file in order to override/add to GOVUK classes
 const cssPath = 'fala/assets-src/sass/*.scss';
 
-// GOVUK font & images 
+// GOVUK font & images
 const assetPath = 'node_modules/govuk-frontend/dist/govuk/assets/**';
 
 // Icon for 'print this page' button
@@ -49,7 +50,7 @@ function cssTask() {
 }
 
 function assetTask() {
-  // { encoding: false } to copy over as binary files, GULP default is to encode into UTF:8 
+  // { encoding: false } to copy over as binary files, GULP default is to encode into UTF:8
   return src(assetPath, { encoding: false })
   .pipe(dest('fala/assets'));
 }
