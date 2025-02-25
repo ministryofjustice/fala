@@ -3,26 +3,11 @@
 {% block pageTitle %}{{_('Search results')}}{% endblock %}
 {% set BACK_LABEL = _("Back") %}
 {% set CHANGE_SEARCH = _("Change search") %}
+{% block language_and_navigation %}
+  {% include 'adviser/_language_and_navigation_other_region.html' %}
+{% endblock %}
 {% block content %}
   <div class="govuk-grid-column-full">
-    {% if not FEATURE_FLAG_WELSH_TRANSLATION %}
-      <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
-    {% endif %}
-    {% if tailored_results %}
-      {% if request.GET.getlist('categories')|length > 1 %}
-        {{ govukBackLink({
-          'classes': "back_link_other_region, govuk-!-margin-bottom-5",
-          'text': BACK_LABEL,
-          'href': "/check?categories="+category_code+"&sub-category="+sub_category_code,
-        }) }}
-      {% else %}
-        {{ govukBackLink({
-          'classes': "back_link_other_region, govuk-!-margin-bottom-5",
-          'text': BACK_LABEL,
-          'href': "/check?categories="+category_code,
-        }) }}
-      {% endif %}
-    {% endif %}
     <h1 class="govuk-heading-xl">{{_('The postcode ')}}{{ postcode }}{{_(' is in ')}}{{ region }}</h1>
     <p class="govuk-body">{{_('This search only covers England and Wales.')}}</p>
     <p class="govuk-body">

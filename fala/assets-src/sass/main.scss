@@ -154,10 +154,6 @@ body.fala-dev {
   }
 }
 
-.language-switcher {
-  text-align: right;
-  margin-right: govuk-spacing(0);
-}
 
 .results-header {
   font-size: 19px;
@@ -193,14 +189,14 @@ body.fala-dev {
   color: $govuk-text-colour;
 }
 
-.language-and-exit-container{
-  display: block;
+.language-switcher {
+  text-align: right;
+  margin-right: govuk-spacing(0);
 }
 
-@media only screen and (min-width: 730px) {
-  .language-and-exit-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
+
+.language-and-back-container{
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
 }
