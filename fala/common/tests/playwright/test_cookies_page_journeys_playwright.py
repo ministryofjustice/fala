@@ -1,6 +1,7 @@
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from playwright.sync_api import sync_playwright, expect
 from fala.common.test_utils.playwright.setup import PlaywrightTestSetup
+from django.test import override_settings
 
 
 class CookiesPageEndToEndJourneys(PlaywrightTestSetup):
@@ -159,3 +160,27 @@ class CookiesPageEndToEndJourneysWithFreshSetUp(StaticLiveServerTestCase):
             self.verify_cookie_value("Allowed", my_cookies)
 
             self.tear_down(page, context)
+
+
+class TranslationLink(StaticLiveServerTestCase):
+    @override_settings(FEATURE_FLAG_WELSH_TRANSLATION=True)
+    def test_language_switcher_link(self):
+        with sync_playwright() as p:
+            browser = p.chromium.launch()
+            context = browser.new_context()
+            page = context.new_page()
+            page.goto(f"{self.live_server_url}")
+            expect(page.locator("h1")).to_have_text("Find a legal aid adviser or family mediator")
+            expect(page.locator("#language_switcher_link")).to_have_text("Cymraeg")
+            my_cookies = context.cookies()
+            assert len(my_cookies) == 0
+            page.locator("#language_switcher_link").click()
+            my_cookies = context.cookies()
+            assert len(my_cookies) == 1
+            expect(page.locator("h1")).to_have_text("Dod o hyd i gynghorydd cymorth cyfreithiol neu gyfryngwr teulu")
+            expect(page.locator("#language_switcher_link")).to_have_text("English")
+            my_cookies = context.cookies()
+            assert my_cookies[0]["name"] == "django_language"
+            assert my_cookies[0]["value"] == "cy"
+            page.context.close()
+            context.browser.close()

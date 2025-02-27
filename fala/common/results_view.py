@@ -4,17 +4,22 @@ from django.views.generic import ListView
 from fala.apps.adviser.forms import AdviserSearchForm
 from fala.apps.category_search.forms import CategorySearchForm
 from fala.common.states import EnglandOrWalesState, OtherJurisdictionState, ErrorState, CategorySearchErrorState
-from fala.common.mixin_for_views import CommonContextMixin, CategoryMixin
+from fala.common.mixin_for_views import CommonContextMixin, CategoryMixin, TranslationMixin
 from fala.common.category_messages import CATEGORY_MESSAGES
 from fala.common.regions import Region
 
 
-class ResultsView(CommonContextMixin, CategoryMixin, ListView, EnglandOrWalesState, OtherJurisdictionState):
+class ResultsView(
+    CommonContextMixin, TranslationMixin, CategoryMixin, ListView, EnglandOrWalesState, OtherJurisdictionState
+):
     def get(self, request, *args, **kwargs):
         self.tailored_results = self.request.GET.get("tailored_results", False)
         categories = self.request.GET.getlist("categories", [])
         self.category_code = categories[0] if categories else ""
         self.sub_category_code = categories[1] if len(categories) > 1 else ""
+        self.category_code = self.request.GET.get("categories", False)
+        self.translation_link = self.translation_link(request)
+        self.language = self.language(request)
 
         if self.tailored_results:
             form_class = CategorySearchForm
@@ -71,5 +76,6 @@ class ResultsView(CommonContextMixin, CategoryMixin, ListView, EnglandOrWalesSta
         context["tailored_results"] = self.tailored_results
         context["category_code"] = self.category_code
         context["sub_category_code"] = self.sub_category_code
+        context.update({"translation_link": self.translation_link, "language": self.language})
         context.update(self.state.get_context_data())
         return context
