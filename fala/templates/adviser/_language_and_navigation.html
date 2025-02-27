@@ -14,13 +14,17 @@
           'href': "/check?categories="+category_code,
         }) }}
       {% endif %}
-  {% endif %}
+    {% endif %}
   </div>
   {% if FEATURE_FLAG_WELSH_TRANSLATION %}
     <div class="govuk-grid-column-one-half language-switcher govuk-!-display-none-print">
-      <p class="govuk-body">
-        English / <a class="govuk-body govuk-link" href="/" target="_blank">Cymraeg</a>
-      </p>
+      <form id="language_switcher_form" action="{{ url('set_language') }}" method="post">
+        <input type="hidden" name="next" value="{{ request.get_full_path() }}">
+        <input type="hidden" name="language" value="{{ language }}">
+        <p class="govuk-body">
+          {{ translation_link | safe }}
+        </p>
+      </form>
     </div>
   {% endif %}
 </div>
