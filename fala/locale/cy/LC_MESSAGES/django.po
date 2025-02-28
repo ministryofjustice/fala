@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fala\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-21 14:18+0000\n"
+"POT-Creation-Date: 2025-02-27 15:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -92,6 +92,14 @@ msgstr ""
 "oes gennych blentyn sydd wedi cael anaf i’r ymennydd yn ystod beichiogrwydd, "
 "genedigaeth neu yn ystod 8 wythnos gyntaf ei fywyd."
 
+#: fala/common/states.py:71
+msgid "Previous"
+msgstr "Cynt"
+
+#: fala/common/states.py:86
+msgid "Next"
+msgstr "Nesaf"
+
 #: fala/common/states.py:101
 msgid "Northern Ireland"
 msgstr "Gogledd Iwerddon"
@@ -114,11 +122,11 @@ msgstr ""
 "Profwyd gwall wrth geisio dod o hyd i gynghorwyr cyfreithiol. Rhowch gynnig "
 "arall arni yn hwyrach ymlaen."
 
-#: fala/settings/base.py:66
+#: fala/settings/base.py:69
 msgid "English"
 msgstr "Saesneg"
 
-#: fala/settings/base.py:67
+#: fala/settings/base.py:70
 msgid "Cymraeg"
 msgstr "Cymraeg"
 

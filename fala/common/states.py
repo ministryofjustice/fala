@@ -68,7 +68,7 @@ class EnglandOrWalesState(object):
                 else:
                     page_params = {"page": current_page.previous_page_number()}
                     prev_link = "/search?" + urllib.parse.urlencode({**page_params, **params})
-                pagination["previous"] = {"href": prev_link}
+                pagination["previous"] = {"href": prev_link, "text": _("Previous")}
 
             if current_page.has_next():
                 if len(categories) > 0:
@@ -83,7 +83,7 @@ class EnglandOrWalesState(object):
                 else:
                     page_params = {"page": current_page.next_page_number()}
                     href = "/search?" + urllib.parse.urlencode({**page_params, **params})
-                pagination["next"] = {"href": href}
+                pagination["next"] = {"href": href, "text": _("Next")}
 
             return {
                 "form": self._form,
