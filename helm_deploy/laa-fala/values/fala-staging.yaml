@@ -58,7 +58,7 @@ feature_flags:
   survey_monkey: "disabled"
   block_robots: "enabled"
   maintenance_mode: "disabled"
-  single_category_search: "disabled"
+  single_category_search: "enabled"
   welsh_translation: "disabled"
 
 laalaa_api:
