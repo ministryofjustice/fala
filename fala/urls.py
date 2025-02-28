@@ -1,6 +1,6 @@
 # coding=utf-8
 from django.conf import settings
-from django.urls import re_path, include
+from django.urls import re_path
 from fala.apps.adviser.views import AdviserSearchView
 from fala.apps.category_search.views import CategorySearchView
 from fala.common.results_view import ResultsView
@@ -14,9 +14,11 @@ from fala.common.compliance_views import (
     SecurityTxtView,
 )
 from django.views.static import serve
+from fala.apps.adviser.views import set_language
+
 
 urlpatterns = [
-    re_path(r"^i18n/", include("django.conf.urls.i18n"), name="set_language"),
+    re_path(r"^i18n/setlang/$", set_language, name="set_language"),
     re_path(r"^accessibility-statement$", AccessibilityView.as_view(), name="accessibility_statement"),
     re_path(r"^cookies$", CookiesView.as_view(), name="cookies"),
     re_path(r"^privacy$", PrivacyView.as_view(), name="privacy"),
