@@ -1,0 +1,55 @@
+{% if FEATURE_FLAG_WELSH_TRANSLATION %}
+  <div class="govuk-grid-row language-and-back-container">
+    <div class="govuk-grid-column-one-half">
+      {% if tailored_results %}
+        {% if request.GET.getlist('categories')|length > 1 %}
+          {{ govukBackLink({
+            'classes': "back_link_other_region govuk-!-margin-top-0",
+            'text': BACK_LABEL,
+            'href': "/check?categories="+category_code+"&sub-category="+sub_category_code,
+          }) }}
+        {% else %}
+          {{ govukBackLink({
+            'classes': "back_link_other_region govuk-!-margin-top-0",
+            'text': BACK_LABEL,
+            'href': "/check?categories="+category_code,
+          }) }}
+        {% endif %}
+      {% endif %}
+    </div>
+    <div class="govuk-grid-column-one-half language-switcher">
+      <form id="language_switcher_form" action="{{ url('set_language') }}" method="post">
+        <input type="hidden" name="next" value="{{ request.get_full_path() }}">
+        <input type="hidden" name="language" value="{{ language }}">
+        <p class="govuk-body">
+          {{ translation_link | safe }}
+        </p>
+      </form>
+    </div>
+  </div>
+{% else %}
+  <div class="govuk-grid-row language-and-back-container">
+    <div class="govuk-grid-column-one-half">
+      {% if tailored_results %}
+        {% if request.GET.getlist('categories')|length > 1 %}
+          {{ govukBackLink({
+            'classes': "back_link_other_region govuk-!-margin-top-0",
+            'text': BACK_LABEL,
+            'href': "/check?categories="+category_code+"&sub-category="+sub_category_code,
+          }) }}
+        {% else %}
+          {{ govukBackLink({
+            'classes': "back_link_other_region govuk-!-margin-top-0",
+            'text': BACK_LABEL,
+            'href': "/check?categories="+category_code,
+          }) }}
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
+  <div class="govuk-grid-column-full">
+    <div class="govuk-grid-row govuk-!-margin-bottom-6">
+      <div id="google_translate_element"></div>
+    </div>
+  </div>
+{% endif %}
