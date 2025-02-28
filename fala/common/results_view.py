@@ -17,7 +17,6 @@ class ResultsView(
         categories = self.request.GET.getlist("categories", [])
         self.category_code = categories[0] if categories else ""
         self.sub_category_code = categories[1] if len(categories) > 1 else ""
-        self.category_code = self.request.GET.get("categories", False)
         self.translation_link = self.translation_link(request)
         self.language = self.language(request)
 
