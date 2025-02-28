@@ -10,32 +10,25 @@
 
 {% block content %}
   <div class="govuk-grid-column-full">
-    <span class="language-and-exit-container">
-      {% if not FEATURE_FLAG_WELSH_TRANSLATION %}
-        <div id="google_translate_element" class="govuk-!-margin-bottom-6 govuk-!-display-none-print"></div>
-        {% endif %}
+    {% if FEATURE_FLAG_WELSH_TRANSLATION %}
       <div id="exit_button">
-      {% if 'mat' in request.GET.getlist('categories') %}
-        {{ govukExitThisPage({"text": exitText})}}
-      {% endif %}
-     </div>
-    </span>
-  </div>
-  <div class="govuk-grid-column-full">
-    {% if tailored_results %}
-      {% if request.GET.getlist('categories')|length > 1 %}
-        {{ govukBackLink({
-          'classes': "back_link, govuk-!-display-none-print, govuk-!-margin-bottom-5",
-          'text': BACK_LABEL,
-          'href': "/check?categories="+category_code+"&sub-category="+sub_category_code,
-        }) }}
-      {% else %}
-        {{ govukBackLink({
-          'classes': "back_link, govuk-!-display-none-print, govuk-!-margin-bottom-5",
-          'text': BACK_LABEL,
-          'href': "/check?categories="+category_code,
-        }) }}
-      {% endif %}
+        {% if 'mat' in request.GET.getlist('categories') %}
+          {{ govukExitThisPage({"text": exitText})}}
+        {% endif %}
+      </div>
+    {% else %}
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-half">
+          <div id="google_translate_element" class="govuk-!-margin-bottom-6 govuk-!-display-none-print"></div>
+        </div>
+        <div class="govuk-grid-column-one-half">
+          <div id="exit_button">
+            {% if 'mat' in request.GET.getlist('categories') %}
+              {{ govukExitThisPage({"text": exitText})}}
+            {% endif %}
+          </div>
+        </div>
+      </div>
     {% endif %}
   </div>
 
@@ -87,8 +80,7 @@
             'text': changeSearchButton,
             'type': "submit",
             'classes': "govuk-!-margin-bottom-2 govuk-!-display-none-print",
-            'id': "changeSearchButton",
-            'name': "search"
+            'id': "changeSearchButton"
           }) }}
         </form>
       </div>
