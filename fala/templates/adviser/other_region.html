@@ -1,8 +1,6 @@
 {% extends 'adviser/adviser_base.html' %}
 
 {% block pageTitle %}{{_('Search results')}}{% endblock %}
-{% set BACK_LABEL = _("Back") %}
-{% set CHANGE_SEARCH = _("Change search") %}
 {% block language_and_navigation %}
   {% include 'adviser/_language_and_navigation_other_region.html' %}
 {% endblock %}
@@ -18,7 +16,7 @@
     {% if not tailored_results %}
       <form action="/" method="get" novalidate>
         {{ govukButton({
-          'text': CHANGE_SEARCH,
+          'text': _("Change search"),
           'type': "submit",
           'classes': "govuk-!-margin-bottom-2",
           'id': "otherRegionChangeSearchButton",
