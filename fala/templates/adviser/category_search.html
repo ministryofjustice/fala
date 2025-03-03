@@ -6,9 +6,9 @@
   {% else %}
     {{_('Find a legal aid adviser for ')}}
     {% if category_code == 'hlpas' %}
-      {{_('the')}} {{ category_display_name }}
+      {{_('the')}} {{ _(category_display_name) | title }}
     {% else %}
-      {{ category_display_name | lower }}
+      {{ _(category_display_name) | lower }}
     {% endif %}
   {% endif %}
 {% endblock %}
@@ -56,9 +56,9 @@
     {% endif %}
     <h1 class="govuk-heading-xl"> {{_('Find a legal aid adviser for ')}}
       {% if category_code == 'hlpas' %}
-        {{_('the')}} {{ category_display_name }}
+        {{_('the')}} {{ _(category_display_name) | title }}
       {% else %}
-        {{ category_display_name | lower }}
+        {{ _(category_display_name) | lower }}
       {% endif %}
     </h1>
     <p class="govuk-body">{{_('Search for official legal aid advisers in England and Wales.')}}</p>
