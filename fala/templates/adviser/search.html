@@ -23,7 +23,7 @@
         }) }}
       {% endif %}
       <h1 class="govuk-heading-xl">{{_('Find a legal aid adviser or family mediator')}}</h1>
-      <p class="govuk-body">{{_('Use this service to find legal aid advisers near you. They will ask about your problem and finances to work out if you can get legal aid.')}}</p>
+      <p class="govuk-body">{{_('Use this service to find legal aid advisers in England and Wales. They will ask about your problem and finances to work out if you can get legal aid.')}}</p>
       <p class="govuk-body">{{_('You can ')}}<a class="govuk-link" href="{{ CHECK_LEGAL_AID_URL }}" target="_blank" rel="noopener">{{_('check if your problem is covered by legal aid (opens in a new tab)')}}</a>{{_(' before your call.')}}</p>
   </div>
 
@@ -43,7 +43,7 @@
             {% endif %}
 
             {% set POSTCODE_LABEL = _("Postcode") %}
-            {% set POSTCODE_HINT = _("For example, NE31 1SF") %}
+            {% set POSTCODE_HINT = _("For example, NE31 1SF, or a partial postcode like NE31, S1 or SW1X.") %}
             {% set ORG_LABEL = _("Name of organisation you are looking for (optional)") %}
             {% set ORG_HINT = _("For example, Citizens Advice or Shelter") %}
             {% set LEGAL_HINT = _("Legal problem (optional)") %}

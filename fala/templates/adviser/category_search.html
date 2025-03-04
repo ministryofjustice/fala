@@ -81,8 +81,8 @@
         {% endif %}
         <input type="hidden" name="tailored_results" value="true">
 
-        {% set POSTCODE_CATEGORY_LABEL = _("What is your postcode?") %}
-        {% set POSTCODE_CATEGORY_HINT = _("For example, SW1H 9AJ") %}
+        {% set POSTCODE_CATEGORY_LABEL = _("Postcode") %}
+        {% set POSTCODE_CATEGORY_HINT = _("For example, NE31 1SF, or a partial postcode like NE31, S1 or SW1X.") %}
 
         {% if 'postcode' in form.errors or form.errors['__all__'] %}
           {{ govukInput({
