@@ -8,7 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fala\n"
 "Report-Msgid-Bugs-To: \n"
+<<<<<<< HEAD
 "POT-Creation-Date: 2025-03-06 15:54+0000\n"
+=======
+"POT-Creation-Date: 2025-03-05 15:58+0000\n"
+>>>>>>> 97622e3 (add content changes around postcode)
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,7 +35,9 @@ msgstr "Rhowch enw eich sefydliad"
 msgid "Enter a valid postcode"
 msgstr "Rhowch god post dilys"
 
-#: fala/common/base_form_components.py:30 fala/templates/adviser/search.html:45
+#: fala/common/base_form_components.py:30
+#: fala/templates/adviser/category_search.html:84
+#: fala/templates/adviser/search.html:45
 msgid "Postcode"
 msgstr "Cod post"
 
@@ -752,6 +758,7 @@ msgstr ""
 "Pan fyddwch chi'n cysylltu â'r cynghorydd, bydd yn gofyn am eich problem "
 "a’ch sefyllfa ariannol i weld a allwch chi gael cymorth cyfreithiol."
 
+<<<<<<< HEAD
 #: fala/templates/adviser/category_search.html:84
 msgid "What is your postcode?"
 msgstr "Beth yw eich cod post?"
@@ -760,6 +767,13 @@ msgstr "Beth yw eich cod post?"
 msgid "For example, SW1H 9AJ"
 msgstr "Er enghraifft, SW1H 9AJ"
 
+=======
+#: fala/templates/adviser/category_search.html:85
+#: fala/templates/adviser/search.html:46
+msgid "For example, NE31 1SF, or a partial postcode like NE31, S1 or SW1X."
+msgstr "Er enghraifft, NE31 1SF, neu rhan o god post fel NE31, S1 neu SW1X."
+
+>>>>>>> 97622e3 (add content changes around postcode)
 #: fala/templates/adviser/category_search.html:109
 #: fala/templates/adviser/search.html:50
 msgid "Search"
@@ -1541,12 +1555,12 @@ msgstr "Dod o hyd i gynghorydd cymorth cyfreithiol neu gyfryngwr teulu"
 
 #: fala/templates/adviser/search.html:26
 msgid ""
-"Use this service to find legal aid advisers near you. They will ask about "
-"your problem and finances to work out if you can get legal aid."
+"Use this service to find legal aid advisers in England and Wales. They will "
+"ask about your problem and finances to work out if you can get legal aid."
 msgstr ""
-"Defnyddiwch y gwasanaeth hwn i ddod o hyd i gynghorwyr cymorth cyfreithiol "
-"yn eich ardal chi. Byddant yn gofyn am eich problem a’ch sefyllfa ariannol i "
-"weld a allwch chi gael cymorth cyfreithiol."
+"Defnyddiwch y gwasanaeth hwn i ddod o hyd i gynghorwyr cyfreithiol yng "
+"Nghymru a Lloegr yn eich ardal chi. Byddant yn gofyn am eich problem a’ch "
+"sefyllfa ariannol i weld a allwch chi gael cymorth cyfreithiol."
 
 #: fala/templates/adviser/search.html:27
 msgid "You can "
@@ -1561,10 +1575,6 @@ msgstr ""
 #: fala/templates/adviser/search.html:27
 msgid " before your call."
 msgstr " cyn eich galwad."
-
-#: fala/templates/adviser/search.html:46
-msgid "For example, NE31 1SF"
-msgstr "Er enghraifft, NE31 1SF"
 
 #: fala/templates/adviser/search.html:47
 msgid "Name of organisation you are looking for (optional)"
