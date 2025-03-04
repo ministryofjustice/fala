@@ -172,4 +172,11 @@ python manage.py compilemessages -l cy
 
 Django will use the `django.mo` file to display translations.
 
-**TODO** - The `makemessages` command in Django doesn't natively support Jinja2 templates. It is designed to work with Django's default template engine and expects translation strings to be in those templates.Still need to configure Django to handle Jinja2 templates during `makemessages` by adding the appropriate options and ensuring Jinja2 templates are included.
+### **To Note**
+
+The `makemessages` command in Django doesn’t understand the syntax of Jinja2 components and is designed to work with Django's default template engine. Therefore any strings in the Jinja2 components that need to be translated, have to be set as Jinja2 variables, within the templates. 
+
+There has been exploration in configuring this app to use `babel`, in order to translate the strings inside Jinja2 components, but the benefits in doing so did not outweigh the current implementation;
+- Django’s [documentation](https://docs.djangoproject.com/en/5.1/topics/i18n/translation/#localization-how-to-create-language-files) lacks clear instructions on integrating Babel.
+- Babel setup requires extra configuration (e.g., babel.cfg, manual extraction, compilation).
+- Using Django’s gettext system from views works well enough without the added complexity.
