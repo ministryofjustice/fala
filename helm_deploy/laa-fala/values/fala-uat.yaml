@@ -50,7 +50,7 @@ feature_flags:
   no_map: "enabled"
   survey_monkey: "disabled"
   block_robots: "enabled"
-  maintenance_mode: "disabled"
+  maintenance_mode: "enabled"
   single_category_search: "enabled"
   welsh_translation: "enabled"
 
