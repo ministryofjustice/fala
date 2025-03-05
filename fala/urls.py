@@ -1,8 +1,10 @@
 # coding=utf-8
 from django.conf import settings
 from django.urls import re_path, include
+from django.shortcuts import render
 from fala.apps.adviser.views import AdviserSearchView
 from fala.apps.category_search.views import CategorySearchView
+from fala.common.mixin_for_views import TranslationMixin
 from fala.common.results_view import ResultsView
 from fala.common.footer_views import (
     AccessibilityView,
@@ -27,3 +29,33 @@ urlpatterns = [
     re_path(r"^check/(?P<category>[\w-]+)$", CategorySearchView.as_view(), name="category_search"),
     re_path(r"^check$", CategorySearchView.as_view(), name="category_search_query"),
 ] + [re_path(r"^static/(?P<path>.*)$", serve, {"document_root": settings.STATIC_ROOT})]
+
+
+def custom_404_view(request, exception):
+    return render(
+        request,
+        "404.html",
+        {
+            "translation_link": TranslationMixin().translation_link(request),
+            "language": TranslationMixin().language(request),
+            "FEATURE_FLAG_WELSH_TRANSLATION": settings.FEATURE_FLAG_WELSH_TRANSLATION,
+        },
+        status=404,
+    )
+
+
+def custom_500_view(request):
+    return render(
+        request,
+        "500.html",
+        {
+            "translation_link": TranslationMixin().translation_link(request),
+            "language": TranslationMixin().language(request),
+            "FEATURE_FLAG_WELSH_TRANSLATION": settings.FEATURE_FLAG_WELSH_TRANSLATION,
+        },
+        status=500,
+    )
+
+
+handler404 = custom_404_view
+handler500 = custom_500_view
