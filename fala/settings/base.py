@@ -70,6 +70,8 @@ LANGUAGES = (
     ("cy", _("Cymraeg")),
 )
 
+LANGUAGE_COOKIE_NAME = "FALA-lang"
+
 MEDIA_ROOT = root("assets", "uploads")
 
 MEDIA_URL = "/media/"
