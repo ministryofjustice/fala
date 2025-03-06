@@ -182,7 +182,7 @@ class TranslationLink(StaticLiveServerTestCase):
             expect(page.get_by_label("Hawliadau yn erbyn Awdurdodau Cyhoeddus")).to_be_visible()
             expect(page.locator("#language_switcher_link")).to_have_text("English")
             my_cookies = context.cookies()
-            assert my_cookies[0]["name"] == "django_language"
+            assert my_cookies[0]["name"] == "FALA-lang"
             assert my_cookies[0]["value"] == "cy"
             page.context.close()
             context.browser.close()

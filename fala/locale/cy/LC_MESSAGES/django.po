@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fala\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-04 11:10+0000\n"
+"POT-Creation-Date: 2025-03-06 15:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -198,31 +198,31 @@ msgstr "Saesneg"
 msgid "Cymraeg"
 msgstr "Cymraeg"
 
-#: fala/templates/404.html:6
+#: fala/templates/404.html:4
 msgid "Page not found - 404 - "
 msgstr "Heb ddod o hyd i’r dudalen - 404- "
 
-#: fala/templates/404.html:10
+#: fala/templates/404.html:12
 msgid "Page not found"
 msgstr "Heb ddod o hyd i’r dudalen"
 
-#: fala/templates/404.html:12
+#: fala/templates/404.html:14
 msgid "If you entered a web address please check it was correct."
 msgstr "Os bu ichi deipio cyfeiriad gwefan, gwiriwch ei fod yn gywir."
 
-#: fala/templates/404.html:13
+#: fala/templates/404.html:15
 msgid "Alternatively return to "
 msgstr "Fel arall, dychwelwch i "
 
-#: fala/templates/404.html:13
+#: fala/templates/404.html:15
 msgid " homepage"
 msgstr " hafan"
 
-#: fala/templates/404.html:13
+#: fala/templates/404.html:15
 msgid " and try again."
 msgstr " a rhowch gynnig arall arni."
 
-#: fala/templates/500.html:6
+#: fala/templates/500.html:4
 msgid ""
 "Sorry, there is a problem with the service - Find a legal advisor or family "
 "mediator - GOV.UK"
@@ -230,27 +230,27 @@ msgstr ""
 "Mae’n ddrwg gennym, ond mae problem gyda’r gwasanaeth - Dod o hyd i "
 "gynghorydd cymorth cyfreithiol neu gyfryngwr teulu - GOV.UK"
 
-#: fala/templates/500.html:10
+#: fala/templates/500.html:12
 msgid "Sorry, there is a problem with the service"
 msgstr "Mae’n ddrwg gennym, ond mae problem gyda’r gwasanaeth"
 
-#: fala/templates/500.html:11
+#: fala/templates/500.html:13
 msgid "Try again later."
 msgstr "Rhowch gynnig arall arni hwyrach ymlaen."
 
-#: fala/templates/500.html:12
+#: fala/templates/500.html:14
 msgid "You can also "
 msgstr "Gallwch hefyd "
 
-#: fala/templates/500.html:12
+#: fala/templates/500.html:14
 msgid "find a solicitor"
 msgstr "ddod o hyd i gyfreithiwr"
 
-#: fala/templates/500.html:12
+#: fala/templates/500.html:14
 msgid " on the Law Society website."
 msgstr " ar wefan Cymdeithas y Gyfraith."
 
-#: fala/templates/500.html:13
+#: fala/templates/500.html:15
 msgid ""
 "Search using your location, then select ‘Accepts legal aid’ to show legal "
 "aid solicitors near you."
@@ -865,17 +865,17 @@ msgid "Essential cookies we use"
 msgstr "Cwcis hanfodol rydym yn eu defnyddio"
 
 #: fala/templates/adviser/cookies.html:74
-#: fala/templates/adviser/cookies.html:110
+#: fala/templates/adviser/cookies.html:117
 msgid "Name"
 msgstr "Enw"
 
 #: fala/templates/adviser/cookies.html:75
-#: fala/templates/adviser/cookies.html:111
+#: fala/templates/adviser/cookies.html:118
 msgid "Purpose"
 msgstr "Pwrpas"
 
 #: fala/templates/adviser/cookies.html:76
-#: fala/templates/adviser/cookies.html:112
+#: fala/templates/adviser/cookies.html:119
 msgid "Expires"
 msgstr "Daw i ben"
 
@@ -887,11 +887,19 @@ msgstr "Mae’n cadw eich gosodiadau caniatâd cwcis"
 msgid "1 year"
 msgstr "1 flwyddyn"
 
-#: fala/templates/adviser/cookies.html:88
+#: fala/templates/adviser/cookies.html:89
+msgid "Essential if you choose to use the Welsh language version of the site"
+msgstr "Hanfodol os ydych yn dewis defnyddio fersiwn Gymraeg y wefan"
+
+#: fala/templates/adviser/cookies.html:90
+msgid "When you close your browser"
+msgstr "Pan fyddwch yn cau eich porwr"
+
+#: fala/templates/adviser/cookies.html:95
 msgid "Analytics cookies (optional)"
 msgstr "Cwcis dadansoddol (dewisol)"
 
-#: fala/templates/adviser/cookies.html:91
+#: fala/templates/adviser/cookies.html:98
 msgid ""
 "We use Google Analytics software to understand how people use Find a legal "
 "aid adviser or family mediator. We do this to help make sure the site is "
@@ -902,7 +910,7 @@ msgstr ""
 "wnawn hyn i sicrhau bod y wefan yn diwallu anghenion ei defnyddwyr ac i’n "
 "helpu ni i wneud gwelliannau."
 
-#: fala/templates/adviser/cookies.html:95
+#: fala/templates/adviser/cookies.html:102
 msgid ""
 "We do not collect or store your personal information (for example your name "
 "or address) so this information cannot be used to identify who you are."
@@ -911,20 +919,20 @@ msgstr ""
 "eich enw neu’ch cyfeiriad) felly ni ellir defnyddio’r wybodaeth hon i "
 "ddatgelu pwy ydych chi."
 
-#: fala/templates/adviser/cookies.html:99
+#: fala/templates/adviser/cookies.html:106
 msgid "We do not allow Google to use or share our analytics data."
 msgstr ""
 "Nid ydym yn caniatáu i Google ddefnyddio na rhannu ein data dadansoddol."
 
-#: fala/templates/adviser/cookies.html:103
+#: fala/templates/adviser/cookies.html:110
 msgid "Google Analytics stores information about"
 msgstr "Mae Google Analytics yn storio gwybodaeth am y canlynol"
 
-#: fala/templates/adviser/cookies.html:107
+#: fala/templates/adviser/cookies.html:114
 msgid "Analytics cookies we use"
 msgstr "Cwcis dadansoddol rydym yn eu defnyddio"
 
-#: fala/templates/adviser/cookies.html:118
+#: fala/templates/adviser/cookies.html:125
 msgid ""
 "Helps us count how many people visit Find a legal aid adviser or family "
 "mediator by telling us if you’ve visited before."
@@ -933,12 +941,12 @@ msgstr ""
 "cymorth cyfreithiol neu gyfryngwr teulu drwy ddweud wrthym a ydych chi wedi "
 "ymweld o’r blaen."
 
-#: fala/templates/adviser/cookies.html:119
-#: fala/templates/adviser/cookies.html:124
+#: fala/templates/adviser/cookies.html:126
+#: fala/templates/adviser/cookies.html:131
 msgid "2 years"
 msgstr "2 flynedd"
 
-#: fala/templates/adviser/cookies.html:123
+#: fala/templates/adviser/cookies.html:130
 msgid ""
 "Used by Google Analytics to find and track an individual session with your "
 "device."
