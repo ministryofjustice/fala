@@ -1597,7 +1597,7 @@ msgstr "Efallai y gallwch gael cymorth gan "
 
 #: fala/templates/maintenance_mode.html:5
 msgid "Civil Legal Advice "
-msgstr "Civil Legal Advice "
+msgstr "Cyngor Cyfreithiol Sifi "
 
 #: fala/templates/maintenance_mode.html:5
 msgid "if you’re in England or Wales."

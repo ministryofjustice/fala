@@ -1,9 +1,11 @@
 {% set error = "404" %}
 {% extends 'adviser/adviser_base.html' %}
 
-{% block main_js %}{% endblock %}
-
 {% block pageTitle %}{{_('Page not found - 404 - ')}}{{ title }}{% endblock %}
+
+{% block language_and_navigation %}
+  {% include 'adviser/_language_and_navigation_error_page.html' %}
+{% endblock %}
 
 {% block content %}
   <div class="govuk-grid-column-two-thirds">

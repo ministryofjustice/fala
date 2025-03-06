@@ -47,7 +47,11 @@
     {% block global_subheader %}{% endblock %}
     <main id="main-content" class="govuk-main-wrapper" role="main">
       {% block language_and_navigation %}
-        {% include 'adviser/_language_and_navigation.html' %}
+        {% if FEATURE_FLAG_MAINTENANCE_MODE %}
+          {% include 'adviser/_language_and_navigation_error_page.html' %}
+        {% else %}
+          {% include 'adviser/_language_and_navigation.html' %}
+        {% endif %}
       {% endblock %}
       <div class="govuk-grid-row">
         {% if FEATURE_FLAG_MAINTENANCE_MODE %}
