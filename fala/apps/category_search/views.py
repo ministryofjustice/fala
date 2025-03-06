@@ -26,7 +26,10 @@ class CategorySearchView(CommonContextMixin, TranslationMixin, CategoryMixin, Te
         self.sub_category_code = result[1]
 
         category_message = CATEGORY_MESSAGES.get(self.category_slug, "")
-        category_display_name = (self.category_slug or "").replace("-", " ").title()
+        if self.category_code in ["aap", "hlpas"]:
+            category_display_name = (self.category_slug or "").replace("-", " ").title()
+        else:
+            category_display_name = (self.category_slug or "").replace("-", " ").capitalize()
 
         form = CategorySearchForm(
             initial={
