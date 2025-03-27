@@ -1594,6 +1594,11 @@ msgstr ""
 "I weld yr ail ddolen, defnyddiwch y bysell tab neu cliciwch tu mewn i’r "
 "enghraifft hon ac yna pwyswch y bysell tab."
 
+#: fala/templates/base.html:24
+msgid "Skip to main content"
+msgstr "Ymlaen i’r prif gynnwys"
+
+
 #: fala/templates/maintenance_mode.html:3
 msgid "Sorry, the service is unavailable"
 msgstr "Yn anffodus, nid yw’r gwasanaeth ar gael"

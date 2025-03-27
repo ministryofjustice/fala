@@ -23,10 +23,12 @@
   {% endblock %}
 </head>
 
+{% set skip_text = _('Skip to main content') %}
+
 {% block skipLink %}
   {{ govukSkipLink({
     'href': '#main-content',
-    'text': 'Skip to main content'
+    'text': skip_text
   }) }}
 
   {% if category_code == 'mat' or sub_category_code == 'mat' %}
@@ -41,6 +43,7 @@
     }) }}
   {% endif %}
 {% endblock %}
+
 
 {% block header %}
   {% block cookie_banner %}
