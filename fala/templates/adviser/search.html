@@ -1,6 +1,6 @@
 {% extends 'adviser/adviser_base.html' %}
 
-{% block pageTitle %}{{_('Find a Legal Aid Adviser or Family Mediator')}}{% endblock %}
+{% block pageTitle %}{% if form.errors %}{{_('Error: ')}}{% endif %}{{_('Find a Legal Aid Adviser or Family Mediator')}}{% endblock %}
 
 {% import "macros/element.html" as Element %}
 {% import "macros/forms.html" as Form %}
