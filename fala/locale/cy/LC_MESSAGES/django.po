@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fala\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-05 15:58+0000\n"
+"POT-Creation-Date: 2025-03-27 11:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -669,7 +669,7 @@ msgstr ""
 
 #: fala/templates/adviser/adviser_base.html:6
 #: fala/templates/adviser/cookies.html:41 fala/templates/adviser/search.html:25
-#: fala/templates/base.html:6
+#: fala/templates/base.html:7
 msgid "Find a legal aid adviser or family mediator"
 msgstr "Dod o hyd i gynghorydd cymorth cyfreithiol neu gyfryngwr teulu"
 
@@ -729,7 +729,7 @@ msgid "There is a problem"
 msgstr "Mae problem"
 
 #: fala/templates/adviser/category_search.html:25
-#: fala/templates/adviser/results.html:8
+#: fala/templates/adviser/results.html:8 fala/templates/base.html:8
 msgid "Exit this page"
 msgstr "Gadael y dudalen hon"
 
@@ -1581,10 +1581,16 @@ msgstr ""
 "Os ydych chi’n ddarparwr ac mae eich manylion yn anghywir, cysylltwch "
 "rheolwr eich contract."
 
-#: fala/templates/base.html:9
+#: fala/templates/base.html:11
 msgid "GOV.UK - The best place to find government services and information"
 msgstr ""
 "GOV.UK - Y lle gorau i ddod o hyd i wybodaeth a gwasanaethau’r llywodraeth"
+
+#: fala/templates/base.html:33
+msgid ""
+"To view the secondary link, tab to or click inside this example and then "
+"press tab."
+msgstr ""
 
 #: fala/templates/maintenance_mode.html:3
 msgid "Sorry, the service is unavailable"

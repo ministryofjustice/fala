@@ -3,7 +3,9 @@
 {%- from 'govuk_frontend_jinja/components/cookie-banner/macro.html' import govukCookieBanner -%}
 {%- from 'govuk_frontend_jinja/components/button/macro.html' import govukButton -%}
 {%- from 'govuk_frontend_jinja/components/back-link/macro.html' import govukBackLink -%}
+{%- from "govuk_frontend_jinja/components/skip-link/macro.html" import govukSkipLink -%}
 {% set SERVICE_NAME = _("Find a legal aid adviser or family mediator") %}
+{% set exitText = _("Exit this page")%}
 
 <head>
   <title {%- if pageTitleLang %} lang="{{ pageTitleLang }}"{% endif %}>{% block pageTitle %}{{_('GOV.UK - The best place to find government services and information')}}{% endblock %}</title>
@@ -26,6 +28,18 @@
     'href': '#main-content',
     'text': 'Skip to main content'
   }) }}
+
+  {% if category_code == 'mat' or sub_category_code == 'mat' %}
+    <p class="govuk-body">{{_('To view the secondary link, tab to or click inside this example and then press tab.')}}</p>
+    {{ govukSkipLink({
+      'text': exitText,
+      'href': "https://bbc.co.uk/weather/",
+      'classes': "govuk-js-exit-this-page-skiplink",
+      'attributes': {
+        'rel': "nofollow noreferrer"
+      }
+    }) }}
+  {% endif %}
 {% endblock %}
 
 {% block header %}
