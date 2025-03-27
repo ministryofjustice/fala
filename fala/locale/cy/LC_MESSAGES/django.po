@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fala\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-27 14:56+0000\n"
+"POT-Creation-Date: 2025-03-27 14:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1586,18 +1586,17 @@ msgid "GOV.UK - The best place to find government services and information"
 msgstr ""
 "GOV.UK - Y lle gorau i ddod o hyd i wybodaeth a gwasanaethau’r llywodraeth"
 
-#: fala/templates/base.html:33
+#: fala/templates/base.html:26
+msgid "Skip to main content"
+msgstr "Ymlaen i’r prif gynnwys"
+
+#: fala/templates/base.html:35
 msgid ""
 "To view the secondary link, tab to or click inside this example and then "
 "press tab."
 msgstr ""
 "I weld yr ail ddolen, defnyddiwch y bysell tab neu cliciwch tu mewn i’r "
 "enghraifft hon ac yna pwyswch y bysell tab."
-
-#: fala/templates/base.html:24
-msgid "Skip to main content"
-msgstr "Ymlaen i’r prif gynnwys"
-
 
 #: fala/templates/maintenance_mode.html:3
 msgid "Sorry, the service is unavailable"
