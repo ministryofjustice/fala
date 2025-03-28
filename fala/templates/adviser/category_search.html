@@ -1,15 +1,11 @@
 {% extends 'adviser/adviser_base.html' %}
 
 {% block pageTitle %}
-  {% if results %}
-    {{_('Search results')}}
+  {% if form.errors %}{{_('Error: ')}}{% endif %}{{_('Find a legal aid adviser for ')}}
+  {% if category_code == 'hlpas' %}
+    {{_('the')}} {{ _(category_display_name) | title }}
   {% else %}
-    {{_('Find a legal aid adviser for ')}}
-    {% if category_code == 'hlpas' %}
-      {{_('the')}} {{ _(category_display_name) | title }}
-    {% else %}
-      {{ _(category_display_name) | lower }}
-    {% endif %}
+    {{ _(category_display_name) | lower }}
   {% endif %}
 {% endblock %}
 

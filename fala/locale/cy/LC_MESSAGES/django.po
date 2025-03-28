@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fala\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-26 17:44+0000\n"
+"POT-Creation-Date: 2025-03-27 12:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1533,6 +1533,10 @@ msgstr "Gweld ar fap (mae’n agor mewn tab newydd)"
 #: fala/templates/adviser/results.html:146
 msgid "Can help with"
 msgstr "Yn gallu helpu gyda"
+
+#: fala/templates/adviser/search.html:3
+msgid "Error: "
+msgstr "Gwall: "
 
 #: fala/templates/adviser/search.html:3
 msgid "Find a Legal Aid Adviser or Family Mediator"
