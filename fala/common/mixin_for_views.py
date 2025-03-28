@@ -28,7 +28,7 @@ class TranslationMixin:
         if user_language == "cy":
             return "<a class='govuk-body govuk-link' id='language_switcher_link' href='#' hreflang='en' lang='en' rel='alternate' aria-label='Change language to English'>English</a> / Cymraeg"
         else:
-            return "English / <a class='govuk-body govuk-link' id='language_switcher_link' href='#' hreflang='cy' lang='cy' rel='alternate' aria-label='Change language to English'>Cymraeg</a>"
+            return "English / <a class='govuk-body govuk-link' id='language_switcher_link' href='#' hreflang='cy' lang='cy' rel='alternate' aria-label='Change language to Welsh'>Cymraeg</a>"
 
     def language(self, request):
         user_language = request.COOKIES.get("FALA-lang", "en")
