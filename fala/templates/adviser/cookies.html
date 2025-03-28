@@ -1,6 +1,9 @@
 {% extends 'adviser/adviser_base.html' %}
 
-{% block pageTitle %}Cookies{% endblock %}
+{% block pageTitle %}
+  {% trans %}Cookies{% endtrans %}
+{% endblock %}
+
 
 {%- from 'govuk_frontend_jinja/components/radios/macro.html' import govukRadios -%}
 {%- from 'govuk_frontend_jinja/components/notification-banner/macro.html' import govukNotificationBanner -%}

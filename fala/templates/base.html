@@ -1,3 +1,4 @@
+{% set htmlLang = request.LANGUAGE_CODE %}
 {% extends 'govuk_frontend_jinja/template.html' %}
 
 {%- from 'govuk_frontend_jinja/components/cookie-banner/macro.html' import govukCookieBanner -%}
@@ -21,12 +22,15 @@
   {% endblock %}
 </head>
 
+{% set skip_text = _('Skip to main content') %}
+
 {% block skipLink %}
   {{ govukSkipLink({
     'href': '#main-content',
-    'text': 'Skip to main content'
+    'text': skip_text
   }) }}
 {% endblock %}
+
 
 {% block header %}
   {% block cookie_banner %}

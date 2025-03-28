@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fala\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-05 15:58+0000\n"
+"POT-Creation-Date: 2025-03-27 12:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -350,8 +350,8 @@ msgstr "Dolenni Cefnogi"
 msgid "Privacy"
 msgstr "Preifatrwydd"
 
-#: fala/templates/adviser/_footer.html:14
-#: fala/templates/adviser/cookies.html:38
+#: fala/templates/adviser/_footer.html:14 fala/templates/adviser/cookies.html:4
+#: fala/templates/adviser/cookies.html:41
 msgid "Cookies"
 msgstr "Cwcis"
 
@@ -668,7 +668,7 @@ msgstr ""
 "archwilio’r wefan yn erbyn safon AA WCAG 2.2 erbyn mis Mehefin 2025."
 
 #: fala/templates/adviser/adviser_base.html:6
-#: fala/templates/adviser/cookies.html:41 fala/templates/adviser/search.html:25
+#: fala/templates/adviser/cookies.html:44 fala/templates/adviser/search.html:25
 #: fala/templates/base.html:6
 msgid "Find a legal aid adviser or family mediator"
 msgstr "Dod o hyd i gynghorydd cymorth cyfreithiol neu gyfryngwr teulu"
@@ -764,15 +764,15 @@ msgstr "Er enghraifft, NE31 1SF, neu rhan o god post fel NE31, S1 neu SW1X."
 msgid "Search"
 msgstr "Chwilio"
 
-#: fala/templates/adviser/cookies.html:8
+#: fala/templates/adviser/cookies.html:11
 msgid "Success"
 msgstr "Llwyddiant"
 
-#: fala/templates/adviser/cookies.html:9
+#: fala/templates/adviser/cookies.html:12
 msgid "Your cookie settings were saved"
 msgstr "Cafodd eich gosodiadau cwcis eu cadw"
 
-#: fala/templates/adviser/cookies.html:10
+#: fala/templates/adviser/cookies.html:13
 msgid ""
 "<h3 class=\"govuk-notification-banner__heading\">Your cookie settings were "
 "saved</h3><p>Other government services may set additional cookies. These "
@@ -786,27 +786,27 @@ msgstr ""
 "p><p class=\"govuk-body\"><a class=\"govuk-notification-banner__link\" "
 "href=\"/\">Mynd yn ôl i’r dudalen roeddech chi’n edrych arni</a></p>"
 
-#: fala/templates/adviser/cookies.html:11
+#: fala/templates/adviser/cookies.html:14
 msgid "Do you want to accept analytics cookies?"
 msgstr "Ydych chi eisiau derbyn cwcis dadansoddol?"
 
-#: fala/templates/adviser/cookies.html:12
+#: fala/templates/adviser/cookies.html:15
 msgid "Yes"
 msgstr "Ydw"
 
-#: fala/templates/adviser/cookies.html:13
+#: fala/templates/adviser/cookies.html:16
 msgid "No"
 msgstr "Nac ydw"
 
-#: fala/templates/adviser/cookies.html:14
+#: fala/templates/adviser/cookies.html:17
 msgid "Save cookie settings"
 msgstr "Cadw’r gosodiadau cwcis"
 
-#: fala/templates/adviser/cookies.html:41
+#: fala/templates/adviser/cookies.html:44
 msgid " puts small files (known as ‘cookies’) on your computer."
 msgstr " yn rhoi ffeiliau bach (a elwir yn ‘gwcis’) ar eich cyfrifiadur."
 
-#: fala/templates/adviser/cookies.html:45
+#: fala/templates/adviser/cookies.html:48
 msgid ""
 "These cookies are used across the Find a legal aid adviser or family "
 "mediator website."
@@ -814,23 +814,23 @@ msgstr ""
 "Defnyddir y cwcis hyn ar draws gwefan Dod o hyd i gynghorydd cymorth "
 "cyfreithiol neu gyfryngwr teulu."
 
-#: fala/templates/adviser/cookies.html:49
+#: fala/templates/adviser/cookies.html:52
 msgid "Find out "
 msgstr "Mae rhagor o wybodaeth am "
 
-#: fala/templates/adviser/cookies.html:49
+#: fala/templates/adviser/cookies.html:52
 msgid "how to manage cookies"
 msgstr "sut i reoli cwcis"
 
-#: fala/templates/adviser/cookies.html:49
+#: fala/templates/adviser/cookies.html:52
 msgid " from the Information Commissioner's Office."
 msgstr " ar gael gan Swyddfa’r Comisiynydd Gwybodaeth."
 
-#: fala/templates/adviser/cookies.html:53
+#: fala/templates/adviser/cookies.html:56
 msgid "Cookie settings"
 msgstr "Gosodiadau cwcis"
 
-#: fala/templates/adviser/cookies.html:56
+#: fala/templates/adviser/cookies.html:59
 msgid ""
 "We use Javascript to set most of our cookies. Unfortunately Javascript is "
 "not running on your browser, so you cannot change your settings. You can try:"
@@ -839,19 +839,19 @@ msgstr ""
 "nid yw Javascript yn rhedeg ar eich porwr, felly ni allwch newid eich "
 "gosodiadau. Gallwch geisio:"
 
-#: fala/templates/adviser/cookies.html:58
+#: fala/templates/adviser/cookies.html:61
 msgid "reloading the page"
 msgstr "ail-lwytho'r dudalen"
 
-#: fala/templates/adviser/cookies.html:59
+#: fala/templates/adviser/cookies.html:62
 msgid "turning on Javascript in your browser"
 msgstr "rhoi Javascript ar waith yn eich porwr"
 
-#: fala/templates/adviser/cookies.html:65
+#: fala/templates/adviser/cookies.html:68
 msgid "Essential cookies (strictly necessary)"
 msgstr "Cwcis hanfodol (rhai cwbl angenrheidiol)"
 
-#: fala/templates/adviser/cookies.html:68
+#: fala/templates/adviser/cookies.html:71
 msgid ""
 "We use an essential cookie to remember when you accept or reject cookies on "
 "our website."
@@ -859,46 +859,46 @@ msgstr ""
 "Rydym yn defnyddio cwci hanfodol i gofio pan fyddwch yn derbyn neu’n gwrthod "
 "cwcis ar ein gwefan."
 
-#: fala/templates/adviser/cookies.html:71
+#: fala/templates/adviser/cookies.html:74
 msgid "Essential cookies we use"
 msgstr "Cwcis hanfodol rydym yn eu defnyddio"
 
-#: fala/templates/adviser/cookies.html:74
-#: fala/templates/adviser/cookies.html:117
+#: fala/templates/adviser/cookies.html:77
+#: fala/templates/adviser/cookies.html:120
 msgid "Name"
 msgstr "Enw"
 
-#: fala/templates/adviser/cookies.html:75
-#: fala/templates/adviser/cookies.html:118
+#: fala/templates/adviser/cookies.html:78
+#: fala/templates/adviser/cookies.html:121
 msgid "Purpose"
 msgstr "Pwrpas"
 
-#: fala/templates/adviser/cookies.html:76
-#: fala/templates/adviser/cookies.html:119
+#: fala/templates/adviser/cookies.html:79
+#: fala/templates/adviser/cookies.html:122
 msgid "Expires"
 msgstr "Daw i ben"
 
-#: fala/templates/adviser/cookies.html:82
+#: fala/templates/adviser/cookies.html:85
 msgid "Saves your cookie consent settings"
 msgstr "Mae’n cadw eich gosodiadau caniatâd cwcis"
 
-#: fala/templates/adviser/cookies.html:83
+#: fala/templates/adviser/cookies.html:86
 msgid "1 year"
 msgstr "1 flwyddyn"
 
-#: fala/templates/adviser/cookies.html:89
+#: fala/templates/adviser/cookies.html:92
 msgid "Essential if you choose to use the Welsh language version of the site"
 msgstr "Hanfodol os ydych yn dewis defnyddio fersiwn Gymraeg y wefan"
 
-#: fala/templates/adviser/cookies.html:90
+#: fala/templates/adviser/cookies.html:93
 msgid "When you close your browser"
 msgstr "Pan fyddwch yn cau eich porwr"
 
-#: fala/templates/adviser/cookies.html:95
+#: fala/templates/adviser/cookies.html:98
 msgid "Analytics cookies (optional)"
 msgstr "Cwcis dadansoddol (dewisol)"
 
-#: fala/templates/adviser/cookies.html:98
+#: fala/templates/adviser/cookies.html:101
 msgid ""
 "We use Google Analytics software to understand how people use Find a legal "
 "aid adviser or family mediator. We do this to help make sure the site is "
@@ -909,7 +909,7 @@ msgstr ""
 "wnawn hyn i sicrhau bod y wefan yn diwallu anghenion ei defnyddwyr ac i’n "
 "helpu ni i wneud gwelliannau."
 
-#: fala/templates/adviser/cookies.html:102
+#: fala/templates/adviser/cookies.html:105
 msgid ""
 "We do not collect or store your personal information (for example your name "
 "or address) so this information cannot be used to identify who you are."
@@ -918,20 +918,20 @@ msgstr ""
 "eich enw neu’ch cyfeiriad) felly ni ellir defnyddio’r wybodaeth hon i "
 "ddatgelu pwy ydych chi."
 
-#: fala/templates/adviser/cookies.html:106
+#: fala/templates/adviser/cookies.html:109
 msgid "We do not allow Google to use or share our analytics data."
 msgstr ""
 "Nid ydym yn caniatáu i Google ddefnyddio na rhannu ein data dadansoddol."
 
-#: fala/templates/adviser/cookies.html:110
+#: fala/templates/adviser/cookies.html:113
 msgid "Google Analytics stores information about"
 msgstr "Mae Google Analytics yn storio gwybodaeth am y canlynol"
 
-#: fala/templates/adviser/cookies.html:114
+#: fala/templates/adviser/cookies.html:117
 msgid "Analytics cookies we use"
 msgstr "Cwcis dadansoddol rydym yn eu defnyddio"
 
-#: fala/templates/adviser/cookies.html:125
+#: fala/templates/adviser/cookies.html:128
 msgid ""
 "Helps us count how many people visit Find a legal aid adviser or family "
 "mediator by telling us if you’ve visited before."
@@ -940,12 +940,12 @@ msgstr ""
 "cymorth cyfreithiol neu gyfryngwr teulu drwy ddweud wrthym a ydych chi wedi "
 "ymweld o’r blaen."
 
-#: fala/templates/adviser/cookies.html:126
-#: fala/templates/adviser/cookies.html:131
+#: fala/templates/adviser/cookies.html:129
+#: fala/templates/adviser/cookies.html:134
 msgid "2 years"
 msgstr "2 flynedd"
 
-#: fala/templates/adviser/cookies.html:130
+#: fala/templates/adviser/cookies.html:133
 msgid ""
 "Used by Google Analytics to find and track an individual session with your "
 "device."
@@ -1535,6 +1535,10 @@ msgid "Can help with"
 msgstr "Yn gallu helpu gyda"
 
 #: fala/templates/adviser/search.html:3
+msgid "Error: "
+msgstr "Gwall: "
+
+#: fala/templates/adviser/search.html:3
 msgid "Find a Legal Aid Adviser or Family Mediator"
 msgstr "Dod o hyd i gynghorydd cymorth cyfreithiol neu gyfryngwr teulu"
 
@@ -1585,6 +1589,10 @@ msgstr ""
 msgid "GOV.UK - The best place to find government services and information"
 msgstr ""
 "GOV.UK - Y lle gorau i ddod o hyd i wybodaeth a gwasanaethau’r llywodraeth"
+
+#: fala/templates/base.html:24
+msgid "Skip to main content"
+msgstr "Ymlaen i’r prif gynnwys"
 
 #: fala/templates/maintenance_mode.html:3
 msgid "Sorry, the service is unavailable"
