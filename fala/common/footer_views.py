@@ -1,17 +1,26 @@
 # coding=utf-8
 from fala.common.mixin_for_views import CommonContextMixin, TranslationMixin
 from django.views.generic import TemplateView
+from django.utils.http import url_has_allowed_host_and_scheme
 
 
 class FooterView:
     def get(self, request, **kwargs):
         context = self.get_context_data(**kwargs)
+
+        referer = request.META.get("HTTP_REFERER", "/")
+        host = request.get_host()
+
+        previous_url = referer if url_has_allowed_host_and_scheme(referer, allowed_hosts={host}) else "/"
+
         context.update(
             {
+                "previous_url": previous_url,
                 "translation_link": self.translation_link(request),
                 "language": self.language(request),
             }
         )
+
         return self.render_to_response(context)
 
 
