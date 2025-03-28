@@ -13,7 +13,7 @@ class FalaPage(object):
 
     @property
     def exit_button(self):
-        return self._page.get_by_text("Exit this page")
+        return self._page.get_by_role("button", name="Exit this page")
 
     @property
     def language_dropdown(self):

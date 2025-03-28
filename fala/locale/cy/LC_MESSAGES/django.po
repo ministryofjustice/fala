@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fala\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-27 12:37+0000\n"
+"POT-Creation-Date: 2025-03-28 14:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,7 +32,7 @@ msgid "Enter a valid postcode"
 msgstr "Rhowch god post dilys"
 
 #: fala/common/base_form_components.py:30
-#: fala/templates/adviser/category_search.html:84
+#: fala/templates/adviser/category_search.html:80
 #: fala/templates/adviser/search.html:45
 msgid "Postcode"
 msgstr "Cod post"
@@ -409,7 +409,6 @@ msgid "Your closest legal aid advisers for "
 msgstr "Eich cynghorwyr cymorth cyfreithiol agosaf ar gyfer "
 
 #: fala/templates/adviser/_results_heading.html:11
-#: fala/templates/adviser/category_search.html:5
 #: fala/templates/adviser/other_region.html:3
 #: fala/templates/adviser/results.html:3
 msgid "Search results"
@@ -669,7 +668,7 @@ msgstr ""
 
 #: fala/templates/adviser/adviser_base.html:6
 #: fala/templates/adviser/cookies.html:44 fala/templates/adviser/search.html:25
-#: fala/templates/base.html:6
+#: fala/templates/base.html:8
 msgid "Find a legal aid adviser or family mediator"
 msgstr "Dod o hyd i gynghorydd cymorth cyfreithiol neu gyfryngwr teulu"
 
@@ -713,40 +712,45 @@ msgstr ""
 "Os ydych chi’n ddarparwr ac mae eich manylion yn anghywir, cysylltwch "
 "rheolwr eich contract."
 
-#: fala/templates/adviser/category_search.html:7
-#: fala/templates/adviser/category_search.html:57
+#: fala/templates/adviser/category_search.html:4
+#: fala/templates/adviser/search.html:3
+msgid "Error: "
+msgstr "Gwall: "
+
+#: fala/templates/adviser/category_search.html:4
+#: fala/templates/adviser/category_search.html:53
 msgid "Find a legal aid adviser for "
 msgstr "Dod o hyd i gynghorydd cymorth cyfreithiol ar gyfer "
 
-#: fala/templates/adviser/category_search.html:9
-#: fala/templates/adviser/category_search.html:59
+#: fala/templates/adviser/category_search.html:6
+#: fala/templates/adviser/category_search.html:55
 msgid "the"
 msgstr "y"
 
-#: fala/templates/adviser/category_search.html:24
+#: fala/templates/adviser/category_search.html:20
 #: fala/templates/adviser/search.html:12
 msgid "There is a problem"
 msgstr "Mae problem"
 
-#: fala/templates/adviser/category_search.html:25
-#: fala/templates/adviser/results.html:8
+#: fala/templates/adviser/category_search.html:21
+#: fala/templates/adviser/results.html:8 fala/templates/base.html:9
 msgid "Exit this page"
 msgstr "Gadael y dudalen hon"
 
-#: fala/templates/adviser/category_search.html:64
+#: fala/templates/adviser/category_search.html:60
 msgid "Search for official legal aid advisers in England and Wales."
 msgstr ""
 "Chwilio am gynghorwyr cymorth cyfreithiol swyddogol yng Nghymru a Lloegr."
 
-#: fala/templates/adviser/category_search.html:68
+#: fala/templates/adviser/category_search.html:64
 msgid "Next steps"
 msgstr "Y camau nesaf"
 
-#: fala/templates/adviser/category_search.html:70
+#: fala/templates/adviser/category_search.html:66
 msgid "We'll show you a list of legal advisers."
 msgstr "Byddwn yn dangos rhestr o gynghorwyr cyfreithiol i chi."
 
-#: fala/templates/adviser/category_search.html:71
+#: fala/templates/adviser/category_search.html:67
 msgid ""
 "When you contact the adviser they'll ask about your problem and finances to "
 "work out if you can get legal aid."
@@ -754,12 +758,12 @@ msgstr ""
 "Pan fyddwch chi'n cysylltu â'r cynghorydd, bydd yn gofyn am eich problem "
 "a’ch sefyllfa ariannol i weld a allwch chi gael cymorth cyfreithiol."
 
-#: fala/templates/adviser/category_search.html:85
+#: fala/templates/adviser/category_search.html:81
 #: fala/templates/adviser/search.html:46
 msgid "For example, NE31 1SF, or a partial postcode like NE31, S1 or SW1X."
 msgstr "Er enghraifft, NE31 1SF, neu rhan o god post fel NE31, S1 neu SW1X."
 
-#: fala/templates/adviser/category_search.html:109
+#: fala/templates/adviser/category_search.html:105
 #: fala/templates/adviser/search.html:50
 msgid "Search"
 msgstr "Chwilio"
@@ -1535,10 +1539,6 @@ msgid "Can help with"
 msgstr "Yn gallu helpu gyda"
 
 #: fala/templates/adviser/search.html:3
-msgid "Error: "
-msgstr "Gwall: "
-
-#: fala/templates/adviser/search.html:3
 msgid "Find a Legal Aid Adviser or Family Mediator"
 msgstr "Dod o hyd i gynghorydd cymorth cyfreithiol neu gyfryngwr teulu"
 
@@ -1585,14 +1585,22 @@ msgstr ""
 "Os ydych chi’n ddarparwr ac mae eich manylion yn anghywir, cysylltwch "
 "rheolwr eich contract."
 
-#: fala/templates/base.html:9
+#: fala/templates/base.html:12
 msgid "GOV.UK - The best place to find government services and information"
 msgstr ""
 "GOV.UK - Y lle gorau i ddod o hyd i wybodaeth a gwasanaethau’r llywodraeth"
 
-#: fala/templates/base.html:24
+#: fala/templates/base.html:27
 msgid "Skip to main content"
 msgstr "Ymlaen i’r prif gynnwys"
+
+#: fala/templates/base.html:36
+msgid ""
+"To view the secondary link, tab to or click inside this example and then "
+"press tab."
+msgstr ""
+"I weld yr ail ddolen, defnyddiwch y bysell tab neu cliciwch tu mewn i’r "
+"enghraifft hon ac yna pwyswch y bysell tab."
 
 #: fala/templates/maintenance_mode.html:3
 msgid "Sorry, the service is unavailable"
