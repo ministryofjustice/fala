@@ -7,20 +7,12 @@ from django.utils.http import url_has_allowed_host_and_scheme
 class FooterView:
     def get(self, request, **kwargs):
         context = self.get_context_data(**kwargs)
-
-        referer = request.META.get("HTTP_REFERER", "/")
-        host = request.get_host()
-
-        previous_url = referer if url_has_allowed_host_and_scheme(referer, allowed_hosts={host}) else "/"
-
         context.update(
             {
-                "previous_url": previous_url,
                 "translation_link": self.translation_link(request),
                 "language": self.language(request),
             }
         )
-
         return self.render_to_response(context)
 
 
@@ -34,3 +26,16 @@ class PrivacyView(FooterView, CommonContextMixin, TranslationMixin, TemplateView
 
 class CookiesView(FooterView, CommonContextMixin, TranslationMixin, TemplateView):
     template_name = "adviser/cookies.html"
+
+    def get(self, request, **kwargs):
+        response = super().get(request, **kwargs)
+
+        context = response.context_data
+
+        referer = request.META.get("HTTP_REFERER", "/")
+        host = request.get_host()
+        previous_url = referer if url_has_allowed_host_and_scheme(referer, allowed_hosts={host}) else "/"
+
+        context.update({"previous_url": previous_url})
+
+        return self.render_to_response(context)

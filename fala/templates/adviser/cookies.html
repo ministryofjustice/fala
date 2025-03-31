@@ -18,7 +18,9 @@
     {{ _('Other government services may set additional cookies. These will have a separate cookie policy and banner.') }}
   </p>
   <p class="govuk-body">
-    <a class="govuk-notification-banner__link" href="{{ previous_url }}">{{ _("Go back to the page you were looking at") }}</a>
+    <a class="govuk-notification-banner__link" href="{{ previous_url }}">
+      {{ _('Go back to the page you were looking at') }}
+    </a>
   </p>
 {% endset %}
 {% set titleText = _("Do you want to accept analytics cookies?") %}
