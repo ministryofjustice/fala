@@ -105,6 +105,45 @@ e.g. `helm -n  laa-fala-staging delete el-123-fee-change`
 It is also possible to manually deploy to an environment from the command line, the structure of the command can be found in `bin/deploy.sh`
 
 
+## CHECK referrals
+
+As part of improvement works to 'Check if you can get legal aid and Find a legal advisor' (CHECK) in February 2025, a new set of pages & urls were created that would allow users to be sent from CHECK to FALA. This allowed the CLA team (who were maintaining CHECK at the time) to then remove a set of redundant ‘mini-FALA’ pages. Epic for the work can be viewed [here](https://dsdmoj.atlassian.net/browse/EL-1891).
+
+- A user would find their category of law on CHECK
+- CHECK would then populate a referral link to FALA with the category pre-populated in the URL
+- The user would then enter a postcode on FALA, on the bespoke landing page for that category
+
+All possible URL params are described in the below table:
+
+| **Category**                           | **URL params**                     | **Link to staging**      |
+| -------------------------------------- | ---------------------------------- | ------------------------ |
+| Claims against public authorities      | `aap`<br>/check?categories=aap     | [Find a legal aid adviser for claims against public authorities](https://staging.find-legal-advice.justice.gov.uk/check/claims-against-public-authorities)               |
+| Clinical Negligence                    | `med`<br>/check?categories=med     | [Find a legal aid adviser for clinical negligence](https://staging.find-legal-advice.justice.gov.uk/check/clinical-negligence)                                           |
+| Community Care                         | `com`<br>/check?categories=com     | [Find a legal aid adviser for community care](https://staging.find-legal-advice.justice.gov.uk/check/community-care)                                                     |
+| Crime                                  | `crm`<br>/check?categories=crm     | [Find a legal aid adviser for crime](https://staging.find-legal-advice.justice.gov.uk/check/crime)                                                                       |
+| Debt                                   | `deb`<br>/check?categories=deb     | [Find a legal aid adviser for debt](https://staging.find-legal-advice.justice.gov.uk/check/debt)                                                                         |
+| Discrimination                         | `disc`<br>/check?categories=disc   | [Find a legal aid adviser for discrimination](https://staging.find-legal-advice.justice.gov.uk/check/discrimination)                                                     |
+| Education                              | `edu`<br>/check?categories=edu     | [Find a legal aid adviser for education](https://staging.find-legal-advice.justice.gov.uk/check/education)                                                               |
+| Family                                 | `mat`<br>/check?categories=mat     | [Find a legal aid adviser for family](https://staging.find-legal-advice.justice.gov.uk/check/family)                                                                     |
+| Family Mediation                       | `fmed`<br>/check?categories=fmed   | [Find a legal aid adviser for family mediation](https://staging.find-legal-advice.justice.gov.uk/check/family-mediation)                                                 |
+| Housing                                | `hou`<br>/check?categories=hou     | [Find a legal aid adviser for housing](https://staging.find-legal-advice.justice.gov.uk/check/housing)                                                                   |
+| Housing Loss Prevention Advice Service | `hlpas`<br>/check?categories=hlpas | [Find a legal aid adviser for the Housing Loss Prevention Advice Service](https://staging.find-legal-advice.justice.gov.uk/check/housing-loss-prevention-advice-service) |
+| Immigration or Asylum                  | `immas`<br>/check?categories=immas | [Find a legal aid adviser for immigration or asylum](https://staging.find-legal-advice.justice.gov.uk/check/immigration-or-asylum)                                       |
+| Mental Health                          | `mhe`<br>/check?categories=mhe     | [Find a legal aid adviser for mental health](https://staging.find-legal-advice.justice.gov.uk/check/mental-health)                                                       |
+| Modern Slavery                         | `mosl`<br>/check?categories=mosl   | [Find a legal aid adviser for modern slavery](https://staging.find-legal-advice.justice.gov.uk/check/modern-slavery)                                                     |
+| Prison Law                             | `pl`<br>/check?categories=pl       | [Find a legal aid adviser for prison law](https://staging.find-legal-advice.justice.gov.uk/check/prison-law)                                                             |
+| Public Law                             | `pub`<br>/check?categories=pub     | [Find a legal aid adviser for public law](https://staging.find-legal-advice.justice.gov.uk/check/public-law)                                                             |
+| Welfare Benefits                       | `wb`<br>/check?categories=wb       | [Find a legal aid adviser for welfare benefits](https://staging.find-legal-advice.justice.gov.uk/check/welfare-benefits)                                                 |
+
+
+There are also some scenarios in which users coming from CHECK will need to be shown multiple categories. The way the Check search in FALA is set up allows for any combination of categories to be selected. The title of the search is determined by which category is put first in the URL. 
+
+The below URLs are some of the main examples which are used by CHECK:
+
+| **Main Category**   | **Sub Category**     | **URL params**                    | **Link to staging**          |
+| ------------------- | -------------------- | -------------------------------------- | ---------------------------- |
+| Mental health       | Clinical Negligence  | `mhe` & `med` <br>/check?categories=mhe&sub-category=med | [Find a legal aid adviser for mental health](https://staging.find-legal-advice.justice.gov.uk/check/mental-health?sub-category=med) |
+
 ## Documentation
 * [Installation via virtualenv](docs/virtual-env.md)
 * [Using Kubernetes](docs/kubernetes.md)
