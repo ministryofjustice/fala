@@ -10,7 +10,19 @@
 
 {% set successTitle = _('Success') %}
 {% set bodyText = _('Your cookie settings were saved') %}
-{% set bodyHTML = _('<h3 class="govuk-notification-banner__heading">Your cookie settings were saved</h3><p>Other government services may set additional cookies. These will have a separate cookie policy and banner.</p><p class="govuk-body"><a class="govuk-notification-banner__link" href="/">Go back to the page you were looking at</a></p>') %}
+{% set bodyHTML %}
+  <h3 class="govuk-notification-banner__heading">
+    {{ _('Your cookie settings were saved') }}
+  </h3>
+  <p>
+    {{ _('Other government services may set additional cookies. These will have a separate cookie policy and banner.') }}
+  </p>
+  <p class="govuk-body">
+    <a class="govuk-notification-banner__link" href="{{ previous_url }}">
+      {{ _('Go back to the page you were looking at') }}
+    </a>
+  </p>
+{% endset %}
 {% set titleText = _("Do you want to accept analytics cookies?") %}
 {% set yes = _("Yes") %}
 {% set no = _("No") %}
