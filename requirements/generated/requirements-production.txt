@@ -32,7 +32,7 @@ govuk-frontend-jinja==3.1.0
     # via -r requirements/source/requirements-base.in
 idna==3.7
     # via requests
-jinja2==3.1.5
+jinja2==3.1.6
     # via
     #   -r requirements/source/requirements-base.in
     #   django-jinja
