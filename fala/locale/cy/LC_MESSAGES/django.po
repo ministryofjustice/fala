@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fala\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-31 11:25+0000\n"
+"POT-Creation-Date: 2025-04-24 10:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -397,22 +397,24 @@ msgid "Take part (opens in new tab)"
 msgstr "Cymryd rhan (yn agor mewn tab newydd)"
 
 #: fala/templates/adviser/_results_heading.html:4
-msgid "Your closest legal aid advisers and family mediators"
-msgstr "Eich cynghorwyr cymorth cyfreithiol a’ch cyfryngwyr teuluol agosaf"
+msgid "Your nearest legal aid advisers and family mediators"
+msgstr "Eich cynghorwyr cymorth cyfreithiol a chyfryngwyr teulu agosaf"
 
 #: fala/templates/adviser/_results_heading.html:6
-msgid "Your closest legal aid advisers for the "
+msgid "Your nearest legal aid advisers for the "
 msgstr "Eich cynghorwyr cymorth cyfreithiol agosaf ar gyfer y "
 
 #: fala/templates/adviser/_results_heading.html:8
-msgid "Your closest legal aid advisers for "
+msgid "Your nearest legal aid advisers for "
 msgstr "Eich cynghorwyr cymorth cyfreithiol agosaf ar gyfer "
 
 #: fala/templates/adviser/_results_heading.html:11
-#: fala/templates/adviser/other_region.html:3
-#: fala/templates/adviser/results.html:3
-msgid "Search results"
-msgstr "Canlyniad chwilio"
+msgid "Your nearest legal aid advisors and family mediators"
+msgstr "Eich cynghorwyr cymorth cyfreithiol a chyfryngwyr teulu agosaf"
+
+#: fala/templates/adviser/_results_heading.html:13
+msgid "Your nearest legal aid advisors "
+msgstr "Eich cynghorwyr cymorth cyfreithiol agosaf "
 
 #: fala/templates/adviser/_scotland_warning.html:3
 msgid ""
@@ -733,7 +735,7 @@ msgid "There is a problem"
 msgstr "Mae problem"
 
 #: fala/templates/adviser/category_search.html:21
-#: fala/templates/adviser/results.html:8 fala/templates/base.html:9
+#: fala/templates/adviser/results.html:12 fala/templates/base.html:9
 msgid "Exit this page"
 msgstr "Gadael y dudalen hon"
 
@@ -956,13 +958,17 @@ msgstr ""
 "Mae Google Analytics yn ei ddefnyddio i ganfod a thracio sesiynau unigol "
 "gyda’ch dyfais."
 
+#: fala/templates/adviser/other_region.html:3
+#: fala/templates/adviser/results.html:3 fala/templates/adviser/results.html:44
+msgid "Search results"
+msgstr "Canlyniad chwilio"
+
 #: fala/templates/adviser/other_region.html:4
-#: fala/templates/adviser/results.html:9
+#: fala/templates/adviser/results.html:13
 msgid "Back"
 msgstr "Yn ôl"
 
 #: fala/templates/adviser/other_region.html:5
-#: fala/templates/adviser/results.html:77
 msgid "Change search"
 msgstr "Newid y manylion chwilio"
 
@@ -1403,15 +1409,11 @@ msgstr ""
 msgid "Last updated 25 June 2024"
 msgstr "Diweddarwyd ddiwethaf 25 June 2024"
 
-#: fala/templates/adviser/results.html:40
-msgid "No search results"
-msgstr "Dim canlyniadau chwilio"
-
-#: fala/templates/adviser/results.html:41
+#: fala/templates/adviser/results.html:45
 msgid "There are no results for your criteria."
 msgstr "Nid oes dim canlyniadau ar gyfer eich meini prawf."
 
-#: fala/templates/adviser/results.html:51
+#: fala/templates/adviser/results.html:55
 msgid ""
 "You can contact any legal adviser on the list but you might need to contact "
 "a few to find one near you that can help. Those based further away may be "
@@ -1422,7 +1424,7 @@ msgstr ""
 "chi a all helpu. Efallai y bydd y rheini sydd wedi’u lleoli ymhellach i "
 "ffwrdd yn gallu helpu dros y ffôn."
 
-#: fala/templates/adviser/results.html:52
+#: fala/templates/adviser/results.html:56
 msgid ""
 "These advisers are contracted by the government and regulated by the "
 "Solicitors Regulation Authority."
@@ -1430,110 +1432,124 @@ msgstr ""
 "Caiff y cynghorwyr hyn eu contractio gan y llywodraeth a’u rheoleiddio gan "
 "yr Awdurdod Rheoleiddio Cyfreithwyr."
 
-#: fala/templates/adviser/results.html:58
+#: fala/templates/adviser/results.html:59
+msgid "What you searched for"
+msgstr "Beth wnaethoch chi chwilio amdano"
+
+#: fala/templates/adviser/results.html:63
 msgid "Postcode:"
 msgstr "Cod post:"
 
-#: fala/templates/adviser/results.html:61
+#: fala/templates/adviser/results.html:66
 msgid "Organisation:"
 msgstr "Sefydliad:"
 
-#: fala/templates/adviser/results.html:64
+#: fala/templates/adviser/results.html:69
 msgid "Legal problem: "
 msgstr "Problem gyfreithiol: "
 
-#: fala/templates/adviser/results.html:93
+#: fala/templates/adviser/results.html:81
+msgid "Search for something else"
+msgstr "Chwilio am rywbeth arall"
+
+#: fala/templates/adviser/results.html:90
 msgid "Print this page"
 msgstr "Argraffu’r dudalen hon"
 
-#: fala/templates/adviser/results.html:102
+#: fala/templates/adviser/results.html:99
 #, python-format
 msgid ""
 "\n"
 "            "
 msgid_plural ""
 "\n"
-"            <span class=\"govuk-!-font-weight-bold\" id=\"result-count-"
-"overall\">%(result_count)s results</span> in order of closeness to\n"
+"            <h2 class=\"govuk-heading-m\"><span class=\"govuk-!-font-weight-"
+"bold\" id=\"result-count-overall\">%(result_count)s results</span> in order "
+"of closeness to\n"
 "          "
 msgstr[0] ""
 "\n"
-"            <span class=\"govuk-!-font-weight-bold\" id=\"result-count-"
-"overall\">%(result_count)s canlyniad</span> yn ôl pa mor agos ydynt i\n"
+"            <h2 class=\"govuk-heading-m\"><span class=\"govuk-!-font-weight-"
+"bold\" id=\"result-count-overall\">%(result_count)s canlyniad</span> yn ôl "
+"pa mor agos ydynt i\n"
 "          "
 msgstr[1] ""
 "\n"
-"            <span class=\"govuk-!-font-weight-bold\" id=\"result-count-"
-"overall\">%(result_count)s canlyniad</span> yn ôl pa mor agos ydynt i\n"
+"            <h2 class=\"govuk-heading-m\"><span class=\"govuk-!-font-weight-"
+"bold\" id=\"result-count-overall\">%(result_count)s ganlyniad</span> yn ôl "
+"pa mor agos ydynt i\n"
 "          "
 msgstr[2] ""
 "\n"
-"            <span class=\"govuk-!-font-weight-bold\" id=\"result-count-"
-"overall\">%(result_count)s canlyniad</span> yn ôl pa mor agos ydynt i\n"
+"            <h2 class=\"govuk-heading-m\"><span class=\"govuk-!-font-weight-"
+"bold\" id=\"result-count-overall\">%(result_count)s chanlyniad</span> yn ôl "
+"pa mor agos ydynt i\n"
 "          "
 msgstr[3] ""
 "\n"
-"            <span class=\"govuk-!-font-weight-bold\" id=\"result-count-"
-"overall\">%(result_count)s canlyniad</span> yn ôl pa mor agos ydynt i\n"
+"            <h2 class=\"govuk-heading-m\"><span class=\"govuk-!-font-weight-"
+"bold\" id=\"result-count-overall\">%(result_count)s o ganlyniadau</span> yn "
+"ôl pa mor agos ydynt i\n"
 "          "
 
-#: fala/templates/adviser/results.html:108
+#: fala/templates/adviser/results.html:105
 msgid "matching"
 msgstr "sy’n cyfateb i"
 
-#: fala/templates/adviser/results.html:113
+#: fala/templates/adviser/results.html:108
 #, python-format
 msgid ""
 "\n"
 "          "
 msgid_plural ""
 "\n"
-"          <span class=\"govuk-!-font-weight-bold\" id=\"result-count-"
-"org\">%(result_count)s results</span> for <strong>%(org_name)s</strong>.\n"
+"          <h2 class=\"govuk-heading-m\"><span class=\"govuk-!-font-weight-"
+"bold\" id=\"result-count-org\">%(result_count)s results</span> for "
+"%(org_name)s</h2>\n"
 "        "
 msgstr[0] ""
 "\n"
-"          <span class=\"govuk-!-font-weight-bold\" id=\"result-count-"
-"org\">%(result_count)s canlyniad</span> ar gyfer <strong>%(org_name)s</"
-"strong>.\n"
+"          <h2 class=\"govuk-heading-m\"><span class=\"govuk-!-font-weight-"
+"bold\" id=\"result-count-org\">%(result_count)s canlyniad</span> ar gyfer "
+"%(org_name)s</h2>\n"
 "        "
 msgstr[1] ""
 "\n"
-"          <span class=\"govuk-!-font-weight-bold\" id=\"result-count-"
-"org\">%(result_count)s canlyniad</span> ar gyfer <strong>%(org_name)s</"
-"strong>.\n"
+"          <h2 class=\"govuk-heading-m\"><span class=\"govuk-!-font-weight-"
+"bold\" id=\"result-count-org\">%(result_count)s ganlyniad</span> ar gyfer "
+"%(org_name)s</h2>\n"
 "        "
 msgstr[2] ""
 "\n"
-"          <span class=\"govuk-!-font-weight-bold\" id=\"result-count-"
-"org\">%(result_count)s canlyniad</span> ar gyfer <strong>%(org_name)s</"
-"strong>.\n"
+"          <h2 class=\"govuk-heading-m\"><span class=\"govuk-!-font-weight-"
+"bold\" id=\"result-count-org\">%(result_count)s chanlyniad</span> ar gyfer "
+"%(org_name)s</h2>\n"
 "        "
 msgstr[3] ""
 "\n"
-"          <span class=\"govuk-!-font-weight-bold\" id=\"result-count-"
-"org\">%(result_count)s canlyniad</span> ar gyfer <strong>%(org_name)s</"
-"strong>.\n"
+"          <h2 class=\"govuk-heading-m\"><span class=\"govuk-!-font-weight-"
+"bold\" id=\"result-count-org\">%(result_count)s o ganlyniadau</span> ar "
+"gyfer %(org_name)s</h2>\n"
 "        "
 
-#: fala/templates/adviser/results.html:125
+#: fala/templates/adviser/results.html:120
 msgid "Distance"
 msgstr "Pellter"
 
-#: fala/templates/adviser/results.html:126
+#: fala/templates/adviser/results.html:121
 #, python-format
 msgid "%(miles)s miles away"
 msgstr "%(miles)s milltir i ffwrdd"
 
-#: fala/templates/adviser/results.html:133
+#: fala/templates/adviser/results.html:128
 msgid "Address"
 msgstr "Cyfeiriad"
 
-#: fala/templates/adviser/results.html:142
+#: fala/templates/adviser/results.html:137
 msgid "View on map (opens in new tab)"
 msgstr "Gweld ar fap (mae’n agor mewn tab newydd)"
 
-#: fala/templates/adviser/results.html:146
+#: fala/templates/adviser/results.html:141
 msgid "Can help with"
 msgstr "Yn gallu helpu gyda"
 

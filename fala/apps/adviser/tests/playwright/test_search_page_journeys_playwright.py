@@ -37,7 +37,7 @@ class SearchPageEndToEndJourneys(PlaywrightTestSetup):
         for postcode in test_cases:
             with self.subTest(postcode=postcode):
                 page = self.visit_results_page(postcode=postcode)
-                expect(page.h1).to_have_text("Search results")
+                expect(page.h1).to_have_text("Your nearest legal aid advisors")
                 expect(page.change_search_grey_box.nth(0)).to_have_text(f"Postcode: {postcode}")
                 expect(page.item_from_text("in order of closeness")).to_be_visible()
 
@@ -45,7 +45,7 @@ class SearchPageEndToEndJourneys(PlaywrightTestSetup):
         page = self.visit_results_page_with_full_search(
             "SE11", "Islington Law Centre", ["Housing Loss Prevention Advice Service"]
         )
-        expect(page.h1).to_have_text("Search results")
+        expect(page.h1).to_have_text("Your nearest legal aid advisors")
         # this selector matches multiple things so picking out the things we want using 'nth()'
         expect(page.change_search_grey_box.nth(0)).to_have_text("Postcode: SE11")
         expect(page.change_search_grey_box.nth(1)).to_have_text("Organisation: Islington Law Centre")
@@ -59,7 +59,7 @@ class SearchPageEndToEndJourneys(PlaywrightTestSetup):
         expect(page.locator("h1")).to_have_text(f"{self.front_page_heading}")
         page.get_by_label("Name of organisation you are looking for (optional)").fill("test")
         page.get_by_role("button", name="Search").click()
-        expect(page.locator("h1")).to_have_text("No search results")
+        expect(page.locator("h1")).to_have_text("Search results")
         expect(page.locator("#no-results-info")).to_have_text("There are no results for your criteria.")
 
     def test_invalid_postcode_journey(self):

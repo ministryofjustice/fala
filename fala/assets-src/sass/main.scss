@@ -198,3 +198,12 @@ body.fala-dev {
   justify-content: space-between; 
   align-items: center;
 }
+
+.buttonCamouflagedAsLink{
+  background: none;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	outline: inherit;
+  color: #1d70b8;
+}

@@ -2,6 +2,10 @@
 
 {% block pageTitle %}{{_('Search results')}}{% endblock %}
 
+{% block language_and_navigation %}
+  {% include 'adviser/_language_and_navigation_results_page.html' %}
+{% endblock %}
+
 {%- from 'govuk_frontend_jinja/components/pagination/macro.html' import govukPagination %}
 {%- from "govuk_frontend_jinja/components/exit-this-page/macro.html" import govukExitThisPage -%}
 
@@ -37,7 +41,7 @@
   {% endif %}
     {% if data.count < 1 %}
     <div class="govuk-grid-column-full">
-        <h1 class="govuk-heading-xl govuk-!-margin-bottom-5">{{_('No search results')}}</h1>
+        <h1 class="govuk-heading-xl govuk-!-margin-bottom-5">{{_('Search results')}}</h1>
         <p class="govuk-body-m" id="no-results-info">{{_('There are no results for your criteria.')}}</p>
     </div>
     {% else %}
@@ -52,6 +56,7 @@
       <p class="govuk-body">{{_('These advisers are contracted by the government and regulated by the Solicitors Regulation Authority.')}}</p>
     {% endif %}
     {% if not tailored_results %}
+      <h2 class="govuk-heading-m">{{_('What you searched for')}}</h2>
       <div class="laa-fala__grey-box govuk-!-margin-bottom-6">
         <ul class="govuk-list" role="list">
           {% if form.postcode.value() %}
@@ -73,15 +78,7 @@
               <input type="hidden" name="categories" value="{{ value }}">
             {% endif %}
           {% endfor %}
-
-          {% set changeSearchButton = _("Change search") %}
-
-          {{ govukButton({
-            'text': changeSearchButton,
-            'type': "submit",
-            'classes': "govuk-!-margin-bottom-2 govuk-!-display-none-print",
-            'id': "changeSearchButton"
-          }) }}
+          <button type="submit" id="changeSearchButton" class="govuk-body govuk-link govuk-!-margin-bottom-2 govuk-!-display-none-print buttonCamouflagedAsLink">{{_('Search for something else')}}</button>
         </form>
       </div>
     {% endif %}
@@ -101,18 +98,16 @@
         {% if data.origin %}
           {% trans page_count=data.results|length, result_count=data.count %}
             {% pluralize %}
-            <span class="govuk-!-font-weight-bold" id="result-count-overall">{{ result_count }} results</span> in order of closeness to
+            <h2 class="govuk-heading-m"><span class="govuk-!-font-weight-bold" id="result-count-overall">{{ result_count }} results</span> in order of closeness to
           {% endtrans %}
           <strong class="notranslate" translate="no">{{ form.postcode.value()|upper }}</strong>
           {%- if form.name.value() %}
-            {{ _('matching') }} <strong>{{ form.name.value() }}</strong>.
-          {%- else -%}
-            .
+            {{ _('matching') }} {{ form.name.value() }}</h2>
         {% endif %}
       {% else %}
         {% trans result_count=data.count, page_count=data.results|length, org_name=form.name.value() %}
           {% pluralize %}
-          <span class="govuk-!-font-weight-bold" id="result-count-org">{{ result_count }} results</span> for <strong>{{ org_name }}</strong>.
+          <h2 class="govuk-heading-m"><span class="govuk-!-font-weight-bold" id="result-count-org">{{ result_count }} results</span> for {{ org_name }}</h2>
         {% endtrans %}
       {% endif %}
     </span>

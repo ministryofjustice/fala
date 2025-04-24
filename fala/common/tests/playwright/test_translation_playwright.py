@@ -12,10 +12,10 @@ class TranslationSelection(PlaywrightTestSetup):
         expect(page.h1).to_have_text("Dewch o hyd i gynghorydd cymorth cyfreithiol neu gyfryngwr teuluol")
         page.search("SA31 3DP")
         # this tests that the language selection persists to the results page
-        expect(page.h1).to_have_text("Canlyniadau chwilio")
+        expect(page.h1).to_have_text("Eich cynghorwyr cymorth cyfreithiol agosaf")
         page.select_page_number(4).click()
         # this tests that the language selection persists when pagination buttons are clicked
-        expect(page.h1).to_have_text("Canlyniadau chwilio")
+        expect(page.h1).to_have_text("Eich cynghorwyr cymorth cyfreithiol agosaf")
 
     @override_settings(FEATURE_FLAG_WELSH_TRANSLATION=False)
     def test_translate_to_irish(self):

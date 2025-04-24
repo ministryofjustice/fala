@@ -1,13 +1,15 @@
 <div class="govuk-grid-column-two-thirds">
   {% if tailored_results %}
       {% if form|category_selection_first_item|lower == "family" %}
-          <h1 class="govuk-heading-xl">{{_('Your closest legal aid advisers and family mediators')}}</h1>
+          <h1 class="govuk-heading-xl">{{_('Your nearest legal aid advisers and family mediators')}}</h1>
       {% elif form|category_selection_first_item|lower == "housing loss prevention advice service" %}
-          <h1 class="govuk-heading-xl">{{_('Your closest legal aid advisers for the ')}}{{ form|category_selection_first_item|title }}</h1>
+          <h1 class="govuk-heading-xl">{{_('Your nearest legal aid advisers for the ')}}{{ form|category_selection_first_item|title }}</h1>
       {% else %}
-          <h1 class="govuk-heading-xl">{{_('Your closest legal aid advisers for ')}}{{ form|category_selection_first_item|lower }}</h1>
+          <h1 class="govuk-heading-xl">{{_('Your nearest legal aid advisers for ')}}{{ form|category_selection_first_item|lower }}</h1>
       {% endif %}
+  {% elif (form|category_selection_first_item|lower == "family") or (form|category_selection_first_item|lower == "family mediation") %}
+      <h1 class="govuk-heading-xl">{{_('Your nearest legal aid advisors and family mediators')}}</h1>
   {% else %}
-      <h1 class="govuk-heading-xl">{{_('Search results')}}</h1>
+      <h1 class="govuk-heading-xl">{{_('Your nearest legal aid advisors ')}}</h1>
   {% endif %}
 </div>

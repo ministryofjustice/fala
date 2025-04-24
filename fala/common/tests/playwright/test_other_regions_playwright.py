@@ -22,7 +22,7 @@ class OtherRegionsTest(PlaywrightTestSetup):
 
         results_page = self.visit_results_page(postcode="TD13", checkbox_labels=checkboxes)
         expect(results_page.item_from_text("Legal Aid in Scotland")).to_be_visible()
-        search_page = results_page.change_search()
+        search_page = results_page.search_for_something_else()
 
         # after switching back to the change search page, postcode and checkboxes are preserved
         expect(search_page.postcode_input_field).to_have_value("TD13")
