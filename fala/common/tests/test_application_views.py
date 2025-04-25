@@ -49,16 +49,8 @@ class LanguageSwitcherTest(SimpleTestCase):
 
     data = {"name": "foo", "categories": ["deb", "edu"]}
 
-    @override_settings(FEATURE_FLAG_WELSH_TRANSLATION=True)
-    def test_language_switcher_visible_when_flag_set(self):
+    def test_language_switcher_visible(self):
         response = self.client.get(self.url, self.data)
         html = parse_html(response.content)
         language_switcher = find_element(html, "div", "language-switcher")
         self.assertIsNotNone(language_switcher)
-
-    @override_settings(FEATURE_FLAG_WELSH_TRANSLATION=False)
-    def test_language_switcher_not_visible_when_flag_unset(self):
-        response = self.client.get(self.url, self.data)
-        html = parse_html(response.content)
-        language_switcher = find_element(html, "div", "language-switcher")
-        self.assertIsNone(language_switcher)

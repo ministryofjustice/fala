@@ -10,26 +10,11 @@
 
 {% block content %}
   <div class="govuk-grid-column-full">
-    {% if FEATURE_FLAG_WELSH_TRANSLATION %}
-      <div id="exit_button">
-        {% if 'mat' in request.GET.getlist('categories') %}
-          {{ govukExitThisPage({"text": exitText})}}
-        {% endif %}
-      </div>
-    {% else %}
-      <div class="govuk-grid-row">
-        <div class="govuk-grid-column-one-half">
-          <div id="google_translate_element" class="govuk-!-margin-bottom-6 govuk-!-display-none-print"></div>
-        </div>
-        <div class="govuk-grid-column-one-half">
-          <div id="exit_button">
-            {% if 'mat' in request.GET.getlist('categories') %}
-              {{ govukExitThisPage({"text": exitText})}}
-            {% endif %}
-          </div>
-        </div>
-      </div>
-    {% endif %}
+    <div id="exit_button">
+      {% if 'mat' in request.GET.getlist('categories') %}
+        {{ govukExitThisPage({"text": exitText})}}
+      {% endif %}
+    </div>
   </div>
 
   {% if FEATURE_FLAG_SURVEY_MONKEY %}

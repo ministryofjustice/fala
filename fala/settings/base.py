@@ -255,7 +255,5 @@ FEATURE_FLAG_SINGLE_CATEGORY_SEARCH_FORM = (
     os.environ.get("FEATURE_FLAG_SINGLE_CATEGORY_SEARCH_FORM", "").lower() == "enabled"
 )
 
-FEATURE_FLAG_WELSH_TRANSLATION = os.environ.get("FEATURE_FLAG_WELSH_TRANSLATION", "").lower() == "enabled"
-
 BLOCK_ROBOTS = os.environ.get("BLOCK_ROBOTS", "").lower() == "enabled"
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
