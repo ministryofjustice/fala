@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fala\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-31 11:25+0000\n"
+"POT-Creation-Date: 2025-04-25 10:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1592,14 +1592,6 @@ msgstr ""
 #: fala/templates/base.html:27
 msgid "Skip to main content"
 msgstr "Ymlaen i’r prif gynnwys"
-
-#: fala/templates/base.html:36
-msgid ""
-"To view the secondary link, tab to or click inside this example and then "
-"press tab."
-msgstr ""
-"I weld yr ail ddolen, defnyddiwch y bysell tab neu cliciwch tu mewn i’r "
-"enghraifft hon ac yna pwyswch y bysell tab."
 
 #: fala/templates/maintenance_mode.html:3
 msgid "Sorry, the service is unavailable"
