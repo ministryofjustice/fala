@@ -30,7 +30,7 @@ class EndToEndJourneys(PlaywrightTestSetup):
         for postcode in test_cases:
             with self.subTest(postcode=postcode):
                 page = self.visit_results_page(postcode=postcode)
-                expect(page.h1).to_have_text("Search results")
+                expect(page.h1).to_have_text("Your nearest legal aid advisors")
 
     def test_invalid_postcode_journey(self):
         test_cases = [

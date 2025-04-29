@@ -18,22 +18,22 @@ class ResultsViewTest(SimpleTestCase):
     def test_single_category_results_for_mental_health(self):
         self.data = {"tailored_results": "true", "postcode": "SE11", "categories": ["mhe"]}
         response = self.client.get(self.url, self.data)
-        self.assertContains(response, "Your closest legal aid advisers for mental health")
+        self.assertContains(response, "Your nearest legal aid advisers for mental health")
 
     def test_single_category_results_for_family(self):
         self.data = {"tailored_results": "true", "postcode": "SE11", "categories": ["mat"]}
         response = self.client.get(self.url, self.data)
-        self.assertContains(response, "Your closest legal aid advisers and family mediators")
+        self.assertContains(response, "Your nearest legal aid advisers and family mediators")
 
     def test_single_category_results_for_hlpas(self):
         self.data = {"tailored_results": "true", "postcode": "SE11", "categories": ["hlpas"]}
         response = self.client.get(self.url, self.data)
-        self.assertContains(response, "Your closest legal aid advisers for the Housing Loss Prevention Advice Service")
+        self.assertContains(response, "Your nearest legal aid advisers for the Housing Loss Prevention Advice Service")
 
     def test_pagination_links_with_hlpas(self):
         self.data = {"tailored_results": "true", "postcode": "SE11", "categories": ["hlpas"]}
         response = self.client.get(self.url, self.data)
-        self.assertContains(response, "Your closest legal aid advisers for the Housing Loss Prevention Advice Service")
+        self.assertContains(response, "Your nearest legal aid advisers for the Housing Loss Prevention Advice Service")
         html = parse_html(response.content)
         next_link = find_element(html, "a", "govuk-link govuk-pagination__link")
         next_href = next_link.get("href")

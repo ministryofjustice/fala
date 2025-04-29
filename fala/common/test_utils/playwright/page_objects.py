@@ -25,11 +25,12 @@ class FalaPage(object):
     def select_page_number(self, number):
         return self._page.locator(f'a.govuk-pagination__link:has-text(" {number} ")')
 
-    # `change_search()` is looking for the "Change search" text.
-    # There is a "Change search" button on ResultsPage with id #changeSearchButton
-    # There is a "Change search" button on OtherRegionPage with id #otherRegionChangeSearchButton
     def change_search(self):
         self.item_from_text("Change Search").click()
+        return SearchPage(self._page)
+
+    def search_for_something_else(self):
+        self.item_from_text("Search for something else").click()
         return SearchPage(self._page)
 
 

@@ -29,7 +29,6 @@ class ResultsPageWithBothOrgAndPostcodeTest(SimpleTestCase):
 
         # Check the presence of specific elements
         self.assertIsNotNone(results_header.find("strong", class_="notranslate", text="PE30"))
-        self.assertIsNotNone(results_header.find("strong", text="bu"))
 
     def test_search_parameters_box_is_visible(self):
         search_params_box = find_element(self.html, "div", "laa-fala__grey-box")
@@ -62,7 +61,7 @@ class ResultsPageWithJustOrgTest(SimpleTestCase):
         search_params_box = find_element(self.html, "div", "laa-fala__grey-box")
         # replace the spaces in the HTML for ease of comparison
         content = search_params_box.text.replace("\n", "")
-        self.assertEqual(content, "Organisation: fooLegal problem: Debt, Education   Change search")
+        self.assertEqual(content, "Organisation: fooLegal problem: Debt, Education Search for something else")
 
 
 class ResultsPageWithJustPostcodeTest(SimpleTestCase):
@@ -86,12 +85,6 @@ class ResultsPageWithJustPostcodeTest(SimpleTestCase):
         expected_text = "in order of closeness to"
         self.assertIn(expected_text, results_header.text.strip())
 
-        # Extract the text from the results header span
-        header_text = results_header.get_text()
-
-        # Assert that either the full stop or the string is visible
-        self.assertIn(".", header_text, "Full stop after PE30 not found")
-
         # Check the presence of specific elements
         self.assertIsNotNone(results_header.find("strong", class_="notranslate", text="PE30"))
 
@@ -99,7 +92,7 @@ class ResultsPageWithJustPostcodeTest(SimpleTestCase):
         search_params_box = find_element(self.html, "div", "laa-fala__grey-box")
         # replace the spaces in the HTML for ease of comparison
         content = search_params_box.text.replace("\n", "")
-        self.assertEqual(content, "Postcode: PE30Legal problem: Debt   Change search")
+        self.assertEqual(content, "Postcode: PE30Legal problem: Debt Search for something else")
 
 
 class ResultsPageWhenCategoryIsFamily(SimpleTestCase):
