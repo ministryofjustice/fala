@@ -1,7 +1,6 @@
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from playwright.sync_api import sync_playwright, expect
 from fala.common.test_utils.playwright.setup import PlaywrightTestSetup
-from django.test import override_settings
 
 
 class CookiesPageEndToEndJourneys(PlaywrightTestSetup):
@@ -163,7 +162,6 @@ class CookiesPageEndToEndJourneysWithFreshSetUp(StaticLiveServerTestCase):
 
 
 class TranslationLink(StaticLiveServerTestCase):
-    @override_settings(FEATURE_FLAG_WELSH_TRANSLATION=True)
     def test_language_switcher_link(self):
         with sync_playwright() as p:
             browser = p.chromium.launch()
