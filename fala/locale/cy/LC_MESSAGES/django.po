@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fala\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-25 10:37+0000\n"
+"POT-Creation-Date: 2025-04-29 08:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -959,7 +959,7 @@ msgstr ""
 "gyda’ch dyfais."
 
 #: fala/templates/adviser/other_region.html:3
-#: fala/templates/adviser/results.html:3 fala/templates/adviser/results.html:44
+#: fala/templates/adviser/results.html:3
 msgid "Search results"
 msgstr "Canlyniad chwilio"
 
@@ -1408,6 +1408,10 @@ msgstr ""
 #: fala/templates/adviser/privacy.html:208
 msgid "Last updated 25 June 2024"
 msgstr "Diweddarwyd ddiwethaf 25 June 2024"
+
+#: fala/templates/adviser/results.html:44
+msgid "No search results"
+msgstr "Dim canlyniadau chwilio"
 
 #: fala/templates/adviser/results.html:45
 msgid "There are no results for your criteria."

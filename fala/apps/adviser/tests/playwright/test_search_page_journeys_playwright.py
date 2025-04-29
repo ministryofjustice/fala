@@ -59,8 +59,16 @@ class SearchPageEndToEndJourneys(PlaywrightTestSetup):
         expect(page.locator("h1")).to_have_text(f"{self.front_page_heading}")
         page.get_by_label("Name of organisation you are looking for (optional)").fill("test")
         page.get_by_role("button", name="Search").click()
-        expect(page.locator("h1")).to_have_text("Search results")
+        expect(page.locator("h1")).to_have_text("No search results")
         expect(page.locator("#no-results-info")).to_have_text("There are no results for your criteria.")
+
+    def test_valid_organisation_search(self):
+        page = self.browser.new_page()
+        page.goto(f"{self.live_server_url}")
+        expect(page.locator("h1")).to_have_text(f"{self.front_page_heading}")
+        page.get_by_label("Name of organisation you are looking for (optional)").fill("Shelter")
+        page.get_by_role("button", name="Search").click()
+        expect(page.locator("h1")).to_have_text("Search results")
 
     def test_invalid_postcode_journey(self):
         test_cases = [

@@ -92,3 +92,13 @@ def form_categories(categories):
             text = "Claims against public authorities"
         processed_categories.append({"value": value, "text": text, "id": f"id_categories_{text}"})
     return processed_categories
+
+
+@library.filter
+def no_postcode_search(form):
+    postcode = form.cleaned_data.get("postcode")
+
+    if postcode == "":
+        return True
+
+    return None
