@@ -12,6 +12,7 @@ class SearchViewTest(TestCase):
         self.welfare_benefits_slug = "welfare-benefits"
         self.welfare_benefits_code = "wb"
         self.clinical_negligence_url = reverse("category_search", kwargs={"category": "clinical-negligence"})
+        self.hlpas_url = reverse("category_search", kwargs={"category": "hlpas"})
         self.welfare_benefits_url = reverse("category_search", kwargs={"category": "welfare-benefits"})
 
         settings.FEATURE_FLAG_SINGLE_CATEGORY_SEARCH_FORM = True
@@ -50,16 +51,27 @@ class SearchViewTest(TestCase):
         self.assertNotEqual(response.url, self.welfare_benefits_url)
         self.assertNotIn(f"/{self.welfare_benefits_slug}", response.url)
 
+    def test_displays_search_form_hlpas(self):
+        response = self.client.get(self.clinical_negligence_url)
+        self.assertEqual(response.status_code, 200)
+        content = response.content.decode("utf-8")
+
+        self.assertRegex(content, re.compile(r"Find a legal aid adviser for\s+the Housing Loss Prevention Advice Service", re.IGNORECASE))
+        self.assertRegex(content, re.compile(r'<input type="hidden" name="categories" value="hlpas">', re.IGNORECASE))
+        self.assertRegex(
+            content,
+            re.compile(
+                r"Tell the adviser your home is at risk and you want advice through the Housing Loss Prevention Advice Service.",
+                re.IGNORECASE,
+            ),
+        )
+    
     def test_displays_search_form_clinical_negligence(self):
         response = self.client.get(self.clinical_negligence_url)
         self.assertEqual(response.status_code, 200)
         content = response.content.decode("utf-8")
 
         self.assertRegex(content, re.compile(r"Find a legal aid adviser for\s+clinical negligence", re.IGNORECASE))
-        self.assertRegex(
-            content,
-            re.compile(r"Legal aid for advice about clinical negligence is usually only available", re.IGNORECASE),
-        )
         self.assertRegex(content, re.compile(r'<input type="hidden" name="categories" value="med">', re.IGNORECASE))
 
     def test_displays_search_form_welfare_benefits(self):
