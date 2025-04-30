@@ -65,7 +65,7 @@ class SearchViewTest(TestCase):
                 re.IGNORECASE,
             ),
         )
-    
+
     def test_displays_search_form_clinical_negligence(self):
         response = self.client.get(self.clinical_negligence_url)
         self.assertEqual(response.status_code, 200)

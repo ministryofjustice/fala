@@ -1,0 +1,35 @@
+Metadata-Version: 2.1
+Name: pytest-playwright
+Version: 0.5.0
+Summary: A pytest wrapper with fixtures for Playwright to automate web browsers
+Home-page: https://github.com/microsoft/playwright-pytest
+Author: Microsoft
+Author-email: 
+License: Apache-2.0
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Classifier: Framework :: Pytest
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: playwright (>=1.18)
+Requires-Dist: pytest (<9.0.0,>=6.2.4)
+Requires-Dist: pytest-base-url (<3.0.0,>=1.0.0)
+Requires-Dist: python-slugify (<9.0.0,>=6.0.0)
+
+# Pytest plugin for Playwright [![PyPI](https://img.shields.io/pypi/v/pytest-playwright)](https://pypi.org/project/pytest-playwright/)
+
+Write end-to-end tests for your web apps with [Playwright](https://github.com/microsoft/playwright-python) and [pytest](https://docs.pytest.org/en/stable/).
+
+- Support for **all modern browsers** including Chromium, WebKit and Firefox.
+- Support for **headless and headed** execution.
+- **Built-in fixtures** that provide browser primitives to test functions.
+
+## Documentation
+
+See on [playwright.dev](https://playwright.dev/python/docs/test-runners) for examples and more detailed information.

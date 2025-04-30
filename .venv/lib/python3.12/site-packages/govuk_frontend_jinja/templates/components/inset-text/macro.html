@@ -1,0 +1,8 @@
+{% macro govukInsetText(params) %}
+{% from "govuk_frontend_jinja/macros/attributes.html" import govukAttributes -%}
+
+<div {%- if params.id %} id="{{ params.id }}"{% endif %} class="govuk-inset-text {%- if params.classes %} {{ params.classes }}{% endif %}"
+  {{- govukAttributes(params.attributes) }}>
+  {{ caller() if caller else (params.html | safe | trim | indent(2) if params.html else params.text) }}
+</div>
+{% endmacro %}
