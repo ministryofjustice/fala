@@ -1,11 +1,14 @@
+{% set BACK_LABEL = _("Back") %}
+{% set CHANGE_SEARCH = _("Change search") %}
+
 {% extends 'adviser/adviser_base.html' %}
 
 {% block pageTitle %}{{_('Search results')}}{% endblock %}
-{% set BACK_LABEL = _("Back") %}
-{% set CHANGE_SEARCH = _("Change search") %}
-{% block language_and_navigation %}
-  {% include 'adviser/_language_and_navigation_other_region.html' %}
+
+{% block navigation %}
+  {% include 'adviser/_navigation_other_region.html' %}
 {% endblock %}
+
 {% block content %}
   <div class="govuk-grid-column-full">
     <h1 class="govuk-heading-xl">{{_('The postcode ')}}{{ postcode }}{{_(' is in ')}}{{ region }}</h1>

@@ -193,11 +193,16 @@ body.fala-dev {
   margin-right: govuk-spacing(0);
 }
 
-.language-and-back-container{
+.language-container{
   display: flex;
   justify-content: space-between; 
   align-items: center;
 }
+
+.back-container{
+  margin-bottom: -35px;
+}
+
 
 .buttonCamouflagedAsLink{
   background: none;

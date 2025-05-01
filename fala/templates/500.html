@@ -3,10 +3,6 @@
 
 {% block pageTitle %}{{ _('Sorry, there is a problem with the service - Find a legal advisor or family mediator - GOV.UK') }} - {{ super() }}{% endblock %}
 
-{% block language_and_navigation %}
-  {% include 'adviser/_language_and_navigation_error_page.html' %}
-{% endblock %}
-
 {% block content %}
   <div class="govuk-grid-column-two-thirds">
     <h1 class="govuk-heading-xl">{{_('Sorry, there is a problem with the service')}}</h1>
