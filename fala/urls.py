@@ -38,7 +38,6 @@ def custom_404_view(request, exception):
         {
             "translation_link": TranslationMixin().translation_link(request),
             "language": TranslationMixin().language(request),
-            "FEATURE_FLAG_WELSH_TRANSLATION": settings.FEATURE_FLAG_WELSH_TRANSLATION,
         },
         status=404,
     )
@@ -51,7 +50,6 @@ def custom_500_view(request):
         {
             "translation_link": TranslationMixin().translation_link(request),
             "language": TranslationMixin().language(request),
-            "FEATURE_FLAG_WELSH_TRANSLATION": settings.FEATURE_FLAG_WELSH_TRANSLATION,
         },
         status=500,
     )

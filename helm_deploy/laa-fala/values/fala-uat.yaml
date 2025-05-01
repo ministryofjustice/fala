@@ -52,7 +52,6 @@ feature_flags:
   block_robots: "enabled"
   maintenance_mode: "disabled"
   single_category_search: "enabled"
-  welsh_translation: "enabled"
 
 laalaa_api:
   host: "https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk"

@@ -1,20 +1,12 @@
-{% if FEATURE_FLAG_WELSH_TRANSLATION %}
-  <div class="govuk-grid-row language-and-back-container">
-    <div class="govuk-grid-column-one-half"></div>
-    <div class="govuk-grid-column-one-half language-switcher">
-      <form id="language_switcher_form" action="{{ url('set_language') }}" method="post">
-        <input type="hidden" name="next" value="{{ request.get_full_path() }}">
-        <input type="hidden" name="language" value="{{ language }}">
-        <p class="govuk-body">
-          {{ translation_link | safe }}
-        </p>
-      </form>
-    </div>
+<div class="govuk-grid-row language-and-back-container">
+  <div class="govuk-grid-column-one-half"></div>
+  <div class="govuk-grid-column-one-half language-switcher">
+    <form id="language_switcher_form" action="{{ url('set_language') }}" method="post">
+      <input type="hidden" name="next" value="{{ request.get_full_path() }}">
+      <input type="hidden" name="language" value="{{ language }}">
+      <p class="govuk-body">
+        {{ translation_link | safe }}
+      </p>
+    </form>
   </div>
-{% else %}
-  <div class="govuk-grid-column-full">
-    <div class="govuk-grid-row govuk-!-margin-bottom-6">
-      <div id="google_translate_element"></div>
-    </div>
-  </div>
-{% endif %}
+</div>

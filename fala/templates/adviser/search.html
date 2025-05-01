@@ -13,9 +13,6 @@
 
 {% block content %}
   <div class="govuk-grid-column-two-thirds">
-      {% if not FEATURE_FLAG_WELSH_TRANSLATION %}
-        <div id="google_translate_element" class="govuk-!-margin-bottom-6"></div>
-      {% endif %}
       {% if form.errors %}
         {{ govukErrorSummary({
           "titleText": titleText,
