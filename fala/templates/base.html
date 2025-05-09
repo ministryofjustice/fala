@@ -63,12 +63,8 @@
   <div class="govuk-width-container">
     {% block global_subheader %}{% endblock %}
     <main id="main-content" class="govuk-main-wrapper" role="main">
-      {% block language_and_navigation %}
-        {% if FEATURE_FLAG_MAINTENANCE_MODE %}
-          {% include 'adviser/_language_and_navigation_error_page.html' %}
-        {% else %}
-          {% include 'adviser/_language_and_navigation.html' %}
-        {% endif %}
+      {% block language %}
+          {% include 'adviser/_language.html' %}
       {% endblock %}
       <div class="govuk-grid-row">
         {% if FEATURE_FLAG_MAINTENANCE_MODE %}

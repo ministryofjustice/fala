@@ -1,6 +1,5 @@
-<div class="govuk-grid-row language-and-back-container">
-  <div class="govuk-grid-column-one-half">
-  </div>
+<div class="govuk-grid-row language-container">
+  <div class="govuk-grid-column-one-half"></div>
   <div class="govuk-grid-column-one-half language-switcher govuk-!-display-none-print">
     <form id="language_switcher_form" action="{{ url('set_language') }}" method="post">
       <input type="hidden" name="next" value="{{ request.get_full_path() }}">
