@@ -1,22 +1,19 @@
-<div class="govuk-grid-row back-container">
-  <div class="govuk-grid-column-one-half">
-    {% if tailored_results %}
-      {% if request.GET.getlist('categories')|length > 1 %}
-        {{ govukBackLink({
-          'classes': "back_link_other_region govuk-!-margin-top-0",
-          'text': BACK_LABEL,
-          'href': "/check?categories="+category_code+"&sub-category="+sub_category_code,
-        }) }}
-      {% else %}
-        {{ govukBackLink({
-          'classes': "back_link_other_region govuk-!-margin-top-0",
-          'text': BACK_LABEL,
-          'href': "/check?categories="+category_code,
-        }) }}
-      {% endif %}
-    {% else %}
-      <!-- empty content, to preserve positioning of the language switcher -->
-      <span class="ghost-back-container"></span>
-    {% endif %}
+{% if tailored_results %}
+  <div class="govuk-grid-row back-container">
+    <div class="govuk-grid-column-one-half">
+        {% if request.GET.getlist('categories')|length > 1 %}
+          {{ govukBackLink({
+            'classes': "back_link_other_region govuk-!-margin-top-0",
+            'text': BACK_LABEL,
+            'href': "/check?categories="+category_code+"&sub-category="+sub_category_code,
+          }) }}
+        {% else %}
+          {{ govukBackLink({
+            'classes': "back_link_other_region govuk-!-margin-top-0",
+            'text': BACK_LABEL,
+            'href': "/check?categories="+category_code,
+          }) }}
+        {% endif %}      
+    </div>
   </div>
-</div>
+{% endif %}
