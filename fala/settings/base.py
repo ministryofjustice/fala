@@ -1,6 +1,7 @@
 # coding=utf-8
 import sys
 import os
+import datetime
 from os.path import join, abspath, dirname
 
 import sentry_sdk
@@ -259,5 +260,4 @@ FEATURE_FLAG_SINGLE_CATEGORY_SEARCH_FORM = (
 BLOCK_ROBOTS = os.environ.get("BLOCK_ROBOTS", "").lower() == "enabled"
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-import datetime
 GOVUK_REBRAND_ENABLED = datetime.datetime.now() > datetime.datetime(2025, 6, 25)

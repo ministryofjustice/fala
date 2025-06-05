@@ -4,6 +4,7 @@ from django.conf import settings
 def current_environment(request):
     return {"ENVIRONMENT": settings.ENVIRONMENT}
 
+
 def govuk_rebrand(request):
     govuk_rebrand_enabled = settings.GOVUK_REBRAND_ENABLED
     if not govuk_rebrand_enabled and settings.ENVIRONMENT != "production":
