@@ -57,7 +57,8 @@
   {{ govukHeader({
         'homepageUrl': "https://www.gov.uk",
         'serviceName': SERVICE_NAME if not govukRebrand,
-        'useTudorCrown': true
+        'useTudorCrown': true,
+        'rebrand': govukRebrand
   }) }}
   {% if govukRebrand %}
     {{ govukServiceNavigation({
