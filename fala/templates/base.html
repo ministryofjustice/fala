@@ -1,10 +1,12 @@
 {% set htmlLang = request.LANGUAGE_CODE %}
+{% set govukRebrand = GOVUK_REBRAND_ENABLED %}
 {% extends 'govuk_frontend_jinja/template.html' %}
 
 {%- from 'govuk_frontend_jinja/components/cookie-banner/macro.html' import govukCookieBanner -%}
 {%- from 'govuk_frontend_jinja/components/button/macro.html' import govukButton -%}
 {%- from 'govuk_frontend_jinja/components/back-link/macro.html' import govukBackLink -%}
 {%- from "govuk_frontend_jinja/components/skip-link/macro.html" import govukSkipLink -%}
+{%- from "govuk_frontend_jinja/components/service-navigation/macro.html" import govukServiceNavigation -%}
 {% set SERVICE_NAME = _("Find a legal aid adviser or family mediator") %}
 {% set exitText = _("Exit this page")%}
 
@@ -53,10 +55,18 @@
   {% endblock %}
 
   {{ govukHeader({
-    'homepageUrl': "https://www.gov.uk/",
-    'serviceName': SERVICE_NAME,
-    'serviceUrl': "/"
+        'homepageUrl': "https://www.gov.uk",
+        'serviceName': SERVICE_NAME if not govukRebrand,
+        'useTudorCrown': true
   }) }}
+  {% if govukRebrand %}
+    {{ govukServiceNavigation({
+      'serviceName': SERVICE_NAME,
+      'serviceUrl': "/"
+    }) }}
+  {%  endif %}
+
+
 {% endblock %}
 
 {% block main %}

@@ -115,6 +115,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "django.template.context_processors.i18n",
                 "adviser.context_processors.current_environment",
+                "adviser.context_processors.govuk_rebrand",
             ],
         },
     }
@@ -257,3 +258,6 @@ FEATURE_FLAG_SINGLE_CATEGORY_SEARCH_FORM = (
 
 BLOCK_ROBOTS = os.environ.get("BLOCK_ROBOTS", "").lower() == "enabled"
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+import datetime
+GOVUK_REBRAND_ENABLED = datetime.datetime.now() > datetime.datetime(2025, 6, 25)
