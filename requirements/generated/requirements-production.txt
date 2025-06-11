@@ -47,7 +47,7 @@ python-dateutil==2.9.0.post0
     # via cla-common
 python-dotenv==1.0.1
     # via -r requirements/source/requirements-base.in
-requests==2.32.0
+requests==2.32.4
     # via
     #   -r requirements/source/requirements-base.in
     #   cla-common
