@@ -115,6 +115,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "django.template.context_processors.i18n",
                 "adviser.context_processors.current_environment",
+                "adviser.context_processors.govuk_rebrand",
             ],
         },
     }
