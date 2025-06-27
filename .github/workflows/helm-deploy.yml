@@ -10,7 +10,7 @@ env:
   PYTHON_VERSION: '3.12'
   NODE_VERSION: '20.17.0'
   AWS_REGION: ${{  vars.ECR_REGION }}
-  ECR_ENDPOINT: ${{ secrets.ECR_REGISTRY_URL }}.dkr.ecr.${{ vars.ECR_REGION }}.amazonaws.com/${{ vars.ECR_REPOSITORY }}
+  ECR_ENDPOINT: ${{ secrets.ECR_REPO_URL }}
 
 jobs:
   lint:
@@ -131,7 +131,7 @@ jobs:
 
       # ---------- AWS auth (OIDC) ----------
       - name: Configure AWS creds
-        uses: aws-actions/configure-aws-credentials@4.2.1
+        uses: aws-actions/configure-aws-credentials@v4.2.1
         with:
           role-to-assume: ${{ secrets.ECR_ROLE_TO_ASSUME }}
           aws-region: ${{  vars.ECR_REGION }}
