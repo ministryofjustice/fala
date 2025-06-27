@@ -1,0 +1,45 @@
+name: "Deploy"
+description: "Deploy docker image to namespace"
+inputs:
+    kube-cert:
+        description: "Kubernetes cluster authentication certificate"
+        required: true
+    kube-token:
+        description: "Kubernetes cluster authentication token"
+        required: true
+    kube-cluster:
+        description: "Kubernetes cluster name"
+        required: true
+    kube-namespace:
+        description: "Kubernetes cluster namespace"
+        required: true
+    app-environment:
+        description: "environment to which the app is being deployed [staging, production, etc]"
+        required: true
+    ecr-registry_url:
+        description: "ECR registry url"
+        required: true
+
+runs:
+    using: "composite"
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Authenticate to the cluster
+      uses: ministryofjustice/laa-reusable-github-actions/.github/actions/authenticate_to_cluster@2aa2676c3cd9876ec7037ee8b3d729d0306cb7c6
+      with:
+            kube-cert: ${{ inputs.kube-cert }}
+            kube-token: ${{ inputs.kube-token }}
+            kube-cluster: ${{ inputs.kube-cluster }}
+            kube-namespace: ${{ inputs.kube-namespace }}
+
+    - name: Deploy using Helm
+      shell: bash
+      run: . bin/deploy.sh ${{ inputs.app-environment }}
+      env:
+        ECR_ENDPOINT: ${{ inputs.ecr-registry_url }}
+        IMAGE_TAG: ${{ github.sha }}
+        GITHUB_SHA: ${{ github.sha }}
+        GITHUB_REF_NAME: ${{ github.ref_name }}
+        K8S_NAMESPACE: ${{ inputs.kube-namespace }}
