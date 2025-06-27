@@ -246,19 +246,8 @@ workflows:
             - laa-fala
             - laa-fala-live-staging
 
-      - production_deploy_approval:
-          type: approval
-          requires:
-            - Deploy to Staging
-          filters:
-            branches:
-              only:
-                - main
-
       - deploy_grafana:
           name: Deploy Grafana Production Dashboards
-          requires:
-            - production_deploy_approval
           filters:
             branches:
               only:
@@ -270,8 +259,6 @@ workflows:
       - deploy:
           name: Deploy to Production
           environment: production
-          requires:
-            - production_deploy_approval
           filters:
             branches:
               only:
