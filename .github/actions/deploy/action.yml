@@ -36,18 +36,10 @@ runs:
             kube-token: ${{ inputs.kube-token }}
             kube-cluster: ${{ inputs.kube-cluster }}
             kube-namespace: ${{ inputs.kube-namespace }}
- 
-    - name: Deploy infrastructure to UAT
-      shell: bash
-      run: |
-        if [ ${{ inputs.app-environment }} == 'uat' ]
-        then
-          kubectl apply --record=false -f ./infrastructure/laa-manage-your-civil-cases-uat/
-        fi
 
     - name: Deploy using Helm
       shell: bash
-      run: ./scripts/deploy.sh ${{ inputs.app-environment }}
+      run: . bin/deploy.sh ${{ inputs.app-environment }}
       env:
         REGISTRY: ${{ inputs.ecr-registry_url }} 
         REPOSITORY: ${{ inputs.ecr-repository }}
