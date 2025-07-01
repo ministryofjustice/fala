@@ -1,0 +1,56 @@
+name: Build and Push Image
+description: Build Image and Push to a Container Registry (with caching)
+
+inputs:
+  image_registry:
+    required: true
+    description: "Image Registry URL"
+  image_repo:
+    required: true
+    description: "Image Repository URL"
+  dockerfile_path:
+    required: true
+    description: "Dockerfile Path"
+    default: "Dockerfile"
+  image_tag:
+    required: true
+    description: "Image Tag"
+    default: ${{ github.sha }}
+
+outputs:
+  image_registry:
+    description: "Image Registry URL"
+    value: ${{ steps.output.outputs.image_registry }}
+  image_repo:
+    description: "Image Repo Path"
+    value: ${{ steps.output.outputs.image_repo }}
+  image_tag:
+    description: "Image Tag"
+    value: ${{ steps.output.outputs.image_tag }}
+  image_uri:
+    description: "Image URI"
+    value: ${{ steps.output.outputs.image_uri }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Docker Build & Push with Cache
+      id: build_and_push
+      run: |
+        docker build \
+          --push \
+          --cache-from=type=local,src=/tmp/.buildx-cache \
+          --cache-to=type=local,dest=/tmp/.buildx-cache \
+          -t ${{ inputs.image_registry }}/${{ inputs.image_repo }}:${{ inputs.image_tag }} \
+          -f ${{ inputs.dockerfile_path }} .
+
+      shell: bash
+
+    - name: Output
+      id: output
+      run: |
+        echo image_registry=${{ inputs.image_registry }} >> "$GITHUB_OUTPUT"
+        echo image_repo=${{ inputs.image_repo }} >> "$GITHUB_OUTPUT"
+        echo image_tag=${{ inputs.image_tag }} >> "$GITHUB_OUTPUT"
+        echo image_uri="${{ inputs.image_registry }}/${{ inputs.image_repo }}:${{ inputs.image_tag }}" >> "$GITHUB_OUTPUT"
+      shell: bash
