@@ -9,6 +9,8 @@ deploy_branch() {
   RELEASE_HOST="$BRANCH_RELEASE_NAME-fala-staging.cloud-platform.service.justice.gov.uk"
 # Set the ingress name, needs <release name>-<chart name>-<namespace>-green
   IDENTIFIER="$BRANCH_RELEASE_NAME-laa-fala-$K8S_NAMESPACE-green"
+  echo "this is the branch release name $BRANCH_RELEASE_NAME"
+  echo "this is the release host $RELEASE_HOST"
   echo "this is the identifer ingress name $IDENTIFIER"
   echo "Deploying CIRCLE_SHA1: $CIRCLE_SHA1 under release name: '$BRANCH_RELEASE_NAME'..."
 
