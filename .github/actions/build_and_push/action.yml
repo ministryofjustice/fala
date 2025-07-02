@@ -45,7 +45,7 @@ runs:
           --push \
           --cache-from=type=local,src=/tmp/.buildx-cache \
           --cache-to=type=local,dest=/tmp/.buildx-cache \
-          -t ${{ inputs.image_registry }}/${{ inputs.image_repo }}:${{ inputs.image_tag }} \
+          -t ${{ inputs.image_registry }}.dkr.ecr.eu-west-2.amazonaws.com/${{ inputs.image_repo }}:${{ inputs.image_tag }} \
           -f ${{ inputs.dockerfile_path }} .
 
       shell: bash
