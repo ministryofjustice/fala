@@ -41,8 +41,7 @@ runs:
       shell: bash
       run: . bin/deploy.sh ${{ inputs.app-environment }}
       env:
-        REGISTRY: ${{ inputs.ecr-registry_url }} 
-        REPOSITORY: ${{ inputs.ecr-repository }}
+        ECR_ENDPOINT: ${{ inputs.ecr-registry_url }}
         IMAGE_TAG: ${{ github.sha }}
         GITHUB_SHA: ${{ github.sha }}
         GITHUB_REF_NAME: ${{ github.ref_name }}
