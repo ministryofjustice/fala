@@ -34,6 +34,10 @@ outputs:
 runs:
   using: "composite"
   steps:
+    - name: Show image reference
+      shell: bash
+      run: |
+        echo "Trying to push -> ${{ inputs.image_registry }}/${{ inputs.image_repo }}:${{ inputs.image_tag }}"
     - name: Docker Build & Push with Cache
       id: build_and_push
       run: |
