@@ -136,20 +136,8 @@ jobs:
           role-to-assume: ${{ secrets.ECR_ROLE_TO_ASSUME }}
           aws-region: ${{ vars.ECR_REGION }}
 
-      - name: Log in to Amazon ECR
+      - uses: aws-actions/amazon-ecr-login@062b18b96a7aff071d4dc91bc00c4c1a7945b076
         id: login-ecr
-        uses: aws-actions/amazon-ecr-login@062b18b96a7aff071d4dc91bc00c4c1a7945b076
-
-      - name: Show ECR context (build job)
-        shell: bash
-        run: |
-          echo "GITHUB_REF_NAME       = $GITHUB_REF_NAME"
-          echo "image_registry input  = ${{ secrets.ECR_REPO_URL }}"
-          echo "image_repo input      = ${{ vars.ECR_REPOSITORY }}"
-          echo "ECR_REGISTRY_URL input = ${{ secrets.ECR_REGISTRY_URL }}"
-          echo "Computed tag          = ${{ github.sha }}"
-          echo "AWS region            = ${{ vars.ECR_REGION }}"
-          echo "Full image URI        = ${{ secrets.ECR_REPO_URL }}/${{ vars.ECR_REPOSITORY }}:${{ github.sha }}"
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@e468171a9de216ec08956ac3ada2f0791b6bd435
@@ -176,8 +164,8 @@ jobs:
       - name: Build and push image with local action
         uses: ./.github/actions/build_and_push
         with:
-          image_registry: ${{ secrets.ECR_REGISTRY_URL }}
-          image_repo:     ${{ vars.ECR_REPOSITORY }}
+          image_registry: ${{ secrets.ECR_REGISTRY }}
+          image_repo:     ${{ secrets.ECR_REPO }}
           dockerfile_path: Dockerfile
           image_tag:      ${{ steps.branch-tag.outputs.tag }}
 
