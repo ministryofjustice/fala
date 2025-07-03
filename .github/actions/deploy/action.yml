@@ -39,7 +39,6 @@ runs:
       run: . bin/deploy.sh ${{ inputs.app-environment }}
       env:
         ECR_ENDPOINT: ${{ inputs.ecr-registry_url }}
-        IMAGE_TAG: ${{ github.sha }}
         GITHUB_SHA: ${{ github.sha }}
         GITHUB_REF_NAME: ${{ github.ref_name }}
         K8S_NAMESPACE: ${{ inputs.kube-namespace }}
