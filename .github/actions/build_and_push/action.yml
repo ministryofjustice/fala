@@ -1,0 +1,29 @@
+name: Build and Push Image
+description: Build Image and Push to a Container Registry (with caching)
+
+inputs:
+  repo_full_uri:
+    required: true
+    description: "ECR full Registry URL"
+  dockerfile_path:
+    required: true
+    description: "Dockerfile Path"
+    default: "Dockerfile"
+  image_tag:
+    required: true
+    description: "Image Tag"
+    default: ${{ github.sha }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Docker Build & Push with Cache
+      id: build_and_push
+      run: |
+        docker build \
+          --push \
+          --cache-from=type=local,src=/tmp/.buildx-cache \
+          --cache-to=type=local,dest=/tmp/.buildx-cache \
+          -t ${{ inputs.repo_full_uri }}:${{ inputs.image_tag }} \
+          -f ${{ inputs.dockerfile_path }} .
+      shell: bash
