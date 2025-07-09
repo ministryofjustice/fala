@@ -3,6 +3,9 @@ name: Deploy to Kubernetes with Helm
 on:
   pull_request:
     branches: ['**']
+  push:
+    branches:
+      - main
 
 env:
   PYTHON_VERSION: '3.12'
