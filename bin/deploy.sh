@@ -2,7 +2,7 @@
 
 ENVIRONMENT=$1
 
-# Use source branch for PRs, current branch for direct pushes
+# Use source branch for PRs, current branch for PR merges
 BRANCH_NAME="${GITHUB_HEAD_REF:-$GITHUB_REF_NAME}"
 
 # Convert the branch name into a string that can be turned into a valid URL
