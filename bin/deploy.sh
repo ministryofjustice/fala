@@ -35,7 +35,7 @@ deploy_main() {
 }
 
 
-if [ "$GITHUB_REF_NAME" == "main" ]; then
+if [ "$BRANCH_NAME" == "main" ]; then
   deploy_main
 else
   deploy_branch
