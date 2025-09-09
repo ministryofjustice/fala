@@ -14,7 +14,7 @@ charset-normalizer==3.3.2
     # via requests
 cla-common @ https://github.com/ministryofjustice/cla_common/archive/refs/tags/0.3.3.tar.gz
     # via -r requirements/source/requirements-base.in
-django==5.1.10
+django==5.1.12
     # via
     #   -r requirements/source/requirements-base.in
     #   django-csp
