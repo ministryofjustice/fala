@@ -206,4 +206,3 @@ jobs:
           kube-cluster:     ${{ secrets.FALA_K8S_CLUSTER_NAME }}
           kube-namespace:   ${{ secrets.FALA_K8S_NAMESPACE }}
           app-environment:  production
-

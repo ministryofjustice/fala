@@ -12,29 +12,29 @@ The website uses the LAA Legal Adviser API. The code is hosted at https://github
 - [docker](https://www.docker.com/)
 
 ## Prerequisites
-- [Playwright](https://playwright.dev/python/) 
+- [Playwright](https://playwright.dev/python/)
 
 ## Installation for development
 
 ### .env
 
-We need to do this for our developer settings, so please copy this file over if it doesn't exist and/or you're not using Docker. 
+We need to do this for our developer settings, so please copy this file over if it doesn't exist and/or you're not using Docker.
 
-You can use this command in your terminal or manually create a `.env` file: 
+You can use this command in your terminal or manually create a `.env` file:
 
-`cp .env.example .env` 
+`cp .env.example .env`
 
 ### Playwright
 
-Playwright is a tool for automating web browsers. It allows developers to write scripts to control web browsers and 
-interact with web pages programmatically. It's often used for automated testing, web scraping, and 
+Playwright is a tool for automating web browsers. It allows developers to write scripts to control web browsers and
+interact with web pages programmatically. It's often used for automated testing, web scraping, and
 browser automation tasks. We use it to test our end to end user journeys.
 
 For local development and when using Playwright for the first time, run:
 
 `playwright install`
 
-This will install all required browser support required for Playwright to run. 
+This will install all required browser support required for Playwright to run.
 
 We've configured Playwright to run with the rest of the app's tests i.e. by running `./manage.py test`. If you'd like to edit
 any of the Playwright test settings for debugging purposes, for example running a headed browser, you can configure this in the setup file.
@@ -53,8 +53,8 @@ If you're not using `Docker Desktop`, you may want to have two terminals open.
 
 ### Tips for developing with docker containers
 
-Code editing - You can edit the code on your local disk, with a local editor, as normal. (You don't have to edit the 
-files inside the Docker container, because your local directory is mounted into container.) When you save a file, it 
+Code editing - You can edit the code on your local disk, with a local editor, as normal. (You don't have to edit the
+files inside the Docker container, because your local directory is mounted into container.) When you save a file, it
 becomes present in the container immediately, and the server restarts.
 
 Browsing the app - Point your local browser at http://localhost:8013/
@@ -69,15 +69,15 @@ From the shell inside the container you can run some tests e.g.
 
 `python manage.py test`
 
-Alternatively, some editors have functionality to hook into running containers, such as VS Code's 'Dev Containers' 
-extension. Docker Desktop offers a UI version of looking through logs, exec and many other interactions. 
+Alternatively, some editors have functionality to hook into running containers, such as VS Code's 'Dev Containers'
+extension. Docker Desktop offers a UI version of looking through logs, exec and many other interactions.
 
 ### Debugging
 Depending on how you're running the project, via `venv` or Docker you can perform the following debugging:
 
 You can insert a breakpoint with the `breakpoint()` function at any position in your code.
 
-If you're using a docker contain to run your project locally, you can run `docker attach fala` to view the output in 
+If you're using a docker contain to run your project locally, you can run `docker attach fala` to view the output in
 your chosen terminal.
 
 When breakpoint() is reached, you will be able to debug from the command line.
@@ -136,7 +136,7 @@ All possible URL params are described in the below table:
 | Welfare Benefits                       | `wb`<br>/check?categories=wb       | {HOST}/check/welfare-benefits                       |
 
 
-There are also some scenarios in which users coming from CHECK will need to be shown multiple categories. The way the Check search in FALA is set up allows for any combination of categories to be selected. The title of the search is determined by which category is put first in the URL. 
+There are also some scenarios in which users coming from CHECK will need to be shown multiple categories. The way the Check search in FALA is set up allows for any combination of categories to be selected. The title of the search is determined by which category is put first in the URL.
 
 The below URLs are some of the main examples which are used by CHECK:
 

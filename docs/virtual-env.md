@@ -85,7 +85,7 @@ node --version
 
 5. Create a ``.env`` file from the example file:
 
-       `cp .env.example .env` 
+       `cp .env.example .env`
 
 ## Running
 
@@ -168,13 +168,13 @@ python manage.py makemessages -l cy -i locale -i venv
 - Compile the translated `django.po` file into the optimised `django.mo` file:
 ```bash
 python manage.py compilemessages -l cy
-``` 
+```
 
 Django will use the `django.mo` file to display translations.
 
 ### **To Note**
 
-The `makemessages` command in Django doesn’t understand the syntax of Jinja2 components and is designed to work with Django's default template engine. Therefore any strings in the Jinja2 components that need to be translated, have to be set as Jinja2 variables, within the templates. 
+The `makemessages` command in Django doesn’t understand the syntax of Jinja2 components and is designed to work with Django's default template engine. Therefore any strings in the Jinja2 components that need to be translated, have to be set as Jinja2 variables, within the templates.
 
 There has been exploration in configuring this app to use `babel`, in order to translate the strings inside Jinja2 components, but the benefits in doing so did not outweigh the current implementation;
 - Django’s [documentation](https://docs.djangoproject.com/en/5.1/topics/i18n/translation/#localization-how-to-create-language-files) lacks clear instructions on integrating Babel.

@@ -5,4 +5,3 @@ if (printResultsPage) {
     window.print();
   })
 };
-
