@@ -28,6 +28,7 @@ repos:
           - --output-file
           - requirements/generated/requirements-dev.txt
           - --strip-extras
+          - --no-annotate
           - -q
       - id: pip-compile
         language_version: python3.12
@@ -38,6 +39,7 @@ repos:
           - --output-file
           - requirements/generated/requirements-pre-commit.txt
           - --strip-extras
+          - --no-annotate
           - -q
       - id: pip-compile
         language_version: python3.12
@@ -48,6 +50,7 @@ repos:
           - --output-file
           - requirements/generated/requirements-lint.txt
           - --strip-extras
+          - --no-annotate
           - -q
       - id: pip-compile
         language_version: python3.12
@@ -58,4 +61,5 @@ repos:
           - --output-file
           - requirements/generated/requirements-production.txt
           - --strip-extras
+          - --no-annotate
           - -q
