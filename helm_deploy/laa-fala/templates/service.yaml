@@ -13,4 +13,3 @@ spec:
       name: http
   selector:
     {{- include "app.selectorLabels" . | nindent 4 }}
-

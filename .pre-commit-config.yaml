@@ -17,7 +17,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/jazzband/pip-tools
-    rev: v7.5.1
+    rev: v7.5.0
     hooks:
       - id: pip-compile
         language_version: python3.12
