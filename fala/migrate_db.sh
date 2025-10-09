@@ -9,4 +9,4 @@ echo "Database setup and Django migrations completed successfully."
 
 exec "$@"
 
-    
+
