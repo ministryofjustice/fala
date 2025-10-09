@@ -25,4 +25,3 @@ services:
     ports:
       - "8013:8000"
     stdin_open: true
-

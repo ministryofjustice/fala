@@ -15,7 +15,7 @@ if (fala_form && cookie_value) {
 
     // variables for postcode and organisation name
     const postcode = document.querySelector("#id_postcode").value;
-    const organisation = document.querySelector("#id_name").value;    
+    const organisation = document.querySelector("#id_name").value;
 
     // variables for checkbox
     const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
@@ -42,4 +42,3 @@ if (fala_postcode_only_form && cookie_value) {
   });
 });
 };
-
