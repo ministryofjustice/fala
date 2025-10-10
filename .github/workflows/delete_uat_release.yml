@@ -1,7 +1,4 @@
 name: Delete UAT release
-
-# This is a GitHub action because Circle:CI doesn't see PR closed events
-# but they are available to actions
 on:
   # pull_request_target runs even when PRs have conflicts - pull_request does not
   # here we just want to tidy up regardless of the state of the PR.
@@ -15,6 +12,23 @@ jobs:
     environment: staging
     steps:
       - uses: actions/checkout@v4
+
+      - name: Debug secrets presence
+        shell: bash
+        env:
+          S1: ${{ secrets.FALA_K8S_CLUSTER_NAME }}
+          S2: ${{ secrets.FALA_K8S_CLUSTER_CERT }}
+          S3: ${{ secrets.FALA_K8S_NAMESPACE }}
+          S4: ${{ secrets.FALA_K8S_TOKEN }}
+        run: |
+          for v in S1 S2 S3 S4; do
+            if [ -z "${!v}" ]; then
+              echo "$v EMPTY"
+            else
+              echo "$v PRESENT length=${#v}"
+            fi
+          done
+
       - name: Delete from STAGING namespace using target
         id: delete_uat
         uses: ./.github/actions/delete-uat-release
