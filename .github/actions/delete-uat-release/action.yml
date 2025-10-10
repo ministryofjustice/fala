@@ -68,6 +68,11 @@ runs:
         K8S_NAMESPACE: ${{ inputs.k8s_namespace }}
         K8S_TOKEN: ${{ inputs.k8s_token }}
       run: |
+        # Fail fast if secrets/inputs are missing
+        if [ -z "$K8S_CLUSTER" ] || [ -z "$K8S_TOKEN" ] || [ -z "$K8S_NAMESPACE" ] || [ -z "$K8S_CLUSTER_CERT" ]; then
+          echo "Missing required Kubernetes inputs (likely due to secrets not being available on this event)."
+          exit 1
+        fi
         echo "${K8S_CLUSTER_CERT}" > ./ca.crt
         kubectl config set-cluster ${K8S_CLUSTER} --certificate-authority=./ca.crt --server=https://${K8S_CLUSTER}
         kubectl config set-credentials circleci --token=${K8S_TOKEN}
