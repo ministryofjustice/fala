@@ -11,6 +11,12 @@ The website uses the LAA Legal Adviser API. The code is hosted at https://github
 ## Dependencies
 - [docker](https://www.docker.com/)
 
+## Local Setup Requirements
+To run this project locally, ensure you have:
+- Node.js >= 20
+- Python >= 3.12
+
+
 ## Prerequisites
 - [Playwright](https://playwright.dev/python/)
 
