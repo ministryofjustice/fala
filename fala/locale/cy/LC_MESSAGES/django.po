@@ -368,10 +368,6 @@ msgstr "Helpwch i wella’r chwiliad hwn am gynghorwyr cyfreithiol"
 msgid "Take part (opens in new tab)"
 msgstr "Cymryd rhan (yn agor mewn tab newydd)"
 
-#: fala/templates/adviser/_results_heading.html:4
-msgid "Your nearest legal aid advisers and family mediators"
-msgstr "Eich cynghorwyr cymorth cyfreithiol a chyfryngwyr teulu agosaf"
-
 #: fala/templates/adviser/_results_heading.html:6
 msgid "Your nearest legal aid advisers for the "
 msgstr "Eich cynghorwyr cymorth cyfreithiol agosaf ar gyfer y "
