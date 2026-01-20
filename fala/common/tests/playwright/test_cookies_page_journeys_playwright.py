@@ -160,6 +160,15 @@ class CookiesPageEndToEndJourneysWithFreshSetUp(StaticLiveServerTestCase):
 
             self.tear_down(page, context)
 
+import logging
+
+logging.basicConfig(
+    filename="playwright_cookies.log",
+    filemode="a",  # append
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+)
+
 
 class TranslationLink(StaticLiveServerTestCase):
     def test_language_switcher_link(self):
@@ -175,6 +184,7 @@ class TranslationLink(StaticLiveServerTestCase):
             assert len(my_cookies) == 0
             page.locator("#language_switcher_link").click()
             my_cookies = context.cookies()
+            logging.info("The lenght of my cookies/n/n/n/n",my_cookies)
             assert len(my_cookies) == 1
             expect(page.locator("h1")).to_have_text("Dod o hyd i gynghorydd cymorth cyfreithiol neu gyfryngwr teulu")
             expect(page.get_by_label("Hawliadau yn erbyn Awdurdodau Cyhoeddus")).to_be_visible()
