@@ -174,11 +174,12 @@ class TranslationLink(StaticLiveServerTestCase):
             my_cookies = context.cookies()
             assert len(my_cookies) == 0
             page.locator("#language_switcher_link").click()
-    
-            import time 
+
+            import time
+
             time.sleep(2)
             my_cookies = context.cookies()
-            print( my_cookies, 'This is my cookies')
+            print(my_cookies, "This is my cookies")
             assert len(my_cookies) == 1
             page.screenshot(path="screenshot.png", full_page=True)
             expect(page.locator("h1")).to_have_text("Dod o hyd i gynghorydd cymorth cyfreithiol neu gyfryngwr teulu")
