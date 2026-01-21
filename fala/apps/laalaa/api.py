@@ -15,25 +15,25 @@ except NameError:
 
 
 def return_get_categories():
-    return [
-        {"code": "MOSL", "civil": True, "name": "Modern slavery"},
-        {"code": "MED", "civil": True, "name": "Clinical negligence"},
-        {"code": "PUB", "civil": True, "name": "Public law"},
-        {"code": "MHE", "civil": True, "name": "Mental health"},
-        {"code": "COM", "civil": True, "name": "Community care"},
-        {"code": "DEB", "civil": True, "name": "Debt"},
-        {"code": "WB", "civil": True, "name": "Welfare benefits"},
-        {"code": "HLPAS", "civil": True, "name": "Housing Loss Prevention Advice Service"},
-        {"code": "FMED", "civil": True, "name": "Family mediation"},
-        {"code": "DISC", "civil": True, "name": "Discrimination"},
-        {"code": "AAP", "civil": True, "name": "Claims Against Public Authorities"},
-        {"code": "EDU", "civil": True, "name": "Education"},
-        {"code": "MAT", "civil": True, "name": "Family"},
-        {"code": "IMMAS", "civil": True, "name": "Immigration or asylum"},
-        {"code": "HOU", "civil": True, "name": "Housing"},
-        {"code": "PL", "civil": False, "name": "Prison law"},
-        {"code": "CRM", "civil": False, "name": "Crime"},
-    ]
+    return {
+        "MOSL": {"civil": True, "name": "Modern slavery"},
+        "MED": {"civil": True, "name": "Clinical negligence"},
+        "PUB": {"civil": True, "name": "Public law"},
+        "MHE": {"civil": True, "name": "Mental health"},
+        "COM": {"civil": True, "name": "Community care"},
+        "DEB": {"civil": True, "name": "Debt"},
+        "WB": {"civil": True, "name": "Welfare benefits"},
+        "HLPAS": {"civil": True, "name": "Housing Loss Prevention Advice Service"},
+        "FMED": {"civil": True, "name": "Family mediation"},
+        "DISC": {"civil": True, "name": "Discrimination"},
+        "AAP": {"civil": True, "name": "Claims Against Public Authorities"},
+        "EDU": {"civil": True, "name": "Education"},
+        "MAT": {"civil": True, "name": "Family"},
+        "IMMAS": {"civil": True, "name": "Immigration or asylum"},
+        "HOU": {"civil": True, "name": "Housing"},
+        "PL": {"civil": False, "name": "Prison law"},
+        "CRM": {"civil": False, "name": "Crime"},
+    }
 
 
 def get_categories():
