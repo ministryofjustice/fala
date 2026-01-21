@@ -2,10 +2,7 @@
 from urllib.parse import urlencode
 from collections import OrderedDict
 import requests
-
 from django.conf import settings
-
-
 from cla_common.laalaa import LaaLaaError
 
 try:
@@ -37,10 +34,9 @@ def return_get_categories():
 
 
 def get_categories():
-
     categories = return_get_categories()
     categories.sort(key=lambda x: x["name"])
-    return categories
+    return [(c["code"], c["name"]) for c in categories]
 
 
 PROVIDER_CATEGORY_CHOICES = get_categories()

@@ -174,14 +174,8 @@ class TranslationLink(StaticLiveServerTestCase):
             my_cookies = context.cookies()
             assert len(my_cookies) == 0
             page.locator("#language_switcher_link").click()
-
-            import time
-
-            time.sleep(2)
             my_cookies = context.cookies()
-            print(my_cookies, "This is my cookies")
             assert len(my_cookies) == 1
-            page.screenshot(path="screenshot.png", full_page=True)
             expect(page.locator("h1")).to_have_text("Dod o hyd i gynghorydd cymorth cyfreithiol neu gyfryngwr teulu")
             expect(page.get_by_label("Hawliadau yn erbyn Awdurdodau Cyhoeddus")).to_be_visible()
             expect(page.locator("#language_switcher_link")).to_have_text("English")
