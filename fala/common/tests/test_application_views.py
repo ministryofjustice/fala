@@ -39,7 +39,7 @@ class ErrorPageTest(SimpleTestCase):
     def test_raises_404_when_page_number_does_not_exist(
         self,
     ):
-        response = self.client.get(self.url, {"postcode": "SE11", "page": 500})
+        response = self.client.get(self.url, {"postcode": "SE11", "page": 4566})
         self.assertEqual(response.status_code, 404)
 
 

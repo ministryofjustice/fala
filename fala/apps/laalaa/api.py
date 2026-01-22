@@ -2,8 +2,12 @@
 from urllib.parse import urlencode
 from collections import OrderedDict
 import requests
+
 from django.conf import settings
-from cla_common.laalaa import LaaLaaError
+from django.utils.translation import gettext_lazy as _
+
+from cla_common.laalaa import LaalaaProviderCategoriesApiClient, LaaLaaError
+
 
 try:
     basestring
@@ -11,32 +15,13 @@ except NameError:
     basestring = str
 
 
-def return_get_categories():
-    return [
-        {"code": "MOSL", "civil": True, "name": "Modern slavery"},
-        {"code": "MED", "civil": True, "name": "Clinical negligence"},
-        {"code": "PUB", "civil": True, "name": "Public law"},
-        {"code": "MHE", "civil": True, "name": "Mental health"},
-        {"code": "COM", "civil": True, "name": "Community care"},
-        {"code": "DEB", "civil": True, "name": "Debt"},
-        {"code": "WB", "civil": True, "name": "Welfare benefits"},
-        {"code": "HLPAS", "civil": True, "name": "Housing Loss Prevention Advice Service"},
-        {"code": "FMED", "civil": True, "name": "Family mediation"},
-        {"code": "DISC", "civil": True, "name": "Discrimination"},
-        {"code": "AAP", "civil": True, "name": "Claims Against Public Authorities"},
-        {"code": "EDU", "civil": True, "name": "Education"},
-        {"code": "MAT", "civil": True, "name": "Family"},
-        {"code": "IMMAS", "civil": True, "name": "Immigration or asylum"},
-        {"code": "HOU", "civil": True, "name": "Housing"},
-        {"code": "PL", "civil": False, "name": "Prison law"},
-        {"code": "CRM", "civil": False, "name": "Crime"},
-    ]
-
-
 def get_categories():
-    categories = return_get_categories()
-    categories.sort(key=lambda x: x["name"])
-    return [(c["code"], c["name"]) for c in categories]
+    if settings.LAALAA_API_HOST:
+        categories = LaalaaProviderCategoriesApiClient.singleton(settings.LAALAA_API_HOST, _).get_categories()
+        # sort by name (the second item in the tuple) rather than the code
+        return [item for item in sorted(categories.items(), key=lambda x: x[1])]
+
+    return []
 
 
 PROVIDER_CATEGORY_CHOICES = get_categories()
