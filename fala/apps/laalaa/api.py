@@ -4,6 +4,7 @@ from collections import OrderedDict
 from django.conf import settings
 import json
 
+
 try:
     basestring
 except NameError:
