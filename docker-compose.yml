@@ -4,11 +4,15 @@ services:
     container_name: fala
     build:
       context: .
-      target: ${DOCKER_TARGET:-development}
+      target: ${ENVIRONMENT:-development}
     volumes:
       - ./fala:/home/app/fala
+      - /home/app/fala/assets
     command:
-      sh -lc "cp -rn /home/app/fala/assets_baked/. /home/app/fala/assets/ || true; python3 manage.py runserver 0.0.0.0:8000"
+      - python3
+      - manage.py
+      - runserver
+      - "0.0.0.0:8000"
 
     environment:
       ENVIRONMENT: "dev"
