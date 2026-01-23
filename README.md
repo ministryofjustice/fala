@@ -1,5 +1,7 @@
 # Find a Legal Adviser
 
+[![Ministry of Justice Repository Compliance Badge](https://github-community.service.justice.gov.uk/repository-standards/api/fala/badge)](https://github-community.service.justice.gov.uk/repository-standards/fala)
+
 This repository holds the code for the "Find a legal aid adviser or family mediator" application. The service helps members of the public in England and Wales to search for a legal adviser or family mediator with a legal aid contract.
 
 The website address is https://find-legal-advice.justice.gov.uk/.
@@ -9,9 +11,11 @@ The website address is https://find-legal-advice.justice.gov.uk/.
 The website uses the LAA Legal Adviser API. The code is hosted at https://github.com/ministryofjustice/laa-legal-adviser-api.
 
 ## Dependencies
+
 - [docker](https://www.docker.com/)
 
 ## Prerequisites
+
 - [Playwright](https://playwright.dev/python/)
 
 ## Installation for development
@@ -73,6 +77,7 @@ Alternatively, some editors have functionality to hook into running containers, 
 extension. Docker Desktop offers a UI version of looking through logs, exec and many other interactions.
 
 ### Debugging
+
 Depending on how you're running the project, via `venv` or Docker you can perform the following debugging:
 
 You can insert a breakpoint with the `breakpoint()` function at any position in your code.
@@ -104,7 +109,6 @@ e.g. `helm -n  laa-fala-staging delete el-123-fee-change`
 
 It is also possible to manually deploy to an environment from the command line, the structure of the command can be found in `bin/deploy.sh`
 
-
 ## CHECK referrals
 
 As part of improvement works to 'Check if you can get legal aid and Find a legal advisor' (CHECK) in February 2025, a new set of pages & urls were created that would allow users to be sent from CHECK to FALA. Epic for the work can be viewed [here](https://dsdmoj.atlassian.net/browse/EL-1891).
@@ -135,21 +139,21 @@ All possible URL params are described in the below table:
 | Public Law                             | `pub`<br>/check?categories=pub     | {HOST}/check/public-law                             |
 | Welfare Benefits                       | `wb`<br>/check?categories=wb       | {HOST}/check/welfare-benefits                       |
 
-
 There are also some scenarios in which users coming from CHECK will need to be shown multiple categories. The way the Check search in FALA is set up allows for any combination of categories to be selected. The title of the search is determined by which category is put first in the URL.
 
 The below URLs are some of the main examples which are used by CHECK:
 
-| **Main Category**   | **Sub Category**     | **URL params sent by CHECK**                             | **Resolved URL in FALA**                    |
-| ------------------- | -------------------- | -------------------------------------------------------- | ------------------------------------------- |
-| Mental health       | Clinical Negligence  | `mhe` & `med` <br>/check?categories=mhe&sub-category=med | {HOST}/check/mental-health?sub-category=med |
+| **Main Category** | **Sub Category**    | **URL params sent by CHECK**                             | **Resolved URL in FALA**                    |
+| ----------------- | ------------------- | -------------------------------------------------------- | ------------------------------------------- |
+| Mental health     | Clinical Negligence | `mhe` & `med` <br>/check?categories=mhe&sub-category=med | {HOST}/check/mental-health?sub-category=med |
 
 ## Documentation
-* [Installation via virtualenv](docs/virtual-env.md)
-* [Using Kubernetes](docs/kubernetes.md)
-* [Releasing](https://github.com/ministryofjustice/laa-civil-legal-aid-documentation/blob/master/releasing/kubernetes.md)
-(opens in https://github.com/ministryofjustice/laa-civil-legal-aid-documentation)
-* [Requirements files](requirements/README.md)
+
+- [Installation via virtualenv](docs/virtual-env.md)
+- [Using Kubernetes](docs/kubernetes.md)
+- [Releasing](https://github.com/ministryofjustice/laa-civil-legal-aid-documentation/blob/master/releasing/kubernetes.md)
+  (opens in https://github.com/ministryofjustice/laa-civil-legal-aid-documentation)
+- [Requirements files](requirements/README.md)
 
 ## Git hooks
 
@@ -165,7 +169,7 @@ Repository uses [MoJ DevSecOps hooks](https://github.com/ministryofjustice/devse
    curl --proto '=https' --tlsv1.2 -LsSf https://raw.githubusercontent.com/ministryofjustice/devsecops-hooks/e85ca6127808ef407bc1e8ff21efed0bbd32bb1a/prek/prek-installer.sh | sh
    ```
 
-   or 
+   or
 
    ```bash
    brew install prek
@@ -177,7 +181,7 @@ Repository uses [MoJ DevSecOps hooks](https://github.com/ministryofjustice/devse
    powershell -ExecutionPolicy ByPass -c "irm https://raw.githubusercontent.com/ministryofjustice/devsecops-hooks/e85ca6127808ef407bc1e8ff21efed0bbd32bb1a/prek/prek-installer.ps1 | iex"
    ```
 
-3. **Activation**
+2. **Activation**
 
    Execute the following command in the repository directory
 
@@ -185,9 +189,9 @@ Repository uses [MoJ DevSecOps hooks](https://github.com/ministryofjustice/devse
    prek install
    ```
 
-4. **Test**
+3. **Test**
 
-    To dry-run the hook
+   To dry-run the hook
 
    ```bash
    prek run
