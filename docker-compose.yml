@@ -4,20 +4,16 @@ services:
     container_name: fala
     build:
       context: .
-      target: ${ENVIRONMENT:-development}
+      target: ${DOCKER_TARGET:-development}
     volumes:
       - ./fala:/home/app/fala
-      - /home/app/fala/assets
     command:
-      - python3
-      - manage.py
-      - runserver
-      - "0.0.0.0:8000"
+      sh -lc "cp -rn /home/app/fala/assets_baked/. /home/app/fala/assets/ || true; python3 manage.py runserver 0.0.0.0:8000"
 
     environment:
       ENVIRONMENT: "dev"
       ALLOW_HOSTS: ".localhost"
-      LAALAA_API_HOST: "https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk"
+      LAALAA_API_HOST: "http://laa-legal-adviser-api.laa-legal-adviser-api-staging.svc.cluster.local"
       DJANGO_SETTINGS_MODULE: "fala.settings"
       FEATURE_FLAG_SURVEY_MONKEY: "disabled"
       FEATURE_FLAG_MAINTENANCE_MODE: "disabled"
