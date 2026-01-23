@@ -1,9 +1,8 @@
 # coding=utf-8
 from urllib.parse import urlencode
 from collections import OrderedDict
-import requests
 from django.conf import settings
-from cla_common.laalaa import LaaLaaError
+import json
 
 try:
     basestring
@@ -11,32 +10,22 @@ except NameError:
     basestring = str
 
 
-def return_get_categories():
-    return [
-        {"code": "MOSL", "civil": True, "name": "Modern slavery"},
-        {"code": "MED", "civil": True, "name": "Clinical negligence"},
-        {"code": "PUB", "civil": True, "name": "Public law"},
-        {"code": "MHE", "civil": True, "name": "Mental health"},
-        {"code": "COM", "civil": True, "name": "Community care"},
-        {"code": "DEB", "civil": True, "name": "Debt"},
-        {"code": "WB", "civil": True, "name": "Welfare benefits"},
-        {"code": "HLPAS", "civil": True, "name": "Housing Loss Prevention Advice Service"},
-        {"code": "FMED", "civil": True, "name": "Family mediation"},
-        {"code": "DISC", "civil": True, "name": "Discrimination"},
-        {"code": "AAP", "civil": True, "name": "Claims Against Public Authorities"},
-        {"code": "EDU", "civil": True, "name": "Education"},
-        {"code": "MAT", "civil": True, "name": "Family"},
-        {"code": "IMMAS", "civil": True, "name": "Immigration or asylum"},
-        {"code": "HOU", "civil": True, "name": "Housing"},
-        {"code": "PL", "civil": False, "name": "Prison law"},
-        {"code": "CRM", "civil": False, "name": "Crime"},
-    ]
+def load_data(file_path: str) -> json:
+    with open(file_path, "r") as apiData:
+        data = json.load(apiData)
+
+    return data if data else []
 
 
 def get_categories():
-    categories = return_get_categories()
-    categories.sort(key=lambda x: x["name"])
-    return [(c["code"], c["name"]) for c in categories]
+    if settings.LAALAA_API_HOST:
+        data = load_data(file_path="mock_api_categories.json")
+        if not data:
+            raise FileNotFoundError("Not able to locate the mock Json File")
+
+        return [item for item in sorted(data.items(), key=lambda x: x[1])]
+
+    return []
 
 
 PROVIDER_CATEGORY_CHOICES = get_categories()
@@ -55,16 +44,9 @@ def laalaa_url(**kwargs):
 
 
 def laalaa_search(**kwargs):
-    try:
-        response = requests.get(laalaa_url(**kwargs))
-        response.raise_for_status()
-        return response.json()
-    except requests.exceptions.HTTPError as e:
-        if response.status_code == 404:
-            return response.json()
-        raise LaaLaaError(e)
-    except (requests.exceptions.RequestException, ValueError) as e:
-        raise LaaLaaError(e)
+    data = load_data(file_path="mock_api_categories.json")
+
+    return data if data else FileNotFoundError("Not able to locate the mock Json File")
 
 
 def decode_category(category):
