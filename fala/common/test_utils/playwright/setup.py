@@ -40,7 +40,6 @@ class PlaywrightTestSetup(StaticLiveServerTestCase):
         if checkbox_labels is None:
             checkbox_labels = []
         page = self.browser.new_page()
-
         page.goto(f"{self.live_server_url}")
         page.get_by_label("Postcode").fill(postcode)
         if organisation:
