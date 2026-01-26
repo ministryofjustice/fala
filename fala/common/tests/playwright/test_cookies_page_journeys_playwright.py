@@ -1,7 +1,6 @@
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from playwright.sync_api import sync_playwright, expect
 from fala.common.test_utils.playwright.setup import PlaywrightTestSetup
-import time
 
 
 class CookiesPageEndToEndJourneys(PlaywrightTestSetup):
@@ -169,20 +168,13 @@ class TranslationLink(StaticLiveServerTestCase):
             context = browser.new_context()
             page = context.new_page()
             page.goto(f"{self.live_server_url}")
-            time.sleep(2)
             expect(page.locator("h1")).to_have_text("Find a legal aid adviser or family mediator")
             expect(page.get_by_label("Claims against public authorities")).to_be_visible()
             expect(page.locator("#language_switcher_link")).to_have_text("Cymraeg")
             my_cookies = context.cookies(urls=[self.live_server_url])
-
             assert len(my_cookies) == 0
             page.locator("#language_switcher_link").click()
             my_cookies = context.cookies(urls=[self.live_server_url])
-
-            time.sleep(5)
-            page.screenshot(path="screenshot.png", full_page=True)
-
-            print(my_cookies)
             assert len(my_cookies) == 1
             expect(page.locator("h1")).to_have_text("Dod o hyd i gynghorydd cymorth cyfreithiol neu gyfryngwr teulu")
             expect(page.get_by_label("Hawliadau yn erbyn Awdurdodau Cyhoeddus")).to_be_visible()
