@@ -1,12 +1,9 @@
 # coding=utf-8
 from urllib.parse import urlencode
 from collections import OrderedDict
-import requests
-
 from django.conf import settings
-from django.utils.translation import gettext_lazy as _
+import json
 
-from cla_common.laalaa import LaalaaProviderCategoriesApiClient, LaaLaaError
 
 try:
     basestring
@@ -14,13 +11,20 @@ except NameError:
     basestring = str
 
 
-def get_categories():
-    if settings.LAALAA_API_HOST:
-        categories = LaalaaProviderCategoriesApiClient.singleton(settings.LAALAA_API_HOST, _).get_categories()
-        # sort by name (the second item in the tuple) rather than the code
-        return [item for item in sorted(categories.items(), key=lambda x: x[1])]
+def load_data(file_path: str) -> json:
+    with open(file_path, "r") as apiData:
+        data = json.load(apiData)
 
-    return []
+    return data if data else []
+
+
+def get_categories():
+
+    data = load_data(file_path="mock_api_categories.json")
+    if not data:
+        raise FileNotFoundError("Not able to locate the mock Json File")
+
+    return [item for item in sorted(data.items(), key=lambda x: x[1])]
 
 
 PROVIDER_CATEGORY_CHOICES = get_categories()
@@ -39,16 +43,9 @@ def laalaa_url(**kwargs):
 
 
 def laalaa_search(**kwargs):
-    try:
-        response = requests.get(laalaa_url(**kwargs))
-        response.raise_for_status()
-        return response.json()
-    except requests.exceptions.HTTPError as e:
-        if response.status_code == 404:
-            return response.json()
-        raise LaaLaaError(e)
-    except (requests.exceptions.RequestException, ValueError) as e:
-        raise LaaLaaError(e)
+    data = load_data(file_path="mock_api_categories.json")
+
+    return data if data else FileNotFoundError("Not able to locate the mock Json File")
 
 
 def decode_category(category):

@@ -4,100 +4,13 @@ from unittest import mock
 
 
 def get_categories():
-    items = json.loads(
-        """
-    [
-    {
-        "code": "MOSL",
-        "civil": true,
-        "name": "Modern slavery"
-    },
-    {
-        "code": "MED",
-        "civil": true,
-        "name": "Clinical negligence"
-    },
-    {
-        "code": "PUB",
-        "civil": true,
-        "name": "Public law"
-    },
-    {
-        "code": "MHE",
-        "civil": true,
-        "name": "Mental health"
-    },
-    {
-        "code": "COM",
-        "civil": true,
-        "name": "Community care"
-    },
-    {
-        "code": "DEB",
-        "civil": true,
-        "name": "Debt"
-    },
-    {
-        "code": "WB",
-        "civil": true,
-        "name": "Welfare benefits"
-    },
-    {
-        "code": "HLPAS",
-        "civil": true,
-        "name": "Housing Loss Prevention Advice Service"
-    },
-    {
-        "code": "FMED",
-        "civil": true,
-        "name": "Family mediation"
-    },
-    {
-        "code": "DISC",
-        "civil": true,
-        "name": "Discrimination"
-    },
-    {
-        "code": "AAP",
-        "civil": true,
-        "name": "Claims Against Public Authorities"
-    },
-    {
-        "code": "EDU",
-        "civil": true,
-        "name": "Education"
-    },
-    {
-        "code": "MAT",
-        "civil": true,
-        "name": "Family"
-    },
-    {
-        "code": "IMMAS",
-        "civil": true,
-        "name": "Immigration or asylum"
-    },
-    {
-        "code": "HOU",
-        "civil": true,
-        "name": "Housing"
-    },
-    {
-        "code": "PL",
-        "civil": false,
-        "name": "Prison law"
-    },
-    {
-        "code": "CRM",
-        "civil": false,
-        "name": "Crime"
-    }
-]
-    """,
-        strict=False,
-    )
 
+    with open("mock_api_categories.json", "r") as apiData:
+        items = json.load(apiData)
+
+    print(items)
     data = {item["code"].lower(): item["name"] for item in items}
+
     return data
 
 
