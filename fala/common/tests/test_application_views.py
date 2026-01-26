@@ -6,7 +6,6 @@ from fala.common.test_utils.helpers import parse_html, find_element
 class MaintenanceModeTest(SimpleTestCase):
     client = Client()
     url = reverse("results")
-
     data = {"name": "foo", "categories": ["deb", "edu"]}
 
     maintenance_mode_h1 = "Sorry, the service is unavailable"
