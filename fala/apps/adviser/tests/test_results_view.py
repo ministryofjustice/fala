@@ -1,19 +1,6 @@
-from django.test import SimpleTestCase, Client, override_settings, TestCase
+from django.test import SimpleTestCase, Client, override_settings
 from django.urls import reverse
-import bs4
-
-
-def parse_html(content):
-    return bs4.BeautifulSoup(content, "html.parser")
-
-
-def find_element(html, tag, class_):
-    return html.find(tag, class_=class_)
-
-
-class MyTestCase(TestCase):
-    def setUp(self):
-        self.client = Client()
+from fala.common.test_utils.helpers import parse_html, find_element
 
 
 class ResultsPageWithBothOrgAndPostcodeTest(SimpleTestCase):
