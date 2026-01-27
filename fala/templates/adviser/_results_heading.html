@@ -8,10 +8,10 @@
           <h1 class="govuk-heading-xl">{{_('Your nearest legal aid advisers for ')}}{{ form|category_selection_first_item|lower }}</h1>
       {% endif %}
   {% elif (form|category_selection_first_item|lower == "family") or (form|category_selection_first_item|lower == "family mediation") %}
-      <h1 class="govuk-heading-xl">{{_('Your nearest legal aid advisors and family mediators')}}</h1>
+      <h1 class="govuk-heading-xl">{{_('Your nearest legal aid advisers and family mediators')}}</h1>
   {% elif (form|no_postcode_search)%}
       <h1 class="govuk-heading-xl">{{_('Search results')}}</h1>
   {% else %}
-      <h1 class="govuk-heading-xl">{{_('Your nearest legal aid advisors ')}}</h1>
+      <h1 class="govuk-heading-xl">{{_('Your nearest legal aid advisers ')}}</h1>
   {% endif %}
 </div>

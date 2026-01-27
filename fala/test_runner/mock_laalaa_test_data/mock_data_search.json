@@ -1,0 +1,243 @@
+{
+    "count": 4565,
+    "next": "https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/legal-advisers/?page=2",
+    "previous": null,
+    "results": [
+        {
+            "telephone": "01792 633 280",
+            "location": {
+                "address": "4-6 Orchard Street",
+                "city": "Swansea",
+                "postcode": "SA1 5AG",
+                "point": {
+                    "type": "Point",
+                    "coordinates": [
+                        -3.943112,
+                        51.622156
+                    ]
+                },
+                "type": "Office"
+            },
+            "organisation": {
+                "name": "Public Defender Service Swansea",
+                "website": ""
+            },
+            "categories": [
+                "CRM"
+            ]
+        },
+        {
+            "telephone": "01443 629724",
+            "location": {
+                "address": "1 Penuel Lane",
+                "city": "Pontypridd",
+                "postcode": "CF37 4UF",
+                "point": {
+                    "type": "Point",
+                    "coordinates": [
+                        -3.341437,
+                        51.602562
+                    ]
+                },
+                "type": "Office"
+            },
+            "organisation": {
+                "name": "Public Defender Service Pontypridd",
+                "website": ""
+            },
+            "categories": [
+                "CRM"
+            ]
+        },
+        {
+            "telephone": "01325 289 480",
+            "location": {
+                "address": "3rd Floor Stephenson House\nAlderman Best Way",
+                "city": "Darlington",
+                "postcode": "DL1 4WB",
+                "point": {
+                    "type": "Point",
+                    "coordinates": [
+                        -1.502321,
+                        54.514943
+                    ]
+                },
+                "type": "Office"
+            },
+            "organisation": {
+                "name": "Public Defender Service Darlington",
+                "website": ""
+            },
+            "categories": [
+                "CRM"
+            ]
+        },
+        {
+            "telephone": "01242 548 270",
+            "location": {
+                "address": "Lower Ground Floor\n65 Regent House\nRodney Road",
+                "city": "Cheltenham",
+                "postcode": "GL50 1HX",
+                "point": {
+                    "type": "Point",
+                    "coordinates": [
+                        -2.074691,
+                        51.898941
+                    ]
+                },
+                "type": "Office"
+            },
+            "organisation": {
+                "name": "Public Defender Service Cheltenham",
+                "website": ""
+            },
+            "categories": [
+                "CRM"
+            ]
+        },
+        {
+            "telephone": "0208 581 7403",
+            "location": {
+                "address": "27-37 Station Road",
+                "city": "Hayes",
+                "postcode": "UB3 4DX",
+                "point": {
+                    "type": "Point",
+                    "coordinates": [
+                        -0.418481,
+                        51.506204
+                    ]
+                },
+                "type": "Office"
+            },
+            "organisation": {
+                "name": "1 Law Solicitors LTD",
+                "website": ""
+            },
+            "categories": [
+                "CRM"
+            ]
+        },
+        {
+            "telephone": "0203 011 5999",
+            "location": {
+                "address": "12 Caroline Street\nJewellery Quarter",
+                "city": "Birmingham",
+                "postcode": "B3 1TR",
+                "point": {
+                    "type": "Point",
+                    "coordinates": [
+                        -1.907137,
+                        52.486093
+                    ]
+                },
+                "type": "Office"
+            },
+            "organisation": {
+                "name": "1 Law Solicitors LTD",
+                "website": ""
+            },
+            "categories": [
+                "CRM"
+            ]
+        },
+        {
+            "telephone": "01872 222 688",
+            "location": {
+                "address": "11 Edward Street",
+                "city": "Truro",
+                "postcode": "TR1 3AR",
+                "point": {
+                    "type": "Point",
+                    "coordinates": [
+                        -5.056496,
+                        50.264714
+                    ]
+                },
+                "type": "Office"
+            },
+            "organisation": {
+                "name": "@Cornwall Law LLP",
+                "website": ""
+            },
+            "categories": [
+                "MAT"
+            ]
+        },
+        {
+            "telephone": "0207 231 1405",
+            "location": {
+                "address": "32 St Olav'S Court\nLower Road\nCanada Water",
+                "city": "London",
+                "postcode": "SE16 2XB",
+                "point": {
+                    "type": "Point",
+                    "coordinates": [
+                        -0.054561,
+                        51.498653
+                    ]
+                },
+                "type": "Office"
+            },
+            "organisation": {
+                "name": "A & A Law",
+                "website": ""
+            },
+            "categories": [
+                "MOSL",
+                "MAT",
+                "CRM"
+            ]
+        },
+        {
+            "telephone": "0204 511 9159",
+            "location": {
+                "address": "85-87 Bayham Street\nCamden",
+                "city": "London",
+                "postcode": "NW1 0AG",
+                "point": {
+                    "type": "Point",
+                    "coordinates": [
+                        -0.140526,
+                        51.537774
+                    ]
+                },
+                "type": "Office"
+            },
+            "organisation": {
+                "name": "Geoffrey Grace Solicitors",
+                "website": ""
+            },
+            "categories": [
+                "COM",
+                "DEB",
+                "MAT",
+                "HOU"
+            ]
+        },
+        {
+            "telephone": "01772 888 700",
+            "location": {
+                "address": "58 Lancaster Road",
+                "city": "Preston",
+                "postcode": "PR1 1DD",
+                "point": {
+                    "type": "Point",
+                    "coordinates": [
+                        -2.698162,
+                        53.760467
+                    ]
+                },
+                "type": "Office"
+            },
+            "organisation": {
+                "name": "A & M Solicitors LTD",
+                "website": "www.aandmsolicitors.com"
+            },
+            "categories": [
+                "CRM"
+            ]
+        }
+    ],
+    "origin": null
+}
