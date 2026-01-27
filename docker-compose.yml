@@ -7,7 +7,7 @@ services:
       target: ${ENVIRONMENT:-development}
     volumes:
       - ./fala:/home/app/fala
-      - /home/app/fala/assets
+      - ./fala/assets-src:/home/app/fala/assets-src
     command:
       - python3
       - manage.py

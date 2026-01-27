@@ -168,6 +168,7 @@ class PaginationTest(SimpleTestCase):
 
         response = self.client.get(self.url, data)
         html = parse_html(response.content)
+
         next = find_element(html, "div", "govuk-pagination__next")
         link = next.find("a").get("href")
         self.assertEqual("/search?page=3&postcode=PE30&name=&categories=deb", link)
