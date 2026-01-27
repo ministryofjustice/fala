@@ -9,9 +9,9 @@ class ResultPageEndToEndJourneys(PlaywrightTestSetup):
         search_page = results_page.search_for_something_else()
         expect(search_page.h1).to_have_text("Find a legal aid adviser or family mediator")
 
-    # def test_pagination_does_not_appear_when_there_is_one_page(self):
-    #     results_page = self.visit_results_page(postcode="W1J5BF", organisation="charles")
-    #     expect(results_page.pagination_link_title).not_to_be_visible()
+    def test_pagination_does_not_appear_when_there_is_one_page(self):
+        results_page = self.visit_results_page(postcode="W1J5BF", organisation="charles")
+        expect(results_page.pagination_link_title).not_to_be_visible()
 
     def test_pagination_does_appears_when_there_is_more_than_one_page(self):
         results_page = self.visit_results_page(postcode="SE11")

@@ -1,11 +1,14 @@
 import json
+import os
 from django.test.runner import DiscoverRunner
 from unittest import mock
 from django.utils.translation import gettext_lazy as _
 
 
 def _context_manager(file_path: str) -> json:
-    with open(file_path, "r") as file:
+    path = os.path.dirname(os.path.realpath(__file__))
+    path = os.path.join(path, "mock_laalaa_test_data", file_path)
+    with open(path, "r") as file:
         return json.load(file)
 
 
@@ -32,7 +35,7 @@ def laalaa_search(**kwargs):
     return _context_manager("mock_lala_company_charles.json")
 
 
-class MOCKLAALAAREUNNER(DiscoverRunner):
+class FalaTestRunner(DiscoverRunner):
     def setup_test_environment(self, **kwargs):
         # This runs BEFORE the apps are fully ready for testing
         self.laala_api_client_patcher = mock.patch(
