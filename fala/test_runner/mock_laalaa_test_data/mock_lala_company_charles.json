@@ -1,259 +1,259 @@
 {
-    "count": 10,
-    "next": "https://localhost/legal-advisers/?name=charles&page=2&postcode=W1J5BF",
-    "previous": null,
-    "results": [
-        {
-            "telephone": "0330 390 3999",
-            "location": {
-                "address": "50 Grosvenor Hill Mayfair\n\nLondon",
-                "city": "",
-                "postcode": "W1K 3QT",
-                "point": {
-                    "type": "Point",
-                    "coordinates": [
-                        -0.14545,
-                        51.511368
-                    ]
-                },
-                "type": "Outreach Office"
-            },
-            "organisation": {
-                "name": "Disputes Mediation",
-                "website": ""
-            },
-            "distance": 0.12459716851711009,
-            "categories": [
-                "FMED"
-            ]
-        },
-        {
-            "telephone": "0203 983 8880",
-            "location": {
-                "address": "Berkeley Square House\nBerkeley Square",
-                "city": "London",
-                "postcode": "W1J 6BD",
-                "point": {
-                    "type": "Point",
-                    "coordinates": [
-                        -0.144584,
-                        51.509878
-                    ]
-                },
-                "type": "Office"
-            },
-            "organisation": {
-                "name": "Berkeley Legal",
-                "website": ""
-            },
-            "distance": 0.12584676759598942,
-            "categories": [
-                "CRM"
-            ]
-        },
-        {
-            "telephone": "0203 858 0851",
-            "location": {
-                "address": "2Nd Floor\nBerkeley Square House\nBerkeley Square",
-                "city": "London",
-                "postcode": "W1J 6BD",
-                "point": {
-                    "type": "Point",
-                    "coordinates": [
-                        -0.144584,
-                        51.509878
-                    ]
-                },
-                "type": "Office"
-            },
-            "organisation": {
-                "name": "Berkeley Square Solicitors LTD",
-                "website": ""
-            },
-            "distance": 0.12584676759598942,
-            "categories": [
-                "CRM"
-            ]
-        },
-        {
-            "telephone": "0330 390 3999",
-            "location": {
-                "address": "2Nd Floor Berkeley Square House\n\nLondon",
-                "city": "",
-                "postcode": "W1J 6BD",
-                "point": {
-                    "type": "Point",
-                    "coordinates": [
-                        -0.144584,
-                        51.509878
-                    ]
-                },
-                "type": "Outreach Office"
-            },
-            "organisation": {
-                "name": "Disputes Mediation",
-                "website": ""
-            },
-            "distance": 0.12584676759598942,
-            "categories": [
-                "FMED"
-            ]
-        },
-        {
-            "telephone": "01604 345 756",
-            "location": {
-                "address": "3Rd Floor Berkeley Square House\nLondon",
-                "city": "",
-                "postcode": "W1J 6BD",
-                "point": {
-                    "type": "Point",
-                    "coordinates": [
-                        -0.144584,
-                        51.509878
-                    ]
-                },
-                "type": "Outreach Office"
-            },
-            "organisation": {
-                "name": "Wright Mediation",
-                "website": "www.wrightmediation.co.uk"
-            },
-            "distance": 0.12584676759598942,
-            "categories": [
-                "FMED"
-            ]
-        },
-        {
-            "telephone": "0208 911 8841",
-            "location": {
-                "address": "Suite 409\nMayfairpoint\n35 South Molton Street",
-                "city": "London",
-                "postcode": "W1K 5RG",
-                "point": {
-                    "type": "Point",
-                    "coordinates": [
-                        -0.148803,
-                        51.514243
-                    ]
-                },
-                "type": "Office"
-            },
-            "organisation": {
-                "name": "Tilson Solicitors LTD",
-                "website": ""
-            },
-            "distance": 0.29257397549560565,
-            "categories": [
-                "CRM"
-            ]
-        },
-        {
-            "telephone": "0330 390 3999",
-            "location": {
-                "address": "17 Hanover Square Mayfair\n\nLondon",
-                "city": "",
-                "postcode": "W1S 1BN",
-                "point": {
-                    "type": "Point",
-                    "coordinates": [
-                        -0.144726,
-                        51.514289
-                    ]
-                },
-                "type": "Outreach Office"
-            },
-            "organisation": {
-                "name": "Disputes Mediation",
-                "website": ""
-            },
-            "distance": 0.3136683577221526,
-            "categories": [
-                "FMED"
-            ]
-        },
-        {
-            "telephone": "01604 345 756",
-            "location": {
-                "address": "17 Hanover Square\nMayfair\nLondon",
-                "city": "",
-                "postcode": "W1S 1BN",
-                "point": {
-                    "type": "Point",
-                    "coordinates": [
-                        -0.144726,
-                        51.514289
-                    ]
-                },
-                "type": "Outreach Office"
-            },
-            "organisation": {
-                "name": "Wright Mediation",
-                "website": "www.wrightmediation.co.uk"
-            },
-            "distance": 0.3136683577221526,
-            "categories": [
-                "FMED"
-            ]
-        },
-        {
-            "telephone": "0333 772 0409",
-            "location": {
-                "address": "13 Hanover Square\nMayfair",
-                "city": "London",
-                "postcode": "W1S 1HN",
-                "point": {
-                    "type": "Point",
-                    "coordinates": [
-                        -0.14392,
-                        51.514535
-                    ]
-                },
-                "type": "Office"
-            },
-            "organisation": {
-                "name": "Duncan Lewis Solicitors  LTD",
-                "website": "www.dunanlewis.com"
-            },
-            "distance": 0.3434913667245785,
-            "categories": [
-                "MOSL",
-                "DEB",
-                "HOU"
-            ]
-        },
-        {
-            "telephone": "07812 56832",
-            "location": {
-                "address": "25 North Row",
-                "city": "London",
-                "postcode": "W1K 6DJ",
-                "point": {
-                    "type": "Point",
-                    "coordinates": [
-                        -0.154585,
-                        51.513203
-                    ]
-                },
-                "type": "Office"
-            },
-            "organisation": {
-                "name": "Brysons Solicitors",
-                "website": ""
-            },
-            "distance": 0.37333064114943726,
-            "categories": [
-                "CRM"
-            ]
-        }
-    ],
-    "origin": {
-        "postcode": "W1J 5BF",
+  "count": 10,
+  "next": "https://localhost/legal-advisers/?name=charles&page=2&postcode=W1J5BF",
+  "previous": null,
+  "results": [
+    {
+      "telephone": "0330 390 3999",
+      "location": {
+        "address": "50 Grosvenor Hill Mayfair\n\nLondon",
+        "city": "",
+        "postcode": "W1K 3QT",
         "point": {
-            "type": "Point",
-            "coordinates": [
-                -0.147491,
-                51.510088
-            ]
-        }
+          "type": "Point",
+          "coordinates": [
+            -0.14545,
+            51.511368
+          ]
+        },
+        "type": "Outreach Office"
+      },
+      "organisation": {
+        "name": "Disputes Mediation",
+        "website": ""
+      },
+      "distance": 0.12459716851711009,
+      "categories": [
+        "FMED"
+      ]
+    },
+    {
+      "telephone": "0203 983 8880",
+      "location": {
+        "address": "Berkeley Square House\nBerkeley Square",
+        "city": "London",
+        "postcode": "W1J 6BD",
+        "point": {
+          "type": "Point",
+          "coordinates": [
+            -0.144584,
+            51.509878
+          ]
+        },
+        "type": "Office"
+      },
+      "organisation": {
+        "name": "Berkeley Legal",
+        "website": ""
+      },
+      "distance": 0.12584676759598942,
+      "categories": [
+        "CRM"
+      ]
+    },
+    {
+      "telephone": "0203 858 0851",
+      "location": {
+        "address": "2Nd Floor\nBerkeley Square House\nBerkeley Square",
+        "city": "London",
+        "postcode": "W1J 6BD",
+        "point": {
+          "type": "Point",
+          "coordinates": [
+            -0.144584,
+            51.509878
+          ]
+        },
+        "type": "Office"
+      },
+      "organisation": {
+        "name": "Berkeley Square Solicitors LTD",
+        "website": ""
+      },
+      "distance": 0.12584676759598942,
+      "categories": [
+        "CRM"
+      ]
+    },
+    {
+      "telephone": "0330 390 3999",
+      "location": {
+        "address": "2Nd Floor Berkeley Square House\n\nLondon",
+        "city": "",
+        "postcode": "W1J 6BD",
+        "point": {
+          "type": "Point",
+          "coordinates": [
+            -0.144584,
+            51.509878
+          ]
+        },
+        "type": "Outreach Office"
+      },
+      "organisation": {
+        "name": "Disputes Mediation",
+        "website": ""
+      },
+      "distance": 0.12584676759598942,
+      "categories": [
+        "FMED"
+      ]
+    },
+    {
+      "telephone": "01604 345 756",
+      "location": {
+        "address": "3Rd Floor Berkeley Square House\nLondon",
+        "city": "",
+        "postcode": "W1J 6BD",
+        "point": {
+          "type": "Point",
+          "coordinates": [
+            -0.144584,
+            51.509878
+          ]
+        },
+        "type": "Outreach Office"
+      },
+      "organisation": {
+        "name": "Wright Mediation",
+        "website": "www.wrightmediation.co.uk"
+      },
+      "distance": 0.12584676759598942,
+      "categories": [
+        "FMED"
+      ]
+    },
+    {
+      "telephone": "0208 911 8841",
+      "location": {
+        "address": "Suite 409\nMayfairpoint\n35 South Molton Street",
+        "city": "London",
+        "postcode": "W1K 5RG",
+        "point": {
+          "type": "Point",
+          "coordinates": [
+            -0.148803,
+            51.514243
+          ]
+        },
+        "type": "Office"
+      },
+      "organisation": {
+        "name": "Tilson Solicitors LTD",
+        "website": ""
+      },
+      "distance": 0.29257397549560565,
+      "categories": [
+        "CRM"
+      ]
+    },
+    {
+      "telephone": "0330 390 3999",
+      "location": {
+        "address": "17 Hanover Square Mayfair\n\nLondon",
+        "city": "",
+        "postcode": "W1S 1BN",
+        "point": {
+          "type": "Point",
+          "coordinates": [
+            -0.144726,
+            51.514289
+          ]
+        },
+        "type": "Outreach Office"
+      },
+      "organisation": {
+        "name": "Disputes Mediation",
+        "website": ""
+      },
+      "distance": 0.3136683577221526,
+      "categories": [
+        "FMED"
+      ]
+    },
+    {
+      "telephone": "01604 345 756",
+      "location": {
+        "address": "17 Hanover Square\nMayfair\nLondon",
+        "city": "",
+        "postcode": "W1S 1BN",
+        "point": {
+          "type": "Point",
+          "coordinates": [
+            -0.144726,
+            51.514289
+          ]
+        },
+        "type": "Outreach Office"
+      },
+      "organisation": {
+        "name": "Wright Mediation",
+        "website": "www.wrightmediation.co.uk"
+      },
+      "distance": 0.3136683577221526,
+      "categories": [
+        "FMED"
+      ]
+    },
+    {
+      "telephone": "0333 772 0409",
+      "location": {
+        "address": "13 Hanover Square\nMayfair",
+        "city": "London",
+        "postcode": "W1S 1HN",
+        "point": {
+          "type": "Point",
+          "coordinates": [
+            -0.14392,
+            51.514535
+          ]
+        },
+        "type": "Office"
+      },
+      "organisation": {
+        "name": "Duncan Lewis Solicitors  LTD",
+        "website": "www.dunanlewis.com"
+      },
+      "distance": 0.3434913667245785,
+      "categories": [
+        "MOSL",
+        "DEB",
+        "HOU"
+      ]
+    },
+    {
+      "telephone": "07812 56832",
+      "location": {
+        "address": "25 North Row",
+        "city": "London",
+        "postcode": "W1K 6DJ",
+        "point": {
+          "type": "Point",
+          "coordinates": [
+            -0.154585,
+            51.513203
+          ]
+        },
+        "type": "Office"
+      },
+      "organisation": {
+        "name": "Brysons Solicitors",
+        "website": ""
+      },
+      "distance": 0.37333064114943726,
+      "categories": [
+        "CRM"
+      ]
     }
+  ],
+  "origin": {
+    "postcode": "W1J 5BF",
+    "point": {
+      "type": "Point",
+      "coordinates": [
+        -0.147491,
+        51.510088
+      ]
+    }
+  }
 }

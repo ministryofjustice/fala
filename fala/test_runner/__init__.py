@@ -28,11 +28,14 @@ def laalaa_search(**kwargs):
     if organisation_name in ["test", "burns"]:
         return _context_manager("mock_empty_result.json")
 
+    if organisation_name == "charles":
+        return _context_manager("mock_laalaa_company_charles.json")
+
     page = kwargs.get("page", 0)
     if isinstance(page, int) and page > 4565:
         return json.loads("""{"error": "Invalid page."}""", strict=False)
 
-    return _context_manager("mock_lala_company_charles.json")
+    return _context_manager("mock_lala_search_all.json")
 
 
 class FalaTestRunner(DiscoverRunner):
