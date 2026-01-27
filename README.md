@@ -11,6 +11,12 @@ The website uses the LAA Legal Adviser API. The code is hosted at https://github
 ## Dependencies
 - [docker](https://www.docker.com/)
 
+## Local Setup Requirements
+To run this project locally, ensure you have:
+- Node.js >= 20
+- Python >= 3.12
+
+
 ## Prerequisites
 - [Playwright](https://playwright.dev/python/)
 
@@ -165,7 +171,7 @@ Repository uses [MoJ DevSecOps hooks](https://github.com/ministryofjustice/devse
    curl --proto '=https' --tlsv1.2 -LsSf https://raw.githubusercontent.com/ministryofjustice/devsecops-hooks/e85ca6127808ef407bc1e8ff21efed0bbd32bb1a/prek/prek-installer.sh | sh
    ```
 
-   or 
+   or
 
    ```bash
    brew install prek
