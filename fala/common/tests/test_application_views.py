@@ -6,7 +6,6 @@ from fala.common.test_utils.helpers import parse_html, find_element
 class MaintenanceModeTest(SimpleTestCase):
     client = Client()
     url = reverse("results")
-
     data = {"name": "foo", "categories": ["deb", "edu"]}
 
     maintenance_mode_h1 = "Sorry, the service is unavailable"
@@ -39,7 +38,7 @@ class ErrorPageTest(SimpleTestCase):
     def test_raises_404_when_page_number_does_not_exist(
         self,
     ):
-        response = self.client.get(self.url, {"postcode": "SE11", "page": 500})
+        response = self.client.get(self.url, {"postcode": "SE11", "page": 4566})
         self.assertEqual(response.status_code, 404)
 
 
