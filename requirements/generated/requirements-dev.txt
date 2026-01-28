@@ -99,7 +99,7 @@ python-dotenv==1.0.1
     # via -r requirements/source/requirements-base.in
 python-slugify==8.0.4
     # via pytest-playwright
-pyyaml==6.0.1
+pyyaml==6.0.3
     # via pre-commit
 requests==2.32.5
     # via
