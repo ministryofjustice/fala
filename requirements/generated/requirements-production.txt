@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file=requirements/generated/requirements-production.txt requirements/source/requirements-production.in
 #
-asgiref==3.8.1
+asgiref==3.11.0
     # via django
 certifi==2024.7.4
     # via
