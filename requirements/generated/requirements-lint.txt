@@ -8,7 +8,7 @@ black==24.10.0
     # via -r requirements/source/requirements-lint.in
 click==8.3.1
     # via black
-flake8==7.0.0
+flake8==7.3.0
     # via -r requirements/source/requirements-lint.in
 mccabe==0.7.0
     # via flake8
