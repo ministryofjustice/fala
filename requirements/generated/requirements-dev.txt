@@ -34,13 +34,13 @@ django-csp==3.8
     # via -r requirements/source/requirements-base.in
 django-extended-choices==0.3.0
     # via cla-common
-django-jinja==2.10.2
+django-jinja==2.11.0
     # via -r requirements/source/requirements-base.in
-django-storages==1.13.2
+django-storages==1.14.6
     # via -r requirements/source/requirements-base.in
 filelock==3.20.3
     # via virtualenv
-govuk-frontend-jinja==3.6.0
+govuk-frontend-jinja==3.10.0
     # via -r requirements/source/requirements-base.in
 greenlet==3.0.3
     # via playwright
