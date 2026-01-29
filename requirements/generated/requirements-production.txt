@@ -30,7 +30,7 @@ django-storages==1.14.6
     # via -r requirements/source/requirements-base.in
 govuk-frontend-jinja==3.10.0
     # via -r requirements/source/requirements-base.in
-idna==3.7
+idna==3.11
     # via requests
 jinja2==3.1.6
     # via

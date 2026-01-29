@@ -46,7 +46,7 @@ greenlet==3.0.3
     # via playwright
 identify==2.6.16
     # via pre-commit
-idna==3.7
+idna==3.11
     # via requests
 iniconfig==2.0.0
     # via pytest
