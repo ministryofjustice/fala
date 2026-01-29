@@ -30,7 +30,7 @@ django==5.1.15
     #   django-csp
     #   django-jinja
     #   django-storages
-django-csp==3.7
+django-csp==3.8
     # via -r requirements/source/requirements-base.in
 django-extended-choices==0.3.0
     # via cla-common
