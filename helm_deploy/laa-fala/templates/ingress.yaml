@@ -8,7 +8,6 @@ metadata:
     chart: {{ template "app.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
-{{- with .Values.ingress.annotations }}
   annotations:
 {{- if .Values.ingress.whitelistEnabled }}
     nginx.ingress.kubernetes.io/whitelist-source-range: "{{ include "laa-fala.whitelist" . }}"
