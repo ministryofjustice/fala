@@ -8,6 +8,11 @@ BRANCH_NAME="${GITHUB_HEAD_REF:-$GITHUB_REF_NAME}"
 # Convert the branch name into a string that can be turned into a valid URL
 BRANCH_RELEASE_NAME=$(echo $BRANCH_NAME | tr '[:upper:]' '[:lower:]' | sed 's:^\w*\/::' | tr -s ' _/[]().' '-' | cut -c1-18 | sed 's/-$//')
 
+# Pull ranges from shared LAA IP ranges and then remove spaces,
+# replace linebreaks with commas, remove last comma, and escape commas for helm input
+SHARED_IP_RANGES_LAA=$(curl -s https://raw.githubusercontent.com/ministryofjustice/laa-ip-allowlist/main/cidrs.txt | tr -d ' ' | tr '\n' ',' | sed 's/,/\\,/g' | sed 's/\\,$//')
+PINGDOM_IPS="$(python3 bin/pingdom_ips.py)"
+
 deploy_branch() {
 # Set the deployment host, this will add the prefix of the branch name e.g el-257-deploy-with-circleci or just main
   RELEASE_HOST="$BRANCH_RELEASE_NAME-fala-staging.cloud-platform.service.justice.gov.uk"
@@ -30,6 +35,8 @@ deploy_main() {
                           --install --wait \
                           --namespace=${K8S_NAMESPACE} \
                           --values ./helm_deploy/laa-fala/values/fala-$ENVIRONMENT.yaml \
+                          --set-string pingdomIPs=$PINGDOM_IPS \
+                          --set-string sharedIPRangesLAA=$SHARED_IP_RANGES_LAA \
                           --set image.repository="${ECR_ENDPOINT}" \
                           --set image.tag="main-$GITHUB_SHA"
 }

@@ -43,6 +43,7 @@ service:
   port: 8000
 
 ingress:
+  whitelistEnabled: true
   annotations:
     external-dns.alpha.kubernetes.io/aws-weight: "100"
 

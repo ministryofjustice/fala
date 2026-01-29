@@ -49,6 +49,7 @@ ingress:
       secret: false
     - host: find-legal-advice.justice.gov.uk
       secret: fala-tls-certificate
+  whitelistEnabled: false
   annotations:
     external-dns.alpha.kubernetes.io/set-identifier: "fala-laa-fala-laa-fala-production-green"
     external-dns.alpha.kubernetes.io/aws-weight: "100"

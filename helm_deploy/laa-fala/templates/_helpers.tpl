@@ -5,6 +5,16 @@ Expand the name of the chart.
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
+{{- define "laa-fala.whitelist_additional" -}}
+{{- if .Values.ingress.whitelist_additional -}}
+,{{ join "," .Values.ingress.whitelist_additional }}
+{{- end -}}
+{{- end -}}
+
+{{- define "laa-fala.whitelist" -}}
+{{ join "," .Values.ingress.whitelist }},{{- .Values.pingdomIPs }}{{ include "laa-fala.whitelist_additional" . }},{{- .Values.sharedIPRangesLAA }}
+{{- end -}}
+
 {{/*
 Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
