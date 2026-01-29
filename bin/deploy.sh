@@ -35,8 +35,8 @@ deploy_main() {
                           --install --wait \
                           --namespace=${K8S_NAMESPACE} \
                           --values ./helm_deploy/laa-fala/values/fala-$ENVIRONMENT.yaml \
-                          --set-string pingdomIPs=$PINGDOM_IPS \
-                          --set-string sharedIPRangesLAA=$SHARED_IP_RANGES_LAA \
+                          # --set-string pingdomIPs=$PINGDOM_IPS \
+                          # --set-string sharedIPRangesLAA=$SHARED_IP_RANGES_LAA \
                           --set image.repository="${ECR_ENDPOINT}" \
                           --set image.tag="main-$GITHUB_SHA"
 }
