@@ -22,7 +22,7 @@ cla-common @ https://github.com/ministryofjustice/cla_common/archive/refs/tags/0
     # via -r requirements/source/requirements-base.in
 click==8.1.7
     # via pip-tools
-distlib==0.3.8
+distlib==0.4.0
     # via virtualenv
 django==5.1.15
     # via
