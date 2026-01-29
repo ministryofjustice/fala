@@ -24,7 +24,7 @@ django-csp==3.8
     # via -r requirements/source/requirements-base.in
 django-extended-choices==0.3.0
     # via cla-common
-django-jinja==2.10.2
+django-jinja==2.11.0
     # via -r requirements/source/requirements-base.in
 django-storages==1.13.2
     # via -r requirements/source/requirements-base.in
