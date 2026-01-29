@@ -44,7 +44,7 @@ govuk-frontend-jinja==3.6.0
     # via -r requirements/source/requirements-base.in
 greenlet==3.0.3
     # via playwright
-identify==2.5.36
+identify==2.6.16
     # via pre-commit
 idna==3.7
     # via requests
