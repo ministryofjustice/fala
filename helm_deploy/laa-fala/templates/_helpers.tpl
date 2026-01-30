@@ -5,14 +5,23 @@ Expand the name of the chart.
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
-{{- define "laa-fala.whitelist_additional" -}}
-{{- if .Values.ingress.whitelist_additional -}}
-,{{ join "," .Values.ingress.whitelist_additional }}
-{{- end -}}
-{{- end -}}
-
 {{- define "laa-fala.whitelist" -}}
-{{ join "," .Values.ingress.whitelist }},{{- .Values.pingdomIPs }}{{ include "laa-fala.whitelist_additional" . }},{{- .Values.sharedIPRangesLAA }}
+{{- $items := list -}}
+{{- range .Values.ingress.whitelist }}
+{{- $items = append $items . -}}
+{{- end -}}
+{{- if .Values.pingdomIPs }}
+{{- $items = append $items .Values.pingdomIPs -}}
+{{- end -}}
+{{- if .Values.ingress.whitelist_additional }}
+{{- range .Values.ingress.whitelist_additional }}
+{{- $items = append $items . -}}
+{{- end -}}
+{{- end -}}
+{{- if .Values.sharedIPRangesLAA }}
+{{- $items = append $items .Values.sharedIPRangesLAA -}}
+{{- end -}}
+{{- join "," $items -}}
 {{- end -}}
 
 {{/*

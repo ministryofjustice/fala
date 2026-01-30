@@ -21,26 +21,26 @@ deploy_branch() {
   echo "Deploying commit: $GITHUB_SHA under release name: '$BRANCH_RELEASE_NAME'..."
 
   helm upgrade $BRANCH_RELEASE_NAME ./helm_deploy/laa-fala/. \
+                --install --wait \
                 --namespace=${K8S_NAMESPACE} \
                 --values ./helm_deploy/laa-fala/values/fala-uat.yaml \
                 --set image.repository="$ECR_ENDPOINT" \
                 --set image.tag="branch-$GITHUB_SHA" \
-                --set-string pingdomIPs=$PINGDOM_IPS \
-                --set-string sharedIPRangesLAA=$SHARED_IP_RANGES_LAA \
                 --set ingress.annotations."external-dns\.alpha\.kubernetes\.io/set-identifier"="$IDENTIFIER" \
                 --set ingress.hosts[0].host="$RELEASE_HOST" \
-                --install
+                --set-string pingdomIPs=$PINGDOM_IPS \
+                --set-string sharedIPRangesLAA=$SHARED_IP_RANGES_LAA
 }
 
 deploy_main() {
   helm upgrade fala ./helm_deploy/laa-fala/. \
+                          --install --wait \
                           --namespace=${K8S_NAMESPACE} \
                           --values ./helm_deploy/laa-fala/values/fala-$ENVIRONMENT.yaml \
                           --set-string pingdomIPs=$PINGDOM_IPS \
                           --set-string sharedIPRangesLAA=$SHARED_IP_RANGES_LAA \
                           --set image.repository="${ECR_ENDPOINT}" \
-                          --set image.tag="main-$GITHUB_SHA" \
-                          --install
+                          --set image.tag="main-$GITHUB_SHA"
 }
 
 
