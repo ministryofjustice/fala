@@ -108,7 +108,7 @@ requests==2.32.5
     #   pytest-base-url
 sentry-sdk==2.8.0
     # via -r requirements/source/requirements-base.in
-six==1.16.0
+six==1.17.0
     # via python-dateutil
 soupsieve==2.5
     # via beautifulsoup4
