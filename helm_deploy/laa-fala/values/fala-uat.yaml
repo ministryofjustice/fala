@@ -43,7 +43,7 @@ service:
   port: 8000
 
 ingress:
-  whitelistEnabled: true
+  whitelistEnabled: false
   whitelist_additional:
   # Additional IPs for CP egress
     - 35.178.209.113/32
