@@ -61,7 +61,7 @@ markupsafe==2.1.5
     # via jinja2
 nodeenv==1.10.0
     # via pre-commit
-packaging==24.0
+packaging==24.2
     # via
     #   build
     #   pytest
