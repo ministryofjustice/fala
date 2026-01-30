@@ -5,6 +5,19 @@ import sys
 
 
 def get_pingdom_probe_ips():
+    """
+    Fetches the current list of Pingdom IPv4 probe addresses and returns them
+    as a list of CIDR strings (/32).
+
+    This list is used to allowlist Pingdom health-check traffic at the ingress
+    level. The endpoint queried is public and this function is invoked during
+    deployment only (not at runtime), so request volume is very low
+    (typically tens of calls per hour at peak). As a result, rate limiting is
+    not expected to be an issue in practice.
+
+    Returns:
+        list[str]: A list of IPv4 CIDR strings (e.g. "1.2.3.4/32").
+    """
     ip_list = []
     pingdom_link = "https://my.pingdom.com/probes/ipv4"
     pingdom_ips = requests.get(pingdom_link).text.split()
