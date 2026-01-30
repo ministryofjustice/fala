@@ -50,6 +50,11 @@ ingress:
     - host: staging.find-legal-advice.justice.gov.uk
       secret: fala-tls-certificate
   whitelistEnabled: true
+  whitelist_additional:
+  # Additional IPs for CP egress
+    - 35.178.209.113/32
+    - 3.8.51.207/32
+    - 35.177.252.54/32
   annotations:
     external-dns.alpha.kubernetes.io/set-identifier: "fala-laa-fala-laa-fala-staging-green"
     external-dns.alpha.kubernetes.io/aws-weight: "100"
