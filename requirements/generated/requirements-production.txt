@@ -45,7 +45,7 @@ psycopg==3.3.2
     # via -r requirements/source/requirements-base.in
 python-dateutil==2.9.0.post0
     # via cla-common
-python-dotenv==1.0.1
+python-dotenv==1.2.1
     # via -r requirements/source/requirements-base.in
 requests==2.32.5
     # via
