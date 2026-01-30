@@ -59,7 +59,7 @@ logstash-formatter==0.5.17
     # via -r requirements/source/requirements-base.in
 markupsafe==2.1.5
     # via jinja2
-nodeenv==1.8.0
+nodeenv==1.10.0
     # via pre-commit
 packaging==24.0
     # via
