@@ -75,7 +75,7 @@ playwright==1.45.0
     #   pytest-playwright
 pluggy==1.6.0
     # via pytest
-pre-commit==3.7.1
+pre-commit==3.8.0
     # via -r requirements/source/requirements-pre-commit.in
 psycopg==3.1.19
     # via -r requirements/source/requirements-base.in
