@@ -65,7 +65,7 @@ packaging==24.0
     # via
     #   build
     #   pytest
-pip-tools==7.4.1
+pip-tools==7.5.2
     # via -r requirements/source/requirements-dev.in
 platformdirs==4.2.2
     # via virtualenv
