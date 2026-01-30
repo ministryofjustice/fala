@@ -43,6 +43,12 @@ service:
   port: 8000
 
 ingress:
+  whitelistEnabled: true
+  whitelist_additional:
+  # Additional IPs for CP egress
+    - 35.178.209.113/32
+    - 3.8.51.207/32
+    - 35.177.252.54/32
   annotations:
     external-dns.alpha.kubernetes.io/aws-weight: "100"
 
