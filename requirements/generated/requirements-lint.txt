@@ -12,7 +12,7 @@ flake8==7.0.0
     # via -r requirements/source/requirements-lint.in
 mccabe==0.7.0
     # via flake8
-mypy-extensions==1.0.0
+mypy-extensions==1.1.0
     # via black
 packaging==24.0
     # via black
