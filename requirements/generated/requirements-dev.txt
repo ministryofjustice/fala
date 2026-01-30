@@ -61,13 +61,13 @@ markupsafe==2.1.5
     # via jinja2
 nodeenv==1.10.0
     # via pre-commit
-packaging==24.0
+packaging==24.2
     # via
     #   build
     #   pytest
-pip-tools==7.4.1
+pip-tools==7.5.2
     # via -r requirements/source/requirements-dev.in
-platformdirs==4.2.2
+platformdirs==4.5.1
     # via virtualenv
 playwright==1.57.0
     # via
