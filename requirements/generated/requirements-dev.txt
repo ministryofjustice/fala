@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file=requirements/generated/requirements-dev.txt requirements/source/requirements-dev.in
 #
-asgiref==3.11.0
+asgiref==3.11.1
     # via django
 beautifulsoup4==4.14.3
     # via -r requirements/source/requirements-dev.in
