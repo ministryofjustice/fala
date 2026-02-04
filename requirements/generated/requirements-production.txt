@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file=requirements/generated/requirements-production.txt requirements/source/requirements-production.in
 #
-asgiref==3.11.0
+asgiref==3.11.1
     # via django
 certifi==2024.12.14
     # via
@@ -20,17 +20,17 @@ django==5.2.10
     #   django-csp
     #   django-jinja
     #   django-storages
-django-csp==3.7
+django-csp==3.8
     # via -r requirements/source/requirements-base.in
 django-extended-choices==0.4.1
     # via cla-common
-django-jinja==2.10.2
+django-jinja==2.11.0
     # via -r requirements/source/requirements-base.in
-django-storages==1.13.2
+django-storages==1.14.6
     # via -r requirements/source/requirements-base.in
-govuk-frontend-jinja==3.6.0
+govuk-frontend-jinja==3.10.0
     # via -r requirements/source/requirements-base.in
-idna==3.7
+idna==3.11
     # via requests
 jinja2==3.1.6
     # via
@@ -41,23 +41,23 @@ logstash-formatter==0.5.17
     # via -r requirements/source/requirements-base.in
 markupsafe==2.1.5
     # via jinja2
-psycopg==3.1.19
+psycopg==3.3.2
     # via -r requirements/source/requirements-base.in
 python-dateutil==2.9.0.post0
     # via cla-common
-python-dotenv==1.0.1
+python-dotenv==1.2.1
     # via -r requirements/source/requirements-base.in
 requests==2.32.5
     # via
     #   -r requirements/source/requirements-base.in
     #   cla-common
-sentry-sdk==2.8.0
+sentry-sdk==2.51.0
     # via -r requirements/source/requirements-base.in
-six==1.16.0
+six==1.17.0
     # via python-dateutil
 sqlparse==0.5.5
     # via django
-typing-extensions==4.12.2
+typing-extensions==4.15.0
     # via psycopg
 urllib3==2.6.3
     # via
