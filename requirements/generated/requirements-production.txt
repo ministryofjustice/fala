@@ -57,7 +57,7 @@ six==1.17.0
     # via python-dateutil
 sqlparse==0.5.5
     # via django
-typing-extensions==4.12.2
+typing-extensions==4.15.0
     # via psycopg
 urllib3==2.6.3
     # via
