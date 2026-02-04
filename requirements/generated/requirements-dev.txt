@@ -91,7 +91,7 @@ pytest==8.4.2
     #   pytest-playwright
 pytest-base-url==2.1.0
     # via pytest-playwright
-pytest-playwright==0.5.0
+pytest-playwright==0.7.2
     # via -r requirements/source/requirements-dev.in
 python-dateutil==2.9.0.post0
     # via cla-common
