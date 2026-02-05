@@ -61,7 +61,7 @@ markupsafe==3.0.3
     # via jinja2
 nodeenv==1.10.0
     # via pre-commit
-packaging==24.2
+packaging==26.0
     # via
     #   build
     #   pytest
@@ -75,7 +75,7 @@ playwright==1.45.0
     #   pytest-playwright
 pluggy==1.6.0
     # via pytest
-pre-commit==3.8.0
+pre-commit==4.5.1
     # via -r requirements/source/requirements-pre-commit.in
 psycopg==3.3.2
     # via -r requirements/source/requirements-base.in
@@ -106,7 +106,7 @@ requests==2.32.5
     #   -r requirements/source/requirements-base.in
     #   cla-common
     #   pytest-base-url
-sentry-sdk==2.51.0
+sentry-sdk==2.52.0
     # via -r requirements/source/requirements-base.in
 six==1.17.0
     # via python-dateutil
