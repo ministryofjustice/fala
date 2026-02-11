@@ -1,10 +1,10 @@
 repos:
   - repo: https://github.com/ministryofjustice/devsecops-hooks
-    rev: v1.2.0
+    rev: v1.4.1
     hooks:
       - id: baseline
   - repo: https://github.com/ambv/black
-    rev: 25.9.0
+    rev: 25.12.0
     hooks:
       - id: black
         language_version: python3
@@ -21,7 +21,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/jazzband/pip-tools
-    rev: v7.5.1
+    rev: v7.5.2
     hooks:
       - id: pip-compile
         language_version: python3.12

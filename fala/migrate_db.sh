@@ -8,5 +8,3 @@ cd /home/app
 echo "Database setup and Django migrations completed successfully."
 
 exec "$@"
-
-

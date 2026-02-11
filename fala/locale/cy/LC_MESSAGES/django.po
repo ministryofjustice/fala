@@ -368,10 +368,6 @@ msgstr "Helpwch i wella’r chwiliad hwn am gynghorwyr cyfreithiol"
 msgid "Take part (opens in new tab)"
 msgstr "Cymryd rhan (yn agor mewn tab newydd)"
 
-#: fala/templates/adviser/_results_heading.html:4
-msgid "Your nearest legal aid advisers and family mediators"
-msgstr "Eich cynghorwyr cymorth cyfreithiol a chyfryngwyr teulu agosaf"
-
 #: fala/templates/adviser/_results_heading.html:6
 msgid "Your nearest legal aid advisers for the "
 msgstr "Eich cynghorwyr cymorth cyfreithiol agosaf ar gyfer y "
@@ -381,7 +377,7 @@ msgid "Your nearest legal aid advisers for "
 msgstr "Eich cynghorwyr cymorth cyfreithiol agosaf ar gyfer "
 
 #: fala/templates/adviser/_results_heading.html:11
-msgid "Your nearest legal aid advisors and family mediators"
+msgid "Your nearest legal aid advisers and family mediators"
 msgstr "Eich cynghorwyr cymorth cyfreithiol a chyfryngwyr teulu agosaf"
 
 #: fala/templates/adviser/_results_heading.html:13
@@ -391,7 +387,7 @@ msgid "Search results"
 msgstr "Canlyniad chwilio"
 
 #: fala/templates/adviser/_results_heading.html:15
-msgid "Your nearest legal aid advisors "
+msgid "Your nearest legal aid advisers "
 msgstr "Eich cynghorwyr cymorth cyfreithiol agosaf "
 
 #: fala/templates/adviser/_scotland_warning.html:3
