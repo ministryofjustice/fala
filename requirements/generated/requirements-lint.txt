@@ -4,23 +4,23 @@
 #
 #    pip-compile --output-file=requirements/generated/requirements-lint.txt requirements/source/requirements-lint.in
 #
-black==24.3.0
+black==26.1.0
     # via -r requirements/source/requirements-lint.in
-click==8.1.7
+click==8.3.1
     # via black
-flake8==7.0.0
+flake8==7.3.0
     # via -r requirements/source/requirements-lint.in
 mccabe==0.7.0
     # via flake8
-mypy-extensions==1.0.0
+mypy-extensions==1.1.0
     # via black
-packaging==24.0
+packaging==26.0
     # via black
-pathspec==0.12.1
+pathspec==1.0.4
     # via black
-platformdirs==4.2.2
+platformdirs==4.5.1
     # via black
-pycodestyle==2.11.1
+pycodestyle==2.14.0
     # via flake8
-pyflakes==3.2.0
+pyflakes==3.4.0
     # via flake8
