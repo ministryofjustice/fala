@@ -4,24 +4,21 @@
 #
 #    pip-compile --output-file=requirements/generated/requirements-pre-commit.txt requirements/source/requirements-pre-commit.in
 #
-cfgv==3.4.0
+cfgv==3.5.0
     # via pre-commit
-distlib==0.3.8
+distlib==0.4.0
     # via virtualenv
-filelock==3.20.3
+filelock==3.24.2
     # via virtualenv
-identify==2.5.36
+identify==2.6.16
     # via pre-commit
-nodeenv==1.8.0
+nodeenv==1.10.0
     # via pre-commit
-platformdirs==4.2.2
+platformdirs==4.9.2
     # via virtualenv
-pre-commit==3.7.1
+pre-commit==4.5.1
     # via -r requirements/source/requirements-pre-commit.in
-pyyaml==6.0.1
+pyyaml==6.0.3
     # via pre-commit
-virtualenv==20.36.1
+virtualenv==20.37.0
     # via pre-commit
-
-# The following packages are considered to be unsafe in a requirements file:
-# setuptools

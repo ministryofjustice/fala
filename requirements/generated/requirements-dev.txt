@@ -18,31 +18,31 @@ cfgv==3.5.0
     # via pre-commit
 charset-normalizer==3.4.4
     # via requests
-cla-common @ https://github.com/ministryofjustice/cla_common/archive/refs/tags/0.3.3.tar.gz
-    # via -r requirements/source/requirements-base.in
+cla-common @ https://github.com/ministryofjustice/cla_common/archive/refs/tags/0.3.25.tar.gz
+    # via -r /Users/william.clarke/dev/fala/requirements/source/requirements-base.in
 click==8.3.1
     # via pip-tools
 distlib==0.4.0
     # via virtualenv
 django==6.0.2
     # via
-    #   -r requirements/source/requirements-base.in
+    #   -r /Users/william.clarke/dev/fala/requirements/source/requirements-base.in
     #   django-csp
     #   django-jinja
     #   django-storages
-django-csp==4.0
-    # via -r requirements/source/requirements-base.in
+django-csp==3.7
+    # via -r /Users/william.clarke/dev/fala/requirements/source/requirements-base.in
 django-extended-choices==0.3.0
     # via cla-common
-django-jinja==2.11.0
-    # via -r requirements/source/requirements-base.in
-django-storages==1.14.6
-    # via -r requirements/source/requirements-base.in
-filelock==3.20.4
+django-jinja==2.10.2
+    # via -r /Users/william.clarke/dev/fala/requirements/source/requirements-base.in
+django-storages==1.13.2
+    # via -r /Users/william.clarke/dev/fala/requirements/source/requirements-base.in
+filelock==3.24.2
     # via virtualenv
-govuk-frontend-jinja==3.10.0
-    # via -r requirements/source/requirements-base.in
-greenlet==3.0.3
+govuk-frontend-jinja==3.6.0
+    # via -r /Users/william.clarke/dev/fala/requirements/source/requirements-base.in
+greenlet==3.1.1
     # via playwright
 identify==2.6.16
     # via pre-commit
@@ -52,11 +52,11 @@ iniconfig==2.3.0
     # via pytest
 jinja2==3.1.6
     # via
-    #   -r requirements/source/requirements-base.in
+    #   -r /Users/william.clarke/dev/fala/requirements/source/requirements-base.in
     #   django-jinja
     #   govuk-frontend-jinja
 logstash-formatter==0.5.17
-    # via -r requirements/source/requirements-base.in
+    # via -r /Users/william.clarke/dev/fala/requirements/source/requirements-base.in
 markupsafe==3.0.3
     # via jinja2
 nodeenv==1.10.0
@@ -65,59 +65,67 @@ packaging==26.0
     # via
     #   build
     #   pytest
-pip-tools==7.5.3
+    #   wheel
+pip-tools==7.4.1
     # via -r requirements/source/requirements-dev.in
 platformdirs==4.9.2
     # via virtualenv
-playwright==1.45.0
+playwright==1.49.1
     # via
     #   -r requirements/source/requirements-dev.in
     #   pytest-playwright
 pluggy==1.6.0
     # via pytest
 pre-commit==4.5.1
-    # via -r requirements/source/requirements-pre-commit.in
-psycopg==3.3.2
-    # via -r requirements/source/requirements-base.in
-pyee==13.0.0
+    # via -r /Users/william.clarke/dev/fala/requirements/source/requirements-pre-commit.in
+psycopg==3.1.19
+    # via -r /Users/william.clarke/dev/fala/requirements/source/requirements-base.in
+pyee==12.0.0
     # via playwright
+pygments==2.19.2
+    # via pytest
 pyproject-hooks==1.2.0
     # via
     #   build
     #   pip-tools
-pytest==9.0.2
+pytest==8.4.2
     # via
     #   pytest-base-url
     #   pytest-playwright
 pytest-base-url==2.1.0
     # via pytest-playwright
-pytest-playwright==0.7.2
+pytest-playwright==0.5.2
     # via -r requirements/source/requirements-dev.in
 python-dateutil==2.9.0.post0
     # via cla-common
 python-dotenv==1.2.1
-    # via -r requirements/source/requirements-base.in
+    # via -r /Users/william.clarke/dev/fala/requirements/source/requirements-base.in
 python-slugify==8.0.4
     # via pytest-playwright
+pytz==2021.1
+    # via cla-common
 pyyaml==6.0.3
     # via pre-commit
 requests==2.32.5
     # via
-    #   -r requirements/source/requirements-base.in
+    #   -r /Users/william.clarke/dev/fala/requirements/source/requirements-base.in
     #   cla-common
     #   pytest-base-url
-sentry-sdk==2.52.0
-    # via -r requirements/source/requirements-base.in
+sentry-sdk==2.8.0
+    # via -r /Users/william.clarke/dev/fala/requirements/source/requirements-base.in
 six==1.17.0
     # via python-dateutil
 soupsieve==2.8.3
     # via beautifulsoup4
+speaklater==1.3
+    # via cla-common
 sqlparse==0.5.5
     # via django
 text-unidecode==1.3
     # via python-slugify
 typing-extensions==4.15.0
     # via
+    #   beautifulsoup4
     #   psycopg
     #   pyee
 urllib3==2.6.3
@@ -125,8 +133,8 @@ urllib3==2.6.3
     #   requests
     #   sentry-sdk
 uwsgi==2.0.31
-    # via -r requirements/source/requirements-base.in
-virtualenv==20.36.1
+    # via -r /Users/william.clarke/dev/fala/requirements/source/requirements-base.in
+virtualenv==20.37.0
     # via pre-commit
 wheel==0.46.3
     # via pip-tools
