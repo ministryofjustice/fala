@@ -12,49 +12,49 @@ certifi==2026.1.4
     #   sentry-sdk
 charset-normalizer==3.4.4
     # via requests
-cla-common @ https://github.com/ministryofjustice/cla_common/archive/refs/tags/0.3.25.tar.gz
-    # via -r /Users/william.clarke/dev/fala/requirements/source/requirements-base.in
+cla-common @ https://github.com/ministryofjustice/cla_common/archive/refs/tags/0.3.3.tar.gz
+    # via -r requirements/source/requirements-base.in
 django==6.0.2
     # via
-    #   -r /Users/william.clarke/dev/fala/requirements/source/requirements-base.in
+    #   -r requirements/source/requirements-base.in
     #   django-csp
     #   django-jinja
     #   django-storages
 django-csp==3.7
-    # via -r /Users/william.clarke/dev/fala/requirements/source/requirements-base.in
+    # via -r requirements/source/requirements-base.in
 django-extended-choices==0.3.0
     # via cla-common
 django-jinja==2.10.2
-    # via -r /Users/william.clarke/dev/fala/requirements/source/requirements-base.in
+    # via -r requirements/source/requirements-base.in
 django-storages==1.13.2
-    # via -r /Users/william.clarke/dev/fala/requirements/source/requirements-base.in
+    # via -r requirements/source/requirements-base.in
 govuk-frontend-jinja==3.6.0
-    # via -r /Users/william.clarke/dev/fala/requirements/source/requirements-base.in
+    # via -r requirements/source/requirements-base.in
 idna==3.11
     # via requests
 jinja2==3.1.6
     # via
-    #   -r /Users/william.clarke/dev/fala/requirements/source/requirements-base.in
+    #   -r requirements/source/requirements-base.in
     #   django-jinja
     #   govuk-frontend-jinja
 logstash-formatter==0.5.17
-    # via -r /Users/william.clarke/dev/fala/requirements/source/requirements-base.in
+    # via -r requirements/source/requirements-base.in
 markupsafe==3.0.3
     # via jinja2
 psycopg==3.1.19
-    # via -r /Users/william.clarke/dev/fala/requirements/source/requirements-base.in
+    # via -r requirements/source/requirements-base.in
 python-dateutil==2.9.0.post0
     # via cla-common
 python-dotenv==1.2.1
-    # via -r /Users/william.clarke/dev/fala/requirements/source/requirements-base.in
+    # via -r requirements/source/requirements-base.in
 pytz==2021.1
     # via cla-common
 requests==2.32.5
     # via
-    #   -r /Users/william.clarke/dev/fala/requirements/source/requirements-base.in
+    #   -r requirements/source/requirements-base.in
     #   cla-common
 sentry-sdk==2.8.0
-    # via -r /Users/william.clarke/dev/fala/requirements/source/requirements-base.in
+    # via -r requirements/source/requirements-base.in
 six==1.17.0
     # via python-dateutil
 speaklater==1.3
@@ -68,4 +68,4 @@ urllib3==2.6.3
     #   requests
     #   sentry-sdk
 uwsgi==2.0.31
-    # via -r /Users/william.clarke/dev/fala/requirements/source/requirements-base.in
+    # via -r requirements/source/requirements-base.in
