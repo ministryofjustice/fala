@@ -67,7 +67,7 @@ packaging==26.0
     #   pytest
 pip-tools==7.5.2
     # via -r requirements/source/requirements-dev.in
-platformdirs==4.5.1
+platformdirs==4.9.2
     # via virtualenv
 playwright==1.45.0
     # via
