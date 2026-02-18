@@ -173,11 +173,8 @@ class TranslationLink(StaticLiveServerTestCase):
             expect(page.locator("#language_switcher_link")).to_have_text("Cymraeg")
             my_cookies = context.cookies(urls=[self.live_server_url])
             assert len(my_cookies) == 0
-            print(f"URL before click: {page.url}")
             page.locator("#language_switcher_link").click()
-            print(f"URL after click: {page.url}")
             my_cookies = context.cookies(urls=[self.live_server_url])
-            print(f"Cookies after language switch: {my_cookies}")
             # Check that we have at least the language cookie, but allow for other cookies
             assert len(my_cookies) >= 1
             # Verify the language cookie exists and has the correct value
