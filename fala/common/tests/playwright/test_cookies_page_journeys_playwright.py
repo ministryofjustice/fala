@@ -174,6 +174,8 @@ class TranslationLink(StaticLiveServerTestCase):
             my_cookies = context.cookies(urls=[self.live_server_url])
             assert len(my_cookies) == 0
             page.locator("#language_switcher_link").click()
+            # Wait a moment for any JavaScript to execute and cookies to be set
+            page.wait_for_load_state("networkidle")
             my_cookies = context.cookies(urls=[self.live_server_url])
             # Check that we have at least the language cookie, but allow for other cookies
             assert len(my_cookies) >= 1
