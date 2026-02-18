@@ -42,7 +42,7 @@ filelock==3.20.4
     # via virtualenv
 govuk-frontend-jinja==3.10.0
     # via -r requirements/source/requirements-base.in
-greenlet==3.0.3
+greenlet==3.1.1
     # via playwright
 identify==2.6.16
     # via pre-commit
