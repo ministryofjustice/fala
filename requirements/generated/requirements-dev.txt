@@ -69,7 +69,7 @@ pip-tools==7.5.3
     # via -r requirements/source/requirements-dev.in
 platformdirs==4.9.2
     # via virtualenv
-playwright==1.49.0
+playwright==1.58.0
     # via
     #   -r requirements/source/requirements-dev.in
     #   pytest-playwright
