@@ -175,7 +175,7 @@ class TranslationLink(StaticLiveServerTestCase):
             assert len(my_cookies) == 0
             page.locator("#language_switcher_link").click()
             # Wait a moment for any JavaScript to execute and cookies to be set
-            page.wait_for_load_state()
+            page.wait_for_load_state("load")
             my_cookies = context.cookies(urls=[self.live_server_url])
             assert len(my_cookies) == 1
             expect(page.locator("h1")).to_have_text("Dod o hyd i gynghorydd cymorth cyfreithiol neu gyfryngwr teulu")
