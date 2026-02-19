@@ -1,4 +1,4 @@
-FROM node:20 as node_build
+FROM node:24 as node_build
 
 WORKDIR /home/node
 
@@ -12,7 +12,7 @@ RUN ./node_modules/.bin/gulp build --production
 #################################################
 # BASE IMAGE USED BY ALL STAGES
 #################################################
-FROM python:3.12-bullseye as base
+FROM python:3.13-bullseye as base
 
 COPY --from=node_build home/node/fala/assets /home/app/fala/assets
 
