@@ -25,7 +25,7 @@
     }
   },
   "dependencies": {
-    "govuk-frontend": "5.14.0"
+    "govuk-frontend": "6.0.0"
   },
   "devDependencies": {
     "browser-sync": "^3.0.3",
@@ -33,14 +33,14 @@
     "gulp": "^5.0.0",
     "gulp-clean-css": "^4.3.0",
     "gulp-concat": "^2.6.1",
-    "gulp-sass": "^5.1.0",
+    "gulp-sass": "^6.0.0",
     "gulp-sourcemaps": "^3.0.0",
     "gulp-terser": "^2.1.0",
-    "merge-stream": "^1.0.0",
+    "merge-stream": "^2.0.0",
     "minimatch": "^10.2.1",
     "natives": "^1.1.6",
-    "read-json-sync": "^1.1.0",
+    "read-json-sync": "^2.0.0",
     "sass": "^1.77.8",
-    "yargs": "^3.27.0"
+    "yargs": "^18.0.0"
   }
 }
