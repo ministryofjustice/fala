@@ -79,7 +79,7 @@ pre-commit==4.5.1
     # via -r requirements/source/requirements-pre-commit.in
 psycopg==3.3.2
     # via -r requirements/source/requirements-base.in
-pyee==13.0.0
+pyee==13.0.1
     # via playwright
 pyproject-hooks==1.2.0
     # via
