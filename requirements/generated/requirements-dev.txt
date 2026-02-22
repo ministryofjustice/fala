@@ -77,7 +77,7 @@ pluggy==1.6.0
     # via pytest
 pre-commit==4.5.1
     # via -r requirements/source/requirements-pre-commit.in
-psycopg==3.3.2
+psycopg==3.3.3
     # via -r requirements/source/requirements-base.in
 pyee==13.0.0
     # via playwright
