@@ -15,7 +15,7 @@ PINGDOM_IPS="$(python3 bin/pingdom_ips.py)"
 
 deploy_branch() {
 # Set the deployment host, this will add the prefix of the branch name e.g el-257-deploy-with-circleci or just main
-  RELEASE_HOST="$BRANCH_RELEASE_NAME-fala-staging.cloud-platform.service.justice.gov.uk"
+  RELEASE_HOST="$BRANCH_RELEASE_NAME-fala-staging.beta.cloud-platform.service.justice.gov.uk"
 # Set the ingress name, needs <release name>-<chart name>-<namespace>-green
   IDENTIFIER="$BRANCH_RELEASE_NAME-laa-fala-$K8S_NAMESPACE-green"
   echo "Deploying commit: $GITHUB_SHA under release name: '$BRANCH_RELEASE_NAME'..."

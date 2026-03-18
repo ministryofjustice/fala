@@ -43,12 +43,10 @@ service:
   port: 8000
 
 ingress:
-  className: "default"
+  className: "beta"
   hosts:
-    - host: laa-fala-staging.apps.live-1.cloud-platform.service.justice.gov.uk
+    - host: laa-fala-staging.beta.cloud-platform.service.justice.gov.uk
       secret: false
-    - host: staging.find-legal-advice.justice.gov.uk
-      secret: fala-tls-certificate
   whitelistEnabled: true
   whitelist_additional:
   # Additional IPs for CP egress
@@ -70,7 +68,7 @@ laalaa_api:
   host: "https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk"
 
 # Accept any subdomain that ends in the following
-allowed_hosts: ".laa-fala-staging.apps.live-1.cloud-platform.service.justice.gov.uk .staging.find-legal-advice.justice.gov.uk"
+allowed_hosts: ".laa-fala-staging.beta.cloud-platform.service.justice.gov.uk"
 
 autoscaling:
   enabled: false
