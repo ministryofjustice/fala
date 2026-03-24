@@ -1,17 +1,18 @@
 // Set up routing so requests for files in /static are served from GOV.UK Frontend assets.
 // import GDS components from `node_modules`
-$govuk-images-path: "/static/images/";
-$govuk-fonts-path: "/static/fonts/";
-$govuk-new-typography-scale: true;
-$govuk-global-styles: true;
-$govuk-new-link-styles: true;
 $gem-c-print-link-background-width: 16px;
 $gem-c-print-link-background-height: 18px;
 
-@import "govuk-frontend/govuk/all";
+@use "govuk-frontend/govuk/all" as * with (
+  $govuk-images-path: "/static/images/",
+  $govuk-fonts-path: "/static/fonts/",
+  $govuk-new-typography-scale: true,
+  $govuk-global-styles: true
+);
 
 // import custom CSS
-@import 'google-translate';
+@use 'google-translate' as googleTranslate;
+@include googleTranslate.styles($govuk-text-colour, $govuk-focus-colour);
 
 $laa-unknown-colour: govuk-colour("orange");
 $laa-staging-colour: govuk-colour("turquoise");
