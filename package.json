@@ -25,7 +25,7 @@
     }
   },
   "dependencies": {
-    "govuk-frontend": "5.14.0"
+    "govuk-frontend": "6.0.0"
   },
   "devDependencies": {
     "browser-sync": "^3.0.3",
