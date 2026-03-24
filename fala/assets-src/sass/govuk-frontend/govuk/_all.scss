@@ -1,12 +1,10 @@
 // Compatibility shim for GOV.UK Frontend v6-style imports in this build setup.
 $govuk-images-path: null !default;
 $govuk-fonts-path: null !default;
-$govuk-new-typography-scale: false !default;
 $govuk-global-styles: false !default;
 
 @forward "node_modules/govuk-frontend/dist/govuk/index" with (
 	$govuk-images-path: $govuk-images-path,
 	$govuk-fonts-path: $govuk-fonts-path,
-	$govuk-new-typography-scale: $govuk-new-typography-scale,
 	$govuk-global-styles: $govuk-global-styles
 );
