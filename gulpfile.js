@@ -39,7 +39,7 @@ const imagePath =   'fala/assets-src/images/icon-print.png';
 function cssTask() {
   return src(cssPath)
   .pipe(sourcemaps.init())
-  .pipe(sass())
+  .pipe(sass({ loadPaths: ['.'] }))
   // name of output file
   .pipe(concat('style.css'))
   // this minifies the CSS
