@@ -40,6 +40,7 @@ function cssTask() {
   return src(cssPath)
   .pipe(sourcemaps.init())
   .pipe(sass({ loadPaths: ['.'] }))
+  .pipe(sass({ includePaths: ['node_modules'] }))
   // name of output file
   .pipe(concat('style.css'))
   // this minifies the CSS
