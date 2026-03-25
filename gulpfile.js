@@ -44,6 +44,7 @@ function cssTask() {
     quietDeps: true,
     silenceDeprecations: ['legacy-js-api']
   }))
+  .pipe(sass({ includePaths: ['node_modules'] }))
   // name of output file
   .pipe(concat('style.css'))
   // this minifies the CSS
