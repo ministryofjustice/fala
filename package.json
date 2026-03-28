@@ -26,22 +26,22 @@
     "socket.io-parser": "^4.2.6"
   },
   "dependencies": {
-    "govuk-frontend": "6.0.0"
+    "govuk-frontend": "6.1.0"
   },
   "devDependencies": {
-    "browser-sync": "^3.0.3",
+    "browser-sync": "^3.0.4",
     "concat": "^1.0.3",
-    "gulp": "^5.0.0",
+    "gulp": "^5.0.1",
     "gulp-clean-css": "^4.3.0",
     "gulp-concat": "^2.6.1",
     "gulp-sass": "^5.1.0",
     "gulp-sourcemaps": "^3.0.0",
     "gulp-terser": "^2.1.0",
-    "merge-stream": "^1.0.0",
+    "merge-stream": "^1.0.1",
     "minimatch": "^10.2.4",
     "natives": "^1.1.6",
-    "read-json-sync": "^1.1.0",
-    "sass": "^1.77.8",
-    "yargs": "^3.27.0"
+    "read-json-sync": "^1.1.1",
+    "sass": "^1.98.0",
+    "yargs": "^3.32.0"
   }
 }
