@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/ministryofjustice/fala",
   "overrides": {
-    "lodash": "4.18.0",
+    "browser-sync": {
+      "lodash": "4.18.0"
+    },
     "minimatch": "^10.2.4",
     "resp-modifier": {
       "minimatch": "^10.2.4"
