@@ -8,19 +8,19 @@ asgiref==3.11.1
     # via django
 beautifulsoup4==4.14.3
     # via -r requirements/source/requirements-dev.in
-build==1.4.0
+build==1.4.2
     # via pip-tools
-certifi==2026.1.4
+certifi==2026.2.25
     # via
     #   requests
     #   sentry-sdk
 cfgv==3.5.0
     # via pre-commit
-charset-normalizer==3.4.4
+charset-normalizer==3.4.7
     # via requests
 cla-common @ https://github.com/ministryofjustice/cla_common/archive/refs/tags/0.3.3.tar.gz
     # via -r requirements/source/requirements-base.in
-click==8.3.1
+click==8.3.2
     # via pip-tools
 distlib==0.4.0
     # via virtualenv
@@ -30,21 +30,23 @@ django==6.0.3
     #   django-csp
     #   django-jinja
     #   django-storages
-django-csp==3.7
+django-csp==4.0
     # via -r requirements/source/requirements-base.in
 django-extended-choices==0.3.0
     # via cla-common
-django-jinja==2.10.2
+django-jinja==2.11.0
     # via -r requirements/source/requirements-base.in
-django-storages==1.13.2
+django-storages==1.14.6
     # via -r requirements/source/requirements-base.in
-filelock==3.20.4
-    # via virtualenv
+filelock==3.25.2
+    # via
+    #   python-discovery
+    #   virtualenv
 govuk-frontend-jinja==4.0.0
     # via -r requirements/source/requirements-base.in
-greenlet==3.0.3
+greenlet==3.4.0
     # via playwright
-identify==2.6.16
+identify==2.6.18
     # via pre-commit
 idna==3.11
     # via requests
@@ -64,13 +66,16 @@ nodeenv==1.10.0
 packaging==26.0
     # via
     #   build
+    #   django-csp
     #   pytest
     #   wheel
-pip-tools==7.4.1
+pip-tools==7.5.3
     # via -r requirements/source/requirements-dev.in
-platformdirs==4.9.2
-    # via virtualenv
-playwright==1.45.1
+platformdirs==4.9.6
+    # via
+    #   python-discovery
+    #   virtualenv
+playwright==1.58.0
     # via
     #   -r requirements/source/requirements-dev.in
     #   pytest-playwright
@@ -78,9 +83,9 @@ pluggy==1.6.0
     # via pytest
 pre-commit==4.5.1
     # via -r requirements/source/requirements-pre-commit.in
-psycopg==3.1.19
+psycopg==3.3.2
     # via -r requirements/source/requirements-base.in
-pyee==11.1.0
+pyee==13.0.1
     # via playwright
 pygments==2.20.0
     # via pytest
@@ -88,16 +93,18 @@ pyproject-hooks==1.2.0
     # via
     #   build
     #   pip-tools
-pytest==8.4.2
+pytest==9.0.3
     # via
     #   pytest-base-url
     #   pytest-playwright
 pytest-base-url==2.1.0
     # via pytest-playwright
-pytest-playwright==0.5.2
+pytest-playwright==0.7.2
     # via -r requirements/source/requirements-dev.in
 python-dateutil==2.9.0.post0
     # via cla-common
+python-discovery==1.2.2
+    # via virtualenv
 python-dotenv==1.2.1
     # via -r requirements/source/requirements-base.in
 python-slugify==8.0.4
@@ -109,7 +116,7 @@ requests==2.32.5
     #   -r requirements/source/requirements-base.in
     #   cla-common
     #   pytest-base-url
-sentry-sdk==2.8.0
+sentry-sdk==2.52.0
     # via -r requirements/source/requirements-base.in
 six==1.17.0
     # via python-dateutil
@@ -130,7 +137,7 @@ urllib3==2.6.3
     #   sentry-sdk
 uwsgi==2.0.31
     # via -r requirements/source/requirements-base.in
-virtualenv==20.36.1
+virtualenv==21.2.0
     # via pre-commit
 wheel==0.46.3
     # via pip-tools
