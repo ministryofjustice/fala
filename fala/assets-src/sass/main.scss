@@ -8,7 +8,7 @@ $govuk-new-link-styles: true;
 $gem-c-print-link-background-width: 16px;
 $gem-c-print-link-background-height: 18px;
 
-@import "govuk-frontend/govuk/all";
+@import "govuk-frontend/dist/govuk/index";
 
 // import custom CSS
 @import 'google-translate';
