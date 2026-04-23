@@ -4,7 +4,7 @@ django-storages==1.14.6
 django-csp==4.0
 jinja2<4
 logstash-formatter==0.5.17
-https://github.com/ministryofjustice/cla_common/archive/refs/tags/0.3.25    .tar.gz
+https://github.com/ministryofjustice/cla_common/archive/refs/tags/0.3.25.tar.gz
 requests==2.32.5
 sentry-sdk==2.52.0
 uwsgi==2.0.31
