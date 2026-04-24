@@ -105,7 +105,7 @@ python-dateutil==2.9.0.post0
     # via cla-common
 python-discovery==1.2.2
     # via virtualenv
-python-dotenv==1.2.1
+python-dotenv==1.2.2
     # via -r requirements/source/requirements-base.in
 python-slugify==8.0.4
     # via pytest-playwright
