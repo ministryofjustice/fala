@@ -50,7 +50,7 @@ jobs:
         with:
           images: ${{ steps.login-ecr.outputs.registry }}/${{ inputs.ECR_REPOSITORY }}
           tags: |
-            type=sha,format=long,prefix=,suffix=
+            type=raw,value=${{ github.ref_name == 'main' && format('main-{0}', github.sha) || format('branch-{0}', github.sha) }}
 
       - name: Build and push a Docker image to the container repository
         id: docker-build
