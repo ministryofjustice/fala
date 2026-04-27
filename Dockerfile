@@ -12,7 +12,7 @@ RUN ./node_modules/.bin/gulp build --production
 #################################################
 # BASE IMAGE USED BY ALL STAGES
 #################################################
-FROM python:3.13-bullseye as base
+FROM python:3.13-trixie as base
 
 COPY --from=node_build home/node/fala/assets /home/app/fala/assets
 
@@ -26,8 +26,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       build-essential \
       curl \
       git \
-      libpcre3 \
-      libpcre3-dev
+      libpcre2-dev
 
 ENV HOME /home/app
 ENV APP_HOME /home/app
