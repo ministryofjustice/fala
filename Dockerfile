@@ -1,4 +1,4 @@
-FROM node:24 as node_build
+FROM node:24-bookworm-slim AS node_build
 
 WORKDIR /home/node
 
@@ -12,7 +12,7 @@ RUN ./node_modules/.bin/gulp build --production
 #################################################
 # BASE IMAGE USED BY ALL STAGES
 #################################################
-FROM python:3.13-trixie as base
+FROM python:3.13-bookworm AS base
 
 COPY --from=node_build home/node/fala/assets /home/app/fala/assets
 
@@ -28,8 +28,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       git \
       libpcre2-dev
 
-ENV HOME /home/app
-ENV APP_HOME /home/app
+ENV HOME=/home/app \
+  APP_HOME=/home/app
 WORKDIR /home/app
 
 #################################################
