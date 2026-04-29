@@ -1,4 +1,4 @@
-FROM node:24-bookworm-slim AS node_build
+FROM docker.io/node:25.9.0-trixie@sha256:74ff139f927c4a233bf0757edefe1ee057d185d6548c65d2741bdda68660fb6a AS node_build
 
 WORKDIR /home/node
 
