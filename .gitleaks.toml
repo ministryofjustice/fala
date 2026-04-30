@@ -1,0 +1,5 @@
+[allowlist]
+paths = [
+  "reports/dependency-check-report.json",
+  "reports/dependency-check-report.sarif"
+]
