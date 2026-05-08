@@ -1,4 +1,4 @@
-FROM node:24 as node_build
+FROM docker.io/node:25.9.0-trixie@sha256:74ff139f927c4a233bf0757edefe1ee057d185d6548c65d2741bdda68660fb6a AS node_build
 
 WORKDIR /home/node
 
@@ -12,7 +12,7 @@ RUN ./node_modules/.bin/gulp build --production
 #################################################
 # BASE IMAGE USED BY ALL STAGES
 #################################################
-FROM python:3.13-bullseye as base
+FROM python:3.13-bookworm AS base
 
 COPY --from=node_build home/node/fala/assets /home/app/fala/assets
 
@@ -26,11 +26,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       build-essential \
       curl \
       git \
-      libpcre3 \
-      libpcre3-dev
+      libpcre2-dev
 
-ENV HOME /home/app
-ENV APP_HOME /home/app
+ENV HOME=/home/app \
+  APP_HOME=/home/app
 WORKDIR /home/app
 
 #################################################

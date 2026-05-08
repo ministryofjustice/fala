@@ -12,7 +12,7 @@ certifi==2026.2.25
     #   sentry-sdk
 charset-normalizer==3.4.7
     # via requests
-cla-common @ https://github.com/ministryofjustice/cla_common/archive/refs/tags/0.3.3.tar.gz
+cla-common @ https://github.com/ministryofjustice/cla_common/archive/refs/tags/0.3.25.tar.gz
     # via -r requirements/source/requirements-base.in
 django==6.0.3
     # via
@@ -50,13 +50,14 @@ python-dateutil==2.9.0.post0
 python-dotenv==1.2.1
     # via -r requirements/source/requirements-base.in
 requests==2.33.0
-    # via
-    #   -r requirements/source/requirements-base.in
-    #   cla-common
+pytz==2021.1
+    # via cla-common
 sentry-sdk==2.52.0
     # via -r requirements/source/requirements-base.in
 six==1.17.0
     # via python-dateutil
+speaklater==1.3
+    # via cla-common
 sqlparse==0.5.5
     # via django
 typing-extensions==4.15.0
