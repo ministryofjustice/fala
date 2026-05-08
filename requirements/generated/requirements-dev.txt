@@ -113,7 +113,7 @@ pytz==2021.1
     # via cla-common
 pyyaml==6.0.3
     # via pre-commit
-requests==2.32.5
+requests==2.33.0
     # via
     #   -r requirements/source/requirements-base.in
     #   cla-common

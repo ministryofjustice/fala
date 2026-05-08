@@ -49,12 +49,9 @@ python-dateutil==2.9.0.post0
     # via cla-common
 python-dotenv==1.2.1
     # via -r requirements/source/requirements-base.in
+requests==2.33.0
 pytz==2021.1
     # via cla-common
-requests==2.32.5
-    # via
-    #   -r requirements/source/requirements-base.in
-    #   cla-common
 sentry-sdk==2.52.0
     # via -r requirements/source/requirements-base.in
 six==1.17.0
