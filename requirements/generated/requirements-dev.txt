@@ -135,7 +135,7 @@ typing-extensions==4.15.0
     #   beautifulsoup4
     #   psycopg
     #   pyee
-urllib3==2.6.3
+urllib3==2.7.0
     # via
     #   requests
     #   sentry-sdk
