@@ -65,8 +65,9 @@ sqlparse==0.5.5
     # via django
 typing-extensions==4.15.0
     # via psycopg
-urllib3==2.6.3
+urllib3==2.7.0
     # via
+    #   -r requirements/source/requirements-base.in
     #   requests
     #   sentry-sdk
 uwsgi==2.0.31
