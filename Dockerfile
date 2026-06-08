@@ -24,8 +24,6 @@ RUN useradd --uid 1000 --user-group -m -d /home/app app
 # Install python and build dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
       build-essential \
-      curl \
-      git \
       libpcre2-dev
 
 ENV HOME=/home/app \
