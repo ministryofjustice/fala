@@ -7,7 +7,6 @@ wsgi_app = "fala.wsgi:application"
 # Worker & Process Management
 workers = 4
 master = True  # Gunicorn always uses a master process by default
-pidfile = "/tmp/master.pid"
 max_requests = 5000
 max_requests_jitter = 50  # Recommended when using max_requests to break synchronization
 
