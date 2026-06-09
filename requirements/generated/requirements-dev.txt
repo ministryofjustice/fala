@@ -46,6 +46,8 @@ govuk-frontend-jinja==4.0.0
     # via -r requirements/source/requirements-base.in
 greenlet==3.4.0
     # via playwright
+gunicorn==26.0.0
+    # via -r requirements/source/requirements-base.in
 identify==2.6.19
     # via pre-commit
 idna==3.11
@@ -67,6 +69,7 @@ packaging==26.0
     # via
     #   build
     #   django-csp
+    #   gunicorn
     #   pytest
     #   wheel
 pip-tools==7.5.3
@@ -140,8 +143,6 @@ urllib3==2.7.0
     #   -r requirements/source/requirements-base.in
     #   requests
     #   sentry-sdk
-uwsgi==2.0.31
-    # via -r requirements/source/requirements-base.in
 virtualenv==21.2.4
     # via pre-commit
 wheel==0.47.0

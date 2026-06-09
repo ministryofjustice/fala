@@ -2,4 +2,4 @@
 set -e
 
 # Run server
-$HOME/.local/bin/uwsgi --ini $APP_HOME/conf/uwsgi.ini
+$HOME/.local/bin/gunicorn --config $APP_HOME/conf/gunicorn.conf.py
