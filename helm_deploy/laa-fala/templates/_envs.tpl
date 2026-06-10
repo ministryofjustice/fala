@@ -21,5 +21,5 @@ env:
   - name: DJANGO_SETTINGS_MODULE
     value: fala.settings.production
   - name: SECRET_KEY
-    value: {{ .values.envVars.SECRET_KEY }}
+    value: {{ .Values.envVars.SECRET_KEY }}
 {{- end }}
