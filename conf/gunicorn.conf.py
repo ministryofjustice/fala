@@ -26,7 +26,7 @@ access_log_format = json.dumps(
         "process_name": "gunicorn",
         "timestamp_msec": "%(L)s",  # Request time in milliseconds (as string)
         "method": "%(m)s",  # HTTP method
-        "uri": "%(U)s?%(q)s",  # URL path + query string
+        "uri": "%(U)s",  # URL path + query string
         "proto": "%(H)s",  # Protocol
         "status": "%(s)s",  # Status code (string/integer depending on parser)
         "referer": "%(f)s",  # Referer
