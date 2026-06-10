@@ -18,4 +18,6 @@ env:
     value: {{ .Values.feature_flags.maintenance_mode }}
   - name: FEATURE_FLAG_SINGLE_CATEGORY_SEARCH_FORM
     value: {{ .Values.feature_flags.single_category_search }}
+  - name: DJANGO_SETTINGS_MODULE
+    value: fala.settings.production
 {{- end }}
