@@ -16,8 +16,7 @@ timeout = 30  # Equivalent to harakiri
 # at the application level; this is typically handled by an upstream reverse proxy like Nginx.
 
 # Lifecycle
-preload_app = False  # uWSGI default behavior is to lazy-load per worker
-wsgi_lazy_fetch = True
+preload_app = False
 
 # Logging Configuration
 # Gunicorn uses standard  string formatting for logs.
