@@ -42,7 +42,7 @@ class FalaTestRunner(DiscoverRunner):
     def setup_test_environment(self, **kwargs):
         # This runs BEFORE the apps are fully ready for testing
         self.laala_api_client_patcher = mock.patch(
-            "cla_common.laalaa.LaalaaProviderCategoriesApiClient.get_categories"
+            "fala.apps.laalaa.categories.LaalaaProviderCategoriesApiClient.get_categories"
         )
         laala_api_client_mock = self.laala_api_client_patcher.start()
         laala_api_client_mock.return_value = get_categories()

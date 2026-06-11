@@ -74,3 +74,9 @@ autoscaling:
   minReplicas: 1
   maxReplicas: 100
   targetCPUUtilizationPercentage: 80
+
+envVars:
+  SECRET_KEY:
+    secret:
+      name: secret-key
+      key: SECRET_KEY
