@@ -2,16 +2,15 @@
     "extends": [
         "github>ministryofjustice/devsecops-actions"
     ],
-    "packageRules": [
-        {
-            "description": "Regenerate requirements files after updating source .in files",
-            "matchPaths": ["requirements/source/**"],
-            "postUpdateOptions": ["pip-compile"]
-        },
-        {
-            "description": "Disable updates to generated .txt files - let pip-compile handle them",
-            "matchPaths": ["requirements/generated/**"],
-            "enabled": false
-        }
-    ]
+    "pip-compile": {
+        "managerFilePatterns": [
+            "/^requirements\\/generated\\/requirements-.*\\.txt$/"
+        ]
+    },
+    "pip_requirements": {
+        "enabled": false
+    },
+    "pip_setup": {
+        "enabled": false
+    }
 }
