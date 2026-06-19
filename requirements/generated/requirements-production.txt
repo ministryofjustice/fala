@@ -12,8 +12,6 @@ certifi==2026.2.25
     #   sentry-sdk
 charset-normalizer==3.4.7
     # via requests
-cla-common @ https://github.com/ministryofjustice/cla_common/archive/refs/tags/0.3.3.tar.gz
-    # via -r requirements/source/requirements-base.in
 django==6.0.3
     # via
     #   -r requirements/source/requirements-base.in
@@ -22,13 +20,13 @@ django==6.0.3
     #   django-storages
 django-csp==4.0
     # via -r requirements/source/requirements-base.in
-django-extended-choices==0.3.0
-    # via cla-common
 django-jinja==2.11.0
     # via -r requirements/source/requirements-base.in
 django-storages==1.14.6
     # via -r requirements/source/requirements-base.in
 govuk-frontend-jinja==4.0.0
+    # via -r requirements/source/requirements-base.in
+gunicorn==26.0.0
     # via -r requirements/source/requirements-base.in
 idna==3.11
     # via requests
@@ -42,28 +40,23 @@ logstash-formatter==0.5.17
 markupsafe==3.0.3
     # via jinja2
 packaging==26.0
-    # via django-csp
+    # via
+    #   django-csp
+    #   gunicorn
 psycopg==3.3.2
     # via -r requirements/source/requirements-base.in
-python-dateutil==2.9.0.post0
-    # via cla-common
 python-dotenv==1.2.1
     # via -r requirements/source/requirements-base.in
 requests==2.32.5
-    # via
-    #   -r requirements/source/requirements-base.in
-    #   cla-common
+    # via -r requirements/source/requirements-base.in
 sentry-sdk==2.52.0
     # via -r requirements/source/requirements-base.in
-six==1.17.0
-    # via python-dateutil
 sqlparse==0.5.5
     # via django
 typing-extensions==4.15.0
     # via psycopg
-urllib3==2.6.3
+urllib3==2.7.0
     # via
+    #   -r requirements/source/requirements-base.in
     #   requests
     #   sentry-sdk
-uwsgi==2.0.31
-    # via -r requirements/source/requirements-base.in

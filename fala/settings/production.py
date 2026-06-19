@@ -1,6 +1,8 @@
 import os
 from .base import *  # noqa: F401,F403
 
+LOGGING["loggers"]["root"]["level"] = "INFO"  # noqa: F405
+
 settings_required = (
     "SECRET_KEY",
     "LAALAA_API_HOST",
