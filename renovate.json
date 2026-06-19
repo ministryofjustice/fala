@@ -1,16 +1,16 @@
 {
-    "extends": [
-        "github>ministryofjustice/devsecops-actions"
-    ],
-    "pip-compile": {
-        "managerFilePatterns": [
-            "/^requirements\\/generated\\/requirements-.*\\.txt$/"
-        ]
-    },
-    "pip_requirements": {
-        "enabled": false
-    },
-    "pip_setup": {
-        "enabled": false
-    }
+  "extends": [
+    "github>ministryofjustice/devsecops-actions"
+  ],
+  "pip-compile": {
+    "managerFilePatterns": [
+      "/^requirements\\/source\\/.*\\.in$/"
+    ]
+  },
+  "pip_requirements": {
+    "enabled": false
+  },
+  "pip_setup": {
+    "enabled": false
+  }
 }
