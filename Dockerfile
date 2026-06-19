@@ -12,7 +12,7 @@ RUN ./node_modules/.bin/gulp build --production
 #################################################
 # BASE IMAGE USED BY ALL STAGES
 #################################################
-FROM python:3.13-bookworm AS base
+FROM python:3.13-slim-trixie AS base
 
 COPY --from=node_build home/node/fala/assets /home/app/fala/assets
 
@@ -24,8 +24,6 @@ RUN useradd --uid 1000 --user-group -m -d /home/app app
 # Install python and build dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
       build-essential \
-      curl \
-      git \
       libpcre2-dev
 
 ENV HOME=/home/app \
