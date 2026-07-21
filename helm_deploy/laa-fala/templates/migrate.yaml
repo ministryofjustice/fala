@@ -38,8 +38,8 @@ spec:
                 cpu: 100m
                 memory: 125Mi
           securityContext:
-            runAsUser: 1000
             runAsNonRoot: true
+            runAsUser: 1000
             allowPrivilegeEscalation: false
             seccompProfile:
               type: RuntimeDefault
