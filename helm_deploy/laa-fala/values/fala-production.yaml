@@ -36,7 +36,7 @@ podSecurityContext: {}
 # fsGroup: 2000
 
 securityContext:
- runAsUser: 1000
+  runAsUser: 1000
 
 service:
   type: ClusterIP

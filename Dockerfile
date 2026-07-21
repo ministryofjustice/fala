@@ -12,19 +12,17 @@ RUN ./node_modules/.bin/gulp build --production
 #################################################
 # BASE IMAGE USED BY ALL STAGES
 #################################################
-FROM python:3.13-slim-trixie AS base
+FROM python:3.15-rc-alpine AS base
 
 COPY --from=node_build home/node/fala/assets /home/app/fala/assets
 
 ENV LC_CTYPE=C.UTF-8
 
 # Runtime User
-RUN useradd --uid 1000 --user-group -m -d /home/app app
+RUN addgroup -g 1000 app && adduser -u 1000 -G app -D -h /home/app app
 
 # Install python and build dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
-      build-essential \
-      libpcre2-dev
+RUN apk add --no-cache build-base pcre2-dev
 
 ENV HOME=/home/app \
   APP_HOME=/home/app
@@ -52,7 +50,7 @@ RUN ./manage.py collectstatic --noinput
 # Project permissions
 RUN  chown -R app: /home/app
 
-USER 1000
+USER app
 EXPOSE 8000
 CMD ["/home/app/docker/run.sh"]
 
@@ -62,7 +60,7 @@ CMD ["/home/app/docker/run.sh"]
 FROM base AS production
 
 # Install system dependencies, including gettext for translations
-RUN apt-get update && apt-get install -y --no-install-recommends gettext
+RUN apk add --no-cache gettext
 
 # Install Python dependencies
 COPY ./requirements/generated/requirements-production.txt ./requirements.txt
@@ -87,6 +85,6 @@ RUN ./manage.py collectstatic --noinput
 # Project permissions
 RUN  chown -R app: /home/app
 
-USER 1000
+USER app
 EXPOSE 8000
 CMD ["/home/app/docker/run.sh"]
