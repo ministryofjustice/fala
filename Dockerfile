@@ -14,19 +14,26 @@ RUN ./node_modules/.bin/gulp build --production
 #################################################
 FROM python:3.15-rc-alpine AS base
 
-COPY --from=node_build home/node/fala/assets /home/app/fala/assets
-
 ENV LC_CTYPE=C.UTF-8
 
-# Runtime User
+# Create runtime user early, then use that user in child stages.
 RUN addgroup -g 1000 app && adduser -u 1000 -G app -D -h /home/app app
 
-# Install python and build dependencies
-RUN apk add --no-cache build-base pcre2-dev
+# Install OS dependencies required by Python builds and runtime scripts.
+RUN apk add --no-cache \
+  bash \
+  build-base \
+  gettext \
+  pcre2-dev
 
 ENV HOME=/home/app \
-  APP_HOME=/home/app
+  APP_HOME=/home/app \
+  PATH=/home/app/.local/bin:$PATH
 WORKDIR /home/app
+
+COPY --from=node_build --chown=app:app home/node/fala/assets /home/app/fala/assets
+
+USER app
 
 #################################################
 # DEVELOPMENT
@@ -35,22 +42,15 @@ WORKDIR /home/app
 FROM base AS development
 
 # Install Python dependencies for development, includes tests.
-COPY ./requirements/generated/requirements-dev.txt ./requirements.txt
+COPY --chown=app:app ./requirements/generated/requirements-dev.txt ./requirements.txt
 RUN pip3 install --user --requirement ./requirements.txt
 
-# Add .local/bin to PATH to allow playwright command execution
-ENV PATH=/home/app/.local/bin:$PATH
-RUN playwright install --with-deps
+RUN playwright install
 
-COPY fala/ fala/
-COPY manage.py manage.py
+COPY --chown=app:app fala/ fala/
+COPY --chown=app:app manage.py manage.py
 
 RUN ./manage.py collectstatic --noinput
-
-# Project permissions
-RUN  chown -R app: /home/app
-
-USER app
 EXPOSE 8000
 CMD ["/home/app/docker/run.sh"]
 
@@ -59,32 +59,19 @@ CMD ["/home/app/docker/run.sh"]
 #################################################
 FROM base AS production
 
-# Install system dependencies, including gettext for translations
-RUN apk add --no-cache gettext
-
 # Install Python dependencies
-COPY ./requirements/generated/requirements-production.txt ./requirements.txt
+COPY --chown=app:app ./requirements/generated/requirements-production.txt ./requirements.txt
 RUN pip3 install --user --requirement ./requirements.txt
 
 # Copy migrate_db.sh to the /home/app/fala directory
-COPY fala/migrate_db.sh /home/app/fala/migrate_db.sh
-
-# Ensure the correct ownership
-RUN chown app:app /home/app/fala/migrate_db.sh
-
-# Ensure the script has execute permissions
+COPY --chown=app:app fala/migrate_db.sh /home/app/fala/migrate_db.sh
 RUN chmod +x /home/app/fala/migrate_db.sh
 
-COPY . .
+COPY --chown=app:app . .
 
 # Compile translation files
 RUN python manage.py compilemessages -l cy
 
 RUN ./manage.py collectstatic --noinput
-
-# Project permissions
-RUN  chown -R app: /home/app
-
-USER app
 EXPOSE 8000
 CMD ["/home/app/docker/run.sh"]
