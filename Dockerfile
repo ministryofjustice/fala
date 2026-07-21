@@ -12,9 +12,9 @@ RUN ./node_modules/.bin/gulp build --production
 #################################################
 # BASE IMAGE USED BY ALL STAGES
 #################################################
-FROM python:3.13-slim-trixie AS base
+FROM python:3.15-rc-slim-trixie AS base
 
-COPY --from=node_build home/node/fala/assets /home/app/fala/assets
+COPY --from=node_build /home/node/fala/assets /home/app/fala/assets
 
 ENV LC_CTYPE=C.UTF-8
 
