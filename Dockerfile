@@ -53,7 +53,8 @@ COPY fala/ fala/
 COPY manage.py manage.py
 
 USER root
-RUN chown -R app:app /home/app/fala/static
+RUN mkdir -p /home/app/fala/static \
+  && chown -R app:app /home/app/fala/static
 USER app
 RUN ./manage.py collectstatic --noinput
 EXPOSE 8000
@@ -87,7 +88,9 @@ RUN python manage.py compilemessages -l cy \
 # Harden copied resources: make them root-owned and non-writable by group/others
 USER root
 RUN chown -R root:root /home/app \
-  && chmod -R go-w /home/app
+  && chmod -R go-w /home/app \
+  && chown app:app /home/app/tmp \
+  && chmod 700 /home/app/tmp
 USER app
 EXPOSE 8000
 CMD ["/home/app/docker/run.sh"]
