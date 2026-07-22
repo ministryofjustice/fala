@@ -44,10 +44,19 @@ USER app
 
 FROM base AS development
 
+USER root
+RUN apk add --no-cache \
+    chromium \
+    freetype \
+    harfbuzz \
+    nss \
+    ttf-freefont
+USER app
+
 # Install Python dependencies for development, includes tests.
 COPY ./requirements/generated/requirements-dev.txt ./requirements.txt
 RUN pip3 install --user --requirement ./requirements.txt \
-  && playwright install
+  && (playwright install --with-deps || playwright install)
 
 COPY fala/ fala/
 COPY manage.py manage.py
