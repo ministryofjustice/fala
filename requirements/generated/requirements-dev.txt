@@ -55,7 +55,7 @@ jinja2==3.1.6
     #   -r requirements/source/requirements-base.in
     #   django-jinja
     #   govuk-frontend-jinja
-logstash-formatter==0.5.17
+logstash-formatter==0.5.16
     # via -r requirements/source/requirements-base.in
 markupsafe==3.0.3
     # via jinja2

@@ -3,7 +3,7 @@ django-jinja==2.11.0
 django-storages==1.14.6
 django-csp==4.0
 jinja2<4
-logstash-formatter==0.5.17
+logstash-formatter==0.5.16
 urllib3==2.7.0
 requests==2.32.5
 sentry-sdk==2.52.0

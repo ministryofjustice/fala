@@ -28,7 +28,7 @@ spec:
         - name: migrate-db
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["/bin/bash", "-c", "/home/app/fala/migrate_db.sh"]
+          command: ["/bin/sh", "-c", "/home/app/fala/migrate_db.sh"]
           {{ include "app.envs" . | nindent 10 }}
           resources:
               limits:
@@ -38,6 +38,10 @@ spec:
                 cpu: 100m
                 memory: 125Mi
           securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
             allowPrivilegeEscalation: false
+            seccompProfile:
+              type: RuntimeDefault
             capabilities:
               drop: ["ALL"]

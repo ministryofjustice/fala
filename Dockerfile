@@ -3,32 +3,40 @@ FROM docker.io/node:25.9.0-trixie@sha256:74ff139f927c4a233bf0757edefe1ee057d185d
 WORKDIR /home/node
 
 COPY package.json package-lock.json ./
-RUN npm install
+RUN npm ci
 
-COPY . .
+COPY gulpfile.js ./
+COPY fala/assets-src/ fala/assets-src/
 
 RUN ./node_modules/.bin/gulp build --production
 
 #################################################
 # BASE IMAGE USED BY ALL STAGES
 #################################################
-FROM python:3.13-slim-trixie AS base
-
-COPY --from=node_build home/node/fala/assets /home/app/fala/assets
+FROM python:3.15-rc-alpine@sha256:c8a2b555f655e34e8616f94fbc08e4e54cc381a4a8437cce3e5736fd818f790c AS base
 
 ENV LC_CTYPE=C.UTF-8
 
-# Runtime User
-RUN useradd --uid 1000 --user-group -m -d /home/app app
-
-# Install python and build dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
-      build-essential \
-      libpcre2-dev
+# Create runtime user early, then use that user in child stages.
+RUN addgroup -g 1000 app && adduser -u 1000 -G app -D -h /home/app app \
+  && apk add --no-cache \
+    bash=5.3.9-r1 \
+    build-base=0.5-r4 \
+    gettext=1.0-r0 \
+    pcre2-dev=10.47-r1
 
 ENV HOME=/home/app \
-  APP_HOME=/home/app
+  APP_HOME=/home/app \
+  TMPDIR=/home/app/tmp \
+  PIP_NO_CACHE_DIR=1 \
+  PATH=/home/app/.local/bin:$PATH
 WORKDIR /home/app
+
+COPY --from=node_build --chown=root:root home/node/fala/assets /home/app/fala/assets
+
+RUN mkdir -p /home/app/tmp && chown app:app /home/app/tmp
+
+USER app
 
 #################################################
 # DEVELOPMENT
@@ -36,23 +44,28 @@ WORKDIR /home/app
 
 FROM base AS development
 
+USER root
+RUN apk add --no-cache \
+    chromium \
+    freetype \
+    harfbuzz \
+    nss \
+    ttf-freefont
+USER app
+
 # Install Python dependencies for development, includes tests.
 COPY ./requirements/generated/requirements-dev.txt ./requirements.txt
-RUN pip3 install --user --requirement ./requirements.txt
-
-# Add .local/bin to PATH to allow playwright command execution
-ENV PATH=/home/app/.local/bin:$PATH
-RUN playwright install --with-deps
+RUN pip3 install --user --requirement ./requirements.txt \
+  && (playwright install --with-deps || playwright install)
 
 COPY fala/ fala/
 COPY manage.py manage.py
 
+USER root
+RUN mkdir -p /home/app/fala/static \
+  && chown -R app:app /home/app/fala/static
+USER app
 RUN ./manage.py collectstatic --noinput
-
-# Project permissions
-RUN  chown -R app: /home/app
-
-USER 1000
 EXPOSE 8000
 CMD ["/home/app/docker/run.sh"]
 
@@ -61,32 +74,32 @@ CMD ["/home/app/docker/run.sh"]
 #################################################
 FROM base AS production
 
-# Install system dependencies, including gettext for translations
-RUN apt-get update && apt-get install -y --no-install-recommends gettext
-
 # Install Python dependencies
 COPY ./requirements/generated/requirements-production.txt ./requirements.txt
 RUN pip3 install --user --requirement ./requirements.txt
 
 # Copy migrate_db.sh to the /home/app/fala directory
-COPY fala/migrate_db.sh /home/app/fala/migrate_db.sh
+COPY --chmod=755 fala/migrate_db.sh /home/app/fala/migrate_db.sh
 
-# Ensure the correct ownership
-RUN chown app:app /home/app/fala/migrate_db.sh
-
-# Ensure the script has execute permissions
-RUN chmod +x /home/app/fala/migrate_db.sh
-
-COPY . .
+COPY conf/ conf/
+COPY docker/ docker/
+COPY fala/ fala/
+COPY manage.py manage.py
 
 # Compile translation files
-RUN python manage.py compilemessages -l cy
+USER root
+RUN mkdir -p /home/app/fala/static \
+  && chown -R app:app /home/app/fala/locale /home/app/fala/static
+USER app
+RUN python manage.py compilemessages -l cy \
+  && ./manage.py collectstatic --noinput
 
-RUN ./manage.py collectstatic --noinput
-
-# Project permissions
-RUN  chown -R app: /home/app
-
-USER 1000
+# Harden copied resources: make them root-owned and non-writable by group/others
+USER root
+RUN chown -R root:root /home/app \
+  && chmod -R go-w /home/app \
+  && chown app:app /home/app/tmp \
+  && chmod 700 /home/app/tmp
+USER app
 EXPOSE 8000
 CMD ["/home/app/docker/run.sh"]
